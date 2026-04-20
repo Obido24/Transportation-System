@@ -1,0 +1,134 @@
+
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="flex flex-col fixed left-0 top-0 h-full py-6 bg-[#edeeef] dark:bg-slate-900 h-screen w-64 border-r-0 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-2xl font-bold text-[#00513f] dark:text-emerald-400 font-headline">I-Metro Bus Admin</h1>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest mt-1">Inter-Metro Transport Solution Limited</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<!-- Active Tab: Revenue -->
+<a class="flex items-center gap-3 px-4 py-3 text-[#00513f] dark:text-emerald-400 font-bold border-r-4 border-[#00513f] hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-sm uppercase tracking-wide">Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-sm uppercase tracking-wide">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label text-sm uppercase tracking-wide">Activity</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label text-sm uppercase tracking-wide">Support</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-6 space-y-2 border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-4 py-2 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label text-sm uppercase tracking-wide">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label text-sm uppercase tracking-wide">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar (Execution from JSON) -->
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-40 bg-[#f8f9fa]/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_10px_30px_rgba(25,28,29,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-[#00513f] dark:text-emerald-400 font-headline">I-Metro Bus Admin</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-[#00513f] dark:text-emerald-400 border-b-2 border-[#00513f] pb-1 font-label text-sm font-semibold transition-all" href="#">Analytics</a>
+<a class="text-[#3e4944] dark:text-slate-400 hover:text-[#006b54] dark:hover:text-emerald-300 font-label text-sm font-semibold transition-all" href="#">Configuration</a>
+<a class="text-[#3e4944] dark:text-slate-400 hover:text-[#006b54] dark:hover:text-emerald-300 font-label text-sm font-semibold transition-all" href="#">Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<input class="bg-surface-container-highest border-none rounded-full px-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" placeholder="Search transactions..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1.5 text-on-surface-variant text-sm">search</span>
+</div>
+<div class="flex gap-4 items-center">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border-2 border-primary-container/20">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional male administrator in his 40s wearing glasses and a soft neutral blazer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2wkZp4INDATSEAlQLIJIRISG6iq0n8SyHZ1HNbasu8vdfQivj0Puzgwwdt1Cz2GUZlG-4YQSgtg9_uE-gkJ6tzEqQgAPrR3d0DxSRfGPNUU2y7Smw9kTZifnHFj_trd3MwFVNxYG5DQPcHa0oiUp9gTy6uWuZpPHLtJ4Um2RDjR3BfclN5JEguMgQQRJoGcg87ke6NRxLBf4iciBv9mgNobMijuSFJyjeiD4pXDJXeUaP4t_RFLho5U6UXno93SA1hnrEbqk19Lg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 max-w-[1400px] mx-auto space-y-8">
+<!-- Page Header & Filters -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-extrabold font-headline text-on-surface tracking-tight">Revenue Dashboard</h2>
+<p class="text-on-surface-variant font-body">Financial health and transit movement overview</p>
+</div>
+<div class="flex gap-3">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
+<span class="text-sm font-semibold">Last 30 Days</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_more</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-sm">route</span>
+<span class="text-sm font-semibold">All Routes</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Revenue Note -->
+<div class="rounded-xl bg-surface-container-lowest border border-outline-variant/10 p-5 shadow-sm">
+<p class="text-sm font-semibold text-on-surface">Live Revenue Records</p>
+<p class="mt-1 text-sm text-on-surface-variant">This view now shows only live revenue totals and recent payment records from the backend.</p>
+</div>
+<!-- Recent Transactions Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-low flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+<div>
+<h3 class="font-headline font-bold text-on-surface">Recent Transactions</h3>
+<p class="text-xs text-on-surface-variant">Filter by payment status to inspect pending entries.</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-2 bg-surface-container-highest rounded-full p-1" data-filter-group="payment-status">
+<button class="px-3 py-1 text-xs font-bold rounded-full bg-primary text-on-primary" data-filter="ALL">All</button>
+<button class="px-3 py-1 text-xs font-bold rounded-full text-on-surface-variant hover:bg-surface-container-low" data-filter="PENDING">Pending</button>
+<button class="px-3 py-1 text-xs font-bold rounded-full text-on-surface-variant hover:bg-surface-container-low" data-filter="SUCCESS">Success</button>
+<button class="px-3 py-1 text-xs font-bold rounded-full text-on-surface-variant hover:bg-surface-container-low" data-filter="FAILED">Failed</button>
+</div>
+<button class="text-primary text-sm font-bold hover:underline">View All</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low/50">
+<tr>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Transaction ID</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Date &amp; Time</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Route</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Method</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Amount</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Status</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/30">
+<tr>
+<td class="px-6 py-8 text-sm text-on-surface-variant text-center" colspan="7">
+Loading live transaction data...
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+
+
+
+
+

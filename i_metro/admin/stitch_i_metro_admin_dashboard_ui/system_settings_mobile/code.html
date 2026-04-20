@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Settings | I-Metro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "surface": "#f8f9fa",
+                    "secondary-fixed": "#c8eadc",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6f7a74",
+                    "on-surface": "#191c1d",
+                    "on-secondary-container": "#4c6b5f",
+                    "primary-container": "#006b54",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary-fixed-variant": "#00513f",
+                    "surface-dim": "#d9dadb",
+                    "on-tertiary-fixed": "#3c0804",
+                    "secondary-fixed-dim": "#adcec0",
+                    "on-primary-container": "#94e8cb",
+                    "on-secondary-fixed-variant": "#2f4d42",
+                    "surface-tint": "#016b54",
+                    "inverse-surface": "#2e3132",
+                    "on-tertiary-fixed-variant": "#753229",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "surface-bright": "#f8f9fa",
+                    "secondary": "#466559",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "surface-container-high": "#e7e8e9",
+                    "outline-variant": "#bec9c3",
+                    "secondary-container": "#c8eadc",
+                    "on-primary-fixed": "#002118",
+                    "tertiary-container": "#92493e",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#9ef3d6",
+                    "primary": "#00513f",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad4",
+                    "inverse-primary": "#82d7ba",
+                    "primary-fixed-dim": "#82d7ba",
+                    "background": "#f8f9fa",
+                    "on-background": "#191c1d",
+                    "surface-container-low": "#f3f4f5",
+                    "on-tertiary-container": "#ffcdc5",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#753229",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-surface-variant": "#3e4944",
+                    "on-secondary-fixed": "#012018"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "1rem",
+                    "xl": "1.25rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-50 bg-slate-50 dark:bg-slate-950 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined text-teal-900 dark:text-teal-400">menu</span>
+</button>
+<h1 class="text-xl font-bold text-teal-900 dark:text-teal-50 font-['Manrope'] tracking-tight">I-Metro</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a professional transit administrator in a minimalist modern office setting with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLPt4ZaqMxMImNSsMwcoXnXGvd_xGFNuIoWy3MO2Zj1ITeLjjJuRLbeSs-R5W-w3HN9-2L824pCPVBivJEP4FnrJ0IdW979zxYRp9n2GfTkmBl-YvnQQhnsfDWxIyrGcVyst8AUyF8Xo-IQtQKQXsehMs9D4k6diMSDiyAtebKGkKgWoE5MKS_jdcCPbG7uK4YgYB8VgnDM1OLeVWo77aZLcEoilAAx1HTJpDntLUXNNvF3VKwnOY-sAGE6IhvHK7PIsgypci9xPk"/>
+</div>
+</div>
+</header>
+<main class="px-6 py-6 max-w-lg mx-auto">
+<div class="mb-8">
+<h2 class="text-2xl font-extrabold text-on-surface tracking-tight mb-2">System Settings</h2>
+<p class="text-on-surface-variant text-sm">Manage global configurations for the I-Metro transit network.</p>
+</div>
+<div class="space-y-4">
+<!-- General Section -->
+<section class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/15">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+</div>
+<h3 class="text-lg font-bold tracking-tight">General</h3>
+</div>
+<div class="space-y-6">
+<div class="flex justify-between items-center">
+<div>
+<p class="font-semibold text-sm">System Maintenance Mode</p>
+<p class="text-xs text-on-surface-variant">Disable public API access</p>
+</div>
+<button class="w-12 h-6 bg-surface-container-highest rounded-full relative p-1 transition-colors">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</button>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Default Language</label>
+<div class="relative">
+<select class="w-full bg-surface-container-highest border-0 rounded-lg py-3 px-4 text-sm appearance-none focus:ring-2 focus:ring-primary/20">
+<option>English (United States)</option>
+<option>Spanish (ES)</option>
+<option>French (FR)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 text-sm pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Fare Configuration Section -->
+<section class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/15">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="payments">payments</span>
+</div>
+<h3 class="text-lg font-bold tracking-tight">Fare Configuration</h3>
+</div>
+<div class="space-y-6">
+<div class="space-y-3">
+<div class="flex justify-between">
+<label class="text-sm font-semibold">Base Fare Adjustment</label>
+<span class="text-sm font-bold text-primary">$2.75</span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" max="10" min="1" step="0.25" type="range" value="2.75"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="text-xs text-on-surface-variant font-medium mb-1">Peak Multiplier</p>
+<p class="text-lg font-bold">1.5x</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="text-xs text-on-surface-variant font-medium mb-1">Transfer Window</p>
+<p class="text-lg font-bold">90m</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Notification Rules Section -->
+<section class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/15">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+</div>
+<h3 class="text-lg font-bold tracking-tight">Notification Rules</h3>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container-low rounded-lg flex items-start gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-primary" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-sm">System Latency Alerts</p>
+<p class="text-xs text-on-surface-variant">Notify when delay &gt; 5 mins</p>
+</div>
+<button class="w-12 h-6 bg-primary rounded-full relative p-1">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm translate-x-6"></div>
+</button>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg flex items-start gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-sm">Revenue Summaries</p>
+<p class="text-xs text-on-surface-variant">Daily automated email</p>
+</div>
+<button class="w-12 h-6 bg-primary rounded-full relative p-1">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm translate-x-6"></div>
+</button>
+</div>
+</div>
+</section>
+<!-- API & Integrations Section -->
+<section class="bg-surface-container-lowest rounded-xl p-5 border border-outline-variant/15">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="api">api</span>
+</div>
+<h3 class="text-lg font-bold tracking-tight">API &amp; Integrations</h3>
+</div>
+<div class="space-y-4">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Primary API Endpoint</label>
+<div class="flex gap-2">
+<input class="flex-1 bg-surface-container-highest border-0 rounded-lg py-3 px-4 text-xs font-mono" readonly="" type="text" value="https://api.i-metro.v1/prod"/>
+<button class="p-3 bg-surface-container-high rounded-lg">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-2 text-primary font-semibold text-sm py-2">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+<span>Register New Webhook</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Action Button (Mobile Contextual FAB suppressed as per instructions, using a standard task action instead) -->
+<div class="mt-12 flex flex-col gap-3">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="save">save</span>
+                Save All Changes
+            </button>
+<button class="w-full text-error font-semibold py-4 rounded-xl border border-error/20 bg-error-container/10">
+                Discard Updates
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.03)] border-t border-slate-100/50 dark:border-slate-800/50">
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Activity</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Revenue</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Support</span>
+</button>
+<!-- ACTIVE TAB: Settings -->
+<button class="flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-xl px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Settings</span>
+</button>
+</nav>
+</body></html>

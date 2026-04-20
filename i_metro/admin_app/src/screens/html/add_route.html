@@ -1,0 +1,175 @@
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 flex flex-col p-4 overflow-y-auto z-50">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center text-on-primary">
+<img src="/brand/imetro_logo.png" alt="I-Metro logo" class="h-full w-full object-contain block" />
+</div>
+<div>
+<div class="text-xl font-bold tracking-tight text-emerald-900">I-Metro</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-semibold">Inter-Metro Transport Solution Limited</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-medium">Merchant Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-900 font-semibold bg-white/50 rounded-lg active:scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-medium">Route Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-medium">Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-4 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/10" data-action="new-route" type="button">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Route
+            </button>
+</div>
+<div class="mt-auto space-y-1 pt-6">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/20 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<main class="ml-64 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto w-full">
+<div class="flex items-start justify-between gap-6 mb-8">
+<div>
+<p class="text-sm font-bold uppercase tracking-[0.2em] text-on-surface-variant">Route Management</p>
+<h1 class="text-4xl font-bold text-on-surface tracking-tight mt-2">Add New Route</h1>
+<p class="text-on-surface-variant mt-2 max-w-2xl">Create a real route record for the backend. Only pickup, destination, price, currency, and active state are stored by the current data model.</p>
+</div>
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-on-surface font-medium transition-colors" href="/admin/routes" data-action="back-to-routes">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Back to Routes
+                </a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_10px_30px_rgba(25,28,29,0.05)] border-none">
+<div class="mb-8 bg-surface-container-low -mx-8 -mt-8 px-8 py-4 rounded-t-lg">
+<h2 class="text-sm font-bold uppercase tracking-[0.05em] text-on-surface-variant">Route Specifications</h2>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Pickup location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">location_on</span>
+<input data-setting="from-location" class="w-full pl-12 pr-4 py-3 bg-surface-container-highest border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" placeholder="e.g. Nyanya" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Destination</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-error">near_me</span>
+<input data-setting="to-location" class="w-full pl-12 pr-4 py-3 bg-surface-container-highest border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" placeholder="e.g. Banex" type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Price (NGN)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">payments</span>
+<input data-setting="price" class="w-full pl-12 pr-4 py-3 bg-surface-container-highest border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" placeholder="600" min="0" type="number"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Currency</label>
+<input class="w-full px-4 py-3 bg-surface-container-highest border-none rounded-lg text-on-surface-variant" type="text" value="NGN" readonly/>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant/10 flex justify-end gap-4">
+<button class="px-8 py-3 rounded-lg font-bold text-primary border border-primary/20 hover:bg-surface-container-low transition-all" data-action="discard" type="button">
+                                    Discard
+                                </button>
+<button class="px-12 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all" data-action="save-route" type="submit">
+                                    Save Route
+                                </button>
+</div>
+</form>
+</div>
+</div>
+<div class="space-y-6">
+<div class="bg-surface-container-lowest rounded-lg p-6 shadow-[0px_10px_30px_rgba(25,28,29,0.05)] border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">insights</span>
+<h3 class="font-bold text-on-surface">Route Preview</h3>
+</div>
+<p class="text-sm text-on-surface-variant">This preview updates as you type and reflects what will be saved.</p>
+<div class="mt-4 space-y-3">
+<div class="p-3 bg-surface-container-low rounded-lg">
+<p class="text-xs text-on-surface-variant">Route</p>
+<p data-setting="preview-route" class="text-sm font-semibold text-on-surface">No route entered yet</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-surface-container-low rounded-lg">
+<p class="text-xs text-on-surface-variant">Status</p>
+<p class="text-sm font-semibold text-on-surface">Draft</p>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg">
+<p class="text-xs text-on-surface-variant">Price</p>
+<p data-setting="preview-price" class="text-sm font-semibold text-on-surface">NGN 0</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-high rounded-lg p-6 space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<h3 class="font-bold text-on-surface">Live Route Stats</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Total routes</span>
+<span data-setting="route-total" class="font-bold text-on-surface">0</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Active routes</span>
+<span data-setting="route-active" class="font-bold text-on-surface">0</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Average fare</span>
+<span data-setting="route-average" class="font-bold text-on-surface">NGN 0</span>
+</div>
+<div class="w-full bg-surface-container-lowest rounded-full h-1.5 overflow-hidden">
+<div data-setting="route-activity-bar" class="bg-primary w-0 h-full rounded-full"></div>
+</div>
+<p data-setting="route-note" class="text-xs text-on-surface-variant">Waiting for route data from the backend.</p>
+</div>
+</div>
+<div class="bg-emerald-900 rounded-lg p-6 text-on-primary relative overflow-hidden">
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-10">route</span>
+<h4 class="font-bold mb-2">Recent Routes</h4>
+<ul data-setting="recent-routes" class="space-y-2 text-sm opacity-90">
+<li>No routes loaded yet.</li>
+</ul>
+</div>
+</div>
+</div>
+</main>

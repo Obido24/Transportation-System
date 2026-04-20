@@ -1,0 +1,200 @@
+
+<!-- SIDEBAR ANCHOR -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-900 flex flex-col p-4 overflow-y-auto z-10">
+<div class="flex items-center gap-3 px-2 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="subway">subway</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50 leading-none">I-Metro</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-medium">Inter-Metro Transport Solution Limited</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-900 dark:text-emerald-400 font-semibold bg-white/50 dark:bg-slate-800/50 rounded-lg scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-headline text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-headline text-sm">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-headline text-sm">Merchant Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-headline text-sm">Route Management</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="account_circle">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CANVAS -->
+<main class="ml-64 min-h-screen">
+<!-- TOP NAV ANCHOR -->
+<header class="sticky top-0 z-20 flex justify-between items-center h-16 px-8 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg w-auto">
+<div class="flex items-center bg-surface-container-highest rounded-full px-4 py-1.5 w-96 transition-all focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary/20">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-on-surface-variant/60" placeholder="Search records..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<!-- PROFILE TRIGGER & MENU ANCHOR -->
+<div class="relative group">
+<button class="flex items-center gap-2 pl-2 py-1 pr-1 bg-surface-container-low rounded-full hover:bg-surface-container-high transition-colors">
+<span class="text-xs font-semibold text-emerald-900 dark:text-emerald-400 hidden lg:inline px-2">I-Metro Bus Admin</span>
+<div class="h-8 w-8 rounded-full overflow-hidden ring-2 ring-primary/10">
+<img alt="Admin Profile" class="h-full w-full object-cover" data-alt="Close-up portrait of a professional male administrator in his 40s, soft studio lighting, neutral grey background, professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEJkWMxU5lH0rUojl9jasHAvvZZEZC-rriUhie5u7sr2FEwBfWYsOkJYi8HmHE8ORfY1ft8Zjq3ilOX7lERJ-zsjM5LCUkh2rr-R8HjFoyzwJ3Mb0ynTrmE4_OkOaEAWtrqng4PwhDagkuGKNwpGt77ht31fs3eT4_I9P9Pe_r6hAf7itiuqCwsaCuKEnEhuYdC_nYtj573p-vsuVfzEqdGTe2SI0VvGZ-OXw68KUxqxzarh1vt989qEmZpGgd7OK6k8uLpp1AIPE"/>
+</div>
+</button>
+<!-- DROPDOWN PANEL (Inter-Metro Transport Solution Limited Style) -->
+<div class="absolute right-0 mt-3 w-72 bg-surface-container-lowest rounded-xl p-2 shadow-[0px_10px_30px_rgba(25,28,29,0.08)] opacity-100 transform origin-top-right transition-all duration-200 border border-outline-variant/10 z-50">
+<!-- User Identity Header -->
+<div class="px-4 py-4 mb-2 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-lg overflow-hidden">
+<img alt="Admin Profile" class="h-full w-full object-cover" data-alt="Detailed professional headshot of a middle-aged male executive with a confident expression, warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjEwtgUim9-3M95n5NN7IAJcmpeYxi7cBK3WZTCzvnzZEW-PAmepZNktxipV_i5Sn-M8U1HTdYkocI0b3gWRvw179mRK7v6vaxIJsz3jhVILhln2HpSNZlwBaSKZ1svEqy84A46CPnUNwr6LylCOTBOJigKL47N0CpfpaOK0sSNTOclu95tb9v603yO2PBjnfTbcQG2Tgxcu-RuCqTzqAxVkK20nkCPjRUxrUZvSCRE61THPJGRrcIYWN3Qq0uJ1c9fuwg389dZYo"/>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface leading-tight">I-Metro Bus Admin</h4>
+<p class="text-xs text-on-surface-variant">System Administrator</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="h-1.5 w-1.5 rounded-full bg-primary-fixed-dim"></span>
+<span class="text-[10px] text-emerald-700 font-medium tracking-wide">LEVEL 4 ACCESS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Menu Actions -->
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group/item">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/item:text-primary transition-colors" data-icon="account_circle">account_circle</span>
+<span class="text-sm font-medium">Profile Settings</span>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group/item">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/item:text-primary transition-colors" data-icon="security">security</span>
+<span class="text-sm font-medium">Security &amp; Privacy</span>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group/item">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/item:text-primary transition-colors" data-icon="history">history</span>
+<span class="text-sm font-medium">Recent Activity</span>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="h-px bg-outline-variant/10 my-2 mx-2"></div>
+<!-- Logout Anchor -->
+<button class="w-full flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-error-container/20 group/logout transition-colors">
+<span class="material-symbols-outlined text-error group-hover/logout:scale-110 transition-transform" data-icon="logout">logout</span>
+<span class="text-sm font-semibold text-error">Logout</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- DASHBOARD CONTENT (Bento Grid) -->
+<div class="p-8">
+<header class="mb-10">
+<p class="text-primary font-bold tracking-widest text-xs uppercase mb-2">Inter-Metro Transport Solution Limited</p>
+<h2 class="text-4xl font-headline font-extrabold text-on-surface tracking-tight">Morning Overview</h2>
+</header>
+<div class="grid grid-cols-12 gap-6">
+<!-- Network Snapshot -->
+<div class="col-span-12 lg:col-span-8 h-[400px] bg-surface-container-lowest rounded-xl border border-outline-variant/5 p-6 flex flex-col justify-between">
+<div>
+<p class="text-primary font-bold tracking-widest text-xs uppercase mb-2">Inter-Metro Transport Solution Limited</p>
+<h3 class="font-headline font-extrabold text-on-surface text-3xl">Network Snapshot</h3>
+<p class="text-on-surface-variant text-sm mt-2">Live operational health and alert readiness at a glance.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-xl">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Operational</p>
+<p class="text-3xl font-extrabold text-emerald-700 mt-2">98.2%</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl">
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Active alerts</p>
+<p class="text-3xl font-extrabold text-on-surface mt-2">03</p>
+</div>
+</div>
+</div>
+<!-- Stats Stack -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="flex-1 bg-primary p-6 rounded-xl text-on-primary bg-gradient-to-br from-primary to-primary-container">
+<span class="material-symbols-outlined text-4xl mb-4" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<h3 class="font-headline font-medium opacity-80 text-sm">Tickets Issued (Today)</h3>
+<div class="text-5xl font-extrabold mt-2 tracking-tighter">14,204</div>
+<p class="mt-4 text-xs font-medium bg-white/20 inline-block px-3 py-1 rounded-full">+12% vs yesterday</p>
+</div>
+<div class="flex-1 bg-surface-container-high p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" data-icon="warning">warning</span>
+<h3 class="font-headline font-medium text-on-surface-variant text-sm">Active Alerts</h3>
+<div class="text-5xl font-extrabold mt-2 tracking-tighter text-on-surface">03</div>
+<p class="mt-4 text-xs font-medium text-on-surface-variant underline cursor-pointer">View active alerts</p>
+</div>
+</div>
+<!-- Recent Activity (Asymmetric List) -->
+<div class="col-span-12 bg-surface-container-lowest rounded-xl p-8">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="text-2xl font-headline font-extrabold text-on-surface">System Logs</h3>
+<p class="text-on-surface-variant text-sm">Most recent infrastructure events</p>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">Download Report</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg group hover:scale-[1.005] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Core Server Maintenance</p>
+<p class="text-xs text-on-surface-variant">I-Metro Bus Admin  14 mins ago</p>
+</div>
+</div>
+<span class="text-xs font-bold px-3 py-1 bg-surface-container-highest rounded-full text-on-surface-variant uppercase tracking-wider">Completed</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg group hover:scale-[1.005] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-lg" data-icon="error_outline">error_outline</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Signal Delay: Route A4</p>
+<p class="text-xs text-on-surface-variant">Automated  32 mins ago</p>
+</div>
+</div>
+<span class="text-xs font-bold px-3 py-1 bg-tertiary-container/20 rounded-full text-tertiary-fixed-dim uppercase tracking-wider">Critical</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB ANCHOR (Contextual Suppression Logic applied - only on Dashboard) -->
+<button class="fixed bottom-8 right-8 h-14 w-14 rounded-full bg-primary text-on-primary shadow-xl flex items-center justify-center hover:scale-110 transition-transform group">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+<span class="absolute right-16 bg-on-surface text-surface text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">New Route</span>
+</button>
+
+
+
+
+
+

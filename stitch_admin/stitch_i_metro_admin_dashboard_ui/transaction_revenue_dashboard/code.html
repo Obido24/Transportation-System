@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro Admin | Revenue &amp; Transactions</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#c8eadc",
+                    "primary-container": "#006b54",
+                    "tertiary-fixed": "#ffdad4",
+                    "on-secondary-fixed": "#012018",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8f9fa",
+                    "primary": "#00513f",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#191c1d",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#adcec0",
+                    "surface-container": "#edeeef",
+                    "on-tertiary-container": "#ffcdc5",
+                    "surface-tint": "#016b54",
+                    "outline": "#6f7a74",
+                    "on-secondary-container": "#4c6b5f",
+                    "on-primary-fixed-variant": "#00513f",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#92493e",
+                    "on-tertiary-fixed": "#3c0804",
+                    "secondary-fixed": "#c8eadc",
+                    "surface-variant": "#e1e3e4",
+                    "on-surface": "#191c1d",
+                    "on-tertiary-fixed-variant": "#753229",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#3e4944",
+                    "on-secondary-fixed-variant": "#2f4d42",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "primary-fixed": "#9ef3d6",
+                    "inverse-surface": "#2e3132",
+                    "surface-dim": "#d9dadb",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-primary-fixed": "#002118",
+                    "surface": "#f8f9fa",
+                    "on-primary-container": "#94e8cb",
+                    "inverse-primary": "#82d7ba",
+                    "surface-container-high": "#e7e8e9",
+                    "outline-variant": "#bec9c3",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-bright": "#f8f9fa",
+                    "primary-fixed-dim": "#82d7ba",
+                    "secondary": "#466559",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#753229",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "1rem",
+                    "xl": "1.25rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- SideNavBar (Execution from JSON) -->
+<aside class="flex flex-col fixed left-0 top-0 h-full py-6 bg-[#edeeef] dark:bg-slate-900 h-screen w-64 border-r-0 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-2xl font-bold text-[#00513f] dark:text-emerald-400 font-headline">I-Metro Admin</h1>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest mt-1">Kinetic Sanctuary</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<!-- Active Tab: Revenue -->
+<a class="flex items-center gap-3 px-4 py-3 text-[#00513f] dark:text-emerald-400 font-bold border-r-4 border-[#00513f] hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label text-sm uppercase tracking-wide">Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-sm uppercase tracking-wide">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label text-sm uppercase tracking-wide">Activity</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label text-sm uppercase tracking-wide">Support</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-6 space-y-2 border-t border-outline-variant/10">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-lg font-bold text-sm mb-4 transition-transform active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                Create Report
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label text-sm uppercase tracking-wide">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label text-sm uppercase tracking-wide">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar (Execution from JSON) -->
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-40 bg-[#f8f9fa]/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_10px_30px_rgba(25,28,29,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-[#00513f] dark:text-emerald-400 font-headline">The Fluid Transit Authority</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-[#00513f] dark:text-emerald-400 border-b-2 border-[#00513f] pb-1 font-label text-sm font-semibold transition-all" href="#">Analytics</a>
+<a class="text-[#3e4944] dark:text-slate-400 hover:text-[#006b54] dark:hover:text-emerald-300 font-label text-sm font-semibold transition-all" href="#">Configuration</a>
+<a class="text-[#3e4944] dark:text-slate-400 hover:text-[#006b54] dark:hover:text-emerald-300 font-label text-sm font-semibold transition-all" href="#">Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<input class="bg-surface-container-highest border-none rounded-full px-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" placeholder="Search transactions..." type="text"/>
+<span class="material-symbols-outlined absolute right-3 top-1.5 text-on-surface-variant text-sm">search</span>
+</div>
+<div class="flex gap-4 items-center">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">help_outline</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border-2 border-primary-container/20">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional male administrator in his 40s wearing glasses and a soft neutral blazer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2wkZp4INDATSEAlQLIJIRISG6iq0n8SyHZ1HNbasu8vdfQivj0Puzgwwdt1Cz2GUZlG-4YQSgtg9_uE-gkJ6tzEqQgAPrR3d0DxSRfGPNUU2y7Smw9kTZifnHFj_trd3MwFVNxYG5DQPcHa0oiUp9gTy6uWuZpPHLtJ4Um2RDjR3BfclN5JEguMgQQRJoGcg87ke6NRxLBf4iciBv9mgNobMijuSFJyjeiD4pXDJXeUaP4t_RFLho5U6UXno93SA1hnrEbqk19Lg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 max-w-[1400px] mx-auto space-y-8">
+<!-- Page Header & Filters -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-extrabold font-headline text-on-surface tracking-tight">Revenue Dashboard</h2>
+<p class="text-on-surface-variant font-body">Financial health and transit movement overview</p>
+</div>
+<div class="flex gap-3">
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-sm">calendar_today</span>
+<span class="text-sm font-semibold">Last 30 Days</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_more</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-lg border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-sm">route</span>
+<span class="text-sm font-semibold">All Routes</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Summary Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Total Revenue -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<span class="text-primary-fixed-variant text-xs font-bold px-2 py-1 bg-secondary-container rounded-full">+12.4%</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm font-medium uppercase tracking-wider font-label">Total Revenue (USD)</p>
+<p class="text-3xl font-extrabold font-headline mt-1">$4,281,092</p>
+</div>
+</div>
+<!-- Average Fare -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary-container/20 rounded-lg">
+<span class="material-symbols-outlined text-secondary">confirmation_number</span>
+</div>
+<span class="text-on-surface-variant text-xs font-bold px-2 py-1 bg-surface-container-high rounded-full">Stable</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm font-medium uppercase tracking-wider font-label">Average Fare</p>
+<p class="text-3xl font-extrabold font-headline mt-1">$3.45</p>
+</div>
+</div>
+<!-- Refund Rate -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-error-container/20 rounded-lg">
+<span class="material-symbols-outlined text-error">assignment_return</span>
+</div>
+<span class="text-error text-xs font-bold px-2 py-1 bg-error-container rounded-full">-2.1%</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm font-medium uppercase tracking-wider font-label">Refund Rate</p>
+<p class="text-3xl font-extrabold font-headline mt-1">0.84%</p>
+</div>
+</div>
+<!-- Active Promos -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-tertiary-container/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary">loyalty</span>
+</div>
+<span class="text-on-surface-variant text-xs font-bold px-2 py-1 bg-surface-container-high rounded-full">8 Active</span>
+</div>
+<div>
+<p class="text-on-surface-variant text-sm font-medium uppercase tracking-wider font-label">Active Promos</p>
+<p class="text-3xl font-extrabold font-headline mt-1">2,410</p>
+</div>
+</div>
+</div>
+<!-- Main Analytics Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Revenue Trend Chart Placeholder -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="px-6 py-4 bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline font-bold text-on-surface">Revenue Trends</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-xs font-bold bg-primary text-on-primary rounded-full">DAILY</button>
+<button class="px-3 py-1 text-xs font-bold text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">WEEKLY</button>
+</div>
+</div>
+<div class="p-6 h-80 flex items-end justify-between gap-2 relative">
+<!-- Chart Lines (Stylized Grid) -->
+<div class="absolute inset-x-6 inset-y-10 flex flex-col justify-between opacity-10">
+<div class="border-t border-on-surface-variant w-full"></div>
+<div class="border-t border-on-surface-variant w-full"></div>
+<div class="border-t border-on-surface-variant w-full"></div>
+<div class="border-t border-on-surface-variant w-full"></div>
+</div>
+<!-- Stylized Bar Graph -->
+<div class="bg-primary/20 w-full h-2/3 rounded-t-lg relative group transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full h-1/2 bg-primary rounded-t-lg"></div>
+</div>
+<div class="bg-primary/20 w-full h-4/5 rounded-t-lg relative group transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full h-2/3 bg-primary rounded-t-lg"></div>
+</div>
+<div class="bg-primary/20 w-full h-3/5 rounded-t-lg relative group transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full h-1/3 bg-primary rounded-t-lg"></div>
+</div>
+<div class="bg-primary/20 w-full h-1/2 rounded-t-lg relative group transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full h-1/4 bg-primary rounded-t-lg"></div>
+</div>
+<div class="bg-primary/20 w-full h-5/6 rounded-t-lg relative group transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full h-3/4 bg-primary rounded-t-lg"></div>
+</div>
+<div class="bg-primary/20 w-full h-3/4 rounded-t-lg relative group transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full h-1/2 bg-primary rounded-t-lg"></div>
+</div>
+<div class="bg-primary/20 w-full h-4/5 rounded-t-lg relative group transition-all hover:bg-primary/40">
+<div class="absolute bottom-0 w-full h-2/3 bg-primary rounded-t-lg"></div>
+</div>
+</div>
+</div>
+<!-- Revenue Distribution -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm flex flex-col">
+<div class="px-6 py-4 bg-surface-container-low">
+<h3 class="font-headline font-bold text-on-surface">Route Distribution</h3>
+</div>
+<div class="p-6 space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>Green Line (Main)</span>
+<span>42%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[42%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>Express 88</span>
+<span>28%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[28%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>River Shuttle</span>
+<span>18%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[18%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-bold">
+<span>Airport Connector</span>
+<span>12%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-outline h-full w-[12%]"></div>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant/20">
+<p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-4">Payment Breakdown</p>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium">Metro Pass</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="text-xs font-medium">NFC</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="text-xs font-medium">QR Code</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Transactions Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="px-6 py-4 bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline font-bold text-on-surface">Recent Transactions</h3>
+<button class="text-primary text-sm font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low/50">
+<tr>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Transaction ID</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Date &amp; Time</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Route</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Method</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Amount</th>
+<th class="px-6 py-4 text-xs font-bold text-on-surface-variant uppercase tracking-widest font-label">Status</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/30">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-on-surface">#IM-902341</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 14:21</td>
+<td class="px-6 py-4 text-sm font-medium">Green Line South</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">contactless</span>
+                                        I-Metro Pass
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold">$2.50</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-container text-on-secondary-fixed-variant">Settled</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-on-surface">#IM-902342</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 14:18</td>
+<td class="px-6 py-4 text-sm font-medium">Express 88</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">nfc</span>
+                                        NFC Payment
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold">$12.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container">Refunded</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-on-surface">#IM-902343</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 14:15</td>
+<td class="px-6 py-4 text-sm font-medium">River Shuttle</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">qr_code_2</span>
+                                        QR Code
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold">$4.25</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-container text-on-secondary-fixed-variant">Settled</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4 font-mono text-sm text-on-surface">#IM-902344</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant">Oct 24, 2023 • 14:12</td>
+<td class="px-6 py-4 text-sm font-medium">Green Line North</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">contactless</span>
+                                        I-Metro Pass
+                                    </span>
+</td>
+<td class="px-6 py-4 font-bold">$2.50</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant">Flagged</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>

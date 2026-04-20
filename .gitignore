@@ -1,0 +1,30 @@
+# dependencies/builds
+node_modules/
+build/
+dist/
+.dart_tool/
+.pub/
+.cache/
+
+# secrets/env
+.env
+.env.*
+*.key
+*.pem
+
+# backend / validator / SDK / generated binaries
+i_metro/backend/
+i_metro/sdk/
+i_metro/validator_client/
+validator_bridge*
+Validator*/
+validator*/
+sdk_extract/
+CL-0409_SDK*/
+CL-0409_SDK(1).zip
+install_validator*.sh
+build_validator.sh
+validator_bridge_run.sh
+
+# archives
+*.zip

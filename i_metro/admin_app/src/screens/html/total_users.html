@@ -1,0 +1,211 @@
+
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-900 flex flex-col p-4 overflow-y-auto z-50">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<img src="/brand/imetro_logo.png" alt="I-Metro logo" class="h-full w-full object-contain block" />
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50 leading-tight">I-Metro</h1>
+<p class="text-xs text-on-surface-variant">Inter-Metro Transport Solution Limited</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg group active:scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<!-- Active State: User Management -->
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-900 dark:text-emerald-400 font-semibold bg-white/50 dark:bg-slate-800/50 rounded-lg active:scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg group active:scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg group active:scale-[0.98] duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-medium">Route Management</span>
+</a>
+</nav>
+<div class="mt-8 pt-8 border-t border-outline-variant/10">
+<button class="w-full bg-primary hover:bg-primary-container text-on-primary py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+<span class="font-semibold">New Route</span>
+</button>
+</div>
+<div class="mt-auto space-y-1 pt-6">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-sm">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/20 transition-colors rounded-lg mt-2" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar & Main Canvas Content -->
+<main class="ml-64 min-h-screen transition-all duration-300">
+<!-- TopNavBar Component -->
+<header class="sticky top-0 z-40 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg flex justify-between items-center h-16 px-8 w-auto">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all duration-200" placeholder="Search users, IDs, or locations..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant">
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold tracking-[0.05em] uppercase text-on-surface-variant hidden md:block">Admin Profile</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container-highest">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="portrait of a professional male administrator in a light grey studio background, neutral expression, clean aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX8VHnHrZTHZpcw8q_ZtfOZwtcU3YtUXgzssQTVDPzG_DpvLgxPc9skygNx5olqV6fwbF_p6QjHvGmeeEXgBrFl1wmEdxTsVCBRTBNFZ9A9L4zTnY08nfM0Bybcve3P3HQwYGMsOtzkPEl-2E4w-YkDXMDRToz9Bat3zBqCX1zcFomHfx7kdKBP4Gdt1n30aq8iNZayozDen18TRCJBUdrI7o9Rq5F6uVynhHtZ4tCJh4vVECL22OxuwJ4xOIskUf4RkWEVEun2wQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Page Content -->
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header Section -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-4xl font-medium tracking-tight text-on-surface mb-2">Total Users</h2>
+<p class="text-on-surface-variant max-w-md">Manage and monitor the transit system's active passenger base and authentication statuses.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-low px-4 py-2.5 rounded-lg flex items-center gap-2 text-primary font-medium hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 shadow-lg shadow-primary/10 transition-all active:scale-95" data-action="add-user" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="person_add">person_add</span>
+                        Add User
+                    </button>
+</div>
+</div>
+<!-- Stats Bento Grid (High-end UI Pattern) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-transparent hover:border-primary/10 transition-all">
+<p class="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">Active Users</p>
+<div class="flex items-end justify-between">
+<h3 class="text-3xl font-bold text-on-surface">0</h3>
+<span class="text-primary font-bold text-sm flex items-center bg-primary-fixed/20 px-2 py-1 rounded">Live</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-transparent hover:border-primary/10 transition-all">
+<p class="text-xs font-bold tracking-widest uppercase text-on-surface-variant mb-4">New Today</p>
+<div class="flex items-end justify-between">
+<h3 class="text-3xl font-bold text-on-surface">0</h3>
+<span class="text-on-surface-variant font-medium text-sm flex items-center">created today</span>
+</div>
+</div>
+<div class="md:col-span-2 bg-gradient-to-br from-primary to-primary-container p-6 rounded-lg text-on-primary flex justify-between relative overflow-hidden">
+<div class="relative z-10">
+<p class="text-xs font-bold tracking-widest uppercase opacity-80 mb-4">Network Health</p>
+<h3 class="text-3xl font-bold mb-2">Loading live reliability...</h3>
+<p class="text-sm opacity-90 max-w-xs">Waiting for live backend metrics.</p>
+</div>
+<div class="absolute right-[-20px] bottom-[-20px] opacity-10">
+<span class="material-symbols-outlined text-[140px]" data-icon="cloud_done">cloud_done</span>
+</div>
+</div>
+</div>
+<!-- Users Table Container -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm shadow-slate-200/50">
+<!-- Table Header/Toolbar -->
+<div class="px-8 py-5 bg-surface-container-low flex justify-between items-center">
+<h4 class="font-bold text-on-surface tracking-tight uppercase text-xs tracking-[0.05em]">User Directory</h4>
+<div class="flex gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="download">download</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- The "Air" Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">
+<th class="px-8 py-4 font-semibold">User</th>
+<th class="px-8 py-4 font-semibold">Gender</th>
+<th class="px-8 py-4 font-semibold">Location</th>
+<th class="px-8 py-4 font-semibold">Status</th>
+<th class="px-8 py-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr>
+<td class="px-8 py-6 text-sm text-on-surface-variant text-center" colspan="5">
+Loading live users...
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination -->
+<div class="px-8 py-4 bg-surface-container-low/30 border-t border-outline-variant/10 flex justify-between items-center text-sm">
+<p class="text-on-surface-variant">Showing live users from the backend</p>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded-lg transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded-lg font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high rounded-lg transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high rounded-lg transition-colors">3</button>
+<span class="flex items-end px-1">...</span>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-container-high rounded-lg transition-colors">120</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Meta Info -->
+<div class="mt-12 flex flex-col md:flex-row gap-8">
+<div class="flex-1 bg-surface-container-low p-6 rounded-lg">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-primary/10 rounded text-primary">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<h5 class="font-bold text-on-surface">Security Overview</h5>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-4">24 users requested password resets in the last hour. All requests were verified through multi-factor authentication systems without incident.</p>
+<a class="text-xs font-bold text-primary uppercase tracking-widest hover:underline" href="/admin/activity">View Audit Logs</a>
+</div>
+<div class="flex-1 bg-surface-container-low p-6 rounded-lg">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-primary/10 rounded text-primary">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+</div>
+<h5 class="font-bold text-on-surface">Regional Density</h5>
+</div>
+<div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden mb-2">
+<div class="h-full bg-primary" style="width: 0%"></div>
+</div>
+<div class="flex justify-between text-xs text-on-surface-variant">
+<span>No location data</span>
+<span class="font-bold">0 users</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - Suppressed on Management Screen as per mandate if needed, 
+         but technically useful for "Quick Add" if allowed. Mandate says suppress on Transactional/Details.
+         Management is a top-level hub, but we will follow the "Suppress on Task-Focused" logic for maximum focus. -->
+
+
+
+
+

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro Admin | Route Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#753229",
+                        "primary-fixed-dim": "#82d7ba",
+                        "primary-container": "#006b54",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface-dim": "#d9dadb",
+                        "inverse-surface": "#2e3132",
+                        "secondary-container": "#c8eadc",
+                        "surface-bright": "#f8f9fa",
+                        "background": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "outline": "#6f7a74",
+                        "on-primary-container": "#94e8cb",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#92493e",
+                        "primary-fixed": "#9ef3d6",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e7e8e9",
+                        "on-primary-fixed": "#002118",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#3c0804",
+                        "surface": "#f8f9fa",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary-fixed": "#ffdad4",
+                        "secondary-fixed": "#c8eadc",
+                        "outline-variant": "#bec9c3",
+                        "on-surface": "#191c1d",
+                        "surface-tint": "#016b54",
+                        "tertiary": "#753229",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-secondary-container": "#4c6b5f",
+                        "secondary": "#466559",
+                        "surface-container": "#edeeef",
+                        "on-secondary-fixed": "#012018",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed-dim": "#adcec0",
+                        "inverse-primary": "#82d7ba",
+                        "on-background": "#191c1d",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-fixed-variant": "#2f4d42",
+                        "on-surface-variant": "#3e4944",
+                        "on-tertiary-container": "#ffcdc5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#00513f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #191c1d;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Manrope', sans-serif;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #00513f 0%, #006b54 100%);
+        }
+        .glass-panel {
+            backdrop-filter: blur(16px);
+            background: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar Component -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 dark:bg-slate-900 flex flex-col p-4 overflow-y-auto z-50">
+<div class="flex items-center gap-3 px-2 mb-8">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" data-icon="directions_bus">directions_bus</span>
+</div>
+<div>
+<h2 class="text-xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50 leading-tight">I-Metro</h2>
+<p class="text-xs text-on-surface-variant opacity-70">Transit Authority</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-medium">Merchant Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-900 dark:text-emerald-400 font-semibold bg-white/50 dark:bg-slate-800/50 rounded-lg active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-medium">Route Management</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 space-y-1">
+<button class="w-full kinetic-gradient text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 mb-6 shadow-lg shadow-emerald-900/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                New Route
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-sm">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/20 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-sm font-medium">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 min-h-screen flex flex-col">
+<!-- TopNavBar Component -->
+<header class="sticky top-0 z-40 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg flex justify-between items-center h-16 px-8 w-full shadow-[0px_10px_30px_rgba(25,28,29,0.05)]">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200 outline-none" placeholder="Search routes, stations, or IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<button class="hover:text-emerald-900 transition-colors p-1 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full border-2 border-slate-50"></span>
+</button>
+<button class="hover:text-emerald-900 transition-colors p-1">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-on-surface tracking-wider uppercase">ADMIN</p>
+<p class="text-[10px] text-on-surface-variant">Sarah Jenkins</p>
+</div>
+<img alt="Admin Profile" class="w-10 h-10 rounded-full border-2 border-primary-container/20 group-hover:border-primary transition-colors" data-alt="professional headshot of a female transit administrator in business casual attire with a soft office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzu_YTiaboKghg-TCuFfOvGH8Sh_p-LTiG332iZUvSAeKQMu5Hpj468h7DfUVYxxp6sXhtz3ef3SYJqtcfKNaf2ZnxBC3yHMu9unS8WpfbQN8_WHYgmrWgEi6_VU6280zR25D5D9qCX3c2tCFRnPcpN1TmR8KC4kwdBvOCIKu39IMTpGvGqeI_MEvT-P9Su1dF0T5M2GU-Y7tTtrCMgp6G_DkFEgg4KjAaGov1CYoj0LzYRJQ1vDkJomusNHeDNKI6yGbKsiTahkQ"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-8 space-y-8 animate-in fade-in duration-700">
+<!-- Page Header & Hero Action -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<nav class="flex text-xs text-on-surface-variant mb-2 gap-2 font-medium tracking-wide uppercase">
+<span class="opacity-60">Admin</span>
+<span class="opacity-60">/</span>
+<span class="text-primary">Routes</span>
+</nav>
+<h1 class="text-4xl font-bold tracking-tight text-on-surface">Route Management</h1>
+<p class="text-on-surface-variant mt-1">Manage and monitor 24 active transit arteries across the metropolitan area.</p>
+</div>
+<button class="group flex items-center gap-3 kinetic-gradient text-white px-8 py-4 rounded-xl font-bold shadow-xl shadow-emerald-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span>Add New Transit Route</span>
+</button>
+</div>
+<!-- Stats Overview (Asymmetric Bento Grid) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="md:col-span-2 bg-surface-container-lowest p-6 rounded-xl border border-transparent shadow-sm relative overflow-hidden group">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-emerald-50 rounded-full group-hover:scale-110 transition-transform duration-700"></div>
+<div class="relative z-10">
+<p class="text-on-surface-variant text-sm font-medium">Total Network Coverage</p>
+<h3 class="text-5xl font-bold text-on-surface mt-2 tracking-tight">1,240 <span class="text-lg font-medium text-on-surface-variant">km</span></h3>
+<div class="flex items-center gap-2 mt-4 text-primary text-sm font-semibold">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span>+4.2% from last month</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<p class="text-on-surface-variant text-sm font-medium">Active Routes</p>
+<h3 class="text-4xl font-bold text-on-surface mt-2 tracking-tight">18</h3>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-6">
+<div class="bg-primary h-full rounded-full w-[75%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<p class="text-on-surface-variant text-sm font-medium">Pending Review</p>
+<h3 class="text-4xl font-bold text-on-surface mt-2 tracking-tight">06</h3>
+<div class="flex gap-1 mt-6">
+<div class="h-2 w-2 rounded-full bg-primary/40"></div>
+<div class="h-2 w-2 rounded-full bg-primary/40"></div>
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<div class="px-8 py-6 bg-surface-container-low flex justify-between items-center">
+<h2 class="text-xl font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="route">route</span>
+                        Available Routes
+                    </h2>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg text-sm font-medium border border-outline-variant/20 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white rounded-lg text-sm font-medium border border-outline-variant/20 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Route ID</th>
+<th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Pickup Point</th>
+<th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Destination</th>
+<th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Status</th>
+<th class="text-right px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Price</th>
+<th class="text-right px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<span class="font-mono text-xs font-semibold px-2 py-1 bg-surface-container-high rounded text-on-surface">RT-2041</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Central Station</span>
+<span class="text-xs text-on-surface-variant">Gate 4, Hub A</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Westside Terminal</span>
+<span class="text-xs text-on-surface-variant">Arrival Hall B</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="font-bold text-on-surface">$12.50</span>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<span class="font-mono text-xs font-semibold px-2 py-1 bg-surface-container-high rounded text-on-surface">RT-8812</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">North Highlands</span>
+<span class="text-xs text-on-surface-variant">Plaza Circle</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Downtown Plaza</span>
+<span class="text-xs text-on-surface-variant">Main St. Corner</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="font-bold text-on-surface">$8.75</span>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<span class="font-mono text-xs font-semibold px-2 py-1 bg-surface-container-high rounded text-on-surface">RT-5022</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Airport Link</span>
+<span class="text-xs text-on-surface-variant">Terminal 2</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Business District</span>
+<span class="text-xs text-on-surface-variant">Apex Towers</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-800 text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                                        Maintenance
+                                    </span>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="font-bold text-on-surface">$25.00</span>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-6">
+<span class="font-mono text-xs font-semibold px-2 py-1 bg-surface-container-high rounded text-on-surface">RT-1104</span>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">Eco Park</span>
+<span class="text-xs text-on-surface-variant">Main Entrance</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<div class="flex flex-col">
+<span class="font-bold text-on-surface">South Mall</span>
+<span class="text-xs text-on-surface-variant">West Parking</span>
+</div>
+</td>
+<td class="px-8 py-6">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-xs font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                        Draft
+                                    </span>
+</td>
+<td class="px-8 py-6 text-right">
+<span class="font-bold text-on-surface">$5.25</span>
+</td>
+<td class="px-8 py-6 text-right">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-8 py-6 flex items-center justify-between border-t border-surface-container-high">
+<p class="text-sm text-on-surface-variant font-medium">Showing <span class="text-on-surface">1-4</span> of <span class="text-on-surface">18</span> routes</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant/20 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors font-medium">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant/20 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Information (Glassmorphism Map View) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<div class="lg:col-span-2 relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="minimalist clean digital transit map of a metropolitan city with neon green transit lines glowing against a dark slate background" data-location="Chicago" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLbuVfRq0ZatNvIywEvlWTCJMaCsZqUkhVYS0yyf_xdiZKg755hAFJugJuihayHLZf0kBjcSaMAQc0J75gBvLe2dKOmyQBIXx5xbcLQwLKOmzFntC0kk6FMB9aUax93vM1ZsSJOWF1OOza3fMsvJ-QQaERX6kN26mr0H-Y2Utvi25ii5KqxLRSUfC9-aOvxXFxoKU0NP1531ix8_3pU8TRUonZAyAycxQiBCBUgZ_0ZgZZs7hoaLO4Q0QnyvCbiG0WP50Nw2fEm2c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+<div class="absolute top-6 left-6 glass-panel p-4 rounded-xl border border-white/20 shadow-lg max-w-[280px]">
+<h4 class="font-bold text-on-surface">Network Map Live</h4>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">Visualizing high-traffic congestion points in real-time. RT-5022 maintenance is affecting 14% of North traffic.</p>
+<button class="mt-4 text-xs font-bold text-primary flex items-center gap-1 group">
+                            Full Network Insights
+                            <span class="material-symbols-outlined text-[14px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="bg-primary-container/10 p-6 rounded-2xl border border-primary-container/10">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="auto_awesome">auto_awesome</span>
+<h4 class="font-bold text-on-surface">AI Route Optimization</h4>
+<p class="text-sm text-on-surface-variant mt-2">Our kinetic engine suggests adding 2 new stops to North Highlands route to increase efficiency by 22%.</p>
+<button class="mt-4 w-full py-2 bg-white rounded-lg text-primary text-xs font-bold border border-primary/20 hover:bg-primary hover:text-white transition-all">Review Suggestions</button>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/5">
+<h4 class="font-bold text-on-surface mb-4">Route Health</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-on-surface-variant">Punctuality</span>
+<span class="text-xs font-bold text-emerald-600">98%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-[98%]"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs font-medium text-on-surface-variant">Passenger Load</span>
+<span class="text-xs font-bold text-amber-600">62%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full w-[62%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

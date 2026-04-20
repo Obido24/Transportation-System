@@ -1,0 +1,137 @@
+<main class="flex-1 min-h-screen flex flex-col">
+  <div class="p-8 space-y-8 animate-in fade-in duration-700">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <div>
+        <nav class="flex text-xs text-on-surface-variant mb-2 gap-2 font-medium tracking-wide uppercase">
+          <span class="opacity-60">Admin</span>
+          <span class="opacity-60">/</span>
+          <span class="text-primary">Routes</span>
+        </nav>
+        <h1 class="text-4xl font-bold tracking-tight text-on-surface">Route Management</h1>
+        <p class="text-on-surface-variant mt-1" data-route-summary>
+          Live route records from the backend.
+        </p>
+      </div>
+      <button
+        class="group flex items-center gap-3 kinetic-gradient text-white px-8 py-4 rounded-xl font-bold shadow-xl shadow-emerald-900/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+        data-action="add-route"
+      >
+        <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+        <span>Add New Transit Route</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+        <p class="text-on-surface-variant text-sm font-medium">Total Routes</p>
+        <h3 class="text-4xl font-bold text-on-surface mt-2 tracking-tight" data-route-total-count>
+          Loading...
+        </h3>
+        <p class="text-xs text-on-surface-variant mt-4">Live records from the backend.</p>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+        <p class="text-on-surface-variant text-sm font-medium">Active Routes</p>
+        <h3 class="text-4xl font-bold text-on-surface mt-2 tracking-tight" data-route-active-count>
+          Loading...
+        </h3>
+        <div class="w-full bg-surface-container-high h-1.5 rounded-full mt-6 overflow-hidden">
+          <div class="bg-primary h-full rounded-full w-[0%]" data-route-active-bar></div>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+        <p class="text-on-surface-variant text-sm font-medium">Inactive Routes</p>
+        <h3 class="text-4xl font-bold text-on-surface mt-2 tracking-tight" data-route-inactive-count>
+          Loading...
+        </h3>
+        <p class="text-xs text-on-surface-variant mt-4">Routes currently not in service.</p>
+      </div>
+      <div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+        <p class="text-on-surface-variant text-sm font-medium">Average Fare</p>
+        <h3 class="text-4xl font-bold text-on-surface mt-2 tracking-tight" data-route-average-fare>
+          Loading...
+        </h3>
+        <p class="text-xs text-on-surface-variant mt-4">Across all backend routes.</p>
+      </div>
+    </div>
+
+    <div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+      <div class="px-8 py-6 bg-surface-container-low flex justify-between items-center">
+        <h2 class="text-xl font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary" data-icon="route">route</span>
+          Available Routes
+        </h2>
+        <span class="text-xs font-bold text-primary uppercase tracking-widest">Live Backend</span>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-surface-container-low/50">
+              <th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Route ID</th>
+              <th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Pickup Point</th>
+              <th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Destination</th>
+              <th class="text-left px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Status</th>
+              <th class="text-right px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Price</th>
+              <th class="text-right px-8 py-4 text-xs font-bold text-on-surface-variant tracking-[0.05em] uppercase">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-surface-container-high">
+            <tr>
+              <td class="px-8 py-10 text-center text-sm text-on-surface-variant" colspan="6">
+                Loading live routes...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="px-8 py-6 flex items-center justify-between border-t border-surface-container-high">
+        <p class="text-sm text-on-surface-variant font-medium" data-route-pagination>
+          Showing live routes from the backend.
+        </p>
+        <span class="text-xs text-primary font-semibold uppercase tracking-widest">No demo data</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+        <div class="flex items-start justify-between gap-4 mb-6">
+          <div>
+            <h4 class="font-bold text-on-surface">Route Snapshot</h4>
+            <p class="text-xs text-on-surface-variant mt-1">Live route counts and health summary from the backend.</p>
+          </div>
+          <span class="text-xs font-bold text-primary uppercase tracking-widest">Live</span>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="p-4 bg-surface-container-low rounded-xl">
+            <p class="text-xs text-on-surface-variant font-medium">Active routes</p>
+            <p class="text-2xl font-bold text-on-surface mt-2" data-route-insight="active-count">Loading...</p>
+          </div>
+          <div class="p-4 bg-surface-container-low rounded-xl">
+            <p class="text-xs text-on-surface-variant font-medium">Inactive routes</p>
+            <p class="text-2xl font-bold text-on-surface mt-2" data-route-insight="inactive-count">Loading...</p>
+          </div>
+        </div>
+        <div class="mt-4 p-4 bg-primary/10 rounded-xl">
+          <p class="text-xs text-on-surface-variant">Recommendation</p>
+          <p class="text-sm font-semibold text-on-surface mt-1" data-route-insight="summary">
+            Loading live route summary...
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
+        <h4 class="font-bold text-on-surface mb-4">Route Notes</h4>
+        <div class="space-y-4">
+          <p class="text-sm text-on-surface-variant">
+            This screen now shows only live routes from the backend. Add, edit, and delete actions operate on the real route table.
+          </p>
+          <p class="text-sm text-on-surface-variant">
+            If no routes exist yet, the table will show an honest empty state instead of sample analytics.
+          </p>
+          <p class="text-sm text-on-surface-variant">
+            Currency is displayed in NGN across the route list and exports.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

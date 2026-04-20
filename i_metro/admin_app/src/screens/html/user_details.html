@@ -1,0 +1,375 @@
+
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 flex flex-col p-4 overflow-y-auto z-20">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg">
+<img src="/brand/imetro_logo.png" alt="I-Metro logo" class="h-full w-full object-contain block" />
+</div>
+<div>
+<h2 class="text-xl font-bold tracking-tight text-emerald-900 leading-tight">I-Metro</h2>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Inter-Metro Transport Solution Limited</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-900 font-semibold bg-white/50 rounded-lg scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined text-emerald-900" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span>User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span>User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span>Route Management</span>
+</a>
+</nav>
+<div class="mt-auto pt-8 border-t border-slate-200 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="sticky top-0 z-10 bg-slate-50/80 backdrop-blur-lg flex justify-between items-center h-16 px-8 w-auto">
+<div class="flex items-center bg-surface-container-highest rounded-full px-4 py-1.5 w-96 transition-all focus-within:bg-white focus-within:ring-1 ring-primary/20">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full p-0" placeholder="Search records..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-8 w-[1px] bg-outline-variant opacity-30 mx-2"></div>
+<div class="flex items-center gap-3">
+<img alt="Admin Profile" class="w-8 h-8 rounded-full object-cover border border-primary/10" data-alt="Close up portrait of a professional man in a business setting with soft natural window lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSVpJ1TwlmhLzH6F3_O9QbK8x4zdKo6uFShEMCikyOtlV__nw2EvaZL5MFXX3A4RpoTlE2q1xNJEccSHDb_Dj3kygZ61qb7zQB1YXpSjpIqr0EYCsJltTBVDeP5PYpPYPZuh8euLsh63XW_OIQHXLgV23hTD8MYY-5NA2iYu48FhPWHGjoytbfA_ryaxR1AtOOhiPIOVnWCh1EmR0QnA26bSHDmbYnWaxTrah7kyEh-hGnFs-qF4lgen8sCvlPppdlCQEzRioXtv0"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<!-- Breadcrumbs & Actions -->
+<div class="flex justify-between items-center">
+<nav class="flex items-center gap-2 text-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">User Management</a>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="font-semibold text-on-surface">User Details</span>
+</nav>
+<div class="flex gap-3">
+<button class="px-5 py-2 rounded-lg border border-outline/20 text-on-surface font-medium hover:bg-surface-container-low transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="edit">edit</span>
+                        Edit Profile
+                    </button>
+<!-- Status Toggle Button -->
+<button class="px-5 py-2 rounded-lg bg-error text-white font-medium hover:opacity-90 transition-all flex items-center gap-2 shadow-sm shadow-error/20">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span>
+                        Block User
+                    </button>
+</div>
+</div>
+<!-- Bento Layout Profile Summary -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Main Identity Card -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-lg overflow-hidden border border-transparent">
+<div class="h-32 bg-gradient-to-r from-primary to-primary-container relative">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
+</div>
+<div class="px-8 pb-8 -mt-12 relative flex items-end gap-6">
+<div class="p-1 bg-white rounded-2xl shadow-xl">
+<img alt="User record" class="w-32 h-32 rounded-xl object-cover" data-alt="Generic profile avatar placeholder for a user account" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWxHpnm0xd5cbJQ2frtCBRkxGFpN7LssfAsHZIk7qB8TlsCVOrEl8p12jMBSScCV6Q8GwosXV5lfW2AGPx46d9WIgGO8QewboUWEV3VeeeUprFWguX7ChPPp6MXAGRjEgQYX-d5Qt35xzwd2A-ktaUjB8YyxwAUp6HlG9794MweUwIYeSpkYr9yQeYnj-SmF8P74U_ckqBK1NEPNFFLTx0BkeignWAoDCJJZ2-XfiXsOGqgQ26e-xHJWUkTl3wQuItgJfdphgQyr0"/>
+</div>
+<div class="pb-2 flex-1">
+<div class="flex items-center gap-3">
+<h1 class="text-3xl font-bold text-on-surface">User record</h1>
+<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider rounded-full border border-primary/10">Active Member</span>
+</div>
+<p class="text-on-surface-variant flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="alternate_email">alternate_email</span>
+                                user@i-metro.com
+                            </p>
+</div>
+</div>
+<div class="px-8 pb-8 pt-4 grid grid-cols-3 gap-6 border-t border-surface-container-low mt-4">
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-1">Total Trips</p>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold text-primary leading-none">1,284</span>
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-1">Loyalty Points</p>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold text-primary leading-none">4,850</span>
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="stars">stars</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold mb-1">Account Age</p>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold text-primary leading-none">2.4y</span>
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="history">history</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Contact & Bio Side Card -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<div class="bg-surface-container-lowest rounded-lg p-6 h-full flex flex-col">
+<h3 class="text-sm font-bold text-on-surface-variant uppercase tracking-wider mb-4">Contact Details</h3>
+<div class="space-y-4 flex-1">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg" data-icon="phone">phone</span>
+</div>
+<div>
+<p class="text-[11px] text-on-surface-variant font-medium">Mobile Number</p>
+<p class="text-sm font-semibold">Phone on file</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="text-[11px] text-on-surface-variant font-medium">Primary Address</p>
+<p class="text-sm font-semibold">Address on file</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-lg" data-icon="credit_card">credit_card</span>
+</div>
+<div>
+<p class="text-[11px] text-on-surface-variant font-medium">Payment Method</p>
+<p class="text-sm font-semibold">Visa ending in  9012</p>
+</div>
+</div>
+</div>
+<div class="pt-6 mt-6 border-t border-surface-container-low">
+<button class="w-full py-3 bg-surface-container-high hover:bg-surface-container-highest rounded-lg text-primary text-sm font-bold transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="chat">chat</span>
+                                Send Notification
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Booking History Section -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden">
+<div class="px-8 py-5 flex items-center justify-between bg-surface-container-low">
+<div>
+<h2 class="text-lg font-bold text-on-surface">Booking History</h2>
+<p class="text-xs text-on-surface-variant">Last 10 transactions and journey logs</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 text-xs font-bold text-primary hover:bg-white rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant text-[10px] font-bold uppercase tracking-widest border-b border-surface-container-low">
+<th class="px-8 py-4">Journey ID</th>
+<th class="px-6 py-4">Date &amp; Time</th>
+<th class="px-6 py-4">Route / Service</th>
+<th class="px-6 py-4">Duration</th>
+<th class="px-6 py-4">Fare</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-8 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low/50">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-5">
+<span class="font-mono text-xs font-semibold text-primary">#IM-29401</span>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">Oct 24, 2023</div>
+<div class="text-[11px] text-on-surface-variant">08:45 AM</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="directions_subway">directions_subway</span>
+</div>
+<div>
+<div class="text-sm font-semibold">Green Line Exp.</div>
+<div class="text-[11px] text-on-surface-variant">Zone 1 → Zone 4</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">
+                                    24 mins
+                                </td>
+<td class="px-6 py-5 text-sm font-bold">
+                                    ?4.50
+                                </td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Completed
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-5">
+<span class="font-mono text-xs font-semibold text-primary">#IM-29388</span>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">Oct 23, 2023</div>
+<div class="text-[11px] text-on-surface-variant">05:12 PM</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-amber-100 flex items-center justify-center text-amber-700">
+<span class="material-symbols-outlined text-sm" data-icon="directions_bus">directions_bus</span>
+</div>
+<div>
+<div class="text-sm font-semibold">Metro Bus 42B</div>
+<div class="text-[11px] text-on-surface-variant">Main St. Loop</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">
+                                    12 mins
+                                </td>
+<td class="px-6 py-5 text-sm font-bold">
+                                    ?2.25
+                                </td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                        Completed
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-8 py-5">
+<span class="font-mono text-xs font-semibold text-primary">#IM-28114</span>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">Oct 21, 2023</div>
+<div class="text-[11px] text-on-surface-variant">10:20 AM</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="directions_subway">directions_subway</span>
+</div>
+<div>
+<div class="text-sm font-semibold">North-South Line</div>
+<div class="text-[11px] text-on-surface-variant">Hub → Terminal A</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant">
+                                    --
+                                </td>
+<td class="px-6 py-5 text-sm font-bold">
+                                    ?0.00
+                                </td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-slate-200 text-slate-700 text-[10px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
+                                        Cancelled
+                                    </span>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xl" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Footer -->
+<div class="px-8 py-4 border-t border-surface-container-low flex justify-between items-center bg-surface-container-lowest">
+<p class="text-xs text-on-surface-variant">Showing 1-3 of 1,284 trips</p>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container-low transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container-low transition-colors text-xs font-bold">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container-low transition-colors text-xs font-bold">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Notes & System Logs Section -->
+<div class="grid grid-cols-2 gap-6">
+<div class="bg-surface-container-lowest rounded-lg p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold text-on-surface uppercase tracking-wider">Internal Admin Notes</h3>
+<button class="text-primary text-xs font-bold hover:underline">Add Note</button>
+</div>
+<div class="space-y-4">
+<div class="p-3 bg-surface-container-low rounded-lg">
+<p class="text-sm text-on-surface italic">"User requested fare refund for trip #IM-28114 due to 15min station delay. Refund processed via dashboard."</p>
+<div class="flex items-center justify-between mt-2">
+<span class="text-[10px] text-on-surface-variant font-medium">Added by: Admin Sarah W.</span>
+<span class="text-[10px] text-on-surface-variant">Oct 22, 2023</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-6">
+<h3 class="text-sm font-bold text-on-surface uppercase tracking-wider mb-4">Account Security</h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-sm py-1">
+<span class="text-on-surface-variant">Last Login</span>
+<span class="font-medium">2 hours ago (203.0.113.42)</span>
+</div>
+<div class="flex justify-between items-center text-sm py-1">
+<span class="text-on-surface-variant">Two-Factor Auth</span>
+<span class="text-emerald-600 font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+                                Enabled
+                            </span>
+</div>
+<div class="flex justify-between items-center text-sm py-1">
+<span class="text-on-surface-variant">Device Count</span>
+<span class="font-medium">2 Registered Devices</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+
+
+

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro Audit &amp; Activity Logs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed": "#c8eadc",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a74",
+                        "on-surface": "#191c1d",
+                        "on-secondary-container": "#4c6b5f",
+                        "primary-container": "#006b54",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary-fixed": "#3c0804",
+                        "secondary-fixed-dim": "#adcec0",
+                        "on-primary-container": "#94e8cb",
+                        "on-secondary-fixed-variant": "#2f4d42",
+                        "surface-tint": "#016b54",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#753229",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "surface-bright": "#f8f9fa",
+                        "secondary": "#466559",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#bec9c3",
+                        "secondary-container": "#c8eadc",
+                        "on-primary-fixed": "#002118",
+                        "tertiary-container": "#92493e",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#9ef3d6",
+                        "primary": "#00513f",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdad4",
+                        "inverse-primary": "#82d7ba",
+                        "primary-fixed-dim": "#82d7ba",
+                        "background": "#f8f9fa",
+                        "on-background": "#191c1d",
+                        "surface-container-low": "#f3f4f5",
+                        "on-tertiary-container": "#ffcdc5",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#753229",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-surface-variant": "#3e4944",
+                        "on-secondary-fixed": "#012018"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #00513f 0%, #006b54 100%);
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 bg-slate-50 flex justify-between items-center w-full px-6 py-4 transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-4">
+<button class="text-teal-900 hover:bg-slate-200/50 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-xl font-bold text-teal-900 font-['Manrope'] tracking-tight">I-Metro</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-[10px] text-on-primary-container font-bold overflow-hidden">
+<img alt="Admin Profile" data-alt="close-up portrait of a professional transit administrator in a modern office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqmdFUocsFxu4TAymzE51AavsdDmzqMNfaTQtrqhFXus7fNXVAe-F7yuX1zRF0kOzFmO3HsLQaup3__ma3i1Qbx-Q3Uos_YFXlNHEMA9GIpZ0OLg1bPXU-ZmkwLdtUauuLd7-zLahk5xbIeLpU_-PSnmSzzljSMXq5u8_ZFHVm-9NVSK_gdT-XlZFJzz5u8nSTh5SU34EJzY6Wpc-Rgm2PPYui8CJP2akqcaMLyJ7c_hntyRWqUTswv1NKxB5OrhIM0IwfYbyLUlo"/>
+</div>
+</div>
+</header>
+<main class="px-4 pt-4">
+<!-- Dashboard Header Section -->
+<section class="mb-6">
+<div class="flex justify-between items-end mb-2">
+<div>
+<span class="text-on-surface-variant text-xs font-label tracking-widest uppercase opacity-70">Security &amp; Logs</span>
+<h2 class="text-2xl font-extrabold text-on-surface tracking-tight">Activity Log</h2>
+</div>
+<button class="bg-surface-container-high p-2 rounded-lg text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<!-- Quick Category Tabs -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide mt-4">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap">All Logs</button>
+<button class="bg-surface-container-lowest text-on-surface-variant px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap">Security</button>
+<button class="bg-surface-container-lowest text-on-surface-variant px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap">System</button>
+<button class="bg-surface-container-lowest text-on-surface-variant px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap">User Ops</button>
+</div>
+</section>
+<!-- Vertical List of Activity Cards -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.02)] border border-transparent hover:border-outline-variant/20 transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img alt="Admin User" data-alt="professional headshot of a middle-aged male system administrator with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzHCyPUsMA8Bm2TD-4v3Qo2iK0BaQG04KtkhG1vzaU-b17IkILv9DL3lgY19DCXK_7VXVbD0PRLbk-NEiCyg9vrlmQP8VaKZUdxeGkwb7xND0MOxzFzhtfKjdC0NMCtJCnecLwsJ_xhniLvsrW3jG0Cq8lLQ3XnjBOdvifWIjQVIusZqy6Xm_fsBp3SnQTq3uxnhhc44sfNoLS7j2MjcyJH0b7pySowALxdI2uZl1xYWrTxNh-jRB_oDtCnccFeKn8HyCIrh2G_xY"/>
+</div>
+<div>
+<p class="font-semibold text-sm text-on-surface">James Donovan</p>
+<p class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+                                2 mins ago • System Controller
+                            </p>
+</div>
+</div>
+<span class="bg-primary-fixed-dim/20 text-primary px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Security</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                    Successfully updated the <span class="text-primary font-medium">Core Security Protocol v4.2</span> across all peripheral transit nodes.
+                </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.02)] border border-transparent transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-tertiary-fixed flex items-center justify-center overflow-hidden">
+<img alt="Admin User" data-alt="portrait of a young female tech support lead with a friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR9KCzyflHmESLlpn1w4jbfYTvesW3Ss6xUnqDYsBHWh08rS1ip3WvurgiKss54ZEQbC2wzGYsyMQTmpQ4Rqbbgv9BgvJVOesmMxwFGe9cDchAt-h2YHcTz9MrI_v2kqSRqyjKTVxJw1FO2kJ7q3lv-h5kQk0ItwnHdcOjQVbH4QjP7Oqujlxp-2vX_zds5iF6S2kiQyddfoXDLVhmd9surCWMCQ3IDZt42d88Gy4cWCLu3_JdMm1jPujTnl0-obvLQOZb_lpE5lQ"/>
+</div>
+<div>
+<p class="font-semibold text-sm text-on-surface">Sarah Kova</p>
+<p class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+                                45 mins ago • Support Lead
+                            </p>
+</div>
+</div>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">User Ops</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                    Overrode ticket refund limitation for Transaction <span class="text-secondary font-medium">#TX-88219</span> due to hardware malfunction at Station B.
+                </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.02)] border border-transparent transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-outline-variant flex items-center justify-center overflow-hidden">
+<img alt="Automated Script" data-alt="abstract avatar representing an automated intelligent agent system" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQaCl1F00EFhkXHEGkRgGQk2jHHpD3IltgZqsLJNMsOU51qb3_BNP3C4Jj9rAu2KH8MtIxG3AAxTeAqEBXnNphDXDKls0bOihRdhkpQ9nnpvOm-wLmVpTUTE8pbKlXwDZb2aIUgdLt303ofH0-PLB9h1J5FNjMsI2crrpLCJDRPPJGtJBYBzMKB2wMnNbkZM8n7QQFdadZvmbx1LhClRTBvIimilzkvGWV2HVPPKwkEEVEyVS6g0BaweqrzNj55HNZeZNw9eo4ecU"/>
+</div>
+<div>
+<p class="font-semibold text-sm text-on-surface">System Agent [Auto]</p>
+<p class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+                                2 hours ago • Automated Task
+                            </p>
+</div>
+</div>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Maintenance</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                    Daily health check completed for <span class="font-medium">Red Line Signaling</span>. 0 errors detected. 12 warnings suppressed.
+                </p>
+</div>
+<!-- Card 4 (Critical Action) -->
+<div class="bg-error-container/30 border border-error/10 p-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.02)] transition-all">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-error-container flex items-center justify-center overflow-hidden">
+<img alt="Admin User" data-alt="serious-looking network engineer in a brightly lit data center" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtQR4bOkRbijYIUqaOPTDgvh7vn615FSlAep4PfjqHamjG4FVKjr-GbSXRL8Dv-v4MrYaN-jrS7lbwmFA9tAyxlEPtSh_dlR-oylYsq-acq93sOLp8PaVTzjAfNHdtUYcM2XDSV6uE-zwgJHaL_kEXZvtY0QSaegx9kolrAkyAbqlUxoUgNynpNPjFJEwrprwoR11sV1TM6qF2tUwjqUyo_VHqZaKERVhtlsBS_Jc6voInhZDnOHtluHvM3CTZNuqzBl8RgsvFjk0"/>
+</div>
+<div>
+<p class="font-semibold text-sm text-on-surface">Marcus Reed</p>
+<p class="text-[10px] text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">schedule</span>
+                                3 hours ago • Network Engineer
+                            </p>
+</div>
+</div>
+<span class="bg-error text-on-error px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Urgent</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                    Manually initiated <span class="text-error font-semibold">Firewall Lockdown</span> on Node 7 after detecting suspicious traffic patterns from external IP.
+                </p>
+</div>
+</div>
+</main>
+<!-- Floating Action Button: Create Audit Alert -->
+<div class="fixed bottom-24 right-6 z-40">
+<button class="kinetic-gradient text-on-primary h-14 w-14 rounded-full shadow-lg flex items-center justify-center transition-transform active:scale-90">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add_alert</span>
+</button>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-100/50 dark:border-slate-800/50 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-50 rounded-t-2xl">
+<a class="flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-xl px-4 py-1.5 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Activity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-teal-600 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Revenue</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-teal-600 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Support</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 hover:text-teal-600 transition-transform scale-95 active:scale-90" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Settings</span>
+</a>
+</nav>
+</body></html>

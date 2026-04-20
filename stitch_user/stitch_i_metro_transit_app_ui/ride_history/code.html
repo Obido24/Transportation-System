@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#dde2f3",
+                        "on-tertiary-container": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "on-primary-fixed": "#002113",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#dde2f3",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6e7a71",
+                        "on-surface-variant": "#3e4942",
+                        "primary-container": "#00875a",
+                        "on-tertiary-fixed": "#410005",
+                        "surface-tint": "#006c47",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed": "#8df7c1",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#5e6473",
+                        "inverse-primary": "#71dba6",
+                        "on-primary-fixed-variant": "#005235",
+                        "outline-variant": "#bdcac0",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-background": "#191c1e",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-tertiary-fixed-variant": "#7d2a2a",
+                        "tertiary-container": "#ba5855",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary": "#585e6c",
+                        "primary-fixed-dim": "#71dba6",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-fixed": "#161c27",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#9b403e",
+                        "primary": "#006b47",
+                        "on-secondary-fixed-variant": "#414754",
+                        "surface": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed-dim": "#c1c6d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #006b47 0%, #00875a 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb]/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-100 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#006b47]">menu</span>
+</button>
+<h1 class="font-headline font-extrabold text-xl text-[#006b47] tracking-tight">I-Metro</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="hidden md:block font-headline font-bold text-lg tracking-tight text-[#006b47]">History</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/10">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="professional portrait of a young man with a friendly expression and short hair in a modern corporate style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYwvb0dFRscbrfaw_oh1AbVJAECq7rNIenjGAn35PoaMy_s5KBzAgCejnPmJWFMhSbwLiU5ECwnUNIPVH8iylObIOiuJMKWRdw46UINGfQRzReOji5rPVZd-yIDuTH05DA4U2vPeMQvjMqwAE9_YpKwqmXzGrcPslny8fL_gHzVFp5nRFEHNipjaUPezkp5Pc4GBnPNgCoT_BPnKMem8Jm3qdZOcZMvgeqCk8cHooAVrGMsKo_mgmpNyEkpktZ8t4RKOyP3z8iqQ"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto min-h-screen">
+<!-- History Headline -->
+<div class="mb-8">
+<h2 class="font-headline text-3xl font-extrabold tracking-tight mb-2">Trip History</h2>
+<p class="text-on-surface-variant font-label text-sm">Review your past travels and expenses.</p>
+</div>
+<!-- Filter Chips (Asymmetric Layout) -->
+<div class="flex gap-2 overflow-x-auto pb-6 scrollbar-hide">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label text-xs font-semibold whitespace-nowrap">All Rides</button>
+<button class="bg-surface-container-low text-on-surface-variant px-6 py-2 rounded-full font-label text-xs font-semibold whitespace-nowrap hover:bg-surface-container-high transition-colors">This Month</button>
+<button class="bg-surface-container-low text-on-surface-variant px-6 py-2 rounded-full font-label text-xs font-semibold whitespace-nowrap hover:bg-surface-container-high transition-colors">Previous</button>
+<button class="bg-surface-container-low text-on-surface-variant px-6 py-2 rounded-full font-label text-xs font-semibold whitespace-nowrap hover:bg-surface-container-high transition-colors">Tickets</button>
+</div>
+<!-- History List (Tonal Layering & Asymmetric Cards) -->
+<div class="space-y-6">
+<!-- Trip Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 group cursor-pointer hover:bg-surface-container-low transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 kinetic-gradient rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">train</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Oct 24, 2023 • 08:45 AM</p>
+<p class="font-headline font-bold text-lg text-on-surface">Central Terminal</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline font-extrabold text-primary text-lg">$4.50</span>
+<div class="flex items-center gap-1 justify-end mt-1 text-[10px] font-bold text-primary uppercase">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Completed
+                        </div>
+</div>
+</div>
+<div class="relative pl-5 py-2">
+<div class="absolute left-[7px] top-0 bottom-0 w-[2px] bg-primary/20 rounded-full"></div>
+<div class="absolute left-0 top-0 w-[14px] h-[14px] bg-surface-container-lowest border-2 border-primary rounded-full"></div>
+<div class="absolute left-0 bottom-0 w-[14px] h-[14px] bg-primary rounded-full"></div>
+<p class="font-headline font-bold text-lg text-on-surface opacity-60">Westside Plaza</p>
+</div>
+</div>
+<!-- Trip Card 2 (Canceled) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 group cursor-pointer hover:bg-surface-container-low transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-surface-container-high rounded-xl flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">directions_bus</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Oct 22, 2023 • 06:15 PM</p>
+<p class="font-headline font-bold text-lg text-on-surface">Airport Link S1</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline font-extrabold text-on-surface-variant text-lg">$0.00</span>
+<div class="flex items-center gap-1 justify-end mt-1 text-[10px] font-bold text-tertiary uppercase">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">cancel</span>
+                            Canceled
+                        </div>
+</div>
+</div>
+<div class="relative pl-5 py-2">
+<div class="absolute left-[7px] top-0 bottom-0 w-[2px] bg-outline-variant/30 rounded-full"></div>
+<div class="absolute left-0 top-0 w-[14px] h-[14px] bg-surface-container-lowest border-2 border-outline-variant rounded-full"></div>
+<div class="absolute left-0 bottom-0 w-[14px] h-[14px] bg-outline-variant rounded-full"></div>
+<p class="font-headline font-bold text-lg text-on-surface opacity-60">Downtown Station</p>
+</div>
+</div>
+<!-- Trip Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 group cursor-pointer hover:bg-surface-container-low transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 kinetic-gradient rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">commute</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Oct 20, 2023 • 09:20 AM</p>
+<p class="font-headline font-bold text-lg text-on-surface">University Gate</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline font-extrabold text-primary text-lg">$2.75</span>
+<div class="flex items-center gap-1 justify-end mt-1 text-[10px] font-bold text-primary uppercase">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Completed
+                        </div>
+</div>
+</div>
+<div class="relative pl-5 py-2">
+<div class="absolute left-[7px] top-0 bottom-0 w-[2px] bg-primary/20 rounded-full"></div>
+<div class="absolute left-0 top-0 w-[14px] h-[14px] bg-surface-container-lowest border-2 border-primary rounded-full"></div>
+<div class="absolute left-0 bottom-0 w-[14px] h-[14px] bg-primary rounded-full"></div>
+<p class="font-headline font-bold text-lg text-on-surface opacity-60">Library Square</p>
+</div>
+</div>
+<!-- Summary Card (Editorial Style) -->
+<div class="relative overflow-hidden rounded-2xl p-8 kinetic-gradient text-on-primary">
+<div class="relative z-10">
+<h3 class="font-headline font-extrabold text-2xl mb-1">Monthly Summary</h3>
+<p class="font-label text-xs opacity-80 uppercase tracking-widest mb-6">October Statistics</p>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<p class="font-label text-[10px] uppercase opacity-70 mb-1">Total Spent</p>
+<p class="font-headline font-extrabold text-3xl">$142.50</p>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase opacity-70 mb-1">Total Rides</p>
+<p class="font-headline font-extrabold text-3xl">38</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] opacity-10 rotate-12">analytics</span>
+</div>
+<!-- Final Ride Card -->
+<div class="bg-surface-container-lowest rounded-xl p-5 group cursor-pointer hover:bg-surface-container-low transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 kinetic-gradient rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">subway</span>
+</div>
+<div>
+<p class="font-label text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Oct 18, 2023 • 07:10 PM</p>
+<p class="font-headline font-bold text-lg text-on-surface">East Park Loop</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-headline font-extrabold text-primary text-lg">$5.20</span>
+<div class="flex items-center gap-1 justify-end mt-1 text-[10px] font-bold text-primary uppercase">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            Completed
+                        </div>
+</div>
+</div>
+<div class="relative pl-5 py-2">
+<div class="absolute left-[7px] top-0 bottom-0 w-[2px] bg-primary/20 rounded-full"></div>
+<div class="absolute left-0 top-0 w-[14px] h-[14px] bg-surface-container-lowest border-2 border-primary rounded-full"></div>
+<div class="absolute left-0 bottom-0 w-[14px] h-[14px] bg-primary rounded-full"></div>
+<p class="font-headline font-bold text-lg text-on-surface opacity-60">Riverside Marina</p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f7f9fb]/80 backdrop-blur-md shadow-[0_-8px_30px_rgb(0,0,0,0.04)] z-50 rounded-t-[1.5rem]">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:opacity-80 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#00875a]/10 text-[#006b47] dark:text-[#00875a] rounded-2xl px-5 py-2 hover:opacity-80 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:opacity-80 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined mb-1">confirmation_number</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider">Booking</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:opacity-80 active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider">Profile</span>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Support Ticket Management - I-Metro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "surface": "#f8f9fa",
+                    "secondary-fixed": "#c8eadc",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6f7a74",
+                    "on-surface": "#191c1d",
+                    "on-secondary-container": "#4c6b5f",
+                    "primary-container": "#006b54",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary-fixed-variant": "#00513f",
+                    "surface-dim": "#d9dadb",
+                    "on-tertiary-fixed": "#3c0804",
+                    "secondary-fixed-dim": "#adcec0",
+                    "on-primary-container": "#94e8cb",
+                    "on-secondary-fixed-variant": "#2f4d42",
+                    "surface-tint": "#016b54",
+                    "inverse-surface": "#2e3132",
+                    "on-tertiary-fixed-variant": "#753229",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#edeeef",
+                    "surface-bright": "#f8f9fa",
+                    "secondary": "#466559",
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "surface-container-high": "#e7e8e9",
+                    "outline-variant": "#bec9c3",
+                    "secondary-container": "#c8eadc",
+                    "on-primary-fixed": "#002118",
+                    "tertiary-container": "#92493e",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#9ef3d6",
+                    "primary": "#00513f",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#ffdad4",
+                    "inverse-primary": "#82d7ba",
+                    "primary-fixed-dim": "#82d7ba",
+                    "background": "#f8f9fa",
+                    "on-background": "#191c1d",
+                    "surface-container-low": "#f3f4f5",
+                    "on-tertiary-container": "#ffcdc5",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#753229",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-surface-variant": "#3e4944",
+                    "on-secondary-fixed": "#012018"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "1rem",
+                    "xl": "1.25rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #00513f 0%, #006b54 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-slate-50 dark:bg-slate-950 flex justify-between items-center px-6 py-4 transition-all duration-300 ease-in-out">
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-300 ease-in-out">
+<span class="material-symbols-outlined text-teal-900 dark:text-teal-400">menu</span>
+</button>
+<h1 class="text-xl font-bold text-teal-900 dark:text-teal-50 font-['Manrope'] tracking-tight">I-Metro</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="Professional headshot of a transit administrator in a crisp shirt with soft office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTdTVWvvMWjQfPOuo7egpOyaUYPnoDYPEnjxobXLOMLhtQX47RpXxwsHPqlNSrpmwvv5DYg_5ZlDi1FqfwGey86J_7yh1Dtmzm14A-ysv6d5Yal4-Ybau2BX-DQ5JeSlWHNJz8fygJ6pTV_QVvtEUX2HtyrxV9HYIlDVEO_qYx7k5JtpDBE_seJwK1CYP_DhhOAbKz5R97iy7coBGszxf4SkDSLX8ilWZyxbAQvrW-L7kkpOPiBa6UA6hTgsaOSn5ggYbPTBpiJuA"/>
+</div>
+</header>
+<main class="pt-20 pb-28 px-4 max-w-md mx-auto">
+<!-- Dashboard Header -->
+<div class="mb-6 px-2">
+<h2 class="text-2xl font-extrabold text-on-surface tracking-tight">Support Desk</h2>
+<p class="text-on-surface-variant text-sm">System oversight &amp; protocol management</p>
+</div>
+<!-- Metrics Row (Horizontal Scrolling) -->
+<section class="mb-8 -mx-4 overflow-x-auto no-scrollbar flex gap-4 px-4">
+<div class="min-w-[140px] flex-shrink-0 p-4 rounded-lg bg-surface-container-lowest border border-outline-variant/15 flex flex-col gap-1">
+<span class="text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Total Open</span>
+<span class="text-2xl font-bold text-primary">124</span>
+<span class="text-[10px] text-primary-container font-medium">+12 from yesterday</span>
+</div>
+<div class="min-w-[140px] flex-shrink-0 p-4 rounded-lg bg-surface-container-lowest border border-outline-variant/15 flex flex-col gap-1">
+<span class="text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Pending</span>
+<span class="text-2xl font-bold text-tertiary">42</span>
+<span class="text-[10px] text-tertiary-fixed-dim font-medium">Critical focus required</span>
+</div>
+<div class="min-w-[140px] flex-shrink-0 p-4 rounded-lg bg-surface-container-lowest border border-outline-variant/15 flex flex-col gap-1">
+<span class="text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Avg Res</span>
+<span class="text-2xl font-bold text-on-surface">14m</span>
+<span class="text-[10px] text-primary-fixed-dim font-medium">Within SLA range</span>
+</div>
+</section>
+<!-- Efficiency Protocol Card (Bento Style) -->
+<section class="mb-8">
+<div class="kinetic-gradient p-5 rounded-xl text-on-primary shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-[10px] font-bold tracking-widest uppercase opacity-80">System Command</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Efficiency Protocol</h3>
+<p class="text-sm opacity-90 leading-snug">Automated routing is active. 85% of tier-1 tickets are auto-resolved via metro-AI nodes.</p>
+<div class="mt-4 flex gap-3">
+<button class="bg-surface-container-lowest/20 backdrop-blur-md px-3 py-1.5 rounded-lg text-[11px] font-semibold">View Logs</button>
+<button class="bg-white text-primary px-3 py-1.5 rounded-lg text-[11px] font-bold">Adjust Threshold</button>
+</div>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">hub</span>
+</div>
+</div>
+</section>
+<!-- Ticket List Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-center px-2">
+<h4 class="text-sm font-bold text-on-surface uppercase tracking-widest">Recent Tickets</h4>
+<button class="text-xs font-semibold text-primary">Filter All</button>
+</div>
+<!-- Ticket Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all active:scale-[0.98]">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-mono font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">TKT-8842-MET</span>
+<span class="bg-error-container text-on-error-container text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">High Priority</span>
+</div>
+<h5 class="text-sm font-semibold text-on-surface mb-2 leading-tight">Elevator Malfunction - Central Station South Entrance</h5>
+<div class="flex items-center justify-between mt-4 pt-3 border-t border-surface-container-low">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container">engineering</span>
+</div>
+<span class="text-xs text-on-surface-variant font-medium">Assigned to Tech A</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="text-[10px] font-bold uppercase">Processing</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+<!-- Ticket Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all active:scale-[0.98]">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-mono font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">TKT-9011-PAY</span>
+<span class="bg-secondary-container text-on-secondary-container text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Standard</span>
+</div>
+<h5 class="text-sm font-semibold text-on-surface mb-2 leading-tight">Payment Gateway Timeout - Line 4 Kiosk #12</h5>
+<div class="flex items-center justify-between mt-4 pt-3 border-t border-surface-container-low">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-on-surface-variant">
+                            UN
+                        </div>
+<span class="text-xs text-on-surface-variant font-medium">Unassigned</span>
+</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="text-[10px] font-bold uppercase">Pending</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward_ios</span>
+</div>
+</div>
+</div>
+<!-- Ticket Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all active:scale-[0.98]">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-mono font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">TKT-7729-CIV</span>
+<span class="bg-primary-fixed-dim text-on-primary-fixed-variant text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Low</span>
+</div>
+<h5 class="text-sm font-semibold text-on-surface mb-2 leading-tight">Request for additional seating - Platform 2 North</h5>
+<div class="flex items-center justify-between mt-4 pt-3 border-t border-surface-container-low">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-secondary-container">person</span>
+</div>
+<span class="text-xs text-on-surface-variant font-medium">Assigned to Sarah M.</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="text-[10px] font-bold uppercase">Resolved</span>
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB: Create Report -->
+<button class="fixed bottom-24 right-6 kinetic-gradient text-on-primary w-14 h-14 rounded-full shadow-xl flex items-center justify-center transition-transform active:scale-90 z-50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_chart</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.03)] border-t border-slate-100/50 dark:border-slate-800/50">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform hover:text-teal-600 dark:hover:text-teal-300">
+<span class="material-symbols-outlined mb-1">insights</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Activity</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform hover:text-teal-600 dark:hover:text-teal-300">
+<span class="material-symbols-outlined mb-1">payments</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Revenue</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-xl px-4 py-1.5 transition-transform hover:text-teal-600 dark:hover:text-teal-300">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">contact_support</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Support</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform hover:text-teal-600 dark:hover:text-teal-300">
+<span class="material-symbols-outlined mb-1">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Settings</span>
+</div>
+</nav>
+</body></html>

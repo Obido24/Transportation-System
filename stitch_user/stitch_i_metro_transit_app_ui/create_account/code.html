@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create Account | I-Metro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#dde2f3",
+                        "on-tertiary-container": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "on-primary-fixed": "#002113",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#dde2f3",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6e7a71",
+                        "on-surface-variant": "#3e4942",
+                        "primary-container": "#00875a",
+                        "on-tertiary-fixed": "#410005",
+                        "surface-tint": "#006c47",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed": "#8df7c1",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#5e6473",
+                        "inverse-primary": "#71dba6",
+                        "on-primary-fixed-variant": "#005235",
+                        "outline-variant": "#bdcac0",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-background": "#191c1e",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-tertiary-fixed-variant": "#7d2a2a",
+                        "tertiary-container": "#ba5855",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary": "#585e6c",
+                        "primary-fixed-dim": "#71dba6",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-fixed": "#161c27",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#9b403e",
+                        "primary": "#006b47",
+                        "on-secondary-fixed-variant": "#414754",
+                        "surface": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed-dim": "#c1c6d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Bar (Hidden Shell - Only as Anchor) -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb]/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary cursor-pointer">arrow_back</span>
+<span class="font-headline font-extrabold text-xl tracking-tight text-primary">I-Metro</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-6 pt-24 pb-12">
+<div class="w-full max-w-md">
+<!-- Hero Header Section -->
+<div class="mb-10 ml-2">
+<h1 class="text-4xl font-extrabold text-on-surface tracking-tight mb-2">Join the <span class="text-primary">Journey</span>.</h1>
+<p class="text-on-surface-variant font-body text-base">Your premium transit sanctuary awaits. Setup your profile to start exploring the city.</p>
+</div>
+<!-- Registration Form Card -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-[0_-8px_30px_rgb(0,0,0,0.02)] border border-outline-variant/10">
+<form class="space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<!-- First Name -->
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1">First name</label>
+<input class="w-full bg-surface-container-low border-0 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 placeholder:text-outline/40 text-on-surface transition-all" placeholder="Jane" type="text"/>
+</div>
+<!-- Last Name -->
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1">Last name</label>
+<input class="w-full bg-surface-container-low border-0 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 placeholder:text-outline/40 text-on-surface transition-all" placeholder="Doe" type="text"/>
+</div>
+</div>
+<!-- Phone Number -->
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1">Phone</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50 text-xl">call</span>
+<input class="w-full bg-surface-container-low border-0 rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-primary/20 placeholder:text-outline/40 text-on-surface transition-all" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+</div>
+<!-- Email -->
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1">Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50 text-xl">mail</span>
+<input class="w-full bg-surface-container-low border-0 rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-primary/20 placeholder:text-outline/40 text-on-surface transition-all" placeholder="jane.doe@example.com" type="email"/>
+</div>
+</div>
+<!-- Password -->
+<div class="space-y-2">
+<label class="font-label text-xs font-semibold uppercase tracking-wider text-on-surface-variant ml-1">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/50 text-xl">lock</span>
+<input class="w-full bg-surface-container-low border-0 rounded-xl pl-12 pr-12 py-3 focus:ring-2 focus:ring-primary/20 placeholder:text-outline/40 text-on-surface transition-all" placeholder="••••••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline/50 text-xl cursor-pointer">visibility</span>
+</div>
+</div>
+<!-- Terms Checkbox (Implicit/Microcopy) -->
+<div class="pt-2 flex items-start gap-3">
+<input class="mt-1 rounded-md border-outline-variant text-primary focus:ring-primary cursor-pointer" type="checkbox"/>
+<p class="text-xs text-on-surface-variant leading-relaxed">By creating an account, I agree to I-Metro's <span class="text-primary font-semibold">Terms of Service</span> and <span class="text-primary font-semibold">Privacy Policy</span>.</p>
+</div>
+<!-- CTA Button -->
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-on-primary font-headline font-bold py-4 rounded-3xl shadow-lg shadow-primary/10 active:scale-95 transition-all flex items-center justify-center gap-2 mt-4">
+                        Create Account
+                        <span class="material-symbols-outlined">chevron_right</span>
+</button>
+</form>
+</div>
+<!-- Footer Link -->
+<div class="mt-8 text-center">
+<p class="text-on-surface-variant font-body text-sm">
+                    Already have an account? 
+                    <a class="text-primary font-bold ml-1 hover:underline underline-offset-4 decoration-2" href="#">Login</a>
+</p>
+</div>
+</div>
+</main>
+<!-- Background Decorative Element (Asymmetric) -->
+<div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl -z-10"></div>
+<div class="fixed top-[-5%] left-[-5%] w-[300px] h-[300px] bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<!-- Minimal Success Indicator (Empty State Graphic Concept) -->
+<div class="hidden lg:flex fixed left-12 bottom-12 items-center gap-4 bg-surface-container-low p-4 rounded-2xl max-w-xs">
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div class="flex-1">
+<p class="font-headline font-bold text-sm text-on-surface">Sustainable Travel</p>
+<p class="text-xs text-on-surface-variant">Join 2M+ travelers reducing their urban carbon footprint.</p>
+</div>
+</div>
+</body></html>

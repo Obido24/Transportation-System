@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro Revenue Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "secondary-fixed": "#c8eadc",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a74",
+                        "on-surface": "#191c1d",
+                        "on-secondary-container": "#4c6b5f",
+                        "primary-container": "#006b54",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface-dim": "#d9dadb",
+                        "on-tertiary-fixed": "#3c0804",
+                        "secondary-fixed-dim": "#adcec0",
+                        "on-primary-container": "#94e8cb",
+                        "on-secondary-fixed-variant": "#2f4d42",
+                        "surface-tint": "#016b54",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed-variant": "#753229",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "surface-bright": "#f8f9fa",
+                        "secondary": "#466559",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#bec9c3",
+                        "secondary-container": "#c8eadc",
+                        "on-primary-fixed": "#002118",
+                        "tertiary-container": "#92493e",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#9ef3d6",
+                        "primary": "#00513f",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffdad4",
+                        "inverse-primary": "#82d7ba",
+                        "primary-fixed-dim": "#82d7ba",
+                        "background": "#f8f9fa",
+                        "on-background": "#191c1d",
+                        "surface-container-low": "#f3f4f5",
+                        "on-tertiary-container": "#ffcdc5",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#753229",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-surface-variant": "#3e4944",
+                        "on-secondary-fixed": "#012018"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-slate-50 dark:bg-slate-950 sticky top-0 z-40 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-teal-900 dark:text-teal-400">menu</span>
+<h1 class="text-xl font-bold text-teal-900 dark:text-teal-50 font-['Manrope'] tracking-tight">I-Metro</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border-2 border-primary-container/20">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="Professional portrait of a middle-aged transit administrator in a crisp white shirt, clean studio background, soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDVKZAVnxN_ED0N1_p5lMlWneL911TMyxffxTsT0J3NMcb0pGdPQpchVUzBgjTTGYoYrUWwAsi39Vhx6-lQuikybvN8VHkQ9dN4MnqrBjhuD_G2zXYl52r1eTf_BFk0VpF-p0WRdmRbGMQOhfxFtYTHi1GRpAmW2QL7GySVHXj1pqEpRQujbItUqpm1XnFlmWVo_3yYJ-e-g-1rmZnamFqmZXV2YiiVieq_3v5nI0MtvaFayAtBxl7wzOxdnKOkgohwtsnNgbgMRk"/>
+</div>
+</header>
+<main class="px-5 pt-6 space-y-8">
+<!-- Dashboard Header -->
+<section>
+<p class="text-on-surface-variant text-sm font-medium tracking-wide uppercase font-label mb-1">Financial Overview</p>
+<h2 class="text-3xl font-extrabold text-on-surface leading-tight">Revenue Dashboard</h2>
+</section>
+<!-- Summary Cards (Stacked Vertically for Mobile) -->
+<section class="grid grid-cols-1 gap-4">
+<!-- Total Revenue -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-on-surface-variant font-medium font-label">Total Revenue</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-on-surface">$1.24M</span>
+<span class="text-primary font-bold text-sm flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12%
+                    </span>
+</div>
+</div>
+<!-- Average Fare -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative overflow-hidden">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">confirmation_number</span>
+</div>
+<span class="text-on-surface-variant font-medium font-label">Average Fare</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-on-surface">$2.45</span>
+<span class="text-on-surface-variant text-sm">per trip</span>
+</div>
+</div>
+<!-- Refund Rate -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative overflow-hidden">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">assignment_return</span>
+</div>
+<span class="text-on-surface-variant font-medium font-label">Refund Rate</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-on-surface">0.8%</span>
+<span class="text-error font-bold text-sm flex items-center">
+<span class="material-symbols-outlined text-sm">trending_down</span> 0.2%
+                    </span>
+</div>
+</div>
+<!-- Active Promos -->
+<div class="bg-surface-container-lowest rounded-xl p-6 relative overflow-hidden">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<span class="text-on-surface-variant font-medium font-label">Active Promos</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-on-surface">14</span>
+<span class="text-on-surface-variant text-sm">ongoing campaigns</span>
+</div>
+</div>
+</section>
+<!-- Revenue Trends (Bar Chart Representation) -->
+<section class="bg-surface-container-lowest rounded-xl p-6">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-lg font-bold">Revenue Trends</h3>
+<span class="text-primary text-sm font-semibold">Last 7 Days</span>
+</div>
+<div class="flex items-end justify-between h-48 gap-2 px-2">
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-sm h-[40%]"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">M</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-sm h-[60%]"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">T</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/40 rounded-t-sm h-[55%]"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">W</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-sm h-[80%]"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">T</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary rounded-t-sm h-[95%]"></div>
+<span class="text-[10px] text-on-surface-variant font-bold">F</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-sm h-[45%]"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">S</span>
+</div>
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="w-full bg-primary-container/20 rounded-t-sm h-[30%]"></div>
+<span class="text-[10px] text-on-surface-variant font-medium">S</span>
+</div>
+</div>
+</section>
+<!-- Route Distribution -->
+<section class="bg-surface-container rounded-xl p-6">
+<h3 class="text-lg font-bold mb-6">Route Distribution</h3>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="font-medium text-sm">North-South Line</span>
+</div>
+<span class="text-on-surface-variant text-sm font-bold">42%</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-medium text-sm">East-West Express</span>
+</div>
+<span class="text-on-surface-variant text-sm font-bold">35%</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-primary-fixed-dim"></div>
+<span class="font-medium text-sm">Airport Link</span>
+</div>
+<span class="text-on-surface-variant text-sm font-bold">18%</span>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<span class="font-medium text-sm">Suburban Loop</span>
+</div>
+<span class="text-on-surface-variant text-sm font-bold">5%</span>
+</div>
+</div>
+</section>
+<!-- Recent Transactions Table Card -->
+<section>
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-lg font-bold">Recent Transactions</h3>
+<button class="text-primary text-sm font-bold">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Transaction Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest font-label">TXN-892341</p>
+<p class="text-sm font-bold text-on-surface">North-South Line</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-primary-container/10 text-primary text-[10px] font-bold uppercase">Paid</span>
+</div>
+<div class="flex justify-between items-end border-t border-surface-container pt-3">
+<p class="text-xs text-on-surface-variant">2 mins ago</p>
+<p class="text-lg font-extrabold text-on-surface">$3.50</p>
+</div>
+</div>
+<!-- Transaction Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest font-label">TXN-892342</p>
+<p class="text-sm font-bold text-on-surface">Airport Link</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-primary-container/10 text-primary text-[10px] font-bold uppercase">Paid</span>
+</div>
+<div class="flex justify-between items-end border-t border-surface-container pt-3">
+<p class="text-xs text-on-surface-variant">12 mins ago</p>
+<p class="text-lg font-extrabold text-on-surface">$12.00</p>
+</div>
+</div>
+<!-- Transaction Item 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest font-label">TXN-892345</p>
+<p class="text-sm font-bold text-on-surface">East-West Express</p>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-error-container/10 text-error text-[10px] font-bold uppercase">Failed</span>
+</div>
+<div class="flex justify-between items-end border-t border-surface-container pt-3">
+<p class="text-xs text-on-surface-variant">45 mins ago</p>
+<p class="text-lg font-extrabold text-on-surface">$5.25</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl z-50 rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.03)] border-t border-slate-100/50 dark:border-slate-800/50">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Activity</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-teal-50 dark:bg-teal-900/30 text-teal-900 dark:text-teal-100 rounded-xl px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Revenue</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Support</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-4 py-1.5 transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-wide">Settings</span>
+</div>
+</nav>
+</body></html>

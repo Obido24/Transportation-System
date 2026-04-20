@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro Admin - Add New Route</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#753229",
+                        "primary-fixed-dim": "#82d7ba",
+                        "primary-container": "#006b54",
+                        "on-primary-fixed-variant": "#00513f",
+                        "surface-dim": "#d9dadb",
+                        "inverse-surface": "#2e3132",
+                        "secondary-container": "#c8eadc",
+                        "surface-bright": "#f8f9fa",
+                        "background": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "outline": "#6f7a74",
+                        "on-primary-container": "#94e8cb",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#92493e",
+                        "primary-fixed": "#9ef3d6",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e7e8e9",
+                        "on-primary-fixed": "#002118",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#3c0804",
+                        "surface": "#f8f9fa",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary-fixed": "#ffdad4",
+                        "secondary-fixed": "#c8eadc",
+                        "outline-variant": "#bec9c3",
+                        "on-surface": "#191c1d",
+                        "surface-tint": "#016b54",
+                        "tertiary": "#753229",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-secondary-container": "#4c6b5f",
+                        "secondary": "#466559",
+                        "surface-container": "#edeeef",
+                        "on-secondary-fixed": "#012018",
+                        "surface-variant": "#e1e3e4",
+                        "secondary-fixed-dim": "#adcec0",
+                        "inverse-primary": "#82d7ba",
+                        "on-background": "#191c1d",
+                        "surface-container-low": "#f3f4f5",
+                        "on-secondary-fixed-variant": "#2f4d42",
+                        "on-surface-variant": "#3e4944",
+                        "on-tertiary-container": "#ffcdc5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#00513f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-slate-100 flex flex-col p-4 overflow-y-auto z-50">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">train</span>
+</div>
+<div>
+<div class="text-xl font-bold tracking-tight text-emerald-900">I-Metro</div>
+<div class="text-[10px] uppercase tracking-wider text-on-surface-variant font-semibold">Transit Authority</div>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-medium">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-medium">Merchant Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-900 font-semibold bg-white/50 rounded-lg active:scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-medium">Route Management</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 space-y-1">
+<button class="w-full mb-6 bg-gradient-to-br from-primary to-primary-container text-on-primary py-3 px-4 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined">add</span>
+                New Route
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 hover:bg-slate-200 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/20 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-40 bg-slate-50/80 backdrop-blur-lg flex justify-between items-center h-16 px-8 w-auto">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-highest border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all duration-200" placeholder="Search routes, schedules, or transit IDs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-8">
+<button class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-emerald-700 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center text-slate-500 hover:text-emerald-700 transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<div class="text-xs font-bold text-on-surface uppercase tracking-wider">I-Metro Admin</div>
+<div class="text-[10px] text-on-surface-variant">Fleet Manager</div>
+</div>
+<img class="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm" data-alt="professional headshot of a middle-aged male transit manager with short hair wearing a navy suit and focused expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9F-W19-WhUzKzYJng_gANBfAU3ms_19CbA96r9AwR2RH69zlR8wR3kOUQwiRyb5QJc6aMyzwBrCtDwGDwohbFCJ1KnBEWrFhogbc48mYUZlAIC1V_yUlIrJ9cNHHCq36BuCmXhpKrx2Nqwgr24Qq1EUfY_v91D7yPRW_QMVBu4MSPuvdEVvkYM1JEgIfMiY80fXx0uGxxckfI18hpVojQjvfh0JZ7ZKpVHVY6HUko99fl1sCqSeTuHEH_ZlbXlQpXDv9Psy4EpXw"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-8 max-w-6xl mx-auto w-full">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h1 class="text-3xl font-bold text-on-surface tracking-tight">Add New Route</h1>
+<p class="text-on-surface-variant mt-1">Configure a new metropolitan transit line for the I-Metro network.</p>
+</div>
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-on-surface font-medium transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Back to Routes
+                </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Form Section -->
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_10px_30px_rgba(25,28,29,0.05)] border-none">
+<div class="mb-8 bg-surface-container-low -mx-8 -mt-8 px-8 py-4 rounded-t-lg">
+<h2 class="text-sm font-bold uppercase tracking-[0.05em] text-on-surface-variant">Route Specifications</h2>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Pickup location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">location_on</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-highest border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" placeholder="e.g. Grand Central Station" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Destination</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-error">near_me</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-highest border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" placeholder="e.g. Westside Terminal" type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Price</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">payments</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-highest border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" placeholder="0.00" type="number"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant font-medium">USD</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Route Frequency</label>
+<select class="w-full px-4 py-3 bg-surface-container-highest border-none rounded-lg focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all">
+<option>Every 15 minutes</option>
+<option>Every 30 minutes</option>
+<option>Hourly</option>
+<option>Peak hours only</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-on-surface-variant ml-1">Operational Days</label>
+<div class="flex flex-wrap gap-2">
+<label class="flex-1 min-w-[100px] cursor-pointer">
+<input checked="" class="hidden peer" type="checkbox"/>
+<div class="text-center py-2 px-3 rounded-lg bg-surface-container-highest text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary transition-all text-sm font-medium">Mon-Fri</div>
+</label>
+<label class="flex-1 min-w-[100px] cursor-pointer">
+<input class="hidden peer" type="checkbox"/>
+<div class="text-center py-2 px-3 rounded-lg bg-surface-container-highest text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary transition-all text-sm font-medium">Saturday</div>
+</label>
+<label class="flex-1 min-w-[100px] cursor-pointer">
+<input class="hidden peer" type="checkbox"/>
+<div class="text-center py-2 px-3 rounded-lg bg-surface-container-highest text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary transition-all text-sm font-medium">Sunday</div>
+</label>
+</div>
+</div>
+<div class="pt-6 border-t border-outline-variant/10 flex justify-end gap-4">
+<button class="px-8 py-3 rounded-lg font-bold text-primary border border-primary/20 hover:bg-surface-container-low transition-all" type="button">
+                                    Discard
+                                </button>
+<button class="px-12 py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-lg font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all" type="submit">
+                                    Save Route
+                                </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Preview/Context Column -->
+<div class="space-y-6">
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0px_10px_30px_rgba(25,28,29,0.05)] h-[400px] relative group">
+<img class="w-full h-full object-cover" data-alt="clean minimal city map layout with highlighted transit lines in teal and emerald colors on a light gray background" data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9srk-QhnM8VuqObgVcAUqi-GdLkZ3LLSAmsDyD8aznyZBRRyA8pT92Y44rcQSUcK26JFw3363RLPBrN08NLE5jlc8MOPjqxfzsw_J4CCq9fgJWqLw57SdtF0H02lY0nSw4dv5DlBeLd1p8RRNSzR0HKfn-xjuBigJA2sKrlciHreuHYW2f5sYA0fvU-TK06VN_VtSpv4oCY2WK8gc48WcfNQk4bkV36rnDQI-ORWlcuHat-lAU2dxPC-gX61tMBc8JjseFR5Bgo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none"></div>
+<div class="absolute bottom-4 left-4 right-4 bg-white/20 backdrop-blur-md p-4 rounded-lg border border-white/20">
+<p class="text-xs font-bold text-white uppercase tracking-widest mb-1">Visualizer</p>
+<p class="text-white/90 text-sm leading-snug">The route map will automatically update based on your pickup and destination coordinates.</p>
+</div>
+<div class="absolute top-4 right-4 bg-primary px-3 py-1.5 rounded-full text-white text-[10px] font-bold uppercase tracking-wider">
+                            Live Preview
+                        </div>
+</div>
+<div class="bg-surface-container-high rounded-lg p-6 space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<h3 class="font-bold text-on-surface">Route Analytics</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Est. Capacity</span>
+<span class="font-bold text-on-surface">1,200/day</span>
+</div>
+<div class="w-full bg-surface-container-lowest rounded-full h-1.5">
+<div class="bg-primary w-2/3 h-full rounded-full"></div>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Carbon Offset</span>
+<span class="font-bold text-emerald-600">High Impact</span>
+</div>
+</div>
+</div>
+<div class="bg-emerald-900 rounded-lg p-6 text-on-primary relative overflow-hidden">
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl opacity-10">eco</span>
+<h4 class="font-bold mb-2">Did you know?</h4>
+<p class="text-sm opacity-80 leading-relaxed">Each new metro route added to the I-Metro network reduces city traffic congestion by an average of 4.2% within the first six months.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

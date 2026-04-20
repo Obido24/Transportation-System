@@ -1,0 +1,287 @@
+
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col fixed left-0 top-0 h-full py-6 bg-[#edeeef] dark:bg-slate-900 h-screen w-64 border-r-0 z-50">
+<div class="px-6 mb-8">
+<h1 class="text-2xl font-bold text-[#00513f] dark:text-emerald-400">I-Metro Bus Admin</h1>
+<p class="text-xs text-on-surface-variant font-label tracking-wide uppercase mt-1">Inter-Metro Transport Solution Limited</p>
+</div>
+<nav class="flex-1 space-y-1 px-4">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center px-4 py-3 rounded-lg text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-label text-sm tracking-wide">Revenue</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="font-label text-sm tracking-wide">Settings</span>
+</a>
+<!-- Active State Logic: Activity logs page -->
+<a class="flex items-center px-4 py-3 rounded-lg text-[#00513f] dark:text-emerald-400 font-bold border-r-4 border-[#00513f] bg-white/50 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="history">history</span>
+<span class="font-label text-sm tracking-wide">Activity</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-lg text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] dark:hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="support_agent">support_agent</span>
+<span class="font-label text-sm tracking-wide">Support</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant/10">
+<div class="space-y-1">
+<a class="flex items-center px-4 py-2 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="verified_user">verified_user</span>
+                    Security
+                </a>
+<a class="flex items-center px-4 py-2 text-[#3e4944] dark:text-slate-400 hover:bg-[#f8f9fa] transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="logout">logout</span>
+                    Log Out
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-40 bg-[#f8f9fa]/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0px_10px_30px_rgba(25,28,29,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-[#00513f] dark:text-emerald-400">I-Metro Bus Admin</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-semibold text-[#3e4944] hover:text-[#006b54] transition-all" href="#">Analytics</a>
+<a class="text-sm font-semibold text-[#3e4944] hover:text-[#006b54] transition-all" href="#">Configuration</a>
+<a class="text-sm font-semibold text-[#00513f] border-b-2 border-[#00513f] pb-1" href="#">Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search logs..." type="text"/>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Administrator Profile" class="h-full w-full object-cover" data-alt="close-up portrait of a professional male administrator in a modern office with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9l91YUWJ3Brj02TQsqqHtHG1E61eA05Stezv_5vjQsYOS99UUytIC-194PN-lV_cAFVOCETd4UGcNCrp58uVRDUZjs2NeF-0QNH2L8SNtPdixePl-Dc7YEXpo_QBtDiHMtSSfJ1XE41DyhG3npn5Ljt-j4DyEZNJ1lzG4UsAIeyp16DorvlT1s9oZov9LjiLPjifuM-o6iNOWxy-KCvng-OyJBkmqzOe7M5saaonjyf11r2Qwqn7XTJtY_x433fbRaz6B4K5gt3Q"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Audit Content Canvas -->
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<h2 class="text-3xl font-bold text-on-surface tracking-tight mb-2">Audit &amp; Activity Logs</h2>
+<p class="text-on-surface-variant max-w-lg">Monitor administrative actions and security events across the Inter-Metro Transport Solution Limited infrastructure.</p>
+</div>
+<div class="flex items-center gap-3">
+</div>
+</div>
+<!-- Filters Bento Section -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="md:col-span-1 bg-surface-container-lowest p-4 rounded-lg flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Filter by Category</label>
+<select class="bg-transparent border-none p-0 text-sm font-medium focus:ring-0 cursor-pointer">
+<option>All Categories</option>
+<option>Security</option>
+<option>Data Edit</option>
+<option>User Mod</option>
+</select>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest p-4 rounded-lg flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Admin User</label>
+<select class="bg-transparent border-none p-0 text-sm font-medium focus:ring-0 cursor-pointer">
+<option>Everyone</option>
+<option>System Admin</option>
+<option>Operations Admin</option>
+<option>Support Admin</option>
+</select>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest p-4 rounded-lg flex flex-col gap-2">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Date Range</label>
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium">Last 24 Hours</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">calendar_today</span>
+</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-lowest p-4 rounded-lg flex flex-col gap-2 border-2 border-primary/5">
+<label class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Search Logs</label>
+<div class="flex items-center gap-2">
+<input class="bg-transparent border-none p-0 text-sm w-full focus:ring-0" placeholder="Filter by keyword..." type="text"/>
+<span class="material-symbols-outlined text-sm text-primary">search</span>
+</div>
+</div>
+</div>
+<!-- Audit Table -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<!-- Table Header (Styled via Section Header rule) -->
+<div class="bg-surface-container-low px-8 py-4 grid grid-cols-12 gap-4">
+<div class="col-span-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Timestamp</div>
+<div class="col-span-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Admin User</div>
+<div class="col-span-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Category</div>
+<div class="col-span-3 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Details</div>
+<div class="col-span-2 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">IP Address</div>
+</div>
+<!-- Table Rows (Air Table style: No horizontal lines, generous padding) -->
+<div class="divide-y-0">
+<!-- Row 1 -->
+<div class="px-8 py-6 grid grid-cols-12 gap-4 items-center hover:bg-surface-container-low transition-colors group">
+<div class="col-span-2">
+<p class="text-sm font-medium text-on-surface">Oct 24, 2023</p>
+<p class="text-xs text-on-surface-variant">14:22:05</p>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+<img alt="Admin portrait" class="h-full w-full object-cover" data-alt="portrait of a confident male tech professional wearing glasses and a dark shirt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBL852Qa9hDf2ymTZsf67TUb5FCEiAtry9Yg_xnPCl2-AcJz1wsQl4SdyoWg_DNz3rw3tny-THcdUe2VzxkTQndI0P8iacttTmnX6m4pFJ5nEkt_AfPIRy9rUtAiFMjamKcd_JLBPmfrFZpe3uPj2Hf8e86LVQ48C1tekcomUQmG6Oa-4bOWP1TtPaT0q6mn2HqizCOTn4ATu6NSJFMu5wBKhzYnyjVy82ujLd2fLhySBEjlzDPrDn5uwX1V9Pa7n4kHDpxQGKXErg"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">System Admin</p>
+<p class="text-xs text-on-surface-variant">Senior Controller</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary-container text-on-secondary-container">
+                                Data Edit
+                            </span>
+</div>
+<div class="col-span-3 text-sm text-on-surface-variant leading-relaxed">
+                            Changed fare multiplier for <span class="font-mono text-primary font-medium">Route RT-2041</span> to 1.25x
+                        </div>
+<div class="col-span-2 text-xs font-mono text-on-surface-variant">
+                            192.168.1.104
+                        </div>
+</div>
+<!-- Row 2 (Zebra) -->
+<div class="px-8 py-6 grid grid-cols-12 gap-4 items-center bg-surface-container-low/30 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-2">
+<p class="text-sm font-medium text-on-surface">Oct 24, 2023</p>
+<p class="text-xs text-on-surface-variant">13:58:12</p>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+<img alt="Admin portrait" class="h-full w-full object-cover" data-alt="professional woman in a bright office environment with soft focus greenery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHijj5FR5JEP3t52XxM6y8DprN7OfEp4gd2CWCls1VNdL0NqOfoKCCHahOkc2HBaAbDXDEPWQeEtyF3rjsItMVduXxpoghEomCWBEj-TkUtsFfvp_8uk2WrJLN1LhIO3qrecJBEub4WjCBviBxaXcOV9DZEuoM3YPnmx9NItZsXd2QDiqVfD6rvwZZG5NhxsxkSJBsQfU8eBqaNQ5hhkvdokYJAfS30ydoLTgk5EjWUT3kY91b7fFpRZrtrymA2hTkNf5dAdF9R44"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Operations Admin</p>
+<p class="text-xs text-on-surface-variant">Security Lead</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-error-container text-on-error-container">
+                                Security
+                            </span>
+</div>
+<div class="col-span-3 text-sm text-on-surface-variant leading-relaxed">
+                            Failed login attempt detected from unknown region (RU)
+                        </div>
+<div class="col-span-2 text-xs font-mono text-on-surface-variant">
+                            45.12.98.201
+                        </div>
+</div>
+<!-- Row 3 -->
+<div class="px-8 py-6 grid grid-cols-12 gap-4 items-center hover:bg-surface-container-low transition-colors group">
+<div class="col-span-2">
+<p class="text-sm font-medium text-on-surface">Oct 24, 2023</p>
+<p class="text-xs text-on-surface-variant">12:15:30</p>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+<img alt="Admin portrait" class="h-full w-full object-cover" data-alt="portrait of a mid-adult male professional with a friendly smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfUdX04Ixh9raJrWo9Lxb3XTpnoip8TsmePomytar1xshlacuPEdO6IygOMxxyBaxlkB3cnUupgSsojHvmKD32yVOKriQ65IICJnHe5ouulP-tYi0e74YQAXQUduyVAd009TH5t8jqT5_cCdl5u0Jgn5IgAnbEuS2myZTDFfNJBNYXqQY11MIHOTW-WPIzeyKeOdlLk9ZimeJPZoDE2E461akScnUn988z3cvj5PM0Wz-uV_5l1G2REy0FkjEPzSa1LHG_W_NL1CY"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Support Admin</p>
+<p class="text-xs text-on-surface-variant">Fleet Admin</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-surface-container-highest text-on-surface-variant">
+                                User Mod
+                            </span>
+</div>
+<div class="col-span-3 text-sm text-on-surface-variant leading-relaxed">
+                            Granted "Elevated Dispatch" permissions to user <span class="text-on-surface font-medium">@alex_t</span>
+</div>
+<div class="col-span-2 text-xs font-mono text-on-surface-variant">
+                            192.168.1.55
+                        </div>
+</div>
+<!-- Row 4 -->
+<div class="px-8 py-6 grid grid-cols-12 gap-4 items-center bg-surface-container-low/30 hover:bg-surface-container-low transition-colors group">
+<div class="col-span-2">
+<p class="text-sm font-medium text-on-surface">Oct 24, 2023</p>
+<p class="text-xs text-on-surface-variant">10:05:44</p>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+<img alt="Admin portrait" class="h-full w-full object-cover" data-alt="professional woman of color smiling in a clean architectural office setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ9fYSpJGKyQkllO8rAS4_Zi1ZrW4QXeF6OAQzeeb1gc4AoCT9JR4PXo9nhr2eeYe4O6MBO_QHZVopG2qFL7DYox55ic-_S0cfCYNpldDxN4_5xRYPjVmJ0wOAhnlm_-BTZ4_ScDwY9YjvLHJOaDTg39dsbBRyPSK5zsFjrsTS2fHytCRaiSXkiv2btj8SYanVNeTv9mEZ9CMzKmIOoX3gH5yeozB6RjmuGJiUqSgOp2Fd5dvHXX8kdfRIumaaWglpuU4_5-loE3Y"/>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">Elena Vance</p>
+<p class="text-xs text-on-surface-variant">System Auditor</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-secondary-container text-on-secondary-container">
+                                Data Edit
+                            </span>
+</div>
+<div class="col-span-3 text-sm text-on-surface-variant leading-relaxed">
+                            Archived 2,400 completed maintenance tickets from Q2 2023
+                        </div>
+<div class="col-span-2 text-xs font-mono text-on-surface-variant">
+                            10.0.0.12
+                        </div>
+</div>
+<!-- Row 5 -->
+<div class="px-8 py-6 grid grid-cols-12 gap-4 items-center hover:bg-surface-container-low transition-colors group">
+<div class="col-span-2">
+<p class="text-sm font-medium text-on-surface">Oct 24, 2023</p>
+<p class="text-xs text-on-surface-variant">08:30:11</p>
+</div>
+<div class="col-span-3 flex items-center gap-3">
+<div class="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary" data-icon="shield_person">shield_person</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-on-surface">System Agent</p>
+<p class="text-xs text-on-surface-variant">Automated Task</p>
+</div>
+</div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-error-container text-on-error-container">
+                                Security
+                            </span>
+</div>
+<div class="col-span-3 text-sm text-on-surface-variant leading-relaxed">
+                            API Key rotation successful for external <span class="text-on-surface font-medium">Weather_Svc</span>
+</div>
+<div class="col-span-2 text-xs font-mono text-on-surface-variant">
+                            Internal Loop
+                        </div>
+</div>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="px-8 py-6 border-t border-outline-variant/10 flex items-center justify-between">
+<p class="text-sm text-on-surface-variant">Showing 1 to 5 of 124 entries</p>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary text-xs font-bold">1</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface text-xs font-medium">2</button>
+<button class="w-8 h-8 rounded-lg hover:bg-surface-container text-on-surface text-xs font-medium">3</button>
+<button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Suppressed on Details/List but included for Task Action if primary) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="flex items-center gap-3 px-6 py-4 rounded-full bg-primary text-on-primary shadow-xl hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_alert</span>
+<span class="font-bold text-sm">Create Audit Alert</span>
+</button>
+</div>
+
+
+
+

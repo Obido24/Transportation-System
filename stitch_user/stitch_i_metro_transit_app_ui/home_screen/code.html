@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro - The Kinetic Sanctuary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#dde2f3",
+                        "on-tertiary-container": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "on-primary-fixed": "#002113",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#dde2f3",
+                        "surface-container": "#eceef0",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6e7a71",
+                        "on-surface-variant": "#3e4942",
+                        "primary-container": "#00875a",
+                        "on-tertiary-fixed": "#410005",
+                        "surface-tint": "#006c47",
+                        "surface-dim": "#d8dadc",
+                        "primary-fixed": "#8df7c1",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#5e6473",
+                        "inverse-primary": "#71dba6",
+                        "on-primary-fixed-variant": "#005235",
+                        "outline-variant": "#bdcac0",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-background": "#191c1e",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-tertiary-fixed-variant": "#7d2a2a",
+                        "tertiary-container": "#ba5855",
+                        "surface-container-lowest": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "secondary": "#585e6c",
+                        "primary-fixed-dim": "#71dba6",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-fixed": "#161c27",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#9b403e",
+                        "primary": "#006b47",
+                        "on-secondary-fixed-variant": "#414754",
+                        "surface": "#f7f9fb",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#ffffff",
+                        "inverse-surface": "#2d3133",
+                        "surface-bright": "#f7f9fb",
+                        "secondary-fixed-dim": "#c1c6d7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #006b47 0%, #00875a 100%);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb]/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#006b47] hover:bg-slate-100 transition-colors p-2 rounded-full active:scale-95 duration-200" data-icon="menu">menu</button>
+<span class="text-xl font-extrabold text-[#006b47] tracking-tight">I-Metro</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant/20">
+<img alt="User profile" data-alt="professional portrait of a young man with a friendly smile, clean background, high-end photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFrClHkbL3rmZ2Uys9mEKjYH327Fb-E8LdCUTamKxKGU9J6sT80ZYk1GXZqf1Q9PqjPrNPHMmJW_joZjOBPwULxzR7x268rIeQJaVmMY1RdU6RsryJFYle_7AJYRJiLEU0k6MaQRu56TFuoLGxDBAewW0sp5PGsX5dfp-ElgtqOGxo1GqqAaEBcb58jHvr8piQQ-DwxjMPRvpi3n0entHjevT3IOnXWb6Kd4xcFUFY3nx_PmO1Kl5YyRC68q-doaH8wRMMjrjnMw"/>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Hero Greeting -->
+<section class="mb-8">
+<h1 class="text-3xl font-extrabold text-on-surface tracking-tight mb-2">Hello, Alex!</h1>
+<p class="text-on-surface-variant font-body text-sm">Where are we heading today?</p>
+</section>
+<!-- Quick Actions Bento Grid -->
+<section class="grid grid-cols-2 gap-4 mb-10">
+<button class="signature-gradient text-white p-6 rounded-[1.5rem] flex flex-col items-start justify-between h-40 shadow-lg active:scale-95 transition-transform group">
+<span class="material-symbols-outlined text-3xl" data-icon="directions_bus" style="font-variation-settings: 'FILL' 1;">directions_bus</span>
+<span class="font-headline font-bold text-lg">Book Ride</span>
+</button>
+<button class="bg-surface-container-lowest text-on-surface p-6 rounded-[1.5rem] flex flex-col items-start justify-between h-40 shadow-sm border border-outline-variant/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl text-primary" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-headline font-bold text-lg">Scan Ticket</span>
+</button>
+<button class="bg-surface-container-low text-on-surface p-6 rounded-[1.5rem] flex flex-col items-start justify-between h-32 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl text-on-surface-variant" data-icon="history">history</span>
+<span class="font-headline font-semibold text-base">History</span>
+</button>
+<button class="bg-surface-container-low text-on-surface p-6 rounded-[1.5rem] flex flex-col items-start justify-between h-32 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl text-on-surface-variant" data-icon="person">person</span>
+<span class="font-headline font-semibold text-base">Profile</span>
+</button>
+</section>
+<!-- Active Journey Glass Card -->
+<section class="mb-10">
+<div class="relative overflow-hidden rounded-[1.5rem] bg-primary text-white p-6 shadow-xl">
+<div class="absolute top-0 right-0 p-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="train">train</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-2 h-2 rounded-full bg-primary-fixed animate-pulse"></span>
+<span class="text-[10px] uppercase tracking-widest font-bold opacity-80">Live Journey</span>
+</div>
+<h3 class="text-xl font-bold mb-1">Central Station</h3>
+<p class="text-sm opacity-90 mb-6">Line 4 • Arriving in 4 mins</p>
+<div class="h-1 w-full bg-white/20 rounded-full mb-2 overflow-hidden">
+<div class="h-full bg-white w-2/3"></div>
+</div>
+<div class="flex justify-between text-[10px] font-medium opacity-70">
+<span>WEST END</span>
+<span>EAST HARBOR</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recently Traveled / Featured Routes -->
+<section class="mb-6">
+<div class="flex justify-between items-end mb-6">
+<h2 class="text-xl font-extrabold tracking-tight">Recently Traveled</h2>
+<button class="text-primary text-sm font-semibold">See All</button>
+</div>
+<div class="space-y-4">
+<!-- Route Card 1 -->
+<div class="bg-surface-container-lowest p-5 rounded-[1.25rem] flex items-center justify-between shadow-sm border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="apartment">apartment</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Work Hub</p>
+<p class="font-body text-xs text-on-surface-variant">Via District Line • 22 mins</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-bold text-primary">$2.50</p>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Route Card 2 -->
+<div class="bg-surface-container-lowest p-5 rounded-[1.25rem] flex items-center justify-between shadow-sm border border-outline-variant/5">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-icon="park">park</span>
+</div>
+<div>
+<p class="font-headline font-bold text-on-surface">Green Park</p>
+<p class="font-body text-xs text-on-surface-variant">Via North Express • 15 mins</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-bold text-primary">$1.80</p>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Map Snippet -->
+<section class="mt-10 overflow-hidden rounded-[1.5rem] h-48 relative shadow-inner">
+<img class="w-full h-full object-cover grayscale opacity-50" data-alt="simplified stylistic city map showing transit lines and parks in a minimal aesthetic with green accents" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFO4x8JtidzbuGq6SE_sdM4vgcKU44Nz3wxoyDG9Hhc951IWgRrz-2VRHqfLJsgPyOrf-ffZNOdDRRPTbLcxdBcmETT1Yes5ZGJKJFXrwvUih0jCKLn4pIbxX90i5DTCsyUiXqnHYqDXWrVHKVhtzyhYbtbbn0lCWKd1rVPvupBH00UuhpFCIMtdINpRs9UCAGz1ks_GRiLqPb2cR5wirJZQgXaLqxYhNRemMJ5oMLk36FJHpJgUc7tnsP2hStubnQfeXmHJbOKg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface/80 to-transparent"></div>
+<div class="absolute bottom-4 left-6">
+<button class="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 text-primary font-bold text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="explore">explore</span>
+                    Explore Nearby
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f7f9fb]/80 backdrop-blur-md rounded-t-[1.5rem] shadow-[0_-8px_30px_rgb(0,0,0,0.04)] z-50">
+<a class="flex flex-col items-center justify-center bg-[#00875a]/10 text-[#006b47] rounded-2xl px-5 py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:opacity-80 px-5 py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:opacity-80 px-5 py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Booking</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 hover:opacity-80 px-5 py-2 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+<!-- Floating Quick Action Button (Suppressed on Home as per rules but I'll add a contextual 'Route Search' if needed. User prompt implies home content. Let's stick to the grid above.) -->
+</body></html>

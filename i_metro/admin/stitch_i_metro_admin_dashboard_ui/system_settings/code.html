@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>System Settings | I-Metro Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#c8eadc",
+                        "primary-container": "#006b54",
+                        "tertiary-fixed": "#ffdad4",
+                        "on-secondary-fixed": "#012018",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9fa",
+                        "primary": "#00513f",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#191c1d",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#adcec0",
+                        "surface-container": "#edeeef",
+                        "on-tertiary-container": "#ffcdc5",
+                        "surface-tint": "#016b54",
+                        "outline": "#6f7a74",
+                        "on-secondary-container": "#4c6b5f",
+                        "on-primary-fixed-variant": "#00513f",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#92493e",
+                        "on-tertiary-fixed": "#3c0804",
+                        "secondary-fixed": "#c8eadc",
+                        "surface-variant": "#e1e3e4",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-fixed-variant": "#753229",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3e4944",
+                        "on-secondary-fixed-variant": "#2f4d42",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f1f2",
+                        "tertiary-fixed-dim": "#ffb4a8",
+                        "primary-fixed": "#9ef3d6",
+                        "inverse-surface": "#2e3132",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-primary-fixed": "#002118",
+                        "surface": "#f8f9fa",
+                        "on-primary-container": "#94e8cb",
+                        "inverse-primary": "#82d7ba",
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#bec9c3",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed-dim": "#82d7ba",
+                        "secondary": "#466559",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#753229",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.25rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<aside class="flex flex-col fixed left-0 top-0 h-full py-6 h-screen w-64 bg-[#edeeef] dark:bg-slate-900 z-50">
+<div class="px-6 mb-10">
+<h1 class="text-2xl font-bold text-[#00513f] dark:text-emerald-400 font-headline">I-Metro Admin</h1>
+<p class="text-xs tracking-wide text-on-surface-variant opacity-70">Kinetic Sanctuary</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#3e4944] hover:bg-[#f8f9fa] transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Revenue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#00513f] dark:text-emerald-400 font-bold border-r-4 border-[#00513f] bg-[#f8f9fa] transition-colors group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#3e4944] hover:bg-[#f8f9fa] transition-colors group" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-sm">Activity</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-[#3e4944] hover:bg-[#f8f9fa] transition-colors group" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-sm">Support</span>
+</a>
+</nav>
+<div class="px-6 py-4 border-t border-outline-variant/10">
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-lg font-semibold shadow-sm hover:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                Create Report
+            </button>
+</div>
+<div class="mt-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-[#3e4944] hover:bg-[#f8f9fa] transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<span class="text-sm">Security</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-[#3e4944] hover:bg-[#f8f9fa] transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span class="text-sm">Log Out</span>
+</a>
+</div>
+</aside>
+<header class="flex justify-between items-center w-full px-8 h-16 sticky top-0 z-40 ml-64 max-w-[calc(100%-16rem)] bg-[#f8f9fa]/80 backdrop-blur-xl shadow-[0px_10px_30px_rgba(25,28,29,0.05)]">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold tracking-tight text-[#00513f] dark:text-emerald-400 font-headline">The Fluid Transit Authority</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-[#3e4944] hover:text-[#006b54] text-sm font-semibold transition-all" href="#">Analytics</a>
+<a class="text-[#00513f] border-b-2 border-[#00513f] pb-1 text-sm font-semibold transition-all" href="#">Configuration</a>
+<a class="text-[#3e4944] hover:text-[#006b54] text-sm font-semibold transition-all" href="#">Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container rounded-full text-sm focus:ring-1 focus:ring-primary outline-none border-none w-64" placeholder="Search parameters..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">help_outline</button>
+<img alt="Admin Portrait" class="w-8 h-8 rounded-full border-2 border-primary/20" data-alt="Professional portrait of a male administrator in a modern office environment with soft natural lighting and neutral colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwYgdmS8cYFIdoTqu-wrZE3wQXDah8n4syGBlqqUlEMuv7EPodAjj6XzyYit8ijzl7JeXNC_PnbIXR-0njJJxoh1__-0cxmHICZ2K8G-yQxu4juDahnmlb4Rdc1TTOHh6cDyQMQlgTVLAOjrRzeazXGUtkZgIdOdIsMu2fq6fAoVJtBRnyO3q5eUf0hh3CZGfKJweOgwRzd0IPNABPHMX-HCbfXejzDXZ2U919GrwEJg9OhdW5vs3M27NnHkNYvp2xNFGg_Fo-mAc"/>
+</div>
+</header>
+<main class="ml-64 p-10 max-w-[1400px]">
+<div class="mb-10">
+<h2 class="text-3xl font-extrabold text-on-surface font-headline mb-2">System Configuration</h2>
+<p class="text-on-surface-variant max-w-2xl">Manage the core parameters of the I-Metro transit network. Changes made here affect real-time operations, fare calculations, and system-wide visibility.</p>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<div class="col-span-12 lg:col-span-8 space-y-8">
+<section class="bg-surface-container-lowest rounded-lg overflow-hidden transition-all">
+<div class="px-8 py-5 bg-surface-container-low flex items-center justify-between">
+<h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">General Platform Settings</h3>
+<span class="material-symbols-outlined text-on-surface-variant">info</span>
+</div>
+<div class="p-8 space-y-6">
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface">Platform Name</label>
+<input class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" type="text" value="The Fluid Transit Authority"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface">Operational Timezone</label>
+<select class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-all appearance-none">
+<option>UTC (Coordinated Universal Time)</option>
+<option>EST (Eastern Standard Time)</option>
+<option>GMT (Greenwich Mean Time)</option>
+</select>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-primary/5 rounded-xl border border-primary/10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">construction</span>
+<div>
+<h4 class="font-bold text-primary">Maintenance Mode</h4>
+<p class="text-xs text-on-surface-variant">Temporarily redirect users to a "Under Maintenance" page.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-lg overflow-hidden">
+<div class="px-8 py-5 bg-surface-container-low">
+<h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">Fare Configuration</h3>
+</div>
+<div class="p-8 grid grid-cols-2 gap-10">
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface flex justify-between">
+                                    Base Fare Multiplier
+                                    <span class="text-primary font-bold">1.2x</span>
+</label>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+<p class="text-[11px] text-on-surface-variant">Applied to all standard ticket types across the network.</p>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface">Peak Hour Strategy</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="py-2 text-xs font-bold border-2 border-primary text-primary rounded-lg bg-primary/5">Dynamic</button>
+<button class="py-2 text-xs font-semibold border-2 border-transparent text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors">Fixed</button>
+<button class="py-2 text-xs font-semibold border-2 border-transparent text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors">Disabled</button>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant/10">
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant block mb-2">Live Preview</span>
+<div class="flex items-center justify-between mb-1">
+<span class="text-sm">Standard Ticket</span>
+<span class="font-headline font-bold text-primary">$4.50</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm">Peak Surcharge</span>
+<span class="font-headline font-bold text-primary">+$1.25</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-lg overflow-hidden">
+<div class="px-8 py-5 bg-surface-container-low flex justify-between items-center">
+<h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">API &amp; Integrations</h3>
+<button class="text-xs font-bold text-primary hover:underline">Revoke All Keys</button>
+</div>
+<div class="p-8 space-y-6">
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface">Production API Key</label>
+<div class="flex gap-2">
+<input class="flex-1 bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface-variant font-mono" readonly="" type="password" value="••••••••••••••••••••••••"/>
+<button class="px-4 bg-surface-container-highest rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">content_copy</span>
+</button>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface">Webhook Endpoint URL</label>
+<div class="flex gap-2">
+<input class="flex-1 bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" placeholder="https://your-domain.com/webhooks/i-metro" type="text"/>
+<button class="px-6 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity">Test</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<section class="bg-surface-container-lowest rounded-lg overflow-hidden">
+<div class="px-6 py-5 bg-surface-container-low">
+<h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">Notification Rules</h3>
+</div>
+<div class="p-6 space-y-6">
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-on-surface-variant uppercase">Platform Errors</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Email Admin Alerts</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Slack Integration</span>
+</label>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/10 space-y-4">
+<h4 class="text-xs font-bold text-on-surface-variant uppercase">Transit Alerts</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">SMS for Critical Delays</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm text-on-surface group-hover:text-primary transition-colors">Mobile Push Notifications</span>
+</label>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-lowest rounded-lg overflow-hidden">
+<div class="px-6 py-5 bg-surface-container-low">
+<h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">Custom Branding</h3>
+</div>
+<div class="p-6 space-y-6">
+<div class="space-y-4">
+<label class="text-sm font-semibold text-on-surface block">Primary Brand Color</label>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary border-4 border-surface-container shadow-sm"></div>
+<div class="flex-1 space-y-1">
+<code class="text-xs font-mono font-bold">#00513F</code>
+<p class="text-[10px] text-on-surface-variant">Transit Emerald (Global Default)</p>
+</div>
+<button class="text-xs font-bold text-primary">Change</button>
+</div>
+</div>
+<div class="space-y-3">
+<label class="text-sm font-semibold text-on-surface block">Logo Assets</label>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center text-center gap-3 hover:bg-surface-container transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline group-hover:scale-110 transition-transform">cloud_upload</span>
+<p class="text-xs font-medium text-on-surface-variant">Drop SVG or PNG here<br/><span class="text-[10px] opacity-60">Max size 2MB</span></p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<div class="mt-12 flex items-center justify-end gap-4 p-6 bg-surface-container-low rounded-xl">
+<span class="text-sm text-on-surface-variant mr-auto italic flex items-center gap-2">
+<span class="material-symbols-outlined text-base">history</span>
+                Last modified by Admin at 14:45 GMT
+            </span>
+<button class="px-8 py-3 text-sm font-bold text-on-surface-variant hover:bg-surface-container transition-colors rounded-lg">Discard Changes</button>
+<button class="px-10 py-3 bg-primary text-on-primary font-bold rounded-lg shadow-lg hover:scale-[1.02] transition-transform active:scale-[0.98]">Save Configuration</button>
+</div>
+</main>
+<div class="fixed bottom-8 right-8">
+<button class="w-14 h-14 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">save</span>
+</button>
+</div>
+</body></html>

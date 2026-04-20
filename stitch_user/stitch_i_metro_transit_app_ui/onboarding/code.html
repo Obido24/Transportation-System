@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#dde2f3",
+                    "on-tertiary-container": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb3af",
+                    "on-primary-fixed": "#002113",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#dde2f3",
+                    "surface-container": "#eceef0",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#6e7a71",
+                    "on-surface-variant": "#3e4942",
+                    "primary-container": "#00875a",
+                    "on-tertiary-fixed": "#410005",
+                    "surface-tint": "#006c47",
+                    "surface-dim": "#d8dadc",
+                    "primary-fixed": "#8df7c1",
+                    "surface-variant": "#e0e3e5",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#5e6473",
+                    "inverse-primary": "#71dba6",
+                    "on-primary-fixed-variant": "#005235",
+                    "outline-variant": "#bdcac0",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-background": "#191c1e",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdad7",
+                    "on-tertiary-fixed-variant": "#7d2a2a",
+                    "tertiary-container": "#ba5855",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "background": "#f7f9fb",
+                    "inverse-on-surface": "#eff1f3",
+                    "secondary": "#585e6c",
+                    "primary-fixed-dim": "#71dba6",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container-low": "#f2f4f6",
+                    "on-secondary-fixed": "#161c27",
+                    "on-surface": "#191c1e",
+                    "tertiary": "#9b403e",
+                    "primary": "#006b47",
+                    "on-secondary-fixed-variant": "#414754",
+                    "surface": "#f7f9fb",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed-dim": "#c1c6d7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: linear-gradient(135deg, #006b47 0%, #00875a 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-background selection:bg-primary-fixed overflow-hidden h-screen w-full flex flex-col items-center justify-center">
+<div class="relative h-screen w-full max-w-md bg-surface overflow-hidden flex flex-col">
+<div class="absolute top-0 left-0 w-full h-[574px] z-0 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface z-10"></div>
+<img alt="Modern city transit" class="w-full h-full object-cover grayscale-[20%] brightness-90" data-alt="Cinematic shot of a sleek modern green metro train arriving at a sunlit futuristic glass station with soft morning light and motion blur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkuc151WaMen8WZwS50YmNU_W0OgUUBrTpi1BvJi9Gbwh-RszclYjFbqQHmfXmXoYCnmBdtWAs9fh12GJe9BRkmM15zq0HoKS-KHkQTMBtREjtjquFUxkzeDLuIs4CHVR9VjIb1z7nNRHqimdGZfSBoSu43q5QobqjrxZmlkCqqOIBP0iVyfHZXLG7lSSYNiAlIzHDrinligFWMXyc0sv649NAm0hLJ96ZYgQIHCXCzd_zTV8LtmGrITBgM77s4eIo_6iVfemOpA"/>
+</div>
+<div class="relative z-20 flex-1 flex flex-col justify-end px-8 pb-12">
+<div class="mb-8 ml-2">
+<span class="inline-block bg-primary-fixed text-on-primary-fixed text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-4">
+                    The Kinetic Sanctuary
+                </span>
+<h1 class="text-[40px] font-extrabold text-on-surface leading-[1.1] tracking-tight">
+                    Move Smarter <br/>with I-Metro
+                </h1>
+<p class="mt-6 text-on-surface-variant font-medium text-lg leading-relaxed max-w-[280px]">
+                    Your personalized gateway to a calmer, faster urban commute.
+                </p>
+</div>
+<div class="flex items-center gap-2 mb-12 ml-2">
+<div class="h-1.5 w-8 rounded-full bg-primary"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-outline-variant"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-outline-variant"></div>
+</div>
+<div class="flex flex-col gap-4">
+<button class="kinetic-gradient text-on-primary w-full py-5 rounded-[1.5rem] font-bold text-lg shadow-xl shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group">
+<span>Next</span>
+<span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="text-on-surface-variant w-full py-4 rounded-[1.5rem] font-semibold text-base hover:bg-surface-container-low transition-colors active:scale-[0.98]">
+                    Skip
+                </button>
+</div>
+</div>
+<div class="absolute top-12 left-8 z-30">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 kinetic-gradient rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">directions_subway</span>
+</div>
+<span class="font-['Manrope'] font-black text-xl text-on-surface tracking-tighter">I-Metro</span>
+</div>
+</div>
+<div class="absolute top-12 right-8 z-30">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-on-surface-variant">
+<span class="material-symbols-outlined text-xl">help</span>
+</button>
+</div>
+</div>
+<div class="fixed inset-x-0 bottom-0 pointer-events-none z-50 p-6 flex justify-center hidden md:flex">
+<div class="bg-surface-container-lowest/90 backdrop-blur-xl px-6 py-3 rounded-2xl border border-outline-variant/20 shadow-2xl pointer-events-auto">
+<p class="text-xs text-on-surface-variant font-medium">Experience the flow of the city with I-Metro's kinetic design system.</p>
+</div>
+</div>
+</body></html>

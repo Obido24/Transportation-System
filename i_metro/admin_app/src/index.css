@@ -1,0 +1,32 @@
+:root {
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.bg-kinetic-gradient {
+  background: linear-gradient(135deg, #00513f 0%, #006b54 100%);
+}
+
+.kinetic-gradient {
+  background: linear-gradient(135deg, #00513f 0%, #006b54 100%);
+}
+
+.no-line-card {
+  background-color: #ffffff;
+}
+
+.editorial-headline {
+  font-family: "Manrope", sans-serif;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+}

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile - I-Metro</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#dde2f3",
+                    "on-tertiary-container": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb3af",
+                    "on-primary-fixed": "#002113",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#dde2f3",
+                    "surface-container": "#eceef0",
+                    "on-tertiary": "#ffffff",
+                    "outline": "#6e7a71",
+                    "on-surface-variant": "#3e4942",
+                    "primary-container": "#00875a",
+                    "on-tertiary-fixed": "#410005",
+                    "surface-tint": "#006c47",
+                    "surface-dim": "#d8dadc",
+                    "primary-fixed": "#8df7c1",
+                    "surface-variant": "#e0e3e5",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#5e6473",
+                    "inverse-primary": "#71dba6",
+                    "on-primary-fixed-variant": "#005235",
+                    "outline-variant": "#bdcac0",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-background": "#191c1e",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#ffdad7",
+                    "on-tertiary-fixed-variant": "#7d2a2a",
+                    "tertiary-container": "#ba5855",
+                    "surface-container-lowest": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "background": "#f7f9fb",
+                    "inverse-on-surface": "#eff1f3",
+                    "secondary": "#585e6c",
+                    "primary-fixed-dim": "#71dba6",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-container-low": "#f2f4f6",
+                    "on-secondary-fixed": "#161c27",
+                    "on-surface": "#191c1e",
+                    "tertiary": "#9b403e",
+                    "primary": "#006b47",
+                    "on-secondary-fixed-variant": "#414754",
+                    "surface": "#f7f9fb",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "surface-bright": "#f7f9fb",
+                    "secondary-fixed-dim": "#c1c6d7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb]/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="text-[#006b47] hover:bg-slate-100 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-['Manrope'] font-bold text-lg tracking-tight text-[#006b47]">I-Metro</h1>
+</div>
+<div class="flex items-center">
+<img alt="User profile" class="w-10 h-10 rounded-full border-2 border-primary-container object-cover" data-alt="Close up portrait of a young man with a friendly expression in clean urban lighting with a blurred city background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM2rccULxSYDWPWWBIQ3PG6_sXM2HYvmpnR2GE42N3_wo_vRXtjGDXv_U5Q11qNkXuYU4pH4N-pg5TAtcDWImeeNgMKw9YqFvRMSWH3T-iCmN-2mWhCKeML4wh6ntZXct9aHgv0smxHNSjdaRE1g2aeZL0bmAdpamDeBazZeEEdL0_q9Q1pmfv16JHp-r9lGSwCkbN84W1ZSgWBEwpSfkCqAUV-4B7Zw3ob_xIWtx75GAbK9xYu_AEPgDXNwnIt9DrL_LK_xdYFg"/>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Hero Profile Section -->
+<section class="flex flex-col items-center text-center mb-10">
+<div class="relative mb-4">
+<div class="w-32 h-32 rounded-3xl overflow-hidden bg-surface-container-low p-1 bg-gradient-to-br from-primary to-primary-container">
+<img alt="Alex Johnson" class="w-full h-full object-cover rounded-[1.25rem]" data-alt="Professional and modern headshot of a man named Alex Johnson against a neutral soft studio background with high-end lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0_UIn7kj63KrVY4CL8ONLBMEblYwRWKzfM-L8VhT-y_egs10Pj7U3nfCzrpZqegiTE7KkKIoFqZZQsXh12NeYYKE08C8hw1DIK1wqmvzkbD6XxLUV565IfktRpaZq_0cHSjsfkvetDx_a9s4tSnYUNXluJbNuPM3ehsjLeK3uXitPx3bxbasVzw0tiLKfqfVrpVyzq9hOooGy0xyq40qTwUTgl51uM6KcRfbxINod2j3l6L73GFWIQAOwz1DKSlgk9-6lIzwjCQ"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-on-primary px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-lg border-4 border-surface">
+                    Gold Member
+                </div>
+</div>
+<h2 class="text-3xl font-extrabold text-on-surface tracking-tight mb-1">Alex Johnson</h2>
+<p class="text-on-surface-variant text-sm font-medium">alex.johnson@metro.com</p>
+</section>
+<!-- Stats Grid (Bento Style) -->
+<section class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-low p-5 rounded-3xl flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary mb-3" data-icon="commute">commute</span>
+<div>
+<p class="text-2xl font-bold text-on-surface">128</p>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Total Rides</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-5 rounded-3xl flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary mb-3" data-icon="savings">savings</span>
+<div>
+<p class="text-2xl font-bold text-on-surface">$42.50</p>
+<p class="text-xs text-on-surface-variant uppercase tracking-wider font-semibold">Saved This Month</p>
+</div>
+</div>
+</section>
+<!-- Settings List -->
+<section class="space-y-4">
+<h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-[0.2em] ml-2 mb-4">Account Settings</h3>
+<div class="space-y-2">
+<!-- Edit Profile -->
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl hover:bg-slate-50 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="person_edit">person_edit</span>
+</div>
+<span class="font-semibold text-on-surface">Edit Profile</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- Payment Methods -->
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl hover:bg-slate-50 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<span class="font-semibold text-on-surface">Payment Methods</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- Settings -->
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl hover:bg-slate-50 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</div>
+<span class="font-semibold text-on-surface">Settings</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- Security -->
+<button class="w-full flex items-center justify-between p-4 bg-surface-container-lowest rounded-2xl hover:bg-slate-50 transition-colors group">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+</div>
+<span class="font-semibold text-on-surface">Security</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Logout Button -->
+<button class="mt-8 w-full py-4 text-error font-bold flex items-center justify-center gap-2 rounded-2xl hover:bg-error/5 transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+            Logout
+        </button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f7f9fb]/80 backdrop-blur-md rounded-t-[1.5rem] z-50 shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:opacity-80 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:opacity-80 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 hover:opacity-80 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Booking</span>
+</a>
+<!-- ACTIVE TAB: Profile -->
+<a class="flex flex-col items-center justify-center bg-[#00875a]/10 text-[#006b47] rounded-2xl px-5 py-2 hover:opacity-80 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

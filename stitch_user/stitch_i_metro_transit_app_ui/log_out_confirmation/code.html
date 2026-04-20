@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro - Log Out</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed": "#ffdad7",
+                        "on-surface": "#191c1e",
+                        "inverse-primary": "#71dba6",
+                        "on-tertiary-fixed-variant": "#7d2a2a",
+                        "on-tertiary-fixed": "#410005",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#00875a",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#8df7c1",
+                        "secondary": "#585e6c",
+                        "primary": "#006b47",
+                        "on-primary-fixed-variant": "#005235",
+                        "secondary-fixed": "#dde2f3",
+                        "primary-fixed-dim": "#71dba6",
+                        "secondary-fixed-dim": "#c1c6d7",
+                        "on-primary-fixed": "#002113",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-container": "#ffffff",
+                        "tertiary-container": "#ba5855",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-container": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb3af",
+                        "tertiary": "#9b403e",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#414754",
+                        "on-secondary-fixed": "#161c27",
+                        "on-background": "#191c1e",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-tint": "#006c47",
+                        "surface-container-highest": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "background": "#f7f9fb",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-dim": "#d8dadc",
+                        "surface-container": "#eceef0",
+                        "secondary-container": "#dde2f3",
+                        "on-secondary-container": "#5e6473",
+                        "outline-variant": "#bdcac0",
+                        "on-surface-variant": "#3e4942",
+                        "error-container": "#ffdad6",
+                        "surface": "#f7f9fb",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#6e7a71"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 bg-[#f7f9fb]/80 dark:bg-slate-900/80 backdrop-blur-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#006b47]" data-icon="menu">menu</span>
+</button>
+<span class="text-xl font-extrabold text-[#006b47] dark:text-[#00875a] tracking-tight">I-Metro</span>
+</div>
+<div class="flex items-center">
+<img alt="User profile" class="w-10 h-10 rounded-full border-2 border-primary/20" data-alt="Close-up portrait of a professional smiling man with clean background, natural lighting, high-end corporate style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxYNohkWFOr0a0VqEHQAUwNuelbPrjKPU6FlW-lYaokPiC2sftMwDjrVN3jwtPyEdpCAsymSbnchTD9w4kxdPWHBNWdLH1GlB37PxTYIcVeRE-N8F9of4N_kuPjpZ-is6DRg35T7e3YMZSsgQOI55Hh1XLCiPGUAgsa-9n1dCM1Iw9sGjfD5YPgNOGT8Q2kICGZWioSlbIeB2SxerKqvakAOwySBJHnKD8yNnDiYqxv14l4hX60--hga0w22PxxLH_osz0hX8lPQ"/>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Profile Content (Background for the Modal) -->
+<section class="mb-10 text-center">
+<div class="relative inline-block mb-4">
+<img alt="User profile large" class="w-24 h-24 rounded-full mx-auto" data-alt="Professional headshot of a person, modern studio lighting, soft gray background, high quality" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo2NDFfaZzzMj4q3DkBLUn6IfLfUY9nLqJusvNthiXv2KPekWAmHzn2NijmJDfqJUjuEBz9J21O1PRNbJukgHfESoLmv8923mr6phrDsHdkrWhr511vLp3XHL__11JwJ3N2TeNi3hPV4Zw9T-P6FSImk1ukYw6TZO1IA-YNydMHP1umom8c_GycIr0wSqIXQKfL9hqhonaOM4I6ieNxAW5j_mAOCoFSEuD_JPS-8CL-RZYudUnkMxeMheeM6Lw-GfAd3Sj29x__Q"/>
+<div class="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full text-white ring-4 ring-surface">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</div>
+</div>
+<h1 class="text-2xl font-extrabold tracking-tight mb-1">I-Metro Traveler</h1>
+<p class="text-on-surface-variant font-medium">Gold Member</p>
+</section>
+<!-- Profile Options Bento-like Grid -->
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-[1rem] flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-low p-3 rounded-xl text-primary">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Personal Information</p>
+<p class="text-sm text-on-surface-variant">Update your details</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-[1rem] flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-low p-3 rounded-xl text-primary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Payment Methods</p>
+<p class="text-sm text-on-surface-variant">Manage your digital wallet</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-[1rem] flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="bg-surface-container-low p-3 rounded-xl text-primary">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Notifications</p>
+<p class="text-sm text-on-surface-variant">Travel alerts &amp; reminders</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full py-4 text-tertiary font-bold flex items-center justify-center gap-2 bg-tertiary-fixed/30 rounded-[1.5rem] hover:bg-tertiary-fixed/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </button>
+</div>
+</main>
+<!-- LOG OUT CONFIRMATION MODAL OVERLAY -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-inverse-surface/40 backdrop-blur-sm">
+<!-- Modal Container -->
+<div class="bg-surface-container-lowest w-full max-w-sm rounded-[2rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.1)] text-center">
+<!-- Icon/Visual Header -->
+<div class="w-16 h-16 bg-tertiary-fixed mx-auto rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-tertiary text-3xl" data-icon="logout">logout</span>
+</div>
+<!-- Content -->
+<h2 class="text-xl font-extrabold text-on-surface mb-2">Are you sure you want to log out?</h2>
+<p class="text-on-surface-variant text-sm mb-8 px-4">You will need to enter your credentials to access your traveler profile again.</p>
+<!-- Buttons -->
+<div class="flex flex-col gap-3">
+<!-- Log Out (Primary/Danger) -->
+<button class="w-full py-4 rounded-[1.5rem] bg-gradient-to-br from-tertiary to-tertiary-container text-on-tertiary font-bold text-base shadow-lg shadow-tertiary/20 active:scale-95 transition-transform">
+                    Log Out
+                </button>
+<!-- Cancel (Secondary) -->
+<button class="w-full py-4 rounded-[1.5rem] bg-surface-container-low text-on-surface-variant font-semibold text-base hover:bg-surface-container-high active:scale-95 transition-transform">
+                    Cancel
+                </button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar from JSON (Suppressed on Modal would be ideal, but included for structure as requested) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f7f9fb]/80 dark:bg-slate-900/80 backdrop-blur-md rounded-t-[1.5rem] z-50 shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-5 py-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Booking</span>
+</div>
+<!-- Active: Profile -->
+<div class="flex flex-col items-center justify-center bg-[#00875a]/10 text-[#006b47] dark:text-[#00875a] rounded-2xl px-5 py-2 active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Inter'] font-medium text-[10px] uppercase tracking-wider mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

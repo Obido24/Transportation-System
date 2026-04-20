@@ -1,0 +1,117 @@
+
+<!-- Dashboard Background (Mockup Context) -->
+<div class="flex h-screen w-full blur-md scale-105 select-none pointer-events-none">
+<!-- Predicted SideNavBar -->
+<aside class="bg-slate-100 dark:bg-slate-900 text-emerald-900 dark:text-emerald-400 h-screen w-64 fixed left-0 top-0 flex flex-col h-full p-4 overflow-y-auto">
+<div class="mb-8 px-2 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="directions_subway">directions_subway</span>
+</div>
+<div>
+<div class="text-xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50">I-Metro</div>
+<div class="text-xs text-on-surface-variant">Inter-Metro Transport Solution Limited</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 p-3 text-slate-600">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-slate-600">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-medium">User Management</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-slate-600">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-medium">Merchant Management</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-slate-600">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-medium">Route Management</span>
+</div>
+</nav>
+<div class="mt-auto pt-4 border-t border-slate-200">
+<div class="text-emerald-900 dark:text-emerald-400 font-semibold bg-white/50 dark:bg-slate-800/50 rounded-lg flex items-center gap-3 p-3">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-medium">Logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Mockup -->
+<main class="ml-64 flex-1 p-10 bg-surface">
+<div class="max-w-6xl mx-auto">
+<div class="flex justify-between items-end mb-10">
+<div>
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface mb-2">Transit Dashboard</h1>
+<p class="text-on-surface-variant">System status: Operative</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-lg h-32"></div>
+<div class="bg-surface-container-lowest p-6 rounded-lg h-32"></div>
+<div class="bg-surface-container-lowest p-6 rounded-lg h-32"></div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-8 h-96">
+<div class="w-full h-full rounded-lg bg-surface-container-low"></div>
+</div>
+</div>
+</main>
+</div>
+<!-- LOG OUT CONFIRMATION MODAL -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+<!-- Backdrop Dimming -->
+<div class="absolute inset-0 bg-on-surface/10 backdrop-blur-md"></div>
+<!-- Modal Card: Tonal Layering -->
+<div class="relative w-full max-w-md bg-surface-container-lowest rounded-xl shadow-[0px_10px_30px_rgba(25,28,29,0.05)] overflow-hidden">
+<!-- Modal Header (Subtle tonal shift) -->
+<div class="bg-surface-container-low px-6 py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+</div>
+<h2 class="text-lg font-bold text-on-surface tracking-tight">System Session</h2>
+</div>
+<!-- Modal Content -->
+<div class="p-8 text-center">
+<div class="mb-6 flex justify-center">
+<div class="relative">
+<img alt="Admin Profile" class="w-20 h-20 rounded-full object-cover shadow-sm ring-4 ring-surface-container-low" data-alt="Close up portrait of a professional transit administrator in a modern office with soft bokeh lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl29r45m-o2zr5X0vt9QypG3i8gfFCDnnsRBwPH-MU-9AmQegoeAnuyW9HNeWvQjL6raDsgjyXgUNN9iHfqsvLCGo0S8-unSdCR3CYi1gOlStKxALjwBQi_pIE8EIdkLiHBarH8yhxrbuhRMAb1hfD4d8ievEBl1NZtkQw6oiQJMc-UGOrtJgF56lGe7CGIT4npSzQBKaRa6foyGvfzpuayQy440ketmPwrsVD051RCfTDIlr4cFPA-3WQKWCbnCyuGT_SAjGML-c"/>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 bg-primary-fixed-dim rounded-full flex items-center justify-center text-on-primary-fixed ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-[14px]" data-icon="verified" data-weight="fill">verified</span>
+</div>
+</div>
+</div>
+<h3 class="text-2xl font-bold text-on-surface mb-3 tracking-tight">Are you sure you want to log out?</h3>
+<p class="text-on-surface-variant body-md leading-relaxed px-4">
+                    You are currently managing active transit routes. Logging out will end your current administrative session.
+                </p>
+</div>
+<!-- Footer Actions -->
+<div class="p-6 pt-0 flex gap-3">
+<!-- Cancel: Secondary -->
+<button class="flex-1 px-6 py-3.5 rounded-lg text-primary font-semibold hover:bg-surface-container-low transition-colors duration-200">
+                    Cancel
+                </button>
+<!-- Confirm: Primary Gradient -->
+<button class="flex-1 px-6 py-3.5 rounded-lg bg-gradient-to-br from-primary to-primary-container text-on-primary font-semibold shadow-lg shadow-primary/10 active:scale-[0.98] transition-all duration-150">
+                    Confirm
+                </button>
+</div>
+<!-- Inter-Metro Transport Solution Limited Detail: Subtle Tonal Bottom Bar -->
+<div class="h-1 bg-surface-container-highest w-full opacity-50"></div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 -z-10 opacity-20 pointer-events-none">
+<svg fill="none" height="600" viewbox="0 0 600 600" width="600" xmlns="http://www.w3.org/2000/svg">
+<circle cx="400" cy="200" fill="url(#paint0_linear)" r="200"></circle>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear" x1="400" x2="400" y1="0" y2="400">
+<stop stop-color="#00513f"></stop>
+<stop offset="1" stop-color="#006b54" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+
+
+

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro Admin - Profile Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb4a8",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#753229",
+                    "primary-fixed-dim": "#82d7ba",
+                    "primary-container": "#006b54",
+                    "on-primary-fixed-variant": "#00513f",
+                    "surface-dim": "#d9dadb",
+                    "inverse-surface": "#2e3132",
+                    "secondary-container": "#c8eadc",
+                    "surface-bright": "#f8f9fa",
+                    "background": "#f8f9fa",
+                    "error": "#ba1a1a",
+                    "outline": "#6f7a74",
+                    "on-primary-container": "#94e8cb",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#92493e",
+                    "primary-fixed": "#9ef3d6",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e7e8e9",
+                    "on-primary-fixed": "#002118",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed": "#3c0804",
+                    "surface": "#f8f9fa",
+                    "inverse-on-surface": "#f0f1f2",
+                    "tertiary-fixed": "#ffdad4",
+                    "secondary-fixed": "#c8eadc",
+                    "outline-variant": "#bec9c3",
+                    "on-surface": "#191c1d",
+                    "surface-tint": "#016b54",
+                    "tertiary": "#753229",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-secondary-container": "#4c6b5f",
+                    "secondary": "#466559",
+                    "surface-container": "#edeeef",
+                    "on-secondary-fixed": "#012018",
+                    "surface-variant": "#e1e3e4",
+                    "secondary-fixed-dim": "#adcec0",
+                    "inverse-primary": "#82d7ba",
+                    "on-background": "#191c1d",
+                    "surface-container-low": "#f3f4f5",
+                    "on-secondary-fixed-variant": "#2f4d42",
+                    "on-surface-variant": "#3e4944",
+                    "on-tertiary-container": "#ffcdc5",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#00513f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "1rem",
+                    "xl": "1.25rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SIDEBAR ANCHOR -->
+<aside class="fixed left-0 top-0 h-screen w-64 bg-slate-100 dark:bg-slate-900 flex flex-col p-4 overflow-y-auto z-10">
+<div class="flex items-center gap-3 px-2 mb-8">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="subway">subway</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-emerald-900 dark:text-emerald-50 leading-none">I-Metro</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-medium">Transit Authority</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-emerald-900 dark:text-emerald-400 font-semibold bg-white/50 dark:bg-slate-800/50 rounded-lg scale-[0.98] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-headline text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-headline text-sm">User Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-headline text-sm">Merchant Management</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-headline text-sm">Route Management</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="account_circle">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CANVAS -->
+<main class="ml-64 min-h-screen">
+<!-- TOP NAV ANCHOR -->
+<header class="sticky top-0 z-20 flex justify-between items-center h-16 px-8 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-lg w-auto">
+<div class="flex items-center bg-surface-container-highest rounded-full px-4 py-1.5 w-96 transition-all focus-within:bg-surface-container-lowest focus-within:ring-1 focus-within:ring-primary/20">
+<span class="material-symbols-outlined text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-on-surface-variant/60" placeholder="Search transit data..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-slate-500 hover:text-emerald-700 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-error ring-2 ring-white"></span>
+</button>
+<button class="text-slate-500 hover:text-emerald-700 transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<!-- PROFILE TRIGGER & MENU ANCHOR -->
+<div class="relative group">
+<button class="flex items-center gap-2 pl-2 py-1 pr-1 bg-surface-container-low rounded-full hover:bg-surface-container-high transition-colors">
+<span class="text-xs font-semibold text-emerald-900 dark:text-emerald-400 hidden lg:inline px-2">Admin Metro</span>
+<div class="h-8 w-8 rounded-full overflow-hidden ring-2 ring-primary/10">
+<img alt="Admin Profile" class="h-full w-full object-cover" data-alt="Close-up portrait of a professional male administrator in his 40s, soft studio lighting, neutral grey background, professional attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEJkWMxU5lH0rUojl9jasHAvvZZEZC-rriUhie5u7sr2FEwBfWYsOkJYi8HmHE8ORfY1ft8Zjq3ilOX7lERJ-zsjM5LCUkh2rr-R8HjFoyzwJ3Mb0ynTrmE4_OkOaEAWtrqng4PwhDagkuGKNwpGt77ht31fs3eT4_I9P9Pe_r6hAf7itiuqCwsaCuKEnEhuYdC_nYtj573p-vsuVfzEqdGTe2SI0VvGZ-OXw68KUxqxzarh1vt989qEmZpGgd7OK6k8uLpp1AIPE"/>
+</div>
+</button>
+<!-- DROPDOWN PANEL (Kinetic Sanctuary Style) -->
+<div class="absolute right-0 mt-3 w-72 bg-surface-container-lowest rounded-xl p-2 shadow-[0px_10px_30px_rgba(25,28,29,0.08)] opacity-100 transform origin-top-right transition-all duration-200 border border-outline-variant/10 z-50">
+<!-- User Identity Header -->
+<div class="px-4 py-4 mb-2 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-3">
+<div class="h-12 w-12 rounded-lg overflow-hidden">
+<img alt="Admin Profile" class="h-full w-full object-cover" data-alt="Detailed professional headshot of a middle-aged male executive with a confident expression, warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjEwtgUim9-3M95n5NN7IAJcmpeYxi7cBK3WZTCzvnzZEW-PAmepZNktxipV_i5Sn-M8U1HTdYkocI0b3gWRvw179mRK7v6vaxIJsz3jhVILhln2HpSNZlwBaSKZ1svEqy84A46CPnUNwr6LylCOTBOJigKL47N0CpfpaOK0sSNTOclu95tb9v603yO2PBjnfTbcQG2Tgxcu-RuCqTzqAxVkK20nkCPjRUxrUZvSCRE61THPJGRrcIYWN3Qq0uJ1c9fuwg389dZYo"/>
+</div>
+<div>
+<h4 class="font-headline font-bold text-on-surface leading-tight">Admin Metro</h4>
+<p class="text-xs text-on-surface-variant">System Administrator</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="h-1.5 w-1.5 rounded-full bg-primary-fixed-dim"></span>
+<span class="text-[10px] text-emerald-700 font-medium tracking-wide">LEVEL 4 ACCESS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Menu Actions -->
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group/item">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/item:text-primary transition-colors" data-icon="account_circle">account_circle</span>
+<span class="text-sm font-medium">Profile Settings</span>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group/item">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/item:text-primary transition-colors" data-icon="security">security</span>
+<span class="text-sm font-medium">Security &amp; Privacy</span>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-surface-container-low transition-colors group/item">
+<div class="flex items-center gap-3 text-on-surface">
+<span class="material-symbols-outlined text-on-surface-variant group-hover/item:text-primary transition-colors" data-icon="history">history</span>
+<span class="text-sm font-medium">Recent Activity</span>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+<div class="h-px bg-outline-variant/10 my-2 mx-2"></div>
+<!-- Logout Anchor -->
+<button class="w-full flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-error-container/20 group/logout transition-colors">
+<span class="material-symbols-outlined text-error group-hover/logout:scale-110 transition-transform" data-icon="logout">logout</span>
+<span class="text-sm font-semibold text-error">Logout</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- DASHBOARD CONTENT (Bento Grid) -->
+<div class="p-8">
+<header class="mb-10">
+<p class="text-primary font-bold tracking-widest text-xs uppercase mb-2">Transit Sanctuary</p>
+<h2 class="text-4xl font-headline font-extrabold text-on-surface tracking-tight">Morning Overview</h2>
+</header>
+<div class="grid grid-cols-12 gap-6">
+<!-- Live Network Map -->
+<div class="col-span-12 lg:col-span-8 h-[400px] bg-surface-container-lowest rounded-xl overflow-hidden relative border border-outline-variant/5">
+<div class="absolute inset-0 z-0">
+<img class="h-full w-full object-cover opacity-80" data-alt="Abstract minimalist topographic city map with glowing transit lines in shades of teal and emerald, dark sophisticated aesthetic" data-location="Chicago" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh2MVXg6icnf_eBE9TeDHtm4cWIJj_QeG0v_pZ5zXQqCtY3uth06vLJpIFK9utjCc_1dxQ1KfzYO6a4Gt8DIe9rHX0lJzMrOqu_-Y-QPHEONr55LPPcwdJRVzcnnpw57B0qqogI3gIQyI3e_5p-ns3kOZ5WJTcgYjkEhEezB-W6WoH2dVcZi6O9GZWJeUszTnNxclQ4L03USpv_3SPY-7Yiwb9wAqDETafQmkcjG19se9M_PygxMEkpbx-QXKsgFTasn_0WE1nfRA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+</div>
+<div class="absolute top-6 left-6 z-10 bg-surface-container-lowest/80 backdrop-blur-md px-4 py-3 rounded-lg border border-white/20">
+<h3 class="font-headline font-bold text-on-surface">Network Status</h3>
+<p class="text-xs text-emerald-700 font-bold flex items-center gap-1">
+<span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span> 
+                            98.2% OPERATIONAL
+                        </p>
+</div>
+</div>
+<!-- Stats Stack -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="flex-1 bg-primary p-6 rounded-xl text-on-primary bg-gradient-to-br from-primary to-primary-container">
+<span class="material-symbols-outlined text-4xl mb-4" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<h3 class="font-headline font-medium opacity-80 text-sm">Tickets Issued (Today)</h3>
+<div class="text-5xl font-extrabold mt-2 tracking-tighter">14,204</div>
+<p class="mt-4 text-xs font-medium bg-white/20 inline-block px-3 py-1 rounded-full">+12% vs yesterday</p>
+</div>
+<div class="flex-1 bg-surface-container-high p-6 rounded-xl">
+<span class="material-symbols-outlined text-primary text-4xl mb-4" data-icon="warning">warning</span>
+<h3 class="font-headline font-medium text-on-surface-variant text-sm">Active Alerts</h3>
+<div class="text-5xl font-extrabold mt-2 tracking-tighter text-on-surface">03</div>
+<p class="mt-4 text-xs font-medium text-on-surface-variant underline cursor-pointer">View active alerts</p>
+</div>
+</div>
+<!-- Recent Activity (Asymmetric List) -->
+<div class="col-span-12 bg-surface-container-lowest rounded-xl p-8">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h3 class="text-2xl font-headline font-extrabold text-on-surface">System Logs</h3>
+<p class="text-on-surface-variant text-sm">Most recent infrastructure events</p>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">Download Report</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg group hover:scale-[1.005] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Core Server Maintenance</p>
+<p class="text-xs text-on-surface-variant">Admin Metro • 14 mins ago</p>
+</div>
+</div>
+<span class="text-xs font-bold px-3 py-1 bg-surface-container-highest rounded-full text-on-surface-variant uppercase tracking-wider">Completed</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg group hover:scale-[1.005] transition-transform">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-lg" data-icon="error_outline">error_outline</span>
+</div>
+<div>
+<p class="font-semibold text-on-surface">Signal Delay: Route A4</p>
+<p class="text-xs text-on-surface-variant">Automated • 32 mins ago</p>
+</div>
+</div>
+<span class="text-xs font-bold px-3 py-1 bg-tertiary-container/20 rounded-full text-tertiary-fixed-dim uppercase tracking-wider">Critical</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB ANCHOR (Contextual Suppression Logic applied - only on Dashboard) -->
+<button class="fixed bottom-8 right-8 h-14 w-14 rounded-full bg-primary text-on-primary shadow-xl flex items-center justify-center hover:scale-110 transition-transform group">
+<span class="material-symbols-outlined text-2xl" data-icon="add">add</span>
+<span class="absolute right-16 bg-on-surface text-surface text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">New Route</span>
+</button>
+</body></html>
