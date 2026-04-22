@@ -1,16 +1,33 @@
-# React + Vite
+# I-Metro User App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Flutter customer app for I-Metro passengers.
 
-Currently, two official plugins are available:
+## What it does
+- Sign in and create bookings
+- Pay for trips through the backend payment flow
+- Show ticket details and QR codes
+- Send support complaints and track their status
+- Show ride history and passenger profile features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Requirements
+- Flutter SDK
+- A running I-Metro backend
+- Chrome, Android, or iOS for testing
 
-## React Compiler
+## Run locally
+1. Start the backend:
+   ```powershell
+   cd "C:\Users\user\Downloads\I-Metro App\i_metro\backend"
+   npm run start:dev
+   ```
+2. Start the user app:
+   ```powershell
+   cd "C:\Users\user\Downloads\I-Metro App\i_metro\app"
+   flutter pub get
+   flutter run -d chrome
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Notes
+- The app talks to the shared backend API.
+- Support requests now show a delivery notice and live status updates.
+- Ticket QR codes are generated from the backend booking/payment flow.
