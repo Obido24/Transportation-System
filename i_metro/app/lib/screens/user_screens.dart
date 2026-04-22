@@ -7086,13 +7086,61 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
   bool _sending = false;
+  bool _loadingSupport = true;
   String? _error;
+  String? _supportError;
+  String? _supportNotice;
+  DateTime? _lastSupportSyncAt;
+  List<Map<String, dynamic>> _supportItems = [];
+  Timer? _supportRefreshTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSupportMessages();
+    _supportRefreshTimer = Timer.periodic(const Duration(seconds: 12), (_) {
+      if (mounted && AuthStore.isLoggedIn) {
+        _loadSupportMessages(silent: true);
+      }
+    });
+  }
 
   @override
   void dispose() {
+    _supportRefreshTimer?.cancel();
     _subjectController.dispose();
     _messageController.dispose();
     super.dispose();
+  }
+
+  Future<void> _loadSupportMessages({bool silent = false}) async {
+    if (!AuthStore.isLoggedIn) {
+      if (!mounted) return;
+      setState(() {
+        _loadingSupport = false;
+        _supportItems = [];
+        _supportError = null;
+      });
+      return;
+    }
+    if (!silent && mounted) {
+      setState(() {
+        _loadingSupport = true;
+        _supportError = null;
+      });
+    }
+    final response = await UserApi.getMySupportMessages();
+    if (!mounted) return;
+    final ok = response['ok'] == true;
+    final items = ok && response['items'] is List
+        ? (response['items'] as List).whereType<Map>().map((item) => Map<String, dynamic>.from(item)).toList()
+        : <Map<String, dynamic>>[];
+    setState(() {
+      _loadingSupport = false;
+      _supportItems = items;
+      _supportError = ok ? null : (response['reason']?.toString() ?? 'Unable to load support messages.');
+      _lastSupportSyncAt = DateTime.now();
+    });
   }
 
   Future<void> _sendMessage() async {
@@ -7120,10 +7168,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     if (response['ok'] == true) {
       _subjectController.clear();
       _messageController.clear();
-      final emailSent = response['emailSent'] == true;
-      final messageText = emailSent
-          ? 'Message sent. Our support team will reach out shortly.'
-          : 'Message saved. Email delivery is not configured yet.';
+      final ticketId = response['id']?.toString();
+      final notice = response['notice']?.toString() ?? 'Complaint delivered to customer service.';
+      final messageText = ticketId == null || ticketId.isEmpty
+          ? notice
+          : '$notice Ticket #$ticketId';
+      setState(() => _supportNotice = messageText);
+      await _loadSupportMessages(silent: true);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messageText)));
     } else {
       final messageText = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to send message.';
@@ -7207,6 +7258,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       LayoutBuilder(
                         builder: (context, constraints) {
                           final isWide = constraints.maxWidth > 860;
+                          final latestSupport = _supportItems.isNotEmpty ? _supportItems.first : null;
                           final leftColumn = Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: const [
@@ -7287,6 +7339,19 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                   const SizedBox(height: 10),
                                   Text(_error!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: error)),
                                 ],
+                                const SizedBox(height: 20),
+                                _SupportLiveUpdateBanner(
+                                  notice: _supportNotice,
+                                  latestItem: latestSupport,
+                                  lastSyncedAt: _lastSupportSyncAt,
+                                ),
+                                const SizedBox(height: 16),
+                                _SupportStatusPanel(
+                                  loading: _loadingSupport,
+                                  errorText: _supportError,
+                                  items: _supportItems,
+                                  onRefresh: () => _loadSupportMessages(),
+                                ),
                                 const SizedBox(height: 12),
                                 Text(
                                   'By sending this message, you agree to our privacy policy regarding data collection for support purposes.',
@@ -7369,6 +7434,361 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SupportStatusPanel extends StatelessWidget {
+  const _SupportStatusPanel({
+    required this.loading,
+    required this.errorText,
+    required this.items,
+    required this.onRefresh,
+  });
+
+  final bool loading;
+  final String? errorText;
+  final List<Map<String, dynamic>> items;
+  final VoidCallback onRefresh;
+
+  @override
+  Widget build(BuildContext context) {
+    const panelBg = Color(0xFFF7FAF8);
+    const panelBorder = Color(0xFFD7E4DB);
+    const heading = Color(0xFF203229);
+    const muted = Color(0xFF51615A);
+    const primary = Color(0xFF006B47);
+
+    final visibleItems = items.take(3).toList();
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: panelBg,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: panelBorder),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text('My support requests', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w800, color: heading)),
+              const Spacer(),
+              TextButton(
+                onPressed: onRefresh,
+                child: Text('Refresh', style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w700, color: primary)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Track whether your complaint is open, in progress, or resolved.',
+            style: GoogleFonts.inter(fontSize: 12, color: muted, height: 1.4),
+          ),
+          const SizedBox(height: 14),
+          if (loading)
+            const _SupportLoadingRow()
+          else if (errorText != null)
+            _SupportEmptyState(message: errorText!)
+          else if (visibleItems.isEmpty)
+            const _SupportEmptyState(message: 'No support complaints sent yet.')
+          else
+            Column(
+              children: [
+                for (final item in visibleItems) ...[
+                  _SupportTicketCard(
+                    subject: item['subject']?.toString() ?? 'Support request',
+                    message: item['message']?.toString() ?? '',
+                    status: item['status']?.toString() ?? 'OPEN',
+                    updatedAt: item['updatedAt']?.toString() ?? item['createdAt']?.toString(),
+                  ),
+                  const SizedBox(height: 12),
+                ],
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SupportLiveUpdateBanner extends StatelessWidget {
+  const _SupportLiveUpdateBanner({
+    required this.notice,
+    required this.latestItem,
+    required this.lastSyncedAt,
+  });
+
+  final String? notice;
+  final Map<String, dynamic>? latestItem;
+  final DateTime? lastSyncedAt;
+
+  @override
+  Widget build(BuildContext context) {
+    const heading = Color(0xFF203229);
+    const muted = Color(0xFF51615A);
+    const success = Color(0xFF006B47);
+    const warning = Color(0xFFB26A00);
+    const danger = Color(0xFFB00020);
+
+    final normalized = latestItem == null ? 'OPEN' : (latestItem!['status']?.toString().toUpperCase() ?? 'OPEN');
+    final statusLabel = switch (normalized) {
+      'IN_PROGRESS' => 'In progress',
+      'RESOLVED' => 'Resolved',
+      _ => 'Open',
+    };
+    final statusColor = switch (normalized) {
+      'IN_PROGRESS' => warning,
+      'RESOLVED' => success,
+      _ => danger,
+    };
+    final statusBg = switch (normalized) {
+      'IN_PROGRESS' => const Color(0xFFFFF2D8),
+      'RESOLVED' => const Color(0xFFE1F2EA),
+      _ => const Color(0xFFFFE2E2),
+    };
+    final subject = latestItem?['subject']?.toString() ?? 'No support request yet';
+    final note = switch (normalized) {
+      'IN_PROGRESS' => 'Our team is working on this complaint.',
+      'RESOLVED' => 'The issue has been settled.',
+      _ => 'Delivered to customer service.',
+    };
+    final updatedAt = latestItem?['updatedAt']?.toString() ?? latestItem?['createdAt']?.toString();
+    final syncText = lastSyncedAt == null ? null : 'Last refreshed just now';
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF7FAF8),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFFD7E4DB)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'Latest support update',
+                style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: heading),
+              ),
+              const Spacer(),
+              if (syncText != null)
+                Text(syncText, style: GoogleFonts.inter(fontSize: 10, color: muted)),
+            ],
+          ),
+          if (notice != null && notice!.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFE1F2EA),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.verified, size: 18, color: success),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      notice!,
+                      style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: heading, height: 1.4),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  subject,
+                  style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w800, color: heading),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(color: statusBg, borderRadius: BorderRadius.circular(999)),
+                child: Text(
+                  statusLabel,
+                  style: GoogleFonts.manrope(fontSize: 11, fontWeight: FontWeight.w800, color: statusColor),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            note,
+            style: GoogleFonts.inter(fontSize: 12, color: muted, height: 1.4),
+          ),
+          if (updatedAt != null && updatedAt.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              'Updated: $updatedAt',
+              style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF71847B)),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _SupportTicketCard extends StatelessWidget {
+  const _SupportTicketCard({
+    required this.subject,
+    required this.message,
+    required this.status,
+    required this.updatedAt,
+  });
+
+  final String subject;
+  final String message;
+  final String status;
+  final String? updatedAt;
+
+  @override
+  Widget build(BuildContext context) {
+    final normalized = status.toUpperCase();
+    final statusLabel = switch (normalized) {
+      'IN_PROGRESS' => 'In progress',
+      'RESOLVED' => 'Resolved',
+      _ => 'Open',
+    };
+    final statusColor = switch (normalized) {
+      'IN_PROGRESS' => const Color(0xFFB26A00),
+      'RESOLVED' => const Color(0xFF006B47),
+      _ => const Color(0xFFB00020),
+    };
+    final statusBg = switch (normalized) {
+      'IN_PROGRESS' => const Color(0xFFFFF2D8),
+      'RESOLVED' => const Color(0xFFE1F2EA),
+      _ => const Color(0xFFFFE2E2),
+    };
+    final supportNote = switch (normalized) {
+      'IN_PROGRESS' => 'Our team is working on this complaint.',
+      'RESOLVED' => 'The issue has been settled.',
+      _ => 'Delivered to customer service.',
+    };
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFD7E4DB)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  subject,
+                  style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: const Color(0xFF203229)),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(color: statusBg, borderRadius: BorderRadius.circular(999)),
+                child: Text(
+                  statusLabel,
+                  style: GoogleFonts.manrope(fontSize: 11, fontWeight: FontWeight.w800, color: statusColor),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            message.isEmpty ? supportNote : message,
+            style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF51615A), height: 1.4),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          if (updatedAt != null && updatedAt!.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              'Updated: $updatedAt',
+              style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF71847B)),
+            ),
+          ],
+          const SizedBox(height: 8),
+          Text(
+            supportNote,
+            style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: statusColor),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SupportLoadingRow extends StatelessWidget {
+  const _SupportLoadingRow();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: List.generate(
+        2,
+        (_) => Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Container(
+            height: 86,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: const Color(0xFFFFFFFF),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: const Color(0xFFD7E4DB)),
+            ),
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: const SizedBox(
+              width: 18,
+              height: 18,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SupportEmptyState extends StatelessWidget {
+  const _SupportEmptyState({required this.message});
+
+  final String message;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFD7E4DB)),
+      ),
+      child: Text(
+        message,
+        style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF51615A)),
       ),
     );
   }

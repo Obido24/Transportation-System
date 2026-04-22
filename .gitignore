@@ -25,6 +25,8 @@ CL-0409_SDK(1).zip
 install_validator*.sh
 build_validator.sh
 validator_bridge_run.sh
+!validator_bridge_README.txt
+!validator_bridge_c_README.txt
 
 # archives
 *.zip

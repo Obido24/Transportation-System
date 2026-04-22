@@ -121,7 +121,10 @@ function DashboardMain() {
       setError("");
 
       try {
-        const response = await fetchWithAuth("/admin/dashboard/summary");
+        const [response, validatorLogsResponse] = await Promise.all([
+          fetchWithAuth("/admin/dashboard/summary"),
+          fetchWithAuth("/admin/validator/logs"),
+        ]);
 
         if (!response.ok) {
           setError("Unable to load dashboard metrics.");
@@ -144,6 +147,7 @@ function DashboardMain() {
           : Array.isArray(summary?.recentPayments)
             ? summary.recentPayments
             : [];
+        const validatorLogs = validatorLogsResponse.ok ? await validatorLogsResponse.json() : [];
         const activeUsers = Number(metrics.activeUsers ?? 0);
         const totalBookings = Number(metrics.totalBookings ?? normalizedBookings.length);
         const activeRoutes = Number(metrics.activeRoutes ?? 0);
@@ -192,6 +196,78 @@ function DashboardMain() {
         const operationsButton = container.querySelector("[data-operation-snapshot-action]");
         if (operationsButton) {
           operationsButton.onclick = () => navigate("/admin/routes");
+        }
+
+        const latestValidatorLog = Array.isArray(validatorLogs) && validatorLogs.length ? validatorLogs[0] : null;
+        const validatorCard = container.querySelector("[data-validator-snapshot-card]");
+        if (validatorCard) {
+          const statusNode = validatorCard.querySelector("[data-validator-snapshot-status]");
+          const busNode = validatorCard.querySelector("[data-validator-snapshot-bus]");
+          const busCountNode = validatorCard.querySelector("[data-validator-snapshot-bus-count]");
+          const summaryNode = validatorCard.querySelector("[data-validator-snapshot-summary]");
+          const validatorNode = validatorCard.querySelector("[data-validator-snapshot-validator]");
+          const ticketNode = validatorCard.querySelector("[data-validator-snapshot-ticket]");
+          const routeNode = validatorCard.querySelector("[data-validator-snapshot-route]");
+          const timeNode = validatorCard.querySelector("[data-validator-snapshot-time]");
+          const titleNode = validatorCard.querySelector("[data-validator-snapshot-title]");
+          const actionButton = validatorCard.querySelector("[data-validator-snapshot-action]");
+          const busCount = new Set(
+            (Array.isArray(validatorLogs) ? validatorLogs : [])
+              .map((entry) => String(entry?.busLabel ?? "").trim() || "Unassigned bus"),
+          ).size;
+
+          if (latestValidatorLog) {
+            const valid = latestValidatorLog.isValid ? "VALID" : "INVALID";
+            const routeLabel =
+              latestValidatorLog.routeId ?? latestValidatorLog.ticketId ?? "No route recorded";
+            const validatorLabel =
+              latestValidatorLog.validatorDeviceName ??
+              latestValidatorLog.validatorDeviceId ??
+              "Unknown validator";
+            const busLabel = latestValidatorLog.busLabel ?? "Unassigned bus";
+
+            if (statusNode) statusNode.textContent = valid;
+            if (busNode) busNode.textContent = busLabel;
+            if (busCountNode) {
+              busCountNode.textContent = `${busCount} bus${busCount === 1 ? "" : "es"} tracked`;
+            }
+            if (summaryNode) {
+              summaryNode.textContent = latestValidatorLog.isValid
+                ? `Last scan was approved on ${busLabel}.`
+                : `Last scan was rejected on ${busLabel}.`;
+            }
+            if (validatorNode) validatorNode.textContent = validatorLabel;
+            if (ticketNode) ticketNode.textContent = latestValidatorLog.ticketId ?? "-";
+            if (routeNode) routeNode.textContent = routeLabel;
+            if (timeNode) timeNode.textContent = latestValidatorLog.timeAgo ?? "-";
+            if (titleNode) {
+              titleNode.textContent = latestValidatorLog.isValid
+                ? "Latest successful validator scan"
+                : "Latest validator scan";
+            }
+            if (actionButton) {
+              actionButton.onclick = () =>
+                navigate(
+                  `/admin/validator-logs?bus=${encodeURIComponent(busLabel)}`,
+                );
+            }
+          } else {
+            if (statusNode) statusNode.textContent = "Waiting";
+            if (busNode) busNode.textContent = "Unassigned bus";
+            if (busCountNode) busCountNode.textContent = "0 buses tracked";
+            if (summaryNode) {
+              summaryNode.textContent =
+                "Validator activity will appear here once a bus attendant scans a ticket.";
+            }
+            if (validatorNode) validatorNode.textContent = "-";
+            if (ticketNode) ticketNode.textContent = "-";
+            if (routeNode) routeNode.textContent = "-";
+            if (timeNode) timeNode.textContent = "-";
+            if (titleNode) titleNode.textContent = "Latest validator scan";
+            if (actionButton) {
+              actionButton.onclick = () => navigate("/admin/validator-logs");
+            }
+          }
         }
 
         const chartContainer = container.querySelector(".h-64");

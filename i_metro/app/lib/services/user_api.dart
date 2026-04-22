@@ -103,4 +103,11 @@ class UserApi {
       auth: true,
     );
   }
+
+  static Future<Map<String, dynamic>> getMySupportMessages() {
+    return ApiClient.getMap(
+      '/support/messages/mine',
+      auth: true,
+    );
+  }
 }

@@ -24,6 +24,7 @@ import {
   TwoFactor,
   UserDetails,
   ValidatorWeb,
+  ValidatorLogs,
 } from "./screens";
 import AdminShell from "./layouts/AdminShell";
 import RequireAuth from "./routes/RequireAuth";
@@ -57,6 +58,7 @@ function App() {
           <Route path="/admin/support" element={<SupportTicketManagement />} />
           <Route path="/admin/settings" element={<SystemSettings />} />
           <Route path="/admin/revenue" element={<RevenueDashboard />} />
+          <Route path="/admin/validator-logs" element={<ValidatorLogs />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/admin/login" replace />} />

@@ -12153,7 +12153,14 @@ class _AdminSupportTicketManagementScreenState extends State<AdminSupportTicketM
                                   onStatusChanged: _refresh,
                                 ),
                                 const SizedBox(height: 22),
-                                _SupportBottomSection(activity: data.activity),
+                                _SupportBottomSection(
+                                  activity: data.activity,
+                                  openCount: openCount,
+                                  inProgressCount: inProgressCount,
+                                  resolvedCount: resolvedCount,
+                                  overdueCount: overdueCount,
+                                  totalCount: data.tickets.length,
+                                ),
                               ],
                             ),
                           ),
@@ -13157,9 +13164,21 @@ class _SupportStatusButton extends StatelessWidget {
 }
 
 class _SupportBottomSection extends StatelessWidget {
-  const _SupportBottomSection({required this.activity});
+  const _SupportBottomSection({
+    required this.activity,
+    required this.openCount,
+    required this.inProgressCount,
+    required this.resolvedCount,
+    required this.overdueCount,
+    required this.totalCount,
+  });
 
   final List<_SupportActivityEntry> activity;
+  final int openCount;
+  final int inProgressCount;
+  final int resolvedCount;
+  final int overdueCount;
+  final int totalCount;
 
   @override
   Widget build(BuildContext context) {
@@ -13172,15 +13191,30 @@ class _SupportBottomSection extends StatelessWidget {
             children: [
               Expanded(child: _SupportActivityFeed(activity: activity)),
               const SizedBox(width: 18),
-              const Expanded(flex: 2, child: _SupportInsightCard()),
+              Expanded(
+                flex: 2,
+                child: _SupportInsightCard(
+                  openCount: openCount,
+                  inProgressCount: inProgressCount,
+                  resolvedCount: resolvedCount,
+                  overdueCount: overdueCount,
+                  totalCount: totalCount,
+                ),
+              ),
             ],
           );
         }
-        return const Column(
+        return Column(
           children: [
-            _SupportActivityFeed(activity: _supportActivity),
+            _SupportActivityFeed(activity: activity),
             SizedBox(height: 18),
-            _SupportInsightCard(),
+            _SupportInsightCard(
+              openCount: openCount,
+              inProgressCount: inProgressCount,
+              resolvedCount: resolvedCount,
+              overdueCount: overdueCount,
+              totalCount: totalCount,
+            ),
           ],
         );
       },
@@ -13263,7 +13297,19 @@ class _SupportActivityRow extends StatelessWidget {
 }
 
 class _SupportInsightCard extends StatelessWidget {
-  const _SupportInsightCard();
+  const _SupportInsightCard({
+    required this.openCount,
+    required this.inProgressCount,
+    required this.resolvedCount,
+    required this.overdueCount,
+    required this.totalCount,
+  });
+
+  final int openCount;
+  final int inProgressCount;
+  final int resolvedCount;
+  final int overdueCount;
+  final int totalCount;
 
   @override
   Widget build(BuildContext context) {
@@ -13278,30 +13324,71 @@ class _SupportInsightCard extends StatelessWidget {
           Positioned(
             right: -10,
             top: -20,
-            child: Icon(Icons.rocket_launch, size: 120, color: Colors.white.withOpacity(0.08)),
+            child: Icon(Icons.support_agent, size: 120, color: Colors.white.withOpacity(0.08)),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Efficiency Protocol v2.4',
+                'Live support snapshot',
                 style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
               ),
               const SizedBox(height: 10),
               Text(
-                'Our new automated ticketing prioritization has reduced first-response times by 22%. Review the latest benchmarks to optimize your support workflow.',
+                'These counts come from the live support queue, so the team can see what needs attention right now.',
                 style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onPrimaryContainer),
               ),
               const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-                decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
-                child: Text(
-                  'Review Benchmarks',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
-                ),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  _SupportMiniStat(label: 'Open', value: openCount.toString()),
+                  _SupportMiniStat(label: 'In progress', value: inProgressCount.toString()),
+                  _SupportMiniStat(label: 'Resolved', value: resolvedCount.toString()),
+                  _SupportMiniStat(label: 'Overdue', value: overdueCount.toString()),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Total tickets: $totalCount',
+                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.9)),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SupportMiniStat extends StatelessWidget {
+  const _SupportMiniStat({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 110,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.12)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label.toUpperCase(),
+            style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, color: Colors.white.withOpacity(0.72)),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white),
           ),
         ],
       ),

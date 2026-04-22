@@ -13,6 +13,7 @@ const navItems = [
   { label: "Settings", icon: "settings", path: "/admin/settings" },
   { label: "Activity", icon: "history", path: "/admin/activity" },
   { label: "Support", icon: "support_agent", path: "/admin/support" },
+  { label: "Bus Scan Logs", icon: "qr_code_scanner", path: "/admin/validator-logs" },
 ];
 
 function AdminShell() {
