@@ -29,7 +29,7 @@ Payload (JSON, UTF-8, then base64url encoded):
 
 Signature:
 - HMAC-SHA256 of the **payload JSON bytes**
-- Secret is stored on the backend only (`QR_SECRET`)
+- The signing key stays on the backend only.
 
 ### 1.2 POS QR (POS1 - placeholder)
 Format:
