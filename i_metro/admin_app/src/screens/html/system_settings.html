@@ -152,11 +152,66 @@
 <input data-setting="webhook-endpoint" class="flex-1 bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" placeholder="https://your-domain.com/webhooks/i-metro" type="text"/>
 <button data-setting="test-webhook" class="px-6 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity" type="button">Test</button>
 </div>
-</div>
-</div>
-</section>
-</div>
-<div class="col-span-12 lg:col-span-4 space-y-8">
+  </div>
+  </div>
+  </section>
+  <section class="bg-surface-container-lowest rounded-lg overflow-hidden">
+  <div class="px-8 py-5 bg-surface-container-low flex items-center justify-between">
+  <div>
+  <h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">Validator + User App Integration</h3>
+  <p class="text-xs text-on-surface-variant mt-1">Copy the live API base, validator URL, and scan endpoint for the user app and gate phone.</p>
+  </div>
+  <span class="material-symbols-outlined text-on-surface-variant">qr_code_scanner</span>
+  </div>
+  <div class="p-8 space-y-6">
+  <div class="grid gap-4 md:grid-cols-3">
+  <div class="rounded-xl bg-surface-container-low p-4 border border-outline-variant/10">
+  <p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Live API Base</p>
+  <p data-setting="validator-api-base" class="mt-2 break-all font-mono text-sm text-on-surface">Loading...</p>
+  <button data-setting="copy-validator-api-base" class="mt-3 text-xs font-bold text-primary hover:underline" type="button">Copy API base</button>
+  </div>
+  <div class="rounded-xl bg-surface-container-low p-4 border border-outline-variant/10">
+  <p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Validator Page</p>
+  <p data-setting="validator-launch-url" class="mt-2 break-all font-mono text-sm text-on-surface">Loading...</p>
+  <button data-setting="copy-validator-launch-url" class="mt-3 text-xs font-bold text-primary hover:underline" type="button">Copy validator URL</button>
+  </div>
+  <div class="rounded-xl bg-surface-container-low p-4 border border-outline-variant/10">
+  <p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Scan Endpoint</p>
+  <p data-setting="validator-scan-endpoint" class="mt-2 break-all font-mono text-sm text-on-surface">Loading...</p>
+  <button data-setting="copy-validator-scan-endpoint" class="mt-3 text-xs font-bold text-primary hover:underline" type="button">Copy scan endpoint</button>
+  </div>
+  </div>
+  <div class="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+  <div class="space-y-2">
+  <label class="text-sm font-semibold text-on-surface">New Validator Device Name</label>
+  <input data-setting="validator-device-name" class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" placeholder="Bus 2 Gate Phone" type="text"/>
+  </div>
+  <button data-setting="create-validator-device" class="px-6 py-3 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity" type="button">Generate Validator Key</button>
+  </div>
+  <div class="rounded-xl bg-surface-container-low border border-outline-variant/10 p-5">
+  <div class="flex items-start justify-between gap-4">
+  <div>
+  <p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Latest generated key</p>
+  <p data-setting="validator-status" class="mt-1 text-sm text-on-surface-variant">No validator device key generated yet.</p>
+  <p class="mt-2 text-xs text-on-surface-variant">Validator keys stay hidden after creation. Generate a fresh one here or rotate an existing device to reveal a new key.</p>
+  </div>
+  <button data-setting="copy-validator-device-key" class="px-4 py-2 rounded-lg bg-surface-container-high text-sm font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" type="button">Copy key</button>
+  </div>
+  <input data-setting="validator-device-key" class="mt-4 w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface-variant font-mono" readonly="" type="password" value=""/>
+  </div>
+  <div class="space-y-3">
+  <div class="flex items-center justify-between">
+  <h4 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant">Active Validator Devices</h4>
+  <button data-setting="refresh-validator-devices" class="text-xs font-bold text-primary hover:underline" type="button">Refresh</button>
+  </div>
+  <div data-setting="validator-device-list" class="space-y-3">
+  <div class="rounded-xl bg-surface-container-low p-4 text-sm text-on-surface-variant">Loading validator devices...</div>
+  </div>
+  </div>
+  </div>
+  </section>
+  </div>
+  <div class="col-span-12 lg:col-span-4 space-y-8">
 <section class="bg-surface-container-lowest rounded-lg overflow-hidden">
 <div class="px-6 py-5 bg-surface-container-low">
 <h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">Notification Rules</h3>

@@ -81,7 +81,7 @@ export default function ValidatorWeb() {
     return () => window.removeEventListener("resize", updateCompact);
   }, []);
 
-  const canScan = useMemo(
+  const canValidate = useMemo(
     () => Boolean(baseUrl.trim()) && Boolean(apiKey.trim()),
     [apiKey, baseUrl],
   );
@@ -252,7 +252,7 @@ export default function ValidatorWeb() {
   }, [isCompact]);
 
   useEffect(() => {
-    if (!isCompact || !busLoaded || !canScan || isCameraReady || isScanning || autoStartAttemptedRef.current) {
+    if (!isCompact || !busLoaded || isCameraReady || isScanning || autoStartAttemptedRef.current) {
       return;
     }
 
@@ -263,7 +263,7 @@ export default function ValidatorWeb() {
     }, 250);
 
     return () => window.clearTimeout(timer);
-  }, [busLoaded, canScan, isCameraReady, isCompact, isScanning]);
+  }, [busLoaded, isCameraReady, isCompact, isScanning]);
 
   useEffect(() => {
     return () => {
@@ -429,12 +429,6 @@ export default function ValidatorWeb() {
     setMessage("Starting camera...");
     setScanHint("Hold the QR inside the frame. Good lighting helps a lot.");
 
-    if (!canScan) {
-      setStatus("error");
-      setMessage("Add the backend URL and API key first.");
-      return;
-    }
-
     if (!navigator.mediaDevices?.getUserMedia) {
       setStatus("error");
       setCameraError("This browser does not support camera access.");
@@ -458,8 +452,13 @@ export default function ValidatorWeb() {
       setIsCameraReady(true);
       setCameraBooting(false);
       setStatus("idle");
-      setMessage("Camera ready. Point it at the QR code.");
-      setScanHint(`Keep the QR centered on ${busLabel}. If it does not read, move closer.`);
+      if (baseUrl.trim() && apiKey.trim()) {
+        setMessage("Camera ready. Point it at the QR code.");
+        setScanHint(`Keep the QR centered on ${busLabel}. If it does not read, move closer.`);
+      } else {
+        setMessage("Camera ready. Finish the backend URL and validator key setup to enable scans.");
+        setScanHint("Camera is open, but validation still needs the integration details from Settings.");
+      }
       scanLoopRef.current = requestAnimationFrame(scanFrame);
     } catch (error) {
       setStatus("error");
@@ -847,7 +846,7 @@ export default function ValidatorWeb() {
                   />
                   <button
                     className="w-full rounded-2xl bg-[#1d4ed8] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-60"
-                    disabled={!canScan || !scanInput.trim() || status === "checking"}
+                    disabled={!canValidate || !scanInput.trim() || status === "checking"}
                     type="submit"
                   >
                     {status === "checking" ? "Checking..." : "Validate QR"}
@@ -1211,7 +1210,9 @@ export default function ValidatorWeb() {
                         Connection
                       </p>
                       <p className="mt-2 text-sm text-slate-600">
-                        {canScan ? "Validator is configured." : "Setup needed before scanning."}
+                        {canValidate
+                          ? "Validator is configured."
+                          : "Open Admin > Settings > Validator + User App Integration to create or copy a key."}
                       </p>
                     </div>
                     <button
@@ -1250,7 +1251,8 @@ export default function ValidatorWeb() {
                   ) : (
                     <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-white px-4 py-3 text-sm text-slate-500">
                       Connection details are hidden for gate use. Open setup only when you need to
-                      change the backend or API key.
+                      change the backend or API key, or use Admin &gt; Settings &gt; Validator + User App Integration
+                      to generate a fresh device key.
                     </div>
                   )}
                   <div className="mt-4">
@@ -1294,7 +1296,7 @@ export default function ValidatorWeb() {
                     />
                     <button
                       className="w-full rounded-2xl bg-[#1d4ed8] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-60"
-                      disabled={!canScan || !scanInput.trim() || status === "checking"}
+                      disabled={!canValidate || !scanInput.trim() || status === "checking"}
                       type="submit"
                     >
                       {status === "checking" ? "Checking..." : "Validate QR"}

@@ -5,6 +5,7 @@ import { fetchWithAuth } from "../lib/api";
 import systemSettingsHtml from "./html/system_settings.html?raw";
 
 const wrapperClassName = "min-h-screen";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
 
 const defaultSettings = {
   platformName: "Inter-Metro Transport Solution Limited",
@@ -104,6 +105,13 @@ const settingsSummary = (settings) => ({
       : settings.apiKey,
 });
 
+const getValidatorLaunchUrl = () => {
+  if (typeof window === "undefined") {
+    return "/validator";
+  }
+  return `${window.location.origin.replace(/\/$/, "")}/validator`;
+};
+
 function SystemSettings() {
   const containerRef = useRef(null);
   const baselineRef = useRef(normalizeSettings());
@@ -111,6 +119,10 @@ function SystemSettings() {
   const [statusMessage, setStatusMessage] = useState("Loading system settings...");
   const [statusTone, setStatusTone] = useState("info");
   const [isSaving, setIsSaving] = useState(false);
+  const [validatorDevices, setValidatorDevices] = useState([]);
+  const [validatorDeviceKey, setValidatorDeviceKey] = useState("");
+  const [validatorDeviceName, setValidatorDeviceName] = useState("Gate Validator");
+  const [validatorStatusMessage, setValidatorStatusMessage] = useState("No validator device key generated yet.");
 
   const showStatus = (message, tone = "info") => {
     setStatusMessage(message);
@@ -168,6 +180,97 @@ function SystemSettings() {
         : `Last modified by ${modifiedBy}`;
     }
   };
+
+  const updateValidatorIntegrationDom = (devices, latestKey, message) => {
+    const apiBase = API_BASE_URL.replace(/\/$/, "");
+    const validatorUrl = getValidatorLaunchUrl();
+    const validatorEndpoint = `${apiBase}/validators/validate-qr`;
+
+    const setText = (selector, value) => {
+      const node = getNode(selector);
+      if (node) {
+        node.textContent = value;
+      }
+    };
+
+    setText("[data-setting='validator-api-base']", apiBase);
+    setText("[data-setting='validator-launch-url']", validatorUrl);
+    setText("[data-setting='validator-scan-endpoint']", validatorEndpoint);
+    setText("[data-setting='validator-status']", message ?? validatorStatusMessage);
+
+    const keyInput = getNode("[data-setting='validator-device-key']");
+    if (keyInput) {
+      keyInput.value = latestKey ?? validatorDeviceKey;
+    }
+
+    const nameInput = getNode("[data-setting='validator-device-name']");
+    if (nameInput && !nameInput.value) {
+      nameInput.value = validatorDeviceName;
+    }
+
+    const list = getNode("[data-setting='validator-device-list']");
+    if (list) {
+      if (!devices.length) {
+        list.innerHTML = `
+          <div class="rounded-xl bg-surface-container-low p-4 text-sm text-on-surface-variant">
+            No validator devices yet. Generate a key for the first gate phone.
+          </div>
+        `;
+      } else {
+        list.innerHTML = devices
+          .map((device) => {
+            const lastSeen = device.lastSeenAt
+              ? new Date(device.lastSeenAt).toLocaleString("en-NG", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "Never";
+            return `
+              <div class="rounded-xl bg-surface-container-low border border-outline-variant/10 p-4 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <p class="text-sm font-bold text-on-surface">${device.name}</p>
+                  <p class="text-xs text-on-surface-variant mt-1">Device ID: ${device.id}</p>
+                  <p class="text-xs text-on-surface-variant">Last seen: ${lastSeen}</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  <button data-action="rotate-validator-device" data-device-id="${device.id}" class="px-3 py-2 rounded-lg bg-primary text-on-primary text-xs font-bold hover:opacity-90 transition-opacity" type="button">
+                    Rotate key
+                  </button>
+                  <button data-action="copy-validator-device-id" data-device-id="${device.id}" class="px-3 py-2 rounded-lg bg-surface-container-high text-on-surface text-xs font-bold hover:bg-surface-container-highest transition-colors" type="button">
+                    Copy ID
+                  </button>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      }
+    }
+  };
+
+  const loadValidatorDevices = async () => {
+    try {
+      const response = await fetchWithAuth("/validators/devices");
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.message ?? "Unable to load validator devices");
+      }
+      const devices = Array.isArray(payload) ? payload : [];
+      setValidatorDevices(devices);
+      updateValidatorIntegrationDom(devices, validatorDeviceKey, `${devices.length} validator device${devices.length === 1 ? "" : "s"} loaded.`);
+    } catch {
+      setValidatorDevices([]);
+      updateValidatorIntegrationDom([], validatorDeviceKey, "Unable to load validator devices right now.");
+    }
+  };
+
+  useEffect(() => {
+    updateValidatorIntegrationDom(validatorDevices, validatorDeviceKey, validatorStatusMessage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validatorDevices, validatorDeviceKey, validatorStatusMessage]);
 
   const applyBrandColor = (value) => {
     const color = normalizeHex(value, defaultSettings.branding.primaryColor);
@@ -244,12 +347,16 @@ function SystemSettings() {
       baselineRef.current = next;
       draftRef.current = { ...next, branding: { ...next.branding }, notifications: { ...next.notifications } };
       syncDraftToDom(draftRef.current);
+      updateValidatorIntegrationDom(validatorDevices, validatorDeviceKey, validatorStatusMessage);
+      void loadValidatorDevices();
       showStatus("System settings loaded.", "success");
     } catch {
       const fallback = settingsSummary(draftRef.current);
       baselineRef.current = normalizeSettings(fallback);
       draftRef.current = normalizeSettings(fallback);
       syncDraftToDom(draftRef.current);
+      updateValidatorIntegrationDom(validatorDevices, validatorDeviceKey, validatorStatusMessage);
+      void loadValidatorDevices();
       showStatus("Using local settings defaults.", "info");
     }
   };
@@ -363,6 +470,33 @@ function SystemSettings() {
       }
     });
 
+    bind('[data-setting="copy-validator-api-base"]', "click", async () => {
+      try {
+        await navigator.clipboard.writeText(API_BASE_URL.replace(/\/$/, ""));
+        setValidatorStatusMessage("API base copied to clipboard.");
+      } catch {
+        setValidatorStatusMessage("Unable to copy the API base right now.");
+      }
+    });
+
+    bind('[data-setting="copy-validator-launch-url"]', "click", async () => {
+      try {
+        await navigator.clipboard.writeText(getValidatorLaunchUrl());
+        setValidatorStatusMessage("Validator URL copied to clipboard.");
+      } catch {
+        setValidatorStatusMessage("Unable to copy the validator URL right now.");
+      }
+    });
+
+    bind('[data-setting="copy-validator-scan-endpoint"]', "click", async () => {
+      try {
+        await navigator.clipboard.writeText(`${API_BASE_URL.replace(/\/$/, "")}/validators/validate-qr`);
+        setValidatorStatusMessage("Scan endpoint copied to clipboard.");
+      } catch {
+        setValidatorStatusMessage("Unable to copy the scan endpoint right now.");
+      }
+    });
+
     bind('[data-setting="webhook-endpoint"]', "input", (event) => {
       draftRef.current.webhookUrl = event.target.value;
     });
@@ -406,6 +540,93 @@ function SystemSettings() {
       showStatus("API key will be rotated when you save changes.", "info");
       draftRef.current.revokeAllKeys = true;
     });
+
+    bind('[data-setting="validator-device-name"]', "input", (event) => {
+      setValidatorDeviceName(event.target.value || "Gate Validator");
+    });
+
+    bind('[data-setting="refresh-validator-devices"]', "click", async () => {
+      await loadValidatorDevices();
+    });
+
+    bind('[data-setting="create-validator-device"]', "click", async () => {
+      const input = getNode('[data-setting="validator-device-name"]');
+      const name = input?.value?.trim() || validatorDeviceName || "Gate Validator";
+      if (input && !input.value.trim()) {
+        input.value = name;
+      }
+      try {
+        const response = await fetchWithAuth("/validators/devices", {
+          method: "POST",
+          body: JSON.stringify({ name }),
+        });
+        const payload = await response.json();
+        if (!response.ok) {
+          throw new Error(payload?.message ?? "Unable to create validator device");
+        }
+        setValidatorDeviceKey(payload.apiKey ?? "");
+        setValidatorStatusMessage(`Validator device "${payload.name ?? name}" created. Copy the key now.`);
+        await loadValidatorDevices();
+      } catch {
+        setValidatorStatusMessage("Unable to create a validator device right now.");
+      }
+    });
+
+    bind('[data-setting="copy-validator-device-key"]', "click", async () => {
+      const value = validatorDeviceKey.trim();
+      if (!value) {
+        setValidatorStatusMessage("Generate a validator key first.");
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(value);
+        setValidatorStatusMessage("Validator key copied to clipboard.");
+      } catch {
+        setValidatorStatusMessage("Unable to copy the validator key right now.");
+      }
+    });
+
+    const deviceList = getNode('[data-setting="validator-device-list"]');
+    const deviceHandler = async (event) => {
+      const rotateButton = event.target.closest("button[data-action='rotate-validator-device']");
+      if (rotateButton) {
+        const deviceId = rotateButton.dataset.deviceId;
+        if (!deviceId) return;
+        try {
+          const response = await fetchWithAuth("/validators/devices/rotate-key", {
+            method: "POST",
+            body: JSON.stringify({ deviceId }),
+          });
+          const payload = await response.json();
+          if (!response.ok) {
+            throw new Error(payload?.message ?? "Unable to rotate validator key");
+          }
+          setValidatorDeviceKey(payload.apiKey ?? "");
+          setValidatorStatusMessage("Validator key rotated. Copy the new key now.");
+          await loadValidatorDevices();
+        } catch {
+          setValidatorStatusMessage("Unable to rotate the validator key right now.");
+        }
+        return;
+      }
+
+      const copyIdButton = event.target.closest("button[data-action='copy-validator-device-id']");
+      if (copyIdButton) {
+        const deviceId = copyIdButton.dataset.deviceId ?? "";
+        if (!deviceId) return;
+        try {
+          await navigator.clipboard.writeText(deviceId);
+          setValidatorStatusMessage("Validator device ID copied.");
+        } catch {
+          setValidatorStatusMessage("Unable to copy the validator device ID right now.");
+        }
+      }
+    };
+    if (deviceList && !deviceList.dataset.bound) {
+      deviceList.dataset.bound = "true";
+      deviceList.addEventListener("click", deviceHandler);
+      bindings.push(() => deviceList.removeEventListener("click", deviceHandler));
+    }
 
     bind('[data-setting="email-admin-alerts"]', "change", (event) => {
       draftRef.current.notifications.emailAdminAlerts = event.target.checked;
