@@ -549,12 +549,12 @@ export default function ValidatorWeb() {
 
   const statusTone =
     status === "valid"
-      ? "bg-emerald-500 text-white shadow-[0_25px_70px_rgba(16,185,129,0.45)]"
+      ? "bg-[#00513f] text-white shadow-[0_25px_70px_rgba(0,81,63,0.45)]"
       : status === "invalid"
         ? "bg-rose-500 text-white shadow-[0_25px_70px_rgba(244,63,94,0.45)]"
         : status === "checking"
-          ? "bg-amber-400 text-slate-950 shadow-[0_25px_70px_rgba(251,191,36,0.45)]"
-          : "bg-white/10 text-white border border-white/15";
+          ? "bg-[#0b6b54] text-white shadow-[0_25px_70px_rgba(11,107,84,0.42)]"
+          : "bg-white/95 text-slate-900 border border-emerald-100";
 
   const statusLabel =
     status === "valid" ? "VALID" : status === "invalid" ? "INVALID" : status === "checking" ? "SCANNING" : "READY";
@@ -570,11 +570,11 @@ export default function ValidatorWeb() {
 
   if (isCompact) {
     return (
-      <div className="min-h-screen overflow-x-hidden bg-[#061512] text-white">
+      <div className="min-h-screen overflow-x-hidden bg-[radial-gradient(circle_at_top,#fff7ed_0%,#eff6ff_35%,#dbeafe_100%)] text-slate-900">
         <div className="mx-auto flex min-h-screen w-full max-w-[430px] flex-col gap-4 px-3 py-3">
-          <header className="flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-3 backdrop-blur">
+          <header className="flex items-center justify-between gap-3 rounded-[1.75rem] border border-slate-200 bg-[#0b1220] px-3 py-3 text-white shadow-[0_18px_50px_rgba(15,23,42,0.18)] backdrop-blur">
             <div className="flex items-center gap-2">
-              <div className="h-11 w-11 overflow-hidden rounded-xl bg-white p-1">
+              <div className="h-11 w-11 overflow-hidden rounded-xl bg-white p-1 shadow-sm">
                 <img
                   alt="I-Metro logo"
                   className="h-full w-full object-contain"
@@ -585,15 +585,15 @@ export default function ValidatorWeb() {
                 />
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-emerald-200/70">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-sky-100/75">
                   Gate Validator
                 </p>
-                <h1 className="text-base font-bold">I-Metro QR Validator</h1>
+                <h1 className="text-base font-black tracking-tight text-white">I-Metro QR Validator</h1>
                 <div className="mt-2 flex flex-wrap items-center gap-2">
                   <Link
-                    className={`inline-flex items-center rounded-full border border-emerald-400/25 bg-emerald-400/10 transition hover:bg-emerald-400/20 ${
+                    className={`inline-flex items-center rounded-full border border-amber-300/30 bg-amber-300/15 transition hover:bg-amber-300/25 ${
                       isUltraCompact ? "p-2" : "max-w-[180px] gap-1.5 px-2.5 py-1 text-[10px] font-semibold"
-                    } text-emerald-100`}
+                    } text-amber-50`}
                     title="Open bus scan logs"
                     to={busLogsPath}
                   >
@@ -603,7 +603,7 @@ export default function ValidatorWeb() {
                     {!isUltraCompact ? <span className="truncate">{mobileBusBadgeText}</span> : null}
                   </Link>
                   <button
-                    className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/20 bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-emerald-100/80 transition hover:bg-white/10"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/25 bg-amber-300/15 px-2.5 py-1 text-[10px] font-semibold text-amber-50 transition hover:bg-amber-300/25"
                     onClick={handleCopyBusLabel}
                     type="button"
                   >
@@ -612,32 +612,32 @@ export default function ValidatorWeb() {
                   </button>
                 </div>
                 <button
-                  className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/20 bg-white/5 px-2.5 py-1 text-[10px] font-semibold text-emerald-100/80 transition hover:bg-white/10"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-amber-300/25 bg-amber-300/15 px-2.5 py-1 text-[10px] font-semibold text-amber-50 transition hover:bg-amber-300/25"
                   onClick={handleChangeBus}
                   type="button"
                 >
                   <span className="material-symbols-outlined text-[12px]">swap_horiz</span>
                   <span>Change bus</span>
                 </button>
-                <p className="text-[10px] text-emerald-100/60">
+                <p className="text-[10px] text-slate-300">
                   Camera first. Bus assignment stays saved on this phone.
                 </p>
               </div>
             </div>
             <Link
-              className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-2 text-[11px] font-semibold text-emerald-100"
+              className="rounded-full border border-amber-300/25 bg-amber-300 px-3 py-2 text-[11px] font-semibold text-slate-950 shadow-sm transition hover:bg-amber-200"
               to="/admin/login"
             >
               Admin Login
             </Link>
           </header>
 
-          <section className="rounded-[1.6rem] border border-white/10 bg-white/5 px-4 py-4">
-            <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-emerald-200/70">
+          <section className="rounded-[1.6rem] border border-white/80 bg-white/92 px-4 py-4 text-slate-900 shadow-[0_18px_55px_rgba(15,23,42,0.08)]">
+            <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#00513f]">
               Live scan
             </p>
-            <h2 className="mt-2 text-2xl font-black">Scan a passenger QR</h2>
-            <p className="mt-2 text-sm leading-6 text-emerald-50/80">
+            <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950">Scan a passenger QR</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
               Open this page on the gate phone, allow camera access, and point it at the ticket QR.
             </p>
             <div className={`mt-4 rounded-2xl px-4 py-3 text-sm font-semibold ${statusTone}`}>
@@ -658,24 +658,24 @@ export default function ValidatorWeb() {
             ) : null}
           </section>
 
-          <section className="rounded-[1.6rem] border border-white/10 bg-[#061512] p-3 text-white">
+          <section className="rounded-[1.6rem] border border-slate-200 bg-white/92 p-3 text-slate-900 shadow-[0_18px_55px_rgba(15,23,42,0.08)]">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.28em] text-emerald-200/70">Camera</p>
-                <p className="mt-1 text-sm text-emerald-100/80">
+                <p className="text-[10px] uppercase tracking-[0.28em] text-slate-500">Camera</p>
+                <p className="mt-1 text-sm text-slate-500">
                   {isCameraReady ? "Camera is live" : "Camera is off"}
                 </p>
               </div>
               <div className="flex gap-2">
                 <button
-                  className="rounded-full border border-white/10 bg-white/10 px-3 py-2 text-xs font-semibold text-white"
+                  className="rounded-full border border-[#1d4ed8] bg-[#1d4ed8] px-3 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-[#1e40af]"
                   onClick={startCamera}
                   type="button"
                 >
                   Start
                 </button>
                 <button
-                  className="rounded-full border border-white/10 px-3 py-2 text-xs font-semibold text-white/80"
+                  className="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
                   onClick={stopCamera}
                   type="button"
                 >
@@ -704,7 +704,7 @@ export default function ValidatorWeb() {
                     </div>
                   ) : null}
                   <div className="pointer-events-none absolute inset-0">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08),rgba(0,0,0,0.02)_35%,rgba(0,0,0,0.35)_78%,rgba(0,0,0,0.52))]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.10),rgba(0,0,0,0.02)_35%,rgba(0,0,0,0.34)_78%,rgba(0,0,0,0.52))]" />
                     <div className="absolute inset-0 flex items-center justify-center">
                   <div
                     className={`relative rounded-3xl border border-emerald-300/55 shadow-[0_0_0_9999px_rgba(0,0,0,0.16)] ${
@@ -721,34 +721,34 @@ export default function ValidatorWeb() {
               </div>
             </div>
 
-            <div className="mt-3 rounded-2xl border border-white/10 bg-white/5 px-3 py-3 text-sm text-emerald-50/90">
+            <div className="mt-3 rounded-2xl border border-slate-200 bg-[#f8fafc] px-3 py-3 text-sm text-slate-700">
               {message}
             </div>
             {cameraError ? (
-              <div className="mt-2 rounded-2xl border border-rose-400/20 bg-rose-500/10 px-3 py-3 text-sm text-rose-100">
+              <div className="mt-2 rounded-2xl border border-rose-400/20 bg-rose-500/10 px-3 py-3 text-sm text-rose-700">
                 {cameraError}
               </div>
             ) : null}
 
-            <div className="mt-3 rounded-2xl border border-emerald-400/15 bg-emerald-500/10 px-3 py-3 text-sm text-emerald-50">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-emerald-200/80">
+            <div className="mt-3 rounded-2xl border border-indigo-100 bg-indigo-50 px-3 py-3 text-sm text-slate-700">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-indigo-700">
                 Scan tip
               </p>
               <p className="mt-1">{scanHint}</p>
             </div>
           </section>
 
-          <section className="rounded-[1.6rem] bg-slate-50 p-3 text-slate-900">
+          <section className="rounded-[1.6rem] bg-white/80 p-3 text-slate-900 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
             <div className="grid grid-cols-2 gap-2">
               <button
-                className="rounded-2xl border border-slate-200 bg-white px-3 py-3 text-xs font-bold uppercase tracking-[0.2em]"
+                className="rounded-2xl border border-slate-200 bg-white px-3 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900"
                 onClick={() => setMobilePanel((current) => (current === "setup" ? "none" : "setup"))}
                 type="button"
               >
                 Setup
               </button>
               <button
-                className="rounded-2xl border border-slate-200 bg-white px-3 py-3 text-xs font-bold uppercase tracking-[0.2em]"
+                className="rounded-2xl border border-slate-200 bg-white px-3 py-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-900"
                 onClick={() => setMobilePanel((current) => (current === "tools" ? "none" : "tools"))}
                 type="button"
               >
@@ -757,8 +757,8 @@ export default function ValidatorWeb() {
             </div>
 
             {mobilePanel === "tools" ? (
-              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3">
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                   Backup tools
                 </p>
                 <p className="mt-2 text-sm text-slate-600">
@@ -766,21 +766,21 @@ export default function ValidatorWeb() {
                 </p>
                 <div className="mt-3 grid grid-cols-3 gap-2">
                   <button
-                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em]"
+                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-800"
                     onClick={() => setMobilePanel("manual")}
                     type="button"
                   >
                     Manual
                   </button>
                   <button
-                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em]"
+                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-800"
                     onClick={() => setMobilePanel("image")}
                     type="button"
                   >
                     Upload
                   </button>
                   <button
-                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em]"
+                    className="rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-800"
                     onClick={() => setMobilePanel("history")}
                     type="button"
                   >
@@ -797,7 +797,7 @@ export default function ValidatorWeb() {
                     Backend URL
                   </span>
                   <input
-                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500"
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
                     value={baseUrl}
                     onChange={(event) => setBaseUrl(event.target.value)}
                     placeholder="/api"
@@ -808,7 +808,7 @@ export default function ValidatorWeb() {
                     Validator API Key
                   </span>
                   <input
-                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500"
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
                     value={apiKey}
                     onChange={(event) => setApiKey(event.target.value)}
                     placeholder="vk_..."
@@ -819,7 +819,7 @@ export default function ValidatorWeb() {
                     Bus assignment
                   </span>
                   <select
-                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500"
+                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
                     value={busLabel}
                     onChange={(event) => setBusLabel(event.target.value)}
                   >
@@ -834,8 +834,8 @@ export default function ValidatorWeb() {
             ) : null}
 
             {mobilePanel === "manual" ? (
-              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3">
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                   Manual verify
                 </p>
                 <form className="mt-3 space-y-3" onSubmit={handleManualValidate}>
@@ -846,7 +846,7 @@ export default function ValidatorWeb() {
                     placeholder="Paste the QR payload, ticket ID, or payment reference here."
                   />
                   <button
-                    className="w-full rounded-2xl bg-emerald-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="w-full rounded-2xl bg-[#1d4ed8] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-60"
                     disabled={!canScan || !scanInput.trim() || status === "checking"}
                     type="submit"
                   >
@@ -857,8 +857,8 @@ export default function ValidatorWeb() {
             ) : null}
 
             {mobilePanel === "image" ? (
-              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3">
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                   Image fallback
                 </p>
                 <p className="mt-2 text-sm text-slate-600">
@@ -868,7 +868,7 @@ export default function ValidatorWeb() {
                   ref={fileInputRef}
                   accept="image/*,.png,.jpg,.jpeg,.webp"
                   capture="environment"
-                  className="mt-3 block w-full rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 file:mr-4 file:rounded-full file:border-0 file:bg-emerald-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-emerald-700"
+                  className="mt-3 block w-full rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 file:mr-4 file:rounded-full file:border-0 file:bg-[#7c3aed] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-[#6d28d9]"
                   onChange={handleFileScan}
                   type="file"
                 />
@@ -886,8 +886,8 @@ export default function ValidatorWeb() {
             ) : null}
 
             {mobilePanel === "history" ? (
-              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3">
-                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+              <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                   Recent scans
                 </p>
                 <div className="mt-3 max-h-52 space-y-2 overflow-y-auto pr-1">
@@ -928,11 +928,11 @@ export default function ValidatorWeb() {
             ) : null}
           </section>
 
-          <section className="rounded-[1.6rem] bg-slate-50 p-3 text-slate-900">
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+          <section className="rounded-[1.6rem] bg-white/80 p-3 text-slate-900 shadow-[0_18px_45px_rgba(15,23,42,0.06)]">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
               Validation result
             </p>
-            <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3">
+            <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
               {!result ? (
                 <p className="text-sm text-slate-500">No scan has been checked yet.</p>
               ) : (
@@ -1098,7 +1098,7 @@ export default function ValidatorWeb() {
                     <p className="text-xs uppercase tracking-[0.28em] text-emerald-200/70">
                       Camera
                     </p>
-                    <p className="mt-1 text-sm text-emerald-100/80">
+                    <p className="mt-1 text-sm text-slate-500">
                       {isCameraReady ? "Camera is live" : "Camera is off"}
                     </p>
                   </div>
@@ -1129,7 +1129,7 @@ export default function ValidatorWeb() {
                       playsInline
                     />
                     <div className="pointer-events-none absolute inset-0">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.08),rgba(0,0,0,0.02)_35%,rgba(0,0,0,0.35)_78%,rgba(0,0,0,0.52))]" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.10),rgba(0,0,0,0.02)_35%,rgba(0,0,0,0.34)_78%,rgba(0,0,0,0.52))]" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="relative h-72 w-72 rounded-[2rem] border border-emerald-300/55 shadow-[0_0_0_9999px_rgba(0,0,0,0.16)] md:h-96 md:w-96">
                           <div className="absolute left-4 right-4 top-4 h-8 rounded-t-[1.5rem] border-t border-l border-r border-emerald-300/70" />
@@ -1164,7 +1164,7 @@ export default function ValidatorWeb() {
 
               <div className="space-y-4">
                 <div className="rounded-[1.75rem] bg-slate-50 p-4 md:p-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                     Status board
                   </p>
                   <div
@@ -1207,7 +1207,7 @@ export default function ValidatorWeb() {
                 <div className="rounded-[1.75rem] bg-slate-50 p-4 md:p-5">
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+                      <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                         Connection
                       </p>
                       <p className="mt-2 text-sm text-slate-600">
@@ -1215,7 +1215,7 @@ export default function ValidatorWeb() {
                       </p>
                     </div>
                     <button
-                      className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-slate-700 transition hover:border-emerald-500 hover:text-emerald-700"
+                      className="rounded-full border border-emerald-100 bg-white px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#00513f] transition hover:bg-[#00513f] hover:text-white"
                       onClick={() => setShowConnectionSettings((current) => !current)}
                       type="button"
                     >
@@ -1229,7 +1229,7 @@ export default function ValidatorWeb() {
                           Backend URL
                         </span>
                         <input
-                          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500"
+                          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
                           value={baseUrl}
                           onChange={(event) => setBaseUrl(event.target.value)}
                           placeholder="http://localhost:3000/api"
@@ -1240,7 +1240,7 @@ export default function ValidatorWeb() {
                           Validator API Key
                         </span>
                         <input
-                          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-emerald-500"
+                          className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
                           value={apiKey}
                           onChange={(event) => setApiKey(event.target.value)}
                           placeholder="vk_..."
@@ -1254,7 +1254,7 @@ export default function ValidatorWeb() {
                     </div>
                   )}
                   <div className="mt-4">
-                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+                    <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                       Image fallback
                     </p>
                     <p className="mt-2 text-sm text-slate-600">
@@ -1263,7 +1263,7 @@ export default function ValidatorWeb() {
                     <input
                       ref={fileInputRef}
                       accept="image/*,.png,.jpg,.jpeg,.webp"
-                      className="mt-3 block w-full rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 file:mr-4 file:rounded-full file:border-0 file:bg-emerald-600 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-emerald-700"
+                      className="mt-3 block w-full rounded-2xl border border-dashed border-slate-300 bg-white px-4 py-3 text-sm text-slate-700 file:mr-4 file:rounded-full file:border-0 file:bg-[#7c3aed] file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-[#6d28d9]"
                       capture="environment"
                       onChange={handleFileScan}
                       type="file"
@@ -1282,7 +1282,7 @@ export default function ValidatorWeb() {
                 </div>
 
                 <div className="rounded-[1.75rem] bg-slate-50 p-4 md:p-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                     Manual verify
                   </p>
                   <form className="mt-4 space-y-3" onSubmit={handleManualValidate}>
@@ -1293,7 +1293,7 @@ export default function ValidatorWeb() {
                       placeholder="Paste the QR payload, ticket ID, or payment reference here."
                     />
                     <button
-                      className="w-full rounded-2xl bg-emerald-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="w-full rounded-2xl bg-[#1d4ed8] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-60"
                       disabled={!canScan || !scanInput.trim() || status === "checking"}
                       type="submit"
                     >
@@ -1303,7 +1303,7 @@ export default function ValidatorWeb() {
                 </div>
 
                 <div className="rounded-[1.75rem] bg-slate-50 p-4 md:p-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                     Validation result
                   </p>
                   <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-4">
@@ -1332,7 +1332,7 @@ export default function ValidatorWeb() {
                 </div>
 
                 <div className="rounded-[1.75rem] bg-slate-50 p-4 md:p-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-500">
+                  <p className="text-xs font-bold uppercase tracking-[0.28em] text-slate-600">
                     Recent scans
                   </p>
                   <div className="mt-3 max-h-56 space-y-2 overflow-y-auto pr-1 md:max-h-72">

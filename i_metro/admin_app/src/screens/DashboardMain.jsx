@@ -317,12 +317,13 @@ function DashboardMain() {
             </tr>
           `;
 
-          const title = container.querySelector("[data-recent-transactions-title]");
+            const title = container.querySelector("[data-recent-transactions-title]");
           if (title) {
             const countLabel =
               normalized === "ALL"
                 ? `${formatCompactNumber(filtered.length)} shown`
-                : `${formatCompactNumber(filtered.length)} ${normalized.toLowerCase()}`;            title.textContent = `Recent Transactions ? ${countLabel}`;
+                : `${formatCompactNumber(filtered.length)} ${normalized.toLowerCase()}`;
+            title.textContent = `Recent Transactions · ${countLabel}`;
           }
         };
 
