@@ -158,8 +158,8 @@
   <section class="bg-surface-container-lowest rounded-lg overflow-hidden">
   <div class="px-8 py-5 bg-surface-container-low flex items-center justify-between">
   <div>
-  <h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">Validator + User App Integration</h3>
-  <p class="text-xs text-on-surface-variant mt-1">Copy the live API base, validator URL, and scan endpoint for the user app and gate phone.</p>
+  <h3 class="text-sm font-bold uppercase tracking-wider text-on-surface-variant font-label">Validator Device Access</h3>
+  <p class="text-xs text-on-surface-variant mt-1">Create one key per phone/device. The attendant can still switch buses on the validator page.</p>
   </div>
   <span class="material-symbols-outlined text-on-surface-variant">qr_code_scanner</span>
   </div>
@@ -183,17 +183,17 @@
   </div>
   <div class="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
   <div class="space-y-2">
-  <label class="text-sm font-semibold text-on-surface">New Validator Device Name</label>
-  <input data-setting="validator-device-name" class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" placeholder="Bus 2 Gate Phone" type="text"/>
+  <label class="text-sm font-semibold text-on-surface">Validator Device Name</label>
+  <input data-setting="validator-device-name" class="w-full bg-surface-container-highest border-none rounded-lg px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-all" placeholder="Phone A / Bus 1" type="text"/>
   </div>
-  <button data-setting="create-validator-device" class="px-6 py-3 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity" type="button">Generate Validator Key</button>
+  <button data-setting="create-validator-device" class="px-6 py-3 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity" type="button">Generate Device Key</button>
   </div>
   <div class="rounded-xl bg-surface-container-low border border-outline-variant/10 p-5">
   <div class="flex items-start justify-between gap-4">
   <div>
-  <p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Latest generated key</p>
+  <p class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Latest device key</p>
   <p data-setting="validator-status" class="mt-1 text-sm text-on-surface-variant">No validator device key generated yet.</p>
-  <p class="mt-2 text-xs text-on-surface-variant">Validator keys stay hidden after creation. Generate a fresh one here or rotate an existing device to reveal a new key.</p>
+  <p class="mt-2 text-xs text-on-surface-variant">Use one key per phone. If the same phone changes buses, just pick a different bus on the validator page.</p>
   </div>
   <button data-setting="copy-validator-device-key" class="px-4 py-2 rounded-lg bg-surface-container-high text-sm font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" type="button">Copy key</button>
   </div>

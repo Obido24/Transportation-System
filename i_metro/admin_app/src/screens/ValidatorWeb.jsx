@@ -1212,7 +1212,7 @@ export default function ValidatorWeb() {
                       <p className="mt-2 text-sm text-slate-600">
                         {canValidate
                           ? "Validator is configured."
-                          : "Open Admin > Settings > Validator + User App Integration to create or copy a key."}
+                          : "Open Admin > Settings > Validator Device Access to create or copy a phone key."}
                       </p>
                     </div>
                     <button
@@ -1251,8 +1251,8 @@ export default function ValidatorWeb() {
                   ) : (
                     <div className="mt-4 rounded-2xl border border-dashed border-slate-200 bg-white px-4 py-3 text-sm text-slate-500">
                       Connection details are hidden for gate use. Open setup only when you need to
-                      change the backend or API key, or use Admin &gt; Settings &gt; Validator + User App Integration
-                      to generate a fresh device key.
+                      change the backend or API key, or use Admin &gt; Settings &gt; Validator Device Access
+                      to generate a fresh phone key.
                     </div>
                   )}
                   <div className="mt-4">
