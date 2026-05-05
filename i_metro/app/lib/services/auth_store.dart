@@ -22,6 +22,20 @@ class AuthStore {
 
   static bool get isLoggedIn => token != null && token!.isNotEmpty;
 
+  static bool _isPlaceholderAvatar(String? value) {
+    final avatar = value?.trim();
+    if (avatar == null || avatar.isEmpty) return true;
+    return avatar.contains('lh3.googleusercontent.com/aida-public') || avatar.contains('aida-public');
+  }
+
+  static bool isPlaceholderAvatar(String? value) => _isPlaceholderAvatar(value);
+
+  static String? _normalizeAvatar(String? value) {
+    final avatar = value?.trim();
+    if (_isPlaceholderAvatar(avatar)) return null;
+    return avatar;
+  }
+
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
     token = _prefs?.getString(_tokenKey);
@@ -31,7 +45,10 @@ class AuthStore {
     lastName = _prefs?.getString(_lastNameKey);
     email = _prefs?.getString(_emailKey);
     phone = _prefs?.getString(_phoneKey);
-    avatarUrl = _prefs?.getString(_avatarKey);
+    avatarUrl = _normalizeAvatar(_prefs?.getString(_avatarKey));
+    if (avatarUrl == null) {
+      await _prefs!.remove(_avatarKey);
+    }
   }
 
   static Future<void> setSession({
@@ -51,7 +68,7 @@ class AuthStore {
     lastName = lastNameValue ?? lastName;
     email = emailValue ?? email;
     phone = phoneValue ?? phone;
-    avatarUrl = avatarUrlValue ?? avatarUrl;
+    avatarUrl = _normalizeAvatar(avatarUrlValue ?? avatarUrl);
     await _persist();
   }
 
@@ -66,12 +83,12 @@ class AuthStore {
     lastName = lastNameValue ?? lastName;
     email = emailValue ?? email;
     phone = phoneValue ?? phone;
-    avatarUrl = avatarUrlValue ?? avatarUrl;
+    avatarUrl = _normalizeAvatar(avatarUrlValue ?? avatarUrl);
     await _persist();
   }
 
   static Future<void> setAvatar(String? avatarUrlValue) async {
-    avatarUrl = avatarUrlValue;
+    avatarUrl = _normalizeAvatar(avatarUrlValue);
     await _persist();
   }
 
@@ -98,8 +115,10 @@ class AuthStore {
     if (phone != null) {
       await _prefs!.setString(_phoneKey, phone!);
     }
-    if (avatarUrl != null) {
+    if (avatarUrl != null && avatarUrl!.isNotEmpty) {
       await _prefs!.setString(_avatarKey, avatarUrl!);
+    } else {
+      await _prefs!.remove(_avatarKey);
     }
   }
 

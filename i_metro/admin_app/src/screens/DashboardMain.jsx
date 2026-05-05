@@ -55,6 +55,23 @@ const formatRelativeTime = (value) => {
   return `${days} days ago`;
 };
 
+const normalizeScanReason = (entry) => {
+  if (!entry) return "-";
+  const reason = String(entry.reason ?? "").trim();
+  if (reason) return reason;
+  return entry.isValid ? "Validated successfully" : "Unknown rejection reason";
+};
+
+const normalizeBusLabel = (value) => {
+  const label = String(value ?? "").trim();
+  return label || "Unassigned bus";
+};
+
+const normalizeValidatorLabel = (entry) => {
+  const label = String(entry?.validatorDeviceName ?? entry?.validatorDeviceId ?? "").trim();
+  return label || "Unknown validator";
+};
+
 const statusStyles = {
   SUCCESS: "bg-emerald-100 text-emerald-800",
   PENDING: "bg-amber-100 text-amber-800",
@@ -209,22 +226,21 @@ function DashboardMain() {
           const ticketNode = validatorCard.querySelector("[data-validator-snapshot-ticket]");
           const routeNode = validatorCard.querySelector("[data-validator-snapshot-route]");
           const timeNode = validatorCard.querySelector("[data-validator-snapshot-time]");
+          const reasonNode = validatorCard.querySelector("[data-validator-snapshot-reason]");
           const titleNode = validatorCard.querySelector("[data-validator-snapshot-title]");
           const actionButton = validatorCard.querySelector("[data-validator-snapshot-action]");
           const busCount = new Set(
             (Array.isArray(validatorLogs) ? validatorLogs : [])
-              .map((entry) => String(entry?.busLabel ?? "").trim() || "Unassigned bus"),
+              .map((entry) => normalizeBusLabel(entry?.busLabel)),
           ).size;
 
           if (latestValidatorLog) {
             const valid = latestValidatorLog.isValid ? "VALID" : "INVALID";
             const routeLabel =
               latestValidatorLog.routeId ?? latestValidatorLog.ticketId ?? "No route recorded";
-            const validatorLabel =
-              latestValidatorLog.validatorDeviceName ??
-              latestValidatorLog.validatorDeviceId ??
-              "Unknown validator";
-            const busLabel = latestValidatorLog.busLabel ?? "Unassigned bus";
+            const validatorLabel = normalizeValidatorLabel(latestValidatorLog);
+            const busLabel = normalizeBusLabel(latestValidatorLog.busLabel);
+            const reasonLabel = normalizeScanReason(latestValidatorLog);
 
             if (statusNode) statusNode.textContent = valid;
             if (busNode) busNode.textContent = busLabel;
@@ -240,6 +256,7 @@ function DashboardMain() {
             if (ticketNode) ticketNode.textContent = latestValidatorLog.ticketId ?? "-";
             if (routeNode) routeNode.textContent = routeLabel;
             if (timeNode) timeNode.textContent = latestValidatorLog.timeAgo ?? "-";
+            if (reasonNode) reasonNode.textContent = reasonLabel;
             if (titleNode) {
               titleNode.textContent = latestValidatorLog.isValid
                 ? "Latest successful validator scan"
@@ -263,6 +280,7 @@ function DashboardMain() {
             if (ticketNode) ticketNode.textContent = "-";
             if (routeNode) routeNode.textContent = "-";
             if (timeNode) timeNode.textContent = "-";
+            if (reasonNode) reasonNode.textContent = "-";
             if (titleNode) titleNode.textContent = "Latest validator scan";
             if (actionButton) {
               actionButton.onclick = () => navigate("/admin/validator-logs");

@@ -4,12 +4,22 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HtmlScreen from "./HtmlScreen";
 import editRouteHtml from "./html/edit_route.html?raw";
 import { fetchWithAuth } from "../lib/api";
+import { signalRoutesUpdated } from "../lib/routeUpdates";
 
 const wrapperClassName = "min-h-screen";
 
 const getRouteId = (location) => {
   const params = new URLSearchParams(location.search);
   return params.get("id") || localStorage.getItem("i_metro_admin_selected_route");
+};
+
+const createTimeoutController = (timeoutMs = 8000) => {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+  return {
+    signal: controller.signal,
+    clear: () => window.clearTimeout(timer),
+  };
 };
 
 function EditRoute() {
@@ -32,7 +42,10 @@ function EditRoute() {
       setLoading(true);
       setError("");
       try {
-        const response = await fetchWithAuth("/admin/routes");
+        const timeout = createTimeoutController(8000);
+        const response = await fetchWithAuth("/admin/routes", {
+          signal: timeout.signal,
+        }).finally(() => timeout.clear());
         if (!response.ok) {
           setError("Unable to load routes.");
           return;
@@ -121,6 +134,7 @@ function EditRoute() {
             return;
           }
 
+          const timeout = createTimeoutController(8000);
           const response = await fetchWithAuth(`/admin/routes/${route.id}`, {
             method: "PATCH",
             body: JSON.stringify({
@@ -129,7 +143,8 @@ function EditRoute() {
               price: Math.round(priceValue),
               isActive,
             }),
-          });
+            signal: timeout.signal,
+          }).finally(() => timeout.clear());
 
           if (!response.ok) {
             setError("Unable to update route.");
@@ -137,9 +152,10 @@ function EditRoute() {
           }
 
           setSuccess("Route updated.");
+          signalRoutesUpdated();
           navigate("/admin/routes");
         } catch {
-          setError("Unable to update route.");
+          setError("Unable to update route. Please check that the admin backend is running.");
         }
       });
     }

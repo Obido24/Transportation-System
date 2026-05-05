@@ -1,6 +1,10 @@
 import { useEffect, useMemo } from "react";
 
 const linkMap = [
+  { match: "dashboard", path: "/admin/dashboard" },
+  { match: "analytics", path: "/admin/dashboard" },
+  { match: "configuration", path: "/admin/settings" },
+  { match: "logs", path: "/admin/activity" },
   { match: "revenue", path: "/admin/revenue" },
   { match: "settings", path: "/admin/settings" },
   { match: "activity", path: "/admin/activity" },
@@ -10,7 +14,8 @@ const linkMap = [
   { match: "merchant management", path: "/admin/merchants" },
   { match: "routes", path: "/admin/routes" },
   { match: "merchants", path: "/admin/merchants" },
-  { match: "security", path: "/admin/security" },
+  { match: "bus scan logs", path: "/admin/validator-logs" },
+  { match: "security", path: "/admin/profile-settings" },
   { match: "log out", path: "/admin/logout" },
   { match: "login", path: "/admin/login" },
   { match: "sign in", path: "/admin/login" },

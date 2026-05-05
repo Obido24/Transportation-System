@@ -5,6 +5,7 @@ import 'screens/admin_screens.dart';
 
 class AppRoutes {
   static const splash = '/';
+  static const appModeSelect = '/app-mode-select';
   static const login = '/login';
   static const createAccount = '/create-account';
   static const home = '/home';
@@ -44,6 +45,7 @@ class AppRoutes {
 
   static final Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashOnboardingScreen(),
+    appModeSelect: (context) => const AppModeSelectorScreen(),
     login: (context) => const LoginScreen(),
     createAccount: (context) => const CreateAccountScreen(),
     home: (context) => const HomeScreen(),

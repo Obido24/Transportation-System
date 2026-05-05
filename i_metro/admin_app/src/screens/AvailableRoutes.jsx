@@ -6,8 +6,18 @@ import HtmlScreen from "./HtmlScreen";
 import availableRoutesHtml from "./html/available_routes.html?raw";
 import { fetchWithAuth } from "../lib/api";
 import { downloadCsv, printPdf } from "../lib/exportTools";
+import { signalRoutesUpdated } from "../lib/routeUpdates";
 
 const wrapperClassName = "min-h-screen";
+
+const createTimeoutController = (timeoutMs = 8000) => {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+  return {
+    signal: controller.signal,
+    clear: () => window.clearTimeout(timer),
+  };
+};
 
 const formatCurrency = (value) => {
   if (value === null || value === undefined) return "-";
@@ -115,7 +125,10 @@ function AvailableRoutes() {
     setLoading(true);
     setError("");
     try {
-      const response = await fetchWithAuth("/admin/routes");
+      const timeout = createTimeoutController(8000);
+      const response = await fetchWithAuth("/admin/routes", {
+        signal: timeout.signal,
+      }).finally(() => timeout.clear());
       if (!response.ok) {
         setError("Unable to load routes.");
         return;
@@ -202,7 +215,8 @@ function AvailableRoutes() {
               method: "DELETE",
             });
             if (delResponse.ok) {
-              window.dispatchEvent(new Event("i-metro:routes-updated"));
+              signalRoutesUpdated();
+              await loadRoutes();
             }
           }
         };

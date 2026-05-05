@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import jsQR from "jsqr";
+import { API_BASE_URL } from "../lib/api";
 
 const storageKeys = {
   apiKey: "i_metro_validator_api_key",
@@ -9,7 +10,7 @@ const storageKeys = {
   panel: "i_metro_validator_panel",
 };
 
-const defaultBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "/api";
+const defaultBaseUrl = API_BASE_URL;
 const defaultBusLabel = "Bus 1";
 const busOptions = Array.from({ length: 20 }, (_, index) => `Bus ${index + 1}`);
 
@@ -18,9 +19,64 @@ const readStorage = (key, fallback = "") => {
   return window.localStorage.getItem(key) ?? fallback;
 };
 
+const readQueryParam = (key) => {
+  if (typeof window === "undefined") return "";
+  return new URLSearchParams(window.location.search).get(key)?.trim() ?? "";
+};
+
 const writeStorage = (key, value) => {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(key, value);
+};
+
+const normalizeBaseUrl = (value) => `${value ?? ""}`.trim().replace(/\/$/, "");
+
+const isLoopbackBaseUrl = (value) => /localhost|127\.0\.0\.1/i.test(normalizeBaseUrl(value));
+
+const getSuggestedApiBase = () => {
+  if (typeof window === "undefined") {
+    return defaultBaseUrl;
+  }
+
+  const queryBase = normalizeBaseUrl(readQueryParam("apiBase"));
+  if (queryBase) {
+    return queryBase;
+  }
+
+  const host = window.location.hostname?.trim();
+  if (host && !isLoopbackBaseUrl(host) && !host.endsWith("onrender.com")) {
+    return `http://${host}:3000/api`;
+  }
+
+  return normalizeBaseUrl(defaultBaseUrl) || "http://localhost:3000/api";
+};
+
+const resolveInitialBaseUrl = () => {
+  const queryBase = normalizeBaseUrl(readQueryParam("apiBase"));
+  if (queryBase) return queryBase;
+
+  const storedBase = normalizeBaseUrl(readStorage(storageKeys.baseUrl, ""));
+  if (storedBase) return storedBase;
+
+  const envBase = normalizeBaseUrl(defaultBaseUrl);
+  if (envBase && envBase !== "/api" && !envBase.includes("localhost")) {
+    return envBase;
+  }
+
+  if (typeof window !== "undefined") {
+    const host = window.location.hostname;
+    if (host && host !== "localhost" && host !== "127.0.0.1") {
+      return `http://${host}:3000/api`;
+    }
+  }
+
+  return envBase || "http://localhost:3000/api";
+};
+
+const resolveInitialBusLabel = () => {
+  const queryBus = readQueryParam("bus");
+  if (queryBus) return queryBus;
+  return readStorage(storageKeys.busLabel, defaultBusLabel) || defaultBusLabel;
 };
 
 function formatLabel(value) {
@@ -41,9 +97,9 @@ export default function ValidatorWeb() {
   const lastScanRef = useRef({ value: "", at: 0 });
   const busyRef = useRef(false);
 
-  const [baseUrl, setBaseUrl] = useState(() => readStorage(storageKeys.baseUrl, defaultBaseUrl));
+  const [baseUrl, setBaseUrl] = useState(() => resolveInitialBaseUrl());
   const [apiKey, setApiKey] = useState(() => readStorage(storageKeys.apiKey, ""));
-  const [busLabel, setBusLabel] = useState(() => readStorage(storageKeys.busLabel, defaultBusLabel));
+  const [busLabel, setBusLabel] = useState(() => resolveInitialBusLabel());
   const [scanInput, setScanInput] = useState("");
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [isScanning, setIsScanning] = useState(false);
@@ -65,11 +121,13 @@ export default function ValidatorWeb() {
   const [mobilePanel, setMobilePanel] = useState(() => readStorage(storageKeys.panel, "none"));
   const [busCopied, setBusCopied] = useState(false);
   const [busLoaded, setBusLoaded] = useState(false);
+  const [connectionHint, setConnectionHint] = useState("");
   const autoStartAttemptedRef = useRef(false);
   const [cameraBooting, setCameraBooting] = useState(false);
   const busLogsPath = `/admin/validator-logs?bus=${encodeURIComponent(busLabel)}`;
   const mobileBusBadgeText = busLoaded ? busLabel : "Loading bus...";
   const desktopBusBadgeText = busLoaded ? `Assigned bus: ${busLabel}` : "Loading bus...";
+  const suggestedApiBase = getSuggestedApiBase();
 
   useEffect(() => {
     const updateCompact = () => {
@@ -214,7 +272,7 @@ export default function ValidatorWeb() {
   };
 
   useEffect(() => {
-    writeStorage(storageKeys.baseUrl, baseUrl);
+    writeStorage(storageKeys.baseUrl, normalizeBaseUrl(baseUrl));
   }, [baseUrl]);
 
   useEffect(() => {
@@ -231,14 +289,41 @@ export default function ValidatorWeb() {
   }, [mobilePanel]);
 
   useEffect(() => {
+    if (isCompact && isLoopbackBaseUrl(baseUrl)) {
+      setConnectionHint(
+        "This phone is still pointed at localhost. Open Setup and switch to a backend URL the phone can reach.",
+      );
+      return;
+    }
+
+    if (!canValidate) {
+      setConnectionHint("Add the backend URL and validator key to start validating scans.");
+      return;
+    }
+
+    setConnectionHint("Validator is configured and ready to scan.");
+  }, [baseUrl, canValidate, isCompact]);
+
+  useEffect(() => {
     setBusLoaded(true);
   }, []);
 
   useEffect(() => {
-    const savedBus = readStorage(storageKeys.busLabel, "");
-    if (!savedBus) {
-      writeStorage(storageKeys.busLabel, defaultBusLabel);
-      setBusLabel(defaultBusLabel);
+    const queryBus = readQueryParam("bus");
+    if (queryBus) {
+      writeStorage(storageKeys.busLabel, queryBus);
+      setBusLabel(queryBus);
+    } else {
+      const savedBus = readStorage(storageKeys.busLabel, "");
+      if (!savedBus) {
+        writeStorage(storageKeys.busLabel, defaultBusLabel);
+        setBusLabel(defaultBusLabel);
+      }
+    }
+    const queryBase = normalizeBaseUrl(readQueryParam("apiBase"));
+    if (queryBase) {
+      writeStorage(storageKeys.baseUrl, queryBase);
+      setBaseUrl(queryBase);
     }
     const savedPanel = readStorage(storageKeys.panel, "none");
     setMobilePanel(savedPanel || "none");
@@ -401,19 +486,9 @@ export default function ValidatorWeb() {
         return;
       }
 
-      if (getBarcodeDetector()) {
-        const qrValue = await detectQrValue(frame);
-        if (qrValue) {
-          await validateQr(qrValue, "camera");
-        }
-      } else if (canvasRef.current && video.readyState >= 2) {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        }
+      const qrValue = await detectQrValue(frame);
+      if (qrValue) {
+        await validateQr(qrValue, "camera");
       }
     } catch (error) {
       setCameraError(error?.message ?? "Unable to scan with this browser.");
@@ -795,17 +870,29 @@ export default function ValidatorWeb() {
                   <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
                     Backend URL
                   </span>
-                  <input
-                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
-                    value={baseUrl}
-                    onChange={(event) => setBaseUrl(event.target.value)}
-                    placeholder="/api"
-                  />
-                </label>
-                <label className="block">
-                  <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-                    Validator API Key
-                  </span>
+                    <input
+                      className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
+                      value={baseUrl}
+                      onChange={(event) => setBaseUrl(event.target.value)}
+                      placeholder="/api"
+                    />
+                  </label>
+                  {suggestedApiBase && suggestedApiBase !== normalizeBaseUrl(baseUrl) ? (
+                    <button
+                      className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-800 transition hover:bg-slate-100"
+                      onClick={() => {
+                        setBaseUrl(suggestedApiBase);
+                        setConnectionHint("Backend URL updated.");
+                      }}
+                      type="button"
+                    >
+                      Use detected backend URL
+                    </button>
+                  ) : null}
+                  <label className="block">
+                    <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                      Validator API Key
+                    </span>
                   <input
                     className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
                     value={apiKey}
@@ -871,16 +958,21 @@ export default function ValidatorWeb() {
                   onChange={handleFileScan}
                   type="file"
                 />
-                <p className="mt-2 text-xs text-slate-500">
-                  {selectedFileName
-                    ? `Selected: ${selectedFileName}${fileScanState === "loading" ? " (processing...)" : ""}`
-                    : "Choose a QR image or screenshot from your device."}
-                </p>
-                {fileScanState === "error" ? (
-                  <p className="mt-1 text-xs font-semibold text-rose-600">
-                    The image could not be read. Try a tighter crop of just the QR code.
-                  </p>
-                ) : null}
+                    <p className="mt-2 text-xs text-slate-500">
+                      {selectedFileName
+                        ? `Selected: ${selectedFileName}${fileScanState === "loading" ? " (processing...)" : ""}`
+                        : "Choose a QR image or screenshot from your device."}
+                    </p>
+                    {connectionHint ? (
+                      <p className={`mt-3 text-xs font-semibold ${isCompact && isLoopbackBaseUrl(baseUrl) ? "text-rose-600" : "text-emerald-700"}`}>
+                        {connectionHint}
+                      </p>
+                    ) : null}
+                    {fileScanState === "error" ? (
+                      <p className="mt-1 text-xs font-semibold text-rose-600">
+                        The image could not be read. Try a tighter crop of just the QR code.
+                      </p>
+                    ) : null}
               </div>
             ) : null}
 
@@ -1236,6 +1328,18 @@ export default function ValidatorWeb() {
                           placeholder="http://localhost:3000/api"
                         />
                       </label>
+                      {suggestedApiBase && suggestedApiBase !== normalizeBaseUrl(baseUrl) ? (
+                        <button
+                          className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs font-bold uppercase tracking-[0.18em] text-slate-800 transition hover:bg-slate-100"
+                          onClick={() => {
+                            setBaseUrl(suggestedApiBase);
+                            setConnectionHint("Backend URL updated.");
+                          }}
+                          type="button"
+                        >
+                          Use detected backend URL
+                        </button>
+                      ) : null}
                       <label className="block">
                         <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
                           Validator API Key
@@ -1275,6 +1379,11 @@ export default function ValidatorWeb() {
                         ? `Selected: ${selectedFileName}${fileScanState === "loading" ? " (processing...)" : ""}`
                         : "Choose a QR image or screenshot from your device."}
                     </p>
+                    {connectionHint ? (
+                      <p className={`mt-3 text-xs font-semibold ${isCompact && isLoopbackBaseUrl(baseUrl) ? "text-rose-600" : "text-emerald-700"}`}>
+                        {connectionHint}
+                      </p>
+                    ) : null}
                     {fileScanState === "error" ? (
                       <p className="mt-1 text-xs font-semibold text-rose-600">
                         The image could not be read. Try a tighter crop of just the QR code.

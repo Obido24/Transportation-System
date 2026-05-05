@@ -13555,90 +13555,6 @@ class _SupportData {
   final List<_SupportActivityEntry> activity;
 }
 
-const List<_SupportTicketEntry> _supportTickets = [
-  _SupportTicketEntry(
-    id: '#TKT-8902',
-    supportId: 'demo-8902',
-    subject: 'Fare Refund Request',
-    subtitle: 'Transaction ID: IM-4491-00X',
-    userType: 'Passenger',
-    priority: 'Urgent',
-    assigneeName: 'Arjun Kumar',
-    assigneeInitials: 'AK',
-    status: 'Open',
-    supportStatus: 'OPEN',
-    fullMessage: 'Customer reports a double charge on the last ride. Wants a refund review.',
-    contactLabel: 'Passenger Support',
-    createdAt: null,
-  ),
-  _SupportTicketEntry(
-    id: '#TKT-8899',
-    supportId: 'demo-8899',
-    subject: 'NFC Card Not Updating',
-    subtitle: 'Central Station Kiosk Error',
-    userType: 'Passenger',
-    priority: 'High',
-    assigneeName: 'Unassigned',
-    assigneeInitials: '',
-    status: 'Open',
-    supportStatus: 'OPEN',
-    fullMessage: 'Card balance does not refresh after top-up. Kiosk shows success but app does not.',
-    contactLabel: 'Passenger Support',
-    createdAt: null,
-  ),
-  _SupportTicketEntry(
-    id: '#TKT-8895',
-    supportId: 'demo-8895',
-    subject: 'Bulk Transit Pass API Failure',
-    subtitle: 'Enterprise Merchant Portal',
-    userType: 'Merchant',
-    priority: 'Urgent',
-    assigneeName: 'Sarah Lee',
-    assigneeInitials: 'SL',
-    status: 'Open',
-    supportStatus: 'OPEN',
-    fullMessage: 'Bulk purchase API returns 500 for enterprise account ET-1042.',
-    contactLabel: 'Merchant Support',
-    createdAt: null,
-  ),
-  _SupportTicketEntry(
-    id: '#TKT-8890',
-    supportId: 'demo-8890',
-    subject: 'Route Map Accessibility Correction',
-    subtitle: 'Station App Feedback',
-    userType: 'Passenger',
-    priority: 'Low',
-    assigneeName: 'David Miller',
-    assigneeInitials: 'DM',
-    status: 'Resolved',
-    supportStatus: 'RESOLVED',
-    fullMessage: 'User requested larger text labels for map legends.',
-    contactLabel: 'Passenger Support',
-    createdAt: null,
-  ),
-];
-
-const List<_SupportActivityEntry> _supportActivity = [
-  _SupportActivityEntry(
-    initials: 'AK',
-    message: 'Arjun resolved #TKT-8762',
-    timeAgo: '2 mins ago',
-    color: _DashboardColors.primaryContainer,
-  ),
-  _SupportActivityEntry(
-    initials: 'DM',
-    message: 'David assigned #TKT-8902 to Sarah',
-    timeAgo: '15 mins ago',
-    color: _DashboardColors.secondary,
-  ),
-  _SupportActivityEntry(
-    initials: 'LS',
-    message: 'System flagged #TKT-8910 as overdue',
-    timeAgo: '1 hour ago',
-    color: _DashboardColors.tertiary,
-  ),
-];
-
 Color _colorFromHex(String hex, {required Color fallback}) {
   final cleaned = hex.replaceAll('#', '');
   if (cleaned.length == 6) {
@@ -14153,62 +14069,121 @@ class _SettingsGeneralSection extends StatelessWidget {
     return _SettingsSectionShell(
       title: 'General Platform Settings',
       trailing: const Icon(Icons.info, size: 18, color: _DashboardColors.onSurfaceVariant),
-      child: Column(
-        children: [
-          Row(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final stacked = constraints.maxWidth < 720;
+          final fieldRow = stacked
+              ? Column(
+                  children: [
+                    _SettingsTextField(
+                      label: 'Platform Name',
+                      value: settings.platformName,
+                    ),
+                    const SizedBox(height: 16),
+                    _SettingsSelectField(
+                      label: 'Operational Timezone',
+                      value: settings.timezone,
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child: _SettingsTextField(
+                        label: 'Platform Name',
+                        value: settings.platformName,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _SettingsSelectField(
+                        label: 'Operational Timezone',
+                        value: settings.timezone,
+                      ),
+                    ),
+                  ],
+                );
+          final maintenanceRow = stacked
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.construction, size: 28, color: _DashboardColors.primary),
+                        const SizedBox(width: 14),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Maintenance Mode', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Temporarily redirect users to an Under Maintenance page.',
+                                style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Switch(
+                        value: settings.maintenanceMode,
+                        onChanged: (value) {},
+                        activeColor: Colors.white,
+                        activeTrackColor: _DashboardColors.primary,
+                        inactiveThumbColor: Colors.white,
+                        inactiveTrackColor: _DashboardColors.outlineVariant,
+                      ),
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    const Icon(Icons.construction, size: 28, color: _DashboardColors.primary),
+                    const SizedBox(width: 14),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Maintenance Mode', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                          const SizedBox(height: 4),
+                          Text(
+                            'Temporarily redirect users to an Under Maintenance page.',
+                            style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Switch(
+                      value: settings.maintenanceMode,
+                      onChanged: (value) {},
+                      activeColor: Colors.white,
+                      activeTrackColor: _DashboardColors.primary,
+                      inactiveThumbColor: Colors.white,
+                      inactiveTrackColor: _DashboardColors.outlineVariant,
+                    ),
+                  ],
+                );
+
+          return Column(
             children: [
-              Expanded(
-                child: _SettingsTextField(
-                  label: 'Platform Name',
-                  value: settings.platformName,
+              fieldRow,
+              const SizedBox(height: 16),
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: _DashboardColors.primary.withOpacity(0.05),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: _DashboardColors.primary.withOpacity(0.1)),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: _SettingsSelectField(
-                  label: 'Operational Timezone',
-                  value: settings.timezone,
-                ),
+                child: maintenanceRow,
               ),
             ],
-          ),
-          const SizedBox(height: 16),
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: _DashboardColors.primary.withOpacity(0.05),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _DashboardColors.primary.withOpacity(0.1)),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.construction, size: 28, color: _DashboardColors.primary),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Maintenance Mode', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
-                      const SizedBox(height: 4),
-                      Text(
-                        'Temporarily redirect users to an Under Maintenance page.',
-                        style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
-                      ),
-                    ],
-                  ),
-                ),
-                Switch(
-                  value: settings.maintenanceMode,
-                  onChanged: (value) {},
-                  activeColor: Colors.white,
-                  activeTrackColor: _DashboardColors.primary,
-                  inactiveThumbColor: Colors.white,
-                  inactiveTrackColor: _DashboardColors.outlineVariant,
-                ),
-              ],
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -14226,79 +14201,94 @@ class _SettingsFareSection extends StatelessWidget {
     final peakStrategy = settings.peakStrategy.toLowerCase();
     return _SettingsSectionShell(
       title: 'Fare Configuration',
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final stacked = constraints.maxWidth < 820;
+          final controls = Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Base Fare Multiplier',
+                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+              ),
+              const SizedBox(height: 6),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(multiplierLabel, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                ],
+              ),
+              Slider(
+                value: sliderValue,
+                onChanged: (value) {},
+                min: 0.5,
+                max: 2.0,
+                activeColor: _DashboardColors.primary,
+                inactiveColor: _DashboardColors.surfaceHighest,
+              ),
+              Text(
+                'Applied to all standard ticket types across the network.',
+                style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Peak Hour Strategy',
+                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+              ),
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  _SettingsChipButton(label: 'Dynamic', selected: peakStrategy == 'dynamic'),
+                  _SettingsChipButton(label: 'Fixed', selected: peakStrategy == 'fixed'),
+                  _SettingsChipButton(label: 'Disabled', selected: peakStrategy == 'disabled'),
+                ],
+              ),
+            ],
+          );
+
+          final preview = Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: _DashboardColors.surfaceLow,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.1)),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Base Fare Multiplier',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                  'Live Preview',
+                  style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: _DashboardColors.onSurfaceVariant),
                 ),
-                const SizedBox(height: 6),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(multiplierLabel, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
-                  ],
-                ),
-                Slider(
-                  value: sliderValue,
-                  onChanged: (value) {},
-                  min: 0.5,
-                  max: 2.0,
-                  activeColor: _DashboardColors.primary,
-                  inactiveColor: _DashboardColors.surfaceHighest,
-                ),
-                Text(
-                  'Applied to all standard ticket types across the network.',
-                  style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'Peak Hour Strategy',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
-                ),
+                const SizedBox(height: 12),
+                _SettingsPreviewRow(label: 'Standard Ticket', value: '\$4.50'),
                 const SizedBox(height: 8),
-                Row(
-                  children: [
-                    _SettingsChipButton(label: 'Dynamic', selected: peakStrategy == 'dynamic'),
-                    const SizedBox(width: 8),
-                    _SettingsChipButton(label: 'Fixed', selected: peakStrategy == 'fixed'),
-                    const SizedBox(width: 8),
-                    _SettingsChipButton(label: 'Disabled', selected: peakStrategy == 'disabled'),
-                  ],
-                ),
+                _SettingsPreviewRow(label: 'Peak Surcharge', value: '+\$1.25'),
               ],
             ),
-          ),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: _DashboardColors.surfaceLow,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.1)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Live Preview',
-                    style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: _DashboardColors.onSurfaceVariant),
-                  ),
-                  const SizedBox(height: 12),
-                  _SettingsPreviewRow(label: 'Standard Ticket', value: '\$4.50'),
-                  const SizedBox(height: 8),
-                  _SettingsPreviewRow(label: 'Peak Surcharge', value: '+\$1.25'),
-                ],
-              ),
-            ),
-          ),
-        ],
+          );
+
+          if (stacked) {
+            return Column(
+              children: [
+                controls,
+                const SizedBox(height: 16),
+                preview,
+              ],
+            );
+          }
+
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: controls),
+              const SizedBox(width: 20),
+              Expanded(child: preview),
+            ],
+          );
+        },
       ),
     );
   }
@@ -14314,24 +14304,40 @@ class _SettingsApiSection extends StatelessWidget {
     return _SettingsSectionShell(
       title: 'API & Integrations',
       trailing: Text('Revoke All Keys', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _SettingsSecureField(label: 'Production API Key', value: settings.apiKeyMasked),
-          const SizedBox(height: 16),
-          Row(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final stacked = constraints.maxWidth < 780;
+          final webhookField = _SettingsInlineField(
+            label: 'Webhook Endpoint URL',
+            hint: settings.webhookUrl.isNotEmpty ? settings.webhookUrl : 'https://your-domain.com/webhooks/i-metro',
+          );
+          final actionButton = const _SettingsActionButton(label: 'Test');
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: _SettingsInlineField(
-                  label: 'Webhook Endpoint URL',
-                  hint: settings.webhookUrl.isNotEmpty ? settings.webhookUrl : 'https://your-domain.com/webhooks/i-metro',
+              _SettingsSecureField(label: 'Production API Key', value: settings.apiKeyMasked),
+              const SizedBox(height: 16),
+              if (stacked)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    webhookField,
+                    const SizedBox(height: 12),
+                    Align(alignment: Alignment.centerLeft, child: actionButton),
+                  ],
+                )
+              else
+                Row(
+                  children: [
+                    Expanded(child: webhookField),
+                    const SizedBox(width: 12),
+                    actionButton,
+                  ],
                 ),
-              ),
-              const SizedBox(width: 12),
-              const _SettingsActionButton(label: 'Test'),
             ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -14376,61 +14382,103 @@ class _SettingsBrandingSection extends StatelessWidget {
     final primaryColor = _colorFromHex(settings.primaryColor, fallback: _DashboardColors.primary);
     return _SettingsSectionShell(
       title: 'Custom Branding',
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Primary Brand Color', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: _DashboardColors.surfaceLow, width: 3),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final stacked = constraints.maxWidth < 680;
+          final colorRow = stacked
+              ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(settings.primaryColor, style: GoogleFonts.robotoMono(fontSize: 11, fontWeight: FontWeight.w700)),
+                    Row(
+                      children: [
+                        Container(
+                          width: 44,
+                          height: 44,
+                          decoration: BoxDecoration(
+                            color: primaryColor,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: _DashboardColors.surfaceLow, width: 3),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(settings.primaryColor, style: GoogleFonts.robotoMono(fontSize: 11, fontWeight: FontWeight.w700)),
+                              const SizedBox(height: 4),
+                              Text('Transit Emerald (Global Default)', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text('Change', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: _DashboardColors.surfaceLow, width: 3),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(settings.primaryColor, style: GoogleFonts.robotoMono(fontSize: 11, fontWeight: FontWeight.w700)),
+                          const SizedBox(height: 4),
+                          Text('Transit Emerald (Global Default)', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                        ],
+                      ),
+                    ),
+                    Text('Change', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                  ],
+                );
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Primary Brand Color', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+              const SizedBox(height: 10),
+              colorRow,
+              const SizedBox(height: 18),
+              Text('Logo Assets', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+              const SizedBox(height: 10),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.5), width: 2, style: BorderStyle.solid),
+                  color: _DashboardColors.surfaceLow,
+                ),
+                child: Column(
+                  children: [
+                    const Icon(Icons.cloud_upload, size: 32, color: _DashboardColors.outlineVariant),
+                    const SizedBox(height: 8),
+                    Text(
+                      settings.logoHint,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                    ),
                     const SizedBox(height: 4),
-                    Text('Transit Emerald (Global Default)', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                    Text('Max size 2MB', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant.withOpacity(0.6))),
                   ],
                 ),
               ),
-              Text('Change', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
             ],
-          ),
-          const SizedBox(height: 18),
-          Text('Logo Assets', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
-          const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.5), width: 2, style: BorderStyle.solid),
-              color: _DashboardColors.surfaceLow,
-            ),
-            child: Column(
-              children: [
-                const Icon(Icons.cloud_upload, size: 32, color: _DashboardColors.outlineVariant),
-                const SizedBox(height: 8),
-                Text(
-                  settings.logoHint,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
-                ),
-                const SizedBox(height: 4),
-                Text('Max size 2MB', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant.withOpacity(0.6))),
-              ],
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
@@ -14443,47 +14491,105 @@ class _SettingsFooterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      decoration: BoxDecoration(
-        color: _DashboardColors.surfaceLow,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Row(
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.history, size: 16, color: _DashboardColors.onSurfaceVariant),
-              const SizedBox(width: 8),
-              Text(
-                lastModified,
-                style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant, fontStyle: FontStyle.italic),
-              ),
-            ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final stacked = constraints.maxWidth < 720;
+        final actions = stacked
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Discard Changes',
+                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: _DashboardColors.primary,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 6))],
+                    ),
+                    child: Text(
+                      'Save Configuration',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                    ),
+                  ),
+                ],
+              )
+            : Row(
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Discard Changes',
+                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: _DashboardColors.primary,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 6))],
+                    ),
+                    child: Text(
+                      'Save Configuration',
+                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                    ),
+                  ),
+                ],
+              );
+
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          decoration: BoxDecoration(
+            color: _DashboardColors.surfaceLow,
+            borderRadius: BorderRadius.circular(16),
           ),
-          const Spacer(),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'Discard Changes',
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-            decoration: BoxDecoration(
-              color: _DashboardColors.primary,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 6))],
-            ),
-            child: Text(
-              'Save Configuration',
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
-            ),
-          ),
-        ],
-      ),
+          child: stacked
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.history, size: 16, color: _DashboardColors.onSurfaceVariant),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            lastModified,
+                            style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant, fontStyle: FontStyle.italic),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    actions,
+                  ],
+                )
+              : Row(
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.history, size: 16, color: _DashboardColors.onSurfaceVariant),
+                        const SizedBox(width: 8),
+                        Text(
+                          lastModified,
+                          style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant, fontStyle: FontStyle.italic),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    actions,
+                  ],
+                ),
+        );
+      },
     );
   }
 }

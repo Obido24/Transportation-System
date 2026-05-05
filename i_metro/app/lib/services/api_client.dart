@@ -4,10 +4,15 @@ import 'package:http/http.dart' as http;
 import 'auth_store.dart';
 
 class ApiClient {
+  static const String _productionBaseUrl = 'https://i-metro-backend.onrender.com/api';
+
   static String get baseUrl {
     const configured = String.fromEnvironment('API_BASE_URL', defaultValue: '');
     if (configured.isNotEmpty) {
       return configured;
+    }
+    if (kReleaseMode) {
+      return _productionBaseUrl;
     }
     if (kIsWeb) {
       return 'http://localhost:3000/api';

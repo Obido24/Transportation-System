@@ -208,11 +208,11 @@ Bus Scan Snapshot
 <span class="inline-flex items-center rounded-full bg-secondary-container/70 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-on-secondary-fixed-variant" data-validator-snapshot-bus-count>0 buses tracked</span>
 </div>
 </div>
-<div class="mt-6 grid gap-4 md:grid-cols-4">
-<div class="rounded-xl bg-surface-container-low px-4 py-3">
-<p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">Validator</p>
-<p class="mt-1 text-sm font-semibold text-on-surface" data-validator-snapshot-validator>-</p>
-</div>
+  <div class="mt-6 grid gap-4 md:grid-cols-4">
+  <div class="rounded-xl bg-surface-container-low px-4 py-3">
+  <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">Validator</p>
+  <p class="mt-1 text-sm font-semibold text-on-surface" data-validator-snapshot-validator>-</p>
+  </div>
 <div class="rounded-xl bg-surface-container-low px-4 py-3">
 <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">Ticket</p>
 <p class="mt-1 font-mono text-sm font-semibold text-on-surface break-all" data-validator-snapshot-ticket>-</p>
@@ -221,12 +221,16 @@ Bus Scan Snapshot
 <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">Route</p>
 <p class="mt-1 text-sm font-semibold text-on-surface" data-validator-snapshot-route>-</p>
 </div>
-<div class="rounded-xl bg-surface-container-low px-4 py-3">
-<p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">Time</p>
-<p class="mt-1 text-sm font-semibold text-on-surface" data-validator-snapshot-time>-</p>
-</div>
-</div>
-<div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/10 pt-4">
+  <div class="rounded-xl bg-surface-container-low px-4 py-3">
+  <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">Time</p>
+  <p class="mt-1 text-sm font-semibold text-on-surface" data-validator-snapshot-time>-</p>
+  </div>
+  <div class="rounded-xl bg-surface-container-low px-4 py-3 md:col-span-4 lg:col-span-1">
+  <p class="text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant">Reason</p>
+  <p class="mt-1 text-sm font-semibold text-on-surface break-words" data-validator-snapshot-reason>-</p>
+  </div>
+  </div>
+  <div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/10 pt-4">
 <p class="text-xs text-on-surface-variant">Click through to the full bus scan log for this validation stream.</p>
 <button class="inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-on-primary hover:opacity-95 transition-opacity" type="button" data-validator-snapshot-action>
 <span class="material-symbols-outlined text-[18px]">qr_code_scanner</span>

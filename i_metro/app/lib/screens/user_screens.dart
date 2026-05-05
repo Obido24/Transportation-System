@@ -44,6 +44,287 @@ Widget _brandLogo({double size = 40, double radius = 12}) {
   );
 }
 
+class AppModeSelectorScreen extends StatelessWidget {
+  const AppModeSelectorScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const background = Color(0xFFF7F9FB);
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const surfaceLowest = Color(0xFFFFFFFF);
+    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const disabledSurface = Color(0xFFF4F6F7);
+
+    return Scaffold(
+      backgroundColor: background,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 460),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _brandLogo(size: 46, radius: 14),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Choose Your Ride',
+                              style: GoogleFonts.manrope(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w800,
+                                color: onSurface,
+                                height: 1.1,
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              'Select a service to get started.',
+                              style: GoogleFonts.inter(
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.w500,
+                                color: onSurfaceVariant,
+                                height: 1.38,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 22),
+                  _AppModeCard(
+                    icon: Icons.directions_bus_rounded,
+                    title: 'Bus',
+                    subtitle: 'Available now',
+                    accent: primary,
+                    background: const Color(0xFFF5FBF8),
+                    enabled: true,
+                    primaryAction: true,
+                    onTap: () => Navigator.pushReplacementNamed(context, AppRoutes.home),
+                  ),
+                  const SizedBox(height: 14),
+                  _AppModeCard(
+                    icon: Icons.local_taxi_rounded,
+                    title: 'Taxi Meter',
+                    subtitle: 'Coming soon',
+                    accent: const Color(0xFF9AA6A0),
+                    background: disabledSurface,
+                    enabled: false,
+                    comingSoon: true,
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Taxi Meter is coming soon.')),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 14),
+                  _AppModeCard(
+                    icon: Icons.delivery_dining_rounded,
+                    title: 'Bike Delivery',
+                    subtitle: 'Coming soon',
+                    accent: const Color(0xFF9AA6A0),
+                    background: disabledSurface,
+                    enabled: false,
+                    comingSoon: true,
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Bike Delivery is coming soon.')),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AppModeCard extends StatelessWidget {
+  const _AppModeCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.accent,
+    required this.background,
+    required this.onTap,
+    required this.enabled,
+    this.comingSoon = false,
+    this.primaryAction = false,
+  });
+
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color accent;
+  final Color background;
+  final VoidCallback onTap;
+  final bool enabled;
+  final bool comingSoon;
+  final bool primaryAction;
+
+  @override
+  Widget build(BuildContext context) {
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+
+    final cardBorderColor = enabled
+        ? accent.withOpacity(primaryAction ? 0.32 : 0.18)
+        : const Color(0xFFDAE2DC);
+    final cardShadow = enabled
+        ? [
+            BoxShadow(
+              color: primaryAction ? accent.withOpacity(0.10) : Colors.black.withOpacity(0.04),
+              blurRadius: primaryAction ? 26 : 20,
+              offset: const Offset(0, 10),
+            ),
+          ]
+        : [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
+            ),
+          ];
+
+    return Semantics(
+      button: enabled,
+      child: Material(
+        color: background,
+        borderRadius: BorderRadius.circular(24),
+        child: InkWell(
+          onTap: enabled ? onTap : null,
+          borderRadius: BorderRadius.circular(24),
+          splashColor: enabled ? accent.withOpacity(0.08) : Colors.transparent,
+          highlightColor: enabled ? accent.withOpacity(0.04) : Colors.transparent,
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 17),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              border: Border.all(color: cardBorderColor, width: enabled && primaryAction ? 1.6 : 1),
+              boxShadow: cardShadow,
+              gradient: enabled && primaryAction
+                  ? LinearGradient(
+                      colors: [
+                        const Color(0xFFF8FCFA),
+                        background,
+                      ],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    )
+                  : null,
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 54,
+                  height: 54,
+                  decoration: BoxDecoration(
+                    color: enabled
+                        ? accent.withOpacity(primaryAction ? 0.14 : 0.12)
+                        : const Color(0xFFE7ECE8),
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Icon(
+                    icon,
+                    color: enabled ? accent : const Color(0xFF9AA6A0),
+                    size: 28,
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              title,
+                              style: GoogleFonts.manrope(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800,
+                                color: enabled ? onSurface : onSurface.withOpacity(0.78),
+                                height: 1.1,
+                              ),
+                            ),
+                          ),
+                          if (comingSoon)
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFEAF0EC),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: Text(
+                                'Coming soon',
+                                style: GoogleFonts.inter(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: const Color(0xFF7C8A83),
+                                  letterSpacing: 0.3,
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        subtitle,
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: enabled ? onSurfaceVariant : onSurfaceVariant.withOpacity(0.58),
+                          height: 1.35,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                if (enabled)
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: accent.withOpacity(0.10),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.arrow_forward_rounded, color: accent, size: 18),
+                  )
+                else
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFE9ECE9),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(Icons.lock_outline_rounded, color: Color(0xFF9AA6A0), size: 16),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class SplashOnboardingScreen extends StatefulWidget {
   const SplashOnboardingScreen({super.key});
 
@@ -52,189 +333,866 @@ class SplashOnboardingScreen extends StatefulWidget {
 }
 
 class _SplashOnboardingScreenState extends State<SplashOnboardingScreen> {
+  late final PageController _pageController;
+  Timer? _splashTimer;
+  int _pageIndex = 0;
+
+  static const int _splashPageIndex = 0;
+  static const int _introStartIndex = 1;
+  static const int _introEndIndex = 3;
+
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(initialPage: _splashPageIndex);
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
       if (AuthStore.isLoggedIn) {
-        Navigator.pushReplacementNamed(context, AppRoutes.home);
+        Navigator.pushReplacementNamed(context, AppRoutes.appModeSelect);
+        return;
       }
+      _splashTimer = Timer(const Duration(seconds: 6), () {
+        if (!mounted || _pageIndex != _splashPageIndex) return;
+        _pageController.animateToPage(
+          _introStartIndex,
+          duration: const Duration(milliseconds: 520),
+          curve: Curves.easeOutCubic,
+        );
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    _splashTimer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _goToPage(int page) {
+    if (page < _splashPageIndex || page > _introEndIndex) return;
+    _pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 360),
+      curve: Curves.easeOutCubic,
+    );
+  }
+
+  void _skipToLogin() {
+    Navigator.pushReplacementNamed(context, AppRoutes.login);
+  }
+
+  void _finishOnboarding() {
+    Navigator.pushReplacementNamed(context, AppRoutes.login);
   }
 
   @override
   Widget build(BuildContext context) {
     const background = Color(0xFFF7F9FB);
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    const outlineVariant = Color(0xFFBDCAC0);
-    const primary = Color(0xFF006B47);
-    const primaryFixed = Color(0xFF8DF7C1);
-    const onPrimaryFixed = Color(0xFF002113);
-    const kineticStart = Color(0xFF006B47);
-    const kineticEnd = Color(0xFF00875A);
 
     return Scaffold(
       backgroundColor: background,
-      body: Stack(
+      body: SafeArea(
+        child: PageView(
+          controller: _pageController,
+          physics: const BouncingScrollPhysics(),
+          onPageChanged: (page) {
+            setState(() => _pageIndex = page);
+            if (page != _splashPageIndex) {
+              _splashTimer?.cancel();
+            }
+          },
+          children: [
+            const _OnboardingSplashPage(),
+            _OnboardingSlide(
+              stepIndex: 0,
+              totalSteps: 3,
+              illustrationType: _OnboardingIllustrationType.book,
+              title: 'Book your bus ride',
+              body: 'Enter your pickup and destination to find available I-Metro buses near you.',
+              primaryLabel: 'Next',
+              secondaryLabel: 'Skip',
+              onPrimaryTap: () => _goToPage(2),
+              onSecondaryTap: _skipToLogin,
+            ),
+            _OnboardingSlide(
+              stepIndex: 1,
+              totalSteps: 3,
+              illustrationType: _OnboardingIllustrationType.track,
+              title: 'Track your bus',
+              body: 'Follow your bus location in real time and know exactly when it will arrive.',
+              primaryLabel: 'Next',
+              secondaryLabel: 'Back',
+              onPrimaryTap: () => _goToPage(3),
+              onSecondaryTap: () => _goToPage(1),
+            ),
+            _OnboardingSlide(
+              stepIndex: 2,
+              totalSteps: 3,
+              illustrationType: _OnboardingIllustrationType.rate,
+              title: 'Rate your trip',
+              body: 'Share your feedback so we can keep improving your I-Metro experience.',
+              primaryLabel: 'Get started',
+              secondaryLabel: 'Back',
+              onPrimaryTap: _finishOnboarding,
+              onSecondaryTap: () => _goToPage(2),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+enum _OnboardingIllustrationType { book, track, rate }
+
+class _OnboardingSplashPage extends StatelessWidget {
+  const _OnboardingSplashPage();
+
+  @override
+  Widget build(BuildContext context) {
+    const top = Color(0xFF0D5A3D);
+    const mid = Color(0xFF0A744D);
+    const bottom = Color(0xFF083C2A);
+
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [top, mid, bottom],
+        ),
+      ),
+      child: Stack(
         children: [
-          Positioned.fill(
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 7,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.network(
-                        'https://lh3.googleusercontent.com/aida-public/AB6AXuDkuc151WaMen8WZwS50YmNU_W0OgUUBrTpi1BvJi9Gbwh-RszclYjFbqQHmfXmXoYCnmBdtWAs9fh12GJe9BRkmM15zq0HoKS-KHkQTMBtREjtjquFUxkzeDLuIs4CHVR9VjIb1z7nNRHqimdGZfSBoSu43q5QobqjrxZmlkCqqOIBP0iVyfHZXLG7lSSYNiAlIzHDrinligFWMXyc0sv649NAm0hLJ96ZYgQIHCXCzd_zTV8LtmGrITBgM77s4eIo_6iVfemOpA',
-                        fit: BoxFit.cover,
-                        color: Colors.black.withOpacity(0.12),
-                        colorBlendMode: BlendMode.darken,
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.transparent,
-                              background,
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+          Positioned(
+            top: -90,
+            right: -60,
+            child: _SplashGlow(size: 240, color: Colors.white.withOpacity(0.06)),
+          ),
+          Positioned(
+            left: -70,
+            bottom: -90,
+            child: _SplashGlow(size: 260, color: Colors.white.withOpacity(0.04)),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _brandLogo(size: 96, radius: 26),
+                  const SizedBox(height: 18),
+                  Text(
+                    'I-Metro',
+                    style: GoogleFonts.manrope(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white,
+                      letterSpacing: -0.8,
+                      height: 1.1,
+                    ),
                   ),
-                ),
-                const Expanded(flex: 5, child: SizedBox()),
-              ],
+                  const SizedBox(height: 8),
+                  Text(
+                    'Smart, calm, and reliable bus travel.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.inter(
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white.withOpacity(0.82),
+                      height: 1.45,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          _brandLogo(size: 40, radius: 12),
-                          const SizedBox(width: 8),
-                          Text(
-                            'I-Metro',
-                            style: GoogleFonts.manrope(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                              color: onSurface,
-                              letterSpacing: -0.6,
+          const Positioned(
+            left: 0,
+            right: 0,
+            bottom: 34,
+            child: Center(
+              child: SizedBox(
+                width: 124,
+                child: LinearProgressIndicator(
+                  minHeight: 4,
+                  value: null,
+                  backgroundColor: Color(0x33FFFFFF),
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SplashGlow extends StatelessWidget {
+  const _SplashGlow({required this.size, required this.color});
+
+  final double size;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+      ),
+    );
+  }
+}
+
+class _OnboardingSlide extends StatelessWidget {
+  const _OnboardingSlide({
+    required this.stepIndex,
+    required this.totalSteps,
+    required this.illustrationType,
+    required this.title,
+    required this.body,
+    required this.primaryLabel,
+    required this.secondaryLabel,
+    required this.onPrimaryTap,
+    required this.onSecondaryTap,
+  });
+
+  final int stepIndex;
+  final int totalSteps;
+  final _OnboardingIllustrationType illustrationType;
+  final String title;
+  final String body;
+  final String primaryLabel;
+  final String secondaryLabel;
+  final VoidCallback onPrimaryTap;
+  final VoidCallback onSecondaryTap;
+
+  @override
+  Widget build(BuildContext context) {
+    const background = Color(0xFFF7F9FB);
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const outlineVariant = Color(0xFFBDCAC0);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final horizontalPadding = constraints.maxWidth > 500 ? 28.0 : 22.0;
+        final contentWidth = constraints.maxWidth > 500 ? 430.0 : constraints.maxWidth;
+
+        return Container(
+          color: background,
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: contentWidth),
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(horizontalPadding, 18, horizontalPadding, 18),
+                child: Column(
+                  children: [
+                    const Spacer(flex: 1),
+                    Expanded(
+                      flex: 52,
+                      child: Center(
+                        child: _OnboardingIllustration(
+                          type: illustrationType,
+                          accent: primary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.manrope(
+                        fontSize: constraints.maxWidth > 420 ? 26 : 24,
+                        fontWeight: FontWeight.w800,
+                        color: onSurface,
+                        height: 1.15,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      body,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.inter(
+                        fontSize: 13.5,
+                        fontWeight: FontWeight.w500,
+                        color: onSurfaceVariant,
+                        height: 1.55,
+                      ),
+                    ),
+                    const SizedBox(height: 18),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(totalSteps, (index) {
+                        final active = index == stepIndex;
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 220),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          width: active ? 28 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: active ? primary : outlineVariant.withOpacity(0.55),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                        );
+                      }),
+                    ),
+                    const SizedBox(height: 18),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: onSecondaryTap,
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              foregroundColor: onSurfaceVariant,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                            ),
+                            child: Text(
+                              secondaryLabel,
+                              style: GoogleFonts.inter(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: onSurfaceVariant,
+                              ),
                             ),
                           ),
-                        ],
-                      ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(20),
                         ),
-                        child: const Icon(Icons.help_outline, color: onSurfaceVariant),
-                      ),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(28, 0, 28, 32),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: primaryFixed,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          'LUXURY IN MOTION',
-                          style: GoogleFonts.inter(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1.8,
-                            color: onPrimaryFixed,
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: onPrimaryTap,
+                            style: ElevatedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              backgroundColor: primary,
+                              foregroundColor: Colors.white,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                              shadowColor: primary.withOpacity(0.2),
+                            ),
+                            child: Text(
+                              primaryLabel,
+                              style: GoogleFonts.inter(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Efficient, Safe,\nSmart Mobility',
-                        style: GoogleFonts.manrope(
-                          fontSize: 38,
-                          fontWeight: FontWeight.w800,
-                          height: 1.05,
-                          color: onSurface,
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _OnboardingIllustration extends StatelessWidget {
+  const _OnboardingIllustration({
+    required this.type,
+    required this.accent,
+  });
+
+  final _OnboardingIllustrationType type;
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    switch (type) {
+      case _OnboardingIllustrationType.book:
+        return _BusBookingIllustration(accent: accent);
+      case _OnboardingIllustrationType.track:
+        return _BusTrackingIllustration(accent: accent);
+      case _OnboardingIllustrationType.rate:
+        return _BusRatingIllustration(accent: accent);
+    }
+  }
+}
+
+class _IllustrationFrame extends StatelessWidget {
+  const _IllustrationFrame({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 0.94,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(36),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 24,
+              offset: const Offset(0, 14),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(36),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+class _BusBookingIllustration extends StatelessWidget {
+  const _BusBookingIllustration({required this.accent});
+
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return _IllustrationFrame(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    accent.withOpacity(0.07),
+                    Colors.white,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 24,
+            left: 20,
+            right: 20,
+            child: Container(
+              height: 104,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: accent.withOpacity(0.10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.03),
+                    blurRadius: 18,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              padding: const EdgeInsets.all(14),
+              child: Row(
+                children: [
+                  Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: accent.withOpacity(0.10),
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Icon(Icons.location_pin, color: accent, size: 24),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Choose a route',
+                          style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E)),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Clean-energy fleets, intelligent transport systems, and professional service for Abuja commuters.',
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: onSurfaceVariant,
-                          height: 1.5,
+                        const SizedBox(height: 4),
+                        Text(
+                          'From pickup to destination',
+                          style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF3E4942)),
                         ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: accent.withOpacity(0.08),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.directions_bus_rounded, color: accent, size: 28),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            left: 18,
+            right: 18,
+            bottom: 22,
+            child: Container(
+              height: 138,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF7F9FB),
+                borderRadius: BorderRadius.circular(28),
+                border: Border.all(color: accent.withOpacity(0.08)),
+              ),
+              padding: const EdgeInsets.all(16),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 12,
+                    top: 20,
+                    child: Container(
+                      width: 16,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        color: accent,
+                        shape: BoxShape.circle,
                       ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Container(width: 32, height: 6, decoration: BoxDecoration(color: primary, borderRadius: BorderRadius.circular(99))),
-                          const SizedBox(width: 6),
-                          Container(width: 6, height: 6, decoration: BoxDecoration(color: outlineVariant, borderRadius: BorderRadius.circular(99))),
-                          const SizedBox(width: 6),
-                          Container(width: 6, height: 6, decoration: BoxDecoration(color: outlineVariant, borderRadius: BorderRadius.circular(99))),
+                    ),
+                  ),
+                  Positioned(
+                    left: 38,
+                    top: 28,
+                    right: 26,
+                    child: Container(
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: accent.withOpacity(0.14),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    right: 16,
+                    top: 12,
+                    child: Container(
+                      width: 76,
+                      height: 76,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(22),
+                        border: Border.all(color: accent.withOpacity(0.12)),
+                      ),
+                      child: const Icon(Icons.bus_alert_rounded, color: Color(0xFF006B47), size: 40),
+                    ),
+                  ),
+                  Positioned(
+                    left: 22,
+                    bottom: 18,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(999),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 4)),
                         ],
                       ),
-                      const SizedBox(height: 24),
-                      ElevatedButton(
-                        onPressed: () => Navigator.pushReplacementNamed(context, AppRoutes.login),
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 18),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-                          backgroundColor: kineticStart,
-                          elevation: 0,
-                        ).copyWith(
-                          backgroundColor: MaterialStateProperty.resolveWith(
-                            (states) => kineticStart,
+                      child: Text(
+                        'Available buses',
+                        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: const Color(0xFF3E4942)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BusTrackingIllustration extends StatelessWidget {
+  const _BusTrackingIllustration({required this.accent});
+
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return _IllustrationFrame(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    accent.withOpacity(0.06),
+                    Colors.white,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 18,
+            right: 18,
+            top: 24,
+            child: Container(
+              height: 192,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(28),
+                border: Border.all(color: accent.withOpacity(0.09)),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 22,
+                    top: 18,
+                    child: Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: accent.withOpacity(0.10),
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: Icon(Icons.map_outlined, color: accent, size: 24),
+                    ),
+                  ),
+                  Positioned(
+                    right: 20,
+                    top: 16,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: accent.withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Text(
+                        'Live tracking',
+                        style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: accent),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 30,
+                    right: 30,
+                    top: 82,
+                    child: Container(
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: accent.withOpacity(0.14),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 72,
+                    top: 70,
+                    child: Container(
+                      width: 46,
+                      height: 46,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
+                        ],
+                      ),
+                      child: Icon(Icons.directions_bus_filled_rounded, color: accent, size: 26),
+                    ),
+                  ),
+                  Positioned(
+                    right: 34,
+                    top: 52,
+                    child: Container(
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        color: accent,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(color: accent.withOpacity(0.28), blurRadius: 10, offset: const Offset(0, 4)),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    right: 42,
+                    top: 72,
+                    child: Icon(Icons.place_rounded, color: accent, size: 30),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            left: 36,
+            bottom: 24,
+            child: Container(
+              width: 144,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: accent.withOpacity(0.08)),
+                boxShadow: [
+                  BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 16, offset: const Offset(0, 8)),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('ETA', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: accent)),
+                  const SizedBox(height: 4),
+                  Text('8 min away', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E))),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BusRatingIllustration extends StatelessWidget {
+  const _BusRatingIllustration({required this.accent});
+
+  final Color accent;
+
+  @override
+  Widget build(BuildContext context) {
+    return _IllustrationFrame(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    accent.withOpacity(0.06),
+                    Colors.white,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 24,
+            left: 26,
+            right: 26,
+            child: Container(
+              height: 184,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: accent.withOpacity(0.08)),
+              ),
+              child: Stack(
+                children: [
+                  Positioned(
+                    top: 22,
+                    left: 24,
+                    child: Container(
+                      width: 52,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: accent.withOpacity(0.12),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(Icons.star_rounded, color: accent, size: 30),
+                    ),
+                  ),
+                  Positioned(
+                    top: 34,
+                    left: 92,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Rate your trip',
+                          style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E)),
+                        ),
+                        const SizedBox(height: 6),
+                        Row(
+                          children: List.generate(5, (index) {
+                            return Icon(
+                              Icons.star_rounded,
+                              size: 20,
+                              color: index < 4 ? accent : accent.withOpacity(0.18),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    left: 24,
+                    right: 24,
+                    bottom: 22,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 46,
+                            decoration: BoxDecoration(
+                              color: accent.withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Comfort',
+                                style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w700, color: accent),
+                              ),
+                            ),
                           ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Next', style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white)),
-                            const SizedBox(width: 8),
-                            const Icon(Icons.arrow_forward, color: Colors.white),
-                          ],
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Container(
+                            height: 46,
+                            decoration: BoxDecoration(
+                              color: accent.withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Safety',
+                                style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w700, color: accent),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 14),
-                      TextButton(
-                        onPressed: () => Navigator.pushReplacementNamed(context, AppRoutes.login),
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-                          foregroundColor: onSurfaceVariant,
-                        ),
-                        child: Text('Skip', style: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w600)),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            right: 38,
+            bottom: 24,
+            child: Container(
+              width: 88,
+              height: 88,
+              decoration: BoxDecoration(
+                color: accent.withOpacity(0.10),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.celebration_rounded, color: Color(0xFF006B47), size: 40),
             ),
           ),
         ],
@@ -305,10 +1263,47 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!mounted) return;
     if (response['ok'] == true) {
       await PushService.instance.initialize();
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
+      Navigator.pushReplacementNamed(context, AppRoutes.appModeSelect);
     } else {
       setState(() => _submitError = _loginErrorMessage(response));
     }
+  }
+
+  Widget _buildSecureDivider({
+    required Color outline,
+    required Color surfaceContainerHigh,
+  }) {
+    return Row(
+      children: [
+        Expanded(child: Container(height: 1, color: surfaceContainerHigh)),
+        const SizedBox(width: 12),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF2F6F4),
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.lock_outline_rounded, size: 14, color: outline),
+              const SizedBox(width: 6),
+              Text(
+                'Secure login',
+                style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.1,
+                  color: outline,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(child: Container(height: 1, color: surfaceContainerHigh)),
+      ],
+    );
   }
 
   @override
@@ -330,35 +1325,49 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Stack(
         children: [
           Positioned(
-            top: -80,
-            right: -40,
+            top: -110,
+            right: -90,
+            child: Container(
+              width: 260,
+              height: 260,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    kineticStart.withOpacity(0.95),
+                    kineticEnd.withOpacity(0.86),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                boxShadow: [BoxShadow(color: kineticStart.withOpacity(0.10), blurRadius: 90, spreadRadius: 12)],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -110,
+            left: -90,
             child: Container(
               width: 220,
               height: 220,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: const LinearGradient(colors: [kineticStart, kineticEnd]),
-                boxShadow: [BoxShadow(color: kineticStart.withOpacity(0.04), blurRadius: 120, spreadRadius: 40)],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -60,
-            left: -30,
-            child: Container(
-              width: 180,
-              height: 180,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: const LinearGradient(colors: [kineticStart, kineticEnd]),
-                boxShadow: [BoxShadow(color: kineticStart.withOpacity(0.04), blurRadius: 100, spreadRadius: 30)],
+                gradient: LinearGradient(
+                  colors: [
+                    kineticEnd.withOpacity(0.76),
+                    kineticStart.withOpacity(0.88),
+                  ],
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                ),
+                boxShadow: [BoxShadow(color: kineticStart.withOpacity(0.06), blurRadius: 80, spreadRadius: 8)],
               ),
             ),
           ),
           SafeArea(
             child: Center(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 420),
                   child: Column(
@@ -366,31 +1375,53 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Row(
                         children: [
-                          _brandLogo(size: 40, radius: 12),
-                          const SizedBox(width: 8),
+                          _brandLogo(size: 38, radius: 12),
+                          const SizedBox(width: 10),
                           Text(
                             'I-Metro',
-                            style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: primary),
+                            style: GoogleFonts.manrope(fontSize: 21, fontWeight: FontWeight.w800, color: primary),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'Luxury in Motion',
-                        style: GoogleFonts.manrope(fontSize: 30, fontWeight: FontWeight.w700, color: onSurface),
+                      const SizedBox(height: 22),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 310),
+                        child: Text(
+                          'Luxury in Motion',
+                          style: GoogleFonts.manrope(
+                            fontSize: 27,
+                            fontWeight: FontWeight.w700,
+                            height: 1.08,
+                            color: onSurface,
+                          ),
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Sign in to access clean-energy routes, cashless tickets, and real-time updates.',
-                        style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w500, color: onSurfaceVariant, height: 1.5),
+                      const SizedBox(height: 10),
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 360),
+                        child: Text(
+                          'Sign in to access clean-energy routes, cashless tickets, and real-time updates.',
+                          style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            fontWeight: FontWeight.w500,
+                            color: onSurfaceVariant,
+                            height: 1.45,
+                          ),
+                        ),
                       ),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 28),
                       Container(
-                        padding: const EdgeInsets.fromLTRB(24, 24, 24, 20),
+                        padding: const EdgeInsets.fromLTRB(22, 22, 22, 18),
                         decoration: BoxDecoration(
                           color: surfaceLowest,
-                          borderRadius: BorderRadius.circular(24),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 32, offset: const Offset(0, 12))],
+                          borderRadius: BorderRadius.circular(26),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 28,
+                              offset: const Offset(0, 12),
+                            ),
+                          ],
                         ),
                         child: Form(
                           key: _formKey,
@@ -402,19 +1433,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Text(
                                   'Email/phone',
                                   style: GoogleFonts.inter(
-                                    fontSize: 11,
+                                    fontSize: 10.5,
                                     fontWeight: FontWeight.w700,
-                                    letterSpacing: 1.6,
+                                    letterSpacing: 1.5,
                                     color: onSurfaceVariant,
                                   ),
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 9),
                                 TextFormField(
                                   controller: _loginController,
                                   enabled: !_loading,
                                   keyboardType: TextInputType.emailAddress,
                                   textInputAction: TextInputAction.next,
                                   autofillHints: const [AutofillHints.username],
+                                  cursorColor: primary,
                                   onChanged: (_) => _clearSubmitError(),
                                   validator: (value) {
                                     final input = value?.trim() ?? '';
@@ -434,28 +1466,45 @@ class _LoginScreenState extends State<LoginScreen> {
                                   decoration: InputDecoration(
                                     filled: true,
                                     fillColor: surfaceContainerLow,
-                                    prefixIcon: const Icon(Icons.alternate_email, color: outlineVariant),
+                                    prefixIcon: const Icon(Icons.alternate_email_rounded, color: outlineVariant, size: 20),
+                                    prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
                                     hintText: 'Enter your credentials',
-                                    hintStyle: GoogleFonts.inter(fontSize: 14, color: outline.withOpacity(0.6)),
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                                    hintStyle: GoogleFonts.inter(fontSize: 13.5, color: outline.withOpacity(0.62)),
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
+                                    ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: primary.withOpacity(0.2), width: 2),
+                                      borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.4),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.6),
                                     ),
                                     errorStyle: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 18),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
                                       'PASSWORD',
                                       style: GoogleFonts.inter(
-                                        fontSize: 11,
+                                        fontSize: 10.5,
                                         fontWeight: FontWeight.w700,
-                                        letterSpacing: 1.6,
+                                        letterSpacing: 1.5,
                                         color: onSurfaceVariant,
                                       ),
                                     ),
@@ -466,17 +1515,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                         padding: EdgeInsets.zero,
                                         minimumSize: const Size(0, 0),
                                       ),
-                                      child: Text('Forgot password?', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600)),
+                                      child: Text(
+                                        'Forgot password?',
+                                        style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w600),
+                                      ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 8),
+                                const SizedBox(height: 7),
                                 TextFormField(
                                   controller: _passwordController,
                                   enabled: !_loading,
                                   obscureText: _obscure,
                                   textInputAction: TextInputAction.done,
                                   autofillHints: const [AutofillHints.password],
+                                  cursorColor: primary,
                                   onChanged: (_) => _clearSubmitError(),
                                   onFieldSubmitted: (_) => _handleLogin(),
                                   validator: (value) {
@@ -492,35 +1545,51 @@ class _LoginScreenState extends State<LoginScreen> {
                                   decoration: InputDecoration(
                                     filled: true,
                                     fillColor: surfaceContainerLow,
-                                    prefixIcon: const Icon(Icons.lock, color: outlineVariant),
-                                    hintText: '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022',
-                                    hintStyle: GoogleFonts.inter(fontSize: 14, color: outline.withOpacity(0.6)),
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
-                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                                    prefixIcon: const Icon(Icons.lock_rounded, color: outlineVariant, size: 20),
+                                    prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
+                                    hintText: 'Enter your password',
+                                    hintStyle: GoogleFonts.inter(fontSize: 13.5, color: outline.withOpacity(0.62)),
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
+                                    ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: primary.withOpacity(0.2), width: 2),
+                                      borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.4),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.6),
                                     ),
                                     suffixIcon: IconButton(
-                                      icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off, color: outline),
+                                      icon: Icon(_obscure ? Icons.visibility_rounded : Icons.visibility_off_rounded, color: outline),
                                       onPressed: () => setState(() => _obscure = !_obscure),
                                     ),
                                     errorStyle: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 18),
                                 if (_submitError != null)
                                   Padding(
                                     padding: const EdgeInsets.only(bottom: 12),
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFFFE8E6),
-                                        borderRadius: BorderRadius.circular(12),
+                                        color: const Color(0xFFFFEDEA),
+                                        borderRadius: BorderRadius.circular(14),
                                       ),
                                       child: Row(
                                         children: [
-                                          const Icon(Icons.error_outline, color: Colors.redAccent, size: 18),
+                                          const Icon(Icons.error_outline_rounded, color: Colors.redAccent, size: 18),
                                           const SizedBox(width: 8),
                                           Expanded(
                                             child: Text(
@@ -532,42 +1601,52 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
                                   ),
-                                ElevatedButton(
-                                  onPressed: _loading ? null : _handleLogin,
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.symmetric(vertical: 16),
-                                    backgroundColor: kineticStart,
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                    elevation: 0,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      if (_loading)
-                                        const SizedBox(
-                                          width: 16,
-                                          height: 16,
-                                          child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                                const SizedBox(height: 4),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: _loading ? null : _handleLogin,
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: const Size.fromHeight(54),
+                                      padding: const EdgeInsets.symmetric(vertical: 16),
+                                      backgroundColor: kineticStart,
+                                      disabledBackgroundColor: kineticStart.withOpacity(0.55),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                                      elevation: 0,
+                                      shadowColor: kineticStart.withOpacity(0.22),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (_loading)
+                                          const SizedBox(
+                                            width: 16,
+                                            height: 16,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                            ),
+                                          ),
+                                        if (_loading) const SizedBox(width: 8),
+                                        Text(
+                                          _loading ? 'Signing in...' : 'Login',
+                                          style: GoogleFonts.manrope(
+                                            fontSize: 16.5,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                          ),
                                         ),
-                                      if (_loading) const SizedBox(width: 8),
-                                      Text(_loading ? 'Signing in...' : 'Login', style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white)),
-                                      const SizedBox(width: 8),
-                                      const Icon(Icons.arrow_forward, color: Colors.white),
-                                    ],
+                                        const SizedBox(width: 8),
+                                        const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 18),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                const SizedBox(height: 24),
-                                Row(
-                                  children: [
-                                    Expanded(child: Container(height: 1, color: surfaceContainerHigh)),
-                                    const SizedBox(width: 12),
-                                    Text(
-                                      'SECURE CONNECTION',
-                                      style: GoogleFonts.inter(fontSize: 10, color: outline, letterSpacing: 1.2),
-                                    ),
-                                    const SizedBox(width: 12),
-                                    Expanded(child: Container(height: 1, color: surfaceContainerHigh)),
-                                  ],
+                                const SizedBox(height: 18),
+                                _buildSecureDivider(
+                                  outline: outline,
+                                  surfaceContainerHigh: surfaceContainerHigh,
                                 ),
                               ],
                             ),
@@ -579,12 +1658,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text.rich(
                           TextSpan(
                             text: "Don't have an account? ",
-                            style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant),
+                            style: GoogleFonts.inter(fontSize: 13.5, color: onSurfaceVariant),
                             children: [
                               TextSpan(
                                 text: 'Create account',
                                 style: GoogleFonts.inter(
-                                  fontSize: 13,
+                                  fontSize: 13.5,
                                   fontWeight: FontWeight.w700,
                                   color: primary,
                                   decoration: TextDecoration.underline,
@@ -595,17 +1674,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.nfc, color: outlineVariant),
-                          const SizedBox(width: 18),
-                          Icon(Icons.contactless, color: outlineVariant),
-                          const SizedBox(width: 18),
-                          Icon(Icons.qr_code_2, color: outlineVariant),
-                        ],
                       ),
                     ],
                   ),
@@ -660,6 +1728,162 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     setState(() => _submitError = null);
   }
 
+  void _showLegalSheet({
+    required String title,
+    required List<String> sections,
+  }) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFFF7F9FB),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+      ),
+      builder: (sheetContext) {
+        const primary = Color(0xFF006B47);
+        const onSurface = Color(0xFF191C1E);
+        const onSurfaceVariant = Color(0xFF3E4942);
+        return SafeArea(
+          top: false,
+          child: DraggableScrollableSheet(
+            expand: false,
+            initialChildSize: 0.78,
+            minChildSize: 0.45,
+            maxChildSize: 0.92,
+            builder: (_, controller) {
+              return SingleChildScrollView(
+                controller: controller,
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Container(
+                        width: 46,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFD7E4DB),
+                          borderRadius: BorderRadius.circular(99),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 18),
+                    Row(
+                      children: [
+                        Container(
+                          width: 42,
+                          height: 42,
+                          decoration: BoxDecoration(
+                            color: primary.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: const Icon(Icons.description_outlined, color: primary, size: 22),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'I-Metro',
+                                style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: onSurface),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                title,
+                                style: GoogleFonts.inter(fontSize: 12.5, fontWeight: FontWeight.w600, color: onSurfaceVariant),
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.pop(sheetContext),
+                          icon: const Icon(Icons.close_rounded, color: onSurfaceVariant),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: const Color(0xFFD7E4DB)),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 6))],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: onSurface),
+                          ),
+                          const SizedBox(height: 12),
+                          ...sections.map(
+                            (section) => Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                section,
+                                style: GoogleFonts.inter(fontSize: 13.5, height: 1.5, color: onSurfaceVariant),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () => Navigator.pop(sheetContext),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: primary,
+                          foregroundColor: Colors.white,
+                          elevation: 0,
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                        ),
+                        child: Text(
+                          'Close',
+                          style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  void _showTermsSheet() {
+    _showLegalSheet(
+      title: 'Terms & Conditions',
+      sections: const [
+        '1. Use of I-Metro services requires accurate profile information and acceptance of our fare and ticket rules.',
+        '2. Tickets are personal, time-bound, and must be presented for validation when requested by an attendant or validator.',
+        '3. Suspicious activity, misuse of the platform, or tampering with tickets may result in account restrictions.',
+        '4. I-Metro may update routes, prices, or service availability as operations change.',
+      ],
+    );
+  }
+
+  void _showPrivacySheet() {
+    _showLegalSheet(
+      title: 'Privacy Policy',
+      sections: const [
+        '1. We use your profile details to create your account, manage bookings, and issue tickets.',
+        '2. Location, device, and support data are used to improve service quality and keep operations secure.',
+        '3. We do not sell your personal information. Access is limited to authorized I-Metro services and staff.',
+        '4. You may update your account details from Profile Settings whenever you need to.',
+      ],
+    );
+  }
+
   String _registerErrorMessage(Map<String, dynamic> response) {
     final reason = response['reason']?.toString();
     switch (reason) {
@@ -703,7 +1927,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     if (!mounted) return;
     if (response['ok'] == true) {
       await PushService.instance.initialize();
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
+      Navigator.pushReplacementNamed(context, AppRoutes.appModeSelect);
     } else {
       setState(() => _submitError = _registerErrorMessage(response));
     }
@@ -959,7 +2183,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                                 text: 'Terms of Service',
                                                 style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: primary),
                                                 recognizer: TapGestureRecognizer()
-                                                  ..onTap = () => Navigator.pushNamed(context, AppRoutes.policy),
+                                                  ..onTap = _showTermsSheet,
                                               ),
                                               TextSpan(
                                                 text: ' and ',
@@ -969,7 +2193,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                                 text: 'Privacy Policy',
                                                 style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: primary),
                                                 recognizer: TapGestureRecognizer()
-                                                  ..onTap = () => Navigator.pushNamed(context, AppRoutes.policy),
+                                                  ..onTap = _showPrivacySheet,
                                               ),
                                               const TextSpan(text: '.'),
                                             ],
@@ -1398,6 +2622,9 @@ class _HomeScreenState extends State<HomeScreen> {
     if (data == null || data.trim().isEmpty) {
       return null;
     }
+    if (AuthStore.isPlaceholderAvatar(data)) {
+      return null;
+    }
     if (data.startsWith('http')) {
       return NetworkImage(data);
     }
@@ -1428,15 +2655,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _recentSubtitleDisplay(Map<String, dynamic> booking) {
-    final status = booking['status']?.toString() ?? 'Pending';
     final createdAt = booking['createdAt']?.toString();
     if (createdAt != null && createdAt.contains('T')) {
       final parts = createdAt.split('T');
       final time = parts[1].split('.').first;
       final shortTime = time.length >= 5 ? time.substring(0, 5) : time;
-      return '${parts[0]} - $shortTime - $status';
+      return '${parts[0]} • $shortTime';
     }
-    return status;
+    return 'Recent trip';
   }
 
   Map<String, dynamic>? _featuredRoute() {
@@ -1634,59 +2860,65 @@ class _HomeScreenState extends State<HomeScreen> {
                           Row(
                             children: [
                               Expanded(
+                                flex: 3,
                                 child: _HomeQuickAction(
-                                  height: 160,
+                                  height: 166,
                                   title: 'Book Ride',
-                                  icon: Icons.directions_bus,
+                                  icon: Icons.directions_bus_filled_rounded,
                                   background: const LinearGradient(colors: [primary, primaryContainer]),
                                   onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
                                   iconFilled: true,
                                   textColor: Colors.white,
                                   shadow: true,
+                                  primaryAction: true,
                                 ),
                               ),
-                              const SizedBox(width: 16),
+                              const SizedBox(width: 14),
                               Expanded(
+                                flex: 2,
                                 child: _HomeQuickAction(
-                                  height: 160,
+                                  height: 166,
                                   title: 'Scan Ticket',
-                                  icon: Icons.qr_code_scanner,
+                                  icon: Icons.qr_code_scanner_rounded,
                                   background: LinearGradient(colors: [surfaceLowest, surfaceLowest]),
                                   onTap: _openLatestTicket,
                                   iconColor: primary,
                                   textColor: onSurface,
-                                  border: Border.all(color: outlineVariant.withOpacity(0.1)),
+                                  border: Border.all(color: outlineVariant.withOpacity(0.14)),
                                   shadow: true,
+                                  compact: true,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 14),
                           Row(
                             children: [
                               Expanded(
                                 child: _HomeQuickAction(
-                                  height: 128,
+                                  height: 116,
                                   title: 'History',
-                                  icon: Icons.history,
+                                  icon: Icons.history_rounded,
                                   background: LinearGradient(colors: [surfaceContainerLow, surfaceContainerLow]),
                                   onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
                                   iconColor: onSurfaceVariant,
                                   textColor: onSurface,
                                   compact: true,
+                                  border: Border.all(color: outlineVariant.withOpacity(0.10)),
                                 ),
                               ),
-                              const SizedBox(width: 16),
+                              const SizedBox(width: 14),
                               Expanded(
                                 child: _HomeQuickAction(
-                                  height: 128,
+                                  height: 116,
                                   title: 'Profile',
-                                  icon: Icons.person,
+                                  icon: Icons.person_rounded,
                                   background: LinearGradient(colors: [surfaceContainerLow, surfaceContainerLow]),
                                   onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
                                   iconColor: onSurfaceVariant,
                                   textColor: onSurface,
                                   compact: true,
+                                  border: Border.all(color: outlineVariant.withOpacity(0.10)),
                                 ),
                               ),
                             ],
@@ -1715,62 +2947,62 @@ class _HomeScreenState extends State<HomeScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    Container(width: 8, height: 8, decoration: BoxDecoration(color: const Color(0xFF8DF7C1), borderRadius: BorderRadius.circular(4))),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      _loadingRoutes ? 'SYNCING ROUTES' : 'FEATURED ROUTE',
-                                      style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.6, color: Colors.white.withOpacity(0.8)),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Container(width: 7, height: 7, decoration: BoxDecoration(color: const Color(0xFF8DF7C1), borderRadius: BorderRadius.circular(4))),
+                                const SizedBox(width: 8),
                                 Text(
-                                  '$featuredFrom -> $featuredTo',
-                                  style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white),
+                                  _loadingRoutes ? 'SYNCING ROUTES' : 'FEATURED ROUTE',
+                                  style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.5, color: Colors.white.withOpacity(0.78)),
                                 ),
-                                const SizedBox(height: 6),
-                                Text(
-                                  _loadingRoutes
-                                      ? 'Refreshing active routes from the backend'
-                                      : activeRoutesCount == 0
-                                          ? 'No active routes yet. Check back after routes are published.'
-                                          : '$featuredCurrency $featuredPrice fare - $activeRoutesCount active route${activeRoutesCount == 1 ? '' : 's'} available',
-                                  style: GoogleFonts.inter(fontSize: 12, height: 1.45, color: Colors.white.withOpacity(0.86)),
-                                ),
-                                const SizedBox(height: 18),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: _HomeSnapshotStat(
-                                        label: 'Recent Trips',
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              '$featuredFrom -> $featuredTo',
+                              style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              _loadingRoutes
+                                  ? 'Refreshing active routes from the backend'
+                                  : activeRoutesCount == 0
+                                      ? 'No active routes yet. Check back after routes are published.'
+                                      : '$featuredCurrency $featuredPrice fare - $activeRoutesCount active route${activeRoutesCount == 1 ? '' : 's'} available',
+                              style: GoogleFonts.inter(fontSize: 12, height: 1.45, color: Colors.white.withOpacity(0.86)),
+                            ),
+                            const SizedBox(height: 14),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _HomeSnapshotStat(
+                                    label: 'Recent Trips',
                                         value: recentTripsCount.toString(),
                                       ),
                                     ),
-                                    const SizedBox(width: 12),
-                                    Expanded(
-                                      child: _HomeSnapshotStat(
-                                        label: 'Latest Stop',
-                                        value: latestDestination,
-                                        compactValue: true,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                ElevatedButton.icon(
-                                  onPressed: _openFeaturedRoute,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: primary,
-                                    elevation: 0,
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: _HomeSnapshotStat(
+                                    label: 'Latest Stop',
+                                    value: latestDestination,
+                                    compactValue: true,
                                   ),
-                                  icon: const Icon(Icons.directions_bus_filled_outlined, size: 18),
-                                  label: Text('Book this ride', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800)),
                                 ),
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            ElevatedButton.icon(
+                              onPressed: _openFeaturedRoute,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: primary,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                              ),
+                              icon: const Icon(Icons.directions_bus_filled_outlined, size: 18),
+                              label: Text('Book this ride', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800)),
+                            ),
                               ],
                             ),
                           ],
@@ -1814,27 +3046,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           final booking = entry.value;
                           final route = (booking['route'] as Map?) ?? {};
                           final payment = (booking['payment'] as Map?) ?? {};
-                          final colorPack = entry.key.isEven
-                              ? (
-                                  bg: secondaryContainer,
-                                  fg: const Color(0xFF5E6473),
-                                  icon: Icons.apartment,
-                                )
-                              : (
-                                  bg: tertiaryFixed,
-                                  fg: const Color(0xFF7D2A2A),
-                                  icon: Icons.park,
-                                );
+                          final colorPack = (
+                            bg: const Color(0xFFEAF4EF),
+                            fg: const Color(0xFF006B47),
+                            icon: Icons.directions_bus_filled_rounded,
+                          );
                           final from = route['fromLocation']?.toString() ?? 'Route';
                           final to = route['toLocation']?.toString() ?? 'Destination';
                           final currency = payment['currency']?.toString() ?? route['currency']?.toString() ?? 'NGN';
                           final amount = payment['amount'] ?? route['price'] ?? '-';
+                          final status = (booking['status']?.toString() ?? 'PENDING').toUpperCase();
                           return Padding(
                             padding: EdgeInsets.only(bottom: entry.key == _recentBookings.length - 1 ? 0 : 12),
                             child: _RecentRouteCard(
-                              title: from,
+                              title: '$from → $to',
                               subtitle: _recentSubtitleDisplay(booking),
                               price: '$currency $amount',
+                              status: status,
                               icon: colorPack.icon,
                               iconBackground: colorPack.bg,
                               iconColor: colorPack.fg,
@@ -1846,9 +3074,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                         }),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 22),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
                           color: surfaceLowest,
                           borderRadius: BorderRadius.circular(24),
@@ -1861,8 +3089,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             Row(
                               children: [
                                 Container(
-                                  width: 44,
-                                  height: 44,
+                                  width: 42,
+                                  height: 42,
                                   decoration: BoxDecoration(
                                     color: primary.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(14),
@@ -1874,15 +3102,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('Transit Snapshot', style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: onSurface)),
+                                      Text('Transit Snapshot', style: GoogleFonts.manrope(fontSize: 17.5, fontWeight: FontWeight.w800, color: onSurface)),
                                       const SizedBox(height: 4),
-                                      Text('Live overview based on your routes and booking history.', style: GoogleFonts.inter(fontSize: 12, height: 1.4, color: onSurfaceVariant)),
+                                      Text('Live overview based on your routes and booking history.', style: GoogleFonts.inter(fontSize: 12, height: 1.35, color: onSurfaceVariant)),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 18),
+                            const SizedBox(height: 16),
                             Row(
                               children: [
                                 Expanded(
@@ -1892,7 +3120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     icon: Icons.alt_route_rounded,
                                   ),
                                 ),
-                                const SizedBox(width: 12),
+                                const SizedBox(width: 10),
                                 Expanded(
                                   child: _HomeInfoTile(
                                     label: 'Recent Tickets',
@@ -1902,7 +3130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 10),
                             _HomeLatestDestinationCard(
                               destination: latestDestination,
                               hasTrips: _recentBookings.isNotEmpty,
@@ -1979,6 +3207,7 @@ class _HomeQuickAction extends StatelessWidget {
     this.shadow = false,
     this.compact = false,
     this.iconFilled = false,
+    this.primaryAction = false,
   });
 
   final double height;
@@ -1992,40 +3221,65 @@ class _HomeQuickAction extends StatelessWidget {
   final bool shadow;
   final bool compact;
   final bool iconFilled;
+  final bool primaryAction;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: height,
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          gradient: background,
-          borderRadius: BorderRadius.circular(24),
-          border: border,
-          boxShadow: shadow ? [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 16, offset: const Offset(0, 8))] : null,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(
-              icon,
-              size: compact ? 24 : 32,
-              color: iconColor ?? Colors.white,
-            ),
-            Text(
-              title,
-              maxLines: compact ? 2 : 1,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.manrope(
-                fontSize: compact ? 16 : 18,
-                fontWeight: compact ? FontWeight.w600 : FontWeight.w700,
-                color: textColor ?? Colors.white,
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(24),
+        splashColor: primaryAction ? Colors.white.withOpacity(0.08) : const Color(0xFF006B47).withOpacity(0.08),
+        highlightColor: primaryAction ? Colors.white.withOpacity(0.04) : const Color(0xFF006B47).withOpacity(0.04),
+        child: Container(
+          height: height,
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            gradient: background,
+            borderRadius: BorderRadius.circular(24),
+            border: border,
+            boxShadow: shadow
+                ? [
+                    BoxShadow(
+                      color: primaryAction ? const Color(0xFF006B47).withOpacity(0.10) : Colors.black.withOpacity(0.05),
+                      blurRadius: primaryAction ? 22 : 14,
+                      offset: const Offset(0, 8),
+                    ),
+                  ]
+                : null,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: compact ? 34 : 42,
+                height: compact ? 34 : 42,
+                decoration: BoxDecoration(
+                  color: iconFilled
+                      ? Colors.white.withOpacity(primaryAction ? 0.16 : 0.12)
+                      : Colors.black.withOpacity(0.03),
+                  borderRadius: BorderRadius.circular(compact ? 12 : 14),
+                ),
+                child: Icon(
+                  icon,
+                  size: compact ? 20 : 24,
+                  color: iconColor ?? Colors.white,
+                ),
               ),
-            ),
-          ],
+              Text(
+                title,
+                maxLines: compact ? 2 : 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.manrope(
+                  fontSize: compact ? 15.5 : 17,
+                  fontWeight: compact ? FontWeight.w600 : FontWeight.w700,
+                  color: textColor ?? Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -2046,11 +3300,11 @@ class _HomeSnapshotStat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(13),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.12),
+        color: Colors.white.withOpacity(0.10),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: Colors.white.withOpacity(0.12)),
+        border: Border.all(color: Colors.white.withOpacity(0.10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -2070,7 +3324,7 @@ class _HomeSnapshotStat extends StatelessWidget {
             maxLines: compactValue ? 2 : 1,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.manrope(
-              fontSize: compactValue ? 13 : 20,
+              fontSize: compactValue ? 13.5 : 18,
               fontWeight: FontWeight.w800,
               color: Colors.white,
             ),
@@ -2099,24 +3353,24 @@ class _HomeInfoTile extends StatelessWidget {
     const onSurfaceVariant = Color(0xFF3E4942);
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: const Color(0xFFF7F9FB),
+        color: const Color(0xFFF8FAFB),
         borderRadius: BorderRadius.circular(18),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: primary, size: 20),
-          const SizedBox(height: 10),
+          Icon(icon, color: primary, size: 19),
+          const SizedBox(height: 9),
           Text(
             label.toUpperCase(),
-            style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: onSurfaceVariant),
+            style: GoogleFonts.inter(fontSize: 9.5, fontWeight: FontWeight.w700, letterSpacing: 1.35, color: onSurfaceVariant),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: onSurface),
+            style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface),
           ),
         ],
       ),
@@ -2142,7 +3396,7 @@ class _HomeLatestDestinationCard extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -2162,8 +3416,8 @@ class _HomeLatestDestinationCard extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: 40,
-            height: 40,
+            width: 38,
+            height: 38,
             decoration: BoxDecoration(
               color: hasTrips ? primary.withOpacity(0.14) : tertiary.withOpacity(0.12),
               borderRadius: BorderRadius.circular(14),
@@ -2171,6 +3425,7 @@ class _HomeLatestDestinationCard extends StatelessWidget {
             child: Icon(
               hasTrips ? Icons.place_rounded : Icons.hourglass_empty_rounded,
               color: hasTrips ? primary : tertiary,
+              size: 21,
             ),
           ),
           const SizedBox(width: 12),
@@ -2180,12 +3435,12 @@ class _HomeLatestDestinationCard extends StatelessWidget {
               children: [
                 Text(
                   hasTrips ? 'Latest destination' : 'Latest destination pending',
-                  style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: onSurfaceVariant),
+                  style: GoogleFonts.inter(fontSize: 9.5, fontWeight: FontWeight.w700, letterSpacing: 1.25, color: onSurfaceVariant),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   destination,
-                  style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w800, color: onSurface),
+                  style: GoogleFonts.manrope(fontSize: 15.5, fontWeight: FontWeight.w800, color: onSurface),
                 ),
               ],
             ),
@@ -2201,6 +3456,7 @@ class _RecentRouteCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.price,
+    required this.status,
     required this.icon,
     required this.iconBackground,
     required this.iconColor,
@@ -2210,6 +3466,7 @@ class _RecentRouteCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String price;
+  final String status;
   final IconData icon;
   final Color iconBackground;
   final Color iconColor;
@@ -2226,7 +3483,7 @@ class _RecentRouteCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: surfaceLowest,
           borderRadius: BorderRadius.circular(20),
@@ -2234,35 +3491,83 @@ class _RecentRouteCard extends StatelessWidget {
           boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               children: [
                 Container(
                   width: 48,
                   height: 48,
-                  decoration: BoxDecoration(color: iconBackground, borderRadius: BorderRadius.circular(24)),
-                  child: Icon(icon, color: iconColor),
+                  decoration: BoxDecoration(
+                    color: iconBackground,
+                    borderRadius: BorderRadius.circular(18),
+                    border: Border.all(color: iconColor.withOpacity(0.10)),
+                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        top: 10,
+                        child: Container(
+                          width: 18,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: iconColor.withOpacity(0.18),
+                            borderRadius: BorderRadius.circular(99),
+                          ),
+                        ),
+                      ),
+                      Icon(icon, color: iconColor, size: 22),
+                    ],
+                  ),
                 ),
                 const SizedBox(width: 12),
                 Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w700, color: onSurface)),
-                    const SizedBox(height: 4),
-                    Text(subtitle, style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant)),
+                    Text(title, style: GoogleFonts.manrope(fontSize: 14.8, fontWeight: FontWeight.w700, color: onSurface)),
+                    const SizedBox(height: 3),
+                    Text(subtitle, style: GoogleFonts.inter(fontSize: 10.8, color: onSurfaceVariant)),
                   ],
                 ),
               ],
             ),
+            const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(price, style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w700, color: primary)),
-                const SizedBox(height: 2),
-                Icon(onTap == null ? Icons.remove : Icons.chevron_right, color: onSurfaceVariant, size: 18),
+                Text(price, style: GoogleFonts.manrope(fontSize: 14.8, fontWeight: FontWeight.w700, color: primary)),
+                const SizedBox(height: 6),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: status == 'CONFIRMED'
+                        ? primary.withOpacity(0.10)
+                        : status == 'PENDING'
+                            ? const Color(0xFFFFF3D9)
+                            : const Color(0xFFF2F4F6),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                  child: Text(
+                    status,
+                    style: GoogleFonts.inter(
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.8,
+                      color: status == 'CONFIRMED'
+                          ? primary
+                          : status == 'PENDING'
+                              ? const Color(0xFF9B6A00)
+                              : onSurfaceVariant,
+                    ),
+                  ),
+                ),
               ],
             ),
+            const SizedBox(width: 8),
+            Icon(onTap == null ? Icons.remove : Icons.chevron_right, color: onSurfaceVariant, size: 18),
           ],
         ),
       ),
@@ -2285,22 +3590,25 @@ class _BottomNavPill extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: active ? primary.withOpacity(0.1) : Colors.transparent,
-          borderRadius: BorderRadius.circular(20),
+          color: active ? primary.withOpacity(0.12) : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: active
+              ? [BoxShadow(color: primary.withOpacity(0.07), blurRadius: 12, offset: const Offset(0, 5))]
+              : null,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, color: active ? primary : inactive),
-            const SizedBox(height: 4),
+            Icon(icon, color: active ? primary : inactive, size: 21),
+            const SizedBox(height: 2),
             Text(
               label.toUpperCase(),
               style: GoogleFonts.inter(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 1.1,
+                fontSize: 9,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 0.8,
                 color: active ? primary : inactive,
               ),
             ),
@@ -2507,299 +3815,497 @@ class _BookingScreenState extends State<BookingScreen> {
     const primaryContainer = Color(0xFF00875A);
     const hintGrey = Color(0xFF9AA3A0);
     final filteredRoutes = _filteredRoutes();
+    final originChips = _originChips();
+    final selectedRoute = _selected;
+    final selectedFrom = selectedRoute?['fromLocation']?.toString() ?? 'Choose a route';
+    final selectedTo = selectedRoute?['toLocation']?.toString() ?? 'Trip details will appear here';
+    final selectedPrice = 'NGN ${selectedRoute?['price']?.toString() ?? '-'}';
+    final totalRoutes = _routes.length;
+    final visibleRoutes = filteredRoutes.length;
 
-    return Scaffold(
-      backgroundColor: background,
-      body: Stack(
-        children: [
-          Column(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final contentWidth = constraints.maxWidth > 760 ? 760.0 : constraints.maxWidth;
+        final horizontalPadding = constraints.maxWidth > 760 ? 32.0 : 20.0;
+
+        return Scaffold(
+          backgroundColor: background,
+          body: Stack(
             children: [
-              SizedBox(
-                height: 64,
-                child: ClipRect(
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
-                      ),
-                      child: SafeArea(
-                        bottom: false,
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: const Icon(Icons.arrow_back, color: primary),
-                            ),
-                            Text('Book a Ride', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: _loading
-                    ? const Center(child: CircularProgressIndicator())
-                    : (!ConnectivityService.instance.isOnline && _routes.isEmpty)
-                        ? OfflineFullScreen(
-                            onRetry: _loadRoutes,
-                            title: 'No connection',
-                            body: 'Connect to the internet to load available routes.',
-                          )
-                        : SingleChildScrollView(
-                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 140),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+              Column(
+                children: [
+                  SizedBox(
+                    height: 68,
+                    child: ClipRect(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                          decoration: BoxDecoration(
+                            color: background.withOpacity(0.82),
+                            boxShadow: [
+                              BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4)),
+                            ],
+                          ),
+                          child: SafeArea(
+                            bottom: false,
+                            child: Row(
                               children: [
-                                Text('Choose your route', style: GoogleFonts.manrope(fontSize: 24, fontWeight: FontWeight.w800, color: onSurface)),
-                                const SizedBox(height: 6),
-                                Text('Select a route and continue to payment.', style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
-                                const SizedBox(height: 12),
-                                OfflineBanner(onRetry: _loadRoutes),
-                                const SizedBox(height: 16),
-                                Container(
-                                  padding: const EdgeInsets.all(12),
-                                  decoration: BoxDecoration(
-                                    color: surfaceContainerLow,
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      _PaymentChoiceChip(
-                                        label: 'Monnify',
-                                        active: _provider == 'MONNIFY',
-                                        onTap: () => setState(() => _provider = 'MONNIFY'),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      _PaymentChoiceChip(
-                                        label: 'Paystack',
-                                        active: _provider == 'PAYSTACK',
-                                        onTap: () => setState(() => _provider = 'PAYSTACK'),
-                                      ),
-                                    ],
-                                  ),
+                                IconButton(
+                                  onPressed: () => Navigator.pop(context),
+                                  icon: const Icon(Icons.arrow_back, color: primary),
                                 ),
-                                const SizedBox(height: 16),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                                  decoration: BoxDecoration(
-                                    color: surfaceLowest,
-                                    borderRadius: BorderRadius.circular(18),
-                                    border: Border.all(color: outlineVariant.withOpacity(0.3)),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      const Icon(Icons.search, color: hintGrey, size: 18),
-                                      const SizedBox(width: 8),
-                                      Expanded(
-                                        child: TextField(
-                                          controller: _searchController,
-                                          onChanged: _onSearchChanged,
-                                          style: GoogleFonts.inter(fontSize: 13, color: onSurface),
-                                          decoration: InputDecoration(
-                                            hintText: 'Search route',
-                                            hintStyle: GoogleFonts.inter(fontSize: 13, color: hintGrey),
-                                            border: InputBorder.none,
-                                          ),
-                                        ),
-                                      ),
-                                      if (_searchQuery.trim().isNotEmpty)
-                                        IconButton(
-                                          onPressed: () {
-                                            _searchController.clear();
-                                            _applySearch('');
-                                          },
-                                          icon: const Icon(Icons.close_rounded, size: 18, color: hintGrey),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                if (_searchQuery.trim().isNotEmpty)
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 12),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Showing ${filteredRoutes.length} result${filteredRoutes.length == 1 ? '' : 's'} for "${_searchQuery.trim()}"',
-                                          style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            _searchController.clear();
-                                            _applySearch('');
-                                          },
-                                          child: Text('Clear', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: primary)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                if (_routes.isNotEmpty && _originChips().isNotEmpty) ...[
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Text(
-                                      'Popular origins',
-                                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: onSurfaceVariant),
-                                    ),
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        _RouteOriginChip(
-                                          label: 'Show all',
-                                          active: _searchQuery.trim().isEmpty,
-                                          onTap: () {
-                                            _searchController.clear();
-                                            _applySearch('');
-                                          },
-                                        ),
-                                        ..._originChips().map((origin) {
-                                          final active = _originChip?.toLowerCase() == origin.toLowerCase();
-                                          return _RouteOriginChip(
-                                            label: origin,
-                                            active: active,
-                                            onTap: () {
-                                              if (active) {
-                                                _searchController.clear();
-                                                _applySearch('');
-                                              } else {
-                                                _searchController.text = origin;
-                                                _applySearch(origin, chip: origin);
-                                              }
-                                            },
-                                          );
-                                        }),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
-                                ],
-                                if (_routes.isEmpty)
-                                  _EmptyStateCard(
-                                    icon: Icons.route_outlined,
-                                    title: 'No routes yet',
-                                    body: 'Routes will appear here once they are published.',
-                                    actionLabel: 'Refresh',
-                                    onAction: _loadRoutes,
-                                  )
-                                else if (filteredRoutes.isEmpty)
-                                  _EmptyStateCard(
-                                    icon: Icons.search_off,
-                                    title: 'No matches',
-                                    body: 'No routes match "${_searchQuery.trim()}". Try another search.',
-                                    actionLabel: 'Clear search',
-                                    onAction: () {
-                                      setState(() {
-                                        _searchController.clear();
-                                        _searchQuery = '';
-                                        _originChip = null;
-                                      });
-                                    },
-                                  )
-                                else
-                                  Column(
-                                    children: filteredRoutes.map((route) {
-                                      final isSelected = _selected?['id'] == route['id'];
-                                      return GestureDetector(
-                                        onTap: () => _selectRoute(route),
-                                        child: _RouteOptionCard(
-                                          from: route['fromLocation']?.toString() ?? 'From',
-                                          to: route['toLocation']?.toString() ?? 'To',
-                                          price: 'NGN ${route['price'] ?? '-'}',
-                                          selected: isSelected,
-                                        ),
-                                      );
-                                    }).toList(),
-                                  ),
-                                const SizedBox(height: 24),
-                                GestureDetector(
-                                  onTap: _submitting ? null : _proceedToPayment,
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.symmetric(vertical: 18),
-                                    decoration: BoxDecoration(
-                                      gradient: const LinearGradient(colors: [primary, primaryContainer]),
-                                      borderRadius: BorderRadius.circular(24),
-                                      boxShadow: [BoxShadow(color: primary.withOpacity(0.2), blurRadius: 16, offset: const Offset(0, 8))],
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        if (_submitting)
-                                          const SizedBox(
-                                            width: 18,
-                                            height: 18,
-                                            child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
-                                          )
-                                        else
-                                          const Icon(Icons.credit_card, color: Colors.white),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          _submitting ? 'Processing...' : 'Proceed to Payment',
-                                          style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
+                                Text(
+                                  'Book a Ride',
+                                  style: GoogleFonts.manrope(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w800,
+                                    color: primary,
+                                    height: 1.2,
                                   ),
                                 ),
                               ],
                             ),
                           ),
-              ),
-            ],
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-                  decoration: BoxDecoration(
-                    color: background.withOpacity(0.8),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8))],
+                        ),
+                      ),
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _BottomNavPill(
-                        label: 'Home',
-                        icon: Icons.home,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                  Expanded(
+                    child: _loading
+                        ? const Center(child: CircularProgressIndicator())
+                        : (!ConnectivityService.instance.isOnline && _routes.isEmpty)
+                            ? OfflineFullScreen(
+                                onRetry: _loadRoutes,
+                                title: 'No connection',
+                                body: 'Connect to the internet to load available routes.',
+                              )
+                            : SingleChildScrollView(
+                                padding: EdgeInsets.fromLTRB(horizontalPadding, 18, horizontalPadding, 150),
+                                child: Align(
+                                  alignment: Alignment.topCenter,
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(maxWidth: contentWidth),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Book your trip',
+                                          style: GoogleFonts.manrope(
+                                            fontSize: constraints.maxWidth > 420 ? 28 : 24,
+                                            fontWeight: FontWeight.w800,
+                                            color: onSurface,
+                                            height: 1.1,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Text(
+                                          'Choose a route, compare fares, and move to payment in a clean flow.',
+                                          style: GoogleFonts.inter(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color: onSurfaceVariant,
+                                            height: 1.45,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Container(
+                                          padding: const EdgeInsets.all(14),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(24),
+                                            border: Border.all(color: primary.withOpacity(0.08)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(0.04),
+                                                blurRadius: 18,
+                                                offset: const Offset(0, 8),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Expanded(
+                                                    child: _RouteEndpointPanel(
+                                                      label: 'From',
+                                                      value: selectedRoute == null ? 'Choose route' : selectedFrom,
+                                                      subtitle: 'Current location',
+                                                      accent: primary,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  Container(
+                                                    width: 42,
+                                                    height: 42,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(color: primary.withOpacity(0.12)),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black.withOpacity(0.05),
+                                                          blurRadius: 10,
+                                                          offset: const Offset(0, 4),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: const Icon(Icons.swap_horiz_rounded, color: primary, size: 20),
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  Expanded(
+                                                    child: _RouteEndpointPanel(
+                                                      label: 'To',
+                                                      value: selectedRoute == null ? 'Choose route' : selectedTo,
+                                                      subtitle: 'Destination',
+                                                      accent: primary,
+                                                      alignEnd: true,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 12),
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      selectedRoute == null
+                                                          ? 'Tap a route below to preview the journey.'
+                                                          : '$selectedPrice • ${_provider == 'MONNIFY' ? 'Monnify' : 'Paystack'}',
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: GoogleFonts.inter(
+                                                        fontSize: 11.5,
+                                                        fontWeight: FontWeight.w600,
+                                                        color: onSurfaceVariant,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                                    decoration: BoxDecoration(
+                                                      color: primary.withOpacity(0.08),
+                                                      borderRadius: BorderRadius.circular(999),
+                                                    ),
+                                                    child: Text(
+                                                      '$visibleRoutes routes',
+                                                      style: GoogleFonts.inter(
+                                                        fontSize: 10.5,
+                                                        fontWeight: FontWeight.w700,
+                                                        color: primary,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Container(
+                                          padding: const EdgeInsets.all(8),
+                                          decoration: BoxDecoration(
+                                            color: surfaceContainerLow,
+                                            borderRadius: BorderRadius.circular(18),
+                                            border: Border.all(color: primary.withOpacity(0.06)),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              _PaymentChoiceChip(
+                                                label: 'Monnify',
+                                                active: _provider == 'MONNIFY',
+                                                onTap: () => setState(() => _provider = 'MONNIFY'),
+                                              ),
+                                              const SizedBox(width: 8),
+                                              _PaymentChoiceChip(
+                                                label: 'Paystack',
+                                                active: _provider == 'PAYSTACK',
+                                                onTap: () => setState(() => _provider = 'PAYSTACK'),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                          const SizedBox(height: 16),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(
+                                                'Search routes',
+                                                style: GoogleFonts.manrope(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w800,
+                                                  color: onSurface,
+                                                ),
+                                              ),
+                                            ),
+                                            if (_searchQuery.trim().isNotEmpty)
+                                              TextButton(
+                                                onPressed: () {
+                                                  _searchController.clear();
+                                                  _applySearch('');
+                                                },
+                                                child: Text(
+                                                  'Clear',
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: primary,
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                                          decoration: BoxDecoration(
+                                            color: surfaceLowest,
+                                            borderRadius: BorderRadius.circular(16),
+                                            border: Border.all(color: outlineVariant.withOpacity(0.25)),
+                                            boxShadow: [
+                                              BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 14, offset: const Offset(0, 6)),
+                                            ],
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              const Icon(Icons.search, color: hintGrey, size: 18),
+                                              const SizedBox(width: 10),
+                                              Expanded(
+                                                child: TextField(
+                                                  controller: _searchController,
+                                                  onChanged: _onSearchChanged,
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 13,
+                                                    color: onSurface,
+                                                  ),
+                                                  decoration: InputDecoration(
+                                                    hintText: 'Search by route, location, or fare',
+                                                    hintStyle: GoogleFonts.inter(
+                                                      fontSize: 13,
+                                                      color: hintGrey,
+                                                    ),
+                                                    border: InputBorder.none,
+                                                  ),
+                                                ),
+                                              ),
+                                              if (_searchQuery.trim().isNotEmpty)
+                                                IconButton(
+                                                  onPressed: () {
+                                                    _searchController.clear();
+                                                    _applySearch('');
+                                                  },
+                                                  icon: const Icon(Icons.close_rounded, size: 18, color: hintGrey),
+                                                ),
+                                            ],
+                                          ),
+                                        ),
+                                          const SizedBox(height: 16),
+                                        if (originChips.isNotEmpty) ...[
+                                          Row(
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  'Popular origins',
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w800,
+                                                    letterSpacing: 1.1,
+                                                    color: onSurfaceVariant,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                'Tap to filter',
+                                                style: GoogleFonts.inter(
+                                                  fontSize: 10.5,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: onSurfaceVariant.withOpacity(0.8),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 12),
+                                          Wrap(
+                                            spacing: 10,
+                                            runSpacing: 10,
+                                            children: [
+                                              _RouteOriginChip(
+                                                label: 'Show all',
+                                                active: _searchQuery.trim().isEmpty,
+                                                onTap: () {
+                                                  _searchController.clear();
+                                                  _applySearch('');
+                                                },
+                                              ),
+                                              ...originChips.map((origin) {
+                                                final active = _originChip?.toLowerCase() == origin.toLowerCase();
+                                                return _RouteOriginChip(
+                                                  label: origin,
+                                                  active: active,
+                                                  onTap: () {
+                                                    if (active) {
+                                                      _searchController.clear();
+                                                      _applySearch('');
+                                                    } else {
+                                                      _searchController.text = origin;
+                                                      _applySearch(origin, chip: origin);
+                                                    }
+                                                  },
+                                                );
+                                              }),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 16),
+                                        ],
+                                        if (_routes.isEmpty)
+                                          _EmptyStateCard(
+                                            icon: Icons.route_outlined,
+                                            title: 'No routes yet',
+                                            body: 'Routes will appear here once they are published.',
+                                            actionLabel: 'Refresh',
+                                            onAction: _loadRoutes,
+                                          )
+                                        else if (filteredRoutes.isEmpty)
+                                          _EmptyStateCard(
+                                            icon: Icons.search_off,
+                                            title: 'No matches',
+                                            body: 'No routes match "${_searchQuery.trim()}". Try another search.',
+                                            actionLabel: 'Clear search',
+                                            onAction: () {
+                                              setState(() {
+                                                _searchController.clear();
+                                                _searchQuery = '';
+                                                _originChip = null;
+                                              });
+                                            },
+                                          )
+                                        else
+                                          LayoutBuilder(
+                                            builder: (context, cardConstraints) {
+                                              final double cardWidth = cardConstraints.maxWidth > 680
+                                                  ? (cardConstraints.maxWidth - 12) / 2
+                                                  : cardConstraints.maxWidth;
+                                              return Wrap(
+                                                spacing: 12,
+                                                runSpacing: 12,
+                                                children: filteredRoutes.map((route) {
+                                                  final isSelected = _selected?['id'] == route['id'];
+                                                  return SizedBox(
+                                                    width: cardWidth,
+                                                    child: GestureDetector(
+                                                      onTap: () => _selectRoute(route),
+                                                      child: _RouteOptionCard(
+                                                        from: route['fromLocation']?.toString() ?? 'From',
+                                                        to: route['toLocation']?.toString() ?? 'To',
+                                                        price: 'NGN ${route['price'] ?? '-'}',
+                                                        selected: isSelected,
+                                                      ),
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                              );
+                                            },
+                                          ),
+                                        const SizedBox(height: 24),
+                                        GestureDetector(
+                                          onTap: _submitting ? null : _proceedToPayment,
+                                          child: Container(
+                                            width: double.infinity,
+                                            padding: const EdgeInsets.symmetric(vertical: 16),
+                                            decoration: BoxDecoration(
+                                              gradient: const LinearGradient(colors: [primary, primaryContainer]),
+                                              borderRadius: BorderRadius.circular(22),
+                                              boxShadow: [
+                                                BoxShadow(color: primary.withOpacity(0.18), blurRadius: 18, offset: const Offset(0, 8)),
+                                              ],
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                if (_submitting)
+                                                  const SizedBox(
+                                                    width: 18,
+                                                    height: 18,
+                                                    child: CircularProgressIndicator(
+                                                      strokeWidth: 2,
+                                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                                    ),
+                                                  )
+                                                else
+                                                  const Icon(Icons.credit_card, color: Colors.white, size: 20),
+                                                const SizedBox(width: 8),
+                                                Text(
+                                                  _submitting ? 'Processing...' : 'Proceed to Payment',
+                                                  style: GoogleFonts.manrope(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w800,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                  ),
+                ],
+              ),
+              Positioned(
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    child: Container(
+                      padding: const EdgeInsets.fromLTRB(16, 10, 16, 20),
+                      decoration: BoxDecoration(
+                        color: background.withOpacity(0.82),
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8)),
+                        ],
                       ),
-                      _BottomNavPill(
-                        label: 'History',
-                        icon: Icons.history,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          _BottomNavPill(
+                            label: 'Home',
+                            icon: Icons.home,
+                            onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                          ),
+                          _BottomNavPill(
+                            label: 'History',
+                            icon: Icons.history,
+                            onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                          ),
+                          _BottomNavPill(
+                            label: 'Booking',
+                            icon: Icons.confirmation_number,
+                            active: true,
+                            onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                          ),
+                          _BottomNavPill(
+                            label: 'Profile',
+                            icon: Icons.person,
+                            onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                          ),
+                        ],
                       ),
-                      _BottomNavPill(
-                        label: 'Booking',
-                        icon: Icons.confirmation_number,
-                        active: true,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
-                      ),
-                      _BottomNavPill(
-                        label: 'Profile',
-                        icon: Icons.person,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
@@ -2824,38 +4330,227 @@ class _RouteOptionCard extends StatelessWidget {
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
 
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 180),
+      curve: Curves.easeOut,
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: surfaceLowest,
+        color: selected ? primary.withOpacity(0.04) : surfaceLowest,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: selected ? primary : primary.withOpacity(0.1), width: selected ? 2 : 1),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 6))],
+        border: Border.all(color: selected ? primary : primary.withOpacity(0.08), width: selected ? 1.2 : 1),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(selected ? 0.05 : 0.03),
+            blurRadius: 14,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 40,
-            height: 40,
+            width: 42,
+            height: 42,
             decoration: BoxDecoration(
-              color: primary.withOpacity(0.12),
+              color: primary.withOpacity(0.10),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: const Icon(Icons.place, color: primary),
+            child: const Icon(Icons.route_rounded, color: primary, size: 22),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('$from -> $to', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
-                const SizedBox(height: 4),
-                Text('One-way ticket', style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant)),
+                Row(
+                  children: [
+                    Expanded(
+                        child: Text(
+                          '$from → $to',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: GoogleFonts.manrope(
+                          fontSize: 14.8,
+                          fontWeight: FontWeight.w800,
+                          color: onSurface,
+                          height: 1.15,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: primary.withOpacity(0.08),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Text(
+                        price,
+                        style: GoogleFonts.manrope(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w800,
+                          color: onSurface,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'One-way ticket',
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    color: onSurfaceVariant,
+                    height: 1.3,
+                  ),
+                ),
               ],
             ),
           ),
-          Text(price, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: onSurface)),
+          const SizedBox(width: 8),
+          Container(
+            width: 26,
+            height: 26,
+            decoration: BoxDecoration(
+              color: selected ? primary : Colors.transparent,
+              shape: BoxShape.circle,
+              border: Border.all(color: selected ? primary : primary.withOpacity(0.18)),
+            ),
+            child: Icon(
+              selected ? Icons.check_rounded : Icons.chevron_right_rounded,
+              size: 17,
+              color: selected ? Colors.white : primary,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RouteEndpointPanel extends StatelessWidget {
+  const _RouteEndpointPanel({
+    required this.label,
+    required this.value,
+    required this.subtitle,
+    required this.accent,
+    this.alignEnd = false,
+  });
+
+  final String label;
+  final String value;
+  final String subtitle;
+  final Color accent;
+  final bool alignEnd;
+
+  @override
+  Widget build(BuildContext context) {
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+
+    return Container(
+      constraints: const BoxConstraints(minHeight: 90),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: accent.withOpacity(0.08)),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.75,
+              color: accent,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: alignEnd ? TextAlign.end : TextAlign.start,
+            style: GoogleFonts.manrope(
+              fontSize: 15.5,
+              fontWeight: FontWeight.w800,
+              color: onSurface,
+              height: 1.1,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            subtitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            textAlign: alignEnd ? TextAlign.end : TextAlign.start,
+            style: GoogleFonts.inter(
+              fontSize: 10.5,
+              fontWeight: FontWeight.w500,
+              color: onSurfaceVariant,
+              height: 1.3,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _JourneyStatPill extends StatelessWidget {
+  const _JourneyStatPill({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const onSurfaceVariant = Color(0xFF3E4942);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: primary.withOpacity(0.08)),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label.toUpperCase(),
+            style: GoogleFonts.inter(
+              fontSize: 9,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.0,
+              color: onSurfaceVariant.withOpacity(0.8),
+            ),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            value,
+            style: GoogleFonts.manrope(
+              fontSize: 11.5,
+              fontWeight: FontWeight.w800,
+              color: primary,
+            ),
+          ),
         ],
       ),
     );
@@ -2881,18 +4576,25 @@ class _PaymentChoiceChip extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           decoration: BoxDecoration(
             color: active ? primary : Colors.white,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: primary.withOpacity(0.15)),
+            borderRadius: BorderRadius.circular(13),
+            border: Border.all(color: active ? primary : primary.withOpacity(0.12), width: 1),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(active ? 0.08 : 0.03),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
           ),
           child: Center(
             child: Text(
               label,
               style: GoogleFonts.manrope(
-                fontSize: 12,
-                fontWeight: FontWeight.w700,
+                fontSize: 11.5,
+                fontWeight: FontWeight.w800,
                 color: active ? Colors.white : onSurface,
               ),
             ),
@@ -4411,13 +6113,7 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: primary.withOpacity(0.1), width: 2),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuDYwvb0dFRscbrfaw_oh1AbVJAECq7rNIenjGAn35PoaMy_s5KBzAgCejnPmJWFMhSbwLiU5ECwnUNIPVH8iylObIOiuJMKWRdw46UINGfQRzReOji5rPVZd-yIDuTH05DA4U2vPeMQvjMqwAE9_YpKwqmXzGrcPslny8fL_gHzVFp5nRFEHNipjaUPezkp5Pc4GBnPNgCoT_BPnKMem8Jm3qdZOcZMvgeqCk8cHooAVrGMsKo_mgmpNyEkpktZ8t4RKOyP3z8iqQ',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                              child: const _UserProfileThumb(size: 40),
                             ),
                           ],
                         ),
@@ -5766,7 +7462,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       _firstNameController.text = user['firstName']?.toString() ?? AuthStore.firstName ?? '';
       _lastNameController.text = user['lastName']?.toString() ?? AuthStore.lastName ?? '';
       _emailController.text = user['email']?.toString() ?? AuthStore.email ?? '';
-      _phoneController.text = user['phone']?.toString() ?? AuthStore.phone ?? '';
+      _phoneController.text = _displayPhoneValue(user['phone']?.toString() ?? AuthStore.phone ?? '');
       setState(() => _loading = false);
     } catch (_) {
       setState(() => _loading = false);
@@ -5847,6 +7543,42 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     setState(() => _pushLoading = false);
   }
 
+  String _displayPhoneValue(String value) {
+    var phone = value.trim();
+    if (phone.isEmpty) {
+      return '';
+    }
+    phone = phone.replaceAll(RegExp(r'[\s\-\(\)]'), '');
+    if (phone.startsWith('+234')) {
+      return phone.substring(4);
+    }
+    if (phone.startsWith('234') && phone.length > 3) {
+      return phone.substring(3);
+    }
+    if (phone.startsWith('0') && phone.length > 1) {
+      return phone.substring(1);
+    }
+    return phone;
+  }
+
+  String? _normalizePhoneValue(String value) {
+    var phone = value.trim();
+    if (phone.isEmpty) {
+      return null;
+    }
+    phone = phone.replaceAll(RegExp(r'[\s\-\(\)]'), '');
+    if (phone.startsWith('+234')) {
+      return phone;
+    }
+    if (phone.startsWith('234')) {
+      return '+$phone';
+    }
+    if (phone.startsWith('0') && phone.length > 1) {
+      return '+234${phone.substring(1)}';
+    }
+    return '+234$phone';
+  }
+
   String _lastUpdatedLabel() {
     if (_lastUpdated == null) {
       return 'Last updated on -';
@@ -5865,11 +7597,10 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     String? firstName = _firstNameController.text.trim();
     String? lastName = _lastNameController.text.trim();
     String? email = _emailController.text.trim();
-    String? phone = _phoneController.text.trim();
+    String? phone = _normalizePhoneValue(_phoneController.text);
     if (firstName.isEmpty) firstName = null;
     if (lastName.isEmpty) lastName = null;
     if (email.isEmpty) email = null;
-    if (phone.isEmpty) phone = null;
     final response = await AuthApi.updateProfile(
       firstName: firstName,
       lastName: lastName,
@@ -5941,13 +7672,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: primary.withOpacity(0.2), width: 2),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuCqOMZl9d8pL2f8PZbVT09IDg0BdrbYq8Kf_jd1qHcUA3pAaquJ4D_UWPcdYxv74nPbBEEwqRsRV-ucxSFBQnY8fKBiV_Gqd8TRTKV8UWf93HXaM_FecSAtuh4JlbjMdvUHZdWYoDh7MNT0RE2z6a1TXaULO4i5JakJSJRgj4DltECEl6rzknCvIgMKa44ugcnKZ0U2M0N9Toy1m0p3kLBRF_vR2ptY4qMtnaz-w00vEhiGog0hYAlIyNplhVX_v8dohqRLGng8ag',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                              child: const _UserProfileThumb(size: 40),
                             ),
                           ],
                         ),
@@ -5975,13 +7700,7 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                 borderRadius: BorderRadius.circular(24),
                                 boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 6))],
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuCTdOkMaBLSzaxP9LGh6fe4ked8e4JDNo_xooO_m3_iqlUwMm9oEzzk-SjmyiU3OWCnXwxGVP2NfojnifjXIzOweycjjXejBltyWZskuvJlz0Ypi0RU-wyqOE5QLqpTrCpIO2zXoPPxGKaYUjFxF9Tk3mkJF85IhR3aCjzlaAfGbMcoZk8j8mfEycbdsy7J9-9DrbYLfPLLbCIDQQjlPLtpfS0F2PUfZDfDBA3SzJ4zAvRB20IHa4tlB0CU2wmdRSuYmuS_iIxBxw',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                              child: const _UserProfileThumb(size: 96),
                             ),
                             const SizedBox(height: 12),
                             Text('Profile Settings', style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface)),
@@ -6301,13 +8020,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: primary.withOpacity(0.2), width: 2),
                               ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  'https://lh3.googleusercontent.com/aida-public/AB6AXuAx37eVO0zcVZtWg-ZCwRjtr6VtkbR2kB4maw-MFWKD7Fma4lyeOM4OFmQqe8SqsX7t0g490ekrbsBx1SNYL3lo7ydHWSwnWoeZWGdfI0BD8ClbkDNHEXkKXdXY3Z6c3QSnPC3gc0kw_I70zsZxeCru7V8hn6VVBiJHyXWCpjwHWrHyVoW5KebXLCb1atItgHpZAJBT-BGByVdeDxprhfPSi--Dd9vxSxxQXKTD336OWu31xCZwW5N9JRmsB2gB85CTzO8brYe7bg',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                              child: const _UserProfileThumb(size: 40),
                             ),
                           ],
                         ),
@@ -7185,7 +8898,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   @override
   Widget build(BuildContext context) {
     const background = Color(0xFFF7F9FB);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF3F5F7);
     const surfaceLowest = Color(0xFFFFFFFF);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
@@ -7201,10 +8914,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             top: 0,
             bottom: 0,
             child: Opacity(
-              opacity: 0.05,
+              opacity: 0.015,
               child: Image.network(
                 'https://lh3.googleusercontent.com/aida-public/AB6AXuAtkF29Qu01aqkGm8daAClwzhQWIL2i6V5AdQLxPQghfhkiq6HgszNGYvA_-XFymnT8tvGE0xE75IWAYLLQQgteh-asmsUr38bI4AOAd9gWPBvsFsTJPwdorNHL13i6nOzRHpUrR0IzNFMTZLm5c5uu3C9meePwa4F4IpvPwTyjphVtDB9f--9esReqoPChvrJ3yMtGIY1vVPsECpTEu8uIixkVO2gQmglkFekjGMI1ltjVVCrit8StqmI4p0MF2r9CGyqkEBMRvA',
-                width: MediaQuery.of(context).size.width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.36,
                 fit: BoxFit.cover,
               ),
             ),
@@ -7244,144 +8957,146 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 150),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 180),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('How can we help?', style: GoogleFonts.manrope(fontSize: 32, fontWeight: FontWeight.w800, color: onSurface)),
                       const SizedBox(height: 8),
                       Text(
-                        'Reach out to Inter-Metro Transport Solution Limited (I-Metro) for support, partnerships, or fleet management enquiries.',
-                        style: GoogleFonts.inter(fontSize: 16, color: onSurfaceVariant, height: 1.4),
+                        'Contact I-Metro for support, partnerships, or fleet management enquiries.',
+                        style: GoogleFonts.inter(fontSize: 15, color: onSurfaceVariant, height: 1.45),
                       ),
                       const SizedBox(height: 24),
+                      Text('Contact options', style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface)),
+                      const SizedBox(height: 12),
                       LayoutBuilder(
                         builder: (context, constraints) {
-                          final isWide = constraints.maxWidth > 860;
-                          final latestSupport = _supportItems.isNotEmpty ? _supportItems.first : null;
-                          final leftColumn = Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              _ContactInfoCard(
-                                icon: Icons.call,
-                                title: 'Call Us',
-                                subtitle: 'Customer Support',
-                                value: '+234 912 806 6666',
-                              ),
-                              SizedBox(height: 16),
-                              _ContactInfoCard(
-                                icon: Icons.apartment,
-                                title: 'Head Office',
-                                subtitle: 'Abuja, Nigeria',
-                                value: 'FCT Transport Secretariat',
-                              ),
-                              SizedBox(height: 16),
-                              _ContactLocationRow(),
-                            ],
-                          );
-                          final rightColumn = Container(
-                            padding: const EdgeInsets.all(20),
-                            decoration: BoxDecoration(
-                              color: surfaceLowest,
-                              borderRadius: BorderRadius.circular(24),
-                              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 8))],
+                          final stacked = constraints.maxWidth < 560;
+                          final cards = [
+                            const _ContactInfoCard(
+                              icon: Icons.call_rounded,
+                              title: 'Call Us',
+                              subtitle: 'Customer Support',
+                              value: '+234 912 806 6666',
+                              helperText: 'Tap to call',
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _ContactFormField(
-                                  label: 'Subject',
-                                  placeholder: 'What can we help you with?',
-                                  controller: _subjectController,
-                                ),
-                                const SizedBox(height: 16),
-                                _ContactMessageField(
-                                  label: 'Message',
-                                  placeholder: 'Tell us more about your inquiry...',
-                                  controller: _messageController,
-                                ),
-                                const SizedBox(height: 16),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed: _sending ? null : _sendMessage,
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(vertical: 16),
-                                      backgroundColor: primary,
-                                      foregroundColor: Colors.white,
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                                      elevation: 0,
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        if (_sending)
-                                          const SizedBox(
-                                            width: 18,
-                                            height: 18,
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 2,
-                                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                            ),
-                                          )
-                                        else
-                                          const Icon(Icons.send, size: 18, color: Colors.white),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          _sending ? 'Sending...' : 'Send Message',
-                                          style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                if (_error != null) ...[
-                                  const SizedBox(height: 10),
-                                  Text(_error!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: error)),
-                                ],
-                                const SizedBox(height: 20),
-                                _SupportLiveUpdateBanner(
-                                  notice: _supportNotice,
-                                  latestItem: latestSupport,
-                                  lastSyncedAt: _lastSupportSyncAt,
-                                ),
-                                const SizedBox(height: 16),
-                                _SupportStatusPanel(
-                                  loading: _loadingSupport,
-                                  errorText: _supportError,
-                                  items: _supportItems,
-                                  onRefresh: () => _loadSupportMessages(),
-                                ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  'By sending this message, you agree to our privacy policy regarding data collection for support purposes.',
-                                  style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.4),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                            const _ContactInfoCard(
+                              icon: Icons.apartment_rounded,
+                              title: 'Head Office',
+                              subtitle: 'Abuja, Nigeria',
+                              value: 'FCT Transport Secretariat',
+                              helperText: 'Get directions',
                             ),
-                          );
-
-                          if (isWide) {
-                            return Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          ];
+                          if (stacked) {
+                            return Column(
                               children: [
-                                Expanded(child: leftColumn),
-                                const SizedBox(width: 24),
-                                Expanded(child: rightColumn),
+                                SizedBox(width: double.infinity, child: cards[0]),
+                                const SizedBox(height: 14),
+                                SizedBox(width: double.infinity, child: cards[1]),
                               ],
                             );
                           }
-
-                          return Column(
+                          return Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              leftColumn,
-                              const SizedBox(height: 24),
-                              rightColumn,
+                              Expanded(child: cards[0]),
+                              const SizedBox(width: 14),
+                              Expanded(child: cards[1]),
                             ],
                           );
                         },
+                      ),
+                      const SizedBox(height: 22),
+                      Text('Send a message', style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface)),
+                      const SizedBox(height: 12),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          color: surfaceLowest,
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: const Color(0xFFD7E4DB)),
+                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 18, offset: const Offset(0, 8))],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _ContactFormField(
+                              label: 'Subject',
+                              placeholder: 'What can we help you with?',
+                              controller: _subjectController,
+                            ),
+                            const SizedBox(height: 14),
+                            _ContactMessageField(
+                              label: 'Message',
+                              placeholder: 'Tell us more about your inquiry...',
+                              controller: _messageController,
+                            ),
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: _sending ? null : _sendMessage,
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  backgroundColor: primary,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                                  elevation: 0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    if (_sending)
+                                      const SizedBox(
+                                        width: 18,
+                                        height: 18,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                        ),
+                                      )
+                                    else
+                                      const Icon(Icons.send_rounded, size: 18, color: Colors.white),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      _sending ? 'Sending...' : 'Send Message',
+                                      style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            if (_error != null) ...[
+                              const SizedBox(height: 10),
+                              Text(_error!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: error)),
+                            ],
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 22),
+                      Text('My support requests', style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface)),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Track whether your complaint is open, in progress, or resolved.',
+                        style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.4),
+                      ),
+                      const SizedBox(height: 12),
+                      _SupportStatusPanel(
+                        loading: _loadingSupport,
+                        errorText: _supportError,
+                        items: _supportItems,
+                        onRefresh: () => _loadSupportMessages(),
+                        notice: _supportNotice,
+                        lastSyncedAt: _lastSupportSyncAt,
+                      ),
+                      const SizedBox(height: 12),
+                      Text(
+                        'By sending this message, you agree to our privacy policy regarding data collection for support purposes.',
+                        style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.45),
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),
@@ -7445,12 +9160,16 @@ class _SupportStatusPanel extends StatelessWidget {
     required this.errorText,
     required this.items,
     required this.onRefresh,
+    this.notice,
+    this.lastSyncedAt,
   });
 
   final bool loading;
   final String? errorText;
   final List<Map<String, dynamic>> items;
   final VoidCallback onRefresh;
+  final String? notice;
+  final DateTime? lastSyncedAt;
 
   @override
   Widget build(BuildContext context) {
@@ -7460,7 +9179,13 @@ class _SupportStatusPanel extends StatelessWidget {
     const muted = Color(0xFF51615A);
     const primary = Color(0xFF006B47);
 
-    final visibleItems = items.take(3).toList();
+    final sortedItems = [...items]
+      ..sort((a, b) {
+        final aDate = DateTime.tryParse(a['updatedAt']?.toString() ?? a['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+        final bDate = DateTime.tryParse(b['updatedAt']?.toString() ?? b['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+        return bDate.compareTo(aDate);
+      });
+    final visibleItems = sortedItems.take(4).toList();
 
     return Container(
       width: double.infinity,
@@ -7488,6 +9213,37 @@ class _SupportStatusPanel extends StatelessWidget {
             'Track whether your complaint is open, in progress, or resolved.',
             style: GoogleFonts.inter(fontSize: 12, color: muted, height: 1.4),
           ),
+          if (notice != null && notice!.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                color: const Color(0xFFE1F2EA),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.verified_rounded, size: 18, color: primary),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      notice!,
+                      style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: heading, height: 1.4),
+                    ),
+                  ),
+                  if (lastSyncedAt != null) ...[
+                    const SizedBox(width: 8),
+                    Text(
+                      'Updated just now',
+                      style: GoogleFonts.inter(fontSize: 10, color: muted),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 14),
           if (loading)
             const _SupportLoadingRow()
@@ -7498,147 +9254,27 @@ class _SupportStatusPanel extends StatelessWidget {
           else
             Column(
               children: [
-                for (final item in visibleItems) ...[
-                  _SupportTicketCard(
-                    subject: item['subject']?.toString() ?? 'Support request',
-                    message: item['message']?.toString() ?? '',
-                    status: item['status']?.toString() ?? 'OPEN',
-                    updatedAt: item['updatedAt']?.toString() ?? item['createdAt']?.toString(),
-                  ),
+                _SupportTicketCard(
+                  subject: visibleItems.first['subject']?.toString() ?? 'Support request',
+                  message: visibleItems.first['message']?.toString() ?? '',
+                  status: visibleItems.first['status']?.toString() ?? 'OPEN',
+                  updatedAt: visibleItems.first['updatedAt']?.toString() ?? visibleItems.first['createdAt']?.toString(),
+                  highlighted: true,
+                ),
+                if (visibleItems.length > 1) ...[
                   const SizedBox(height: 12),
+                  for (final item in visibleItems.skip(1)) ...[
+                    _SupportTicketCard(
+                      subject: item['subject']?.toString() ?? 'Support request',
+                      message: item['message']?.toString() ?? '',
+                      status: item['status']?.toString() ?? 'OPEN',
+                      updatedAt: item['updatedAt']?.toString() ?? item['createdAt']?.toString(),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                 ],
               ],
             ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SupportLiveUpdateBanner extends StatelessWidget {
-  const _SupportLiveUpdateBanner({
-    required this.notice,
-    required this.latestItem,
-    required this.lastSyncedAt,
-  });
-
-  final String? notice;
-  final Map<String, dynamic>? latestItem;
-  final DateTime? lastSyncedAt;
-
-  @override
-  Widget build(BuildContext context) {
-    const heading = Color(0xFF203229);
-    const muted = Color(0xFF51615A);
-    const success = Color(0xFF006B47);
-    const warning = Color(0xFFB26A00);
-    const danger = Color(0xFFB00020);
-
-    final normalized = latestItem == null ? 'OPEN' : (latestItem!['status']?.toString().toUpperCase() ?? 'OPEN');
-    final statusLabel = switch (normalized) {
-      'IN_PROGRESS' => 'In progress',
-      'RESOLVED' => 'Resolved',
-      _ => 'Open',
-    };
-    final statusColor = switch (normalized) {
-      'IN_PROGRESS' => warning,
-      'RESOLVED' => success,
-      _ => danger,
-    };
-    final statusBg = switch (normalized) {
-      'IN_PROGRESS' => const Color(0xFFFFF2D8),
-      'RESOLVED' => const Color(0xFFE1F2EA),
-      _ => const Color(0xFFFFE2E2),
-    };
-    final subject = latestItem?['subject']?.toString() ?? 'No support request yet';
-    final note = switch (normalized) {
-      'IN_PROGRESS' => 'Our team is working on this complaint.',
-      'RESOLVED' => 'The issue has been settled.',
-      _ => 'Delivered to customer service.',
-    };
-    final updatedAt = latestItem?['updatedAt']?.toString() ?? latestItem?['createdAt']?.toString();
-    final syncText = lastSyncedAt == null ? null : 'Last refreshed just now';
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7FAF8),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFD7E4DB)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                'Latest support update',
-                style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: heading),
-              ),
-              const Spacer(),
-              if (syncText != null)
-                Text(syncText, style: GoogleFonts.inter(fontSize: 10, color: muted)),
-            ],
-          ),
-          if (notice != null && notice!.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFE1F2EA),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.verified, size: 18, color: success),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      notice!,
-                      style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: heading, height: 1.4),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  subject,
-                  style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w800, color: heading),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(color: statusBg, borderRadius: BorderRadius.circular(999)),
-                child: Text(
-                  statusLabel,
-                  style: GoogleFonts.manrope(fontSize: 11, fontWeight: FontWeight.w800, color: statusColor),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            note,
-            style: GoogleFonts.inter(fontSize: 12, color: muted, height: 1.4),
-          ),
-          if (updatedAt != null && updatedAt.isNotEmpty) ...[
-            const SizedBox(height: 8),
-            Text(
-              'Updated: $updatedAt',
-              style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF71847B)),
-            ),
-          ],
         ],
       ),
     );
@@ -7651,12 +9287,14 @@ class _SupportTicketCard extends StatelessWidget {
     required this.message,
     required this.status,
     required this.updatedAt,
+    this.highlighted = false,
   });
 
   final String subject;
   final String message;
   final String status;
   final String? updatedAt;
+  final bool highlighted;
 
   @override
   Widget build(BuildContext context) {
@@ -7676,19 +9314,28 @@ class _SupportTicketCard extends StatelessWidget {
       'RESOLVED' => const Color(0xFFE1F2EA),
       _ => const Color(0xFFFFE2E2),
     };
-    final supportNote = switch (normalized) {
-      'IN_PROGRESS' => 'Our team is working on this complaint.',
-      'RESOLVED' => 'The issue has been settled.',
-      _ => 'Delivered to customer service.',
-    };
+    final supportNote = message.isEmpty
+        ? switch (normalized) {
+            'IN_PROGRESS' => 'Our team is working on this complaint.',
+            'RESOLVED' => 'The issue has been settled.',
+            _ => 'Delivered to customer service.',
+          }
+        : message;
 
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFD7E4DB)),
+        color: highlighted ? const Color(0xFFF1F9F5) : Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: highlighted ? const Color(0xFFBFDCCD) : const Color(0xFFD7E4DB)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(highlighted ? 0.04 : 0.02),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -7716,7 +9363,7 @@ class _SupportTicketCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            message.isEmpty ? supportNote : message,
+            supportNote,
             style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF51615A), height: 1.4),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -7724,15 +9371,10 @@ class _SupportTicketCard extends StatelessWidget {
           if (updatedAt != null && updatedAt!.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
-              'Updated: $updatedAt',
+              'Updated: ${_formatSupportTimestamp(updatedAt)}',
               style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF71847B)),
             ),
           ],
-          const SizedBox(height: 8),
-          Text(
-            supportNote,
-            style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: statusColor),
-          ),
         ],
       ),
     );
@@ -7800,45 +9442,55 @@ class _ContactInfoCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.value,
+    this.helperText,
   });
 
   final IconData icon;
   final String title;
   final String subtitle;
   final String value;
+  final String? helperText;
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF3F5F7);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
 
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: surfaceContainerLow,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: primary.withOpacity(0.08)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 48,
-            height: 48,
+            width: 36,
+            height: 36,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(10),
               boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 4))],
             ),
-            child: Icon(icon, color: primary),
+            child: Icon(icon, color: primary, size: 18),
           ),
-          const SizedBox(height: 12),
-          Text(title, style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: onSurface)),
-          const SizedBox(height: 4),
-          Text(subtitle.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, letterSpacing: 2.2, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
-          const SizedBox(height: 12),
-          Text(value, style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+          const SizedBox(height: 10),
+          Text(title, style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w700, color: onSurface, height: 1.05)),
+          const SizedBox(height: 3),
+          Text(subtitle, style: GoogleFonts.inter(fontSize: 9.5, letterSpacing: 1.2, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
+          const SizedBox(height: 8),
+          Text(value, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: primary, height: 1.15)),
+          if (helperText != null) ...[
+            const SizedBox(height: 4),
+            Text(
+              helperText!,
+              style: GoogleFonts.inter(fontSize: 9.5, fontWeight: FontWeight.w600, color: onSurfaceVariant),
+            ),
+          ],
         ],
       ),
     );
@@ -7874,12 +9526,13 @@ class _ContactFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF5F7F8);
+    const primary = Color(0xFF006B47);
     const onSurfaceVariant = Color(0xFF3E4942);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
+        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
         const SizedBox(height: 8),
         TextField(
           controller: controller,
@@ -7887,12 +9540,16 @@ class _ContactFormField extends StatelessWidget {
             filled: true,
             fillColor: surfaceContainerLow,
             hintText: placeholder,
-            hintStyle: GoogleFonts.inter(color: Colors.grey.shade400),
+            hintStyle: GoogleFonts.inter(color: onSurfaceVariant.withOpacity(0.45)),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: primary.withOpacity(0.08))),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: const Color(0xFF006B47).withOpacity(0.4), width: 2),
+              borderSide: BorderSide(color: primary.withOpacity(0.45), width: 1.6),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: primary.withOpacity(0.08)),
             ),
           ),
         ),
@@ -7914,32 +9571,53 @@ class _ContactMessageField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF5F7F8);
+    const primary = Color(0xFF006B47);
     const onSurfaceVariant = Color(0xFF3E4942);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
+        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
         const SizedBox(height: 8),
         TextField(
           controller: controller,
-          maxLines: 6,
+          maxLines: 5,
           decoration: InputDecoration(
             filled: true,
             fillColor: surfaceContainerLow,
             hintText: placeholder,
-            hintStyle: GoogleFonts.inter(color: Colors.grey.shade400),
+            hintStyle: GoogleFonts.inter(color: onSurfaceVariant.withOpacity(0.45)),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: primary.withOpacity(0.08))),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: const Color(0xFF006B47).withOpacity(0.4), width: 2),
+              borderSide: BorderSide(color: primary.withOpacity(0.45), width: 1.6),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: primary.withOpacity(0.08)),
             ),
           ),
         ),
       ],
     );
   }
+}
+
+String _formatSupportTimestamp(String? raw) {
+  if (raw == null || raw.trim().isEmpty) {
+    return '--';
+  }
+  final parsed = DateTime.tryParse(raw);
+  if (parsed == null) {
+    return raw;
+  }
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  final local = parsed.toLocal();
+  final hour = local.hour % 12 == 0 ? 12 : local.hour % 12;
+  final minute = local.minute.toString().padLeft(2, '0');
+  final period = local.hour >= 12 ? 'PM' : 'AM';
+  return '${months[local.month - 1]} ${local.day}, ${local.year} • $hour:$minute $period';
 }
 
 class _EmptyStateCard extends StatelessWidget {
@@ -8407,8 +10085,8 @@ class PolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const background = Color(0xFFF7F9FB);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const surfaceContainerHigh = Color(0xFFE6E8EA);
+    const surfaceContainerLow = Color(0xFFF3F5F7);
+    const surfaceContainerHigh = Color(0xFFE8ECE9);
     const outlineVariant = Color(0xFFBDCAC0);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
@@ -8419,18 +10097,30 @@ class PolicyScreen extends StatelessWidget {
       backgroundColor: background,
       body: Stack(
         children: [
+          Positioned(
+            right: -36,
+            top: 88,
+            child: Opacity(
+              opacity: 0.012,
+              child: Image.network(
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuAtkF29Qu01aqkGm8daAClwzhQWIL2i6V5AdQLxPQghfhkiq6HgszNGYvA_-XFymnT8tvGE0xE75IWAYLLQQgteh-asmsUr38bI4AOAd9gWPBvsFsTJPwdorNHL13i6nOzRHpUrR0IzNFMTZLm5c5uu3C9meePwa4F4IpvPwTyjphVtDB9f--9esReqoPChvrJ3yMtGIY1vVPsECpTEu8uIixkVO2gQmglkFekjGMI1ltjVVCrit8StqmI4p0MF2r9CGyqkEBMRvA',
+                width: MediaQuery.of(context).size.width * 0.30,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
           Column(
             children: [
               SizedBox(
                 height: 64,
                 child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                        color: background.withOpacity(0.84),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.035), blurRadius: 12, offset: const Offset(0, 4))],
                       ),
                       child: SafeArea(
                         bottom: false,
@@ -8440,7 +10130,10 @@ class PolicyScreen extends StatelessWidget {
                               onPressed: () => Navigator.pop(context),
                               icon: const Icon(Icons.arrow_back, color: primary),
                             ),
-                            Text('Company Profile', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+                            Text(
+                              'Company Profile',
+                              style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary),
+                            ),
                             const Spacer(),
                             _brandLogo(size: 28, radius: 8),
                           ],
@@ -8452,265 +10145,288 @@ class PolicyScreen extends StatelessWidget {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 140),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 188),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'I-Metro Bus Profile',
-                        style: GoogleFonts.manrope(fontSize: 30, fontWeight: FontWeight.w800, color: onSurface),
-                      ),
-                      Text('2026', style: GoogleFonts.manrope(fontSize: 30, fontWeight: FontWeight.w800, color: primary)),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Inter-Metro Transport Solution Limited (I-Metro) is a privately owned, technology-driven urban mobility company headquartered in Abuja, Nigeria. We deploy clean-energy fleets, intelligent transport systems, and professionally managed operations aligned with international standards. I-Metro holds an active operational license issued by the FCTA Transport Secretariat with approval from the Office of the Honourable Minister of the FCT.',
-                        style: GoogleFonts.inter(fontSize: 16, color: onSurfaceVariant, height: 1.4),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: surfaceLowest,
-                                borderRadius: BorderRadius.circular(16),
-                                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 48,
-                                    height: 48,
-                                    decoration: BoxDecoration(
-                                      color: primary.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: const Icon(Icons.gavel, color: primary),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text('Vision', style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: onSurface)),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'To become Nigeria’s most trusted and innovative provider of sustainable, technology-enabled urban mobility solutions.',
-                                    style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text('Read vision', style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w600)),
-                                      const SizedBox(width: 4),
-                                      const Icon(Icons.arrow_forward, size: 16, color: primary),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: primary,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 48,
-                                    height: 48,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: const Icon(Icons.security, color: Colors.white),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text('Mission', style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white)),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'To transform public transportation by deploying clean-energy fleets, smart technologies, and customer-centric services.',
-                                    style: GoogleFonts.inter(fontSize: 12, color: Colors.white.withOpacity(0.85)),
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text('Read mission', style: GoogleFonts.inter(fontSize: 12, color: Colors.white, fontWeight: FontWeight.w600)),
-                                      const SizedBox(width: 4),
-                                      const Icon(Icons.arrow_forward, size: 16, color: Colors.white),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                      _PolicyHeroCard(
+                        title: 'I-Metro Bus Profile',
+                        year: '2026',
+                        intro:
+                            'Inter-Metro Transport Solution Limited (I-Metro) is a privately owned, technology-driven urban mobility company headquartered in Abuja, Nigeria.',
+                        summary:
+                            'We deploy clean-energy fleets, intelligent transport systems, and professionally managed operations aligned with international standards.',
+                        chips: const [
+                          _PolicyPill(text: 'Clean-energy fleets'),
+                          _PolicyPill(text: 'Smart mobility systems'),
+                          _PolicyPill(text: 'Licensed operations'),
                         ],
                       ),
-                      const SizedBox(height: 32),
-                      _PolicySectionHeader(
-                        index: '01',
+                      const SizedBox(height: 22),
+                      _PolicyStorySection(
+                        title: 'About I-Metro',
+                        subtitle: 'A mobility company built for disciplined city movement and modern commuter comfort.',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _PolicyBullet(text: 'Abuja-based, urban mobility focused, and technology-driven.'),
+                            const SizedBox(height: 8),
+                            _PolicyBullet(text: 'Operates with clean-energy fleets and organized route systems.'),
+                            const SizedBox(height: 8),
+                            _PolicyBullet(text: 'Built around dependable service, safer travel, and clear standards.'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      _PolicySectionTitle(
+                        title: 'Vision & Mission',
+                        subtitle: 'The direction behind the brand and the promise we work from.',
+                      ),
+                      const SizedBox(height: 12),
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          final stacked = constraints.maxWidth < 720;
+                          final visionCard = _PolicyStatementCard(
+                            icon: Icons.visibility_rounded,
+                            title: 'Vision',
+                            body: 'To become Nigeria’s most trusted and innovative provider of sustainable, technology-enabled urban mobility solutions.',
+                            actionLabel: 'Read vision',
+                            onAction: () {},
+                            filled: false,
+                          );
+                          final missionCard = _PolicyStatementCard(
+                            icon: Icons.shield_rounded,
+                            title: 'Mission',
+                            body: 'To transform public transportation by deploying clean-energy fleets, smart technologies, and customer-centric services.',
+                            actionLabel: 'Read mission',
+                            onAction: () {},
+                            filled: true,
+                          );
+                          if (stacked) {
+                            return Column(
+                              children: [
+                                visionCard,
+                                const SizedBox(height: 12),
+                                missionCard,
+                              ],
+                            );
+                          }
+                          return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(child: visionCard),
+                              const SizedBox(width: 12),
+                              Expanded(child: missionCard),
+                            ],
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 20),
+                      _PolicySectionTitle(
                         title: 'Core Values',
+                        subtitle: 'These values guide every decision and rider interaction.',
                       ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Our operations are anchored on clear values that guide every decision and rider interaction:',
-                        style: GoogleFonts.inter(fontSize: 14, color: onSurfaceVariant, height: 1.6),
+                      const SizedBox(height: 12),
+                      _PolicyCard(
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final narrow = constraints.maxWidth < 520;
+                            final tileWidth = narrow ? constraints.maxWidth : (constraints.maxWidth - 12) / 2;
+                            final values = const [
+                              _PolicyValueData(title: 'Safety', body: 'Passenger and operational safety above all else.'),
+                              _PolicyValueData(title: 'Integrity', body: 'Transparent, accountable, and ethical operations.'),
+                              _PolicyValueData(title: 'Innovation', body: 'Continuous adoption of smart mobility solutions.'),
+                              _PolicyValueData(title: 'Professionalism', body: 'Global service standards and discipline.'),
+                              _PolicyValueData(title: 'Sustainability', body: 'Environmental responsibility and long-term impact.'),
+                              _PolicyValueData(title: 'Customer Focus', body: 'Reliable, dignified, and comfortable mobility.'),
+                            ];
+                            return Wrap(
+                              spacing: 12,
+                              runSpacing: 12,
+                              children: values
+                                  .map(
+                                    (value) => SizedBox(
+                                      width: tileWidth,
+                                      child: _PolicyValueTile(data: value),
+                                    ),
+                                  )
+                                  .toList(),
+                            );
+                          },
+                        ),
                       ),
-                      const SizedBox(height: 16),
+                      const SizedBox(height: 20),
+                      _PolicySectionTitle(
+                        title: 'Core Services',
+                        subtitle: 'A compact portfolio for urban, institutional, and managed mobility.',
+                      ),
+                      const SizedBox(height: 12),
+                      _PolicyStorySection(
+                        title: 'What we do',
+                        subtitle: 'Inter-Metro delivers an integrated portfolio of urban and institutional mobility solutions.',
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _PolicyBullet(text: 'High-capacity CNG bus operations.'),
+                            const SizedBox(height: 8),
+                            _PolicyBullet(text: 'Metered taxi services (first of its kind in Abuja).'),
+                            const SizedBox(height: 8),
+                            _PolicyBullet(text: 'Fleet management partnerships for third-party vehicles.'),
+                            const SizedBox(height: 8),
+                            _PolicyBullet(text: 'Hire-purchase vehicle operations.'),
+                            const SizedBox(height: 8),
+                            _PolicyBullet(text: 'Driver recruitment, training, and supervision.'),
+                            const SizedBox(height: 8),
+                            _PolicyBullet(text: 'Route planning, scheduling, and cashless fare collection.'),
+                            const SizedBox(height: 16),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final stacked = constraints.maxWidth < 520;
+                                final cards = [
+                                  const _PolicyMiniCard(
+                                    title: 'Fleet Partnerships',
+                                    body: 'Daily operations, staffing, technology, monitoring, and reporting for partner-owned vehicles.',
+                                  ),
+                                  const _PolicyMiniCard(
+                                    title: 'Hire-Purchase',
+                                    body: 'Vehicles are taken into service and paid for over time from operational proceeds.',
+                                  ),
+                                ];
+                                if (stacked) {
+                                  return Column(
+                                    children: [
+                                      cards[0],
+                                      const SizedBox(height: 12),
+                                      cards[1],
+                                    ],
+                                  );
+                                }
+                                return Row(
+                                  children: [
+                                    Expanded(child: cards[0]),
+                                    const SizedBox(width: 12),
+                                    Expanded(child: cards[1]),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      _PolicySectionTitle(
+                        title: 'Technology & Safety',
+                        subtitle: 'Systems and safeguards that keep operations visible, efficient, and accountable.',
+                      ),
+                      const SizedBox(height: 12),
+                      _PolicyCard(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Operations are underpinned by a centralized, cloud-based mobility management system designed for transparency, efficiency, and safety.',
+                              style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.45),
+                            ),
+                            const SizedBox(height: 14),
+                            _PolicyHighlightPanel(
+                              title: 'Key infrastructure',
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: const [
+                                  _PolicyBullet(text: 'GPS-enabled real-time vehicle tracking.'),
+                                  SizedBox(height: 8),
+                                  _PolicyBullet(text: 'Onboard CCTV with two-way monitoring.'),
+                                  SizedBox(height: 8),
+                                  _PolicyBullet(text: 'Cashless fare collection (POS, smart cards, validators).'),
+                                  SizedBox(height: 8),
+                                  _PolicyBullet(text: 'Centralized cloud-based fleet management platform.'),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      _PolicySectionTitle(
+                        title: 'Partnerships',
+                        subtitle: 'Institutional relationships that support safe, scalable service delivery.',
+                      ),
+                      const SizedBox(height: 12),
+                      _PolicyCard(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            _PolicyPartnerRow(text: 'Presidential Compressed Natural Gas Initiative (P-CNGi).'),
+                            SizedBox(height: 10),
+                            _PolicyPartnerRow(text: 'Office of the Honourable Minister of the FCT.'),
+                            SizedBox(height: 10),
+                            _PolicyPartnerRow(text: 'FCT Transport Secretariat and DRTS.'),
+                            SizedBox(height: 10),
+                            _PolicyPartnerRow(text: 'Federal Ministry of Transport and Environment.'),
+                            SizedBox(height: 10),
+                            _PolicyPartnerRow(text: 'AMAC, FRSC, and the Nigerian Police Force & NSCDC.'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 22),
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
-                          color: surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(16),
+                          color: primary.withOpacity(0.08),
+                          borderRadius: BorderRadius.circular(22),
+                          border: Border.all(color: primary.withOpacity(0.12)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Values in Action', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: onSurface)),
-                            const SizedBox(height: 12),
-                            _PolicyBullet(
-                              text: 'Safety – passenger and operational safety above all else.',
+                            Text(
+                              'Want to partner or learn more?',
+                              style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: onSurface),
                             ),
                             const SizedBox(height: 8),
-                            _PolicyBullet(
-                              text: 'Integrity – transparent, accountable, and ethical operations.',
+                            Text(
+                              'We welcome discussions about fleet partnerships, institutional mobility, and service collaboration.',
+                              style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.45),
                             ),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(
-                              text: 'Innovation – continuous adoption of smart mobility solutions.',
-                            ),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(
-                              text: 'Professionalism – global service standards and discipline.',
-                            ),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(
-                              text: 'Sustainability – environmental responsibility and long-term impact.',
-                            ),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(
-                              text: 'Customer Focus – reliable, dignified, and comfortable mobility.',
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 32),
-                      _PolicySectionHeader(
-                        index: '02',
-                        title: 'Core Services',
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Inter-Metro delivers an integrated portfolio of urban and institutional mobility solutions:',
-                        style: GoogleFonts.inter(fontSize: 14, color: onSurfaceVariant, height: 1.6),
-                      ),
-                      const SizedBox(height: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          _PolicyBullet(text: 'High-capacity CNG bus operations.'),
-                          SizedBox(height: 8),
-                          _PolicyBullet(text: 'Metered taxi services (first of its kind in Abuja).'),
-                          SizedBox(height: 8),
-                          _PolicyBullet(text: 'Fleet management partnerships for third-party vehicles.'),
-                          SizedBox(height: 8),
-                          _PolicyBullet(text: 'Hire-purchase vehicle operations.'),
-                          SizedBox(height: 8),
-                          _PolicyBullet(text: 'Driver recruitment, training, and supervision.'),
-                          SizedBox(height: 8),
-                          _PolicyBullet(text: 'Route planning, scheduling, and cashless fare collection.'),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _PolicyMiniCard(
-                              title: 'Fleet Partnerships',
-                              body: 'I-Metro manages daily operations, staffing, technology, monitoring, and reporting for partner-owned vehicles.',
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: _PolicyMiniCard(
-                              title: 'Hire-Purchase',
-                              body: 'Vehicles are taken into service and paid for over time from operational proceeds with transparent oversight.',
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 32),
-                      _PolicySectionHeader(
-                        index: '03',
-                        title: 'Technology & Safety Infrastructure',
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'Operations are underpinned by a centralized, cloud-based mobility management system designed for transparency, efficiency, and safety.',
-                        style: GoogleFonts.inter(fontSize: 14, color: onSurfaceVariant, height: 1.6),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border(left: BorderSide(color: primary, width: 4)),
-                        ),
-                        child: Text(
-                          'GPS-enabled real-time vehicle tracking\nOnboard CCTV with two-way monitoring\nCashless fare collection (POS, smart cards, validators)\nCentralized cloud-based fleet management platform',
-                          style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600, color: onSurfaceVariant, height: 1.5),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Public sector & institutional partnerships include:',
-                            style: GoogleFonts.inter(fontSize: 14, height: 1.6, color: onSurfaceVariant),
-                          ),
-                          const SizedBox(height: 8),
-                          const _PolicyBullet(text: 'Presidential Compressed Natural Gas Initiative (P-CNGi).'),
-                          const SizedBox(height: 6),
-                          const _PolicyBullet(text: 'Office of the Honourable Minister of the FCT.'),
-                          const SizedBox(height: 6),
-                          const _PolicyBullet(text: 'FCT Transport Secretariat and DRTS.'),
-                          const SizedBox(height: 6),
-                          const _PolicyBullet(text: 'Federal Ministry of Transport and Environment.'),
-                          const SizedBox(height: 6),
-                          const _PolicyBullet(text: 'AMAC, FRSC, and the Nigerian Police Force & NSCDC.'),
-                        ],
-                      ),
-                      const SizedBox(height: 32),
-                      Container(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        decoration: BoxDecoration(
-                          border: Border(top: BorderSide(color: outlineVariant.withOpacity(0.2))),
-                        ),
-                        child: Column(
-                          children: [
-                            Text('Need more information? Call +234 912 806 6666.', style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 14),
                             GestureDetector(
                               onTap: () => Navigator.pushNamed(context, AppRoutes.contactUs),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(vertical: 14),
                                 decoration: BoxDecoration(
                                   color: primary,
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: [BoxShadow(color: primary.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 6))],
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: primary.withOpacity(0.18),
+                                      blurRadius: 14,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
                                 ),
-                                child: Text('Contact I-Metro', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white)),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 18),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      'Contact I-Metro',
+                                      style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                            const SizedBox(height: 16),
-                            Text('I-Metro Bus Profile - 2026', style: GoogleFonts.inter(fontSize: 10, color: Colors.grey.shade500, letterSpacing: 2.0)),
                           ],
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      Center(
+                        child: Text(
+                          'I-Metro Bus Profile - 2026',
+                          style: GoogleFonts.inter(fontSize: 10, color: Colors.grey.shade500, letterSpacing: 2.0),
                         ),
                       ),
                     ],
@@ -8765,6 +10481,379 @@ class PolicyScreen extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _PolicyHeroCard extends StatelessWidget {
+  const _PolicyHeroCard({
+    required this.title,
+    required this.year,
+    required this.intro,
+    required this.summary,
+    required this.chips,
+  });
+
+  final String title;
+  final String year;
+  final String intro;
+  final String summary;
+  final List<Widget> chips;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const surfaceLowest = Color(0xFFFFFFFF);
+    const outlineVariant = Color(0xFFBDCAC0);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: surfaceLowest,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: outlineVariant.withOpacity(0.14)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 46,
+                height: 46,
+                decoration: BoxDecoration(
+                  color: primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: const Icon(Icons.directions_bus_filled_rounded, color: primary),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(title, style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface, height: 1.05)),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: primary.withOpacity(0.10),
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Text(year, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: primary)),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            intro,
+                            style: GoogleFonts.inter(fontSize: 12.5, color: onSurfaceVariant, height: 1.45),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Text(summary, style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.55)),
+          const SizedBox(height: 12),
+          Wrap(spacing: 8, runSpacing: 8, children: chips),
+        ],
+      ),
+    );
+  }
+}
+
+class _PolicyValueData {
+  const _PolicyValueData({required this.title, required this.body});
+
+  final String title;
+  final String body;
+}
+
+class _PolicyValueTile extends StatelessWidget {
+  const _PolicyValueTile({required this.data});
+
+  final _PolicyValueData data;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    return Container(
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF7F9FB),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFFD7E4DB)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: primary.withOpacity(0.10),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(Icons.check_rounded, size: 16, color: primary),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  data.title,
+                  style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: onSurface),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            data.body,
+            style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.45),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PolicyHighlightPanel extends StatelessWidget {
+  const _PolicyHighlightPanel({
+    required this.title,
+    required this.child,
+  });
+
+  final String title;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const surfaceContainerLow = Color(0xFFF3F5F7);
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: surfaceContainerLow,
+        borderRadius: BorderRadius.circular(18),
+        border: Border(left: BorderSide(color: primary, width: 4)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E)),
+          ),
+          const SizedBox(height: 12),
+          child,
+        ],
+      ),
+    );
+  }
+}
+
+class _PolicyStorySection extends StatelessWidget {
+  const _PolicyStorySection({
+    required this.title,
+    required this.subtitle,
+    required this.child,
+  });
+
+  final String title;
+  final String subtitle;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: onSurface)),
+        const SizedBox(height: 6),
+        Text(subtitle, style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.45)),
+        const SizedBox(height: 12),
+        _PolicyCard(child: child),
+      ],
+    );
+  }
+}
+
+class _PolicySectionTitle extends StatelessWidget {
+  const _PolicySectionTitle({
+    required this.title,
+    required this.subtitle,
+  });
+
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: onSurface)),
+        const SizedBox(height: 4),
+        Text(subtitle, style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.45)),
+      ],
+    );
+  }
+}
+
+class _PolicyCard extends StatelessWidget {
+  const _PolicyCard({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: const Color(0xFFD7E4DB)),
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 6))],
+      ),
+      child: child,
+    );
+  }
+}
+
+class _PolicyStatementCard extends StatelessWidget {
+  const _PolicyStatementCard({
+    required this.icon,
+    required this.title,
+    required this.body,
+    required this.actionLabel,
+    required this.onAction,
+    required this.filled,
+  });
+
+  final IconData icon;
+  final String title;
+  final String body;
+  final String actionLabel;
+  final VoidCallback onAction;
+  final bool filled;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    final background = filled ? primary : Colors.white;
+    final textColor = filled ? Colors.white : onSurface;
+    final mutedColor = filled ? Colors.white.withOpacity(0.82) : onSurfaceVariant;
+    final actionColor = filled ? Colors.white : primary;
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: filled ? primary.withOpacity(0.12) : const Color(0xFFD7E4DB)),
+        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 8))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: filled ? Colors.white.withOpacity(0.18) : primary.withOpacity(0.10),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(icon, color: filled ? Colors.white : primary),
+          ),
+          const SizedBox(height: 12),
+          Text(title, style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: textColor)),
+          const SizedBox(height: 8),
+          Text(body, style: GoogleFonts.inter(fontSize: 12, color: mutedColor, height: 1.5)),
+          const SizedBox(height: 14),
+          GestureDetector(
+            onTap: onAction,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(actionLabel, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: actionColor)),
+                const SizedBox(width: 4),
+                Icon(Icons.arrow_forward_rounded, size: 16, color: actionColor),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _PolicyPill extends StatelessWidget {
+  const _PolicyPill({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: primary.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: primary),
+      ),
+    );
+  }
+}
+
+class _PolicyPartnerRow extends StatelessWidget {
+  const _PolicyPartnerRow({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(Icons.check_circle_rounded, color: primary, size: 18),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(text, style: GoogleFonts.inter(fontSize: 12.5, color: onSurfaceVariant, height: 1.45)),
+        ),
+      ],
     );
   }
 }
@@ -8837,6 +10926,87 @@ class _PolicyMiniCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(body, style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.4)),
         ],
+      ),
+    );
+  }
+}
+
+class _UserProfileThumb extends StatelessWidget {
+  const _UserProfileThumb({super.key, this.size = 40});
+
+  final double size;
+
+  String _initials() {
+    final first = AuthStore.firstName?.trim() ?? '';
+    final last = AuthStore.lastName?.trim() ?? '';
+    final email = AuthStore.email?.trim() ?? '';
+    final buffer = StringBuffer();
+
+    if (first.isNotEmpty) {
+      buffer.write(first[0]);
+    }
+    if (last.isNotEmpty) {
+      buffer.write(last[0]);
+    }
+    if (buffer.isEmpty && email.contains('@')) {
+      final local = email.split('@').first;
+      final parts = local.split(RegExp(r'[^A-Za-z0-9]+')).where((part) => part.isNotEmpty).toList();
+      for (final part in parts.take(2)) {
+        buffer.write(part[0]);
+      }
+    }
+
+    final text = buffer.toString().toUpperCase();
+    return text.isEmpty ? 'IM' : text;
+  }
+
+  ImageProvider? _avatarImageProvider() {
+    final data = AuthStore.avatarUrl?.trim();
+    if (data == null || data.isEmpty || AuthStore.isPlaceholderAvatar(data)) {
+      return null;
+    }
+    if (data.startsWith('data:image')) {
+      final comma = data.indexOf(',');
+      if (comma != -1) {
+        final base64Part = data.substring(comma + 1);
+        try {
+          return MemoryImage(base64Decode(base64Part));
+        } catch (_) {
+          return null;
+        }
+      }
+      return null;
+    }
+    if (data.startsWith('http')) {
+      return NetworkImage(data);
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    final avatarProvider = _avatarImageProvider();
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(size / 2),
+        border: Border.all(color: primary.withOpacity(0.18), width: 2),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(size / 2),
+        child: avatarProvider == null
+            ? Container(
+                color: primary.withOpacity(0.08),
+                alignment: Alignment.center,
+                child: Text(
+                  _initials(),
+                  style: GoogleFonts.manrope(fontSize: size * 0.32, fontWeight: FontWeight.w800, color: primary),
+                ),
+              )
+            : Image(image: avatarProvider, fit: BoxFit.cover),
       ),
     );
   }

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import HtmlScreen from "./HtmlScreen";
 import addRouteHtml from "./html/add_route.html?raw";
 import { fetchWithAuth } from "../lib/api";
+import { signalRoutesUpdated } from "../lib/routeUpdates";
 
 const wrapperClassName = "min-h-screen";
 
@@ -16,6 +17,15 @@ const formatCurrency = (value) => {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })}`;
+};
+
+const createTimeoutController = (timeoutMs = 8000) => {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+  return {
+    signal: controller.signal,
+    clear: () => window.clearTimeout(timer),
+  };
 };
 
 function AddRoute() {
@@ -50,7 +60,10 @@ function AddRoute() {
   const loadRouteStats = useCallback(async () => {
     setStatsLoading(true);
     try {
-      const response = await fetchWithAuth("/admin/routes");
+      const timeout = createTimeoutController(8000);
+      const response = await fetchWithAuth("/admin/routes", {
+        signal: timeout.signal,
+      }).finally(() => timeout.clear());
       if (!response.ok) {
         throw new Error("Unable to load routes.");
       }
@@ -126,6 +139,7 @@ function AddRoute() {
 
       setLoading(true);
       try {
+        const timeout = createTimeoutController(8000);
         const response = await fetchWithAuth("/admin/routes", {
           method: "POST",
           body: JSON.stringify({
@@ -135,7 +149,8 @@ function AddRoute() {
             currency: "NGN",
             isActive: true,
           }),
-        });
+          signal: timeout.signal,
+        }).finally(() => timeout.clear());
 
         const result = await response.json().catch(() => ({}));
         if (!response.ok) {
@@ -144,11 +159,11 @@ function AddRoute() {
         }
 
         setSuccess("Route created successfully.");
-        window.dispatchEvent(new Event("i-metro:routes-updated"));
+        signalRoutesUpdated();
         await loadRouteStats();
         navigate("/admin/routes");
       } catch {
-        setError("Unable to create route.");
+        setError("Unable to create route. Please check that the admin backend is running.");
       } finally {
         setLoading(false);
       }
@@ -193,7 +208,7 @@ function AddRoute() {
     <>
       {statsLoading && (
         <div className="mb-4 rounded-lg bg-surface-container-low text-on-surface-variant px-4 py-2 text-sm">
-          Loading live route data...
+          Checking live route data...
         </div>
       )}
       {loading && (

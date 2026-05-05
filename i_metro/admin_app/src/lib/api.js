@@ -1,6 +1,6 @@
 import { authStore } from "./auth";
 
-const API_BASE =
+export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api";
 
 const withAuthHeaders = (headers = {}) => {
@@ -19,7 +19,7 @@ const handleAuthFailure = (response) => {
 };
 
 export const loginAdmin = async ({ emailOrPhone, password }) => {
-  const response = await fetch(`${API_BASE}/auth/login`, {
+  const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ emailOrPhone, password }),
@@ -33,7 +33,7 @@ export const loginAdmin = async ({ emailOrPhone, password }) => {
 };
 
 export const fetchWithAuth = async (path, options = {}) => {
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers: withAuthHeaders({
       "Content-Type": "application/json",
