@@ -19,6 +19,8 @@ i_metro/validator_client/
 validator_bridge*
 Validator*/
 validator*/
+!backend-private/src/validators/
+!backend-private/src/validators/**
 sdk_extract/
 CL-0409_SDK*/
 CL-0409_SDK(1).zip
