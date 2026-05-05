@@ -1,0 +1,234 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+  MERCHANT
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentProvider {
+  MONIEPOINT
+  PAYSTACK
+  USSD
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+enum SupportStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String?  @unique
+  phone        String?  @unique
+  passwordHash String?
+  role         Role     @default(USER)
+  firstName    String?
+  lastName     String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  bookings       Booking[]
+  tickets        Ticket[]
+  merchantProfile Merchant?
+  pushDevices    PushDevice[]
+  supportMessages SupportMessage[]
+}
+
+model Merchant {
+  id         String   @id @default(uuid())
+  userId     String?  @unique
+  name       String
+  email      String?
+  phone      String?
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+model Route {
+  id          String   @id @default(uuid())
+  fromLocation String
+  toLocation   String
+  price        Int
+  currency     String  @default("NGN")
+  isActive     Boolean @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  bookings Booking[]
+  tickets  Ticket[]
+}
+
+model Booking {
+  id         String        @id @default(uuid())
+  userId     String
+  routeId    String
+  status     BookingStatus @default(PENDING)
+  travelDate DateTime?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  user    User   @relation(fields: [userId], references: [id])
+  route   Route  @relation(fields: [routeId], references: [id])
+  payment Payment?
+  ticket  Ticket?
+
+  @@index([userId])
+  @@index([routeId])
+}
+
+model Payment {
+  id          String         @id @default(uuid())
+  bookingId   String         @unique
+  amount      Int
+  currency    String         @default("NGN")
+  provider    PaymentProvider
+  providerRef String?
+  status      PaymentStatus  @default(PENDING)
+  paidAt      DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  booking Booking @relation(fields: [bookingId], references: [id])
+
+  @@index([provider])
+  @@index([status])
+}
+
+model Ticket {
+  id          String   @id @default(uuid())
+  bookingId   String?  @unique
+  userId      String
+  routeId     String
+  amount      Int
+  currency    String  @default("NGN")
+  issuedAt    DateTime @default(now())
+  validDate   DateTime
+  nonce       String
+  usedAt      DateTime?
+  revokedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  booking Booking? @relation(fields: [bookingId], references: [id])
+  user    User     @relation(fields: [userId], references: [id])
+  route   Route    @relation(fields: [routeId], references: [id])
+
+  validations QRValidationLog[]
+
+  @@index([userId])
+  @@index([routeId])
+  @@index([validDate])
+  @@index([usedAt])
+}
+
+model ValidatorDevice {
+  id         String   @id @default(uuid())
+  name       String
+  apiKeyHash String
+  isActive   Boolean  @default(true)
+  lastSeenAt DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  validations QRValidationLog[]
+}
+
+model QRValidationLog {
+  id               String   @id @default(uuid())
+  rawPayload       String
+  format           String
+  isValid          Boolean
+  reason           String?
+  ticketId         String?
+  validatorDeviceId String?
+  createdAt        DateTime @default(now())
+
+  ticket   Ticket?         @relation(fields: [ticketId], references: [id])
+  device   ValidatorDevice? @relation(fields: [validatorDeviceId], references: [id])
+
+  @@index([ticketId])
+  @@index([validatorDeviceId])
+  @@index([format])
+}
+
+model PushDevice {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  platform  String
+  deviceId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model SupportMessage {
+  id        String        @id @default(uuid())
+  userId    String?
+  name      String?
+  email     String?
+  phone     String?
+  subject   String
+  message   String
+  status    SupportStatus @default(OPEN)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  actorUserId String?
+  actorName   String
+  actorRole   String
+  category    String
+  action      String
+  details     String
+  entityType  String?
+  entityId    String?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([category])
+  @@index([entityType])
+  @@index([actorUserId])
+}

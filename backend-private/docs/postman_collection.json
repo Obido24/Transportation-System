@@ -1,0 +1,237 @@
+{
+  "info": {
+    "_postman_id": "i-metro-backend",
+    "name": "I-Metro Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api" },
+    { "key": "jwt", "value": "" },
+    { "key": "adminBootstrapSecret", "value": "set_admin_bootstrap_secret" },
+    { "key": "userId", "value": "" },
+    { "key": "routeId", "value": "" },
+    { "key": "bookingId", "value": "" },
+    { "key": "paymentReference", "value": "" },
+    { "key": "deviceId", "value": "" },
+    { "key": "deviceApiKey", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Create Admin",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/admin/create", "host": ["{{baseUrl}}"], "path": ["auth", "admin", "create"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"admin@example.com\",\"password\":\"Password123\",\"firstName\":\"Admin\",\"lastName\":\"User\",\"role\":\"ADMIN\",\"bootstrapSecret\":\"{{adminBootstrapSecret}}\"}"
+            }
+          }
+        },
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/register", "host": ["{{baseUrl}}"], "path": ["auth", "register"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"user@example.com\",\"password\":\"Password123\",\"firstName\":\"Rita\",\"lastName\":\"Dominic\"}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/auth/login", "host": ["{{baseUrl}}"], "path": ["auth", "login"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"emailOrPhone\":\"user@example.com\",\"password\":\"Password123\"}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Routes",
+      "item": [
+        {
+          "name": "List Routes",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/routes", "host": ["{{baseUrl}}"], "path": ["routes"] }
+          }
+        },
+        {
+          "name": "Seed Routes (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/routes/seed", "host": ["{{baseUrl}}"], "path": ["routes", "seed"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/bookings", "host": ["{{baseUrl}}"], "path": ["bookings"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"userId\":\"{{userId}}\",\"routeId\":\"{{routeId}}\"}"
+            }
+          }
+        },
+        {
+          "name": "Get Booking",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+            "url": { "raw": "{{baseUrl}}/bookings/{{bookingId}}", "host": ["{{baseUrl}}"], "path": ["bookings", "{{bookingId}}"] }
+          }
+        },
+        {
+          "name": "Issue Ticket",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+            "url": { "raw": "{{baseUrl}}/bookings/{{bookingId}}/issue-ticket", "host": ["{{baseUrl}}"], "path": ["bookings", "{{bookingId}}", "issue-ticket"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Initiate Monnify",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/payments/monnify/initiate", "host": ["{{baseUrl}}"], "path": ["payments", "monnify", "initiate"] },
+            "body": { "mode": "raw", "raw": "{\"userId\":\"{{userId}}\",\"routeId\":\"{{routeId}}\"}" }
+          }
+        },
+        {
+          "name": "Monnify Webhook",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "monnify-signature", "value": "demo-signature" }],
+            "url": { "raw": "{{baseUrl}}/payments/monnify/webhook", "host": ["{{baseUrl}}"], "path": ["payments", "monnify", "webhook"] },
+            "body": { "mode": "raw", "raw": "{\"eventType\":\"SUCCESSFUL_TRANSACTION\",\"eventData\":{}}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validators",
+      "item": [
+        {
+          "name": "Create Device (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{jwt}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/validators/devices", "host": ["{{baseUrl}}"], "path": ["validators", "devices"] },
+            "body": { "mode": "raw", "raw": "{\"name\":\"Validator A\"}" }
+          }
+        },
+        {
+          "name": "List Devices (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+            "url": { "raw": "{{baseUrl}}/validators/devices", "host": ["{{baseUrl}}"], "path": ["validators", "devices"] }
+          }
+        },
+        {
+          "name": "Validate QR",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-api-key", "value": "{{deviceApiKey}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/validators/validate-qr", "host": ["{{baseUrl}}"], "path": ["validators", "validate-qr"] },
+            "body": { "mode": "raw", "raw": "{\"qr\":\"IMT1.demo\"}" }
+          }
+        }
+      ]
+    }
+    ,
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "List Users (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/users", "host": ["{{baseUrl}}"], "path": ["admin", "users"] }
+          }
+        },
+        {
+          "name": "List Merchants (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/merchants", "host": ["{{baseUrl}}"], "path": ["admin", "merchants"] }
+          }
+        },
+        {
+          "name": "List Bookings (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/bookings", "host": ["{{baseUrl}}"], "path": ["admin", "bookings"] }
+          }
+        },
+        {
+          "name": "List Payments (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{jwt}}" }],
+            "url": { "raw": "{{baseUrl}}/admin/payments", "host": ["{{baseUrl}}"], "path": ["admin", "payments"] }
+          }
+        }
+      ]
+    }
+  ]
+}

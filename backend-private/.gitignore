@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+generated/
+data/
+
+# Keep environment variables out of version control
+.env
+.env.*
+!.env.example
+
+# Local Prisma output and logs
+/generated/prisma
+*.log
