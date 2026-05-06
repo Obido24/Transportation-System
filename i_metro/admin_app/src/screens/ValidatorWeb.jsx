@@ -45,10 +45,10 @@ const getSuggestedApiBase = () => {
 
   const host = window.location.hostname?.trim();
   if (host && !isLoopbackBaseUrl(host) && !host.endsWith("onrender.com")) {
-    return `http://${host}:3000/api`;
+    return normalizeBaseUrl(defaultBaseUrl) || "https://api.ridei-metro.com/api";
   }
 
-  return normalizeBaseUrl(defaultBaseUrl) || "http://localhost:3000/api";
+  return normalizeBaseUrl(defaultBaseUrl) || "https://api.ridei-metro.com/api";
 };
 
 const resolveInitialBaseUrl = () => {
@@ -66,11 +66,11 @@ const resolveInitialBaseUrl = () => {
   if (typeof window !== "undefined") {
     const host = window.location.hostname;
     if (host && host !== "localhost" && host !== "127.0.0.1") {
-      return `http://${host}:3000/api`;
+      return normalizeBaseUrl(defaultBaseUrl) || "https://api.ridei-metro.com/api";
     }
   }
 
-  return envBase || "http://localhost:3000/api";
+  return envBase || "https://api.ridei-metro.com/api";
 };
 
 const resolveInitialBusLabel = () => {
@@ -1325,7 +1325,7 @@ export default function ValidatorWeb() {
                           className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#1d4ed8]"
                           value={baseUrl}
                           onChange={(event) => setBaseUrl(event.target.value)}
-                          placeholder="http://localhost:3000/api"
+                          placeholder="https://api.ridei-metro.com/api"
                         />
                       </label>
                       {suggestedApiBase && suggestedApiBase !== normalizeBaseUrl(baseUrl) ? (

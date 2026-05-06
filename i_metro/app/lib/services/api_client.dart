@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'auth_store.dart';
 
 class ApiClient {
-  static const String _productionBaseUrl = 'https://i-metro-backend.onrender.com/api';
+  static const String _productionBaseUrl = 'https://api.ridei-metro.com/api';
 
   static String get baseUrl {
     const configured = String.fromEnvironment('API_BASE_URL', defaultValue: '');
@@ -14,13 +14,7 @@ class ApiClient {
     if (kReleaseMode) {
       return _productionBaseUrl;
     }
-    if (kIsWeb) {
-      return 'http://localhost:3000/api';
-    }
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      return 'http://10.0.2.2:3000/api';
-    }
-    return 'http://localhost:3000/api';
+    return _productionBaseUrl;
   }
 
   static Map<String, String> _headers({bool auth = false}) {

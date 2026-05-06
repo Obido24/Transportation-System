@@ -2,7 +2,7 @@ import { useSyncExternalStore } from "react";
 
 const TOKEN_KEY = "i_metro_admin_token";
 const PROFILE_KEY = "i_metro_admin_profile";
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:3000/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "https://api.ridei-metro.com/api";
 const BOOTSTRAP_TIMEOUT_MS = 3500;
 
 const listeners = new Set();
