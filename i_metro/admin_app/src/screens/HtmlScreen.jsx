@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 
 const linkMap = [
   { match: "dashboard", path: "/admin/dashboard" },
@@ -75,6 +75,7 @@ function HtmlScreen({
     () => mapAnchors(html, stripShell),
     [html, stripShell],
   );
+  const localRef = useRef(null);
 
   useEffect(() => {
     if (title) {
@@ -82,11 +83,25 @@ function HtmlScreen({
     }
   }, [title]);
 
+  useLayoutEffect(() => {
+    const node = containerRef?.current ?? localRef.current;
+    if (!node) return;
+    node.innerHTML = processed;
+  }, [containerRef, processed]);
+
   return (
     <div
-      ref={containerRef}
+      ref={(node) => {
+        localRef.current = node;
+        if (typeof containerRef === "function") {
+          containerRef(node);
+          return;
+        }
+        if (containerRef && typeof containerRef === "object") {
+          containerRef.current = node;
+        }
+      }}
       className={wrapperClassName}
-      dangerouslySetInnerHTML={{ __html: processed }}
     />
   );
 }
