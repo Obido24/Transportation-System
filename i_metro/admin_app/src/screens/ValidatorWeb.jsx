@@ -93,9 +93,11 @@ export default function ValidatorWeb() {
   const streamRef = useRef(null);
   const scanLoopRef = useRef(null);
   const busCopyTimeoutRef = useRef(null);
+  const scanCooldownTimerRef = useRef(null);
   const startCameraRef = useRef(null);
   const lastScanRef = useRef({ value: "", at: 0 });
   const busyRef = useRef(false);
+  const scanCooldownUntilRef = useRef(0);
 
   const [baseUrl, setBaseUrl] = useState(() => resolveInitialBaseUrl());
   const [apiKey, setApiKey] = useState(() => readStorage(storageKeys.apiKey, ""));
@@ -112,6 +114,7 @@ export default function ValidatorWeb() {
   const [acceptedCount, setAcceptedCount] = useState(0);
   const [rejectedCount, setRejectedCount] = useState(0);
   const [lastScanAt, setLastScanAt] = useState(null);
+  const [scanCooldownEndsAt, setScanCooldownEndsAt] = useState(0);
   const [showConnectionSettings, setShowConnectionSettings] = useState(false);
   const [selectedFileName, setSelectedFileName] = useState("");
   const [fileScanState, setFileScanState] = useState("");
@@ -356,11 +359,44 @@ export default function ValidatorWeb() {
       if (busCopyTimeoutRef.current) {
         window.clearTimeout(busCopyTimeoutRef.current);
       }
+      clearScanCooldownTimer();
     };
   }, []);
 
   const pushHistory = (entry) => {
     setHistory((current) => [entry, ...current].slice(0, 10));
+  };
+
+  const getReadyMessage = () =>
+    baseUrl.trim() && apiKey.trim()
+      ? "Camera ready. Point it at the next QR code."
+      : "Camera ready. Finish the backend URL and validator key setup to enable scans.";
+
+  const getReadyHint = () =>
+    baseUrl.trim() && apiKey.trim()
+      ? `Keep the QR centered on ${busLabel}. If it does not read, move closer.`
+      : "Camera is open, but validation still needs the integration details from Settings.";
+
+  const clearScanCooldownTimer = () => {
+    if (scanCooldownTimerRef.current) {
+      window.clearTimeout(scanCooldownTimerRef.current);
+      scanCooldownTimerRef.current = null;
+    }
+  };
+
+  const startScanCooldown = () => {
+    const endsAt = Date.now() + 6000;
+    scanCooldownUntilRef.current = endsAt;
+    setScanCooldownEndsAt(endsAt);
+    clearScanCooldownTimer();
+    scanCooldownTimerRef.current = window.setTimeout(() => {
+      scanCooldownUntilRef.current = 0;
+      scanCooldownTimerRef.current = null;
+      setScanCooldownEndsAt(0);
+      setStatus("idle");
+      setMessage(getReadyMessage());
+      setScanHint(getReadyHint());
+    }, 6000);
   };
 
   const stopCamera = () => {
@@ -373,6 +409,9 @@ export default function ValidatorWeb() {
       stream.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
     }
+    clearScanCooldownTimer();
+    scanCooldownUntilRef.current = 0;
+    setScanCooldownEndsAt(0);
     setIsCameraReady(false);
     setIsScanning(false);
     setCameraBooting(false);
@@ -383,6 +422,10 @@ export default function ValidatorWeb() {
     const value = String(qrValue ?? "").trim();
     if (!value) {
       return;
+    }
+
+    if (scanCooldownUntilRef.current && Date.now() < scanCooldownUntilRef.current) {
+      return false;
     }
 
     const now = Date.now();
@@ -438,7 +481,7 @@ export default function ValidatorWeb() {
       setRejectedCount((current) => current + (isValid ? 0 : 1));
       setMessage(
         isValid
-          ? `Gate opened${data?.busLabel ? ` on ${data.busLabel}` : busLabel ? ` on ${busLabel}` : ""} for ticket${data?.ticketId ? ` #${String(data.ticketId).slice(0, 8).toUpperCase()}` : ""}.`
+          ? `Access granted${data?.busLabel ? ` on ${data.busLabel}` : busLabel ? ` on ${busLabel}` : ""} for ticket${data?.ticketId ? ` #${String(data.ticketId).slice(0, 8).toUpperCase()}` : ""}.`
           : `Access denied${data?.reason ? `: ${formatLabel(data.reason)}` : ""}.`,
       );
       pushHistory({
@@ -450,10 +493,11 @@ export default function ValidatorWeb() {
       });
 
       if (isValid) {
-        stopCamera();
+        setScanHint("Access granted. Waiting 6 seconds before the next scan.");
       } else {
-        setScanHint("Try moving the QR closer and keep it flat to the camera.");
+        setScanHint("Access denied. Waiting 6 seconds before the next scan.");
       }
+      startScanCooldown();
       return isValid;
     } catch (error) {
       setStatus("error");
@@ -478,6 +522,12 @@ export default function ValidatorWeb() {
 
   const scanFrame = async () => {
     if (!isScanning || !videoRef.current) return;
+    if (scanCooldownUntilRef.current && Date.now() < scanCooldownUntilRef.current) {
+      if (isScanning) {
+        scanLoopRef.current = requestAnimationFrame(scanFrame);
+      }
+      return;
+    }
     const video = videoRef.current;
 
     try {
@@ -527,6 +577,8 @@ export default function ValidatorWeb() {
       setIsCameraReady(true);
       setCameraBooting(false);
       setStatus("idle");
+      scanCooldownUntilRef.current = 0;
+      setScanCooldownEndsAt(0);
       if (baseUrl.trim() && apiKey.trim()) {
         setMessage("Camera ready. Point it at the QR code.");
         setScanHint(`Keep the QR centered on ${busLabel}. If it does not read, move closer.`);
@@ -933,10 +985,14 @@ export default function ValidatorWeb() {
                   />
                   <button
                     className="w-full rounded-2xl bg-[#1d4ed8] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-60"
-                    disabled={!canValidate || !scanInput.trim() || status === "checking"}
+                    disabled={!canValidate || !scanInput.trim() || status === "checking" || scanCooldownEndsAt > Date.now()}
                     type="submit"
                   >
-                    {status === "checking" ? "Checking..." : "Validate QR"}
+                    {status === "checking"
+                      ? "Checking..."
+                      : scanCooldownEndsAt > Date.now()
+                        ? "Please wait..."
+                        : "Validate QR"}
                   </button>
                 </form>
               </div>
@@ -1405,10 +1461,14 @@ export default function ValidatorWeb() {
                     />
                     <button
                       className="w-full rounded-2xl bg-[#1d4ed8] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1e40af] disabled:cursor-not-allowed disabled:opacity-60"
-                      disabled={!canValidate || !scanInput.trim() || status === "checking"}
+                      disabled={!canValidate || !scanInput.trim() || status === "checking" || scanCooldownEndsAt > Date.now()}
                       type="submit"
                     >
-                      {status === "checking" ? "Checking..." : "Validate QR"}
+                      {status === "checking"
+                        ? "Checking..."
+                        : scanCooldownEndsAt > Date.now()
+                          ? "Please wait..."
+                          : "Validate QR"}
                     </button>
                   </form>
                 </div>
