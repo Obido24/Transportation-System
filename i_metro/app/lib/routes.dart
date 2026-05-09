@@ -7,6 +7,7 @@ class AppRoutes {
   static const splash = '/';
   static const appModeSelect = '/app-mode-select';
   static const login = '/login';
+  static const forgotPassword = '/forgot-password';
   static const createAccount = '/create-account';
   static const home = '/home';
   static const booking = '/booking';
@@ -47,6 +48,7 @@ class AppRoutes {
     splash: (context) => const SplashOnboardingScreen(),
     appModeSelect: (context) => const AppModeSelectorScreen(),
     login: (context) => const LoginScreen(),
+    forgotPassword: (context) => const ForgotPasswordScreen(),
     createAccount: (context) => const CreateAccountScreen(),
     home: (context) => const HomeScreen(),
     booking: (context) {

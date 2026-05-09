@@ -111,4 +111,30 @@ class AuthApi {
       auth: true,
     );
   }
+
+  static Future<Map<String, dynamic>> requestPasswordReset({
+    required String email,
+  }) {
+    return ApiClient.post(
+      '/auth/forgot-password',
+      {
+        'email': email.trim(),
+      },
+    );
+  }
+
+  static Future<Map<String, dynamic>> resetPassword({
+    required String email,
+    required String code,
+    required String newPassword,
+  }) {
+    return ApiClient.post(
+      '/auth/reset-password',
+      {
+        'email': email.trim(),
+        'code': code.trim(),
+        'newPassword': newPassword,
+      },
+    );
+  }
 }
