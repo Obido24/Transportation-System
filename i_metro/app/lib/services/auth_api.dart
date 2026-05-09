@@ -39,17 +39,6 @@ class AuthApi {
       },
     );
 
-    if (response['ok'] == true && response['accessToken'] != null) {
-      await AuthStore.setSession(
-        tokenValue: response['accessToken'] as String,
-        userIdValue: response['userId'] as String?,
-        roleValue: response['role'] as String?,
-        firstNameValue: firstName,
-        lastNameValue: lastName,
-        emailValue: email,
-        phoneValue: phone,
-      );
-    }
     return response;
   }
 

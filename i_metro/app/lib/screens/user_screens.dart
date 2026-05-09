@@ -2284,21 +2284,24 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       _loading = true;
       _submitError = null;
     });
-    final response = await AuthApi.register(
-      firstName: _firstNameController.text,
-      lastName: _lastNameController.text,
-      email: email,
-      phone: phone,
+      final response = await AuthApi.register(
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        email: email,
+        phone: phone,
       password: password,
     );
-    setState(() => _loading = false);
-    if (!mounted) return;
-    if (response['ok'] == true) {
-      await PushService.instance.initialize();
-      Navigator.pushReplacementNamed(context, AppRoutes.appModeSelect);
-    } else {
-      setState(() => _submitError = _registerErrorMessage(response));
-    }
+      setState(() => _loading = false);
+      if (!mounted) return;
+      if (response['ok'] == true) {
+        await AuthStore.clear();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Account created. Please sign in.')),
+        );
+        Navigator.pushReplacementNamed(context, AppRoutes.login);
+      } else {
+        setState(() => _submitError = _registerErrorMessage(response));
+      }
   }
 
   @override
