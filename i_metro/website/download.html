@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I-Metro | Download</title>
+    <meta name="description" content="Download the I-Metro rider app when the public Play Store release is ready and learn what stays private for operators." />
+    <meta name="theme-color" content="#00361a" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#00361a',
+              'primary-container': '#1a4d2e',
+              'primary-fixed': '#b8f0c5',
+              'on-primary': '#ffffff',
+              'on-primary-container': '#88bd95',
+              secondary: '#7d5700',
+              'secondary-container': '#feb71d',
+              'on-secondary-container': '#6b4b00',
+              surface: '#f8f9fa',
+              'surface-container-lowest': '#ffffff',
+              'surface-container-low': '#f3f4f5',
+              'surface-container': '#edeeef',
+              'surface-container-high': '#e7e8e9',
+              outline: '#717971',
+              'outline-variant': '#c1c9bf',
+              'on-surface': '#191c1d',
+              'on-surface-variant': '#414942'
+            },
+            fontFamily: {
+              body: ['Plus Jakarta Sans', 'sans-serif']
+            },
+            borderRadius: {
+              xl: '1rem',
+              '2xl': '1.5rem'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .accent-gradient {
+        background: linear-gradient(135deg, #00361a 0%, #1a4d2e 100%);
+      }
+      .shadow-level-1 {
+        box-shadow: 0 4px 20px -2px rgba(26, 77, 46, 0.08);
+        border: 1px solid #e9ecef;
+      }
+      .shadow-level-2 {
+        box-shadow: 0 10px 30px -5px rgba(26, 77, 46, 0.12);
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface font-body">
+    <header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant/30 shadow-sm">
+  <div class="flex justify-between items-center px-5 md:px-16 py-4 w-full max-w-[1280px] mx-auto">
+    <a class="flex items-center gap-3" href="./index.html">
+      <img src="./assets/logo.png" alt="I-Metro logo" class="h-10 w-10 rounded-xl object-cover shadow-level-1" />
+      <span class="hidden sm:block text-primary font-extrabold text-2xl tracking-tight">I-Metro</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-on-surface-variant">
+      <a href="./index.html" class="hover:text-primary transition-colors">Home</a>
+      <a href="./services.html" class="hover:text-primary transition-colors">Services</a>
+      <a href="./how-it-works.html" class="hover:text-primary transition-colors">How It Works</a>
+      <a href="./download.html" class="hover:text-primary transition-colors">Download</a>
+      <a href="./support.html" class="hover:text-primary transition-colors">Support</a>
+      <a href="./about.html" class="hover:text-primary transition-colors">About</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="./support.html" class="hidden sm:inline-flex px-5 py-2 rounded-full border border-primary text-primary font-semibold hover:bg-primary/5 transition-all">Contact support</a>
+      <a href="./download.html" class="inline-flex px-5 py-2 rounded-full accent-gradient text-white font-semibold shadow-level-1 hover:scale-[0.98] transition-transform">Download app</a>
+    </div>
+  </div>
+</header>
+
+    <main class="pt-24">
+      <section class="px-5 md:px-16 py-16 md:py-24 bg-gradient-to-b from-primary/95 to-primary-container text-white overflow-hidden relative">
+        <div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-secondary-container/20 blur-3xl"></div>
+        <div class="max-w-[1280px] mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
+          <div class="space-y-6">
+            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white/90 text-sm font-semibold border border-white/10">
+              <span class="material-symbols-outlined text-[18px]">phone_iphone</span>
+              Public rider app
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">Put the official rider app in every passenger's hand.</h1>
+            <p class="text-lg md:text-xl text-primary-fixed/90 max-w-xl">The Play Store link will appear here when the public release is ready. For now, we make it clear what is active, what is private, and how people can get support.</p>
+            <div class="flex flex-wrap gap-4">
+              <a href="./support.html" class="inline-flex items-center gap-3 px-6 py-4 rounded-xl bg-white text-primary font-bold shadow-level-2 hover:translate-y-[-1px] transition-transform">
+                <span class="material-symbols-outlined">download</span>
+                Request app access
+              </a>
+              <a href="./services.html" class="inline-flex items-center gap-3 px-6 py-4 rounded-xl border border-white/25 text-white font-bold hover:bg-white/10 transition-colors">
+                <span class="material-symbols-outlined">map</span>
+                See service status
+              </a>
+            </div>
+            <div class="flex flex-wrap gap-3 pt-2 text-sm">
+              <span class="px-4 py-2 rounded-full bg-white/10 border border-white/10">Bus Transport active</span>
+              <span class="px-4 py-2 rounded-full bg-white/10 border border-white/10">Metro Taxi coming soon</span>
+              <span class="px-4 py-2 rounded-full bg-white/10 border border-white/10">Delivery coming soon</span>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="absolute inset-0 bg-black/20 blur-3xl rounded-full"></div>
+            <div class="relative mx-auto max-w-[340px] rounded-[2rem] bg-surface-container-lowest p-5 shadow-level-2 border border-white/20">
+              <div class="rounded-[1.7rem] bg-gradient-to-b from-primary-container to-primary p-5 text-white space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs uppercase tracking-[0.22em] text-primary-fixed/80">I-Metro app</span>
+                  <span class="px-3 py-1 rounded-full bg-white/10 text-xs font-bold">Coming soon</span>
+                </div>
+                <div class="space-y-1">
+                  <p class="text-sm text-primary-fixed/80">Next journey</p>
+                  <h2 class="text-2xl font-extrabold">Terminal • City Centre</h2>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="rounded-2xl bg-white/10 p-4 border border-white/10">
+                    <p class="text-xs text-primary-fixed/80">Fare</p>
+                    <p class="text-lg font-bold">₦1,250</p>
+                  </div>
+                  <div class="rounded-2xl bg-white/10 p-4 border border-white/10">
+                    <p class="text-xs text-primary-fixed/80">Ticket</p>
+                    <p class="text-lg font-bold">Ready</p>
+                  </div>
+                </div>
+                <div class="rounded-2xl bg-secondary-container text-on-secondary-container p-4">
+                  <p class="text-xs font-semibold uppercase tracking-[0.18em]">Operator note</p>
+                  <p class="font-bold">Validator tools stay private and operator-only.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-5 md:px-16 py-16 md:py-24">
+        <div class="max-w-[1280px] mx-auto">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-3xl md:text-5xl font-bold text-primary">Download details</h2>
+            <p class="mt-4 text-on-surface-variant text-lg">One public rider app, one private operator lane, and no confusion about what people can access today.</p>
+          </div>
+          <div class="grid md:grid-cols-3 gap-6">
+            <article class="bg-white rounded-2xl p-6 shadow-level-1 border border-outline-variant/20">
+              <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary-fixed text-primary mb-5"><span class="material-symbols-outlined">android</span></span>
+              <h3 class="text-2xl font-bold text-primary">Play Store link</h3>
+              <p class="mt-3 text-on-surface-variant">The public download button will point here once the rider app is published.</p>
+              <span class="mt-5 inline-flex px-3 py-1 rounded-full bg-surface-container text-primary font-semibold text-sm">Coming soon</span>
+            </article>
+            <article class="bg-white rounded-2xl p-6 shadow-level-1 border border-outline-variant/20">
+              <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-secondary-container text-on-secondary-container mb-5"><span class="material-symbols-outlined">description</span></span>
+              <h3 class="text-2xl font-bold text-primary">Direct APK</h3>
+              <p class="mt-3 text-on-surface-variant">If a direct install link is ever needed, this section can point passengers to the correct source.</p>
+              <span class="mt-5 inline-flex px-3 py-1 rounded-full bg-surface-container text-primary font-semibold text-sm">Request access</span>
+            </article>
+            <article class="bg-white rounded-2xl p-6 shadow-level-1 border border-outline-variant/20">
+              <span class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary-container text-white mb-5"><span class="material-symbols-outlined">verified_user</span></span>
+              <h3 class="text-2xl font-bold text-primary">Operator tools</h3>
+              <p class="mt-3 text-on-surface-variant">Validator and staff utilities remain private and should never be listed as public downloads.</p>
+              <span class="mt-5 inline-flex px-3 py-1 rounded-full bg-primary-fixed text-primary font-semibold text-sm">Private only</span>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-primary text-white px-5 md:px-16 py-14">
+  <div class="max-w-[1280px] mx-auto grid md:grid-cols-4 gap-10">
+    <div class="space-y-4 md:col-span-1">
+      <div class="flex items-center gap-3">
+        <img src="./assets/logo.png" alt="I-Metro logo" class="h-10 w-10 rounded-xl object-cover" />
+        <span class="text-2xl font-extrabold text-secondary-container">I-Metro</span>
+      </div>
+      <p class="text-white/80">Ride better. Move smarter. A public front door for the I-Metro mobility ecosystem.</p>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Explore</h4>
+      <div class="space-y-2 text-white/80">
+        <a href="./index.html" class="block hover:text-secondary-container">Home</a>
+        <a href="./services.html" class="block hover:text-secondary-container">Services</a>
+        <a href="./how-it-works.html" class="block hover:text-secondary-container">How It Works</a>
+        <a href="./download.html" class="block hover:text-secondary-container">Download</a>
+        <a href="./support.html" class="block hover:text-secondary-container">Support</a>
+        <a href="./about.html" class="block hover:text-secondary-container">About</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Legal</h4>
+      <div class="space-y-2 text-white/80">
+        <a href="./privacy.html" class="block hover:text-secondary-container">Privacy Policy</a>
+        <a href="./terms.html" class="block hover:text-secondary-container">Terms of Service</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Support</h4>
+      <p class="text-white/70 text-sm">support@ridei-metro.com</p>
+      <p class="text-white/70 text-sm mt-2">Monday - Saturday &bull; 9:00am - 6:00pm</p>
+    </div>
+  </div>
+  <div class="max-w-[1280px] mx-auto mt-10 pt-6 border-t border-white/10 text-sm text-white/60 flex flex-col sm:flex-row justify-between gap-2">
+    <span>&copy; <span id="year"></span> I-Metro</span>
+    <span>ridei-metro.com</span>
+  </div>
+</footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro | Support</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #00361a 0%, #1a4d2e 100%);
+        }
+        .accent-gradient {
+            background: linear-gradient(90deg, #00361a 0%, #1d5031 100%);
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .support-feedback-success {
+            border-color: #a7f3d0;
+            background-color: #ecfdf5;
+            color: #064e3b;
+        }
+        .support-feedback-error {
+            border-color: #fecaca;
+            background-color: #fef2f2;
+            color: #991b1b;
+        }
+        .support-feedback-info {
+            border-color: #e5e7eb;
+            background-color: #f9fafb;
+            color: #374151;
+        }
+</style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#00361a",
+                      "inverse-surface": "#2e3132",
+                      "background": "#f8f9fa",
+                      "secondary": "#7d5700",
+                      "on-primary-fixed": "#00210e",
+                      "inverse-on-surface": "#f0f1f2",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#1b1c1c",
+                      "surface-dim": "#d9dadb",
+                      "surface-variant": "#e1e3e4",
+                      "tertiary-container": "#444444",
+                      "surface-bright": "#f8f9fa",
+                      "on-secondary-container": "#6b4b00",
+                      "surface-container-highest": "#e1e3e4",
+                      "primary-container": "#1a4d2e",
+                      "on-secondary-fixed": "#271900",
+                      "inverse-primary": "#9dd3aa",
+                      "surface": "#f8f9fa",
+                      "on-tertiary-container": "#b2b1b1",
+                      "secondary-container": "#feb71d",
+                      "secondary-fixed-dim": "#ffba2d",
+                      "outline-variant": "#c1c9bf",
+                      "primary-fixed": "#b8f0c5",
+                      "on-primary-container": "#88bd95",
+                      "surface-tint": "#366847",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#5f4100",
+                      "primary-fixed-dim": "#9dd3aa",
+                      "secondary-fixed": "#ffdeaa",
+                      "on-secondary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#c8c6c6",
+                      "surface-container-low": "#f3f4f5",
+                      "tertiary": "#2e2e2e",
+                      "on-error-container": "#93000a",
+                      "on-background": "#191c1d",
+                      "tertiary-fixed": "#e4e2e2",
+                      "surface-container": "#edeeef",
+                      "surface-container-high": "#e7e8e9",
+                      "on-surface": "#191c1d",
+                      "on-primary-fixed-variant": "#1d5031",
+                      "on-tertiary-fixed-variant": "#474747",
+                      "on-surface-variant": "#414942",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "outline": "#717971"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "1rem",
+                      "xl": "1.5rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit-md": "16px",
+                      "margin-mobile": "20px",
+                      "unit-xxl": "80px",
+                      "unit-sm": "8px",
+                      "container-max": "1280px",
+                      "unit-xl": "48px",
+                      "unit-xs": "4px",
+                      "unit-lg": "24px",
+                      "gutter": "24px",
+                      "margin-desktop": "64px"
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant/30 shadow-sm">
+  <div class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+    <a class="flex items-center gap-3" href="./index.html">
+      <img src="./assets/logo.png" alt="I-Metro logo" class="h-10 w-10 rounded-xl object-cover shadow-level-1" />
+      <span class="hidden sm:block text-primary font-extrabold text-2xl tracking-tight">I-Metro</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-on-surface-variant">
+      <a href="./index.html" class="hover:text-primary transition-colors">Home</a>
+      <a href="./services.html" class="hover:text-primary transition-colors">Services</a>
+      <a href="./how-it-works.html" class="hover:text-primary transition-colors">How It Works</a>
+      <a href="./download.html" class="hover:text-primary transition-colors">Download</a>
+      <a href="./support.html" class="hover:text-primary transition-colors">Support</a>
+      <a href="./about.html" class="hover:text-primary transition-colors">About</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="./support.html" class="hidden sm:inline-flex px-5 py-2 rounded-full border border-primary text-primary font-semibold hover:bg-primary/5 transition-all">Contact support</a>
+      <a href="./download.html" class="inline-flex px-5 py-2 rounded-full accent-gradient text-white font-semibold shadow-level-1 hover:scale-[0.98] transition-transform">Download app</a>
+    </div>
+  </div>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="hero-gradient text-on-primary py-unit-xxl px-margin-desktop relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="w-full h-full" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+</div>
+<div class="max-w-3xl mx-auto text-center relative z-10">
+<h1 class="font-display-lg text-display-lg mb-unit-md">How can we help?</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed mb-unit-xl opacity-90">Search for answers or connect with the I-Metro team for support, partnerships, and launch updates.</p>
+<div class="relative max-w-2xl mx-auto">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary text-2xl">search</span>
+<input aria-autocomplete="list" aria-controls="support-search-results" aria-expanded="false" aria-label="Search I-Metro support articles" class="w-full pl-14 pr-6 py-5 rounded-xl bg-surface text-on-surface border-none shadow-xl focus:ring-4 focus:ring-secondary-container transition-all text-body-lg" id="support-search-input" placeholder="Search for routes, ticketing, or account issues..." type="text"/>
+<div id="support-search-results" aria-live="polite" class="hidden mt-4 rounded-2xl border border-outline-variant/30 bg-surface-container-lowest text-left shadow-2xl overflow-hidden"></div>
+</div>
+</div>
+</section>
+<!-- FAQ / Knowledge Base Bento Grid -->
+<section class="py-unit-xxl px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center justify-between mb-unit-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary">Frequently Asked Questions</h2>
+<button type="button" data-support-topic="help-center" class="text-primary font-bold flex items-center gap-1 hover:underline">
+                    View All Articles <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Large Feature Card -->
+<div class="md:col-span-2 bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-start justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl text-primary mb-4">confirmation_number</span>
+<h3 class="font-headline-md text-headline-md mb-2">Ticketing &amp; Payments</h3>
+<p class="text-on-surface-variant mb-6">Learn about contactless payments, subscription plans, and refund policies for canceled trips.</p>
+</div>
+</div>
+<ul class="space-y-4">
+<li class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30" data-support-topic="metropay-autoreload" role="button" tabindex="0" aria-label="Open MetroPay auto-reload help article">
+<span class="material-symbols-outlined text-secondary">help</span>
+<span class="font-body-md font-semibold">How to setup MetroPay auto-reload?</span>
+</li>
+<li class="flex items-center gap-3 p-3 rounded-lg hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30" data-support-topic="payment-methods" role="button" tabindex="0" aria-label="Open accepted payment methods help article">
+<span class="material-symbols-outlined text-secondary">help</span>
+<span class="font-body-md font-semibold">Accepted payment methods in station terminals</span>
+</li>
+</ul>
+</div>
+<!-- Side Card 1 -->
+<div class="bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4">map</span>
+<h3 class="font-headline-md text-headline-md mb-2">Routes &amp; Scheduling</h3>
+<p class="text-on-surface-variant mb-4">Real-time tracking and route planning guides.</p>
+<a class="text-primary font-bold inline-flex items-center gap-1 group" href="#" data-support-topic="routes-schedule" aria-label="Open routes and scheduling support article">Explore <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></a>
+</div>
+<!-- Side Card 2 -->
+<div class="bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-4xl text-primary mb-4">shield_person</span>
+<h3 class="font-headline-md text-headline-md mb-2">Safety &amp; Privacy</h3>
+<p class="text-on-surface-variant mb-4">Our commitment to commuter safety and data protection.</p>
+<a class="text-primary font-bold inline-flex items-center gap-1 group" href="#" data-support-topic="safety-privacy" aria-label="Open safety and privacy support article">Read More <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></a>
+</div>
+<!-- Side Card 3 -->
+<div class="bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4">accessible_forward</span>
+<h3 class="font-headline-md text-headline-md mb-2">Accessibility</h3>
+<p class="text-on-surface-variant mb-4">Information on station lifts, ramps, and assistance.</p>
+<a class="text-primary font-bold inline-flex items-center gap-1 group" href="#" data-support-topic="accessibility" aria-label="Open accessibility support article">Details <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></a>
+</div>
+<!-- Side Card 4 -->
+<div class="bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined text-4xl text-primary mb-4">campaign</span>
+<h3 class="font-headline-md text-headline-md mb-2">Network Status</h3>
+<p class="text-on-surface-variant mb-4">Planned maintenance and service disruptions.</p>
+<a class="text-primary font-bold inline-flex items-center gap-1 group" href="#" data-support-topic="network-status" aria-label="Open network status support article">Check Status <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></a>
+</div>
+</div>
+</section>
+<!-- Contact Methods -->
+<section class="bg-primary-container text-on-primary py-unit-xxl px-margin-desktop">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-unit-xl">
+<h2 class="font-headline-lg text-headline-lg mb-unit-sm">Get in touch directly</h2>
+<p class="font-body-lg text-primary-fixed/80">Average response time: 5 minutes</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Phone -->
+<div class="bg-primary/40  p-unit-lg rounded-xl border border-white/10 text-center hover:-translate-y-2 transition-transform cursor-pointer" data-support-topic="phone-support" role="button" tabindex="0" aria-label="Open phone support details">
+<div class="w-16 h-16 bg-secondary-container rounded-full flex items-center justify-center mx-auto mb-unit-md shadow-lg">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl">phone_in_talk</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-1">Phone Support</h4>
+<p class="font-body-md text-primary-fixed/70 mb-4">Toll-free 24/7 assistance</p>
+<p class="font-headline-md text-secondary-container font-bold">+2347070050444</p>
+</div>
+<!-- WhatsApp -->
+<div class="bg-primary/40  p-unit-lg rounded-xl border border-white/10 text-center hover:-translate-y-2 transition-transform cursor-pointer" data-support-topic="whatsapp-support" role="button" tabindex="0" aria-label="Open WhatsApp support details">
+<div class="w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center mx-auto mb-unit-md shadow-lg">
+<span class="material-symbols-outlined text-white text-3xl">chat</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-1">WhatsApp</h4>
+<p class="font-body-md text-primary-fixed/70 mb-4">Instant messaging support</p>
+<p class="font-headline-md text-white font-bold">Chat with us</p>
+</div>
+<!-- Email -->
+<div class="bg-primary/40  p-unit-lg rounded-xl border border-white/10 text-center hover:-translate-y-2 transition-transform cursor-pointer" data-support-topic="email-support" role="button" tabindex="0" aria-label="Open email support details">
+<div class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center mx-auto mb-unit-md shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">mail</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-1">Email Support</h4>
+<p class="font-body-md text-primary-fixed/70 mb-4">For complex inquiries</p>
+<p class="font-headline-md text-primary-fixed font-bold">support@ridei-metro.com</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Submit a Ticket Form Section -->
+<section class="py-unit-xxl px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-unit-xxl items-center">
+<div>
+<span class="text-secondary font-bold tracking-widest uppercase text-sm mb-4 block">Official Inquiry</span>
+<h2 class="font-display-lg text-headline-lg md:text-display-lg text-primary mb-unit-md">Submit a Support Ticket</h2>
+<p class="text-on-surface-variant text-body-lg mb-unit-lg">Can't find what you're looking for? Fill out the form and our dedicated transit specialists will investigate your case. Please provide as much detail as possible, including route numbers or transaction IDs.</p>
+<div class="flex items-center gap-6 p-6 bg-surface-container-low rounded-xl border border-outline-variant/30">
+<img alt="Customer Support Lead" class="w-20 h-20 rounded-full object-cover grayscale" data-alt="A professional headshot of a diverse female support manager in a corporate office setting. She is wearing professional attire and has a warm, helpful smile. The background is a blurred high-end office with soft architectural lighting and a green and neutral color palette that matches the prestige brand identity." src="./assets/logo.png"/>
+<div>
+<p class="font-bold text-primary">Mr. Atta</p>
+<p class="text-sm text-on-surface-variant">Head of Operations</p>
+<p class="text-xs text-secondary italic mt-1">"We typically respond to formal tickets within 4 business hours."</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-unit-xl rounded-xl shadow-2xl border border-outline-variant/20">
+<form id="support-ticket-form" class="space-y-6">
+<div id="support-ticket-feedback" class="hidden rounded-xl border px-4 py-3 text-sm font-medium" role="status" aria-live="polite"></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-unit-md">
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="support-full-name">Full Name</label>
+<input id="support-full-name" name="name" class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="John Doe" type="text" autocomplete="name" required/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="support-email">Email Address</label>
+<input id="support-email" name="email" class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="john@example.com" type="email" autocomplete="email" required/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="support-category">Inquiry Category</label>
+<select id="support-category" name="subject" class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all appearance-none bg-white" required>
+<option value="Account &amp; Billing">Account &amp; Billing</option>
+<option value="Technical Issue (App/Web)">Technical Issue (App/Web)</option>
+<option value="Route Delay / Cancellation">Route Delay / Cancellation</option>
+<option value="Lost &amp; Found">Lost &amp; Found</option>
+<option value="Feedback &amp; Suggestions">Feedback &amp; Suggestions</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="support-message">Message</label>
+<textarea id="support-message" name="message" class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none" placeholder="Describe your issue in detail..." rows="4" required></textarea>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" id="support-privacy-consent" type="checkbox" required/>
+<label class="text-sm text-on-surface-variant" for="support-privacy-consent">I agree to the <a class="text-primary underline" href="./privacy.html">Privacy Policy</a></label>
+</div>
+<button id="support-ticket-submit" class="w-full py-4 accent-gradient text-white rounded-lg font-bold text-lg hover:shadow-lg transition-all active:scale-[0.98]" type="submit">
+                        Submit Support Ticket
+                    </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Support detail modal -->
+<div id="support-modal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="support-modal-title">
+  <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" data-close-support-modal></div>
+  <div class="relative w-full max-w-3xl overflow-hidden rounded-3xl border border-outline-variant/30 bg-surface-container-lowest shadow-2xl">
+    <div class="flex items-start justify-between gap-4 border-b border-outline-variant/30 bg-surface-container-low px-6 py-5">
+      <div>
+        <p id="support-modal-eyebrow" class="text-xs font-bold uppercase tracking-[0.3em] text-secondary">I-Metro Support</p>
+        <h3 id="support-modal-title" class="mt-2 text-2xl font-extrabold text-primary"></h3>
+        <p id="support-modal-subtitle" class="mt-2 text-on-surface-variant"></p>
+      </div>
+      <button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-on-surface-variant shadow-sm transition-colors hover:bg-surface-container" data-close-support-modal aria-label="Close support details">
+        <span class="material-symbols-outlined text-xl">close</span>
+      </button>
+    </div>
+    <div class="grid gap-6 px-6 py-6 md:grid-cols-[1.35fr_0.65fr]">
+      <div class="space-y-5">
+        <div id="support-modal-summary" class="rounded-2xl border border-primary/10 bg-primary/5 p-5 text-on-surface-variant"></div>
+        <div id="support-modal-content" class="space-y-3"></div>
+      </div>
+      <aside class="space-y-4 rounded-2xl border border-outline-variant/30 bg-surface-container-low p-5">
+        <p class="text-sm font-bold uppercase tracking-[0.2em] text-secondary">Quick facts</p>
+        <div id="support-modal-footer" class="space-y-3"></div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="bg-primary text-white px-5 md:px-16 py-14">
+  <div class="max-w-[1280px] mx-auto grid md:grid-cols-4 gap-10">
+    <div class="space-y-4 md:col-span-1">
+      <div class="flex items-center gap-3">
+        <img src="./assets/logo.png" alt="I-Metro logo" class="h-10 w-10 rounded-xl object-cover" />
+        <span class="text-2xl font-extrabold text-secondary-container">I-Metro</span>
+      </div>
+      <p class="text-white/80">Ride better. Move smarter. A public front door for the I-Metro mobility ecosystem.</p>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Explore</h4>
+      <div class="space-y-2 text-white/80">
+        <a href="./index.html" class="block hover:text-secondary-container">Home</a>
+        <a href="./services.html" class="block hover:text-secondary-container">Services</a>
+        <a href="./how-it-works.html" class="block hover:text-secondary-container">How It Works</a>
+        <a href="./download.html" class="block hover:text-secondary-container">Download</a>
+        <a href="./support.html" class="block hover:text-secondary-container">Support</a>
+        <a href="./about.html" class="block hover:text-secondary-container">About</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Legal</h4>
+      <div class="space-y-2 text-white/80">
+        <a href="./privacy.html" class="block hover:text-secondary-container">Privacy Policy</a>
+        <a href="./terms.html" class="block hover:text-secondary-container">Terms of Service</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Support</h4>
+      <p class="text-white/70 text-sm">support@ridei-metro.com</p>
+      <p class="text-white/70 text-sm mt-2">Monday - Saturday &bull; 9:00am - 6:00pm</p>
+    </div>
+  </div>
+  <div class="max-w-[1280px] mx-auto mt-10 pt-6 border-t border-white/10 text-sm text-white/60 flex flex-col sm:flex-row justify-between gap-2">
+    <span>&copy; <span id="year"></span> I-Metro</span>
+    <span>ridei-metro.com</span>
+  </div>
+</footer>
+<script src="./site-config.js"></script>
+<script src="./support.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+

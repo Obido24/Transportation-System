@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>I-Metro | Services</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #00361a 0%, #1a4d2e 100%);
+        }
+        .shadow-soft {
+            box-shadow: 0 4px 20px -2px rgba(26, 77, 46, 0.08);
+        }
+        .shadow-lift {
+            box-shadow: 0 20px 40px -12px rgba(26, 77, 46, 0.12);
+        }
+</style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00361a",
+                        "inverse-surface": "#2e3132",
+                        "background": "#f8f9fa",
+                        "secondary": "#7d5700",
+                        "on-primary-fixed": "#00210e",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "surface-dim": "#d9dadb",
+                        "surface-variant": "#e1e3e4",
+                        "tertiary-container": "#444444",
+                        "surface-bright": "#f8f9fa",
+                        "on-secondary-container": "#6b4b00",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-container": "#1a4d2e",
+                        "on-secondary-fixed": "#271900",
+                        "inverse-primary": "#9dd3aa",
+                        "surface": "#f8f9fa",
+                        "on-tertiary-container": "#b2b1b1",
+                        "secondary-container": "#feb71d",
+                        "secondary-fixed-dim": "#ffba2d",
+                        "outline-variant": "#c1c9bf",
+                        "primary-fixed": "#b8f0c5",
+                        "on-primary-container": "#88bd95",
+                        "surface-tint": "#366847",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#5f4100",
+                        "primary-fixed-dim": "#9dd3aa",
+                        "secondary-fixed": "#ffdeaa",
+                        "on-secondary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "surface-container-low": "#f3f4f5",
+                        "tertiary": "#2e2e2e",
+                        "on-error-container": "#93000a",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed": "#e4e2e2",
+                        "surface-container": "#edeeef",
+                        "surface-container-high": "#e7e8e9",
+                        "on-surface": "#191c1d",
+                        "on-primary-fixed-variant": "#1d5031",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-surface-variant": "#414942",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "outline": "#717971"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit-md": "16px",
+                        "margin-mobile": "20px",
+                        "unit-xxl": "80px",
+                        "unit-sm": "8px",
+                        "container-max": "1280px",
+                        "unit-xl": "48px",
+                        "unit-xs": "4px",
+                        "unit-lg": "24px",
+                        "gutter": "24px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed-variant">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface border-b border-outline-variant/30 shadow-sm">
+  <div class="flex justify-between items-center px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+    <a class="flex items-center gap-3" href="./index.html">
+      <img src="./assets/logo.png" alt="I-Metro logo" class="h-10 w-10 rounded-xl object-cover shadow-level-1" />
+      <span class="hidden sm:block text-primary font-extrabold text-2xl tracking-tight">I-Metro</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-on-surface-variant">
+      <a href="./index.html" class="hover:text-primary transition-colors">Home</a>
+      <a href="./services.html" class="hover:text-primary transition-colors">Services</a>
+      <a href="./how-it-works.html" class="hover:text-primary transition-colors">How It Works</a>
+      <a href="./download.html" class="hover:text-primary transition-colors">Download</a>
+      <a href="./support.html" class="hover:text-primary transition-colors">Support</a>
+      <a href="./about.html" class="hover:text-primary transition-colors">About</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="./support.html" class="hidden sm:inline-flex px-5 py-2 rounded-full border border-primary text-primary font-semibold hover:bg-primary/5 transition-all">Contact support</a>
+      <a href="./download.html" class="inline-flex px-5 py-2 rounded-full accent-gradient text-white font-semibold shadow-level-1 hover:scale-[0.98] transition-transform">Download app</a>
+    </div>
+  </div>
+</header>
+<main class="pt-32">
+<!-- Hero Section -->
+<section class="px-margin-desktop max-w-container-max mx-auto mb-unit-xxl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-6">
+<span class="inline-flex items-center gap-2 bg-primary-fixed text-on-primary-fixed-variant px-4 py-1.5 rounded-full font-label-sm text-label-sm mb-6">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+                        The Service Ecosystem
+                    </span>
+<h1 class="font-display-lg text-display-lg text-primary mb-6 leading-tight">
+                        Built for the <span class="text-secondary italic">Modern Commuter</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-unit-lg max-w-xl">
+                        Discover the I-Metro services that power everyday travel. Bus Transport is active now, while Metro Taxi and Delivery are part of the same ecosystem and clearly marked as coming soon.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<a class="accent-gradient text-white px-8 py-4 rounded-lg font-label-md text-label-md shadow-lift flex items-center gap-2 group" href="#tracking">
+                            Explore the service stack
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-6 relative">
+<div class="aspect-square rounded-xl overflow-hidden shadow-lift border border-outline-variant/20">
+<img alt="Technology Hub" class="w-full h-full object-cover" data-alt="A sleek, high-tech control center for a modern public transit network. Multiple glowing monitors display real-time maps, data streams, and transit schedules. The lighting is sophisticated and professional, with cool blue and deep forest green tones reflecting I-Metro's primary identity. The atmosphere is quiet, focused, and representational of elite technological reliability." src="./assets/logo.png"/>
+</div>
+<div class="absolute -bottom-10 -left-10 glass-panel p-6 rounded-lg shadow-lift border border-white/40 hidden md:block">
+<div class="flex items-center gap-4 mb-2">
+<div class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">speed</span>
+</div>
+<div>
+<div class="text-label-sm text-on-surface-variant">System Latency</div>
+<div class="text-headline-md font-bold text-primary">0.04s</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Bento Grid -->
+<section class="px-margin-desktop max-w-container-max mx-auto py-unit-xxl border-t border-outline-variant/10" id="tracking">
+<div class="text-center mb-unit-xl">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Core Ecosystem</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Our integrated platform powers every aspect of your journey, ensuring prestige and fluidity from first to last mile.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Real-time Tracking (Large) -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/20 shadow-soft group hover:shadow-lift transition-all duration-500">
+<div class="flex flex-col h-full">
+<div class="w-14 h-14 bg-primary-fixed rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Real-time Precision</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Utilizing high-frequency satellite telemetry for sub-meter accuracy. Know exactly where your ride is, updated every 2 seconds.
+                        </p>
+<div class="mt-auto overflow-hidden rounded-lg h-48 border border-outline-variant/10">
+<img alt="Real-time Map" class="w-full h-full object-cover" data-alt="A minimalist digital map visualization showing transit routes through a modern metropolis. Subtle neon green lines trace the paths of active trains and buses on a clean light grey background. Soft primary forest green glowing dots indicate real-time locations. The aesthetic is architectural, premium, and data-focused, matching the high-end commuter experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFsIUpxJMq9JVzqBB-6eTIRJZhz0AXhrKYwOtXHyWlmryCThgOLAkekb1gXSrm9cj8Yg2_bEDfF5qIXEZcti1_R9UNMt3Hi9X352DBr8een_T6osglsGtSeBdSCZUuadWsmh7nPkLqwSTCZN5RYSWRztmMXZfGnbkMfWeH7G_rfVloXDayANQ0c0Z87hKdG7TaRrcY-odK_OwvLxNMFP-_05veJ1S84mIZfCHfZqkvXU_DvUYkT12wXsa9BoosmcDIBbn1U5Zm2w"/>
+</div>
+</div>
+</div>
+<!-- QR Validation (Standard) -->
+<div class="bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/20 shadow-soft group hover:shadow-lift transition-all duration-500">
+<div class="w-14 h-14 bg-secondary-fixed rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-secondary-fixed-variant text-3xl">qr_code_scanner</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Instant QR Validation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        High-speed optical scanners located at every entry point. No more fumbling—just scan and proceed in under 0.5 seconds.
+                    </p>
+</div>
+<!-- Multi-channel Payments (Standard) -->
+<div class="bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/20 shadow-soft group hover:shadow-lift transition-all duration-500">
+<div class="w-14 h-14 bg-primary-fixed-dim rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-primary-fixed-variant text-3xl">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Unified Payments</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Pay via I-Metro Wallet, Apple Pay, Google Pay, or traditional debit. Your commute, your payment preference.
+                    </p>
+</div>
+<!-- Premium Comfort (Wide/Mid) -->
+<div class="md:col-span-2 lg:col-span-3 bg-primary text-on-primary p-unit-lg rounded-lg shadow-lift relative overflow-hidden group">
+<div class="relative z-10 lg:w-1/2">
+<div class="w-14 h-14 bg-secondary-container rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl">chair</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3">Prestige Class Comfort</h3>
+<p class="font-body-md text-body-md text-on-primary/80 mb-6">
+                            Experience the premium side of transit. Ergonometric seating, ultra-silent transit modules, and dedicated quiet zones for the busy professional.
+                        </p>
+<ul class="space-y-3 font-label-md">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary-container">check_circle</span> High-speed Complimentary WiFi</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary-container">check_circle</span> Climate Controlled Environment</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary-container">check_circle</span> USB-C Charging Stations</li>
+</ul>
+</div>
+<div class="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block">
+<img alt="Premium Interior" class="w-full h-full object-cover" data-alt="The interior of a premium, modern commuter train cabin. The seats are upholstered in high-quality dark forest green fabric with brushed metallic accents. Large clean windows show a blurred cityscape passing by, lit by soft morning sunlight. The environment is impeccably clean, spacious, and exudes a sense of prestige and calm efficiency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnQdSXhqh5Yb-DMbyc4jXC_yDbJzcCoHh7nCbNkxcs5zNRATv2zvGzq0xiva1fNxi3N-u7sIR7xdEYocbQCp5fT7d6nHf7LsS67oo5WEw0aRpW-e4PxJSbGCufyhw-hOTpc6qVPHMPMoQI5uTDUNvmOuA9m85HD0I7uC8JK1sDAECfHfadah2gq2GhQx3TFCrZKTa787sxkh-Z7CiK_263Qew8W35VDwk9QuQ_o4VDW314jbxloolL0pktrW99WuycweXp-ZNMnQ"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/40 to-transparent"></div>
+</div>
+</div>
+<!-- Ride History (Standard) -->
+<div class="bg-surface-container-lowest p-unit-lg rounded-lg border border-outline-variant/20 shadow-soft group hover:shadow-lift transition-all duration-500">
+<div class="w-14 h-14 bg-tertiary-fixed rounded-xl flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-3xl">history</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Ride Analytics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Track your carbon footprint, travel spend, and frequent routes. Download tax-ready receipts with a single tap.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Capability Comparison -->
+<section class="bg-surface-container-low py-unit-xxl">
+<div class="px-margin-desktop max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">The I-Metro Difference</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-unit-lg">We don't just move people; we enhance urban living. Compare our standard features against traditional transit methods.</p>
+<div class="space-y-6">
+<div class="flex gap-4 p-4 bg-white rounded-lg border border-outline-variant/10 shadow-soft">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">eco</span>
+<div>
+<h4 class="font-label-md text-primary">Sustainability First</h4>
+<p class="text-body-md text-on-surface-variant">100% electric fleet powered by renewable urban microgrids.</p>
+</div>
+</div>
+<div class="flex gap-4 p-4 bg-white rounded-lg border border-outline-variant/10 shadow-soft">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">security</span>
+<div>
+<h4 class="font-label-md text-primary">24/7 Monitored Safety</h4>
+<p class="text-body-md text-on-surface-variant">AI-enhanced safety protocols and immediate emergency response links.</p>
+</div>
+</div>
+<div class="flex gap-4 p-4 bg-white rounded-lg border border-outline-variant/10 shadow-soft">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">diversity_1</span>
+<div>
+<h4 class="font-label-md text-primary">Inclusive Design</h4>
+<p class="text-body-md text-on-surface-variant">Universal accessibility features for a truly barrier-free experience.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative mt-12 lg:mt-0">
+<div class="bg-primary rounded-xl p-8 text-on-primary shadow-lift overflow-hidden">
+<h3 class="font-headline-md mb-6">Performance Metrics</h3>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md">On-Time Reliability</span>
+<span class="font-label-md">99.8%</span>
+</div>
+<div class="h-2 bg-on-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[99.8%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md">Customer Satisfaction</span>
+<span class="font-label-md">4.9/5</span>
+</div>
+<div class="h-2 bg-on-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[98%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md">Validation Speed</span>
+<span class="font-label-md">&lt; 0.5s</span>
+</div>
+<div class="h-2 bg-on-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[95%]"></div>
+</div>
+</div>
+</div>
+<!-- Decorative background icon -->
+<span class="material-symbols-outlined absolute -bottom-10 -right-10 text-[200px] opacity-10 rotate-12">trending_up</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-unit-xxl text-center px-margin-desktop">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-6">Ready for the Next Generation?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-unit-lg">Join 2 million commuters who have already upgraded their urban experience with I-Metro's prestige features.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-4">
+<a href="./download.html" class="inline-flex items-center justify-center accent-gradient text-white px-10 py-4 rounded-lg font-label-md shadow-lift hover:scale-105 transition-transform">Download app</a>
+<a href="./support.html" class="inline-flex items-center justify-center bg-surface-container-highest text-primary px-10 py-4 rounded-lg font-label-md hover:bg-surface-dim transition-colors">Contact support</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-white px-5 md:px-16 py-14">
+  <div class="max-w-[1280px] mx-auto grid md:grid-cols-4 gap-10">
+    <div class="space-y-4 md:col-span-1">
+      <div class="flex items-center gap-3">
+        <img src="./assets/logo.png" alt="I-Metro logo" class="h-10 w-10 rounded-xl object-cover" />
+        <span class="text-2xl font-extrabold text-secondary-container">I-Metro</span>
+      </div>
+      <p class="text-white/80">Ride better. Move smarter. A public front door for the I-Metro mobility ecosystem.</p>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Explore</h4>
+      <div class="space-y-2 text-white/80">
+        <a href="./index.html" class="block hover:text-secondary-container">Home</a>
+        <a href="./services.html" class="block hover:text-secondary-container">Services</a>
+        <a href="./how-it-works.html" class="block hover:text-secondary-container">How It Works</a>
+        <a href="./download.html" class="block hover:text-secondary-container">Download</a>
+        <a href="./support.html" class="block hover:text-secondary-container">Support</a>
+        <a href="./about.html" class="block hover:text-secondary-container">About</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Legal</h4>
+      <div class="space-y-2 text-white/80">
+        <a href="./privacy.html" class="block hover:text-secondary-container">Privacy Policy</a>
+        <a href="./terms.html" class="block hover:text-secondary-container">Terms of Service</a>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-bold text-secondary-container mb-4">Support</h4>
+      <p class="text-white/70 text-sm">support@ridei-metro.com</p>
+      <p class="text-white/70 text-sm mt-2">Monday - Saturday &bull; 9:00am - 6:00pm</p>
+    </div>
+  </div>
+  <div class="max-w-[1280px] mx-auto mt-10 pt-6 border-t border-white/10 text-sm text-white/60 flex flex-col sm:flex-row justify-between gap-2">
+    <span>&copy; <span id="year"></span> I-Metro</span>
+    <span>ridei-metro.com</span>
+  </div>
+</footer>
+<script>
+
+        // Simple observer for fade-in effects
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.shadow-soft').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body></html>
