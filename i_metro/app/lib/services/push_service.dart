@@ -35,7 +35,7 @@ class PushService {
       final messaging = FirebaseMessaging.instance;
       await messaging.requestPermission();
 
-      const vapidKey = kIsWeb ? const String.fromEnvironment('FCM_VAPID_KEY', defaultValue: '') : null;
+      const vapidKey = kIsWeb ? String.fromEnvironment('FCM_VAPID_KEY', defaultValue: '') : null;
       if (kIsWeb && (vapidKey == null || vapidKey.isEmpty)) {
         _initializing = false;
         return;

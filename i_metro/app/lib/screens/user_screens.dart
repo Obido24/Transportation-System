@@ -1,4 +1,4 @@
-﻿import 'dart:async';
+import 'dart:async';
 import 'dart:convert';
 import 'dart:ui';
 
@@ -32,7 +32,8 @@ Widget _brandLogo({double size = 40, double radius = 12}) {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(radius),
-      border: Border.all(color: const Color(0xFFBDCAC0).withOpacity(0.6), width: 1),
+      border:
+          Border.all(color: const Color(0xFFBDCAC0).withOpacity(0.6), width: 1),
     ),
     child: ClipRRect(
       borderRadius: BorderRadius.circular(radius),
@@ -44,287 +45,6 @@ Widget _brandLogo({double size = 40, double radius = 12}) {
   );
 }
 
-class AppModeSelectorScreen extends StatelessWidget {
-  const AppModeSelectorScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
-    const primary = Color(0xFF006B47);
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const disabledSurface = Color(0xFFF4F6F7);
-
-    return Scaffold(
-      backgroundColor: background,
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(20, 18, 20, 24),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 460),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _brandLogo(size: 46, radius: 14),
-                      const SizedBox(width: 14),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Choose Your Ride',
-                              style: GoogleFonts.manrope(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w800,
-                                color: onSurface,
-                                height: 1.1,
-                              ),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              'Select a service to get started.',
-                              style: GoogleFonts.inter(
-                                fontSize: 13.5,
-                                fontWeight: FontWeight.w500,
-                                color: onSurfaceVariant,
-                                height: 1.38,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 22),
-                  _AppModeCard(
-                    icon: Icons.directions_bus_rounded,
-                    title: 'Bus',
-                    subtitle: 'Available now',
-                    accent: primary,
-                    background: const Color(0xFFF5FBF8),
-                    enabled: true,
-                    primaryAction: true,
-                    onTap: () => Navigator.pushReplacementNamed(context, AppRoutes.home),
-                  ),
-                  const SizedBox(height: 14),
-                  _AppModeCard(
-                    icon: Icons.local_taxi_rounded,
-                    title: 'Taxi Meter',
-                    subtitle: 'Coming soon',
-                    accent: const Color(0xFF9AA6A0),
-                    background: disabledSurface,
-                    enabled: false,
-                    comingSoon: true,
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Taxi Meter is coming soon.')),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 14),
-                  _AppModeCard(
-                    icon: Icons.delivery_dining_rounded,
-                    title: 'Bike Delivery',
-                    subtitle: 'Coming soon',
-                    accent: const Color(0xFF9AA6A0),
-                    background: disabledSurface,
-                    enabled: false,
-                    comingSoon: true,
-                    onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Bike Delivery is coming soon.')),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _AppModeCard extends StatelessWidget {
-  const _AppModeCard({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.accent,
-    required this.background,
-    required this.onTap,
-    required this.enabled,
-    this.comingSoon = false,
-    this.primaryAction = false,
-  });
-
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final Color accent;
-  final Color background;
-  final VoidCallback onTap;
-  final bool enabled;
-  final bool comingSoon;
-  final bool primaryAction;
-
-  @override
-  Widget build(BuildContext context) {
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-
-    final cardBorderColor = enabled
-        ? accent.withOpacity(primaryAction ? 0.32 : 0.18)
-        : const Color(0xFFDAE2DC);
-    final cardShadow = enabled
-        ? [
-            BoxShadow(
-              color: primaryAction ? accent.withOpacity(0.10) : Colors.black.withOpacity(0.04),
-              blurRadius: primaryAction ? 26 : 20,
-              offset: const Offset(0, 10),
-            ),
-          ]
-        : [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.03),
-              blurRadius: 18,
-              offset: const Offset(0, 8),
-            ),
-          ];
-
-    return Semantics(
-      button: enabled,
-      child: Material(
-        color: background,
-        borderRadius: BorderRadius.circular(24),
-        child: InkWell(
-          onTap: enabled ? onTap : null,
-          borderRadius: BorderRadius.circular(24),
-          splashColor: enabled ? accent.withOpacity(0.08) : Colors.transparent,
-          highlightColor: enabled ? accent.withOpacity(0.04) : Colors.transparent,
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 17),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: cardBorderColor, width: enabled && primaryAction ? 1.6 : 1),
-              boxShadow: cardShadow,
-              gradient: enabled && primaryAction
-                  ? LinearGradient(
-                      colors: [
-                        const Color(0xFFF8FCFA),
-                        background,
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    )
-                  : null,
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 54,
-                  height: 54,
-                  decoration: BoxDecoration(
-                    color: enabled
-                        ? accent.withOpacity(primaryAction ? 0.14 : 0.12)
-                        : const Color(0xFFE7ECE8),
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Icon(
-                    icon,
-                    color: enabled ? accent : const Color(0xFF9AA6A0),
-                    size: 28,
-                  ),
-                ),
-                const SizedBox(width: 14),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              title,
-                              style: GoogleFonts.manrope(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w800,
-                                color: enabled ? onSurface : onSurface.withOpacity(0.78),
-                                height: 1.1,
-                              ),
-                            ),
-                          ),
-                          if (comingSoon)
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFEAF0EC),
-                                borderRadius: BorderRadius.circular(999),
-                              ),
-                              child: Text(
-                                'Coming soon',
-                                style: GoogleFonts.inter(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w700,
-                                  color: const Color(0xFF7C8A83),
-                                  letterSpacing: 0.3,
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        subtitle,
-                        style: GoogleFonts.inter(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: enabled ? onSurfaceVariant : onSurfaceVariant.withOpacity(0.58),
-                          height: 1.35,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 12),
-                if (enabled)
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: accent.withOpacity(0.10),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(Icons.arrow_forward_rounded, color: accent, size: 18),
-                  )
-                else
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFE9ECE9),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.lock_outline_rounded, color: Color(0xFF9AA6A0), size: 16),
-                  ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class SplashOnboardingScreen extends StatefulWidget {
   const SplashOnboardingScreen({super.key});
 
@@ -333,193 +53,129 @@ class SplashOnboardingScreen extends StatefulWidget {
 }
 
 class _SplashOnboardingScreenState extends State<SplashOnboardingScreen> {
-  late final PageController _pageController;
   Timer? _splashTimer;
-  int _pageIndex = 0;
-
-  static const int _splashPageIndex = 0;
-  static const int _introStartIndex = 1;
-  static const int _introEndIndex = 3;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: _splashPageIndex);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    _splashTimer = Timer(const Duration(seconds: 3), () {
       if (!mounted) return;
-      if (AuthStore.isLoggedIn) {
-        Navigator.pushReplacementNamed(context, AppRoutes.appModeSelect);
-        return;
-      }
-      _splashTimer = Timer(const Duration(seconds: 6), () {
-        if (!mounted || _pageIndex != _splashPageIndex) return;
-        _pageController.animateToPage(
-          _introStartIndex,
-          duration: const Duration(milliseconds: 520),
-          curve: Curves.easeOutCubic,
-        );
-      });
+      Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
     });
   }
 
   @override
   void dispose() {
     _splashTimer?.cancel();
-    _pageController.dispose();
     super.dispose();
   }
 
-  void _goToPage(int page) {
-    if (page < _splashPageIndex || page > _introEndIndex) return;
-    _pageController.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 360),
-      curve: Curves.easeOutCubic,
-    );
-  }
-
-  void _skipToLogin() {
-    Navigator.pushReplacementNamed(context, AppRoutes.login);
-  }
-
-  void _finishOnboarding() {
-    Navigator.pushReplacementNamed(context, AppRoutes.login);
-  }
-
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFF006B47);
+    const deepGreen = Color(0xFF00583B);
+    const glowGreen = Color(0xFF0B875E);
 
     return Scaffold(
       backgroundColor: background,
-      body: SafeArea(
-        child: PageView(
-          controller: _pageController,
-          physics: const BouncingScrollPhysics(),
-          onPageChanged: (page) {
-            setState(() => _pageIndex = page);
-            if (page != _splashPageIndex) {
-              _splashTimer?.cancel();
-            }
-          },
-          children: [
-            const _OnboardingSplashPage(),
-            _OnboardingSlide(
-              stepIndex: 0,
-              totalSteps: 3,
-              illustrationType: _OnboardingIllustrationType.book,
-              title: 'Book your bus ride',
-              body: 'Enter your pickup and destination to find available I-Metro buses near you.',
-              primaryLabel: 'Next',
-              secondaryLabel: 'Skip',
-              onPrimaryTap: () => _goToPage(2),
-              onSecondaryTap: _skipToLogin,
-            ),
-            _OnboardingSlide(
-              stepIndex: 1,
-              totalSteps: 3,
-              illustrationType: _OnboardingIllustrationType.track,
-              title: 'Track your bus',
-              body: 'Follow your bus location in real time and know exactly when it will arrive.',
-              primaryLabel: 'Next',
-              secondaryLabel: 'Back',
-              onPrimaryTap: () => _goToPage(3),
-              onSecondaryTap: () => _goToPage(1),
-            ),
-            _OnboardingSlide(
-              stepIndex: 2,
-              totalSteps: 3,
-              illustrationType: _OnboardingIllustrationType.rate,
-              title: 'Rate your trip',
-              body: 'Share your feedback so we can keep improving your I-Metro experience.',
-              primaryLabel: 'Get started',
-              secondaryLabel: 'Back',
-              onPrimaryTap: _finishOnboarding,
-              onSecondaryTap: () => _goToPage(2),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-enum _OnboardingIllustrationType { book, track, rate }
-
-class _OnboardingSplashPage extends StatelessWidget {
-  const _OnboardingSplashPage();
-
-  @override
-  Widget build(BuildContext context) {
-    const top = Color(0xFF0D5A3D);
-    const mid = Color(0xFF0A744D);
-    const bottom = Color(0xFF083C2A);
-
-    return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [top, mid, bottom],
-        ),
-      ),
-      child: Stack(
+      body: Stack(
         children: [
-          Positioned(
-            top: -90,
-            right: -60,
-            child: _SplashGlow(size: 240, color: Colors.white.withOpacity(0.06)),
-          ),
-          Positioned(
-            left: -70,
-            bottom: -90,
-            child: _SplashGlow(size: 260, color: Colors.white.withOpacity(0.04)),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _brandLogo(size: 96, radius: 26),
-                  const SizedBox(height: 18),
-                  Text(
-                    'I-Metro',
-                    style: GoogleFonts.manrope(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white,
-                      letterSpacing: -0.8,
-                      height: 1.1,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Smart, calm, and reliable bus travel.',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                      fontSize: 13.5,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white.withOpacity(0.82),
-                      height: 1.45,
-                    ),
-                  ),
-                ],
+          Positioned.fill(
+            child: DecoratedBox(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFF007A51), deepGreen],
+                ),
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
+            right: -74,
+            top: -50,
+            child: Container(
+              width: 230,
+              height: 230,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.06),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Positioned(
+            left: -72,
+            bottom: -88,
+            child: Container(
+              width: 260,
+              height: 260,
+              decoration: BoxDecoration(
+                color: glowGreen.withOpacity(0.24),
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 96,
+                  height: 96,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(28),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.14),
+                        blurRadius: 26,
+                        offset: const Offset(0, 14),
+                      ),
+                    ],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(18),
+                    child: Image.asset(_brandLogoAsset, fit: BoxFit.cover),
+                  ),
+                ),
+                const SizedBox(height: 30),
+                Text(
+                  'I-Metro',
+                  style: GoogleFonts.manrope(
+                    fontSize: 34,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Smart, calm, and reliable bus travel.',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white.withOpacity(0.62),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
             left: 0,
             right: 0,
-            bottom: 34,
+            bottom: 48,
             child: Center(
               child: SizedBox(
-                width: 124,
-                child: LinearProgressIndicator(
-                  minHeight: 4,
-                  value: null,
-                  backgroundColor: Color(0x33FFFFFF),
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                width: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(99),
+                  child: LinearProgressIndicator(
+                    minHeight: 4,
+                    backgroundColor: Colors.white.withOpacity(0.18),
+                    valueColor:
+                        const AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -530,673 +186,1074 @@ class _OnboardingSplashPage extends StatelessWidget {
   }
 }
 
-class _SplashGlow extends StatelessWidget {
-  const _SplashGlow({required this.size, required this.color});
+class _ForgotStepBadge extends StatelessWidget {
+  const _ForgotStepBadge({
+    required this.label,
+    required this.title,
+  });
 
-  final double size;
-  final Color color;
+  final String label;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+
+    return Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          decoration: BoxDecoration(
+            color: const Color(0xFFE6F3ED),
+            borderRadius: BorderRadius.circular(999),
+          ),
+          child: Text(
+            label.toUpperCase(),
+            style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 1.1,
+              color: primary,
+            ),
+          ),
+        ),
+        const SizedBox(width: 10),
+        Text(
+          title,
+          style: GoogleFonts.manrope(
+            fontSize: 18,
+            fontWeight: FontWeight.w900,
+            color: onSurface,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ForgotPasswordField extends StatelessWidget {
+  const _ForgotPasswordField({
+    required this.label,
+    required this.hint,
+    required this.icon,
+    required this.controller,
+    this.keyboardType,
+    this.textInputAction,
+    this.validator,
+  });
+
+  final String label;
+  final String hint;
+  final IconData icon;
+  final TextEditingController controller;
+  final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
+  final String? Function(String?)? validator;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const outline = Color(0xFF6E7A71);
+    const outlineVariant = Color(0xFFBDCAC0);
+    const onSurfaceVariant = Color(0xFF3E4942);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label.toUpperCase(),
+          style: GoogleFonts.inter(
+            fontSize: 11,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1.35,
+            color: onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 9),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.018),
+                blurRadius: 14,
+                offset: const Offset(0, 8),
+              ),
+            ],
+          ),
+          child: TextFormField(
+            controller: controller,
+            keyboardType: keyboardType,
+            textInputAction: textInputAction,
+            validator: validator,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              prefixIconConstraints:
+                  const BoxConstraints(minWidth: 50, minHeight: 54),
+              prefixIcon: Icon(icon, color: outlineVariant, size: 22),
+              hintText: hint,
+              hintStyle: GoogleFonts.inter(
+                fontSize: 15,
+                color: outline.withOpacity(0.48),
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide(
+                  color: outlineVariant.withOpacity(0.52),
+                  width: 1,
+                ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide(
+                  color: outlineVariant.withOpacity(0.52),
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide(
+                  color: primary.withOpacity(0.72),
+                  width: 2,
+                ),
+              ),
+              errorStyle:
+                  GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ForgotPasswordActionButton extends StatefulWidget {
+  const _ForgotPasswordActionButton({
+    required this.label,
+    required this.loading,
+    required this.icon,
+    required this.onPressed,
+  });
+
+  final String label;
+  final bool loading;
+  final IconData icon;
+  final VoidCallback? onPressed;
+
+  @override
+  State<_ForgotPasswordActionButton> createState() =>
+      _ForgotPasswordActionButtonState();
+}
+
+class _ForgotPasswordActionButtonState
+    extends State<_ForgotPasswordActionButton> {
+  bool _hovered = false;
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const kineticEnd = Color(0xFF009B67);
+    final enabled = widget.onPressed != null;
+    final active = enabled && (_hovered || _pressed);
+
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() {
+        _hovered = false;
+        _pressed = false;
+      }),
+      child: GestureDetector(
+        onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
+        onTapCancel: enabled ? () => setState(() => _pressed = false) : null,
+        onTapUp: enabled
+            ? (_) {
+                setState(() => _pressed = false);
+                widget.onPressed?.call();
+              }
+            : null,
+        child: AnimatedScale(
+          scale: _pressed ? 0.985 : 1,
+          duration: const Duration(milliseconds: 120),
+          curve: Curves.easeOutCubic,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutCubic,
+            width: double.infinity,
+            height: 58,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: enabled
+                    ? const [primary, kineticEnd]
+                    : [
+                        primary.withOpacity(0.48),
+                        kineticEnd.withOpacity(0.48),
+                      ],
+              ),
+              borderRadius: BorderRadius.circular(999),
+              boxShadow: [
+                BoxShadow(
+                  color: primary.withOpacity(active ? 0.28 : 0.18),
+                  blurRadius: active ? 24 : 18,
+                  offset: Offset(0, active ? 13 : 9),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (widget.loading)
+                    const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    ),
+                  if (widget.loading) const SizedBox(width: 10),
+                  Text(
+                    widget.loading ? 'Please wait...' : widget.label,
+                    style: GoogleFonts.inter(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Icon(widget.icon, color: Colors.white, size: 20),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
 }
 
-class _OnboardingSlide extends StatelessWidget {
-  const _OnboardingSlide({
-    required this.stepIndex,
-    required this.totalSteps,
-    required this.illustrationType,
-    required this.title,
-    required this.body,
-    required this.primaryLabel,
-    required this.secondaryLabel,
-    required this.onPrimaryTap,
-    required this.onSecondaryTap,
-  });
+class UserOnboardingScreen extends StatefulWidget {
+  const UserOnboardingScreen({super.key});
 
-  final int stepIndex;
-  final int totalSteps;
-  final _OnboardingIllustrationType illustrationType;
-  final String title;
-  final String body;
-  final String primaryLabel;
-  final String secondaryLabel;
-  final VoidCallback onPrimaryTap;
-  final VoidCallback onSecondaryTap;
+  @override
+  State<UserOnboardingScreen> createState() => _UserOnboardingScreenState();
+}
+
+class _UserOnboardingScreenState extends State<UserOnboardingScreen> {
+  final PageController _controller = PageController();
+  int _index = 0;
+
+  static const _slides = [
+    _OnboardingSlideData(
+      title: 'Book your bus ride',
+      body:
+          'Enter your pickup and destination to find available I-Metro buses near you.',
+      visual: _OnboardingVisualType.booking,
+    ),
+    _OnboardingSlideData(
+      title: 'Track your bus',
+      body:
+          'Follow your bus location in real time and know exactly when it will arrive.',
+      visual: _OnboardingVisualType.tracking,
+    ),
+    _OnboardingSlideData(
+      title: 'Rate your trip',
+      body:
+          'Share your feedback so we can keep improving your I-Metro experience.',
+      visual: _OnboardingVisualType.rating,
+    ),
+  ];
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _goToLogin() {
+    Navigator.pushReplacementNamed(context, AppRoutes.login);
+  }
+
+  void _next() {
+    if (_index == _slides.length - 1) {
+      _goToLogin();
+      return;
+    }
+    _controller.nextPage(
+      duration: const Duration(milliseconds: 280),
+      curve: Curves.easeOutCubic,
+    );
+  }
+
+  void _back() {
+    if (_index == 0) {
+      _goToLogin();
+      return;
+    }
+    _controller.previousPage(
+      duration: const Duration(milliseconds: 280),
+      curve: Curves.easeOutCubic,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
-    const primary = Color(0xFF006B47);
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    const outlineVariant = Color(0xFFBDCAC0);
+    const background = Color(0xFFF6FAFA);
+    const primary = Color(0xFF007A51);
+    const muted = Color(0xFF56615B);
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final horizontalPadding = constraints.maxWidth > 500 ? 28.0 : 22.0;
-        final contentWidth = constraints.maxWidth > 500 ? 430.0 : constraints.maxWidth;
-
-        return Container(
-          color: background,
-          child: Center(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: contentWidth),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(horizontalPadding, 18, horizontalPadding, 18),
-                child: Column(
-                  children: [
-                    const Spacer(flex: 1),
-                    Expanded(
-                      flex: 52,
-                      child: Center(
-                        child: _OnboardingIllustration(
-                          type: illustrationType,
-                          accent: primary,
-                        ),
-                      ),
+    return Scaffold(
+      backgroundColor: background,
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 430),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(26, 12, 26, 26),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      controller: _controller,
+                      itemCount: _slides.length,
+                      onPageChanged: (value) => setState(() => _index = value),
+                      itemBuilder: (context, index) {
+                        final slide = _slides[index];
+                        return _OnboardingSlide(slide: slide);
+                      },
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.manrope(
-                        fontSize: constraints.maxWidth > 420 ? 26 : 24,
-                        fontWeight: FontWeight.w800,
-                        color: onSurface,
-                        height: 1.15,
-                        letterSpacing: -0.5,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      body,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        fontSize: 13.5,
-                        fontWeight: FontWeight.w500,
-                        color: onSurfaceVariant,
-                        height: 1.55,
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: List.generate(totalSteps, (index) {
-                        final active = index == stepIndex;
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 220),
-                          margin: const EdgeInsets.symmetric(horizontal: 4),
-                          width: active ? 28 : 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            color: active ? primary : outlineVariant.withOpacity(0.55),
-                            borderRadius: BorderRadius.circular(999),
+                  ),
+                  const SizedBox(height: 12),
+                  _OnboardingDots(count: _slides.length, activeIndex: _index),
+                  const SizedBox(height: 22),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 132,
+                        child: TextButton(
+                          onPressed: _back,
+                          style: TextButton.styleFrom(
+                            foregroundColor: muted,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
-                        );
-                      }),
-                    ),
-                    const SizedBox(height: 18),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextButton(
-                            onPressed: onSecondaryTap,
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              foregroundColor: onSurfaceVariant,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                            ),
-                            child: Text(
-                              secondaryLabel,
-                              style: GoogleFonts.inter(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: onSurfaceVariant,
-                              ),
+                          child: Text(
+                            _index == 0 ? 'Skip' : 'Back',
+                            style: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w800,
+                              color: muted,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: onPrimaryTap,
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              backgroundColor: primary,
-                              foregroundColor: Colors.white,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                              shadowColor: primary.withOpacity(0.2),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _next,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primary,
+                            foregroundColor: Colors.white,
+                            elevation: 12,
+                            shadowColor: primary.withOpacity(0.22),
+                            padding: const EdgeInsets.symmetric(vertical: 18),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(22),
                             ),
-                            child: Text(
-                              primaryLabel,
-                              style: GoogleFonts.inter(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
-                              ),
+                          ),
+                          child: Text(
+                            _index == _slides.length - 1
+                                ? 'Get started'
+                                : 'Next',
+                            style: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.white,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+enum _OnboardingVisualType { booking, tracking, rating }
+
+class _OnboardingSlideData {
+  const _OnboardingSlideData({
+    required this.title,
+    required this.body,
+    required this.visual,
+  });
+
+  final String title;
+  final String body;
+  final _OnboardingVisualType visual;
+}
+
+class _OnboardingSlide extends StatelessWidget {
+  const _OnboardingSlide({required this.slide});
+
+  final _OnboardingSlideData slide;
+
+  @override
+  Widget build(BuildContext context) {
+    const text = Color(0xFF191C1E);
+    const muted = Color(0xFF56615B);
+
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final compact = constraints.maxHeight < 660;
+        final visualTopGap = slide.visual == _OnboardingVisualType.tracking
+            ? (compact ? 20.0 : 46.0)
+            : (compact ? 24.0 : 54.0);
+        final visualBottomGap = slide.visual == _OnboardingVisualType.tracking
+            ? (compact ? 22.0 : 28.0)
+            : (compact ? 26.0 : 34.0);
+        return Column(
+          children: [
+            SizedBox(height: visualTopGap),
+            _OnboardingVisual(
+              type: slide.visual,
+              compact: compact,
+            ),
+            SizedBox(height: visualBottomGap),
+            const Spacer(),
+            Text(
+              slide.title,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.manrope(
+                fontSize: compact ? 23 : 25,
+                fontWeight: FontWeight.w700,
+                color: text,
+                height: 1.08,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              slide.body,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.inter(
+                fontSize: compact ? 13 : 14,
+                fontWeight: FontWeight.w500,
+                height: 1.36,
+                color: muted.withOpacity(0.88),
+              ),
+            ),
+          ],
         );
       },
     );
   }
 }
 
-class _OnboardingIllustration extends StatelessWidget {
-  const _OnboardingIllustration({
+class _OnboardingVisual extends StatelessWidget {
+  const _OnboardingVisual({
     required this.type,
-    required this.accent,
+    required this.compact,
   });
 
-  final _OnboardingIllustrationType type;
-  final Color accent;
+  final _OnboardingVisualType type;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
-    switch (type) {
-      case _OnboardingIllustrationType.book:
-        return _BusBookingIllustration(accent: accent);
-      case _OnboardingIllustrationType.track:
-        return _BusTrackingIllustration(accent: accent);
-      case _OnboardingIllustrationType.rate:
-        return _BusRatingIllustration(accent: accent);
-    }
-  }
-}
+    final height = compact ? 320.0 : 384.0;
+    return SizedBox(
+      height: height,
+      width: double.infinity,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          var panelWidth = constraints.maxWidth;
+          if (panelWidth > 390) panelWidth = 390;
 
-class _IllustrationFrame extends StatelessWidget {
-  const _IllustrationFrame({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 0.94,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(36),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.06),
-              blurRadius: 24,
-              offset: const Offset(0, 14),
+          return Center(
+            child: SizedBox(
+              width: panelWidth,
+              height: height,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFFD8EFE5),
+                  borderRadius: BorderRadius.circular(34),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF007A51).withOpacity(0.10),
+                      blurRadius: 52,
+                      spreadRadius: 8,
+                      offset: const Offset(0, 22),
+                    ),
+                    BoxShadow(
+                      color: Colors.white.withOpacity(0.78),
+                      blurRadius: 28,
+                      spreadRadius: -6,
+                      offset: const Offset(0, -12),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned.fill(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(34),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.white.withOpacity(0.28),
+                              const Color(0xFFC1E3D4),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    if (type == _OnboardingVisualType.booking)
+                      const _BookingOnboardingArt(),
+                    if (type == _OnboardingVisualType.tracking)
+                      const _TrackingOnboardingArt(),
+                    if (type == _OnboardingVisualType.rating)
+                      const _RatingOnboardingArt(),
+                  ],
+                ),
+              ),
             ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(36),
-          child: child,
-        ),
+          );
+        },
       ),
     );
   }
 }
 
-class _BusBookingIllustration extends StatelessWidget {
-  const _BusBookingIllustration({required this.accent});
-
-  final Color accent;
+class _BookingOnboardingArt extends StatelessWidget {
+  const _BookingOnboardingArt();
 
   @override
   Widget build(BuildContext context) {
-    return _IllustrationFrame(
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    accent.withOpacity(0.07),
-                    Colors.white,
-                  ],
+    const primary = Color(0xFF007A51);
+
+    return Stack(
+      children: [
+        Positioned(
+          left: 24,
+          right: 24,
+          top: 34,
+          child: _OnboardingCard(
+            height: 92,
+            radius: 28,
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+            child: Row(
+              children: [
+                const _OnboardingIconTile(icon: Icons.location_on, size: 50),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Choose a route',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.manrope(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF191C1E),
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        'From pickup to destination',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF56615B),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+                const _OnboardingIconTile(
+                    icon: Icons.directions_bus_filled, size: 50),
+              ],
             ),
           ),
-          Positioned(
-            top: 24,
-            left: 20,
-            right: 20,
-            child: Container(
-              height: 104,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: accent.withOpacity(0.10)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
-                    blurRadius: 18,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
-              ),
-              padding: const EdgeInsets.all(14),
-              child: Row(
-                children: [
-                  Container(
-                    width: 42,
-                    height: 42,
+        ),
+        Positioned(
+          left: 24,
+          right: 24,
+          bottom: 34,
+          child: _OnboardingCard(
+            height: 128,
+            radius: 30,
+            padding: const EdgeInsets.all(18),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  left: 40,
+                  right: 92,
+                  top: 34,
+                  child: Container(
+                    height: 3,
                     decoration: BoxDecoration(
-                      color: accent.withOpacity(0.10),
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Icon(Icons.location_pin, color: accent, size: 24),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Choose a route',
-                          style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E)),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          'From pickup to destination',
-                          style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF3E4942)),
-                        ),
-                      ],
+                      color: const Color(0xFFD7E9E1),
+                      borderRadius: BorderRadius.circular(99),
                     ),
                   ),
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: accent.withOpacity(0.08),
+                ),
+                Positioned(
+                  left: 32,
+                  top: 27,
+                  child: Container(
+                    width: 17,
+                    height: 17,
+                    decoration: const BoxDecoration(
+                      color: primary,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(Icons.directions_bus_rounded, color: accent, size: 28),
                   ),
-                ],
-              ),
+                ),
+                Positioned(
+                  left: 54,
+                  bottom: 20,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 9,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.055),
+                          blurRadius: 18,
+                          offset: const Offset(0, 9),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      'Available buses',
+                      style: GoogleFonts.inter(
+                        color: const Color(0xFF3E4942),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  right: 42,
+                  top: 24,
+                  child: _OnboardingIconTile(
+                    icon: Icons.directions_bus_filled,
+                    size: 78,
+                    notification: true,
+                  ),
+                ),
+              ],
             ),
           ),
-          Positioned(
-            left: 18,
-            right: 18,
-            bottom: 22,
-            child: Container(
-              height: 138,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF7F9FB),
-                borderRadius: BorderRadius.circular(28),
-                border: Border.all(color: accent.withOpacity(0.08)),
-              ),
-              padding: const EdgeInsets.all(16),
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: 12,
-                    top: 20,
-                    child: Container(
-                      width: 16,
-                      height: 16,
-                      decoration: BoxDecoration(
-                        color: accent,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 38,
-                    top: 28,
-                    right: 26,
-                    child: Container(
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: accent.withOpacity(0.14),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 16,
-                    top: 12,
-                    child: Container(
-                      width: 76,
-                      height: 76,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(22),
-                        border: Border.all(color: accent.withOpacity(0.12)),
-                      ),
-                      child: const Icon(Icons.bus_alert_rounded, color: Color(0xFF006B47), size: 40),
-                    ),
-                  ),
-                  Positioned(
-                    left: 22,
-                    bottom: 18,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(999),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 4)),
-                        ],
-                      ),
-                      child: Text(
-                        'Available buses',
-                        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: const Color(0xFF3E4942)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-class _BusTrackingIllustration extends StatelessWidget {
-  const _BusTrackingIllustration({required this.accent});
-
-  final Color accent;
+class _TrackingOnboardingArt extends StatelessWidget {
+  const _TrackingOnboardingArt();
 
   @override
   Widget build(BuildContext context) {
-    return _IllustrationFrame(
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    accent.withOpacity(0.06),
-                    Colors.white,
-                  ],
+    const primary = Color(0xFF007A51);
+
+    return Stack(
+      children: [
+        Positioned(
+          left: 24,
+          right: 24,
+          top: 38,
+          child: _OnboardingCard(
+            height: 166,
+            radius: 30,
+            padding: const EdgeInsets.all(22),
+            child: Stack(
+              children: [
+                const Positioned(
+                  left: 0,
+                  top: 8,
+                  child:
+                      _OnboardingIconTile(icon: Icons.map_outlined, size: 50),
                 ),
-              ),
+                Positioned(
+                  right: 28,
+                  top: 12,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE6F3ED),
+                      borderRadius: BorderRadius.circular(99),
+                    ),
+                    child: Text(
+                      'Live tracking',
+                      style: GoogleFonts.inter(
+                        color: primary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 54,
+                  right: 78,
+                  top: 78,
+                  child: Container(
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD5E7DF),
+                      borderRadius: BorderRadius.circular(99),
+                    ),
+                  ),
+                ),
+                const Positioned(
+                  left: 96,
+                  top: 62,
+                  child: Icon(
+                    Icons.directions_bus_filled,
+                    color: primary,
+                    size: 28,
+                  ),
+                ),
+                const Positioned(
+                  right: 54,
+                  top: 60,
+                  child: Icon(Icons.location_on, color: primary, size: 40),
+                ),
+                Positioned(
+                  right: 36,
+                  top: 44,
+                  child: Container(
+                    width: 28,
+                    height: 28,
+                    decoration: const BoxDecoration(
+                      color: primary,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Positioned(
-            left: 18,
-            right: 18,
-            top: 24,
-            child: Container(
-              height: 192,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(28),
-                border: Border.all(color: accent.withOpacity(0.09)),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: 22,
-                    top: 18,
-                    child: Container(
-                      width: 42,
-                      height: 42,
-                      decoration: BoxDecoration(
-                        color: accent.withOpacity(0.10),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: Icon(Icons.map_outlined, color: accent, size: 24),
-                    ),
+        ),
+        Positioned(
+          left: 46,
+          bottom: 30,
+          child: Container(
+            width: 148,
+            height: 102,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 17),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.075),
+                  blurRadius: 30,
+                  offset: const Offset(0, 17),
+                ),
+                BoxShadow(
+                  color: Colors.white.withOpacity(0.65),
+                  blurRadius: 16,
+                  offset: const Offset(-8, -8),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'ETA',
+                  style: GoogleFonts.inter(
+                    color: primary,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w900,
                   ),
-                  Positioned(
-                    right: 20,
-                    top: 16,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: accent.withOpacity(0.08),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: Text(
-                        'Live tracking',
-                        style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: accent),
-                      ),
-                    ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  '8 min away',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.manrope(
+                    color: const Color(0xFF191C1E),
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
                   ),
-                  Positioned(
-                    left: 30,
-                    right: 30,
-                    top: 82,
-                    child: Container(
-                      height: 6,
-                      decoration: BoxDecoration(
-                        color: accent.withOpacity(0.14),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 72,
-                    top: 70,
-                    child: Container(
-                      width: 46,
-                      height: 46,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
-                        ],
-                      ),
-                      child: Icon(Icons.directions_bus_filled_rounded, color: accent, size: 26),
-                    ),
-                  ),
-                  Positioned(
-                    right: 34,
-                    top: 52,
-                    child: Container(
-                      width: 22,
-                      height: 22,
-                      decoration: BoxDecoration(
-                        color: accent,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(color: accent.withOpacity(0.28), blurRadius: 10, offset: const Offset(0, 4)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 42,
-                    top: 72,
-                    child: Icon(Icons.place_rounded, color: accent, size: 30),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Positioned(
-            left: 36,
-            bottom: 24,
-            child: Container(
-              width: 144,
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(22),
-                border: Border.all(color: accent.withOpacity(0.08)),
-                boxShadow: [
-                  BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 16, offset: const Offset(0, 8)),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('ETA', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: accent)),
-                  const SizedBox(height: 4),
-                  Text('8 min away', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E))),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
 
-class _BusRatingIllustration extends StatelessWidget {
-  const _BusRatingIllustration({required this.accent});
-
-  final Color accent;
+class _RatingOnboardingArt extends StatelessWidget {
+  const _RatingOnboardingArt();
 
   @override
   Widget build(BuildContext context) {
-    return _IllustrationFrame(
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    accent.withOpacity(0.06),
-                    Colors.white,
-                  ],
+    const primary = Color(0xFF007A51);
+
+    return Stack(
+      children: [
+        Positioned(
+          left: 26,
+          right: 26,
+          top: 34,
+          child: _OnboardingCard(
+            height: 154,
+            child: Stack(
+              children: [
+                const Positioned(
+                  left: 2,
+                  top: 4,
+                  child: _OnboardingIconTile(icon: Icons.star),
                 ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 24,
-            left: 26,
-            right: 26,
-            child: Container(
-              height: 184,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: accent.withOpacity(0.08)),
-              ),
-              child: Stack(
-                children: [
-                  Positioned(
-                    top: 22,
-                    left: 24,
-                    child: Container(
-                      width: 52,
-                      height: 52,
-                      decoration: BoxDecoration(
-                        color: accent.withOpacity(0.12),
-                        shape: BoxShape.circle,
+                Positioned(
+                  left: 76,
+                  right: 8,
+                  top: 8,
+                  child: Text(
+                    'Rate your trip',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.manrope(
+                      fontSize: 21,
+                      fontWeight: FontWeight.w900,
+                      color: const Color(0xFF191C1E),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 76,
+                  top: 48,
+                  child: Row(
+                    children: List.generate(
+                      5,
+                      (index) => Icon(
+                        Icons.star,
+                        size: 17,
+                        color: index < 4 ? primary : const Color(0xFFD6E2DD),
                       ),
-                      child: Icon(Icons.star_rounded, color: accent, size: 30),
                     ),
                   ),
-                  Positioned(
-                    top: 34,
-                    left: 92,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Rate your trip',
-                          style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E)),
-                        ),
-                        const SizedBox(height: 6),
-                        Row(
-                          children: List.generate(5, (index) {
-                            return Icon(
-                              Icons.star_rounded,
-                              size: 20,
-                              color: index < 4 ? accent : accent.withOpacity(0.18),
-                            );
-                          }),
-                        ),
-                      ],
-                    ),
+                ),
+                const Positioned(
+                  left: 2,
+                  right: 2,
+                  bottom: 4,
+                  child: Row(
+                    children: [
+                      _RatingChip(label: 'Comfort'),
+                      SizedBox(width: 10),
+                      _RatingChip(label: 'Safety'),
+                    ],
                   ),
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    bottom: 22,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            height: 46,
-                            decoration: BoxDecoration(
-                              color: accent.withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Comfort',
-                                style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w700, color: accent),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Container(
-                            height: 46,
-                            decoration: BoxDecoration(
-                              color: accent.withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'Safety',
-                                style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w700, color: accent),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+        ),
+        Positioned(
+          right: 42,
+          bottom: 52,
+          child: Container(
+            width: 92,
+            height: 92,
+            decoration: BoxDecoration(
+              color: const Color(0xFFD6EADF),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.white.withOpacity(0.7),
+                  blurRadius: 18,
+                  offset: const Offset(-6, -6),
+                ),
+              ],
+            ),
+            child: const Icon(Icons.celebration, color: primary, size: 36),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _OnboardingCard extends StatelessWidget {
+  const _OnboardingCard({
+    required this.height,
+    required this.child,
+    this.radius = 24,
+    this.padding = const EdgeInsets.all(18),
+  });
+
+  final double height;
+  final Widget child;
+  final double radius;
+  final EdgeInsetsGeometry padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      padding: padding,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.96),
+        borderRadius: BorderRadius.circular(radius),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.045),
+            blurRadius: 32,
+            offset: const Offset(0, 18),
+          ),
+          BoxShadow(
+            color: Colors.white.withOpacity(0.7),
+            blurRadius: 18,
+            offset: const Offset(-8, -8),
+          ),
+        ],
+      ),
+      child: child,
+    );
+  }
+}
+
+class _OnboardingIconTile extends StatelessWidget {
+  const _OnboardingIconTile({
+    required this.icon,
+    this.size = 52,
+    this.notification = false,
+  });
+
+  final IconData icon;
+  final double size;
+  final bool notification;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF007A51);
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            color: const Color(0xFFE6F3ED),
+            borderRadius: BorderRadius.circular(size * 0.3),
+          ),
+          child: Icon(icon, color: primary, size: size * 0.42),
+        ),
+        if (notification)
           Positioned(
-            right: 38,
-            bottom: 24,
+            right: -2,
+            top: -2,
             child: Container(
-              width: 88,
-              height: 88,
-              decoration: BoxDecoration(
-                color: accent.withOpacity(0.10),
+              width: 20,
+              height: 20,
+              decoration: const BoxDecoration(
+                color: primary,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.celebration_rounded, color: Color(0xFF006B47), size: 40),
+              child: const Icon(
+                Icons.priority_high,
+                color: Colors.white,
+                size: 13,
+              ),
             ),
           ),
-        ],
+      ],
+    );
+  }
+}
+
+class _RatingChip extends StatelessWidget {
+  const _RatingChip({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 11),
+        decoration: BoxDecoration(
+          color: const Color(0xFFE6F3ED),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.inter(
+            color: const Color(0xFF007A51),
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
       ),
+    );
+  }
+}
+
+class _OnboardingDots extends StatelessWidget {
+  const _OnboardingDots({
+    required this.count,
+    required this.activeIndex,
+  });
+
+  final int count;
+  final int activeIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF007A51);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(count, (index) {
+        final active = index == activeIndex;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOutCubic,
+          width: active ? 36 : 9,
+          height: 9,
+          margin: const EdgeInsets.symmetric(horizontal: 5),
+          decoration: BoxDecoration(
+            color: active ? primary : const Color(0xFFDDE8E3),
+            borderRadius: BorderRadius.circular(99),
+          ),
+        );
+      }),
     );
   }
 }
@@ -1210,6 +1267,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _obscure = true;
+  bool _rememberMe = false;
   final _loginController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -1263,55 +1321,16 @@ class _LoginScreenState extends State<LoginScreen> {
     if (!mounted) return;
     if (response['ok'] == true) {
       await PushService.instance.initialize();
-      Navigator.pushReplacementNamed(context, AppRoutes.appModeSelect);
+      Navigator.pushReplacementNamed(context, AppRoutes.rideServices);
     } else {
       setState(() => _submitError = _loginErrorMessage(response));
     }
   }
 
-  Widget _buildSecureDivider({
-    required Color outline,
-    required Color surfaceContainerHigh,
-  }) {
-    return Row(
-      children: [
-        Expanded(child: Container(height: 1, color: surfaceContainerHigh)),
-        const SizedBox(width: 12),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          decoration: BoxDecoration(
-            color: const Color(0xFFF2F6F4),
-            borderRadius: BorderRadius.circular(999),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.lock_outline_rounded, size: 14, color: outline),
-              const SizedBox(width: 6),
-              Text(
-                'Secure login',
-                style: GoogleFonts.inter(
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.1,
-                  color: outline,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(child: Container(height: 1, color: surfaceContainerHigh)),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAFA);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const surfaceContainerHigh = Color(0xFFE6E8EA);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const outline = Color(0xFF6E7A71);
@@ -1319,366 +1338,504 @@ class _LoginScreenState extends State<LoginScreen> {
     const primary = Color(0xFF006B47);
     const kineticStart = Color(0xFF006B47);
     const kineticEnd = Color(0xFF00875A);
+    const paleGreen = Color(0xFFF7FBF9);
 
     return Scaffold(
       backgroundColor: background,
       body: Stack(
         children: [
           Positioned(
-            top: -110,
-            right: -90,
+            top: -66,
+            right: -78,
             child: Container(
-              width: 260,
-              height: 260,
+              width: 196,
+              height: 196,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: [
-                    kineticStart.withOpacity(0.95),
-                    kineticEnd.withOpacity(0.86),
-                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
+                  colors: [
+                    kineticEnd.withOpacity(0.96),
+                    kineticStart,
+                  ],
                 ),
-                boxShadow: [BoxShadow(color: kineticStart.withOpacity(0.10), blurRadius: 90, spreadRadius: 12)],
+                boxShadow: [
+                  BoxShadow(
+                      color: kineticStart.withOpacity(0.07),
+                      blurRadius: 80,
+                      spreadRadius: 18)
+                ],
               ),
             ),
           ),
           Positioned(
-            bottom: -110,
-            left: -90,
+            bottom: -82,
+            left: -78,
             child: Container(
-              width: 220,
-              height: 220,
+              width: 170,
+              height: 170,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                   colors: [
-                    kineticEnd.withOpacity(0.76),
-                    kineticStart.withOpacity(0.88),
+                    kineticStart.withOpacity(0.94),
+                    kineticEnd.withOpacity(0.9),
                   ],
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
                 ),
-                boxShadow: [BoxShadow(color: kineticStart.withOpacity(0.06), blurRadius: 80, spreadRadius: 8)],
+                boxShadow: [
+                  BoxShadow(
+                      color: kineticStart.withOpacity(0.06),
+                      blurRadius: 72,
+                      spreadRadius: 16)
+                ],
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: IgnorePointer(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.white.withOpacity(0.56),
+                      background.withOpacity(0.92),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
           SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 24),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 420),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final compact = constraints.maxWidth < 430;
+                var topGap = constraints.maxHeight * 0.12;
+                if (topGap < 52) topGap = 52;
+                if (topGap > 118) topGap = 118;
+                final pagePadding = compact ? 24.0 : 40.0;
+                final cardPadding = compact ? 24.0 : 30.0;
+
+                return SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: pagePadding),
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 540),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _brandLogo(size: 38, radius: 12),
-                          const SizedBox(width: 10),
-                          Text(
-                            'I-Metro',
-                            style: GoogleFonts.manrope(fontSize: 21, fontWeight: FontWeight.w800, color: primary),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 22),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 310),
-                        child: Text(
-                          'Luxury in Motion',
-                          style: GoogleFonts.manrope(
-                            fontSize: 27,
-                            fontWeight: FontWeight.w700,
-                            height: 1.08,
-                            color: onSurface,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 360),
-                        child: Text(
-                          'Sign in to access clean-energy routes, cashless tickets, and real-time updates.',
-                          style: GoogleFonts.inter(
-                            fontSize: 13.5,
-                            fontWeight: FontWeight.w500,
-                            color: onSurfaceVariant,
-                            height: 1.45,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 28),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(22, 22, 22, 18),
-                        decoration: BoxDecoration(
-                          color: surfaceLowest,
-                          borderRadius: BorderRadius.circular(26),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 28,
-                              offset: const Offset(0, 12),
-                            ),
-                          ],
-                        ),
-                        child: Form(
-                          key: _formKey,
-                          autovalidateMode: _autoValidate ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
-                          child: AutofillGroup(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Email/phone',
-                                  style: GoogleFonts.inter(
-                                    fontSize: 10.5,
+                          SizedBox(height: topGap),
+                          Row(
+                            children: [
+                              _brandLogo(size: 44, radius: 13),
+                              const SizedBox(width: 12),
+                              Text(
+                                'I-Metro',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 26,
                                     fontWeight: FontWeight.w700,
-                                    letterSpacing: 1.5,
-                                    color: onSurfaceVariant,
-                                  ),
+                                    height: 1,
+                                    color: primary),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 28),
+                          Text(
+                            'Luxury in Motion',
+                            style: GoogleFonts.manrope(
+                              fontSize: compact ? 32 : 38,
+                              fontWeight: FontWeight.w700,
+                              height: 1.05,
+                              letterSpacing: 0,
+                              color: onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            'Sign in to access clean-energy routes, cashless tickets, and real-time updates.',
+                            style: GoogleFonts.inter(
+                              fontSize: compact ? 14 : 15,
+                              fontWeight: FontWeight.w500,
+                              color: onSurfaceVariant.withOpacity(0.82),
+                              height: 1.55,
+                            ),
+                          ),
+                          const SizedBox(height: 34),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(
+                                cardPadding, 30, cardPadding, 24),
+                            decoration: BoxDecoration(
+                              color: surfaceLowest,
+                              borderRadius: BorderRadius.circular(32),
+                              border: Border.all(
+                                  color: Colors.white.withOpacity(0.82),
+                                  width: 1),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: primary.withOpacity(0.05),
+                                  blurRadius: 40,
+                                  offset: const Offset(0, 22),
                                 ),
-                                const SizedBox(height: 9),
-                                TextFormField(
-                                  controller: _loginController,
-                                  enabled: !_loading,
-                                  keyboardType: TextInputType.emailAddress,
-                                  textInputAction: TextInputAction.next,
-                                  autofillHints: const [AutofillHints.username],
-                                  cursorColor: primary,
-                                  onChanged: (_) => _clearSubmitError(),
-                                  validator: (value) {
-                                    final input = value?.trim() ?? '';
-                                    if (input.isEmpty) {
-                                      return 'Enter your email or phone number.';
-                                    }
-                                    if (input.contains('@')) {
-                                      final emailOk = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(input);
-                                      if (!emailOk) {
-                                        return 'Enter a valid email address.';
-                                      }
-                                    } else if (input.length < 7) {
-                                      return 'Enter a valid phone number.';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: surfaceContainerLow,
-                                    prefixIcon: const Icon(Icons.alternate_email_rounded, color: outlineVariant, size: 20),
-                                    prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
-                                    hintText: 'Enter your credentials',
-                                    hintStyle: GoogleFonts.inter(fontSize: 13.5, color: outline.withOpacity(0.62)),
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                                    ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.4),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.6),
-                                    ),
-                                    errorStyle: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
-                                  ),
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.035),
+                                  blurRadius: 18,
+                                  offset: const Offset(0, 8),
                                 ),
-                                const SizedBox(height: 18),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                              ],
+                            ),
+                            child: Form(
+                              key: _formKey,
+                              autovalidateMode: _autoValidate
+                                  ? AutovalidateMode.onUserInteraction
+                                  : AutovalidateMode.disabled,
+                              child: AutofillGroup(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'PASSWORD',
+                                      'Email/phone',
                                       style: GoogleFonts.inter(
-                                        fontSize: 10.5,
-                                        fontWeight: FontWeight.w700,
-                                        letterSpacing: 1.5,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 1.6,
                                         color: onSurfaceVariant,
                                       ),
                                     ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pushNamed(context, AppRoutes.forgotPassword),
-                                      style: TextButton.styleFrom(
-                                        foregroundColor: primary,
-                                        padding: EdgeInsets.zero,
-                                        minimumSize: const Size(0, 0),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      controller: _loginController,
+                                      enabled: !_loading,
+                                      keyboardType: TextInputType.emailAddress,
+                                      textInputAction: TextInputAction.next,
+                                      autofillHints: const [
+                                        AutofillHints.username
+                                      ],
+                                      onChanged: (_) => _clearSubmitError(),
+                                      validator: (value) {
+                                        final input = value?.trim() ?? '';
+                                        if (input.isEmpty) {
+                                          return 'Enter your email or phone number.';
+                                        }
+                                        if (input.contains('@')) {
+                                          final emailOk = RegExp(
+                                                  r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+                                              .hasMatch(input);
+                                          if (!emailOk) {
+                                            return 'Enter a valid email address.';
+                                          }
+                                        } else if (input.length < 7) {
+                                          return 'Enter a valid phone number.';
+                                        }
+                                        return null;
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: surfaceLowest,
+                                        prefixIconConstraints:
+                                            const BoxConstraints(
+                                                minWidth: 50, minHeight: 54),
+                                        prefixIcon: const Icon(
+                                          Icons.alternate_email,
+                                          color: outlineVariant,
+                                          size: 22,
+                                        ),
+                                        hintText: 'Enter your credentials',
+                                        hintStyle: GoogleFonts.inter(
+                                          fontSize: 15,
+                                          color: outline.withOpacity(0.52),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 19, horizontal: 18),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          borderSide: BorderSide(
+                                              color: outlineVariant
+                                                  .withOpacity(0.55),
+                                              width: 1),
+                                        ),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            borderSide: BorderSide(
+                                                color: outlineVariant
+                                                    .withOpacity(0.55))),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          borderSide: BorderSide(
+                                              color: primary.withOpacity(0.72),
+                                              width: 2),
+                                        ),
+                                        errorStyle: GoogleFonts.inter(
+                                            fontSize: 11,
+                                            color: Colors.redAccent),
                                       ),
-                                      child: Text(
-                                        'Forgot password?',
-                                        style: GoogleFonts.inter(fontSize: 11.5, fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(height: 22),
+                                    Text(
+                                      'PASSWORD',
+                                      style: GoogleFonts.inter(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 1.6,
+                                        color: onSurfaceVariant,
                                       ),
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(height: 7),
-                                TextFormField(
-                                  controller: _passwordController,
-                                  enabled: !_loading,
-                                  obscureText: _obscure,
-                                  textInputAction: TextInputAction.done,
-                                  autofillHints: const [AutofillHints.password],
-                                  cursorColor: primary,
-                                  onChanged: (_) => _clearSubmitError(),
-                                  onFieldSubmitted: (_) => _handleLogin(),
-                                  validator: (value) {
-                                    final input = value ?? '';
-                                    if (input.isEmpty) {
-                                      return 'Enter your password.';
-                                    }
-                                    if (input.length < 6) {
-                                      return 'Password must be at least 6 characters.';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: surfaceContainerLow,
-                                    prefixIcon: const Icon(Icons.lock_rounded, color: outlineVariant, size: 20),
-                                    prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
-                                    hintText: 'Enter your password',
-                                    hintStyle: GoogleFonts.inter(fontSize: 13.5, color: outline.withOpacity(0.62)),
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
+                                    const SizedBox(height: 10),
+                                    TextFormField(
+                                      controller: _passwordController,
+                                      enabled: !_loading,
+                                      obscureText: _obscure,
+                                      textInputAction: TextInputAction.done,
+                                      autofillHints: const [
+                                        AutofillHints.password
+                                      ],
+                                      onChanged: (_) => _clearSubmitError(),
+                                      onFieldSubmitted: (_) => _handleLogin(),
+                                      validator: (value) {
+                                        final input = value ?? '';
+                                        if (input.isEmpty) {
+                                          return 'Enter your password.';
+                                        }
+                                        if (input.length < 6) {
+                                          return 'Password must be at least 6 characters.';
+                                        }
+                                        return null;
+                                      },
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: surfaceLowest,
+                                        prefixIconConstraints:
+                                            const BoxConstraints(
+                                                minWidth: 50, minHeight: 54),
+                                        prefixIcon: const Icon(
+                                          Icons.lock_outline,
+                                          color: outlineVariant,
+                                          size: 22,
+                                        ),
+                                        hintText: 'Enter your password',
+                                        hintStyle: GoogleFonts.inter(
+                                          fontSize: 15,
+                                          color: outline.withOpacity(0.52),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 19, horizontal: 18),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          borderSide: BorderSide(
+                                              color: outlineVariant
+                                                  .withOpacity(0.55),
+                                              width: 1),
+                                        ),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                            borderSide: BorderSide(
+                                                color: outlineVariant
+                                                    .withOpacity(0.55))),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                          borderSide: BorderSide(
+                                              color: primary.withOpacity(0.72),
+                                              width: 2),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          padding:
+                                              const EdgeInsets.only(right: 12),
+                                          constraints: const BoxConstraints(
+                                              minWidth: 50, minHeight: 50),
+                                          icon: Icon(
+                                              _obscure
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: outline.withOpacity(0.82)),
+                                          onPressed: () => setState(
+                                              () => _obscure = !_obscure),
+                                        ),
+                                        errorStyle: GoogleFonts.inter(
+                                            fontSize: 11,
+                                            color: Colors.redAccent),
+                                      ),
                                     ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
+                                    const SizedBox(height: 14),
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 24,
+                                          height: 24,
+                                          child: Checkbox(
+                                            value: _rememberMe,
+                                            onChanged: _loading
+                                                ? null
+                                                : (value) => setState(() =>
+                                                    _rememberMe =
+                                                        value ?? false),
+                                            activeColor: primary,
+                                            checkColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(6),
+                                            ),
+                                            side: BorderSide(
+                                              color: outlineVariant
+                                                  .withOpacity(0.75),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 9),
+                                        Text(
+                                          'Remember me',
+                                          style: GoogleFonts.inter(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                            color: onSurfaceVariant
+                                                .withOpacity(0.82),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        TextButton(
+                                          onPressed: () => Navigator.pushNamed(
+                                              context,
+                                              AppRoutes.forgotPassword),
+                                          style: TextButton.styleFrom(
+                                            foregroundColor: primary,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 2, vertical: 4),
+                                            minimumSize: const Size(0, 0),
+                                            tapTargetSize: MaterialTapTargetSize
+                                                .shrinkWrap,
+                                          ),
+                                          child: Text(
+                                            'Forgot password?',
+                                            style: GoogleFonts.inter(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                              color: primary,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
+                                    const SizedBox(height: 22),
+                                    if (_submitError != null)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 12),
+                                        child: Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 12),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFFFFE8E6),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              const Icon(Icons.error_outline,
+                                                  color: Colors.redAccent,
+                                                  size: 18),
+                                              const SizedBox(width: 8),
+                                              Expanded(
+                                                child: Text(
+                                                  _submitError!,
+                                                  style: GoogleFonts.inter(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.redAccent),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    _PremiumLoginButton(
+                                      loading: _loading,
+                                      onPressed: _loading ? null : _handleLogin,
                                     ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.4),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(16),
-                                      borderSide: const BorderSide(color: Colors.redAccent, width: 1.6),
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: Icon(_obscure ? Icons.visibility_rounded : Icons.visibility_off_rounded, color: outline),
-                                      onPressed: () => setState(() => _obscure = !_obscure),
-                                    ),
-                                    errorStyle: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
-                                  ),
-                                ),
-                                const SizedBox(height: 18),
-                                if (_submitError != null)
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 12),
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                                    const SizedBox(height: 22),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 14, vertical: 11),
                                       decoration: BoxDecoration(
-                                        color: const Color(0xFFFFEDEA),
-                                        borderRadius: BorderRadius.circular(14),
+                                        color: paleGreen,
+                                        borderRadius: BorderRadius.circular(16),
+                                        border: Border.all(
+                                            color: outlineVariant
+                                                .withOpacity(0.36)),
                                       ),
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          const Icon(Icons.error_outline_rounded, color: Colors.redAccent, size: 18),
+                                          const Icon(Icons.lock_outline,
+                                              size: 16, color: primary),
                                           const SizedBox(width: 8),
-                                          Expanded(
+                                          Flexible(
                                             child: Text(
-                                              _submitError!,
-                                              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.redAccent),
+                                              'Encrypted access to your I-Metro account',
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.inter(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: onSurfaceVariant
+                                                    .withOpacity(0.78),
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ),
-                                const SizedBox(height: 4),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed: _loading ? null : _handleLogin,
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize: const Size.fromHeight(54),
-                                      padding: const EdgeInsets.symmetric(vertical: 16),
-                                      backgroundColor: kineticStart,
-                                      disabledBackgroundColor: kineticStart.withOpacity(0.55),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                                      elevation: 0,
-                                      shadowColor: kineticStart.withOpacity(0.22),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (_loading)
-                                          const SizedBox(
-                                            width: 16,
-                                            height: 16,
-                                            child: CircularProgressIndicator(
-                                              strokeWidth: 2,
-                                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                            ),
-                                          ),
-                                        if (_loading) const SizedBox(width: 8),
-                                        Text(
-                                          _loading ? 'Signing in...' : 'Login',
-                                          style: GoogleFonts.manrope(
-                                            fontSize: 16.5,
-                                            fontWeight: FontWeight.w700,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 18),
-                                      ],
-                                    ),
-                                  ),
+                                  ],
                                 ),
-                                const SizedBox(height: 18),
-                                _buildSecureDivider(
-                                  outline: outline,
-                                  surfaceContainerHigh: surfaceContainerHigh,
-                                ),
-                              ],
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Center(
-                        child: Text.rich(
-                          TextSpan(
-                            text: "Don't have an account? ",
-                            style: GoogleFonts.inter(fontSize: 13.5, color: onSurfaceVariant),
-                            children: [
+                          const SizedBox(height: 26),
+                          Center(
+                            child: Text.rich(
                               TextSpan(
-                                text: 'Create account',
+                                text: "Don't have an account? ",
                                 style: GoogleFonts.inter(
-                                  fontSize: 13.5,
-                                  fontWeight: FontWeight.w700,
-                                  color: primary,
-                                  decoration: TextDecoration.underline,
+                                  fontSize: 14,
+                                  color: onSurfaceVariant.withOpacity(0.88),
                                 ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () => Navigator.pushNamed(context, AppRoutes.createAccount),
+                                children: [
+                                  TextSpan(
+                                    text: 'Create account',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: primary,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: primary,
+                                      decorationThickness: 1.4,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () => Navigator.pushNamed(
+                                          context, AppRoutes.createAccount),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                          const SizedBox(height: 36),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ],
@@ -1687,367 +1844,111 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class _PremiumLoginButton extends StatefulWidget {
+  const _PremiumLoginButton({
+    required this.loading,
+    required this.onPressed,
+  });
+
+  final bool loading;
+  final VoidCallback? onPressed;
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<_PremiumLoginButton> createState() => _PremiumLoginButtonState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  final _emailController = TextEditingController();
-  final _codeController = TextEditingController();
-  final _newPasswordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  bool _sending = false;
-  bool _resetting = false;
-  bool _codeSent = false;
-  bool _obscureNew = true;
-  bool _obscureConfirm = true;
-  String? _status;
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _codeController.dispose();
-    _newPasswordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
-  }
-
-  void _showSnack(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-  }
-
-  Future<void> _sendCode() async {
-    final email = _emailController.text.trim();
-    if (email.isEmpty || !email.contains('@')) {
-      _showSnack('Enter a valid email address.');
-      return;
-    }
-    FocusScope.of(context).unfocus();
-    setState(() {
-      _sending = true;
-      _status = null;
-    });
-    final response = await AuthApi.requestPasswordReset(email: email);
-    if (!mounted) return;
-    setState(() => _sending = false);
-
-    if (response['ok'] == true) {
-      final debugCode = response['debugCode']?.toString();
-      if (debugCode != null && debugCode.isNotEmpty) {
-        _codeController.text = debugCode;
-      }
-      const successMessage =
-          'If the email exists, a reset code has been sent. Please check your inbox, spam, and promotions folders.';
-      setState(() {
-        _codeSent = true;
-        _status = successMessage;
-      });
-      _showSnack(successMessage);
-    } else {
-      final message = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to send reset code.';
-      setState(() => _status = message);
-      _showSnack(message);
-    }
-  }
-
-  Future<void> _resetPassword() async {
-    if (!_formKey.currentState!.validate()) return;
-    final email = _emailController.text.trim();
-    final code = _codeController.text.trim();
-    final newPassword = _newPasswordController.text;
-    final confirm = _confirmPasswordController.text;
-
-    if (newPassword != confirm) {
-      _showSnack('New password and confirmation do not match.');
-      return;
-    }
-
-    FocusScope.of(context).unfocus();
-    setState(() {
-      _resetting = true;
-      _status = null;
-    });
-
-    final response = await AuthApi.resetPassword(
-      email: email,
-      code: code,
-      newPassword: newPassword,
-    );
-    if (!mounted) return;
-    setState(() => _resetting = false);
-
-    if (response['ok'] == true) {
-      _showSnack('Password updated successfully. Please sign in again.');
-      Navigator.pushReplacementNamed(context, AppRoutes.login);
-    } else {
-      final message = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to reset password.';
-      setState(() => _status = message);
-      _showSnack(message);
-    }
-  }
+class _PremiumLoginButtonState extends State<_PremiumLoginButton> {
+  bool _hovered = false;
+  bool _pressed = false;
 
   @override
   Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    const background = Color(0xFFF7F9FB);
-    const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF0F3F1);
-    const surfaceContainerHigh = Color(0xFFE3E9E6);
-    const outlineVariant = Color(0xFFBBC2BE);
-    const outline = Color(0xFF8E9792);
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
+    const kineticStart = Color(0xFF006B47);
+    const kineticEnd = Color(0xFF009B67);
+    final enabled = widget.onPressed != null;
+    final active = enabled && (_hovered || _pressed);
 
-    return Scaffold(
-      backgroundColor: background,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
+    return MouseRegion(
+      onEnter: (_) => setState(() => _hovered = true),
+      onExit: (_) => setState(() {
+        _hovered = false;
+        _pressed = false;
+      }),
+      child: GestureDetector(
+        onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
+        onTapCancel: enabled ? () => setState(() => _pressed = false) : null,
+        onTapUp: enabled
+            ? (_) {
+                setState(() => _pressed = false);
+                widget.onPressed?.call();
+              }
+            : null,
+        child: AnimatedScale(
+          scale: _pressed ? 0.985 : 1,
+          duration: const Duration(milliseconds: 120),
+          curve: Curves.easeOutCubic,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutCubic,
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: enabled
+                    ? const [kineticStart, kineticEnd]
+                    : [
+                        kineticStart.withOpacity(0.48),
+                        kineticEnd.withOpacity(0.48),
+                      ],
+              ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: kineticStart.withOpacity(active ? 0.3 : 0.2),
+                  blurRadius: active ? 26 : 18,
+                  offset: Offset(0, active ? 14 : 10),
+                ),
+              ],
+            ),
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(
-                    onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.arrow_back_rounded, color: primary),
-                  ),
-                  const Spacer(),
-                  Container(
-                    width: 42,
-                    height: 42,
-                    decoration: BoxDecoration(
-                      color: primary.withOpacity(0.10),
-                      shape: BoxShape.circle,
+                  if (widget.loading)
+                    const SizedBox(
+                      width: 18,
+                      height: 18,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2.3,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
                     ),
-                    child: const Icon(Icons.lock_reset_rounded, color: primary),
+                  if (widget.loading) const SizedBox(width: 10),
+                  Text(
+                    widget.loading ? 'Signing in...' : 'Login',
+                    style: GoogleFonts.manrope(
+                      fontSize: 19,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                      height: 1,
+                    ),
+                  ),
+                  const SizedBox(width: 11),
+                  AnimatedSlide(
+                    offset: Offset(active ? 0.12 : 0, 0),
+                    duration: const Duration(milliseconds: 180),
+                    curve: Curves.easeOutCubic,
+                    child: const Icon(
+                      Icons.arrow_forward,
+                      color: Colors.white,
+                      size: 22,
+                    ),
                   ),
                 ],
               ),
-              const SizedBox(height: 18),
-              Text('Reset Password', style: GoogleFonts.manrope(fontSize: 30, fontWeight: FontWeight.w800, color: onSurface)),
-              const SizedBox(height: 8),
-              Text(
-                'We will send a reset code to your email. Enter it here with a new password to continue.',
-                style: GoogleFonts.inter(fontSize: 13, height: 1.45, color: onSurfaceVariant),
-              ),
-              const SizedBox(height: 24),
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: surfaceLowest,
-                  borderRadius: BorderRadius.circular(28),
-                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 10))],
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      TextFormField(
-                        controller: _emailController,
-                        keyboardType: TextInputType.emailAddress,
-                        enabled: !_sending && !_resetting,
-                        autofillHints: const [AutofillHints.email],
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: surfaceContainerLow,
-                          labelText: 'Email address',
-                          hintText: 'you@example.com',
-                          prefixIcon: const Icon(Icons.email_outlined, color: outlineVariant, size: 20),
-                          prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          final input = value?.trim() ?? '';
-                          if (input.isEmpty) return 'Enter your email address.';
-                          if (!input.contains('@')) return 'Enter a valid email address.';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 14),
-                      ElevatedButton(
-                        onPressed: _sending || _resetting ? null : _sendCode,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primary,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        ),
-                        child: _sending
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                              )
-                            : Text('Send Reset Code', style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w700)),
-                      ),
-                      const SizedBox(height: 14),
-                      if (_status != null)
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: primary.withOpacity(0.08),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: Text(_status!, style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
-                        ),
-                      const SizedBox(height: 18),
-                      Text('RESET PASSWORD', style: GoogleFonts.inter(fontSize: 10.5, fontWeight: FontWeight.w700, letterSpacing: 1.5, color: onSurfaceVariant)),
-                      const SizedBox(height: 8),
-                      TextFormField(
-                        controller: _codeController,
-                        enabled: !_sending && !_resetting && _codeSent,
-                        textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: surfaceContainerLow,
-                          labelText: 'Reset code',
-                          hintText: 'Enter the code from your email',
-                          prefixIcon: const Icon(Icons.pin_outlined, color: outlineVariant, size: 20),
-                          prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          final input = value?.trim() ?? '';
-                          if (input.isEmpty) return 'Enter the reset code.';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 14),
-                      TextFormField(
-                        controller: _newPasswordController,
-                        enabled: !_sending && !_resetting && _codeSent,
-                        obscureText: _obscureNew,
-                        textInputAction: TextInputAction.next,
-                        autofillHints: const [AutofillHints.newPassword],
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: surfaceContainerLow,
-                          labelText: 'New password',
-                          hintText: 'Create a strong password',
-                          prefixIcon: const Icon(Icons.lock_outline, color: outlineVariant, size: 20),
-                          prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
-                          suffixIcon: IconButton(
-                            onPressed: () => setState(() => _obscureNew = !_obscureNew),
-                            icon: Icon(_obscureNew ? Icons.visibility_outlined : Icons.visibility_off_outlined, color: outline),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          final input = value ?? '';
-                          if (input.isEmpty) return 'Enter a new password.';
-                          if (input.length < 8) return 'Password must be at least 8 characters.';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 14),
-                      TextFormField(
-                        controller: _confirmPasswordController,
-                        enabled: !_sending && !_resetting && _codeSent,
-                        obscureText: _obscureConfirm,
-                        textInputAction: TextInputAction.done,
-                        autofillHints: const [AutofillHints.newPassword],
-                        onFieldSubmitted: (_) => _codeSent ? _resetPassword() : _sendCode(),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: surfaceContainerLow,
-                          labelText: 'Confirm password',
-                          hintText: 'Repeat the new password',
-                          prefixIcon: const Icon(Icons.verified_outlined, color: outlineVariant, size: 20),
-                          prefixIconConstraints: const BoxConstraints(minWidth: 46, minHeight: 46),
-                          suffixIcon: IconButton(
-                            onPressed: () => setState(() => _obscureConfirm = !_obscureConfirm),
-                            icon: Icon(_obscureConfirm ? Icons.visibility_outlined : Icons.visibility_off_outlined, color: outline),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: surfaceContainerHigh, width: 1.1),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(color: primary.withOpacity(0.34), width: 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          final input = value ?? '';
-                          if (input.isEmpty) return 'Confirm your new password.';
-                          if (input != _newPasswordController.text) return 'Passwords do not match.';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 18),
-                      ElevatedButton(
-                        onPressed: !_codeSent || _sending || _resetting ? null : _resetPassword,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primary,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        ),
-                        child: _resetting
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                              )
-                            : Text('Reset Password', style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w700)),
-                      ),
-                      const SizedBox(height: 10),
-                      TextButton(
-                        onPressed: _sending || _resetting ? null : () => Navigator.pushReplacementNamed(context, AppRoutes.login),
-                        child: Text('Back to login', style: GoogleFonts.inter(fontSize: 12.5, fontWeight: FontWeight.w600, color: primary)),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -2096,162 +1997,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     setState(() => _submitError = null);
   }
 
-  void _showLegalSheet({
-    required String title,
-    required List<String> sections,
-  }) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: const Color(0xFFF7F9FB),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
-      ),
-      builder: (sheetContext) {
-        const primary = Color(0xFF006B47);
-        const onSurface = Color(0xFF191C1E);
-        const onSurfaceVariant = Color(0xFF3E4942);
-        return SafeArea(
-          top: false,
-          child: DraggableScrollableSheet(
-            expand: false,
-            initialChildSize: 0.78,
-            minChildSize: 0.45,
-            maxChildSize: 0.92,
-            builder: (_, controller) {
-              return SingleChildScrollView(
-                controller: controller,
-                padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Container(
-                        width: 46,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFD7E4DB),
-                          borderRadius: BorderRadius.circular(99),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    Row(
-                      children: [
-                        Container(
-                          width: 42,
-                          height: 42,
-                          decoration: BoxDecoration(
-                            color: primary.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: const Icon(Icons.description_outlined, color: primary, size: 22),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'I-Metro',
-                                style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: onSurface),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                title,
-                                style: GoogleFonts.inter(fontSize: 12.5, fontWeight: FontWeight.w600, color: onSurfaceVariant),
-                              ),
-                            ],
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () => Navigator.pop(sheetContext),
-                          icon: const Icon(Icons.close_rounded, color: onSurfaceVariant),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: const Color(0xFFD7E4DB)),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 6))],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            title,
-                            style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: onSurface),
-                          ),
-                          const SizedBox(height: 12),
-                          ...sections.map(
-                            (section) => Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: Text(
-                                section,
-                                style: GoogleFonts.inter(fontSize: 13.5, height: 1.5, color: onSurfaceVariant),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 14),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () => Navigator.pop(sheetContext),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primary,
-                          foregroundColor: Colors.white,
-                          elevation: 0,
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        ),
-                        child: Text(
-                          'Close',
-                          style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  void _showTermsSheet() {
-    _showLegalSheet(
-      title: 'Terms & Conditions',
-      sections: const [
-        '1. Use of I-Metro services requires accurate profile information and acceptance of our fare and ticket rules.',
-        '2. Tickets are personal, time-bound, and must be presented for validation when requested by an attendant or validator.',
-        '3. Suspicious activity, misuse of the platform, or tampering with tickets may result in account restrictions.',
-        '4. I-Metro may update routes, prices, or service availability as operations change.',
-      ],
-    );
-  }
-
-  void _showPrivacySheet() {
-    _showLegalSheet(
-      title: 'Privacy Policy',
-      sections: const [
-        '1. We use your profile details to create your account, manage bookings, and issue tickets.',
-        '2. Location, device, and support data are used to improve service quality and keep operations secure.',
-        '3. We do not sell your personal information. Access is limited to authorized I-Metro services and staff.',
-        '4. You may update your account details from Profile Settings whenever you need to.',
-      ],
-    );
-  }
-
   String _registerErrorMessage(Map<String, dynamic> response) {
     final reason = response['reason']?.toString();
     switch (reason) {
@@ -2284,29 +2029,27 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       _loading = true;
       _submitError = null;
     });
-      final response = await AuthApi.register(
-        firstName: _firstNameController.text,
-        lastName: _lastNameController.text,
-        email: email,
-        phone: phone,
+    final response = await AuthApi.register(
+      firstName: _firstNameController.text,
+      lastName: _lastNameController.text,
+      email: email,
+      phone: phone,
       password: password,
     );
-      setState(() => _loading = false);
-      if (!mounted) return;
-      if (response['ok'] == true) {
-        await AuthStore.clear();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Account created. Please sign in.')),
-        );
-        Navigator.pushReplacementNamed(context, AppRoutes.login);
-      } else {
-        setState(() => _submitError = _registerErrorMessage(response));
-      }
+    setState(() => _loading = false);
+    if (!mounted) return;
+    if (response['ok'] == true) {
+      await PushService.instance.initialize();
+      Navigator.pushReplacementNamed(context, AppRoutes.rideServices);
+    } else {
+      setState(() => _submitError = _registerErrorMessage(response));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAFA);
+    const surface = Color(0xFFFFFFFF);
     const surfaceLowest = Color(0xFFFFFFFF);
     const surfaceContainerLow = Color(0xFFF2F4F6);
     const outline = Color(0xFF6E7A71);
@@ -2329,7 +2072,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               decoration: BoxDecoration(
                 color: primary.withOpacity(0.05),
                 shape: BoxShape.circle,
-                boxShadow: [BoxShadow(color: primary.withOpacity(0.05), blurRadius: 120, spreadRadius: 40)],
+                boxShadow: [
+                  BoxShadow(
+                      color: primary.withOpacity(0.05),
+                      blurRadius: 120,
+                      spreadRadius: 40)
+                ],
               ),
             ),
           ),
@@ -2342,7 +2090,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               decoration: BoxDecoration(
                 color: const Color(0xFFDDE2F3).withOpacity(0.35),
                 shape: BoxShape.circle,
-                boxShadow: [BoxShadow(color: const Color(0xFFDDE2F3).withOpacity(0.4), blurRadius: 90, spreadRadius: 30)],
+                boxShadow: [
+                  BoxShadow(
+                      color: const Color(0xFFDDE2F3).withOpacity(0.4),
+                      blurRadius: 90,
+                      spreadRadius: 30)
+                ],
               ),
             ),
           ),
@@ -2361,7 +2114,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       const SizedBox(width: 8),
                       Text(
                         'I-Metro',
-                        style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: primary),
+                        style: GoogleFonts.manrope(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            color: primary),
                       ),
                     ],
                   ),
@@ -2381,16 +2137,25 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               children: [
                                 Text(
                                   'Join the',
-                                  style: GoogleFonts.manrope(fontSize: 34, fontWeight: FontWeight.w800, color: onSurface),
+                                  style: GoogleFonts.manrope(
+                                      fontSize: 34,
+                                      fontWeight: FontWeight.w800,
+                                      color: onSurface),
                                 ),
                                 RichText(
                                   text: TextSpan(
                                     text: 'Journey',
-                                    style: GoogleFonts.manrope(fontSize: 34, fontWeight: FontWeight.w800, color: primary),
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 34,
+                                        fontWeight: FontWeight.w800,
+                                        color: primary),
                                     children: [
                                       TextSpan(
                                         text: '.',
-                                        style: GoogleFonts.manrope(fontSize: 34, fontWeight: FontWeight.w800, color: onSurface),
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 34,
+                                            fontWeight: FontWeight.w800,
+                                            color: onSurface),
                                       ),
                                     ],
                                   ),
@@ -2398,7 +2163,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                 const SizedBox(height: 8),
                                 Text(
                                   'Create your profile to access clean-energy routes, smart ticketing, and reliable city mobility.',
-                                  style: GoogleFonts.inter(fontSize: 14, color: onSurfaceVariant, height: 1.5),
+                                  style: GoogleFonts.inter(
+                                      fontSize: 14,
+                                      color: onSurfaceVariant,
+                                      height: 1.5),
                                 ),
                               ],
                             ),
@@ -2409,12 +2177,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             decoration: BoxDecoration(
                               color: surfaceLowest,
                               borderRadius: BorderRadius.circular(24),
-                              border: Border.all(color: outlineVariant.withOpacity(0.2)),
-                              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 30, offset: const Offset(0, -8))],
+                              border: Border.all(
+                                  color: outlineVariant.withOpacity(0.2)),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black.withOpacity(0.02),
+                                    blurRadius: 30,
+                                    offset: const Offset(0, -8))
+                              ],
                             ),
                             child: Form(
                               key: _formKey,
-                              autovalidateMode: _autoValidate ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
+                              autovalidateMode: _autoValidate
+                                  ? AutovalidateMode.onUserInteraction
+                                  : AutovalidateMode.disabled,
                               child: Column(
                                 children: [
                                   Row(
@@ -2425,10 +2201,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                           hint: 'Jane',
                                           controller: _firstNameController,
                                           onChanged: (_) => _clearSubmitError(),
-                                          textCapitalization: TextCapitalization.words,
+                                          textCapitalization:
+                                              TextCapitalization.words,
                                           enabled: !_loading,
                                           textInputAction: TextInputAction.next,
-                                          autofillHints: const [AutofillHints.givenName],
+                                          autofillHints: const [
+                                            AutofillHints.givenName
+                                          ],
                                           validator: (value) {
                                             if ((value ?? '').trim().isEmpty) {
                                               return 'Enter your first name.';
@@ -2444,10 +2223,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                           hint: 'Doe',
                                           controller: _lastNameController,
                                           onChanged: (_) => _clearSubmitError(),
-                                          textCapitalization: TextCapitalization.words,
+                                          textCapitalization:
+                                              TextCapitalization.words,
                                           enabled: !_loading,
                                           textInputAction: TextInputAction.next,
-                                          autofillHints: const [AutofillHints.familyName],
+                                          autofillHints: const [
+                                            AutofillHints.familyName
+                                          ],
                                           validator: (value) {
                                             if ((value ?? '').trim().isEmpty) {
                                               return 'Enter your last name.';
@@ -2468,10 +2250,15 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                     enabled: !_loading,
                                     keyboardType: TextInputType.phone,
                                     textInputAction: TextInputAction.next,
-                                    autofillHints: const [AutofillHints.telephoneNumber],
+                                    autofillHints: const [
+                                      AutofillHints.telephoneNumber
+                                    ],
                                     validator: (value) {
                                       final input = (value ?? '').trim();
-                                      if (input.isEmpty && _emailController.text.trim().isEmpty) {
+                                      if (input.isEmpty &&
+                                          _emailController.text
+                                              .trim()
+                                              .isEmpty) {
                                         return 'Provide a phone number or email.';
                                       }
                                       if (input.isEmpty) {
@@ -2496,13 +2283,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                     autofillHints: const [AutofillHints.email],
                                     validator: (value) {
                                       final input = (value ?? '').trim();
-                                      if (input.isEmpty && _phoneController.text.trim().isEmpty) {
+                                      if (input.isEmpty &&
+                                          _phoneController.text
+                                              .trim()
+                                              .isEmpty) {
                                         return 'Provide an email or phone number.';
                                       }
                                       if (input.isEmpty) {
                                         return null;
                                       }
-                                      final emailOk = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(input);
+                                      final emailOk = RegExp(
+                                              r'^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+                                          .hasMatch(input);
                                       if (!emailOk) {
                                         return 'Enter a valid email address.';
                                       }
@@ -2513,7 +2305,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   _CreateAccountPasswordField(
                                     controller: _passwordController,
                                     obscure: _obscure,
-                                    onToggle: () => setState(() => _obscure = !_obscure),
+                                    onToggle: () =>
+                                        setState(() => _obscure = !_obscure),
                                     onChanged: (_) => _clearSubmitError(),
                                     enabled: !_loading,
                                     validator: (value) {
@@ -2530,7 +2323,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   ),
                                   const SizedBox(height: 16),
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Checkbox(
                                         value: _agreed,
@@ -2541,30 +2335,206 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                           }
                                         }),
                                         activeColor: primary,
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6)),
                                       ),
                                       const SizedBox(width: 4),
                                       Expanded(
                                         child: Text.rich(
                                           TextSpan(
-                                            text: "By creating an account, I agree to I-Metro's ",
-                                            style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.4),
+                                            text:
+                                                "By creating an account, I agree to I-Metro's ",
+                                            style: GoogleFonts.inter(
+                                                fontSize: 11,
+                                                color: onSurfaceVariant,
+                                                height: 1.4),
                                             children: [
                                               TextSpan(
                                                 text: 'Terms of Service',
-                                                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: primary),
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = _showTermsSheet,
+                                                style: GoogleFonts.inter(
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: primary),
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () =>
+                                                          _showLegalDocumentDialog(
+                                                            context: context,
+                                                            title:
+                                                                'Terms of Service',
+                                                            subtitle:
+                                                                'Please read these terms carefully before booking rides or using I-Metro services.',
+                                                            badge:
+                                                                'Legal Agreement',
+                                                            variant:
+                                                                _LegalDocumentVariant
+                                                                    .terms,
+                                                            sections: const [
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Acceptance of Terms',
+                                                                body:
+                                                                    'By creating an account, booking a ticket, or using I-Metro, you agree to follow these terms and any service rules shown inside the app.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'User Accounts',
+                                                                body:
+                                                                    'You are responsible for keeping your login details accurate and secure. Account activity made through your credentials may be treated as your activity.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Ticket Booking & Payments',
+                                                                body:
+                                                                    'Tickets are confirmed only after payment is successfully processed. Pending or failed payments do not guarantee a seat, fare, or completed booking.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Passenger Responsibilities',
+                                                                body:
+                                                                    'Passengers must arrive on time, carry valid ticket details, follow driver and staff instructions, and avoid conduct that affects safety or comfort.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Route Availability',
+                                                                body:
+                                                                    'Routes, schedules, buses, fares, and service availability may change because of traffic, safety, weather, operational needs, or regulatory direction.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Refund & Cancellation Policy',
+                                                                body:
+                                                                    'Refunds and cancellations may depend on payment confirmation, trip status, route rules, and operational review. Approved refunds are returned through supported payment channels.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Prohibited Activities',
+                                                                body:
+                                                                    'Do not misuse the app, submit false information, interfere with systems, harass staff or passengers, resell tickets, or use I-Metro for unlawful activity.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Limitation of Liability',
+                                                                body:
+                                                                    'I-Metro works to provide reliable transport, but is not liable for indirect losses caused by delays, disruptions, third-party services, or events outside reasonable control.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Account Suspension',
+                                                                body:
+                                                                    'We may suspend or restrict accounts that appear fraudulent, unsafe, abusive, unpaid, or in breach of these terms.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Intellectual Property',
+                                                                body:
+                                                                    'The I-Metro name, brand assets, interface, content, and service design belong to I-Metro or its licensors and may not be copied without permission.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Changes to Terms',
+                                                                body:
+                                                                    'We may update these terms as our services grow. Continued use of I-Metro after updates means you accept the revised terms.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Contact Information',
+                                                                body:
+                                                                    'For questions about these terms, contact I-Metro support through the app or call +234 912 806 6666.',
+                                                              ),
+                                                            ],
+                                                          ),
                                               ),
                                               TextSpan(
                                                 text: ' and ',
-                                                style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant),
+                                                style: GoogleFonts.inter(
+                                                    fontSize: 11,
+                                                    color: onSurfaceVariant),
                                               ),
                                               TextSpan(
                                                 text: 'Privacy Policy',
-                                                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: primary),
-                                                recognizer: TapGestureRecognizer()
-                                                  ..onTap = _showPrivacySheet,
+                                                style: GoogleFonts.inter(
+                                                    fontSize: 11,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: primary),
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () =>
+                                                          _showLegalDocumentDialog(
+                                                            context: context,
+                                                            title:
+                                                                'Privacy Policy',
+                                                            subtitle:
+                                                                'Learn how I-Metro collects, protects, and uses data to deliver safer, smarter bus travel.',
+                                                            badge:
+                                                                'Data Protection',
+                                                            variant:
+                                                                _LegalDocumentVariant
+                                                                    .privacy,
+                                                            sections: const [
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Information We Collect',
+                                                                body:
+                                                                    'We may collect account details, contact information, booking history, support messages, and other information you provide while using I-Metro.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'How We Use Data',
+                                                                body:
+                                                                    'We use data to create accounts, process bookings, confirm payments, send service updates, improve routes, support passengers, and protect the platform.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'GPS/Location Services',
+                                                                body:
+                                                                    'Location data may be used to support pickup and destination features, route planning, real-time service information, safety, and operational monitoring.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Payment Information',
+                                                                body:
+                                                                    'Payment processing is handled through approved payment partners. I-Metro may store payment references and status, but does not store full card details in the app.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Device Information',
+                                                                body:
+                                                                    'We may collect device type, app version, network status, push notification identifiers, and diagnostic information to improve reliability and security.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Security & Data Protection',
+                                                                body:
+                                                                    'We use reasonable safeguards to protect user data, limit access, and reduce unauthorized use, loss, or misuse of personal information.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Third-Party Services',
+                                                                body:
+                                                                    'I-Metro may use trusted providers for authentication, payments, notifications, analytics, hosting, and customer support. These providers process data only as needed for service delivery.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Cookies & Analytics',
+                                                                body:
+                                                                    'Web versions of I-Metro may use cookies, local storage, or analytics tools to keep sessions working, understand performance, and improve the product.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'User Rights',
+                                                                body:
+                                                                    'You may request access, correction, or deletion of your personal information, subject to legal, safety, payment, and operational record requirements.',
+                                                              ),
+                                                              _LegalSectionData(
+                                                                title:
+                                                                    'Contact Information',
+                                                                body:
+                                                                    'For privacy questions or data requests, contact I-Metro support through the app or call +234 912 806 6666.',
+                                                              ),
+                                                            ],
+                                                          ),
                                               ),
                                               const TextSpan(text: '.'),
                                             ],
@@ -2575,30 +2545,41 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   ),
                                   if (_autoValidate && !_agreed)
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 8, top: 6),
+                                      padding: const EdgeInsets.only(
+                                          left: 8, top: 6),
                                       child: Text(
                                         'Accept the terms to continue.',
-                                        style: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
+                                        style: GoogleFonts.inter(
+                                            fontSize: 11,
+                                            color: Colors.redAccent),
                                       ),
                                     ),
                                   const SizedBox(height: 20),
                                   if (_submitError != null)
                                     Padding(
-                                      padding: const EdgeInsets.only(bottom: 12),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 12),
                                       child: Container(
-                                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 12),
                                         decoration: BoxDecoration(
                                           color: const Color(0xFFFFE8E6),
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
                                         ),
                                         child: Row(
                                           children: [
-                                            const Icon(Icons.error_outline, color: Colors.redAccent, size: 18),
+                                            const Icon(Icons.error_outline,
+                                                color: Colors.redAccent,
+                                                size: 18),
                                             const SizedBox(width: 8),
                                             Expanded(
                                               child: Text(
                                                 _submitError!,
-                                                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.redAccent),
+                                                style: GoogleFonts.inter(
+                                                    fontSize: 12,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.redAccent),
                                               ),
                                             ),
                                           ],
@@ -2606,29 +2587,44 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                       ),
                                     ),
                                   ElevatedButton(
-                                    onPressed: _loading ? null : _handleRegister,
+                                    onPressed:
+                                        _loading ? null : _handleRegister,
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: primary,
-                                      padding: const EdgeInsets.symmetric(vertical: 16),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(24)),
                                       elevation: 0,
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         if (_loading)
                                           const SizedBox(
                                             width: 16,
                                             height: 16,
-                                            child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.white)),
                                           ),
                                         if (_loading) const SizedBox(width: 8),
                                         Text(
-                                          _loading ? 'Creating...' : 'Create Account',
-                                          style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+                                          _loading
+                                              ? 'Creating...'
+                                              : 'Create Account',
+                                          style: GoogleFonts.manrope(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.white),
                                         ),
                                         const SizedBox(width: 8),
-                                        const Icon(Icons.chevron_right, color: Colors.white),
+                                        const Icon(Icons.chevron_right,
+                                            color: Colors.white),
                                       ],
                                     ),
                                   ),
@@ -2641,13 +2637,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             child: Text.rich(
                               TextSpan(
                                 text: 'Already have an account? ',
-                                style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant),
+                                style: GoogleFonts.inter(
+                                    fontSize: 13, color: onSurfaceVariant),
                                 children: [
                                   TextSpan(
                                     text: 'Login',
-                                    style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w700, color: primary, decoration: TextDecoration.underline),
+                                    style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary,
+                                        decoration: TextDecoration.underline),
                                     recognizer: TapGestureRecognizer()
-                                      ..onTap = () => Navigator.pushReplacementNamed(context, AppRoutes.login),
+                                      ..onTap = () =>
+                                          Navigator.pushReplacementNamed(
+                                              context, AppRoutes.login),
                                   ),
                                 ],
                               ),
@@ -2703,13 +2706,18 @@ class _CreateAccountField extends StatelessWidget {
     const outline = Color(0xFF6E7A71);
     const outlineVariant = Color(0xFFBDCAC0);
     const primary = Color(0xFF006B47);
+    const kineticEnd = Color(0xFF009B67);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label.toUpperCase(),
-          style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1.1, color: onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.1,
+              color: onSurfaceVariant),
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -2725,16 +2733,23 @@ class _CreateAccountField extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: surfaceContainerLow,
-            prefixIcon: icon == null ? null : Icon(icon, color: outlineVariant.withOpacity(0.6)),
+            prefixIcon: icon == null
+                ? null
+                : Icon(icon, color: outlineVariant.withOpacity(0.6)),
             hintText: hint,
-            hintStyle: GoogleFonts.inter(fontSize: 13, color: outline.withOpacity(0.4)),
-            contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+            hintStyle: GoogleFonts.inter(
+                fontSize: 13, color: outline.withOpacity(0.4)),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(color: primary.withOpacity(0.2), width: 2),
             ),
-            errorStyle: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
+            errorStyle:
+                GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
           ),
         ),
       ],
@@ -2774,7 +2789,11 @@ class _CreateAccountPasswordField extends StatelessWidget {
       children: [
         Text(
           'PASSWORD',
-          style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1.1, color: onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.1,
+              color: onSurfaceVariant),
         ),
         const SizedBox(height: 8),
         TextFormField(
@@ -2789,26 +2808,35 @@ class _CreateAccountPasswordField extends StatelessWidget {
           decoration: InputDecoration(
             filled: true,
             fillColor: surfaceContainerLow,
-            prefixIcon: Icon(Icons.lock, color: outlineVariant.withOpacity(0.6)),
-            hintText: '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022',
-            hintStyle: GoogleFonts.inter(fontSize: 13, color: outline.withOpacity(0.4)),
-            contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+            prefixIcon:
+                Icon(Icons.lock, color: outlineVariant.withOpacity(0.6)),
+            hintText:
+                '\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022',
+            hintStyle: GoogleFonts.inter(
+                fontSize: 13, color: outline.withOpacity(0.4)),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(color: primary.withOpacity(0.2), width: 2),
             ),
             suffixIcon: IconButton(
               onPressed: onToggle,
-              icon: Icon(obscure ? Icons.visibility : Icons.visibility_off, color: outline.withOpacity(0.6)),
+              icon: Icon(obscure ? Icons.visibility : Icons.visibility_off,
+                  color: outline.withOpacity(0.6)),
             ),
-            errorStyle: GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
+            errorStyle:
+                GoogleFonts.inter(fontSize: 11, color: Colors.redAccent),
           ),
         ),
       ],
     );
   }
 }
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -2836,10 +2864,13 @@ class _HomeScreenState extends State<HomeScreen> {
         _retryHomeData();
       }
     });
-    _ticketRefreshSub = PushService.instance.ticketRefreshStream.listen((event) {
+    _ticketRefreshSub =
+        PushService.instance.ticketRefreshStream.listen((event) {
       if (!mounted) return;
       if (!AuthStore.isLoggedIn) return;
-      if (event.type == 'ticket_ready' || event.type == 'payment_confirmed' || event.type == 'booking_updated') {
+      if (event.type == 'ticket_ready' ||
+          event.type == 'payment_confirmed' ||
+          event.type == 'booking_updated') {
         _loadRecentBookings();
       }
     });
@@ -2887,8 +2918,10 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       final bookings = await UserApi.listBookingsForUser(AuthStore.userId!);
       bookings.sort((a, b) {
-        final aDate = DateTime.tryParse(a['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
-        final bDate = DateTime.tryParse(b['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+        final aDate = DateTime.tryParse(a['createdAt']?.toString() ?? '') ??
+            DateTime.fromMillisecondsSinceEpoch(0);
+        final bDate = DateTime.tryParse(b['createdAt']?.toString() ?? '') ??
+            DateTime.fromMillisecondsSinceEpoch(0);
         return bDate.compareTo(aDate);
       });
       if (!mounted) return;
@@ -2970,11 +3003,14 @@ class _HomeScreenState extends State<HomeScreen> {
     if (phone != null && phone.isNotEmpty) {
       return phone;
     }
-    return AuthStore.isLoggedIn ? 'I-Metro rider' : 'Sign in to personalize your trips';
+    return AuthStore.isLoggedIn
+        ? 'I-Metro rider'
+        : 'Sign in to personalize your trips';
   }
 
   String _avatarInitials() {
-    final parts = _fullName().split(' ').where((part) => part.isNotEmpty).toList();
+    final parts =
+        _fullName().split(' ').where((part) => part.isNotEmpty).toList();
     if (parts.length >= 2) {
       return '${parts.first[0]}${parts[1][0]}'.toUpperCase();
     }
@@ -2991,9 +3027,6 @@ class _HomeScreenState extends State<HomeScreen> {
   ImageProvider? _avatarImageProvider() {
     final data = AuthStore.avatarUrl;
     if (data == null || data.trim().isEmpty) {
-      return null;
-    }
-    if (AuthStore.isPlaceholderAvatar(data)) {
       return null;
     }
     if (data.startsWith('http')) {
@@ -3026,14 +3059,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String _recentSubtitleDisplay(Map<String, dynamic> booking) {
+    final status = booking['status']?.toString() ?? 'Pending';
     final createdAt = booking['createdAt']?.toString();
     if (createdAt != null && createdAt.contains('T')) {
       final parts = createdAt.split('T');
       final time = parts[1].split('.').first;
       final shortTime = time.length >= 5 ? time.substring(0, 5) : time;
-      return '${parts[0]} • $shortTime';
+      return '${parts[0]} - $shortTime - $status';
     }
-    return 'Recent trip';
+    return status;
   }
 
   Map<String, dynamic>? _featuredRoute() {
@@ -3062,21 +3096,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF5FAF8);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const surfaceContainerHighest = Color(0xFFE0E3E5);
+    const surfaceContainerLow = Color(0xFFF3F7F5);
+    const surfaceContainerHighest = Color(0xFFE3ECE7);
     const outlineVariant = Color(0xFFBDCAC0);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
     const primaryContainer = Color(0xFF00875A);
-    const secondaryContainer = Color(0xFFDDE2F3);
-    const tertiaryFixed = Color(0xFFFFDAD7);
+    const secondaryContainer = Color(0xFFE8F5EE);
+    const tertiaryFixed = Color(0xFFF8F2E1);
     final greetingName = _displayName();
     final featuredRoute = _featuredRoute();
-    final featuredFrom = featuredRoute?['fromLocation']?.toString() ?? 'Choose a route';
-    final featuredTo = featuredRoute?['toLocation']?.toString() ?? 'Book your next trip';
+    final featuredFrom =
+        featuredRoute?['fromLocation']?.toString() ?? 'Choose a route';
+    final featuredTo =
+        featuredRoute?['toLocation']?.toString() ?? 'Book your next trip';
     final featuredCurrency = featuredRoute?['currency']?.toString() ?? 'NGN';
     final featuredPrice = featuredRoute?['price']?.toString() ?? '-';
     final recentTripsCount = _recentBookings.length;
@@ -3092,75 +3128,182 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: background,
       body: Stack(
         children: [
+          Positioned(
+            top: -120,
+            right: -90,
+            child: IgnorePointer(
+              child: Container(
+                width: 260,
+                height: 260,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      primary.withOpacity(0.12),
+                      primary.withOpacity(0.02),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: -80,
+            top: 210,
+            child: IgnorePointer(
+              child: Container(
+                width: 180,
+                height: 180,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      const Color(0xFFBCE6D2).withOpacity(0.18),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
           Column(
             children: [
               SizedBox(
-                height: 64,
+                height: 78,
                 child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                        color: background.withOpacity(0.82),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.035),
+                            blurRadius: 18,
+                            offset: const Offset(0, 6),
+                          )
+                        ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
-                            IconButton(
-                              onPressed: () => Navigator.pushNamed(context, AppRoutes.hamburgerMenu),
-                              icon: const Icon(Icons.menu, color: primary),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: surfaceLowest.withOpacity(0.86),
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(
+                                  color: outlineVariant.withOpacity(0.12),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.04),
+                                    blurRadius: 10,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: IconButton(
+                                onPressed: () => Navigator.pushNamed(
+                                    context, AppRoutes.hamburgerMenu),
+                                icon: const Icon(Icons.menu_rounded,
+                                    color: primary, size: 20),
+                                padding: EdgeInsets.zero,
+                              ),
                             ),
-                            _brandLogo(size: 28, radius: 8),
-                            const SizedBox(width: 8),
-                            Text('I-Metro', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: primary)),
+                            const SizedBox(width: 10),
+                            _brandLogo(size: 28, radius: 9),
+                            const SizedBox(width: 10),
+                            Text(
+                              'I-Metro',
+                              style: GoogleFonts.manrope(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w700,
+                                color: primary,
+                                letterSpacing: -0.3,
+                              ),
+                            ),
                             const Spacer(),
                             if (_loadingProfile)
                               SizedBox(
                                 width: 18,
                                 height: 18,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: primary.withOpacity(0.6)),
+                                child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: primary.withOpacity(0.6)),
                               )
                             else
-                              IconButton(
-                                onPressed: () => Navigator.pushNamed(context, AppRoutes.notifications),
-                                icon: Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    const Icon(Icons.notifications, color: Color(0xFF9CA3AF)),
-                                    if (hasAlerts)
-                                      const Positioned(
-                                        right: -1,
-                                        top: -1,
-                                        child: CircleAvatar(
-                                          radius: 4,
-                                          backgroundColor: Color(0xFFEF4444),
+                              Container(
+                                width: 38,
+                                height: 38,
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                      color: outlineVariant.withOpacity(0.12)),
+                                ),
+                                child: IconButton(
+                                  onPressed: () => Navigator.pushNamed(
+                                      context, AppRoutes.notifications),
+                                  padding: EdgeInsets.zero,
+                                  icon: Stack(
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      const Icon(
+                                          Icons.notifications_none_rounded,
+                                          color: Color(0xFF7E8A84),
+                                          size: 20),
+                                      if (hasAlerts)
+                                        const Positioned(
+                                          right: 1,
+                                          top: 1,
+                                          child: CircleAvatar(
+                                            radius: 3.5,
+                                            backgroundColor: Color(0xFFEF4444),
+                                          ),
                                         ),
-                                      ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
-                            const SizedBox(width: 12),
-                            GestureDetector(
-                              onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                            const SizedBox(width: 10),
+                            InkWell(
+                              borderRadius: BorderRadius.circular(22),
+                              onTap: () => Navigator.pushNamed(
+                                  context, AppRoutes.profile),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 7),
                                 decoration: BoxDecoration(
-                                  color: surfaceLowest,
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: outlineVariant.withOpacity(0.2)),
+                                  color: surfaceLowest.withOpacity(0.9),
+                                  borderRadius: BorderRadius.circular(22),
+                                  border: Border.all(
+                                      color: outlineVariant.withOpacity(0.12)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.035),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
                                 ),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     ConstrainedBox(
-                                      constraints: const BoxConstraints(maxWidth: 92),
+                                      constraints:
+                                          const BoxConstraints(maxWidth: 92),
                                       child: Text(
                                         fullName,
                                         overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: onSurface),
+                                        style: GoogleFonts.inter(
+                                            fontSize: 11.5,
+                                            fontWeight: FontWeight.w600,
+                                            color: onSurface),
                                       ),
                                     ),
                                     const SizedBox(width: 8),
@@ -3168,7 +3311,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: 28,
                                       height: 28,
                                       decoration: BoxDecoration(
-                                        gradient: const LinearGradient(colors: [primary, primaryContainer]),
+                                        gradient: const LinearGradient(colors: [
+                                          primary,
+                                          primaryContainer
+                                        ]),
                                         borderRadius: BorderRadius.circular(14),
                                       ),
                                       alignment: Alignment.center,
@@ -3177,7 +3323,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: avatarProvider == null
                                             ? Text(
                                                 avatarInitials,
-                                                style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.white),
+                                                style: GoogleFonts.inter(
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: Colors.white),
                                               )
                                             : Image(
                                                 image: avatarProvider,
@@ -3199,319 +3348,526 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Expanded(
-                child: (!ConnectivityService.instance.isOnline && AuthStore.isLoggedIn)
+                child: (!ConnectivityService.instance.isOnline &&
+                        AuthStore.isLoggedIn)
                     ? OfflineFullScreen(
                         onRetry: _retryHomeData,
                         title: 'Offline profile',
-                        body: 'Reconnect to load your latest profile and stats.',
+                        body:
+                            'Reconnect to load your latest profile and stats.',
                       )
                     : SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 120),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Hello, $greetingName!',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        AuthStore.isLoggedIn ? profileDescriptor : 'Sign in to sync your routes, tickets, and profile.',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant),
-                      ),
-                      const SizedBox(height: 12),
-                      OfflineBanner(onRetry: _retryHomeData),
-                      const SizedBox(height: 20),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: _HomeQuickAction(
-                                  height: 166,
-                                  title: 'Book Ride',
-                                  icon: Icons.directions_bus_filled_rounded,
-                                  background: const LinearGradient(colors: [primary, primaryContainer]),
-                                  onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
-                                  iconFilled: true,
-                                  textColor: Colors.white,
-                                  shadow: true,
-                                  primaryAction: true,
-                                ),
-                              ),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                flex: 2,
-                                child: _HomeQuickAction(
-                                  height: 166,
-                                  title: 'Scan Ticket',
-                                  icon: Icons.qr_code_scanner_rounded,
-                                  background: LinearGradient(colors: [surfaceLowest, surfaceLowest]),
-                                  onTap: _openLatestTicket,
-                                  iconColor: primary,
-                                  textColor: onSurface,
-                                  border: Border.all(color: outlineVariant.withOpacity(0.14)),
-                                  shadow: true,
-                                  compact: true,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 14),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: _HomeQuickAction(
-                                  height: 116,
-                                  title: 'History',
-                                  icon: Icons.history_rounded,
-                                  background: LinearGradient(colors: [surfaceContainerLow, surfaceContainerLow]),
-                                  onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
-                                  iconColor: onSurfaceVariant,
-                                  textColor: onSurface,
-                                  compact: true,
-                                  border: Border.all(color: outlineVariant.withOpacity(0.10)),
-                                ),
-                              ),
-                              const SizedBox(width: 14),
-                              Expanded(
-                                child: _HomeQuickAction(
-                                  height: 116,
-                                  title: 'Profile',
-                                  icon: Icons.person_rounded,
-                                  background: LinearGradient(colors: [surfaceContainerLow, surfaceContainerLow]),
-                                  onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
-                                  iconColor: onSurfaceVariant,
-                                  textColor: onSurface,
-                                  compact: true,
-                                  border: Border.all(color: outlineVariant.withOpacity(0.10)),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 24),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [primary, primaryContainer],
-                          ),
-                          borderRadius: BorderRadius.circular(24),
-                          boxShadow: [BoxShadow(color: primary.withOpacity(0.28), blurRadius: 20, offset: const Offset(0, 10))],
-                        ),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              top: -20,
-                              right: -10,
-                              child: Icon(Icons.route_rounded, size: 120, color: Colors.white.withOpacity(0.1)),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                            Row(
-                              children: [
-                                Container(width: 7, height: 7, decoration: BoxDecoration(color: const Color(0xFF8DF7C1), borderRadius: BorderRadius.circular(4))),
-                                const SizedBox(width: 8),
-                                Text(
-                                  _loadingRoutes ? 'SYNCING ROUTES' : 'FEATURED ROUTE',
-                                  style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.5, color: Colors.white.withOpacity(0.78)),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Text(
-                              '$featuredFrom -> $featuredTo',
-                              style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white),
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              _loadingRoutes
-                                  ? 'Refreshing active routes from the backend'
-                                  : activeRoutesCount == 0
-                                      ? 'No active routes yet. Check back after routes are published.'
-                                      : '$featuredCurrency $featuredPrice fare - $activeRoutesCount active route${activeRoutesCount == 1 ? '' : 's'} available',
-                              style: GoogleFonts.inter(fontSize: 12, height: 1.45, color: Colors.white.withOpacity(0.86)),
-                            ),
-                            const SizedBox(height: 14),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: _HomeSnapshotStat(
-                                    label: 'Recent Trips',
-                                        value: recentTripsCount.toString(),
-                                      ),
-                                    ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: _HomeSnapshotStat(
-                                    label: 'Latest Stop',
-                                    value: latestDestination,
-                                    compactValue: true,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(height: 14),
-                            ElevatedButton.icon(
-                              onPressed: _openFeaturedRoute,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white,
-                                foregroundColor: primary,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-                              ),
-                              icon: const Icon(Icons.directions_bus_filled_outlined, size: 18),
-                              label: Text('Book this ride', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800)),
-                            ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('Recently Traveled', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800)),
-                          Row(
-                            children: [
-                              if (_loadingRecent)
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8),
-                                  child: SizedBox(
-                                    width: 16,
-                                    height: 16,
-                                    child: CircularProgressIndicator(strokeWidth: 2, color: primary.withOpacity(0.7)),
-                                  ),
-                                ),
-                              TextButton(
-                                onPressed: () => Navigator.pushNamed(context, AppRoutes.completedRides),
-                                child: Text('See All', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600, color: primary)),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8),
-                      if (_recentBookings.isEmpty)
-                        _EmptyStateCard(
-                          icon: Icons.train_outlined,
-                          title: 'No trips yet',
-                          body: 'Your completed rides and reusable ticket entries will appear here.',
-                          actionLabel: 'Book a ride',
-                          onAction: _openFeaturedRoute,
-                        )
-                      else
-                        ..._recentBookings.asMap().entries.map((entry) {
-                          final booking = entry.value;
-                          final route = (booking['route'] as Map?) ?? {};
-                          final payment = (booking['payment'] as Map?) ?? {};
-                          final colorPack = (
-                            bg: const Color(0xFFEAF4EF),
-                            fg: const Color(0xFF006B47),
-                            icon: Icons.directions_bus_filled_rounded,
-                          );
-                          final from = route['fromLocation']?.toString() ?? 'Route';
-                          final to = route['toLocation']?.toString() ?? 'Destination';
-                          final currency = payment['currency']?.toString() ?? route['currency']?.toString() ?? 'NGN';
-                          final amount = payment['amount'] ?? route['price'] ?? '-';
-                          final status = (booking['status']?.toString() ?? 'PENDING').toUpperCase();
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: entry.key == _recentBookings.length - 1 ? 0 : 12),
-                            child: _RecentRouteCard(
-                              title: '$from → $to',
-                              subtitle: _recentSubtitleDisplay(booking),
-                              price: '$currency $amount',
-                              status: status,
-                              icon: colorPack.icon,
-                              iconBackground: colorPack.bg,
-                              iconColor: colorPack.fg,
-                              onTap: () => Navigator.pushNamed(
-                                context,
-                                AppRoutes.ticketDetails,
-                                arguments: {'bookingId': booking['id']?.toString()},
-                              ),
-                            ),
-                          );
-                        }),
-                      const SizedBox(height: 22),
-                      Container(
-                        padding: const EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                          color: surfaceLowest,
-                          borderRadius: BorderRadius.circular(24),
-                          border: Border.all(color: outlineVariant.withOpacity(0.12)),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 8))],
-                        ),
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 132),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              children: [
-                                Container(
-                                  width: 42,
-                                  height: 42,
-                                  decoration: BoxDecoration(
-                                    color: primary.withOpacity(0.1),
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  child: const Icon(Icons.insights_rounded, color: primary),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
+                            Text(
+                              'Hello, $greetingName!',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.manrope(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.04,
+                                  letterSpacing: -0.55,
+                                  color: onSurface),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              AuthStore.isLoggedIn
+                                  ? profileDescriptor
+                                  : 'Sign in to sync your routes, tickets, and profile.',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  height: 1.45,
+                                  color: onSurfaceVariant.withOpacity(0.82)),
+                            ),
+                            const SizedBox(height: 14),
+                            OfflineBanner(onRetry: _retryHomeData),
+                            const SizedBox(height: 22),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final totalWidth = constraints.maxWidth;
+                                final gap = totalWidth < 360 ? 12.0 : 16.0;
+                                final topHeroWidth = (totalWidth - gap) * 0.6;
+                                final topSideWidth =
+                                    totalWidth - gap - topHeroWidth;
+                                final topRowHeight = topSideWidth * 0.98;
+                                final bottomRowHeight =
+                                    totalWidth < 360 ? 96.0 : 104.0;
+                                final actionHeight =
+                                    topRowHeight + gap + bottomRowHeight;
+
+                                return SizedBox(
+                                  height: actionHeight,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('Transit Snapshot', style: GoogleFonts.manrope(fontSize: 17.5, fontWeight: FontWeight.w800, color: onSurface)),
-                                      const SizedBox(height: 4),
-                                      Text('Live overview based on your routes and booking history.', style: GoogleFonts.inter(fontSize: 12, height: 1.35, color: onSurfaceVariant)),
+                                      SizedBox(
+                                        height: topRowHeight,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            SizedBox(
+                                              width: topHeroWidth,
+                                              child: _HomeQuickAction(
+                                                title: 'Book Ride',
+                                                icon: Icons
+                                                    .directions_bus_rounded,
+                                                background:
+                                                    const LinearGradient(
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                  colors: [
+                                                    Color(0xFF005E3F),
+                                                    primary,
+                                                    primaryContainer,
+                                                  ],
+                                                  stops: [0.0, 0.48, 1.0],
+                                                ),
+                                                onTap: () =>
+                                                    Navigator.pushNamed(context,
+                                                        AppRoutes.booking),
+                                                iconFilled: true,
+                                                textColor: Colors.white,
+                                                shadow: true,
+                                                hero: true,
+                                                expand: true,
+                                              ),
+                                            ),
+                                            SizedBox(width: gap),
+                                            Expanded(
+                                              child: _HomeQuickAction(
+                                                title: 'Scan Ticket',
+                                                icon: Icons
+                                                    .qr_code_scanner_rounded,
+                                                background:
+                                                    const LinearGradient(
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                  colors: [
+                                                    surfaceLowest,
+                                                    Color(0xFFF8FCFA),
+                                                  ],
+                                                ),
+                                                onTap: _openLatestTicket,
+                                                iconColor: primary,
+                                                textColor: onSurface,
+                                                border: Border.all(
+                                                    color: outlineVariant
+                                                        .withOpacity(0.09)),
+                                                shadow: true,
+                                                expand: true,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(height: gap),
+                                      SizedBox(
+                                        height: bottomRowHeight,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Expanded(
+                                              child: _HomeQuickAction(
+                                                title: 'History',
+                                                icon: Icons.history_rounded,
+                                                background:
+                                                    const LinearGradient(
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                  colors: [
+                                                    Color(0xFFF1F3F2),
+                                                    Color(0xFFF7F8F8),
+                                                  ],
+                                                ),
+                                                onTap: () =>
+                                                    Navigator.pushNamed(
+                                                        context,
+                                                        AppRoutes
+                                                            .completedRides),
+                                                iconColor: onSurfaceVariant
+                                                    .withOpacity(0.6),
+                                                textColor:
+                                                    onSurface.withOpacity(0.76),
+                                                compact: true,
+                                                muted: true,
+                                                expand: true,
+                                              ),
+                                            ),
+                                            SizedBox(width: gap),
+                                            Expanded(
+                                              child: _HomeQuickAction(
+                                                title: 'Profile',
+                                                icon: Icons.person_rounded,
+                                                background:
+                                                    const LinearGradient(
+                                                  begin: Alignment.topLeft,
+                                                  end: Alignment.bottomRight,
+                                                  colors: [
+                                                    Color(0xFFF1F3F2),
+                                                    Color(0xFFF7F8F8),
+                                                  ],
+                                                ),
+                                                onTap: () =>
+                                                    Navigator.pushNamed(context,
+                                                        AppRoutes.profile),
+                                                iconColor: onSurfaceVariant
+                                                    .withOpacity(0.6),
+                                                textColor:
+                                                    onSurface.withOpacity(0.76),
+                                                compact: true,
+                                                muted: true,
+                                                expand: true,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                ),
-                              ],
+                                );
+                              },
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 24),
+                            Container(
+                              padding: const EdgeInsets.all(22),
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    primary,
+                                    primaryContainer,
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primary.withOpacity(0.26),
+                                    blurRadius: 26,
+                                    spreadRadius: -4,
+                                    offset: const Offset(0, 16),
+                                  ),
+                                  BoxShadow(
+                                    color: const Color(0xFF8DF7C1)
+                                        .withOpacity(0.16),
+                                    blurRadius: 36,
+                                    spreadRadius: -10,
+                                    offset: const Offset(0, 18),
+                                  ),
+                                ],
+                              ),
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    top: -10,
+                                    right: -8,
+                                    child: Opacity(
+                                      opacity: 0.12,
+                                      child: Container(
+                                        width: 104,
+                                        height: 132,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(28),
+                                          border: Border.all(
+                                            color: Colors.white,
+                                            width: 8,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                              width: 8,
+                                              height: 8,
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xFF8DF7C1),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4))),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            _loadingRoutes
+                                                ? 'SYNCING ROUTES'
+                                                : 'FEATURED ROUTE',
+                                            style: GoogleFonts.inter(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w700,
+                                                letterSpacing: 1.6,
+                                                color: Colors.white
+                                                    .withOpacity(0.8)),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 12),
+                                      Text(
+                                        '$featuredFrom -> $featuredTo',
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.w700,
+                                            letterSpacing: -0.35,
+                                            color: Colors.white),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        _loadingRoutes
+                                            ? 'Refreshing active routes from the backend'
+                                            : activeRoutesCount == 0
+                                                ? 'No active routes yet. Check back after routes are published.'
+                                                : '$featuredCurrency $featuredPrice fare - $activeRoutesCount active route${activeRoutesCount == 1 ? '' : 's'} available',
+                                        style: GoogleFonts.inter(
+                                            fontSize: 12.5,
+                                            height: 1.5,
+                                            color:
+                                                Colors.white.withOpacity(0.86)),
+                                      ),
+                                      const SizedBox(height: 18),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: _HomeSnapshotStat(
+                                              label: 'Recent Trips',
+                                              value:
+                                                  recentTripsCount.toString(),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Expanded(
+                                            child: _HomeSnapshotStat(
+                                              label: 'Latest Stop',
+                                              value: latestDestination,
+                                              compactValue: true,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 16),
+                                      ElevatedButton.icon(
+                                        onPressed: _openFeaturedRoute,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          foregroundColor: primary,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(999)),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 18, vertical: 15),
+                                        ),
+                                        icon: const Icon(
+                                            Icons
+                                                .directions_bus_filled_outlined,
+                                            size: 18),
+                                        label: Text('Book this ride',
+                                            style: GoogleFonts.manrope(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w700)),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 24),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Expanded(
-                                  child: _HomeInfoTile(
-                                    label: 'Routes Online',
-                                    value: activeRoutesCount.toString(),
-                                    icon: Icons.alt_route_rounded,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Expanded(
-                                  child: _HomeInfoTile(
-                                    label: 'Recent Tickets',
-                                    value: recentTripsCount.toString(),
-                                    icon: Icons.confirmation_number_outlined,
-                                  ),
+                                Text('Recently Traveled',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: -0.25)),
+                                Row(
+                                  children: [
+                                    if (_loadingRecent)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8),
+                                        child: SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              color: primary.withOpacity(0.7)),
+                                        ),
+                                      ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pushNamed(
+                                          context, AppRoutes.completedRides),
+                                      child: Text('See All',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w600,
+                                              color: primary)),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 10),
-                            _HomeLatestDestinationCard(
-                              destination: latestDestination,
-                              hasTrips: _recentBookings.isNotEmpty,
+                            const SizedBox(height: 8),
+                            if (_recentBookings.isEmpty)
+                              _EmptyStateCard(
+                                icon: Icons.train_outlined,
+                                title: 'No trips yet',
+                                body:
+                                    'Your completed rides and reusable ticket entries will appear here.',
+                                actionLabel: 'Book a ride',
+                                onAction: _openFeaturedRoute,
+                              )
+                            else
+                              ..._recentBookings.asMap().entries.map((entry) {
+                                final booking = entry.value;
+                                final route = (booking['route'] as Map?) ?? {};
+                                final payment =
+                                    (booking['payment'] as Map?) ?? {};
+                                final colorPack = entry.key.isEven
+                                    ? (
+                                        bg: secondaryContainer,
+                                        fg: primary,
+                                        icon: Icons.directions_bus_rounded,
+                                      )
+                                    : (
+                                        bg: tertiaryFixed,
+                                        fg: primary,
+                                        icon: Icons.directions_bus_rounded,
+                                      );
+                                final from =
+                                    route['fromLocation']?.toString() ??
+                                        'Route';
+                                final to = route['toLocation']?.toString() ??
+                                    'Destination';
+                                final currency =
+                                    payment['currency']?.toString() ??
+                                        route['currency']?.toString() ??
+                                        'NGN';
+                                final amount =
+                                    payment['amount'] ?? route['price'] ?? '-';
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: entry.key ==
+                                              _recentBookings.length - 1
+                                          ? 0
+                                          : 12),
+                                  child: _RecentRouteCard(
+                                    title: '$from -> $to',
+                                    subtitle: _recentSubtitleDisplay(booking),
+                                    price: '$currency $amount',
+                                    icon: colorPack.icon,
+                                    iconBackground: colorPack.bg,
+                                    iconColor: colorPack.fg,
+                                    onTap: () => Navigator.pushNamed(
+                                      context,
+                                      AppRoutes.ticketDetails,
+                                      arguments: {
+                                        'bookingId': booking['id']?.toString()
+                                      },
+                                    ),
+                                  ),
+                                );
+                              }),
+                            const SizedBox(height: 24),
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest,
+                                borderRadius: BorderRadius.circular(28),
+                                border: Border.all(
+                                    color: outlineVariant.withOpacity(0.1)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.045),
+                                    blurRadius: 18,
+                                    spreadRadius: -2,
+                                    offset: const Offset(0, 10),
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 44,
+                                        height: 44,
+                                        decoration: BoxDecoration(
+                                          color: primary.withOpacity(0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(14),
+                                        ),
+                                        child: const Icon(
+                                            Icons.insights_rounded,
+                                            color: primary),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Transit Snapshot',
+                                                style: GoogleFonts.manrope(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: onSurface)),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                                'Live overview based on your routes and booking history.',
+                                                style: GoogleFonts.inter(
+                                                    fontSize: 12,
+                                                    height: 1.4,
+                                                    color: onSurfaceVariant)),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 18),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: _HomeInfoTile(
+                                          label: 'Routes Online',
+                                          value: activeRoutesCount.toString(),
+                                          icon: Icons.alt_route_rounded,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: _HomeInfoTile(
+                                          label: 'Recent Tickets',
+                                          value: recentTripsCount.toString(),
+                                          icon: Icons
+                                              .confirmation_number_outlined,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  _HomeLatestDestinationCard(
+                                    destination: latestDestination,
+                                    hasTrips: _recentBookings.isNotEmpty,
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
               ),
             ],
           ),
@@ -3521,13 +3877,24 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: 0,
             child: ClipRect(
               child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
                 child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                  margin: const EdgeInsets.fromLTRB(14, 0, 14, 14),
+                  padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
                   decoration: BoxDecoration(
-                    color: background.withOpacity(0.8),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8))],
+                    color: Colors.white.withOpacity(0.74),
+                    borderRadius: BorderRadius.circular(28),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.58),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 28,
+                        spreadRadius: -8,
+                        offset: const Offset(0, 10),
+                      )
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -3541,17 +3908,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       _BottomNavPill(
                         label: 'History',
                         icon: Icons.history,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
                       ),
                       _BottomNavPill(
                         label: 'Booking',
                         icon: Icons.confirmation_number,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                       ),
                       _BottomNavPill(
                         label: 'Profile',
                         icon: Icons.person,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                       ),
                     ],
                   ),
@@ -3567,21 +3937,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _HomeQuickAction extends StatelessWidget {
   const _HomeQuickAction({
-    required this.height,
     required this.title,
     required this.icon,
     required this.background,
     required this.onTap,
+    this.height,
     this.iconColor,
     this.textColor,
     this.border,
     this.shadow = false,
     this.compact = false,
     this.iconFilled = false,
-    this.primaryAction = false,
+    this.hero = false,
+    this.muted = false,
+    this.expand = false,
   });
 
-  final double height;
+  final double? height;
   final String title;
   final IconData icon;
   final LinearGradient background;
@@ -3592,51 +3964,101 @@ class _HomeQuickAction extends StatelessWidget {
   final bool shadow;
   final bool compact;
   final bool iconFilled;
-  final bool primaryAction;
+  final bool hero;
+  final bool muted;
+  final bool expand;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    final resolvedIconColor = iconColor ?? Colors.white;
+    final resolvedTextColor = textColor ?? Colors.white;
+    final iconSurface = hero
+        ? Colors.white.withOpacity(0.16)
+        : iconFilled
+            ? Colors.white.withOpacity(0.14)
+            : muted
+                ? Colors.white.withOpacity(0.54)
+                : Colors.white.withOpacity(0.78);
+
+    final content = Material(
       color: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(24),
-        splashColor: primaryAction ? Colors.white.withOpacity(0.08) : const Color(0xFF006B47).withOpacity(0.08),
-        highlightColor: primaryAction ? Colors.white.withOpacity(0.04) : const Color(0xFF006B47).withOpacity(0.04),
-        child: Container(
-          height: height,
-          padding: const EdgeInsets.all(18),
+        borderRadius: BorderRadius.circular(28),
+        child: Ink(
+          height: expand ? null : height,
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             gradient: background,
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(28),
             border: border,
             boxShadow: shadow
                 ? [
                     BoxShadow(
-                      color: primaryAction ? const Color(0xFF006B47).withOpacity(0.10) : Colors.black.withOpacity(0.05),
-                      blurRadius: primaryAction ? 22 : 14,
-                      offset: const Offset(0, 8),
+                      color: hero
+                          ? const Color(0xFF006B47).withOpacity(0.24)
+                          : Colors.black.withOpacity(0.06),
+                      blurRadius: hero ? 28 : 20,
+                      spreadRadius: hero ? -6 : -3,
+                      offset: Offset(0, hero ? 18 : 12),
                     ),
+                    if (hero)
+                      BoxShadow(
+                        color: const Color(0xFF6DD5A6).withOpacity(0.18),
+                        blurRadius: 34,
+                        spreadRadius: -14,
+                        offset: const Offset(0, 20),
+                      ),
                   ]
-                : null,
+                : [
+                    BoxShadow(
+                      color: muted
+                          ? Colors.black.withOpacity(0.018)
+                          : Colors.black.withOpacity(0.03),
+                      blurRadius: muted ? 10 : 14,
+                      spreadRadius: -5,
+                      offset: Offset(0, muted ? 6 : 10),
+                    )
+                  ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: compact ? 34 : 42,
-                height: compact ? 34 : 42,
+                width: hero
+                    ? 58
+                    : compact
+                        ? 40
+                        : 50,
+                height: hero
+                    ? 58
+                    : compact
+                        ? 40
+                        : 50,
                 decoration: BoxDecoration(
-                  color: iconFilled
-                      ? Colors.white.withOpacity(primaryAction ? 0.16 : 0.12)
-                      : Colors.black.withOpacity(0.03),
-                  borderRadius: BorderRadius.circular(compact ? 12 : 14),
+                  color: iconSurface,
+                  borderRadius: BorderRadius.circular(hero ? 20 : 18),
+                  boxShadow: hero
+                      ? [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            blurRadius: 16,
+                            spreadRadius: -8,
+                            offset: const Offset(0, 10),
+                          ),
+                        ]
+                      : null,
                 ),
+                alignment: Alignment.center,
                 child: Icon(
                   icon,
-                  size: compact ? 20 : 24,
-                  color: iconColor ?? Colors.white,
+                  size: hero
+                      ? 30
+                      : compact
+                          ? 20
+                          : 26,
+                  color: resolvedIconColor,
                 ),
               ),
               Text(
@@ -3644,9 +4066,15 @@ class _HomeQuickAction extends StatelessWidget {
                 maxLines: compact ? 2 : 1,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.manrope(
-                  fontSize: compact ? 15.5 : 17,
-                  fontWeight: compact ? FontWeight.w600 : FontWeight.w700,
-                  color: textColor ?? Colors.white,
+                  fontSize: hero
+                      ? 22
+                      : compact
+                          ? 14
+                          : 17,
+                  fontWeight: hero ? FontWeight.w700 : FontWeight.w600,
+                  height: hero ? 1.02 : 1.1,
+                  letterSpacing: hero ? -0.45 : -0.2,
+                  color: resolvedTextColor,
                 ),
               ),
             ],
@@ -3654,6 +4082,12 @@ class _HomeQuickAction extends StatelessWidget {
         ),
       ),
     );
+
+    if (expand) {
+      return SizedBox.expand(child: content);
+    }
+
+    return content;
   }
 }
 
@@ -3671,11 +4105,19 @@ class _HomeSnapshotStat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(13),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.10),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: Colors.white.withOpacity(0.10)),
+        color: Colors.white.withOpacity(0.14),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: Colors.white.withOpacity(0.12)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 16,
+            spreadRadius: -8,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -3695,8 +4137,8 @@ class _HomeSnapshotStat extends StatelessWidget {
             maxLines: compactValue ? 2 : 1,
             overflow: TextOverflow.ellipsis,
             style: GoogleFonts.manrope(
-              fontSize: compactValue ? 13.5 : 18,
-              fontWeight: FontWeight.w800,
+              fontSize: compactValue ? 13 : 20,
+              fontWeight: FontWeight.w700,
               color: Colors.white,
             ),
           ),
@@ -3724,24 +4166,37 @@ class _HomeInfoTile extends StatelessWidget {
     const onSurfaceVariant = Color(0xFF3E4942);
 
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFB),
-        borderRadius: BorderRadius.circular(18),
+        color: const Color(0xFFF7FAF8),
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 12,
+            spreadRadius: -6,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: primary, size: 19),
-          const SizedBox(height: 9),
+          Icon(icon, color: primary, size: 20),
+          const SizedBox(height: 10),
           Text(
             label.toUpperCase(),
-            style: GoogleFonts.inter(fontSize: 9.5, fontWeight: FontWeight.w700, letterSpacing: 1.35, color: onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.4,
+                color: onSurfaceVariant),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 18, fontWeight: FontWeight.w700, color: onSurface),
           ),
         ],
       ),
@@ -3767,7 +4222,7 @@ class _HomeLatestDestinationCard extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -3782,21 +4237,30 @@ class _HomeLatestDestinationCard extends StatelessWidget {
                   Colors.white,
                 ],
         ),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 12,
+            spreadRadius: -6,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Container(
-            width: 38,
-            height: 38,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
-              color: hasTrips ? primary.withOpacity(0.14) : tertiary.withOpacity(0.12),
+              color: hasTrips
+                  ? primary.withOpacity(0.14)
+                  : tertiary.withOpacity(0.12),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(
               hasTrips ? Icons.place_rounded : Icons.hourglass_empty_rounded,
               color: hasTrips ? primary : tertiary,
-              size: 21,
             ),
           ),
           const SizedBox(width: 12),
@@ -3805,13 +4269,22 @@ class _HomeLatestDestinationCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  hasTrips ? 'Latest destination' : 'Latest destination pending',
-                  style: GoogleFonts.inter(fontSize: 9.5, fontWeight: FontWeight.w700, letterSpacing: 1.25, color: onSurfaceVariant),
+                  hasTrips
+                      ? 'Latest destination'
+                      : 'Latest destination pending',
+                  style: GoogleFonts.inter(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.4,
+                      color: onSurfaceVariant),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   destination,
-                  style: GoogleFonts.manrope(fontSize: 15.5, fontWeight: FontWeight.w800, color: onSurface),
+                  style: GoogleFonts.manrope(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: onSurface),
                 ),
               ],
             ),
@@ -3827,7 +4300,6 @@ class _RecentRouteCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.price,
-    required this.status,
     required this.icon,
     required this.iconBackground,
     required this.iconColor,
@@ -3837,7 +4309,6 @@ class _RecentRouteCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String price;
-  final String status;
   final IconData icon;
   final Color iconBackground;
   final Color iconColor;
@@ -3850,96 +4321,105 @@ class _RecentRouteCard extends StatelessWidget {
     const primary = Color(0xFF006B47);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
+    const successBg = Color(0xFFE7F7F0);
+    const successFg = Color(0xFF0B7D58);
+    const pendingBg = Color(0xFFFFF1CC);
+    const pendingFg = Color(0xFF9A6B00);
+    final parts = subtitle.split(' - ');
+    final status = parts.isNotEmpty ? parts.last.trim() : subtitle;
+    final meta = parts.length > 1
+        ? parts.sublist(0, parts.length - 1).join(' | ')
+        : subtitle;
+    final isConfirmed = status.toUpperCase() == 'CONFIRMED';
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: surfaceLowest,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: outlineVariant.withOpacity(0.1)),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: iconBackground,
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: iconColor.withOpacity(0.10)),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Positioned(
-                        top: 10,
-                        child: Container(
-                          width: 18,
-                          height: 4,
-                          decoration: BoxDecoration(
-                            color: iconColor.withOpacity(0.18),
-                            borderRadius: BorderRadius.circular(99),
-                          ),
-                        ),
-                      ),
-                      Icon(icon, color: iconColor, size: 22),
-                    ],
-                  ),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(24),
+        child: Ink(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: surfaceLowest,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: outlineVariant.withOpacity(0.08)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.045),
+                blurRadius: 16,
+                spreadRadius: -5,
+                offset: const Offset(0, 10),
+              )
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                  color: iconBackground,
+                  borderRadius: BorderRadius.circular(18),
                 ),
-                const SizedBox(width: 12),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
+                child: Icon(icon, color: iconColor),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: GoogleFonts.manrope(fontSize: 14.8, fontWeight: FontWeight.w700, color: onSurface)),
-                    const SizedBox(height: 3),
-                    Text(subtitle, style: GoogleFonts.inter(fontSize: 10.8, color: onSurfaceVariant)),
+                    Text(title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.manrope(
+                            fontSize: 15.5,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: -0.2,
+                            color: onSurface)),
+                    const SizedBox(height: 4),
+                    Text(meta,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                            fontSize: 11.5,
+                            color: onSurfaceVariant.withOpacity(0.78))),
                   ],
                 ),
-              ],
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(price, style: GoogleFonts.manrope(fontSize: 14.8, fontWeight: FontWeight.w700, color: primary)),
-                const SizedBox(height: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
-                  decoration: BoxDecoration(
-                    color: status == 'CONFIRMED'
-                        ? primary.withOpacity(0.10)
-                        : status == 'PENDING'
-                            ? const Color(0xFFFFF3D9)
-                            : const Color(0xFFF2F4F6),
-                    borderRadius: BorderRadius.circular(999),
-                  ),
-                  child: Text(
-                    status,
-                    style: GoogleFonts.inter(
-                      fontSize: 9.5,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 0.8,
-                      color: status == 'CONFIRMED'
-                          ? primary
-                          : status == 'PENDING'
-                              ? const Color(0xFF9B6A00)
-                              : onSurfaceVariant,
+              ),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(price,
+                      style: GoogleFonts.manrope(
+                          fontSize: 15.5,
+                          fontWeight: FontWeight.w700,
+                          color: primary)),
+                  const SizedBox(height: 6),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: isConfirmed ? successBg : pendingBg,
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Text(
+                      status.toUpperCase(),
+                      style: GoogleFonts.inter(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.8,
+                        color: isConfirmed ? successFg : pendingFg,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(width: 8),
-            Icon(onTap == null ? Icons.remove : Icons.chevron_right, color: onSurfaceVariant, size: 18),
-          ],
+                ],
+              ),
+              const SizedBox(width: 8),
+              Icon(onTap == null ? Icons.remove : Icons.chevron_right_rounded,
+                  color: onSurfaceVariant.withOpacity(0.76), size: 20),
+            ],
+          ),
         ),
       ),
     );
@@ -3947,7 +4427,11 @@ class _RecentRouteCard extends StatelessWidget {
 }
 
 class _BottomNavPill extends StatelessWidget {
-  const _BottomNavPill({required this.label, required this.icon, this.active = false, required this.onTap});
+  const _BottomNavPill(
+      {required this.label,
+      required this.icon,
+      this.active = false,
+      required this.onTap});
 
   final String label;
   final IconData icon;
@@ -3958,37 +4442,305 @@ class _BottomNavPill extends StatelessWidget {
   Widget build(BuildContext context) {
     const primary = Color(0xFF006B47);
     const inactive = Color(0xFF9CA3AF);
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: active ? primary.withOpacity(0.12) : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: active
-              ? [BoxShadow(color: primary.withOpacity(0.07), blurRadius: 12, offset: const Offset(0, 5))]
-              : null,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, color: active ? primary : inactive, size: 21),
-            const SizedBox(height: 2),
-            Text(
-              label.toUpperCase(),
-              style: GoogleFonts.inter(
-                fontSize: 9,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.8,
-                color: active ? primary : inactive,
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(22),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOutCubic,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
+          decoration: BoxDecoration(
+            color: active ? primary.withOpacity(0.12) : Colors.transparent,
+            borderRadius: BorderRadius.circular(22),
+            boxShadow: active
+                ? [
+                    BoxShadow(
+                      color: primary.withOpacity(0.12),
+                      blurRadius: 18,
+                      spreadRadius: -8,
+                      offset: const Offset(0, 10),
+                    ),
+                  ]
+                : null,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, color: active ? primary : inactive),
+              const SizedBox(height: 4),
+              Text(
+                label.toUpperCase(),
+                style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: active ? FontWeight.w700 : FontWeight.w600,
+                  letterSpacing: 1.1,
+                  color: active ? primary : inactive,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+class RideServiceSelectorScreen extends StatelessWidget {
+  const RideServiceSelectorScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const background = Color(0xFFF6FAFA);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+
+    return Scaffold(
+      backgroundColor: background,
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            var topGap = constraints.maxHeight * 0.28;
+            if (topGap < 130) topGap = 130;
+            if (topGap > 270) topGap = 270;
+
+            return SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(28, 0, 28, 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: topGap),
+                    Row(
+                      children: [
+                        _brandLogo(size: 54, radius: 12),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Choose Your Ride',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.manrope(
+                                  fontSize: 29,
+                                  fontWeight: FontWeight.w700,
+                                  color: onSurface,
+                                  height: 1.02,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Select a service to get started.',
+                                style: GoogleFonts.inter(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: onSurfaceVariant,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 32),
+                    _RideServiceTile(
+                      title: 'Bus',
+                      subtitle: 'Available now',
+                      icon: Icons.directions_bus_filled,
+                      active: true,
+                      onTap: () => Navigator.pushReplacementNamed(
+                          context, AppRoutes.home),
+                    ),
+                    const SizedBox(height: 20),
+                    const _RideServiceTile(
+                      title: 'Taxi Meter',
+                      subtitle: 'Coming soon',
+                      icon: Icons.local_taxi,
+                      statusLabel: 'Coming soon',
+                      locked: true,
+                    ),
+                    const SizedBox(height: 20),
+                    const _RideServiceTile(
+                      title: 'Bike Delivery',
+                      subtitle: 'Coming soon',
+                      icon: Icons.delivery_dining,
+                      statusLabel: 'Coming soon',
+                      locked: true,
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _RideServiceTile extends StatelessWidget {
+  const _RideServiceTile({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    this.statusLabel,
+    this.locked = false,
+    this.active = false,
+    this.onTap,
+  });
+
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final String? statusLabel;
+  final bool locked;
+  final bool active;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    const surface = Color(0xFFFFFFFF);
+    const inactiveSurface = Color(0xFFF3F7F6);
+    const outlineVariant = Color(0xFFBDCAC0);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const primary = Color(0xFF007A51);
+    const disabled = Color(0xFF9AA3A0);
+    final enabled = onTap != null;
+    final tileColor = enabled ? surface : inactiveSurface;
+    final iconColor = enabled ? primary : disabled;
+    final textColor = enabled ? onSurface : onSurface.withOpacity(0.74);
+    final subTextColor =
+        enabled ? onSurfaceVariant : onSurfaceVariant.withOpacity(0.62);
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final compact = screenWidth < 700;
+    final tileHeight = compact ? 88.0 : 104.0;
+    final iconBox = compact ? 56.0 : 72.0;
+    final iconSize = compact ? 27.0 : 31.0;
+    final horizontalPadding = compact ? 20.0 : 24.0;
+    final titleSize = compact ? 21.0 : 23.0;
+    final subtitleSize = compact ? 14.0 : 15.0;
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Opacity(
+        opacity: enabled ? 1 : 0.78,
+        child: Container(
+          width: double.infinity,
+          height: tileHeight,
+          padding:
+              EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 14),
+          decoration: BoxDecoration(
+            color: tileColor,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: active ? outlineVariant : outlineVariant.withOpacity(0.35),
+              width: active ? 1.5 : 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(enabled ? 0.04 : 0.025),
+                blurRadius: 24,
+                offset: const Offset(0, 14),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: iconBox,
+                height: iconBox,
+                decoration: BoxDecoration(
+                  color: enabled
+                      ? const Color(0xFFE2F3EC)
+                      : const Color(0xFFE5EAEA),
+                  borderRadius: BorderRadius.circular(compact ? 18 : 20),
+                ),
+                child: Icon(icon, color: iconColor, size: iconSize),
+              ),
+              SizedBox(width: compact ? 16 : 20),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.manrope(
+                        fontSize: titleSize,
+                        fontWeight: FontWeight.w700,
+                        color: textColor,
+                        height: 1.05,
+                      ),
+                    ),
+                    const SizedBox(height: 9),
+                    Text(
+                      subtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                        fontSize: subtitleSize,
+                        fontWeight: FontWeight.w500,
+                        color: subTextColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (statusLabel != null) ...[
+                SizedBox(width: compact ? 8 : 10),
+                SizedBox(
+                  width: compact ? 94 : 112,
+                  child: Text(
+                    statusLabel!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: disabled,
+                    ),
+                  ),
+                ),
+              ],
+              SizedBox(width: compact ? 10 : 16),
+              if (locked)
+                Icon(Icons.lock_outline,
+                    color: disabled, size: compact ? 20 : 22)
+              else
+                Container(
+                  width: compact ? 42 : 48,
+                  height: compact ? 42 : 48,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    border: Border.all(color: outlineVariant, width: 1.4),
+                    boxShadow: [
+                      BoxShadow(
+                        color: primary.withOpacity(0.10),
+                        blurRadius: 22,
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  child:
+                      const Icon(Icons.arrow_forward, color: primary, size: 25),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class BookingScreen extends StatefulWidget {
   const BookingScreen({super.key, this.initialRouteId});
 
@@ -4057,7 +4809,8 @@ class _BookingScreenState extends State<BookingScreen> {
     return entries.map((e) => e.key).take(6).toList();
   }
 
-  bool _containsRoute(List<Map<String, dynamic>> routes, Map<String, dynamic>? route) {
+  bool _containsRoute(
+      List<Map<String, dynamic>> routes, Map<String, dynamic>? route) {
     if (route == null) return false;
     final id = route['id']?.toString();
     if (id == null || id.isEmpty) return false;
@@ -4120,7 +4873,8 @@ class _BookingScreenState extends State<BookingScreen> {
     _searchDebounce = Timer(const Duration(milliseconds: 250), () {
       if (!mounted) return;
       final trimmed = value.trim();
-      final chipMatch = _originChip != null && _originChip!.toLowerCase() == trimmed.toLowerCase();
+      final chipMatch = _originChip != null &&
+          _originChip!.toLowerCase() == trimmed.toLowerCase();
       _applySearch(value, chip: chipMatch ? _originChip : null);
     });
   }
@@ -4169,16 +4923,19 @@ class _BookingScreenState extends State<BookingScreen> {
         ),
       );
     } else {
-      final message = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to start payment.';
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      final message = response['message']?.toString() ??
+          response['reason']?.toString() ??
+          'Unable to start payment.';
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAF8);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF2F6F4);
     const outlineVariant = Color(0xFFBDCAC0);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
@@ -4186,497 +4943,611 @@ class _BookingScreenState extends State<BookingScreen> {
     const primaryContainer = Color(0xFF00875A);
     const hintGrey = Color(0xFF9AA3A0);
     final filteredRoutes = _filteredRoutes();
-    final originChips = _originChips();
-    final selectedRoute = _selected;
-    final selectedFrom = selectedRoute?['fromLocation']?.toString() ?? 'Choose a route';
-    final selectedTo = selectedRoute?['toLocation']?.toString() ?? 'Trip details will appear here';
-    final selectedPrice = 'NGN ${selectedRoute?['price']?.toString() ?? '-'}';
-    final totalRoutes = _routes.length;
-    final visibleRoutes = filteredRoutes.length;
+    final previewRoute = _selected ??
+        (filteredRoutes.isNotEmpty
+            ? filteredRoutes.first
+            : (_routes.isNotEmpty ? _routes.first : null));
+    final selectedFrom =
+        previewRoute?['fromLocation']?.toString().trim().isNotEmpty == true
+            ? previewRoute!['fromLocation'].toString()
+            : 'Area 1';
+    final selectedTo =
+        previewRoute?['toLocation']?.toString().trim().isNotEmpty == true
+            ? previewRoute!['toLocation'].toString()
+            : 'Nyanya';
+    final selectedPrice = previewRoute?['price']?.toString() ?? '600';
+    final selectedCurrency =
+        previewRoute?['currency']?.toString().trim().isNotEmpty == true
+            ? previewRoute!['currency'].toString()
+            : 'NGN';
+    final routeCount = filteredRoutes.length;
+    final paymentLabel = _provider == 'PAYSTACK' ? 'Paystack' : 'Monnify';
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final contentWidth = constraints.maxWidth > 760 ? 760.0 : constraints.maxWidth;
-        final horizontalPadding = constraints.maxWidth > 760 ? 32.0 : 20.0;
-
-        return Scaffold(
-          backgroundColor: background,
-          body: Stack(
+    return Scaffold(
+      backgroundColor: background,
+      body: Stack(
+        children: [
+          Column(
             children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: 68,
-                    child: ClipRect(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                          decoration: BoxDecoration(
-                            color: background.withOpacity(0.82),
-                            boxShadow: [
-                              BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4)),
-                            ],
-                          ),
-                          child: SafeArea(
-                            bottom: false,
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  icon: const Icon(Icons.arrow_back, color: primary),
-                                ),
-                                Text(
-                                  'Book a Ride',
-                                  style: GoogleFonts.manrope(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w800,
-                                    color: primary,
-                                    height: 1.2,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: _loading
-                        ? const Center(child: CircularProgressIndicator())
-                        : (!ConnectivityService.instance.isOnline && _routes.isEmpty)
-                            ? OfflineFullScreen(
-                                onRetry: _loadRoutes,
-                                title: 'No connection',
-                                body: 'Connect to the internet to load available routes.',
-                              )
-                            : SingleChildScrollView(
-                                padding: EdgeInsets.fromLTRB(horizontalPadding, 18, horizontalPadding, 150),
-                                child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: ConstrainedBox(
-                                    constraints: BoxConstraints(maxWidth: contentWidth),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Book your trip',
-                                          style: GoogleFonts.manrope(
-                                            fontSize: constraints.maxWidth > 420 ? 28 : 24,
-                                            fontWeight: FontWeight.w800,
-                                            color: onSurface,
-                                            height: 1.1,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 6),
-                                        Text(
-                                          'Choose a route, compare fares, and move to payment in a clean flow.',
-                                          style: GoogleFonts.inter(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w500,
-                                            color: onSurfaceVariant,
-                                            height: 1.45,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Container(
-                                          padding: const EdgeInsets.all(14),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(24),
-                                            border: Border.all(color: primary.withOpacity(0.08)),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.04),
-                                                blurRadius: 18,
-                                                offset: const Offset(0, 8),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  Expanded(
-                                                    child: _RouteEndpointPanel(
-                                                      label: 'From',
-                                                      value: selectedRoute == null ? 'Choose route' : selectedFrom,
-                                                      subtitle: 'Current location',
-                                                      accent: primary,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(width: 10),
-                                                  Container(
-                                                    width: 42,
-                                                    height: 42,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(color: primary.withOpacity(0.12)),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: Colors.black.withOpacity(0.05),
-                                                          blurRadius: 10,
-                                                          offset: const Offset(0, 4),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: const Icon(Icons.swap_horiz_rounded, color: primary, size: 20),
-                                                  ),
-                                                  const SizedBox(width: 10),
-                                                  Expanded(
-                                                    child: _RouteEndpointPanel(
-                                                      label: 'To',
-                                                      value: selectedRoute == null ? 'Choose route' : selectedTo,
-                                                      subtitle: 'Destination',
-                                                      accent: primary,
-                                                      alignEnd: true,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 12),
-                                              Row(
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      selectedRoute == null
-                                                          ? 'Tap a route below to preview the journey.'
-                                                          : '$selectedPrice • ${_provider == 'MONNIFY' ? 'Monnify' : 'Paystack'}',
-                                                      maxLines: 1,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      style: GoogleFonts.inter(
-                                                        fontSize: 11.5,
-                                                        fontWeight: FontWeight.w600,
-                                                        color: onSurfaceVariant,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Container(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                                    decoration: BoxDecoration(
-                                                      color: primary.withOpacity(0.08),
-                                                      borderRadius: BorderRadius.circular(999),
-                                                    ),
-                                                    child: Text(
-                                                      '$visibleRoutes routes',
-                                                      style: GoogleFonts.inter(
-                                                        fontSize: 10.5,
-                                                        fontWeight: FontWeight.w700,
-                                                        color: primary,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 16),
-                                        Container(
-                                          padding: const EdgeInsets.all(8),
-                                          decoration: BoxDecoration(
-                                            color: surfaceContainerLow,
-                                            borderRadius: BorderRadius.circular(18),
-                                            border: Border.all(color: primary.withOpacity(0.06)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              _PaymentChoiceChip(
-                                                label: 'Monnify',
-                                                active: _provider == 'MONNIFY',
-                                                onTap: () => setState(() => _provider = 'MONNIFY'),
-                                              ),
-                                              const SizedBox(width: 8),
-                                              _PaymentChoiceChip(
-                                                label: 'Paystack',
-                                                active: _provider == 'PAYSTACK',
-                                                onTap: () => setState(() => _provider = 'PAYSTACK'),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                          const SizedBox(height: 16),
-                                        Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                'Search routes',
-                                                style: GoogleFonts.manrope(
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w800,
-                                                  color: onSurface,
-                                                ),
-                                              ),
-                                            ),
-                                            if (_searchQuery.trim().isNotEmpty)
-                                              TextButton(
-                                                onPressed: () {
-                                                  _searchController.clear();
-                                                  _applySearch('');
-                                                },
-                                                child: Text(
-                                                  'Clear',
-                                                  style: GoogleFonts.inter(
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: primary,
-                                                  ),
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                                          decoration: BoxDecoration(
-                                            color: surfaceLowest,
-                                            borderRadius: BorderRadius.circular(16),
-                                            border: Border.all(color: outlineVariant.withOpacity(0.25)),
-                                            boxShadow: [
-                                              BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 14, offset: const Offset(0, 6)),
-                                            ],
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              const Icon(Icons.search, color: hintGrey, size: 18),
-                                              const SizedBox(width: 10),
-                                              Expanded(
-                                                child: TextField(
-                                                  controller: _searchController,
-                                                  onChanged: _onSearchChanged,
-                                                  style: GoogleFonts.inter(
-                                                    fontSize: 13,
-                                                    color: onSurface,
-                                                  ),
-                                                  decoration: InputDecoration(
-                                                    hintText: 'Search by route, location, or fare',
-                                                    hintStyle: GoogleFonts.inter(
-                                                      fontSize: 13,
-                                                      color: hintGrey,
-                                                    ),
-                                                    border: InputBorder.none,
-                                                  ),
-                                                ),
-                                              ),
-                                              if (_searchQuery.trim().isNotEmpty)
-                                                IconButton(
-                                                  onPressed: () {
-                                                    _searchController.clear();
-                                                    _applySearch('');
-                                                  },
-                                                  icon: const Icon(Icons.close_rounded, size: 18, color: hintGrey),
-                                                ),
-                                            ],
-                                          ),
-                                        ),
-                                          const SizedBox(height: 16),
-                                        if (originChips.isNotEmpty) ...[
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Text(
-                                                  'Popular origins',
-                                                  style: GoogleFonts.inter(
-                                                    fontSize: 11,
-                                                    fontWeight: FontWeight.w800,
-                                                    letterSpacing: 1.1,
-                                                    color: onSurfaceVariant,
-                                                  ),
-                                                ),
-                                              ),
-                                              Text(
-                                                'Tap to filter',
-                                                style: GoogleFonts.inter(
-                                                  fontSize: 10.5,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: onSurfaceVariant.withOpacity(0.8),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 12),
-                                          Wrap(
-                                            spacing: 10,
-                                            runSpacing: 10,
-                                            children: [
-                                              _RouteOriginChip(
-                                                label: 'Show all',
-                                                active: _searchQuery.trim().isEmpty,
-                                                onTap: () {
-                                                  _searchController.clear();
-                                                  _applySearch('');
-                                                },
-                                              ),
-                                              ...originChips.map((origin) {
-                                                final active = _originChip?.toLowerCase() == origin.toLowerCase();
-                                                return _RouteOriginChip(
-                                                  label: origin,
-                                                  active: active,
-                                                  onTap: () {
-                                                    if (active) {
-                                                      _searchController.clear();
-                                                      _applySearch('');
-                                                    } else {
-                                                      _searchController.text = origin;
-                                                      _applySearch(origin, chip: origin);
-                                                    }
-                                                  },
-                                                );
-                                              }),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 16),
-                                        ],
-                                        if (_routes.isEmpty)
-                                          _EmptyStateCard(
-                                            icon: Icons.route_outlined,
-                                            title: 'No routes yet',
-                                            body: 'Routes will appear here once they are published.',
-                                            actionLabel: 'Refresh',
-                                            onAction: _loadRoutes,
-                                          )
-                                        else if (filteredRoutes.isEmpty)
-                                          _EmptyStateCard(
-                                            icon: Icons.search_off,
-                                            title: 'No matches',
-                                            body: 'No routes match "${_searchQuery.trim()}". Try another search.',
-                                            actionLabel: 'Clear search',
-                                            onAction: () {
-                                              setState(() {
-                                                _searchController.clear();
-                                                _searchQuery = '';
-                                                _originChip = null;
-                                              });
-                                            },
-                                          )
-                                        else
-                                          LayoutBuilder(
-                                            builder: (context, cardConstraints) {
-                                              final double cardWidth = cardConstraints.maxWidth > 680
-                                                  ? (cardConstraints.maxWidth - 12) / 2
-                                                  : cardConstraints.maxWidth;
-                                              return Wrap(
-                                                spacing: 12,
-                                                runSpacing: 12,
-                                                children: filteredRoutes.map((route) {
-                                                  final isSelected = _selected?['id'] == route['id'];
-                                                  return SizedBox(
-                                                    width: cardWidth,
-                                                    child: GestureDetector(
-                                                      onTap: () => _selectRoute(route),
-                                                      child: _RouteOptionCard(
-                                                        from: route['fromLocation']?.toString() ?? 'From',
-                                                        to: route['toLocation']?.toString() ?? 'To',
-                                                        price: 'NGN ${route['price'] ?? '-'}',
-                                                        selected: isSelected,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            },
-                                          ),
-                                        const SizedBox(height: 24),
-                                        GestureDetector(
-                                          onTap: _submitting ? null : _proceedToPayment,
-                                          child: Container(
-                                            width: double.infinity,
-                                            padding: const EdgeInsets.symmetric(vertical: 16),
-                                            decoration: BoxDecoration(
-                                              gradient: const LinearGradient(colors: [primary, primaryContainer]),
-                                              borderRadius: BorderRadius.circular(22),
-                                              boxShadow: [
-                                                BoxShadow(color: primary.withOpacity(0.18), blurRadius: 18, offset: const Offset(0, 8)),
-                                              ],
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                if (_submitting)
-                                                  const SizedBox(
-                                                    width: 18,
-                                                    height: 18,
-                                                    child: CircularProgressIndicator(
-                                                      strokeWidth: 2,
-                                                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                                    ),
-                                                  )
-                                                else
-                                                  const Icon(Icons.credit_card, color: Colors.white, size: 20),
-                                                const SizedBox(width: 8),
-                                                Text(
-                                                  _submitting ? 'Processing...' : 'Proceed to Payment',
-                                                  style: GoogleFonts.manrope(
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.w800,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                  ),
-                ],
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
+              SizedBox(
+                height: 64,
                 child: ClipRect(
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                     child: Container(
-                      padding: const EdgeInsets.fromLTRB(16, 10, 16, 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.82),
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
+                        color: background.withOpacity(0.8),
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8)),
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4))
                         ],
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          _BottomNavPill(
-                            label: 'Home',
-                            icon: Icons.home,
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.home),
-                          ),
-                          _BottomNavPill(
-                            label: 'History',
-                            icon: Icons.history,
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
-                          ),
-                          _BottomNavPill(
-                            label: 'Booking',
-                            icon: Icons.confirmation_number,
-                            active: true,
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
-                          ),
-                          _BottomNavPill(
-                            label: 'Profile',
-                            icon: Icons.person,
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
-                          ),
-                        ],
+                      child: SafeArea(
+                        bottom: false,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              onPressed: () => Navigator.pop(context),
+                              icon:
+                                  const Icon(Icons.arrow_back, color: primary),
+                            ),
+                            Text('Book a Ride',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: primary)),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
+              Expanded(
+                child: _loading
+                    ? const Center(child: CircularProgressIndicator())
+                    : (!ConnectivityService.instance.isOnline &&
+                            _routes.isEmpty)
+                        ? OfflineFullScreen(
+                            onRetry: _loadRoutes,
+                            title: 'No connection',
+                            body:
+                                'Connect to the internet to load available routes.',
+                          )
+                        : SingleChildScrollView(
+                            padding: const EdgeInsets.fromLTRB(20, 20, 20, 140),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Book your trip',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: -0.4,
+                                        color: onSurface)),
+                                const SizedBox(height: 6),
+                                Text(
+                                    'Choose a route, compare fares, and move to payment in a clean flow.',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 13,
+                                        height: 1.45,
+                                        color: onSurfaceVariant
+                                            .withOpacity(0.86))),
+                                const SizedBox(height: 12),
+                                OfflineBanner(onRetry: _loadRoutes),
+                                const SizedBox(height: 16),
+                                Container(
+                                  padding: const EdgeInsets.all(16),
+                                  decoration: BoxDecoration(
+                                    color: surfaceLowest,
+                                    borderRadius: BorderRadius.circular(28),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.045),
+                                        blurRadius: 18,
+                                        spreadRadius: -4,
+                                        offset: const Offset(0, 10),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.all(14),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFFFBFCFB),
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                  color: outlineVariant
+                                                      .withOpacity(0.14),
+                                                ),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'From',
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      letterSpacing: 1.1,
+                                                      color: onSurfaceVariant,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 6),
+                                                  Text(
+                                                    selectedFrom,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: GoogleFonts.manrope(
+                                                      fontSize: 19,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: onSurface,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 2),
+                                                  Text(
+                                                    'Current location',
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 11,
+                                                      color: onSurfaceVariant
+                                                          .withOpacity(0.78),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Container(
+                                            width: 48,
+                                            height: 48,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                              border: Border.all(
+                                                color: outlineVariant
+                                                    .withOpacity(0.16),
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.03),
+                                                  blurRadius: 10,
+                                                  spreadRadius: -6,
+                                                  offset: const Offset(0, 6),
+                                                ),
+                                              ],
+                                            ),
+                                            child: const Icon(
+                                              Icons.swap_horiz_rounded,
+                                              color: primary,
+                                            ),
+                                          ),
+                                          const SizedBox(width: 12),
+                                          Expanded(
+                                            child: Container(
+                                              padding: const EdgeInsets.all(14),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFFFBFCFB),
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                border: Border.all(
+                                                  color: outlineVariant
+                                                      .withOpacity(0.14),
+                                                ),
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'To',
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      letterSpacing: 1.1,
+                                                      color: onSurfaceVariant,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 6),
+                                                  Text(
+                                                    selectedTo,
+                                                    maxLines: 1,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: GoogleFonts.manrope(
+                                                      fontSize: 19,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: onSurface,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 2),
+                                                  Text(
+                                                    'Destination',
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 11,
+                                                      color: onSurfaceVariant
+                                                          .withOpacity(0.78),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 14),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              '$selectedCurrency $selectedPrice \u2022 $paymentLabel',
+                                              style: GoogleFonts.manrope(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700,
+                                                color: onSurface,
+                                              ),
+                                            ),
+                                          ),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 12, vertical: 7),
+                                            decoration: BoxDecoration(
+                                              color: primary.withOpacity(0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(999),
+                                            ),
+                                            child: Text(
+                                              '$routeCount route${routeCount == 1 ? '' : 's'}',
+                                              style: GoogleFonts.inter(
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w700,
+                                                color: primary,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Container(
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: BoxDecoration(
+                                    color: surfaceContainerLow,
+                                    borderRadius: BorderRadius.circular(24),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      _PaymentChoiceChip(
+                                        label: 'Monnify',
+                                        active: _provider == 'MONNIFY',
+                                        onTap: () => setState(
+                                            () => _provider = 'MONNIFY'),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      _PaymentChoiceChip(
+                                        label: 'Paystack',
+                                        active: _provider == 'PAYSTACK',
+                                        onTap: () => setState(
+                                            () => _provider = 'PAYSTACK'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                Text('Search routes',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: onSurface)),
+                                const SizedBox(height: 10),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 14, vertical: 2),
+                                  decoration: BoxDecoration(
+                                    color: surfaceLowest,
+                                    borderRadius: BorderRadius.circular(22),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.035),
+                                        blurRadius: 14,
+                                        spreadRadius: -6,
+                                        offset: const Offset(0, 8),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.search_rounded,
+                                          color: hintGrey, size: 20),
+                                      const SizedBox(width: 10),
+                                      Expanded(
+                                        child: TextField(
+                                          controller: _searchController,
+                                          onChanged: _onSearchChanged,
+                                          style: GoogleFonts.inter(
+                                              fontSize: 13.5, color: onSurface),
+                                          decoration: InputDecoration(
+                                            hintText:
+                                                'Search by route, location, or fare',
+                                            hintStyle: GoogleFonts.inter(
+                                                fontSize: 13, color: hintGrey),
+                                            border: InputBorder.none,
+                                          ),
+                                        ),
+                                      ),
+                                      if (_searchQuery.trim().isNotEmpty)
+                                        IconButton(
+                                          onPressed: () {
+                                            _searchController.clear();
+                                            _applySearch('');
+                                          },
+                                          icon: const Icon(Icons.close_rounded,
+                                              size: 18, color: hintGrey),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                if (_searchQuery.trim().isNotEmpty)
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Showing ${filteredRoutes.length} result${filteredRoutes.length == 1 ? '' : 's'} for "${_searchQuery.trim()}"',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 11,
+                                              color: onSurfaceVariant),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            _searchController.clear();
+                                            _applySearch('');
+                                          },
+                                          child: Text('Clear',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: primary)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                if (_routes.isNotEmpty &&
+                                    _originChips().isNotEmpty) ...[
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'Popular origins',
+                                          style: GoogleFonts.manrope(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w700,
+                                              color: onSurface),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          'Tap to filter',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 11.5,
+                                              fontWeight: FontWeight.w600,
+                                              color: onSurfaceVariant
+                                                  .withOpacity(0.72)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Wrap(
+                                    spacing: 10,
+                                    runSpacing: 10,
+                                    children: [
+                                      _RouteOriginChip(
+                                        label: 'Show all',
+                                        active: _searchQuery.trim().isEmpty,
+                                        onTap: () {
+                                          _searchController.clear();
+                                          _applySearch('');
+                                        },
+                                      ),
+                                      ..._originChips().map((origin) {
+                                        final active =
+                                            _originChip?.toLowerCase() ==
+                                                origin.toLowerCase();
+                                        return _RouteOriginChip(
+                                          label: origin,
+                                          active: active,
+                                          onTap: () {
+                                            if (active) {
+                                              _searchController.clear();
+                                              _applySearch('');
+                                            } else {
+                                              _searchController.text = origin;
+                                              _applySearch(origin,
+                                                  chip: origin);
+                                            }
+                                          },
+                                        );
+                                      }),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 14),
+                                ],
+                                if (_routes.isEmpty)
+                                  _EmptyStateCard(
+                                    icon: Icons.route_outlined,
+                                    title: 'No routes yet',
+                                    body:
+                                        'Routes will appear here once they are published.',
+                                    actionLabel: 'Refresh',
+                                    onAction: _loadRoutes,
+                                  )
+                                else if (filteredRoutes.isEmpty)
+                                  _EmptyStateCard(
+                                    icon: Icons.search_off,
+                                    title: 'No matches',
+                                    body:
+                                        'No routes match "${_searchQuery.trim()}". Try another search.',
+                                    actionLabel: 'Clear search',
+                                    onAction: () {
+                                      setState(() {
+                                        _searchController.clear();
+                                        _searchQuery = '';
+                                        _originChip = null;
+                                      });
+                                    },
+                                  )
+                                else
+                                  Column(
+                                    children: filteredRoutes.map((route) {
+                                      final isSelected =
+                                          _selected?['id'] == route['id'];
+                                      return GestureDetector(
+                                        onTap: () => _selectRoute(route),
+                                        child: _RouteOptionCard(
+                                          from: route['fromLocation']
+                                                  ?.toString() ??
+                                              'From',
+                                          to: route['toLocation']?.toString() ??
+                                              'To',
+                                          price:
+                                              '${route['currency'] ?? 'NGN'} ${route['price'] ?? '-'}',
+                                          selected: isSelected,
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                const SizedBox(height: 24),
+                                GestureDetector(
+                                  onTap: _submitting ? null : _proceedToPayment,
+                                  child: Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 18),
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                          colors: [primary, primaryContainer]),
+                                      borderRadius: BorderRadius.circular(24),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: primary.withOpacity(0.2),
+                                            blurRadius: 16,
+                                            offset: const Offset(0, 8))
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        if (_submitting)
+                                          const SizedBox(
+                                            width: 18,
+                                            height: 18,
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.white)),
+                                          )
+                                        else
+                                          const Icon(Icons.credit_card,
+                                              color: Colors.white),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          _submitting
+                                              ? 'Processing...'
+                                              : 'Proceed to Payment',
+                                          style: GoogleFonts.manrope(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+              ),
             ],
           ),
-        );
-      },
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                  decoration: BoxDecoration(
+                    color: background.withOpacity(0.8),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(24)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 30,
+                          offset: const Offset(0, -8))
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _BottomNavPill(
+                        label: 'Home',
+                        icon: Icons.home,
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.home),
+                      ),
+                      _BottomNavPill(
+                        label: 'History',
+                        icon: Icons.history,
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
+                      ),
+                      _BottomNavPill(
+                        label: 'Booking',
+                        icon: Icons.confirmation_number,
+                        active: true,
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
+                      ),
+                      _BottomNavPill(
+                        label: 'Profile',
+                        icon: Icons.person,
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -4701,225 +5572,81 @@ class _RouteOptionCard extends StatelessWidget {
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
-      curve: Curves.easeOut,
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(12),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: selected ? primary.withOpacity(0.04) : surfaceLowest,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: selected ? primary : primary.withOpacity(0.08), width: selected ? 1.2 : 1),
+        color: selected ? const Color(0xFFF2FBF6) : surfaceLowest,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(
+            color: selected
+                ? primary.withOpacity(0.75)
+                : primary.withOpacity(0.08),
+            width: selected ? 1.5 : 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(selected ? 0.05 : 0.03),
-            blurRadius: 14,
-            offset: const Offset(0, 6),
-          ),
+              color: Colors.black.withOpacity(0.035),
+              blurRadius: 14,
+              spreadRadius: -5,
+              offset: const Offset(0, 8))
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 42,
-            height: 42,
+            width: 46,
+            height: 46,
             decoration: BoxDecoration(
-              color: primary.withOpacity(0.10),
-              borderRadius: BorderRadius.circular(14),
+              color: primary.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(16),
             ),
-            child: const Icon(Icons.route_rounded, color: primary, size: 22),
+            child: const Icon(Icons.alt_route_rounded, color: primary),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                        child: Text(
-                          '$from → $to',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.manrope(
-                          fontSize: 14.8,
-                          fontWeight: FontWeight.w800,
-                          color: onSurface,
-                          height: 1.15,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                      decoration: BoxDecoration(
-                        color: primary.withOpacity(0.08),
-                        borderRadius: BorderRadius.circular(999),
-                      ),
-                      child: Text(
-                        price,
-                        style: GoogleFonts.manrope(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w800,
-                          color: onSurface,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  'One-way ticket',
-                  style: GoogleFonts.inter(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    color: onSurfaceVariant,
-                    height: 1.3,
-                  ),
-                ),
+                Text('$from -> $to',
+                    style: GoogleFonts.manrope(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: -0.2,
+                        color: onSurface)),
+                const SizedBox(height: 4),
+                Text('One-way ticket',
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        color: onSurfaceVariant.withOpacity(0.82))),
               ],
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 10),
           Container(
-            width: 26,
-            height: 26,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
-              color: selected ? primary : Colors.transparent,
-              shape: BoxShape.circle,
-              border: Border.all(color: selected ? primary : primary.withOpacity(0.18)),
+              color: const Color(0xFFF2F8F4),
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(price,
+                style: GoogleFonts.manrope(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: onSurface)),
+          ),
+          const SizedBox(width: 10),
+          Container(
+            width: 34,
+            height: 34,
+            decoration: BoxDecoration(
+              color: selected ? primary : Colors.white,
+              borderRadius: BorderRadius.circular(17),
+              border: Border.all(color: primary.withOpacity(0.12)),
             ),
             child: Icon(
               selected ? Icons.check_rounded : Icons.chevron_right_rounded,
-              size: 17,
-              color: selected ? Colors.white : primary,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _RouteEndpointPanel extends StatelessWidget {
-  const _RouteEndpointPanel({
-    required this.label,
-    required this.value,
-    required this.subtitle,
-    required this.accent,
-    this.alignEnd = false,
-  });
-
-  final String label;
-  final String value;
-  final String subtitle;
-  final Color accent;
-  final bool alignEnd;
-
-  @override
-  Widget build(BuildContext context) {
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-
-    return Container(
-      constraints: const BoxConstraints(minHeight: 90),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: accent.withOpacity(0.08)),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          Text(
-            label,
-            style: GoogleFonts.inter(
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 0.75,
-              color: accent,
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            value,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: alignEnd ? TextAlign.end : TextAlign.start,
-            style: GoogleFonts.manrope(
-              fontSize: 15.5,
-              fontWeight: FontWeight.w800,
-              color: onSurface,
-              height: 1.1,
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            subtitle,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: alignEnd ? TextAlign.end : TextAlign.start,
-            style: GoogleFonts.inter(
-              fontSize: 10.5,
-              fontWeight: FontWeight.w500,
-              color: onSurfaceVariant,
-              height: 1.3,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _JourneyStatPill extends StatelessWidget {
-  const _JourneyStatPill({
-    required this.label,
-    required this.value,
-  });
-
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    const onSurfaceVariant = Color(0xFF3E4942);
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: primary.withOpacity(0.08)),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            label.toUpperCase(),
-            style: GoogleFonts.inter(
-              fontSize: 9,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.0,
-              color: onSurfaceVariant.withOpacity(0.8),
-            ),
-          ),
-          const SizedBox(height: 3),
-          Text(
-            value,
-            style: GoogleFonts.manrope(
-              fontSize: 11.5,
-              fontWeight: FontWeight.w800,
-              color: primary,
+              color: selected ? Colors.white : primary.withOpacity(0.72),
+              size: 20,
             ),
           ),
         ],
@@ -4947,25 +5674,29 @@ class _PaymentChoiceChip extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 13),
           decoration: BoxDecoration(
             color: active ? primary : Colors.white,
-            borderRadius: BorderRadius.circular(13),
-            border: Border.all(color: active ? primary : primary.withOpacity(0.12), width: 1),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(active ? 0.08 : 0.03),
-                blurRadius: 10,
-                offset: const Offset(0, 5),
-              ),
-            ],
+            borderRadius: BorderRadius.circular(18),
+            border:
+                Border.all(color: active ? primary : primary.withOpacity(0.1)),
+            boxShadow: active
+                ? [
+                    BoxShadow(
+                      color: primary.withOpacity(0.14),
+                      blurRadius: 14,
+                      spreadRadius: -8,
+                      offset: const Offset(0, 8),
+                    ),
+                  ]
+                : null,
           ),
           child: Center(
             child: Text(
               label,
               style: GoogleFonts.manrope(
-                fontSize: 11.5,
-                fontWeight: FontWeight.w800,
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
                 color: active ? Colors.white : onSurface,
               ),
             ),
@@ -5023,7 +5754,9 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
     setState(() => _openedInBrowser = opened);
     if (!opened) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Unable to open checkout automatically on this device.')),
+        const SnackBar(
+            content:
+                Text('Unable to open checkout automatically on this device.')),
       );
     }
   }
@@ -5054,11 +5787,13 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
         },
       );
     } else {
-      final status = response['status']?.toString() ?? response['reason']?.toString();
+      final status =
+          response['status']?.toString() ?? response['reason']?.toString();
       final message = status == null || status.isEmpty
           ? 'We are still waiting for confirmation. If you just paid, wait 15-30 seconds and tap Verify again.'
           : 'Still pending: $status. If you just paid, wait 15-30 seconds and tap Verify again.';
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
@@ -5080,7 +5815,11 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
             onPressed: _verifying ? null : _verifyPayment,
             child: Text(
               _verifying ? 'Checking...' : 'Verify',
-              style: const TextStyle(color: Colors.white),
+              style: GoogleFonts.manrope(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -5095,7 +5834,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(18),
               border: Border.all(color: primary.withOpacity(0.08)),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 8))],
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.04),
+                    blurRadius: 14,
+                    offset: const Offset(0, 8))
+              ],
             ),
             child: Row(
               children: [
@@ -5113,20 +5857,27 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Finish checkout, then verify', style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E))),
+                      Text('Finish checkout, then verify',
+                          style: GoogleFonts.manrope(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: const Color(0xFF191C1E))),
                       const SizedBox(height: 4),
                       Text(
                         'Once payment succeeds, return here and tap Verify to load your ticket QR instantly.',
-                        style: GoogleFonts.inter(fontSize: 12, height: 1.4, color: onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 12, height: 1.4, color: onSurfaceVariant),
                       ),
                       const SizedBox(height: 8),
-                      Wrap(
+                      const Wrap(
                         spacing: 8,
                         runSpacing: 6,
                         children: [
-                          _CheckoutStepBadge(label: '1. Open checkout', color: primary),
+                          _CheckoutStepBadge(
+                              label: '1. Open checkout', color: primary),
                           _CheckoutStepBadge(label: '2. Pay', color: primary),
-                          _CheckoutStepBadge(label: '3. Verify', color: primary),
+                          _CheckoutStepBadge(
+                              label: '3. Verify', color: primary),
                         ],
                       ),
                     ],
@@ -5157,17 +5908,24 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                               color: primary.withOpacity(0.08),
                               borderRadius: BorderRadius.circular(18),
                             ),
-                            child: const Icon(Icons.open_in_new_rounded, color: primary),
+                            child: const Icon(Icons.open_in_new_rounded,
+                                color: primary),
                           ),
                           const SizedBox(height: 16),
                           Text(
                             'Open checkout in a new tab',
-                            style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: onSurface),
+                            style: GoogleFonts.manrope(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: onSurface),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             'Chrome cannot show the in-app payment window, so we open your secure checkout page in a browser tab instead.',
-                            style: GoogleFonts.inter(fontSize: 13, height: 1.5, color: onSurfaceVariant),
+                            style: GoogleFonts.inter(
+                                fontSize: 13,
+                                height: 1.5,
+                                color: onSurfaceVariant),
                           ),
                           const SizedBox(height: 18),
                           Container(
@@ -5179,7 +5937,8 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                             ),
                             child: SelectableText(
                               widget.checkoutUrl,
-                              style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant),
+                              style: GoogleFonts.inter(
+                                  fontSize: 12, color: onSurfaceVariant),
                             ),
                           ),
                           const SizedBox(height: 18),
@@ -5192,19 +5951,24 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                                 backgroundColor: primary,
                                 foregroundColor: Colors.white,
                                 elevation: 0,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18)),
                               ),
                               icon: const Icon(Icons.launch_rounded),
                               label: Text(
-                                _openedInBrowser ? 'Open checkout again' : 'Open secure checkout',
-                                style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w800),
+                                _openedInBrowser
+                                    ? 'Open checkout again'
+                                    : 'Open secure checkout',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 15, fontWeight: FontWeight.w800),
                               ),
                             ),
                           ),
                           const SizedBox(height: 12),
                           Text(
                             'When payment is complete, return here and tap Verify to unlock your ticket.',
-                            style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant),
+                            style: GoogleFonts.inter(
+                                fontSize: 12, color: onSurfaceVariant),
                           ),
                         ],
                       ),
@@ -5220,7 +5984,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
           padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.98),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 18, offset: const Offset(0, -6))],
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 18,
+                  offset: const Offset(0, -6))
+            ],
           ),
           child: SizedBox(
             height: 54,
@@ -5230,18 +5999,23 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                 backgroundColor: primary,
                 foregroundColor: Colors.white,
                 elevation: 0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18)),
               ),
               icon: _verifying
                   ? const SizedBox(
                       width: 18,
                       height: 18,
-                      child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                      child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white)),
                     )
                   : const Icon(Icons.verified_outlined),
               label: Text(
                 _verifying ? 'Checking payment...' : 'Verify payment',
-                style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w800),
+                style: GoogleFonts.manrope(
+                    fontSize: 15, fontWeight: FontWeight.w800),
               ),
             ),
           ),
@@ -5267,7 +6041,8 @@ class _CheckoutStepBadge extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: color),
+        style: GoogleFonts.inter(
+            fontSize: 10, fontWeight: FontWeight.w700, color: color),
       ),
     );
   }
@@ -5288,109 +6063,117 @@ class TicketDetailsLoaderScreen extends StatefulWidget {
   final bool showSuccess;
 
   @override
-  State<TicketDetailsLoaderScreen> createState() => _TicketDetailsLoaderScreenState();
+  State<TicketDetailsLoaderScreen> createState() =>
+      _TicketDetailsLoaderScreenState();
 }
 
-  class _TicketDetailsLoaderScreenState extends State<TicketDetailsLoaderScreen> {
-    late Future<Map<String, dynamic>> _bookingFuture;
-    StreamSubscription<TicketRefreshEvent>? _ticketRefreshSub;
-    bool _retryingPayment = false;
-    Timer? _autoRefreshTimer;
-    int _autoRefreshAttempts = 0;
-    String? _lastPaymentStatus;
-    String? _lastQr;
-    String? _lastBookingId;
-    static const Duration _autoRefreshInterval = Duration(seconds: 4);
-    static const int _autoRefreshMaxAttempts = 30;
+class _TicketDetailsLoaderScreenState extends State<TicketDetailsLoaderScreen> {
+  late Future<Map<String, dynamic>> _bookingFuture;
+  StreamSubscription<TicketRefreshEvent>? _ticketRefreshSub;
+  bool _retryingPayment = false;
+  Timer? _autoRefreshTimer;
+  int _autoRefreshAttempts = 0;
+  String? _lastPaymentStatus;
+  String? _lastQr;
+  String? _lastBookingId;
+  static const Duration _autoRefreshInterval = Duration(seconds: 4);
+  static const int _autoRefreshMaxAttempts = 30;
 
-    @override
-    void initState() {
-      super.initState();
-      _bookingFuture = _loadBooking().then((data) {
-        _syncPollingState(data);
-        return data;
-      });
-      _ticketRefreshSub = PushService.instance.ticketRefreshStream.listen((event) {
-        if (!mounted) return;
-        final matchesBooking = widget.bookingId != null && event.bookingId == widget.bookingId;
-        final matchesPayment = widget.paymentReference != null && event.paymentReference == widget.paymentReference;
-        if (matchesBooking || matchesPayment) {
-          _refreshBooking();
-        }
-      });
-    }
-
-    @override
-    void dispose() {
-      _ticketRefreshSub?.cancel();
-      _stopAutoRefresh();
-      super.dispose();
-    }
-
-    Future<void> _refreshBooking() async {
+  @override
+  void initState() {
+    super.initState();
+    _bookingFuture = _loadBooking().then((data) {
+      _syncPollingState(data);
+      return data;
+    });
+    _ticketRefreshSub =
+        PushService.instance.ticketRefreshStream.listen((event) {
       if (!mounted) return;
-      final future = _loadBooking().then((data) {
-        _syncPollingState(data);
-        return data;
-      });
-      setState(() {
-        _bookingFuture = future;
-      });
-      await future;
-    }
+      final matchesBooking =
+          widget.bookingId != null && event.bookingId == widget.bookingId;
+      final matchesPayment = widget.paymentReference != null &&
+          event.paymentReference == widget.paymentReference;
+      if (matchesBooking || matchesPayment) {
+        _refreshBooking();
+      }
+    });
+  }
 
-    void _syncPollingState(Map<String, dynamic> data) {
-      if (data['ok'] != true) {
+  @override
+  void dispose() {
+    _ticketRefreshSub?.cancel();
+    _stopAutoRefresh();
+    super.dispose();
+  }
+
+  Future<void> _refreshBooking() async {
+    if (!mounted) return;
+    final future = _loadBooking().then((data) {
+      _syncPollingState(data);
+      return data;
+    });
+    setState(() {
+      _bookingFuture = future;
+    });
+    await future;
+  }
+
+  void _syncPollingState(Map<String, dynamic> data) {
+    if (data['ok'] != true) {
+      _stopAutoRefresh();
+      return;
+    }
+    final booking = data['booking'] as Map? ?? {};
+    final payment = booking['payment'] as Map? ?? {};
+    _lastBookingId = booking['id']?.toString();
+    _lastPaymentStatus =
+        data['paymentStatus']?.toString() ?? payment['status']?.toString();
+    _lastQr = data['qr']?.toString();
+
+    if (_shouldAutoRefresh()) {
+      _ensureAutoRefresh();
+    } else {
+      _stopAutoRefresh();
+    }
+  }
+
+  bool _shouldAutoRefresh() {
+    final status = (_lastPaymentStatus ?? '').toUpperCase();
+    if (_lastQr != null && _lastQr!.isNotEmpty) return false;
+    if (status == 'SUCCESS') return false;
+    return (widget.paymentReference?.isNotEmpty ?? false) ||
+        (_lastBookingId?.isNotEmpty ?? false);
+  }
+
+  void _ensureAutoRefresh() {
+    if (_autoRefreshTimer != null) return;
+    _autoRefreshAttempts = 0;
+    _autoRefreshTimer = Timer.periodic(_autoRefreshInterval, (timer) {
+      if (!mounted) {
         _stopAutoRefresh();
         return;
       }
-      final booking = data['booking'] as Map? ?? {};
-      final payment = booking['payment'] as Map? ?? {};
-      _lastBookingId = booking['id']?.toString();
-      _lastPaymentStatus = data['paymentStatus']?.toString() ?? payment['status']?.toString();
-      _lastQr = data['qr']?.toString();
-
-      if (_shouldAutoRefresh()) {
-        _ensureAutoRefresh();
-      } else {
+      if (_autoRefreshAttempts >= _autoRefreshMaxAttempts ||
+          !_shouldAutoRefresh()) {
         _stopAutoRefresh();
+        return;
       }
-    }
+      _autoRefreshAttempts += 1;
+      _refreshBooking();
+    });
+  }
 
-    bool _shouldAutoRefresh() {
-      final status = (_lastPaymentStatus ?? '').toUpperCase();
-      if (_lastQr != null && _lastQr!.isNotEmpty) return false;
-      if (status == 'SUCCESS') return false;
-      return (widget.paymentReference?.isNotEmpty ?? false) || (_lastBookingId?.isNotEmpty ?? false);
-    }
+  void _stopAutoRefresh() {
+    _autoRefreshTimer?.cancel();
+    _autoRefreshTimer = null;
+  }
 
-    void _ensureAutoRefresh() {
-      if (_autoRefreshTimer != null) return;
-      _autoRefreshAttempts = 0;
-      _autoRefreshTimer = Timer.periodic(_autoRefreshInterval, (timer) {
-        if (!mounted) {
-          _stopAutoRefresh();
-          return;
-        }
-        if (_autoRefreshAttempts >= _autoRefreshMaxAttempts || !_shouldAutoRefresh()) {
-          _stopAutoRefresh();
-          return;
-        }
-        _autoRefreshAttempts += 1;
-        _refreshBooking();
-      });
-    }
-
-    void _stopAutoRefresh() {
-      _autoRefreshTimer?.cancel();
-      _autoRefreshTimer = null;
-    }
-
-    Future<Map<String, dynamic>> _loadBooking() async {
-      Map<String, dynamic> booking = {};
-      if (widget.bookingId != null && widget.bookingId!.isNotEmpty) {
-        booking = await UserApi.getBooking(widget.bookingId!);
-      } else if (widget.paymentReference != null && widget.paymentReference!.isNotEmpty) {
+  Future<Map<String, dynamic>> _loadBooking() async {
+    Map<String, dynamic> booking = {};
+    if (widget.bookingId != null && widget.bookingId!.isNotEmpty) {
+      booking = await UserApi.getBooking(widget.bookingId!);
+    } else if (widget.paymentReference != null &&
+        widget.paymentReference!.isNotEmpty) {
       final verify = widget.provider == 'PAYSTACK'
           ? await UserApi.verifyPaystack(widget.paymentReference!)
           : await UserApi.verifyMonnify(widget.paymentReference!);
@@ -5426,7 +6209,8 @@ class TicketDetailsLoaderScreen extends StatefulWidget {
       'qr': qrPayload,
       'ticketId': ticketId,
       'paymentStatus': paymentStatus,
-      'paymentReference': payment['providerRef']?.toString() ?? widget.paymentReference,
+      'paymentReference':
+          payment['providerRef']?.toString() ?? widget.paymentReference,
     };
   }
 
@@ -5441,69 +6225,86 @@ class TicketDetailsLoaderScreen extends StatefulWidget {
           }
           final data = snapshot.data ?? {};
           if (data['ok'] != true) {
-            return Center(child: Text('Unable to load ticket details'));
+            return const Center(child: Text('Unable to load ticket details'));
           }
           final booking = data['booking'] as Map;
           final route = booking['route'] as Map? ?? {};
           final payment = booking['payment'] as Map? ?? {};
           final ticket = booking['ticket'] as Map? ?? {};
-            final qr = data['qr']?.toString();
-            final bookingId = booking['id']?.toString();
-            final paymentStatus = data['paymentStatus']?.toString() ?? payment['status']?.toString();
-            final paymentRef = data['paymentReference']?.toString() ?? widget.paymentReference;
-            final paymentProvider = (payment['provider']?.toString() ?? widget.provider).toUpperCase();
-            final showRetry = (qr == null || qr.isEmpty) && (paymentStatus?.toUpperCase() != 'SUCCESS');
-            final fromLocation = route['fromLocation']?.toString() ?? 'From';
-            final toLocation = route['toLocation']?.toString() ?? 'To';
+          final qr = data['qr']?.toString();
+          final bookingId = booking['id']?.toString();
+          final paymentStatus = data['paymentStatus']?.toString() ??
+              payment['status']?.toString();
+          final paymentRef =
+              data['paymentReference']?.toString() ?? widget.paymentReference;
+          final paymentProvider =
+              (payment['provider']?.toString() ?? widget.provider)
+                  .toUpperCase();
+          final showRetry = (qr == null || qr.isEmpty) &&
+              (paymentStatus?.toUpperCase() != 'SUCCESS');
+          final fromLocation = route['fromLocation']?.toString() ?? 'From';
+          final toLocation = route['toLocation']?.toString() ?? 'To';
           final fareLabel = 'NGN ${payment['amount'] ?? route['price'] ?? '-'}';
-          final reference = payment['providerRef']?.toString() ?? widget.paymentReference ?? '-';
+          final reference = payment['providerRef']?.toString() ??
+              widget.paymentReference ??
+              '-';
           final createdAt = booking['createdAt']?.toString();
           final date = createdAt != null ? DateTime.tryParse(createdAt) : null;
-          final dateLabel = date != null ? '${date.day}-${date.month}-${date.year}' : '-';
-          final timeLabel = date != null ? '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}' : '-';
+          final dateLabel =
+              date != null ? '${date.day}-${date.month}-${date.year}' : '-';
+          final timeLabel = date != null
+              ? '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}'
+              : '-';
 
           return TicketDetailsScreen(
             fromLocation: fromLocation,
             toLocation: toLocation,
-            fromCode: fromLocation.isNotEmpty ? fromLocation[0].toUpperCase() : 'F',
+            fromCode:
+                fromLocation.isNotEmpty ? fromLocation[0].toUpperCase() : 'F',
             toCode: toLocation.isNotEmpty ? toLocation[0].toUpperCase() : 'T',
             dateLabel: dateLabel,
             timeLabel: timeLabel,
             fareLabel: fareLabel,
-              reference: reference,
-              qrPayload: qr,
-              ticketId: data['ticketId']?.toString() ?? ticket['id']?.toString(),
-              showSuccess: widget.showSuccess,
-              onRefresh: _refreshBooking,
-              bookingId: bookingId,
-              paymentStatus: paymentStatus,
-                retryingPayment: _retryingPayment,
-                onRetryPayment: (bookingId != null && showRetry)
-                  ? () async {
-                      if (_retryingPayment) return;
-                      setState(() => _retryingPayment = true);
-                      final response = paymentProvider == 'PAYSTACK'
-                          ? await UserApi.retryPaystack(bookingId)
-                          : await UserApi.retryMonnify(bookingId);
-                      if (!mounted) return;
-                      setState(() => _retryingPayment = false);
-                      if (response['ok'] == true && response['checkoutUrl'] != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => PaymentWebViewScreen(
-                              checkoutUrl: response['checkoutUrl'].toString(),
-                              paymentReference: response['paymentReference']?.toString(),
-                              bookingId: response['bookingId']?.toString() ?? bookingId,
-                              provider: paymentProvider == 'PAYSTACK' ? 'PAYSTACK' : 'MONNIFY',
-                            ),
+            reference: reference,
+            qrPayload: qr,
+            ticketId: data['ticketId']?.toString() ?? ticket['id']?.toString(),
+            showSuccess: widget.showSuccess,
+            onRefresh: _refreshBooking,
+            bookingId: bookingId,
+            paymentStatus: paymentStatus,
+            retryingPayment: _retryingPayment,
+            onRetryPayment: (bookingId != null && showRetry)
+                ? () async {
+                    if (_retryingPayment) return;
+                    setState(() => _retryingPayment = true);
+                    final response = paymentProvider == 'PAYSTACK'
+                        ? await UserApi.retryPaystack(bookingId)
+                        : await UserApi.retryMonnify(bookingId);
+                    if (!mounted) return;
+                    setState(() => _retryingPayment = false);
+                    if (response['ok'] == true &&
+                        response['checkoutUrl'] != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PaymentWebViewScreen(
+                            checkoutUrl: response['checkoutUrl'].toString(),
+                            paymentReference:
+                                response['paymentReference']?.toString(),
+                            bookingId:
+                                response['bookingId']?.toString() ?? bookingId,
+                            provider: paymentProvider == 'PAYSTACK'
+                                ? 'PAYSTACK'
+                                : 'MONNIFY',
                           ),
-                        );
-                      } else {
+                        ),
+                      );
+                    } else {
                       final message = response['message']?.toString() ??
                           response['reason']?.toString() ??
                           'Unable to restart payment.';
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(message)));
                     }
                   }
                 : null,
@@ -5600,20 +6401,28 @@ class TicketDetailsScreen extends StatelessWidget {
                         color: primary.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: const Icon(Icons.check_circle_rounded, color: primary),
+                      child: const Icon(Icons.check_circle_rounded,
+                          color: primary),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Payment confirmed', style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w800, color: onSurface)),
+                          Text('Payment confirmed',
+                              style: GoogleFonts.manrope(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w800,
+                                  color: onSurface)),
                           const SizedBox(height: 4),
                           Text(
                             (qrPayload == null || qrPayload!.isEmpty)
                                 ? 'Your ticket is being issued. Pull to refresh if it does not appear.'
                                 : 'Your ticket is ready. Present this QR at the validator gate.',
-                            style: GoogleFonts.inter(fontSize: 12, height: 1.4, color: onSurfaceVariant),
+                            style: GoogleFonts.inter(
+                                fontSize: 12,
+                                height: 1.4,
+                                color: onSurfaceVariant),
                           ),
                         ],
                       ),
@@ -5624,7 +6433,8 @@ class TicketDetailsScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(colors: [primary, primaryContainer]),
+                gradient:
+                    const LinearGradient(colors: [primary, primaryContainer]),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Row(
@@ -5640,15 +6450,21 @@ class TicketDetailsScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Row(
               children: [
-                Expanded(child: _TicketInfoItem(label: 'Date', value: dateLabel)),
-                Expanded(child: _TicketInfoItem(label: 'Time', value: timeLabel, alignEnd: true)),
+                Expanded(
+                    child: _TicketInfoItem(label: 'Date', value: dateLabel)),
+                Expanded(
+                    child: _TicketInfoItem(
+                        label: 'Time', value: timeLabel, alignEnd: true)),
               ],
             ),
             const SizedBox(height: 12),
             Row(
               children: [
-                Expanded(child: _TicketInfoItem(label: 'Fare', value: fareLabel)),
-                Expanded(child: _TicketInfoItem(label: 'Reference', value: reference, alignEnd: true)),
+                Expanded(
+                    child: _TicketInfoItem(label: 'Fare', value: fareLabel)),
+                Expanded(
+                    child: _TicketInfoItem(
+                        label: 'Reference', value: reference, alignEnd: true)),
               ],
             ),
             const SizedBox(height: 20),
@@ -5658,7 +6474,12 @@ class TicketDetailsScreen extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: outlineVariant.withOpacity(0.4)),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 18, offset: const Offset(0, 8))],
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.04),
+                      blurRadius: 18,
+                      offset: const Offset(0, 8))
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -5666,7 +6487,8 @@ class TicketDetailsScreen extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
                         decoration: BoxDecoration(
                           color: primary.withOpacity(0.12),
                           borderRadius: BorderRadius.circular(999),
@@ -5674,11 +6496,17 @@ class TicketDetailsScreen extends StatelessWidget {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.qr_code_scanner_rounded, size: 18, color: primary),
+                            const Icon(Icons.qr_code_scanner_rounded,
+                                size: 18, color: primary),
                             const SizedBox(width: 8),
                             Text(
-                              qrPayload == null || qrPayload!.isEmpty ? 'QR pending' : 'Ready to scan',
-                              style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w800, color: primary),
+                              qrPayload == null || qrPayload!.isEmpty
+                                  ? 'QR pending'
+                                  : 'Ready to scan',
+                              style: GoogleFonts.manrope(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w800,
+                                  color: primary),
                             ),
                           ],
                         ),
@@ -5687,62 +6515,76 @@ class TicketDetailsScreen extends StatelessWidget {
                       if (ticketId != null)
                         Text(
                           'ID ${ticketId!.substring(0, 8).toUpperCase()}',
-                          style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.1, color: onSurfaceVariant),
+                          style: GoogleFonts.inter(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: 1.1,
+                              color: onSurfaceVariant),
                         ),
                     ],
                   ),
                   const SizedBox(height: 16),
-                  Text('Present this code at the validator gate for one-time entry.', style: GoogleFonts.inter(fontSize: 13, height: 1.45, color: onSurfaceVariant)),
-                    const SizedBox(height: 18),
-                    Center(child: _TicketQrBox(qrPayload: qrPayload)),
-                    if (qrPayload != null && qrPayload!.isNotEmpty) ...[
-                      const SizedBox(height: 12),
-                      SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          onPressed: () async {
-                            await Clipboard.setData(ClipboardData(text: qrPayload!));
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('QR payload copied')),
-                              );
-                            }
-                          },
-                          style: OutlinedButton.styleFrom(
-                            side: BorderSide(color: primary.withOpacity(0.5)),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                          ),
-                          icon: const Icon(Icons.copy_rounded, color: primary),
-                          label: Text(
-                            'Copy QR text',
-                            style: GoogleFonts.manrope(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: primary,
-                            ),
+                  Text(
+                      'Present this code at the validator gate for one-time entry.',
+                      style: GoogleFonts.inter(
+                          fontSize: 13, height: 1.45, color: onSurfaceVariant)),
+                  const SizedBox(height: 18),
+                  Center(child: _TicketQrBox(qrPayload: qrPayload)),
+                  if (qrPayload != null && qrPayload!.isNotEmpty) ...[
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: () async {
+                          await Clipboard.setData(
+                              ClipboardData(text: qrPayload!));
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('QR payload copied')),
+                            );
+                          }
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: primary.withOpacity(0.5)),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                        ),
+                        icon: const Icon(Icons.copy_rounded, color: primary),
+                        label: Text(
+                          'Copy QR text',
+                          style: GoogleFonts.manrope(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: primary,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      SelectableText(
-                        qrPayload!,
-                        style: GoogleFonts.inter(
-                          fontSize: 11,
-                          height: 1.4,
-                          color: onSurfaceVariant.withOpacity(0.85),
-                        ),
-                      ),
-                    ],
-                    if ((qrPayload == null || qrPayload!.isEmpty) && paymentStatus != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        'Payment status: ${paymentStatus!.toLowerCase()}. Tap refresh after payment completes.',
-                        style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant.withOpacity(0.8)),
                       ),
                     ),
-                  if ((qrPayload == null || qrPayload!.isEmpty) && onRetryPayment != null)
+                    const SizedBox(height: 10),
+                    SelectableText(
+                      qrPayload!,
+                      style: GoogleFonts.inter(
+                        fontSize: 11,
+                        height: 1.4,
+                        color: onSurfaceVariant.withOpacity(0.85),
+                      ),
+                    ),
+                  ],
+                  if ((qrPayload == null || qrPayload!.isEmpty) &&
+                      paymentStatus != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        'Payment status: ${paymentStatus!.toLowerCase()}. Tap refresh after payment completes.',
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            color: onSurfaceVariant.withOpacity(0.8)),
+                      ),
+                    ),
+                  if ((qrPayload == null || qrPayload!.isEmpty) &&
+                      onRetryPayment != null)
                     Padding(
                       padding: const EdgeInsets.only(top: 12),
                       child: SizedBox(
@@ -5752,18 +6594,26 @@ class TicketDetailsScreen extends StatelessWidget {
                           style: OutlinedButton.styleFrom(
                             side: BorderSide(color: primary.withOpacity(0.6)),
                             padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
                           ),
                           icon: retryingPayment
                               ? const SizedBox(
                                   width: 16,
                                   height: 16,
-                                  child: CircularProgressIndicator(strokeWidth: 2),
+                                  child:
+                                      CircularProgressIndicator(strokeWidth: 2),
                                 )
-                              : const Icon(Icons.refresh_rounded, color: primary),
+                              : const Icon(Icons.refresh_rounded,
+                                  color: primary),
                           label: Text(
-                            retryingPayment ? 'Restarting payment...' : 'Retry payment',
-                            style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: primary),
+                            retryingPayment
+                                ? 'Restarting payment...'
+                                : 'Retry payment',
+                            style: GoogleFonts.manrope(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w700,
+                                color: primary),
                           ),
                         ),
                       ),
@@ -5775,19 +6625,38 @@ class TicketDetailsScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: background,
                       borderRadius: BorderRadius.circular(18),
-                      border: Border.all(color: outlineVariant.withOpacity(0.35)),
+                      border:
+                          Border.all(color: outlineVariant.withOpacity(0.35)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Ticket reference', style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1.4, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
+                        Text('Ticket reference',
+                            style: GoogleFonts.inter(
+                                fontSize: 10,
+                                letterSpacing: 1.4,
+                                fontWeight: FontWeight.w700,
+                                color: onSurfaceVariant)),
                         const SizedBox(height: 6),
-                        SelectableText(reference, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: onSurface)),
+                        SelectableText(reference,
+                            style: GoogleFonts.manrope(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w800,
+                                color: onSurface)),
                         if (ticketId != null) ...[
                           const SizedBox(height: 12),
-                          Text('Ticket ID', style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1.4, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
+                          Text('Ticket ID',
+                              style: GoogleFonts.inter(
+                                  fontSize: 10,
+                                  letterSpacing: 1.4,
+                                  fontWeight: FontWeight.w700,
+                                  color: onSurfaceVariant)),
                           const SizedBox(height: 6),
-                          SelectableText(ticketId!, style: GoogleFonts.manrope(fontSize: 13, fontWeight: FontWeight.w700, color: onSurface)),
+                          SelectableText(ticketId!,
+                              style: GoogleFonts.manrope(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w700,
+                                  color: onSurface)),
                         ],
                       ],
                     ),
@@ -5814,9 +6683,17 @@ class _TicketLocationBox extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(code, style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: Colors.white)),
+          Text(code,
+              style: GoogleFonts.manrope(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white)),
           const SizedBox(height: 4),
-          Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.8))),
+          Text(label.toUpperCase(),
+              style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white.withOpacity(0.8))),
         ],
       ),
     );
@@ -5839,11 +6716,19 @@ class _TicketInfoItem extends StatelessWidget {
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     return Column(
-      crossAxisAlignment: alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      crossAxisAlignment:
+          alignEnd ? CrossAxisAlignment.end : CrossAxisAlignment.start,
       children: [
-        Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1.6, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
+        Text(label.toUpperCase(),
+            style: GoogleFonts.inter(
+                fontSize: 10,
+                letterSpacing: 1.6,
+                fontWeight: FontWeight.w700,
+                color: onSurfaceVariant)),
         const SizedBox(height: 4),
-        Text(value, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
+        Text(value,
+            style: GoogleFonts.manrope(
+                fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
       ],
     );
   }
@@ -5868,8 +6753,10 @@ class _TicketQrBox extends StatelessWidget {
         context: context,
         builder: (dialogContext) {
           return Dialog(
-            insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            insetPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -5888,7 +6775,8 @@ class _TicketQrBox extends StatelessWidget {
                   Text(
                     'Keep the QR full screen and steady for the camera to read it easily.',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                        fontSize: 12, color: onSurfaceVariant),
                   ),
                   const SizedBox(height: 18),
                   Container(
@@ -5917,7 +6805,8 @@ class _TicketQrBox extends StatelessWidget {
                   SelectableText(
                     qrPayload!,
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                        fontSize: 11, color: onSurfaceVariant),
                   ),
                   const SizedBox(height: 16),
                   SizedBox(
@@ -5927,7 +6816,8 @@ class _TicketQrBox extends StatelessWidget {
                       style: FilledButton.styleFrom(
                         backgroundColor: primary,
                         padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16)),
                       ),
                       child: const Text('Close'),
                     ),
@@ -5952,13 +6842,19 @@ class _TicketQrBox extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.hourglass_top_rounded, color: onSurfaceVariant.withOpacity(0.6), size: 34),
+              Icon(Icons.hourglass_top_rounded,
+                  color: onSurfaceVariant.withOpacity(0.6), size: 34),
               const SizedBox(height: 10),
-              Text('Ticket pending', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
+              Text('Ticket pending',
+                  style: GoogleFonts.manrope(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: onSurfaceVariant)),
               const SizedBox(height: 4),
               Text(
                 'If you completed payment, tap refresh to load your QR.',
-                style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant.withOpacity(0.8)),
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: onSurfaceVariant.withOpacity(0.8)),
               ),
             ],
           ),
@@ -6004,7 +6900,8 @@ class _TicketQrBox extends StatelessWidget {
                 size: 280,
                 gapless: true,
                 errorCorrectionLevel: QrErrorCorrectLevel.H,
-                eyeStyle: const QrEyeStyle(eyeShape: QrEyeShape.square, color: Color(0xFF006B47)),
+                eyeStyle: const QrEyeStyle(
+                    eyeShape: QrEyeShape.square, color: Color(0xFF006B47)),
                 dataModuleStyle: const QrDataModuleStyle(
                   dataModuleShape: QrDataModuleShape.square,
                   color: Color(0xFF0F3F2C),
@@ -6028,7 +6925,7 @@ class _TicketQrBox extends StatelessWidget {
 }
 
 class TicketCard extends StatelessWidget {
-  TicketCard({
+  const TicketCard({
     super.key,
     required this.from,
     required this.to,
@@ -6052,7 +6949,12 @@ class TicketCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [cardStart, cardEnd]),
         borderRadius: BorderRadius.circular(22),
-        boxShadow: [BoxShadow(color: cardStart.withOpacity(0.25), blurRadius: 16, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: cardStart.withOpacity(0.25),
+              blurRadius: 16,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -6061,7 +6963,12 @@ class TicketCard extends StatelessWidget {
             children: [
               Icon(Icons.location_on, size: 16, color: accentBlue),
               const SizedBox(width: 6),
-              Expanded(child: Text(from, style: GoogleFonts.manrope(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white))),
+              Expanded(
+                  child: Text(from,
+                      style: GoogleFonts.manrope(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white))),
             ],
           ),
           const SizedBox(height: 8),
@@ -6069,11 +6976,20 @@ class TicketCard extends StatelessWidget {
             children: [
               Icon(Icons.flag, size: 16, color: accentBlue),
               const SizedBox(width: 6),
-              Expanded(child: Text(to, style: GoogleFonts.manrope(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white))),
+              Expanded(
+                  child: Text(to,
+                      style: GoogleFonts.manrope(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white))),
             ],
           ),
           const SizedBox(height: 12),
-          Text(price, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: Colors.white)),
+          Text(price,
+              style: GoogleFonts.manrope(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.white)),
         ],
       ),
     );
@@ -6128,17 +7044,18 @@ class AfterBookingScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
-                            children: const [
+                            children: [
                               Text(
                                 'Abuja, Nigeria',
-                                style: TextStyle(
+                                style: GoogleFonts.inter(
                                   color: accentGreen,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 13,
+                                  height: 1.2,
                                 ),
                               ),
-                              SizedBox(width: 4),
-                              Icon(
+                              const SizedBox(width: 4),
+                              const Icon(
                                 Icons.keyboard_arrow_down,
                                 color: accentGreen,
                                 size: 18,
@@ -6161,11 +7078,13 @@ class AfterBookingScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 12),
-                      const Text(
+                      Text(
                         'Welcome, Daniel',
-                        style: TextStyle(
-                          fontSize: 22,
+                        style: GoogleFonts.manrope(
+                          fontSize: 24,
                           fontWeight: FontWeight.w700,
+                          letterSpacing: -0.3,
+                          height: 1.15,
                           color: Colors.black,
                         ),
                       ),
@@ -6178,13 +7097,18 @@ class AfterBookingScreen extends StatelessWidget {
                           border: Border.all(color: softGrey),
                         ),
                         child: Row(
-                          children: const [
-                            SizedBox(width: 14),
-                            Icon(Icons.search, color: hintGrey),
-                            SizedBox(width: 10),
+                          children: [
+                            const SizedBox(width: 14),
+                            const Icon(Icons.search, color: hintGrey),
+                            const SizedBox(width: 10),
                             Text(
                               'Search route',
-                              style: TextStyle(color: hintGrey, fontSize: 14),
+                              style: GoogleFonts.inter(
+                                color: hintGrey,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                height: 1.3,
+                              ),
                             ),
                           ],
                         ),
@@ -6215,9 +7139,9 @@ class AfterBookingScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           _IndicatorDot(isActive: true),
                           _IndicatorDot(isActive: false),
                           _IndicatorDot(isActive: false),
@@ -6225,7 +7149,8 @@ class AfterBookingScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
                         child: TicketCard(
                           from: 'Lugbe, carwash, Airport road, Abuja',
                           to: 'Airport Junction, Abuja',
@@ -6237,7 +7162,8 @@ class AfterBookingScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                         child: TicketCard(
                           from: 'Lugbe, carwash, Airport road, Abuja',
                           to: 'Airport Junction, Abuja',
@@ -6259,7 +7185,8 @@ class AfterBookingScreen extends StatelessWidget {
                 children: [
                   const Icon(Icons.home_outlined, size: 24),
                   GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, AppRoutes.hamburgerMenu),
+                    onTap: () =>
+                        Navigator.pushNamed(context, AppRoutes.hamburgerMenu),
                     child: const Icon(Icons.menu, size: 26),
                   ),
                 ],
@@ -6271,6 +7198,7 @@ class AfterBookingScreen extends StatelessWidget {
     );
   }
 }
+
 class CompletedRidesScreen extends StatefulWidget {
   const CompletedRidesScreen({super.key});
 
@@ -6303,10 +7231,13 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
         _refreshBookings();
       }
     });
-    _ticketRefreshSub = PushService.instance.ticketRefreshStream.listen((event) {
+    _ticketRefreshSub =
+        PushService.instance.ticketRefreshStream.listen((event) {
       if (!mounted) return;
       if (!AuthStore.isLoggedIn || AuthStore.userId == null) return;
-      if (event.type == 'ticket_ready' || event.type == 'payment_confirmed' || event.type == 'booking_updated') {
+      if (event.type == 'ticket_ready' ||
+          event.type == 'payment_confirmed' ||
+          event.type == 'booking_updated') {
         _refreshBookings();
       }
     });
@@ -6322,8 +7253,10 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
   Future<List<Map<String, dynamic>>> _loadBookings() async {
     final bookings = await UserApi.listBookingsForUser(AuthStore.userId!);
     bookings.sort((a, b) {
-      final aDate = DateTime.tryParse(a['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
-      final bDate = DateTime.tryParse(b['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+      final aDate = DateTime.tryParse(a['createdAt']?.toString() ?? '') ??
+          DateTime.fromMillisecondsSinceEpoch(0);
+      final bDate = DateTime.tryParse(b['createdAt']?.toString() ?? '') ??
+          DateTime.fromMillisecondsSinceEpoch(0);
       return bDate.compareTo(aDate);
     });
     return bookings;
@@ -6340,9 +7273,13 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
 
   Future<void> _retryPayment(String bookingId, String provider) async {
     if (_retryingBookingId == bookingId) return;
-    if (provider != 'MONIEPOINT' && provider != 'MONNIFY' && provider != 'PAYSTACK') {
+    if (provider != 'MONIEPOINT' &&
+        provider != 'MONNIFY' &&
+        provider != 'PAYSTACK') {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Retry is not supported for this payment provider yet.')),
+        const SnackBar(
+            content:
+                Text('Retry is not supported for this payment provider yet.')),
       );
       return;
     }
@@ -6365,8 +7302,11 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
         ),
       );
     } else {
-      final message = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to restart payment.';
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+      final message = response['message']?.toString() ??
+          response['reason']?.toString() ??
+          'Unable to restart payment.';
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(message)));
     }
   }
 
@@ -6385,12 +7325,15 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
     return _isConfirmedBooking(booking);
   }
 
-  List<Map<String, dynamic>> _filteredBookings(List<Map<String, dynamic>> bookings) {
+  List<Map<String, dynamic>> _filteredBookings(
+      List<Map<String, dynamic>> bookings) {
     switch (_selectedFilter) {
       case _HistoryFilter.confirmed:
         return bookings.where(_isConfirmedBooking).toList();
       case _HistoryFilter.pending:
-        return bookings.where((booking) => !_isConfirmedBooking(booking)).toList();
+        return bookings
+            .where((booking) => !_isConfirmedBooking(booking))
+            .toList();
       case _HistoryFilter.tickets:
         return bookings.where(_hasTicket).toList();
       case _HistoryFilter.all:
@@ -6398,11 +7341,13 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
     }
   }
 
-  String _filterLabel(_HistoryFilter filter, List<Map<String, dynamic>> bookings) {
+  String _filterLabel(
+      _HistoryFilter filter, List<Map<String, dynamic>> bookings) {
     final count = switch (filter) {
       _HistoryFilter.all => bookings.length,
       _HistoryFilter.confirmed => bookings.where(_isConfirmedBooking).length,
-      _HistoryFilter.pending => bookings.where((booking) => !_isConfirmedBooking(booking)).length,
+      _HistoryFilter.pending =>
+        bookings.where((booking) => !_isConfirmedBooking(booking)).length,
       _HistoryFilter.tickets => bookings.where(_hasTicket).length,
     };
 
@@ -6461,31 +7406,35 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4))
+                        ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
                             IconButton(
-                              onPressed: () => Navigator.pushNamed(context, AppRoutes.hamburgerMenu),
+                              onPressed: () => Navigator.pushNamed(
+                                  context, AppRoutes.hamburgerMenu),
                               icon: const Icon(Icons.menu, color: primary),
                             ),
                             _brandLogo(size: 26, radius: 8),
                             const SizedBox(width: 8),
-                            Text('I-Metro', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: primary)),
+                            Text('I-Metro',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w800,
+                                    color: primary)),
                             const Spacer(),
-                            Text('History', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
-                            const SizedBox(width: 12),
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: primary.withOpacity(0.1), width: 2),
-                              ),
-                              child: const _UserProfileThumb(size: 40),
-                            ),
+                            Text('History',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: primary)),
                           ],
                         ),
                       ),
@@ -6494,20 +7443,28 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                 ),
               ),
               Expanded(
-                child: (!ConnectivityService.instance.isOnline && _bookingsFuture != null)
+                child: (!ConnectivityService.instance.isOnline &&
+                        _bookingsFuture != null)
                     ? OfflineFullScreen(
                         onRetry: _refreshBookings,
                         title: 'Offline history',
-                        body: 'Reconnect to load your latest trips and tickets.',
+                        body:
+                            'Reconnect to load your latest trips and tickets.',
                       )
                     : SingleChildScrollView(
                         padding: const EdgeInsets.fromLTRB(20, 20, 20, 150),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Trip History', style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface)),
+                            Text('Trip History',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.w800,
+                                    color: onSurface)),
                             const SizedBox(height: 6),
-                            Text('Review your past travels and expenses.', style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant)),
+                            Text('Review your past travels and expenses.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 13, color: onSurfaceVariant)),
                             const SizedBox(height: 12),
                             OfflineBanner(onRetry: _refreshBookings),
                             const SizedBox(height: 16),
@@ -6515,64 +7472,130 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                               _EmptyStateCard(
                                 icon: Icons.lock_outline,
                                 title: 'Sign in to view history',
-                                body: 'Your rides, payments, and tickets will appear here.',
+                                body:
+                                    'Your rides, payments, and tickets will appear here.',
                                 actionLabel: 'Sign in',
-                                onAction: () => Navigator.pushNamed(context, AppRoutes.login),
+                                onAction: () => Navigator.pushNamed(
+                                    context, AppRoutes.login),
                               ),
                             if (_bookingsFuture != null)
                               FutureBuilder<List<Map<String, dynamic>>>(
                                 future: _bookingsFuture,
                                 builder: (context, snapshot) {
-                                  if (snapshot.connectionState == ConnectionState.waiting) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
                                     return Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 24),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 24),
                                       child: Center(
-                                        child: CircularProgressIndicator(color: primary.withOpacity(0.8)),
+                                        child: CircularProgressIndicator(
+                                            color: primary.withOpacity(0.8)),
                                       ),
                                     );
                                   }
                                   final bookings = snapshot.data ?? [];
-                                  final filteredBookings = _filteredBookings(bookings);
+                                  final filteredBookings =
+                                      _filteredBookings(bookings);
                                   if (bookings.isEmpty) {
                                     return _EmptyStateCard(
                                       icon: Icons.history,
                                       title: 'No trips yet',
-                                      body: 'Book your first ride to start building your travel history.',
+                                      body:
+                                          'Book your first ride to start building your travel history.',
                                       actionLabel: 'Book a ride',
-                                      onAction: () => Navigator.pushNamed(context, AppRoutes.booking),
+                                      onAction: () => Navigator.pushNamed(
+                                          context, AppRoutes.booking),
                                     );
                                   }
 
-                                  int totalTrips = 0;
-                                  int totalSpent = 0;
+                                  final now = DateTime.now();
+                                  final monthStart =
+                                      DateTime(now.year, now.month);
+                                  final nextMonthStart =
+                                      DateTime(now.year, now.month + 1);
+                                  int confirmedTrips = 0;
+                                  int confirmedSpent = 0;
                                   String summaryCurrency = 'NGN';
-
-                                  final cards = filteredBookings.map((booking) {
-                                    final route = (booking['route'] as Map?) ?? {};
-                                    final payment = (booking['payment'] as Map?) ?? {};
-                                    final paymentStatus = payment['status']?.toString().toUpperCase() ?? '';
-                                    final provider = payment['provider']?.toString().toUpperCase() ?? '';
-                                    final ticket = booking['ticket'];
-                                    final hasTicket = ticket is Map && ticket.isNotEmpty;
-                                    final showRetry = !hasTicket && paymentStatus != 'SUCCESS';
-                                    final from = route['fromLocation']?.toString() ?? 'Route';
-                                    final to = route['toLocation']?.toString() ?? 'Destination';
-                                    final currency = payment['currency']?.toString() ?? route['currency']?.toString() ?? 'NGN';
-                                    final amountRaw = payment['amount'] ?? route['price'] ?? 0;
-                                    final amount = amountRaw is num ? amountRaw.toInt() : int.tryParse(amountRaw.toString()) ?? 0;
-                                    final status = booking['status']?.toString() ?? 'Completed';
-                                    final statusColor = status.toUpperCase() == 'CONFIRMED' ? primary : tertiary;
-                                    final dateSource = booking['travelDate'] ?? booking['createdAt'];
-                                    final bookingId = booking['id']?.toString();
-
-                                    totalTrips += 1;
-                                    totalSpent += amount;
-                                    if (summaryCurrency == 'NGN' && currency.isNotEmpty) {
+                                  for (final booking in bookings) {
+                                    final payment =
+                                        (booking['payment'] as Map?) ?? {};
+                                    final paymentStatus = payment['status']
+                                            ?.toString()
+                                            .toUpperCase() ??
+                                        '';
+                                    final paidRaw =
+                                        payment['paidAt']?.toString();
+                                    final paidAt = paidRaw != null
+                                        ? DateTime.tryParse(paidRaw)
+                                        : null;
+                                    if (paymentStatus != 'SUCCESS' ||
+                                        paidAt == null ||
+                                        paidAt.isBefore(monthStart) ||
+                                        !paidAt.isBefore(nextMonthStart) ||
+                                        payment['amount'] is! num) {
+                                      continue;
+                                    }
+                                    confirmedTrips += 1;
+                                    confirmedSpent +=
+                                        (payment['amount'] as num).round();
+                                    final currency =
+                                        payment['currency']?.toString() ??
+                                            'NGN';
+                                    if (summaryCurrency == 'NGN' &&
+                                        currency.isNotEmpty) {
                                       summaryCurrency = currency;
                                     }
+                                  }
+
+                                  final cards = filteredBookings.map((booking) {
+                                    final route =
+                                        (booking['route'] as Map?) ?? {};
+                                    final payment =
+                                        (booking['payment'] as Map?) ?? {};
+                                    final paymentStatus = payment['status']
+                                            ?.toString()
+                                            .toUpperCase() ??
+                                        '';
+                                    final provider = payment['provider']
+                                            ?.toString()
+                                            .toUpperCase() ??
+                                        '';
+                                    final ticket = booking['ticket'];
+                                    final hasTicket =
+                                        ticket is Map && ticket.isNotEmpty;
+                                    final showRetry = !hasTicket &&
+                                        paymentStatus != 'SUCCESS';
+                                    final from =
+                                        route['fromLocation']?.toString() ??
+                                            'Route';
+                                    final to =
+                                        route['toLocation']?.toString() ??
+                                            'Destination';
+                                    final currency =
+                                        payment['currency']?.toString() ??
+                                            route['currency']?.toString() ??
+                                            'NGN';
+                                    final amountRaw = payment['amount'] ??
+                                        route['price'] ??
+                                        0;
+                                    final amount = amountRaw is num
+                                        ? amountRaw.toInt()
+                                        : int.tryParse(amountRaw.toString()) ??
+                                            0;
+                                    final status =
+                                        booking['status']?.toString() ??
+                                            'Completed';
+                                    final statusColor =
+                                        status.toUpperCase() == 'CONFIRMED'
+                                            ? primary
+                                            : tertiary;
+                                    final dateSource = booking['travelDate'] ??
+                                        booking['createdAt'];
+                                    final bookingId = booking['id']?.toString();
 
                                     return Padding(
-                                      padding: const EdgeInsets.only(bottom: 12),
+                                      padding:
+                                          const EdgeInsets.only(bottom: 12),
                                       child: _HistoryTripCard(
                                         date: _formatDate(dateSource),
                                         title: from,
@@ -6581,112 +7604,184 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                                         status: status,
                                         statusColor: statusColor,
                                         icon: Icons.subway,
-                                        iconGradient: LinearGradient(colors: [primary, primaryContainer]),
+                                        iconGradient: const LinearGradient(
+                                            colors: [
+                                              primary,
+                                              primaryContainer
+                                            ]),
                                         lineColor: primary,
                                         onTap: bookingId == null
                                             ? null
                                             : () => Navigator.pushNamed(
                                                   context,
                                                   AppRoutes.ticketDetails,
-                                                  arguments: {'bookingId': bookingId},
+                                                  arguments: {
+                                                    'bookingId': bookingId
+                                                  },
                                                 ),
                                         showRetry: showRetry,
-                                        retrying: _retryingBookingId == bookingId,
-                                        onRetry: bookingId == null ? null : () => _retryPayment(bookingId, provider),
+                                        retrying:
+                                            _retryingBookingId == bookingId,
+                                        onRetry: bookingId == null
+                                            ? null
+                                            : () => _retryPayment(
+                                                bookingId, provider),
                                       ),
                                     );
                                   }).toList();
 
-                            return Column(
-                              children: [
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
+                                  return Column(
                                     children: [
-                                      _HistoryChip(
-                                        label: _filterLabel(_HistoryFilter.all, bookings),
-                                        active: _selectedFilter == _HistoryFilter.all,
-                                        onTap: () => setState(() => _selectedFilter = _HistoryFilter.all),
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Row(
+                                          children: [
+                                            _HistoryChip(
+                                              label: _filterLabel(
+                                                  _HistoryFilter.all, bookings),
+                                              active: _selectedFilter ==
+                                                  _HistoryFilter.all,
+                                              onTap: () => setState(() =>
+                                                  _selectedFilter =
+                                                      _HistoryFilter.all),
+                                            ),
+                                            _HistoryChip(
+                                              label: _filterLabel(
+                                                  _HistoryFilter.confirmed,
+                                                  bookings),
+                                              active: _selectedFilter ==
+                                                  _HistoryFilter.confirmed,
+                                              onTap: () => setState(() =>
+                                                  _selectedFilter =
+                                                      _HistoryFilter.confirmed),
+                                            ),
+                                            _HistoryChip(
+                                              label: _filterLabel(
+                                                  _HistoryFilter.pending,
+                                                  bookings),
+                                              active: _selectedFilter ==
+                                                  _HistoryFilter.pending,
+                                              onTap: () => setState(() =>
+                                                  _selectedFilter =
+                                                      _HistoryFilter.pending),
+                                            ),
+                                            _HistoryChip(
+                                              label: _filterLabel(
+                                                  _HistoryFilter.tickets,
+                                                  bookings),
+                                              active: _selectedFilter ==
+                                                  _HistoryFilter.tickets,
+                                              onTap: () => setState(() =>
+                                                  _selectedFilter =
+                                                      _HistoryFilter.tickets),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      _HistoryChip(
-                                        label: _filterLabel(_HistoryFilter.confirmed, bookings),
-                                        active: _selectedFilter == _HistoryFilter.confirmed,
-                                        onTap: () => setState(() => _selectedFilter = _HistoryFilter.confirmed),
+                                      const SizedBox(height: 16),
+                                      Align(
+                                        alignment: Alignment.centerRight,
+                                        child: TextButton.icon(
+                                          onPressed: () => setState(() =>
+                                              _bookingsFuture =
+                                                  _loadBookings()),
+                                          icon: const Icon(
+                                              Icons.refresh_rounded,
+                                              size: 18),
+                                          label: Text('Refresh',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w700)),
+                                          style: TextButton.styleFrom(
+                                              foregroundColor: primary),
+                                        ),
                                       ),
-                                      _HistoryChip(
-                                        label: _filterLabel(_HistoryFilter.pending, bookings),
-                                        active: _selectedFilter == _HistoryFilter.pending,
-                                        onTap: () => setState(() => _selectedFilter = _HistoryFilter.pending),
-                                      ),
-                                      _HistoryChip(
-                                        label: _filterLabel(_HistoryFilter.tickets, bookings),
-                                        active: _selectedFilter == _HistoryFilter.tickets,
-                                        onTap: () => setState(() => _selectedFilter = _HistoryFilter.tickets),
+                                      const SizedBox(height: 8),
+                                      if (filteredBookings.isEmpty)
+                                        _EmptyStateCard(
+                                          icon: Icons.filter_alt_off,
+                                          title: 'No rides for this filter',
+                                          body:
+                                              'Try a different filter or reset to view all rides.',
+                                          actionLabel: 'Show all',
+                                          onAction: () => setState(() =>
+                                              _selectedFilter =
+                                                  _HistoryFilter.all),
+                                        ),
+                                      if (filteredBookings.isEmpty)
+                                        const SizedBox(height: 12),
+                                      ...cards,
+                                      const SizedBox(height: 12),
+                                      Container(
+                                        padding: const EdgeInsets.all(20),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                              colors: [
+                                                primary,
+                                                primaryContainer
+                                              ]),
+                                          borderRadius:
+                                              BorderRadius.circular(24),
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            Positioned(
+                                              right: -8,
+                                              bottom: -8,
+                                              child: Icon(Icons.analytics,
+                                                  size: 120,
+                                                  color: Colors.white
+                                                      .withOpacity(0.1)),
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Monthly Summary',
+                                                    style: GoogleFonts.manrope(
+                                                        fontSize: 22,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        color: Colors.white)),
+                                                const SizedBox(height: 6),
+                                                Text(
+                                                    'CONFIRMED TRIPS THIS MONTH',
+                                                    style: GoogleFonts.inter(
+                                                        fontSize: 11,
+                                                        letterSpacing: 2.2,
+                                                        color: Colors.white
+                                                            .withOpacity(0.8),
+                                                        fontWeight:
+                                                            FontWeight.w600)),
+                                                const SizedBox(height: 16),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    _HistorySummaryStat(
+                                                        label:
+                                                            'Confirmed Trips',
+                                                        value: confirmedTrips
+                                                            .toString()),
+                                                    _HistorySummaryStat(
+                                                        label: 'Spent',
+                                                        value:
+                                                            '$summaryCurrency $confirmedSpent'),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: TextButton.icon(
-                                    onPressed: () => setState(() => _bookingsFuture = _loadBookings()),
-                                    icon: const Icon(Icons.refresh_rounded, size: 18),
-                                    label: Text('Refresh', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700)),
-                                    style: TextButton.styleFrom(foregroundColor: primary),
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                if (filteredBookings.isEmpty)
-                                  _EmptyStateCard(
-                                    icon: Icons.filter_alt_off,
-                                    title: 'No rides for this filter',
-                                    body: 'Try a different filter or reset to view all rides.',
-                                    actionLabel: 'Show all',
-                                    onAction: () => setState(() => _selectedFilter = _HistoryFilter.all),
-                                  ),
-                                if (filteredBookings.isEmpty) const SizedBox(height: 12),
-                                ...cards,
-                                const SizedBox(height: 12),
-                                Container(
-                                  padding: const EdgeInsets.all(20),
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(colors: [primary, primaryContainer]),
-                                    borderRadius: BorderRadius.circular(24),
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        right: -8,
-                                        bottom: -8,
-                                        child: Icon(Icons.analytics, size: 120, color: Colors.white.withOpacity(0.1)),
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Monthly Summary', style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white)),
-                                          const SizedBox(height: 6),
-                                          Text('YOUR RIDES THIS MONTH', style: GoogleFonts.inter(fontSize: 11, letterSpacing: 2.2, color: Colors.white.withOpacity(0.8), fontWeight: FontWeight.w600)),
-                                          const SizedBox(height: 16),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              _HistorySummaryStat(label: 'Trips', value: totalTrips.toString()),
-                                              _HistorySummaryStat(label: 'Spent', value: '$summaryCurrency $totalSpent'),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
+                                  );
+                                },
+                              ),
+                          ],
                         ),
-                    ],
-                  ),
-                ),
+                      ),
               ),
             ],
           ),
@@ -6701,8 +7796,14 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
                   decoration: BoxDecoration(
                     color: background.withOpacity(0.8),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8))],
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(24)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 30,
+                          offset: const Offset(0, -8))
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -6710,7 +7811,8 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                       _BottomNavPill(
                         label: 'Home',
                         icon: Icons.home,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.home),
                       ),
                       _BottomNavPill(
                         label: 'History',
@@ -6721,12 +7823,14 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                       _BottomNavPill(
                         label: 'Booking',
                         icon: Icons.confirmation_number,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                       ),
                       _BottomNavPill(
                         label: 'Profile',
                         icon: Icons.person,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                       ),
                     ],
                   ),
@@ -6789,21 +7893,30 @@ class _RouteOriginChip extends StatelessWidget {
   Widget build(BuildContext context) {
     const primary = Color(0xFF006B47);
     const onSurfaceVariant = Color(0xFF3E4942);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF2F5F3);
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(right: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
           color: active ? primary : surfaceContainerLow,
           borderRadius: BorderRadius.circular(18),
+          boxShadow: active
+              ? [
+                  BoxShadow(
+                    color: primary.withOpacity(0.12),
+                    blurRadius: 12,
+                    spreadRadius: -8,
+                    offset: const Offset(0, 8),
+                  ),
+                ]
+              : null,
         ),
         child: Text(
           label,
           style: GoogleFonts.inter(
-            fontSize: 11,
+            fontSize: 11.5,
             fontWeight: FontWeight.w600,
             color: active ? Colors.white : onSurfaceVariant,
           ),
@@ -6859,7 +7972,12 @@ class _HistoryTripCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: surfaceLowest,
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 16, offset: const Offset(0, 8))],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 16,
+                offset: const Offset(0, 8))
+          ],
         ),
         child: Column(
           children: [
@@ -6870,10 +7988,15 @@ class _HistoryTripCard extends StatelessWidget {
                   height: 40,
                   decoration: BoxDecoration(
                     gradient: iconGradient,
-                    color: iconGradient == null ? iconBackground ?? surfaceContainerLow : null,
+                    color: iconGradient == null
+                        ? iconBackground ?? surfaceContainerLow
+                        : null,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(icon, color: iconGradient == null ? onSurfaceVariant : Colors.white),
+                  child: Icon(icon,
+                      color: iconGradient == null
+                          ? onSurfaceVariant
+                          : Colors.white),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -6882,23 +8005,44 @@ class _HistoryTripCard extends StatelessWidget {
                     children: [
                       Text(
                         date.toUpperCase(),
-                        style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1.4,
+                            color: onSurfaceVariant),
                       ),
                       const SizedBox(height: 4),
-                      Text(title, style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: onSurface)),
+                      Text(title,
+                          style: GoogleFonts.manrope(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: onSurface)),
                     ],
                   ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(price, style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w800, color: statusColor)),
+                    Text(price,
+                        style: GoogleFonts.manrope(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800,
+                            color: statusColor)),
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        Icon(status == 'Canceled' ? Icons.cancel : Icons.check_circle, size: 14, color: statusColor),
+                        Icon(
+                            status == 'Canceled'
+                                ? Icons.cancel
+                                : Icons.check_circle,
+                            size: 14,
+                            color: statusColor),
                         const SizedBox(width: 4),
-                        Text(status.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: statusColor)),
+                        Text(status.toUpperCase(),
+                            style: GoogleFonts.inter(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
+                                color: statusColor)),
                       ],
                     ),
                   ],
@@ -6919,8 +8063,10 @@ class _HistoryTripCard extends StatelessWidget {
                       onPressed: retrying ? null : onRetry,
                       style: OutlinedButton.styleFrom(
                         side: BorderSide(color: lineColor.withOpacity(0.6)),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14)),
                       ),
                       icon: retrying
                           ? const SizedBox(
@@ -6928,10 +8074,14 @@ class _HistoryTripCard extends StatelessWidget {
                               height: 14,
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
-                          : Icon(Icons.refresh_rounded, color: lineColor, size: 16),
+                          : Icon(Icons.refresh_rounded,
+                              color: lineColor, size: 16),
                       label: Text(
                         retrying ? 'Restarting...' : 'Retry payment',
-                        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: lineColor),
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: lineColor),
                       ),
                     ),
                   const Spacer(),
@@ -6939,9 +8089,14 @@ class _HistoryTripCard extends StatelessWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('Open ticket', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: lineColor)),
+                        Text('Open ticket',
+                            style: GoogleFonts.inter(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: lineColor)),
                         const SizedBox(width: 4),
-                        Icon(Icons.chevron_right_rounded, color: lineColor, size: 18),
+                        Icon(Icons.chevron_right_rounded,
+                            color: lineColor, size: 18),
                       ],
                     ),
                 ],
@@ -6996,7 +8151,10 @@ class _HistoryTimeline extends StatelessWidget {
         Expanded(
           child: Text(
             destination,
-            style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: onSurface.withOpacity(0.6)),
+            style: GoogleFonts.manrope(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: onSurface.withOpacity(0.6)),
           ),
         ),
       ],
@@ -7015,14 +8173,21 @@ class _HistorySummaryStat extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1.4, color: Colors.white.withOpacity(0.7))),
+        Text(label.toUpperCase(),
+            style: GoogleFonts.inter(
+                fontSize: 10,
+                letterSpacing: 1.4,
+                color: Colors.white.withOpacity(0.7))),
         const SizedBox(height: 4),
-        Text(value, style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w800, color: Colors.white)),
+        Text(value,
+            style: GoogleFonts.manrope(
+                fontSize: 26,
+                fontWeight: FontWeight.w800,
+                color: Colors.white)),
       ],
     );
   }
 }
-
 
 class _ProfileStatCard extends StatelessWidget {
   const _ProfileStatCard({
@@ -7047,7 +8212,12 @@ class _ProfileStatCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: surfaceLowest,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Row(
         children: [
@@ -7065,9 +8235,18 @@ class _ProfileStatCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label, style: GoogleFonts.inter(fontSize: 11, letterSpacing: 1.3, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
+                Text(label,
+                    style: GoogleFonts.inter(
+                        fontSize: 11,
+                        letterSpacing: 1.3,
+                        fontWeight: FontWeight.w600,
+                        color: onSurfaceVariant)),
                 const SizedBox(height: 6),
-                Text(value, style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: onSurface)),
+                Text(value,
+                    style: GoogleFonts.manrope(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800,
+                        color: onSurface)),
               ],
             ),
           ),
@@ -7106,7 +8285,8 @@ class _ProfileSettingItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: surfaceLowest,
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: outlineVariant.withOpacity(enabled ? 0.35 : 0.2)),
+          border: Border.all(
+              color: outlineVariant.withOpacity(enabled ? 0.35 : 0.2)),
         ),
         child: Row(
           children: [
@@ -7130,14 +8310,16 @@ class _ProfileSettingItem extends StatelessWidget {
                       subtitle!,
                       style: GoogleFonts.inter(
                         fontSize: 11,
-                        color: onSurfaceVariant.withOpacity(enabled ? 0.85 : 0.6),
+                        color:
+                            onSurfaceVariant.withOpacity(enabled ? 0.85 : 0.6),
                       ),
                     ),
                   ],
                 ],
               ),
             ),
-            if (enabled) Icon(Icons.chevron_right, color: onSurfaceVariant),
+            if (enabled)
+              const Icon(Icons.chevron_right, color: onSurfaceVariant),
           ],
         ),
       ),
@@ -7189,47 +8371,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _error = null;
     });
     try {
-      await AuthApi.getMe();
-      final bookings = await UserApi.listBookingsForUser(AuthStore.userId!);
-      final now = DateTime.now();
-      final monthStart = DateTime(now.year, now.month, 1);
-      int monthTotal = 0;
-      int rideCount = 0;
-      for (final booking in bookings) {
+      final results = await Future.wait([
+        AuthApi.getMe(),
+        UserApi.listBookingsForUser(AuthStore.userId!),
+      ]);
+      final bookings = (results[1] as List).cast<Map<String, dynamic>>();
+      final successfulBookings = bookings.where((booking) {
         final payment = booking['payment'];
-        if (payment is! Map) {
+        if (payment is! Map) return false;
+        return payment['status']?.toString().toUpperCase() == 'SUCCESS';
+      }).toList();
+      final now = DateTime.now();
+      final monthStart = DateTime(now.year, now.month);
+      int monthTotal = 0;
+      for (final booking in successfulBookings) {
+        final payment = booking['payment'];
+        if (payment is! Map || payment['amount'] is! num) {
           continue;
         }
-
-        final paymentStatus = payment['status']?.toString().toUpperCase() ?? '';
-        if (paymentStatus != 'SUCCESS') {
-          continue;
-        }
-
-        rideCount += 1;
-
         final paidRaw = payment['paidAt']?.toString();
         final paidAt = paidRaw != null ? DateTime.tryParse(paidRaw) : null;
         if (paidAt == null || paidAt.isBefore(monthStart)) {
           continue;
         }
-
-        int amount = 0;
-        if (payment['amount'] is num) {
-          amount = (payment['amount'] as num).round();
-        } else {
-          final route = booking['route'];
-          if (route is Map && route['price'] is num) {
-            amount = (route['price'] as num).round();
-          }
-        }
-        if (amount <= 0) {
-          continue;
-        }
-        monthTotal += amount;
+        monthTotal += (payment['amount'] as num).round();
       }
       setState(() {
-        _rideCount = rideCount;
+        _rideCount = successfulBookings.length;
         _spentMonth = monthTotal;
         _loading = false;
       });
@@ -7255,7 +8423,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (AuthStore.email != null && AuthStore.email!.trim().isNotEmpty) {
       return AuthStore.email!;
     }
-    return AuthStore.isLoggedIn ? 'Update your email in profile settings' : 'Sign in to view profile';
+    return AuthStore.isLoggedIn
+        ? 'Update your email in profile settings'
+        : 'Sign in to view profile';
   }
 
   String _avatarInitials() {
@@ -7383,7 +8553,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (context) {
-        final hasAvatar = AuthStore.avatarUrl != null && AuthStore.avatarUrl!.trim().isNotEmpty;
+        final hasAvatar = AuthStore.avatarUrl != null &&
+            AuthStore.avatarUrl!.trim().isNotEmpty;
         return SafeArea(
           top: false,
           child: Padding(
@@ -7402,7 +8573,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 16),
                 ListTile(
                   leading: const Icon(Icons.photo_library_outlined),
-                  title: Text('Upload photo', style: GoogleFonts.manrope(fontWeight: FontWeight.w700)),
+                  title: Text('Upload photo',
+                      style: GoogleFonts.manrope(fontWeight: FontWeight.w700)),
                   onTap: () {
                     Navigator.pop(context);
                     _pickAvatar();
@@ -7411,7 +8583,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 if (hasAvatar)
                   ListTile(
                     leading: const Icon(Icons.delete_outline),
-                    title: Text('Remove photo', style: GoogleFonts.manrope(fontWeight: FontWeight.w700)),
+                    title: Text('Remove photo',
+                        style:
+                            GoogleFonts.manrope(fontWeight: FontWeight.w700)),
                     onTap: () {
                       Navigator.pop(context);
                       _removeAvatar();
@@ -7438,8 +8612,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     const primaryContainer = Color(0xFF00875A);
     const error = Color(0xFFBA1A1A);
 
-    final nameText = _loading ? 'Loading...' : _displayName();
-    final emailText = _loading ? 'Fetching profile...' : _displayEmail();
+    final nameText = _displayName();
+    final emailText = _displayEmail();
     final ridesValue = _loading ? '--' : _rideCount.toString();
     final spentValue = _loading ? 'NGN --' : _formatNgn(_spentMonth);
     final avatarProvider = _avatarImageProvider();
@@ -7462,26 +8636,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4))
+                        ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
                             IconButton(
-                              onPressed: () => Navigator.pushNamed(context, AppRoutes.hamburgerMenu),
+                              onPressed: () => Navigator.pushNamed(
+                                  context, AppRoutes.hamburgerMenu),
                               icon: const Icon(Icons.menu, color: primary),
                             ),
                             _brandLogo(size: 26, radius: 8),
                             const SizedBox(width: 8),
-                            Text('I-Metro', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+                            Text('I-Metro',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: primary)),
                             const Spacer(),
                             Container(
                               width: 40,
                               height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: primaryContainer, width: 2),
+                                border: Border.all(
+                                    color: primaryContainer, width: 2),
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
@@ -7491,10 +8676,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         alignment: Alignment.center,
                                         child: Text(
                                           initials,
-                                          style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: primary),
+                                          style: GoogleFonts.manrope(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w800,
+                                              color: primary),
                                         ),
                                       )
-                                    : Image(image: avatarProvider, fit: BoxFit.cover),
+                                    : Image(
+                                        image: avatarProvider,
+                                        fit: BoxFit.cover),
                               ),
                             ),
                           ],
@@ -7520,7 +8710,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 128,
                               padding: const EdgeInsets.all(4),
                               decoration: BoxDecoration(
-                                gradient: const LinearGradient(colors: [primary, primaryContainer]),
+                                gradient: const LinearGradient(
+                                    colors: [primary, primaryContainer]),
                                 borderRadius: BorderRadius.circular(28),
                               ),
                               child: ClipRRect(
@@ -7529,7 +8720,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ? Container(
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(
-                                            colors: [primary.withOpacity(0.2), primaryContainer.withOpacity(0.25)],
+                                            colors: [
+                                              primary.withOpacity(0.2),
+                                              primaryContainer.withOpacity(0.25)
+                                            ],
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                           ),
@@ -7537,10 +8731,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         alignment: Alignment.center,
                                         child: Text(
                                           initials,
-                                          style: GoogleFonts.manrope(fontSize: 36, fontWeight: FontWeight.w800, color: primary),
+                                          style: GoogleFonts.manrope(
+                                              fontSize: 36,
+                                              fontWeight: FontWeight.w800,
+                                              color: primary),
                                         ),
                                       )
-                                    : Image(image: avatarProvider, fit: BoxFit.cover),
+                                    : Image(
+                                        image: avatarProvider,
+                                        fit: BoxFit.cover),
                               ),
                             ),
                           ),
@@ -7555,15 +8754,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 decoration: BoxDecoration(
                                   color: surfaceLowest,
                                   borderRadius: BorderRadius.circular(18),
-                                  border: Border.all(color: outlineVariant.withOpacity(0.5)),
-                                  boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 10, offset: const Offset(0, 4))],
+                                  border: Border.all(
+                                      color: outlineVariant.withOpacity(0.5)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.black.withOpacity(0.08),
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4))
+                                  ],
                                 ),
                                 child: _uploadingAvatar
                                     ? const Padding(
                                         padding: EdgeInsets.all(8),
-                                        child: CircularProgressIndicator(strokeWidth: 2),
+                                        child: CircularProgressIndicator(
+                                            strokeWidth: 2),
                                       )
-                                    : const Icon(Icons.camera_alt_outlined, size: 18, color: primary),
+                                    : const Icon(Icons.camera_alt_outlined,
+                                        size: 18, color: primary),
                               ),
                             ),
                           ),
@@ -7571,56 +8778,96 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             right: -6,
                             bottom: -6,
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
                               decoration: BoxDecoration(
                                 color: memberColor,
                                 borderRadius: BorderRadius.circular(16),
-                                boxShadow: [BoxShadow(color: memberColor.withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 6))],
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: memberColor.withOpacity(0.3),
+                                      blurRadius: 10,
+                                      offset: const Offset(0, 6))
+                                ],
                                 border: Border.all(color: background, width: 4),
                               ),
                               child: Text(
                                 memberLabel,
-                                style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.6, color: Colors.white),
+                                style: GoogleFonts.inter(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 1.6,
+                                    color: Colors.white),
                               ),
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 16),
-                      Text(nameText, style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface)),
+                      Text(nameText,
+                          style: GoogleFonts.manrope(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                              color: onSurface)),
                       const SizedBox(height: 6),
-                      Text(emailText, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: onSurfaceVariant)),
+                      Text(emailText,
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
+                              color: onSurfaceVariant)),
                       const SizedBox(height: 12),
                       OfflineBanner(onRetry: _loadProfile),
                       if (_avatarError != null) ...[
                         const SizedBox(height: 8),
-                        Text(_avatarError!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: error)),
+                        Text(_avatarError!,
+                            style: GoogleFonts.inter(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: error)),
                       ],
                       if (_error != null) ...[
                         const SizedBox(height: 10),
-                        Text(_error!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: error)),
+                        Text(_error!,
+                            style: GoogleFonts.inter(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: error)),
                         const SizedBox(height: 8),
                         GestureDetector(
                           onTap: _loadProfile,
-                          child: Text('Retry', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: primary)),
+                          child: Text('Retry',
+                              style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: primary)),
                         ),
                       ],
                       if (!AuthStore.isLoggedIn) ...[
                         const SizedBox(height: 20),
                         GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, AppRoutes.login),
+                          onTap: () =>
+                              Navigator.pushNamed(context, AppRoutes.login),
                           child: Container(
                             width: double.infinity,
-                            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 12),
                             decoration: BoxDecoration(
                               color: primary,
                               borderRadius: BorderRadius.circular(20),
-                              boxShadow: [BoxShadow(color: primary.withOpacity(0.3), blurRadius: 12, offset: const Offset(0, 6))],
+                              boxShadow: [
+                                BoxShadow(
+                                    color: primary.withOpacity(0.3),
+                                    blurRadius: 12,
+                                    offset: const Offset(0, 6))
+                              ],
                             ),
                             child: Center(
                               child: Text(
                                 'Sign in to view full profile',
-                                style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
+                                style: GoogleFonts.manrope(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white),
                               ),
                             ),
                           ),
@@ -7653,7 +8900,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           padding: const EdgeInsets.only(left: 4, bottom: 8),
                           child: Text(
                             'ACCOUNT SETTINGS',
-                            style: GoogleFonts.inter(fontSize: 10, letterSpacing: 3.2, fontWeight: FontWeight.w700, color: onSurfaceVariant),
+                            style: GoogleFonts.inter(
+                                fontSize: 10,
+                                letterSpacing: 3.2,
+                                fontWeight: FontWeight.w700,
+                                color: onSurfaceVariant),
                           ),
                         ),
                       ),
@@ -7661,9 +8912,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         icon: Icons.person_outline,
                         label: 'Edit Profile',
                         subtitle: 'Name, email, and phone',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profileSettings),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.profileSettings),
                       ),
-                      _ProfileSettingItem(
+                      const _ProfileSettingItem(
                         icon: Icons.payments_outlined,
                         label: 'Payment Methods',
                         subtitle: 'Manage cards (coming soon)',
@@ -7672,19 +8924,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         icon: Icons.settings_outlined,
                         label: 'Settings',
                         subtitle: 'Notifications and preferences',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profileSettings),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.profileSettings),
                       ),
                       _ProfileSettingItem(
                         icon: Icons.shield_outlined,
                         label: 'Security',
                         subtitle: 'Change password',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.changePassword),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.changePassword),
                       ),
                       _ProfileSettingItem(
                         icon: Icons.help_outline,
                         label: 'Support',
                         subtitle: 'Contact the I-Metro team',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.contactUs),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.contactUs),
                       ),
                       const SizedBox(height: 20),
                       Container(
@@ -7692,7 +8947,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         decoration: BoxDecoration(
                           color: surfaceContainerLow,
                           borderRadius: BorderRadius.circular(24),
-                          border: Border.all(color: outlineVariant.withOpacity(0.4)),
+                          border: Border.all(
+                              color: outlineVariant.withOpacity(0.4)),
                         ),
                         child: Row(
                           children: [
@@ -7703,18 +8959,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 color: primary.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(14),
                               ),
-                              child: const Icon(Icons.warning_amber_rounded, color: primary),
+                              child: const Icon(Icons.warning_amber_rounded,
+                                  color: primary),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Ticket Expiry Reminder', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
+                                  Text('Ticket Expiry Reminder',
+                                      style: GoogleFonts.manrope(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: onSurface)),
                                   const SizedBox(height: 4),
                                   Text(
                                     'Tickets are valid for the day of purchase. Please complete your trip before midnight.',
-                                    style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant),
+                                    style: GoogleFonts.inter(
+                                        fontSize: 11, color: onSurfaceVariant),
                                   ),
                                 ],
                               ),
@@ -7726,21 +8988,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       if (AuthStore.isLoggedIn) ...[
                         Text(
                           'Need to logout?',
-                          style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant),
+                          style: GoogleFonts.inter(
+                              fontSize: 12, color: onSurfaceVariant),
                         ),
                         const SizedBox(height: 8),
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton.icon(
-                            onPressed: () => Navigator.pushNamed(context, AppRoutes.logout),
+                            onPressed: () =>
+                                Navigator.pushNamed(context, AppRoutes.logout),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: error,
                               side: BorderSide(color: error.withOpacity(0.5)),
                               padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18)),
                             ),
                             icon: const Icon(Icons.logout, size: 18),
-                            label: Text('Log out of I-Metro', style: GoogleFonts.manrope(fontSize: 13, fontWeight: FontWeight.w700)),
+                            label: Text('Log out of I-Metro',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 13, fontWeight: FontWeight.w700)),
                           ),
                         ),
                       ],
@@ -7762,8 +9029,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
                   decoration: BoxDecoration(
                     color: background.withOpacity(0.8),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8))],
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(24)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 30,
+                          offset: const Offset(0, -8))
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -7771,23 +9044,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       _BottomNavPill(
                         label: 'Home',
                         icon: Icons.home,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.home),
                       ),
                       _BottomNavPill(
                         label: 'History',
                         icon: Icons.history,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
                       ),
                       _BottomNavPill(
                         label: 'Booking',
                         icon: Icons.confirmation_number,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                       ),
                       _BottomNavPill(
                         label: 'Profile',
                         icon: Icons.person,
                         active: true,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                       ),
                     ],
                   ),
@@ -7818,7 +9095,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
   DateTime? _lastUpdated;
   bool _pushLoading = false;
   bool _pushEnabled = false;
-  bool _pushAvailable = const bool.fromEnvironment('ENABLE_FCM', defaultValue: false);
+  final bool _pushAvailable =
+      const bool.fromEnvironment('ENABLE_FCM', defaultValue: false);
   String _pushStatusLabel = 'Off';
 
   @override
@@ -7846,10 +9124,14 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     try {
       final response = await AuthApi.getMe();
       final user = response['user'] is Map ? response['user'] as Map : {};
-      _firstNameController.text = user['firstName']?.toString() ?? AuthStore.firstName ?? '';
-      _lastNameController.text = user['lastName']?.toString() ?? AuthStore.lastName ?? '';
-      _emailController.text = user['email']?.toString() ?? AuthStore.email ?? '';
-      _phoneController.text = _displayPhoneValue(user['phone']?.toString() ?? AuthStore.phone ?? '');
+      _firstNameController.text =
+          user['firstName']?.toString() ?? AuthStore.firstName ?? '';
+      _lastNameController.text =
+          user['lastName']?.toString() ?? AuthStore.lastName ?? '';
+      _emailController.text =
+          user['email']?.toString() ?? AuthStore.email ?? '';
+      _phoneController.text =
+          user['phone']?.toString() ?? AuthStore.phone ?? '';
       setState(() => _loading = false);
     } catch (_) {
       setState(() => _loading = false);
@@ -7875,7 +9157,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     }
     try {
       await Firebase.initializeApp();
-      final settings = await FirebaseMessaging.instance.getNotificationSettings();
+      final settings =
+          await FirebaseMessaging.instance.getNotificationSettings();
       _applyPushStatus(settings.authorizationStatus);
     } catch (_) {
       if (!mounted) return;
@@ -7888,7 +9171,8 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   void _applyPushStatus(AuthorizationStatus status) {
     if (!mounted) return;
-    final enabled = status == AuthorizationStatus.authorized || status == AuthorizationStatus.provisional;
+    final enabled = status == AuthorizationStatus.authorized ||
+        status == AuthorizationStatus.provisional;
     final label = switch (status) {
       AuthorizationStatus.authorized => 'Enabled',
       AuthorizationStatus.provisional => 'Enabled (Quiet)',
@@ -7918,61 +9202,84 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
       _applyPushStatus(settings.authorizationStatus);
       if (settings.authorizationStatus == AuthorizationStatus.denied) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Notifications are blocked for this device.')),
+          const SnackBar(
+              content: Text('Notifications are blocked for this device.')),
         );
       }
     } catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Unable to request notification permissions.')),
+        const SnackBar(
+            content: Text('Unable to request notification permissions.')),
       );
     }
     if (!mounted) return;
     setState(() => _pushLoading = false);
   }
 
-  String _displayPhoneValue(String value) {
-    var phone = value.trim();
-    if (phone.isEmpty) {
-      return '';
-    }
-    phone = phone.replaceAll(RegExp(r'[\s\-\(\)]'), '');
-    if (phone.startsWith('+234')) {
-      return phone.substring(4);
-    }
-    if (phone.startsWith('234') && phone.length > 3) {
-      return phone.substring(3);
-    }
-    if (phone.startsWith('0') && phone.length > 1) {
-      return phone.substring(1);
-    }
-    return phone;
-  }
-
-  String? _normalizePhoneValue(String value) {
-    var phone = value.trim();
-    if (phone.isEmpty) {
-      return null;
-    }
-    phone = phone.replaceAll(RegExp(r'[\s\-\(\)]'), '');
-    if (phone.startsWith('+234')) {
-      return phone;
-    }
-    if (phone.startsWith('234')) {
-      return '+$phone';
-    }
-    if (phone.startsWith('0') && phone.length > 1) {
-      return '+234${phone.substring(1)}';
-    }
-    return '+234$phone';
-  }
-
   String _lastUpdatedLabel() {
     if (_lastUpdated == null) {
       return 'Last updated on -';
     }
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     final date = _lastUpdated!;
     return 'Last updated on ${months[date.month - 1]} ${date.day}, ${date.year}';
+  }
+
+  String _profileInitials() {
+    final first = _firstNameController.text.trim().isNotEmpty
+        ? _firstNameController.text.trim()
+        : AuthStore.firstName?.trim() ?? '';
+    final last = _lastNameController.text.trim().isNotEmpty
+        ? _lastNameController.text.trim()
+        : AuthStore.lastName?.trim() ?? '';
+    if (first.isNotEmpty && last.isNotEmpty) {
+      return '${first[0]}${last[0]}'.toUpperCase();
+    }
+    if (first.isNotEmpty) {
+      return first.substring(0, 1).toUpperCase();
+    }
+    final email = _emailController.text.trim().isNotEmpty
+        ? _emailController.text.trim()
+        : AuthStore.email?.trim() ?? '';
+    if (email.isNotEmpty) {
+      return email.substring(0, 1).toUpperCase();
+    }
+    return 'IM';
+  }
+
+  ImageProvider? _profileAvatarProvider() {
+    final data = AuthStore.avatarUrl;
+    if (data == null || data.trim().isEmpty) {
+      return null;
+    }
+    if (data.startsWith('http')) {
+      return NetworkImage(data);
+    }
+    if (data.startsWith('data:image')) {
+      final comma = data.indexOf(',');
+      if (comma != -1) {
+        final base64Part = data.substring(comma + 1);
+        try {
+          return MemoryImage(base64Decode(base64Part));
+        } catch (_) {
+          return null;
+        }
+      }
+    }
+    return null;
   }
 
   Future<void> _saveProfile() async {
@@ -7984,10 +9291,11 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     String? firstName = _firstNameController.text.trim();
     String? lastName = _lastNameController.text.trim();
     String? email = _emailController.text.trim();
-    String? phone = _normalizePhoneValue(_phoneController.text);
+    String? phone = _phoneController.text.trim();
     if (firstName.isEmpty) firstName = null;
     if (lastName.isEmpty) lastName = null;
     if (email.isEmpty) email = null;
+    if (phone.isEmpty) phone = null;
     final response = await AuthApi.updateProfile(
       firstName: firstName,
       lastName: lastName,
@@ -8001,7 +9309,9 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
         const SnackBar(content: Text('Profile updated successfully')),
       );
     } else {
-      final message = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to update profile';
+      final message = response['message']?.toString() ??
+          response['reason']?.toString() ??
+          'Unable to update profile';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(message)),
       );
@@ -8011,9 +9321,9 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const surfaceContainerHigh = Color(0xFFE6E8EA);
+    const background = Color(0xFFF6FAF8);
+    const surfaceContainerLow = Color(0xFFF1F5F2);
+    const surfaceContainerHigh = Color(0xFFE5ECE7);
     const surfaceLowest = Color(0xFFFFFFFF);
     const outlineVariant = Color(0xFFBDCAC0);
     const onSurface = Color(0xFF191C1E);
@@ -8022,44 +9332,159 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
     const primaryContainer = Color(0xFF00875A);
 
     final canSave = AuthStore.isLoggedIn && !_saving && !_loading;
+    final avatarProvider = _profileAvatarProvider();
+    final initials = _profileInitials();
+    final firstName = _firstNameController.text.trim().isNotEmpty
+        ? _firstNameController.text.trim()
+        : AuthStore.firstName?.trim() ?? '';
+    final lastName = _lastNameController.text.trim().isNotEmpty
+        ? _lastNameController.text.trim()
+        : AuthStore.lastName?.trim() ?? '';
+    final fullName =
+        [firstName, lastName].where((part) => part.isNotEmpty).join(' ');
+    final displayName = fullName.isNotEmpty ? fullName : 'I-Metro Traveler';
+    final displayEmail = _emailController.text.trim().isNotEmpty
+        ? _emailController.text.trim()
+        : (AuthStore.email?.trim().isNotEmpty == true
+            ? AuthStore.email!.trim()
+            : 'traveler@i-metro.com');
 
     return Scaffold(
       backgroundColor: background,
       body: Stack(
         children: [
+          Positioned(
+            top: -110,
+            right: -72,
+            child: Container(
+              width: 240,
+              height: 240,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    primary.withOpacity(0.18),
+                    primaryContainer.withOpacity(0.04),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: 180,
+            left: -48,
+            child: Container(
+              width: 156,
+              height: 156,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.06),
+              ),
+            ),
+          ),
           Column(
             children: [
               SizedBox(
-                height: 64,
+                height: 72,
                 child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                        color: background.withOpacity(0.82),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
+                          )
+                        ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
-                            IconButton(
-                              onPressed: () => Navigator.pushNamed(context, AppRoutes.hamburgerMenu),
-                              icon: const Icon(Icons.menu, color: primary),
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                  context, AppRoutes.hamburgerMenu),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.menu, color: primary),
+                              ),
                             ),
+                            const SizedBox(width: 12),
                             _brandLogo(size: 26, radius: 8),
                             const SizedBox(width: 8),
-                            Text('I-Metro', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('I-Metro',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary)),
+                                Text('Profile settings',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: onSurfaceVariant
+                                            .withOpacity(0.72))),
+                              ],
+                            ),
                             const Spacer(),
                             Container(
-                              width: 40,
-                              height: 40,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 8),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: primary.withOpacity(0.2), width: 2),
+                                color: surfaceLowest.withOpacity(0.92),
+                                borderRadius: BorderRadius.circular(18),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.035),
+                                    blurRadius: 12,
+                                    spreadRadius: -6,
+                                    offset: const Offset(0, 8),
+                                  ),
+                                ],
                               ),
-                              child: const _UserProfileThumb(size: 40),
+                              child: Row(
+                                children: [
+                                  _ProfileInitialAvatar(
+                                    size: 34,
+                                    initials: initials,
+                                    imageProvider: avatarProvider,
+                                    borderColor: primary.withOpacity(0.22),
+                                  ),
+                                  if (AuthStore.isLoggedIn) ...[
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      initials,
+                                      style: GoogleFonts.manrope(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary,
+                                      ),
+                                    ),
+                                  ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -8073,104 +9498,320 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 150),
                   child: Column(
                     children: [
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 96,
-                              height: 96,
-                              padding: const EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                color: surfaceContainerHigh,
-                                borderRadius: BorderRadius.circular(24),
-                                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 6))],
-                              ),
-                              child: const _UserProfileThumb(size: 96),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.fromLTRB(22, 24, 22, 22),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              surfaceLowest,
+                              const Color(0xFFF8FCFA),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              color: outlineVariant.withOpacity(0.1)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: primary.withOpacity(0.08),
+                              blurRadius: 26,
+                              spreadRadius: -16,
+                              offset: const Offset(0, 18),
                             ),
-                            const SizedBox(height: 12),
-                            Text('Profile Settings', style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface)),
-                            const SizedBox(height: 6),
-                            Text('Update your traveler profile and contact details', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w500, color: onSurfaceVariant)),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 24,
+                              spreadRadius: -14,
+                              offset: const Offset(0, 16),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Stack(
+                              clipBehavior: Clip.none,
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: 120,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: primary.withOpacity(0.08),
+                                  ),
+                                ),
+                                _ProfileInitialAvatar(
+                                  size: 98,
+                                  initials: initials,
+                                  imageProvider: avatarProvider,
+                                  borderColor: primary.withOpacity(0.16),
+                                  shadow: true,
+                                ),
+                                Positioned(
+                                  bottom: -2,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 7),
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                        colors: [primary, primaryContainer],
+                                      ),
+                                      borderRadius: BorderRadius.circular(999),
+                                      border: Border.all(
+                                          color: surfaceLowest, width: 3),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: primary.withOpacity(0.18),
+                                          blurRadius: 14,
+                                          spreadRadius: -8,
+                                          offset: const Offset(0, 8),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const Icon(Icons.verified_rounded,
+                                            size: 14, color: Colors.white),
+                                        const SizedBox(width: 6),
+                                        Text(
+                                          'Verified traveler',
+                                          style: GoogleFonts.inter(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 22),
+                            Text(
+                              displayName,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.manrope(
+                                fontSize: 27,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.45,
+                                color: onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              displayEmail,
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.inter(
+                                fontSize: 13,
+                                height: 1.45,
+                                fontWeight: FontWeight.w500,
+                                color: onSurfaceVariant.withOpacity(0.84),
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 14, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: primary.withOpacity(0.08),
+                                borderRadius: BorderRadius.circular(18),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.tune_rounded,
+                                      size: 16, color: primary),
+                                  const SizedBox(width: 8),
+                                  Flexible(
+                                    child: Text(
+                                      'Update your traveler profile and account preferences',
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 11.5,
+                                        fontWeight: FontWeight.w600,
+                                        color: primary,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       if (!AuthStore.isLoggedIn) ...[
                         const SizedBox(height: 16),
                         Container(
-                          padding: const EdgeInsets.all(14),
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
-                            color: surfaceContainerLow,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: outlineVariant.withOpacity(0.3)),
+                            color: surfaceLowest,
+                            borderRadius: BorderRadius.circular(22),
+                            border: Border.all(
+                                color: outlineVariant.withOpacity(0.16)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.03),
+                                blurRadius: 14,
+                                spreadRadius: -8,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
                           ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Sign in to edit your profile details.', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
-                              const SizedBox(height: 8),
+                              Text('Sign in to edit your profile details.',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          onSurfaceVariant.withOpacity(0.92))),
+                              const SizedBox(height: 10),
                               GestureDetector(
-                                onTap: () => Navigator.pushNamed(context, AppRoutes.login),
-                                child: Text('Go to Login', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: primary)),
+                                onTap: () => Navigator.pushNamed(
+                                    context, AppRoutes.login),
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 14, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    color: primary.withOpacity(0.08),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: Text('Go to Login',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: primary)),
+                                ),
                               ),
                             ],
                           ),
                         ),
                       ],
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: _ProfileInputCard(
-                              label: 'First Name',
-                              value: 'First name',
-                              controller: _firstNameController,
-                              enabled: AuthStore.isLoggedIn,
-                            ),
-                          ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: _ProfileInputCard(
-                              label: 'Last Name',
-                              value: 'Last name',
-                              controller: _lastNameController,
-                              enabled: AuthStore.isLoggedIn,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      _ProfileInputCard(
-                        label: 'Email Address',
-                        value: 'Email address',
-                        controller: _emailController,
-                        enabled: AuthStore.isLoggedIn,
-                        trailing: Icon(Icons.verified, color: primary, size: 20),
-                      ),
-                      const SizedBox(height: 16),
-                      _ProfileInputCard(
-                        label: 'Phone Number',
-                        value: 'Phone number',
-                        controller: _phoneController,
-                        enabled: AuthStore.isLoggedIn,
-                        prefix: '+234',
-                      ),
-                      const SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 4),
-                          child: Text('ACCOUNT PREFERENCES', style: GoogleFonts.inter(fontSize: 11, letterSpacing: 2.4, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 18),
                       Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(18),
                         decoration: BoxDecoration(
-                          color: surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(24),
+                          color: surfaceLowest.withOpacity(0.96),
+                          borderRadius: BorderRadius.circular(28),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 22,
+                              spreadRadius: -14,
+                              offset: const Offset(0, 16),
+                            ),
+                          ],
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Text('Personal details',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: onSurface,
+                                )),
+                            const SizedBox(height: 6),
+                            Text(
+                              'Keep your rider identity and contact details up to date.',
+                              style: GoogleFonts.inter(
+                                fontSize: 12.5,
+                                height: 1.45,
+                                color: onSurfaceVariant.withOpacity(0.8),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _ProfileInputCard(
+                                    label: 'First Name',
+                                    value: 'First name',
+                                    controller: _firstNameController,
+                                    enabled: AuthStore.isLoggedIn,
+                                  ),
+                                ),
+                                const SizedBox(width: 14),
+                                Expanded(
+                                  child: _ProfileInputCard(
+                                    label: 'Last Name',
+                                    value: 'Last name',
+                                    controller: _lastNameController,
+                                    enabled: AuthStore.isLoggedIn,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 14),
+                            _ProfileInputCard(
+                              label: 'Email Address',
+                              value: 'Email address',
+                              controller: _emailController,
+                              enabled: AuthStore.isLoggedIn,
+                              trailing: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 6),
+                                decoration: BoxDecoration(
+                                  color: primary.withOpacity(0.08),
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                                child: const Icon(Icons.verified_rounded,
+                                    color: primary, size: 16),
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            _ProfileInputCard(
+                              label: 'Phone Number',
+                              value: 'Phone number',
+                              controller: _phoneController,
+                              enabled: AuthStore.isLoggedIn,
+                              prefix: '+234',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 18),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          color: surfaceLowest.withOpacity(0.96),
+                          borderRadius: BorderRadius.circular(28),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 22,
+                              spreadRadius: -14,
+                              offset: const Offset(0, 16),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Account preferences',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: onSurface,
+                                )),
+                            const SizedBox(height: 6),
+                            Text(
+                              'Manage alerts and personalization for a smoother travel experience.',
+                              style: GoogleFonts.inter(
+                                fontSize: 12.5,
+                                height: 1.45,
+                                color: onSurfaceVariant.withOpacity(0.8),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
                             _PushPermissionCard(
                               enabled: _pushEnabled,
                               available: _pushAvailable,
@@ -8180,9 +9821,10 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                               onRequest: _requestPushPermission,
                             ),
                             const _PreferenceToggle(
-                              icon: Icons.location_on,
+                              icon: Icons.auto_awesome_rounded,
                               title: 'Smart Suggestions',
-                              subtitle: 'Coming soon',
+                              subtitle:
+                                  'Use your travel habits for calmer, faster route suggestions.',
                               enabled: false,
                             ),
                           ],
@@ -8197,11 +9839,19 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                             onTap: _saveProfile,
                             child: Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 18),
+                              padding: const EdgeInsets.symmetric(vertical: 17),
                               decoration: BoxDecoration(
-                                gradient: const LinearGradient(colors: [primary, primaryContainer]),
-                                borderRadius: BorderRadius.circular(24),
-                                boxShadow: [BoxShadow(color: primary.withOpacity(0.2), blurRadius: 16, offset: const Offset(0, 8))],
+                                gradient: const LinearGradient(
+                                    colors: [primary, primaryContainer]),
+                                borderRadius: BorderRadius.circular(22),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: primary.withOpacity(0.18),
+                                    blurRadius: 18,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 10),
+                                  )
+                                ],
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -8210,14 +9860,22 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                                     const SizedBox(
                                       width: 18,
                                       height: 18,
-                                      child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                                      child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white)),
                                     )
                                   else
-                                    const Icon(Icons.check_circle, color: Colors.white),
+                                    const Icon(Icons.check_circle,
+                                        color: Colors.white),
                                   const SizedBox(width: 8),
                                   Text(
                                     _saving ? 'Saving...' : 'Update Profile',
-                                    style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -8226,7 +9884,10 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Text(_lastUpdatedLabel(), style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
+                      Text(_lastUpdatedLabel(),
+                          style: GoogleFonts.inter(
+                              fontSize: 11.5,
+                              color: onSurfaceVariant.withOpacity(0.78))),
                     ],
                   ),
                 ),
@@ -8241,11 +9902,17 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                 child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                  padding: const EdgeInsets.fromLTRB(18, 10, 18, 18),
                   decoration: BoxDecoration(
-                    color: background.withOpacity(0.8),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8))],
+                    color: background.withOpacity(0.76),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(24)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.035),
+                          blurRadius: 24,
+                          offset: const Offset(0, -8))
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -8253,23 +9920,27 @@ class _ProfileSettingsScreenState extends State<ProfileSettingsScreen> {
                       _BottomNavPill(
                         label: 'Home',
                         icon: Icons.home,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.home),
                       ),
                       _BottomNavPill(
                         label: 'History',
                         icon: Icons.history,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
                       ),
                       _BottomNavPill(
                         label: 'Booking',
                         icon: Icons.confirmation_number,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                       ),
                       _BottomNavPill(
                         label: 'Profile',
                         icon: Icons.person,
                         active: true,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                       ),
                     ],
                   ),
@@ -8313,7 +9984,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     }
     if (!AuthStore.isLoggedIn) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please sign in to change your password.')),
+        const SnackBar(
+            content: Text('Please sign in to change your password.')),
       );
       return;
     }
@@ -8328,13 +10000,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
     }
     if (next.length < 8) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Password must be at least 8 characters.')),
+        const SnackBar(
+            content: Text('Password must be at least 8 characters.')),
       );
       return;
     }
     if (next != confirm) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('New password and confirmation do not match.')),
+        const SnackBar(
+            content: Text('New password and confirmation do not match.')),
       );
       return;
     }
@@ -8353,7 +10027,9 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         const SnackBar(content: Text('Password updated successfully.')),
       );
     } else {
-      final message = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to update password';
+      final message = response['message']?.toString() ??
+          response['reason']?.toString() ??
+          'Unable to update password';
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(message)),
       );
@@ -8388,7 +10064,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4))
+                        ],
                       ),
                       child: SafeArea(
                         bottom: false,
@@ -8396,19 +10077,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           children: [
                             IconButton(
                               onPressed: () => Navigator.pop(context),
-                              icon: const Icon(Icons.arrow_back, color: primary),
+                              icon:
+                                  const Icon(Icons.arrow_back, color: primary),
                             ),
-                            Text('Change Password', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+                            Text('Change Password',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: primary)),
                             const Spacer(),
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: primary.withOpacity(0.2), width: 2),
-                              ),
-                              child: const _UserProfileThumb(size: 40),
-                            ),
                           ],
                         ),
                       ),
@@ -8422,11 +10099,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Update Security', style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface)),
+                      Text('Update Security',
+                          style: GoogleFonts.manrope(
+                              fontSize: 28,
+                              fontWeight: FontWeight.w800,
+                              color: onSurface)),
                       const SizedBox(height: 6),
                       Text(
                         'Protect your I-Metro traveler account with a strong, unique password.',
-                        style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: onSurfaceVariant),
                       ),
                       const SizedBox(height: 20),
                       Container(
@@ -8442,27 +10126,36 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               placeholder: 'Enter current password',
                               obscure: !showCurrent,
                               controller: _currentController,
-                              onToggle: () => setState(() => showCurrent = !showCurrent),
+                              onToggle: () =>
+                                  setState(() => showCurrent = !showCurrent),
                             ),
-                            Container(height: 1, margin: const EdgeInsets.symmetric(vertical: 16), color: outlineVariant.withOpacity(0.1)),
+                            Container(
+                                height: 1,
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                color: outlineVariant.withOpacity(0.1)),
                             _PasswordField(
                               label: 'New Password',
                               placeholder: 'Create new password',
                               obscure: !showNew,
                               controller: _newController,
-                              onToggle: () => setState(() => showNew = !showNew),
+                              onToggle: () =>
+                                  setState(() => showNew = !showNew),
                             ),
                             const SizedBox(height: 10),
                             const _StrengthBars(activeCount: 1),
                             const SizedBox(height: 6),
-                            Text('Password must be at least 8 characters', style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant)),
+                            Text('Password must be at least 8 characters',
+                                style: GoogleFonts.inter(
+                                    fontSize: 10, color: onSurfaceVariant)),
                             const SizedBox(height: 16),
                             _PasswordField(
                               label: 'Confirm New Password',
                               placeholder: 'Repeat new password',
                               obscure: !showConfirm,
                               controller: _confirmController,
-                              onToggle: () => setState(() => showConfirm = !showConfirm),
+                              onToggle: () =>
+                                  setState(() => showConfirm = !showConfirm),
                             ),
                           ],
                         ),
@@ -8491,11 +10184,18 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Session Security', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
+                                  Text('Session Security',
+                                      style: GoogleFonts.manrope(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: onSurface)),
                                   const SizedBox(height: 4),
                                   Text(
                                     'Updating your password will sign you out of all other active sessions on different devices for your safety.',
-                                    style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.4),
+                                    style: GoogleFonts.inter(
+                                        fontSize: 11,
+                                        color: onSurfaceVariant,
+                                        height: 1.4),
                                   ),
                                 ],
                               ),
@@ -8514,9 +10214,15 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(vertical: 18),
                               decoration: BoxDecoration(
-                                gradient: const LinearGradient(colors: [primary, primaryContainer]),
+                                gradient: const LinearGradient(
+                                    colors: [primary, primaryContainer]),
                                 borderRadius: BorderRadius.circular(24),
-                                boxShadow: [BoxShadow(color: primary.withOpacity(0.2), blurRadius: 16, offset: const Offset(0, 8))],
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: primary.withOpacity(0.2),
+                                      blurRadius: 16,
+                                      offset: const Offset(0, 8))
+                                ],
                               ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -8525,14 +10231,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     const SizedBox(
                                       width: 18,
                                       height: 18,
-                                      child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation<Color>(Colors.white)),
+                                      child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white)),
                                     )
                                   else
-                                    const Icon(Icons.lock_reset, color: Colors.white),
+                                    const Icon(Icons.lock_reset,
+                                        color: Colors.white),
                                   const SizedBox(width: 8),
                                   Text(
                                     _saving ? 'Saving...' : 'Save Changes',
-                                    style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white),
                                   ),
                                 ],
                               ),
@@ -8546,7 +10260,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                           onTap: () => Navigator.pop(context),
                           child: Text(
                             'Cancel and go back',
-                            style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: onSurfaceVariant),
+                            style: GoogleFonts.inter(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: onSurfaceVariant),
                           ),
                         ),
                       ),
@@ -8562,18 +10279,24 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             Positioned(
                               right: -10,
                               bottom: -10,
-                              child: Icon(Icons.security, size: 100, color: primary.withOpacity(0.1)),
+                              child: Icon(Icons.security,
+                                  size: 100, color: primary.withOpacity(0.1)),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Icon(Icons.lock, color: primary),
+                                const Icon(Icons.lock, color: primary),
                                 const SizedBox(height: 8),
-                                Text('Your data is encrypted', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
+                                Text('Your data is encrypted',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: onSurfaceVariant)),
                                 const SizedBox(height: 6),
                                 Text(
                                   'I-Metro uses bank-grade security to ensure your personal information remains private.',
-                                  style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant),
+                                  style: GoogleFonts.inter(
+                                      fontSize: 10, color: onSurfaceVariant),
                                 ),
                               ],
                             ),
@@ -8611,21 +10334,30 @@ class _ProfileInputCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF3F7F4);
     const surfaceLowest = Color(0xFFFFFFFF);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
+    const primary = Color(0xFF006B47);
 
     Widget field;
     if (controller == null) {
       field = Row(
         children: [
           if (prefix != null) ...[
-            Text(prefix!, style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
+            Text(prefix!,
+                style: GoogleFonts.inter(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: onSurfaceVariant)),
             const SizedBox(width: 6),
           ],
           Expanded(
-            child: Text(value, style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: onSurface)),
+            child: Text(value,
+                style: GoogleFonts.manrope(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: onSurface)),
           ),
         ],
       );
@@ -8633,14 +10365,21 @@ class _ProfileInputCard extends StatelessWidget {
       field = TextField(
         controller: controller,
         readOnly: !enabled,
-        style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: onSurface),
+        style: GoogleFonts.manrope(
+            fontSize: 15.5, fontWeight: FontWeight.w700, color: onSurface),
         decoration: InputDecoration(
           isDense: true,
           border: InputBorder.none,
           hintText: value,
-          hintStyle: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w600, color: onSurfaceVariant.withOpacity(0.6)),
+          hintStyle: GoogleFonts.manrope(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: onSurfaceVariant.withOpacity(0.6)),
           prefixText: prefix != null ? '$prefix ' : null,
-          prefixStyle: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: onSurfaceVariant),
+          prefixStyle: GoogleFonts.inter(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: onSurfaceVariant),
           suffixIcon: trailing,
           contentPadding: EdgeInsets.zero,
         ),
@@ -8648,17 +10387,24 @@ class _ProfileInputCard extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(1),
       decoration: BoxDecoration(
-        color: surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16),
+        color: primary.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(22),
       ),
       child: Container(
-        padding: const EdgeInsets.all(18),
+        padding: const EdgeInsets.fromLTRB(18, 16, 18, 16),
         decoration: BoxDecoration(
           color: surfaceLowest,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 6))],
+          borderRadius: BorderRadius.circular(21),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.035),
+              blurRadius: 16,
+              spreadRadius: -10,
+              offset: const Offset(0, 12),
+            )
+          ],
         ),
         child: Row(
           children: [
@@ -8666,8 +10412,13 @@ class _ProfileInputCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1.4, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
-                  const SizedBox(height: 6),
+                  Text(label.toUpperCase(),
+                      style: GoogleFonts.inter(
+                          fontSize: 10.5,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.w600,
+                          color: onSurfaceVariant.withOpacity(0.8))),
+                  const SizedBox(height: 7),
                   field,
                 ],
               ),
@@ -8675,6 +10426,92 @@ class _ProfileInputCard extends StatelessWidget {
             if (controller == null && trailing != null) trailing!,
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ProfileInitialAvatar extends StatelessWidget {
+  const _ProfileInitialAvatar({
+    required this.size,
+    required this.initials,
+    this.imageProvider,
+    this.borderRadius,
+    this.borderColor,
+    this.shadow = false,
+  });
+
+  final double size;
+  final String initials;
+  final ImageProvider? imageProvider;
+  final double? borderRadius;
+  final Color? borderColor;
+  final bool shadow;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    final radius = borderRadius ?? size / 2;
+    final isCircular = borderRadius == null;
+
+    return Container(
+      width: size,
+      height: size,
+      padding: EdgeInsets.all(isCircular ? 5 : 4),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            primary.withOpacity(0.16),
+            const Color(0xFFEAF7F0),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(radius),
+        border: Border.all(
+          color: borderColor ?? primary.withOpacity(0.18),
+          width: isCircular ? 2.6 : 2,
+        ),
+        boxShadow: shadow
+            ? [
+                BoxShadow(
+                  color: primary.withOpacity(0.16),
+                  blurRadius: 22,
+                  spreadRadius: -14,
+                  offset: const Offset(0, 16),
+                ),
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.04),
+                  blurRadius: 18,
+                  spreadRadius: -12,
+                  offset: const Offset(0, 14),
+                ),
+              ]
+            : null,
+      ),
+      child: ClipRRect(
+        borderRadius:
+            BorderRadius.circular((radius - 4).clamp(0, radius).toDouble()),
+        child: imageProvider == null
+            ? Container(
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF006B47), Color(0xFF00875A)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Text(
+                  initials,
+                  style: GoogleFonts.manrope(
+                    fontSize: size * 0.32,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            : Image(image: imageProvider!, fit: BoxFit.cover),
       ),
     );
   }
@@ -8698,16 +10535,15 @@ class _PushPermissionCard extends StatelessWidget {
   final VoidCallback onRequest;
 
   String _subtitle() {
-    if (!available) {
-      return 'Coming soon';
-    }
     if (!loggedIn) {
-      return 'Sign in to enable ticket and payment alerts.';
+      return 'Sign in to manage trip alerts for this device.';
     }
-    if (enabled) {
-      return 'You will get payment and ticket updates on this device.';
+    if (!available) {
+      return 'Notification controls depend on device support and app setup.';
     }
-    return 'Enable notifications to receive ticket updates instantly.';
+    return enabled
+        ? 'Trip alerts and service updates are enabled for this account.'
+        : 'Stay updated with ticket status, ride reminders, and route changes.';
   }
 
   Widget _statusChip(String label, Color background, Color foreground) {
@@ -8719,28 +10555,8 @@ class _PushPermissionCard extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: foreground),
-      ),
-    );
-  }
-
-  void _showHelp(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Enable Notifications'),
-        content: const Text(
-          'If notifications are blocked, enable them in your device or browser settings.\n\n'
-          'Web: Click the lock icon in the address bar -> Site settings -> Notifications -> Allow.\n'
-          'Android: Settings -> Apps -> I-Metro -> Notifications -> Allow.\n'
-          'iOS: Settings -> Notifications -> I-Metro -> Allow Notifications.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Got it'),
-          ),
-        ],
+        style: GoogleFonts.inter(
+            fontSize: 11, fontWeight: FontWeight.w700, color: foreground),
       ),
     );
   }
@@ -8748,44 +10564,30 @@ class _PushPermissionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerHigh = Color(0xFFE6E8EA);
+    const surfaceContainerHigh = Color(0xFFE6EDE8);
     const primary = Color(0xFF006B47);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
-    const warning = Color(0xFFB54708);
 
-    final isBlocked = statusLabel == 'Blocked';
-    final isNotSet = statusLabel == 'Not set';
-    Widget trailing;
-    if (loading) {
-      trailing = SizedBox(
-        width: 20,
-        height: 20,
-        child: CircularProgressIndicator(strokeWidth: 2, color: primary.withOpacity(0.7)),
-      );
-    } else if (!available) {
-      trailing = _statusChip('Coming soon', surfaceContainerHigh, onSurfaceVariant);
-    } else if (!loggedIn) {
-      trailing = _statusChip('Sign in', surfaceContainerHigh, onSurfaceVariant);
-    } else if (enabled) {
-      trailing = _statusChip(statusLabel, primary.withOpacity(0.12), primary);
-    } else {
-      trailing = TextButton(
-        onPressed: onRequest,
-        style: TextButton.styleFrom(
-          foregroundColor: primary,
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        ),
-        child: Text('Enable', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700)),
-      );
-    }
+    final trailing = _statusChip(
+      statusLabel,
+      enabled ? primary.withOpacity(0.1) : surfaceContainerHigh,
+      enabled ? primary : onSurfaceVariant,
+    );
 
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: surfaceLowest,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 6))],
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 16,
+            spreadRadius: -10,
+            offset: const Offset(0, 12),
+          )
+        ],
       ),
       margin: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -8804,42 +10606,17 @@ class _PushPermissionCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Trip Notifications', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
+                Text('Trip Notifications',
+                    style: GoogleFonts.manrope(
+                        fontSize: 14.5,
+                        fontWeight: FontWeight.w700,
+                        color: onSurface)),
                 const SizedBox(height: 4),
-                Text(_subtitle(), style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant)),
-                if (!enabled && available && loggedIn)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 6),
-                    child: Text(
-                      'Status: $statusLabel',
-                      style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, color: warning),
-                    ),
-                  ),
-                if (isNotSet && !isBlocked)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4),
-                    child: Text(
-                      'Tap Enable to allow alerts for ticket updates.',
-                      style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant),
-                    ),
-                  ),
-                if (isBlocked)
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                      onPressed: () => _showHelp(context),
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        minimumSize: const Size(0, 0),
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        foregroundColor: primary,
-                      ),
-                      child: Text(
-                        'How to enable',
-                        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ),
+                Text(_subtitle(),
+                    style: GoogleFonts.inter(
+                        fontSize: 11.5,
+                        height: 1.45,
+                        color: onSurfaceVariant.withOpacity(0.82))),
               ],
             ),
           ),
@@ -8866,7 +10643,7 @@ class _PreferenceToggle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerHigh = Color(0xFFE6E8EA);
+    const surfaceContainerHigh = Color(0xFFE6EDE8);
     const primary = Color(0xFF006B47);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
@@ -8875,8 +10652,15 @@ class _PreferenceToggle extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: surfaceLowest,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 6))],
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 16,
+            spreadRadius: -10,
+            offset: const Offset(0, 12),
+          )
+        ],
       ),
       margin: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -8895,9 +10679,17 @@ class _PreferenceToggle extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
+                Text(title,
+                    style: GoogleFonts.manrope(
+                        fontSize: 14.5,
+                        fontWeight: FontWeight.w700,
+                        color: onSurface)),
                 const SizedBox(height: 4),
-                Text(subtitle, style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant)),
+                Text(subtitle,
+                    style: GoogleFonts.inter(
+                        fontSize: 11.5,
+                        height: 1.45,
+                        color: onSurfaceVariant.withOpacity(0.82))),
               ],
             ),
           ),
@@ -8951,7 +10743,12 @@ class _PasswordField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 11, letterSpacing: 1.4, fontWeight: FontWeight.w600, color: onSurfaceVariant)),
+        Text(label.toUpperCase(),
+            style: GoogleFonts.inter(
+                fontSize: 11,
+                letterSpacing: 1.4,
+                fontWeight: FontWeight.w600,
+                color: onSurfaceVariant)),
         const SizedBox(height: 6),
         TextField(
           controller: controller,
@@ -8960,16 +10757,21 @@ class _PasswordField extends StatelessWidget {
             filled: true,
             fillColor: surfaceLowest,
             hintText: placeholder,
-            hintStyle: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant.withOpacity(0.6)),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+            hintStyle: GoogleFonts.inter(
+                fontSize: 12, color: onSurfaceVariant.withOpacity(0.6)),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide(color: primary.withOpacity(0.4), width: 2),
             ),
             suffixIcon: IconButton(
               onPressed: onToggle,
-              icon: Icon(obscure ? Icons.visibility : Icons.visibility_off, color: Colors.grey.shade400),
+              icon: Icon(obscure ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.grey.shade400),
             ),
           ),
         ),
@@ -9004,6 +10806,7 @@ class _StrengthBars extends StatelessWidget {
     );
   }
 }
+
 class HamburgerMenuScreen extends StatelessWidget {
   const HamburgerMenuScreen({super.key});
 
@@ -9036,7 +10839,12 @@ class HamburgerMenuScreen extends StatelessWidget {
                   topRight: Radius.circular(24),
                   bottomRight: Radius.circular(24),
                 ),
-                boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 30, offset: const Offset(8, 0))],
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.12),
+                      blurRadius: 30,
+                      offset: const Offset(8, 0))
+                ],
               ),
               child: SafeArea(
                 child: Padding(
@@ -9057,44 +10865,59 @@ class HamburgerMenuScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: primary,
                                     borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: background, width: 2),
+                                    border:
+                                        Border.all(color: background, width: 2),
                                   ),
-                                  child: const Icon(Icons.star, size: 12, color: Colors.white),
+                                  child: const Icon(Icons.star,
+                                      size: 12, color: Colors.white),
                                 ),
                               ),
                             ],
                           ),
-                              const SizedBox(width: 12),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('I-Metro Rider', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: onSurface)),
-                                  const SizedBox(height: 2),
-                                  Text('LUXURY IN MOTION', style: GoogleFonts.inter(fontSize: 10, letterSpacing: 2.2, fontWeight: FontWeight.w700, color: primary)),
-                                ],
-                              ),
+                          const SizedBox(width: 12),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('I-Metro Rider',
+                                  style: GoogleFonts.manrope(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: onSurface)),
+                              const SizedBox(height: 2),
+                              Text('LUXURY IN MOTION',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 10,
+                                      letterSpacing: 2.2,
+                                      fontWeight: FontWeight.w700,
+                                      color: primary)),
                             ],
                           ),
+                        ],
+                      ),
                       const SizedBox(height: 24),
                       _MenuItem(
                         icon: Icons.home,
                         label: 'Home',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.home),
                       ),
                       _MenuItem(
                         icon: Icons.confirmation_number,
                         label: 'Book Ride',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                       ),
                       _MenuItem(
                         icon: Icons.history,
                         label: 'History',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
                       ),
                       _MenuItem(
                         icon: Icons.person,
                         label: 'Profile',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                       ),
                       Container(
                         height: 1,
@@ -9104,27 +10927,36 @@ class HamburgerMenuScreen extends StatelessWidget {
                       _MenuItem(
                         icon: Icons.help,
                         label: 'Support',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.contactUs),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.contactUs),
                       ),
                       _MenuItem(
                         icon: Icons.policy,
                         label: 'Policies',
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.policy),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.policy),
                       ),
                       const Spacer(),
                       GestureDetector(
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.logout),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.logout),
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 14),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
                             color: const Color(0xFFFFF5F5),
                           ),
                           child: Row(
                             children: [
-                              const Icon(Icons.logout, color: Color(0xFFBA1A1A)),
+                              const Icon(Icons.logout,
+                                  color: Color(0xFFBA1A1A)),
                               const SizedBox(width: 12),
-                              Text('Logout', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: const Color(0xFFBA1A1A))),
+                              Text('Logout',
+                                  style: GoogleFonts.manrope(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xFFBA1A1A))),
                             ],
                           ),
                         ),
@@ -9168,13 +11000,18 @@ class _MenuItem extends StatelessWidget {
           children: [
             Icon(icon, color: onSurface.withOpacity(0.7)),
             const SizedBox(width: 12),
-            Text(label, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w600, color: onSurface.withOpacity(0.75))),
+            Text(label,
+                style: GoogleFonts.manrope(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: onSurface.withOpacity(0.75))),
           ],
         ),
       ),
     );
   }
 }
+
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({super.key});
 
@@ -9233,12 +11070,18 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     if (!mounted) return;
     final ok = response['ok'] == true;
     final items = ok && response['items'] is List
-        ? (response['items'] as List).whereType<Map>().map((item) => Map<String, dynamic>.from(item)).toList()
+        ? (response['items'] as List)
+            .whereType<Map>()
+            .map((item) => Map<String, dynamic>.from(item))
+            .toList()
         : <Map<String, dynamic>>[];
     setState(() {
       _loadingSupport = false;
       _supportItems = items;
-      _supportError = ok ? null : (response['reason']?.toString() ?? 'Unable to load support messages.');
+      _supportError = ok
+          ? null
+          : (response['reason']?.toString() ??
+              'Unable to load support messages.');
       _lastSupportSyncAt = DateTime.now();
     });
   }
@@ -9247,7 +11090,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     if (_sending) return;
     if (!AuthStore.isLoggedIn) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please sign in to send a support message.')),
+        const SnackBar(
+            content: Text('Please sign in to send a support message.')),
       );
       Navigator.pushNamed(context, AppRoutes.login);
       return;
@@ -9262,22 +11106,27 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       _sending = true;
       _error = null;
     });
-    final response = await UserApi.sendSupportMessage(subject: subject, message: message);
+    final response =
+        await UserApi.sendSupportMessage(subject: subject, message: message);
     if (!mounted) return;
     setState(() => _sending = false);
     if (response['ok'] == true) {
       _subjectController.clear();
       _messageController.clear();
       final ticketId = response['id']?.toString();
-      final notice = response['notice']?.toString() ?? 'Complaint delivered to customer service.';
+      final notice = response['notice']?.toString() ??
+          'Complaint delivered to customer service.';
       final messageText = ticketId == null || ticketId.isEmpty
           ? notice
           : '$notice Ticket #$ticketId';
       setState(() => _supportNotice = messageText);
       await _loadSupportMessages(silent: true);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(messageText)));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(messageText)));
     } else {
-      final messageText = response['message']?.toString() ?? response['reason']?.toString() ?? 'Unable to send message.';
+      final messageText = response['message']?.toString() ??
+          response['reason']?.toString() ??
+          'Unable to send message.';
       setState(() => _error = messageText);
     }
   }
@@ -9285,12 +11134,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   @override
   Widget build(BuildContext context) {
     const background = Color(0xFFF7F9FB);
-    const surfaceContainerLow = Color(0xFFF3F5F7);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
     const error = Color(0xFFBA1A1A);
+    final latestSupport = _supportItems.isNotEmpty ? _supportItems.first : null;
 
     return Scaffold(
       backgroundColor: background,
@@ -9301,10 +11149,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             top: 0,
             bottom: 0,
             child: Opacity(
-              opacity: 0.015,
+              opacity: 0.05,
               child: Image.network(
                 'https://lh3.googleusercontent.com/aida-public/AB6AXuAtkF29Qu01aqkGm8daAClwzhQWIL2i6V5AdQLxPQghfhkiq6HgszNGYvA_-XFymnT8tvGE0xE75IWAYLLQQgteh-asmsUr38bI4AOAd9gWPBvsFsTJPwdorNHL13i6nOzRHpUrR0IzNFMTZLm5c5uu3C9meePwa4F4IpvPwTyjphVtDB9f--9esReqoPChvrJ3yMtGIY1vVPsECpTEu8uIixkVO2gQmglkFekjGMI1ltjVVCrit8StqmI4p0MF2r9CGyqkEBMRvA',
-                width: MediaQuery.of(context).size.width * 0.36,
+                width: MediaQuery.of(context).size.width * 0.5,
                 fit: BoxFit.cover,
               ),
             ),
@@ -9320,19 +11168,29 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         color: background.withOpacity(0.8),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4))
+                        ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
                             IconButton(
-                              onPressed: () => Navigator.pushNamed(context, AppRoutes.hamburgerMenu),
+                              onPressed: () => Navigator.pushNamed(
+                                  context, AppRoutes.hamburgerMenu),
                               icon: const Icon(Icons.menu, color: primary),
                             ),
                             _brandLogo(size: 28, radius: 8),
                             const SizedBox(width: 8),
-                            Text('I-Metro', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: primary)),
+                            Text('I-Metro',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w800,
+                                    color: primary)),
                             const Spacer(),
                             _brandLogo(size: 28, radius: 8),
                           ],
@@ -9344,68 +11202,26 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 180),
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 150),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('How can we help?', style: GoogleFonts.manrope(fontSize: 32, fontWeight: FontWeight.w800, color: onSurface)),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Contact I-Metro for support, partnerships, or fleet management enquiries.',
-                        style: GoogleFonts.inter(fontSize: 15, color: onSurfaceVariant, height: 1.45),
-                      ),
-                      const SizedBox(height: 24),
-                      Text('Contact options', style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface)),
-                      const SizedBox(height: 12),
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          final stacked = constraints.maxWidth < 560;
-                          final cards = [
-                            const _ContactInfoCard(
-                              icon: Icons.call_rounded,
-                              title: 'Call Us',
-                              subtitle: 'Customer Support',
-                              value: '+234 912 806 6666',
-                              helperText: 'Tap to call',
-                            ),
-                            const _ContactInfoCard(
-                              icon: Icons.apartment_rounded,
-                              title: 'Head Office',
-                              subtitle: 'Abuja, Nigeria',
-                              value: 'FCT Transport Secretariat',
-                              helperText: 'Get directions',
-                            ),
-                          ];
-                          if (stacked) {
-                            return Column(
-                              children: [
-                                SizedBox(width: double.infinity, child: cards[0]),
-                                const SizedBox(height: 14),
-                                SizedBox(width: double.infinity, child: cards[1]),
-                              ],
-                            );
-                          }
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(child: cards[0]),
-                              const SizedBox(width: 14),
-                              Expanded(child: cards[1]),
-                            ],
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 22),
-                      Text('Send a message', style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface)),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 16),
+                      const _ContactLocationRow(),
+                      const SizedBox(height: 34),
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.all(18),
+                        padding: const EdgeInsets.fromLTRB(26, 26, 26, 24),
                         decoration: BoxDecoration(
                           color: surfaceLowest,
-                          borderRadius: BorderRadius.circular(24),
-                          border: Border.all(color: const Color(0xFFD7E4DB)),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 18, offset: const Offset(0, 8))],
+                          borderRadius: BorderRadius.circular(28),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 26,
+                              offset: const Offset(0, 12),
+                            ),
+                          ],
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -9415,22 +11231,23 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               placeholder: 'What can we help you with?',
                               controller: _subjectController,
                             ),
-                            const SizedBox(height: 14),
+                            const SizedBox(height: 22),
                             _ContactMessageField(
                               label: 'Message',
                               placeholder: 'Tell us more about your inquiry...',
                               controller: _messageController,
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 20),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: _sending ? null : _sendMessage,
                                 style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
                                   backgroundColor: primary,
                                   foregroundColor: Colors.white,
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                                  shape: const StadiumBorder(),
                                   elevation: 0,
                                 ),
                                 child: Row(
@@ -9442,15 +11259,22 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                         height: 18,
                                         child: CircularProgressIndicator(
                                           strokeWidth: 2,
-                                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white),
                                         ),
                                       )
                                     else
-                                      const Icon(Icons.send_rounded, size: 18, color: Colors.white),
+                                      const Icon(Icons.send,
+                                          size: 20, color: Colors.white),
                                     const SizedBox(width: 8),
                                     Text(
                                       _sending ? 'Sending...' : 'Send Message',
-                                      style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+                                      style: GoogleFonts.manrope(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -9458,32 +11282,42 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             ),
                             if (_error != null) ...[
                               const SizedBox(height: 10),
-                              Text(_error!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: error)),
+                              Text(
+                                _error!,
+                                style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                  color: error,
+                                ),
+                              ),
                             ],
+                            const SizedBox(height: 26),
+                            _SupportLiveUpdateBanner(
+                              notice: _supportNotice,
+                              latestItem: latestSupport,
+                              lastSyncedAt: _lastSupportSyncAt,
+                            ),
+                            const SizedBox(height: 20),
+                            _SupportStatusPanel(
+                              loading: _loadingSupport,
+                              errorText: _supportError,
+                              items: _supportItems,
+                              onRefresh: () => _loadSupportMessages(),
+                            ),
+                            const SizedBox(height: 18),
+                            Center(
+                              child: Text(
+                                'By sending this message, you agree to our privacy policy regarding data collection for support purposes.',
+                                style: GoogleFonts.inter(
+                                  fontSize: 13,
+                                  color: onSurfaceVariant,
+                                  height: 1.35,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 22),
-                      Text('My support requests', style: GoogleFonts.manrope(fontSize: 17, fontWeight: FontWeight.w800, color: onSurface)),
-                      const SizedBox(height: 6),
-                      Text(
-                        'Track whether your complaint is open, in progress, or resolved.',
-                        style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.4),
-                      ),
-                      const SizedBox(height: 12),
-                      _SupportStatusPanel(
-                        loading: _loadingSupport,
-                        errorText: _supportError,
-                        items: _supportItems,
-                        onRefresh: () => _loadSupportMessages(),
-                        notice: _supportNotice,
-                        lastSyncedAt: _lastSupportSyncAt,
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'By sending this message, you agree to our privacy policy regarding data collection for support purposes.',
-                        style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.45),
-                        textAlign: TextAlign.center,
                       ),
                     ],
                   ),
@@ -9502,8 +11336,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
                   decoration: BoxDecoration(
                     color: background.withOpacity(0.8),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8))],
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(24)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 30,
+                          offset: const Offset(0, -8))
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -9511,23 +11351,27 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                       _BottomNavPill(
                         label: 'Home',
                         icon: Icons.home,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.home),
                       ),
                       _BottomNavPill(
                         label: 'History',
                         icon: Icons.history,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
                       ),
                       _BottomNavPill(
                         label: 'Booking',
                         icon: Icons.confirmation_number,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                       ),
                       _BottomNavPill(
                         label: 'Profile',
                         icon: Icons.person,
                         active: true,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                       ),
                     ],
                   ),
@@ -9547,16 +11391,12 @@ class _SupportStatusPanel extends StatelessWidget {
     required this.errorText,
     required this.items,
     required this.onRefresh,
-    this.notice,
-    this.lastSyncedAt,
   });
 
   final bool loading;
   final String? errorText;
   final List<Map<String, dynamic>> items;
   final VoidCallback onRefresh;
-  final String? notice;
-  final DateTime? lastSyncedAt;
 
   @override
   Widget build(BuildContext context) {
@@ -9566,13 +11406,7 @@ class _SupportStatusPanel extends StatelessWidget {
     const muted = Color(0xFF51615A);
     const primary = Color(0xFF006B47);
 
-    final sortedItems = [...items]
-      ..sort((a, b) {
-        final aDate = DateTime.tryParse(a['updatedAt']?.toString() ?? a['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
-        final bDate = DateTime.tryParse(b['updatedAt']?.toString() ?? b['createdAt']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
-        return bDate.compareTo(aDate);
-      });
-    final visibleItems = sortedItems.take(4).toList();
+    final visibleItems = items.take(3).toList();
 
     return Container(
       width: double.infinity,
@@ -9587,11 +11421,19 @@ class _SupportStatusPanel extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text('My support requests', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w800, color: heading)),
+              Text('My support requests',
+                  style: GoogleFonts.manrope(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: heading)),
               const Spacer(),
               TextButton(
                 onPressed: onRefresh,
-                child: Text('Refresh', style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w700, color: primary)),
+                child: Text('Refresh',
+                    style: GoogleFonts.manrope(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: primary)),
               ),
             ],
           ),
@@ -9600,37 +11442,6 @@ class _SupportStatusPanel extends StatelessWidget {
             'Track whether your complaint is open, in progress, or resolved.',
             style: GoogleFonts.inter(fontSize: 12, color: muted, height: 1.4),
           ),
-          if (notice != null && notice!.isNotEmpty) ...[
-            const SizedBox(height: 12),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-              decoration: BoxDecoration(
-                color: const Color(0xFFE1F2EA),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Icon(Icons.verified_rounded, size: 18, color: primary),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      notice!,
-                      style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: heading, height: 1.4),
-                    ),
-                  ),
-                  if (lastSyncedAt != null) ...[
-                    const SizedBox(width: 8),
-                    Text(
-                      'Updated just now',
-                      style: GoogleFonts.inter(fontSize: 10, color: muted),
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ],
           const SizedBox(height: 14),
           if (loading)
             const _SupportLoadingRow()
@@ -9641,27 +11452,167 @@ class _SupportStatusPanel extends StatelessWidget {
           else
             Column(
               children: [
-                _SupportTicketCard(
-                  subject: visibleItems.first['subject']?.toString() ?? 'Support request',
-                  message: visibleItems.first['message']?.toString() ?? '',
-                  status: visibleItems.first['status']?.toString() ?? 'OPEN',
-                  updatedAt: visibleItems.first['updatedAt']?.toString() ?? visibleItems.first['createdAt']?.toString(),
-                  highlighted: true,
-                ),
-                if (visibleItems.length > 1) ...[
+                for (final item in visibleItems) ...[
+                  _SupportTicketCard(
+                    subject: item['subject']?.toString() ?? 'Support request',
+                    message: item['message']?.toString() ?? '',
+                    status: item['status']?.toString() ?? 'OPEN',
+                    updatedAt: item['updatedAt']?.toString() ??
+                        item['createdAt']?.toString(),
+                  ),
                   const SizedBox(height: 12),
-                  for (final item in visibleItems.skip(1)) ...[
-                    _SupportTicketCard(
-                      subject: item['subject']?.toString() ?? 'Support request',
-                      message: item['message']?.toString() ?? '',
-                      status: item['status']?.toString() ?? 'OPEN',
-                      updatedAt: item['updatedAt']?.toString() ?? item['createdAt']?.toString(),
-                    ),
-                    const SizedBox(height: 12),
-                  ],
                 ],
               ],
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SupportLiveUpdateBanner extends StatelessWidget {
+  const _SupportLiveUpdateBanner({
+    required this.notice,
+    required this.latestItem,
+    required this.lastSyncedAt,
+  });
+
+  final String? notice;
+  final Map<String, dynamic>? latestItem;
+  final DateTime? lastSyncedAt;
+
+  @override
+  Widget build(BuildContext context) {
+    const heading = Color(0xFF203229);
+    const muted = Color(0xFF51615A);
+    const success = Color(0xFF006B47);
+    const warning = Color(0xFFB26A00);
+    const danger = Color(0xFFB00020);
+
+    final normalized = latestItem == null
+        ? 'OPEN'
+        : (latestItem!['status']?.toString().toUpperCase() ?? 'OPEN');
+    final statusLabel = switch (normalized) {
+      'IN_PROGRESS' => 'In progress',
+      'RESOLVED' => 'Resolved',
+      _ => 'Open',
+    };
+    final statusColor = switch (normalized) {
+      'IN_PROGRESS' => warning,
+      'RESOLVED' => success,
+      _ => danger,
+    };
+    final statusBg = switch (normalized) {
+      'IN_PROGRESS' => const Color(0xFFFFF2D8),
+      'RESOLVED' => const Color(0xFFE1F2EA),
+      _ => const Color(0xFFFFE2E2),
+    };
+    final subject =
+        latestItem?['subject']?.toString() ?? 'No support request yet';
+    final note = switch (normalized) {
+      'IN_PROGRESS' => 'Our team is working on this complaint.',
+      'RESOLVED' => 'The issue has been settled.',
+      _ => 'Delivered to customer service.',
+    };
+    final updatedAt = latestItem?['updatedAt']?.toString() ??
+        latestItem?['createdAt']?.toString();
+    final syncText = lastSyncedAt == null ? null : 'Last refreshed just now';
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFFF7FAF8),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: const Color(0xFFD7E4DB)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                'Latest support update',
+                style: GoogleFonts.manrope(
+                    fontSize: 14, fontWeight: FontWeight.w800, color: heading),
+              ),
+              const Spacer(),
+              if (syncText != null)
+                Text(syncText,
+                    style: GoogleFonts.inter(fontSize: 10, color: muted)),
+            ],
+          ),
+          if (notice != null && notice!.isNotEmpty) ...[
+            const SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFE1F2EA),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(Icons.verified, size: 18, color: success),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      notice!,
+                      style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: heading,
+                          height: 1.4),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  subject,
+                  style: GoogleFonts.manrope(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: heading),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                    color: statusBg, borderRadius: BorderRadius.circular(999)),
+                child: Text(
+                  statusLabel,
+                  style: GoogleFonts.manrope(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: statusColor),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            note,
+            style: GoogleFonts.inter(fontSize: 12, color: muted, height: 1.4),
+          ),
+          if (updatedAt != null && updatedAt.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              'Updated: $updatedAt',
+              style: GoogleFonts.inter(
+                  fontSize: 11, color: const Color(0xFF71847B)),
+            ),
+          ],
         ],
       ),
     );
@@ -9674,14 +11625,12 @@ class _SupportTicketCard extends StatelessWidget {
     required this.message,
     required this.status,
     required this.updatedAt,
-    this.highlighted = false,
   });
 
   final String subject;
   final String message;
   final String status;
   final String? updatedAt;
-  final bool highlighted;
 
   @override
   Widget build(BuildContext context) {
@@ -9701,28 +11650,19 @@ class _SupportTicketCard extends StatelessWidget {
       'RESOLVED' => const Color(0xFFE1F2EA),
       _ => const Color(0xFFFFE2E2),
     };
-    final supportNote = message.isEmpty
-        ? switch (normalized) {
-            'IN_PROGRESS' => 'Our team is working on this complaint.',
-            'RESOLVED' => 'The issue has been settled.',
-            _ => 'Delivered to customer service.',
-          }
-        : message;
+    final supportNote = switch (normalized) {
+      'IN_PROGRESS' => 'Our team is working on this complaint.',
+      'RESOLVED' => 'The issue has been settled.',
+      _ => 'Delivered to customer service.',
+    };
 
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: highlighted ? const Color(0xFFF1F9F5) : Colors.white,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: highlighted ? const Color(0xFFBFDCCD) : const Color(0xFFD7E4DB)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(highlighted ? 0.04 : 0.02),
-            blurRadius: 12,
-            offset: const Offset(0, 6),
-          ),
-        ],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFD7E4DB)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -9732,36 +11672,52 @@ class _SupportTicketCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   subject,
-                  style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: const Color(0xFF203229)),
+                  style: GoogleFonts.manrope(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                      color: const Color(0xFF203229)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(width: 10),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(color: statusBg, borderRadius: BorderRadius.circular(999)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                    color: statusBg, borderRadius: BorderRadius.circular(999)),
                 child: Text(
                   statusLabel,
-                  style: GoogleFonts.manrope(fontSize: 11, fontWeight: FontWeight.w800, color: statusColor),
+                  style: GoogleFonts.manrope(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: statusColor),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 8),
           Text(
-            supportNote,
-            style: GoogleFonts.inter(fontSize: 12, color: const Color(0xFF51615A), height: 1.4),
+            message.isEmpty ? supportNote : message,
+            style: GoogleFonts.inter(
+                fontSize: 12, color: const Color(0xFF51615A), height: 1.4),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
           if (updatedAt != null && updatedAt!.isNotEmpty) ...[
             const SizedBox(height: 8),
             Text(
-              'Updated: ${_formatSupportTimestamp(updatedAt)}',
-              style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF71847B)),
+              'Updated: $updatedAt',
+              style: GoogleFonts.inter(
+                  fontSize: 11, color: const Color(0xFF71847B)),
             ),
           ],
+          const SizedBox(height: 8),
+          Text(
+            supportNote,
+            style: GoogleFonts.inter(
+                fontSize: 11, fontWeight: FontWeight.w700, color: statusColor),
+          ),
         ],
       ),
     );
@@ -9829,55 +11785,59 @@ class _ContactInfoCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.value,
-    this.helperText,
   });
 
   final IconData icon;
   final String title;
   final String subtitle;
   final String value;
-  final String? helperText;
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF3F5F7);
+    const surfaceContainerLow = Color(0xFFF2F4F6);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
 
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: surfaceContainerLow,
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: primary.withOpacity(0.08)),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 36,
-            height: 36,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 4))],
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.04),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4))
+              ],
             ),
-            child: Icon(icon, color: primary, size: 18),
+            child: Icon(icon, color: primary),
           ),
-          const SizedBox(height: 10),
-          Text(title, style: GoogleFonts.manrope(fontSize: 15, fontWeight: FontWeight.w700, color: onSurface, height: 1.05)),
-          const SizedBox(height: 3),
-          Text(subtitle, style: GoogleFonts.inter(fontSize: 9.5, letterSpacing: 1.2, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
-          const SizedBox(height: 8),
-          Text(value, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: primary, height: 1.15)),
-          if (helperText != null) ...[
-            const SizedBox(height: 4),
-            Text(
-              helperText!,
-              style: GoogleFonts.inter(fontSize: 9.5, fontWeight: FontWeight.w600, color: onSurfaceVariant),
-            ),
-          ],
+          const SizedBox(height: 12),
+          Text(title,
+              style: GoogleFonts.manrope(
+                  fontSize: 18, fontWeight: FontWeight.w700, color: onSurface)),
+          const SizedBox(height: 4),
+          Text(subtitle.toUpperCase(),
+              style: GoogleFonts.inter(
+                  fontSize: 10,
+                  letterSpacing: 2.2,
+                  fontWeight: FontWeight.w600,
+                  color: onSurfaceVariant)),
+          const SizedBox(height: 12),
+          Text(value,
+              style: GoogleFonts.manrope(
+                  fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
         ],
       ),
     );
@@ -9892,9 +11852,10 @@ class _ContactLocationRow extends StatelessWidget {
     const onSurfaceVariant = Color(0xFF3E4942);
     return Row(
       children: [
-        const Icon(Icons.location_on, color: onSurfaceVariant),
-        const SizedBox(width: 8),
-        Text('Abuja, Nigeria (FCT)', style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
+        const Icon(Icons.location_on, color: onSurfaceVariant, size: 28),
+        const SizedBox(width: 12),
+        Text('Abuja, Nigeria (FCT)',
+            style: GoogleFonts.inter(fontSize: 15, color: onSurfaceVariant)),
       ],
     );
   }
@@ -9913,30 +11874,34 @@ class _ContactFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF5F7F8);
-    const primary = Color(0xFF006B47);
+    const surfaceContainerLow = Color(0xFFF2F4F6);
     const onSurfaceVariant = Color(0xFF3E4942);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
-        const SizedBox(height: 8),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: onSurfaceVariant)),
+        const SizedBox(height: 10),
         TextField(
           controller: controller,
           decoration: InputDecoration(
             filled: true,
             fillColor: surfaceContainerLow,
             hintText: placeholder,
-            hintStyle: GoogleFonts.inter(color: onSurfaceVariant.withOpacity(0.45)),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: primary.withOpacity(0.08))),
+            hintStyle:
+                GoogleFonts.inter(fontSize: 18, color: Colors.grey.shade400),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: primary.withOpacity(0.45), width: 1.6),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: primary.withOpacity(0.08)),
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(
+                  color: const Color(0xFF006B47).withOpacity(0.4), width: 2),
             ),
           ),
         ),
@@ -9958,53 +11923,41 @@ class _ContactMessageField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF5F7F8);
-    const primary = Color(0xFF006B47);
+    const surfaceContainerLow = Color(0xFFF2F4F6);
     const onSurfaceVariant = Color(0xFF3E4942);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: onSurfaceVariant)),
-        const SizedBox(height: 8),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: onSurfaceVariant)),
+        const SizedBox(height: 10),
         TextField(
           controller: controller,
-          maxLines: 5,
+          maxLines: 7,
           decoration: InputDecoration(
             filled: true,
             fillColor: surfaceContainerLow,
             hintText: placeholder,
-            hintStyle: GoogleFonts.inter(color: onSurfaceVariant.withOpacity(0.45)),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide(color: primary.withOpacity(0.08))),
+            hintStyle:
+                GoogleFonts.inter(fontSize: 18, color: Colors.grey.shade400),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: primary.withOpacity(0.45), width: 1.6),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: primary.withOpacity(0.08)),
+              borderRadius: BorderRadius.circular(18),
+              borderSide: BorderSide(
+                  color: const Color(0xFF006B47).withOpacity(0.4), width: 2),
             ),
           ),
         ),
       ],
     );
   }
-}
-
-String _formatSupportTimestamp(String? raw) {
-  if (raw == null || raw.trim().isEmpty) {
-    return '--';
-  }
-  final parsed = DateTime.tryParse(raw);
-  if (parsed == null) {
-    return raw;
-  }
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  final local = parsed.toLocal();
-  final hour = local.hour % 12 == 0 ? 12 : local.hour % 12;
-  final minute = local.minute.toString().padLeft(2, '0');
-  final period = local.hour >= 12 ? 'PM' : 'AM';
-  return '${months[local.month - 1]} ${local.day}, ${local.year} • $hour:$minute $period';
 }
 
 class _EmptyStateCard extends StatelessWidget {
@@ -10031,6 +11984,7 @@ class _EmptyStateCard extends StatelessWidget {
     const onSurfaceVariant = Color(0xFF3E4942);
     const outlineVariant = Color(0xFFBDCAC0);
     const primary = Color(0xFF006B47);
+    const kineticEnd = Color(0xFF009B67);
     final accentColor = accent ?? primary;
 
     return Container(
@@ -10039,7 +11993,12 @@ class _EmptyStateCard extends StatelessWidget {
         color: surfaceLowest,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: outlineVariant.withOpacity(0.25)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -10061,9 +12020,17 @@ class _EmptyStateCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: onSurface)),
+                    Text(title,
+                        style: GoogleFonts.manrope(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            color: onSurface)),
                     const SizedBox(height: 4),
-                    Text(body, style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.4)),
+                    Text(body,
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: onSurfaceVariant,
+                            height: 1.4)),
                   ],
                 ),
               ),
@@ -10075,10 +12042,14 @@ class _EmptyStateCard extends StatelessWidget {
               onPressed: onAction,
               style: TextButton.styleFrom(
                 foregroundColor: accentColor,
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14)),
               ),
-              child: Text(actionLabel!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700)),
+              child: Text(actionLabel!,
+                  style: GoogleFonts.inter(
+                      fontSize: 12, fontWeight: FontWeight.w700)),
             ),
           ],
         ],
@@ -10110,10 +12081,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         _loadNotifications();
       }
     });
-    _ticketRefreshSub = PushService.instance.ticketRefreshStream.listen((event) {
+    _ticketRefreshSub =
+        PushService.instance.ticketRefreshStream.listen((event) {
       if (!mounted) return;
       if (!AuthStore.isLoggedIn || AuthStore.userId == null) return;
-      if (event.type == 'ticket_ready' || event.type == 'payment_confirmed' || event.type == 'booking_updated') {
+      if (event.type == 'ticket_ready' ||
+          event.type == 'payment_confirmed' ||
+          event.type == 'booking_updated') {
         _loadNotifications();
       }
     });
@@ -10141,7 +12115,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       return 'Just now';
     }
     final now = DateTime.now();
-    final sameDay = now.year == date.year && now.month == date.month && now.day == date.day;
+    final sameDay =
+        now.year == date.year && now.month == date.month && now.day == date.day;
     final dateLabel = date.toIso8601String().split('T').first;
     final time = date.toIso8601String().split('T').last.split('.').first;
     final shortTime = time.length >= 5 ? time.substring(0, 5) : time;
@@ -10156,7 +12131,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return 0;
   }
 
-  List<Map<String, dynamic>> _buildFromBookings(List<Map<String, dynamic>> bookings) {
+  List<Map<String, dynamic>> _buildFromBookings(
+      List<Map<String, dynamic>> bookings) {
     const primary = Color(0xFF006B47);
     const warning = Color(0xFFB54708);
     const info = Color(0xFF355AA2);
@@ -10186,7 +12162,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       } else if (paymentStatus == 'SUCCESS' || status == 'CONFIRMED') {
         items.add({
           'title': 'Payment confirmed',
-          'body': 'Payment confirmed for $from -> $to. Tap to issue your ticket.',
+          'body':
+              'Payment confirmed for $from -> $to. Tap to issue your ticket.',
           'time': createdAt,
           'icon': Icons.verified,
           'color': primary,
@@ -10283,25 +12260,36 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
                     color: background.withOpacity(0.8),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 4))],
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4))
+                    ],
                   ),
-                    child: SafeArea(
-                      bottom: false,
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            icon: const Icon(Icons.arrow_back, color: primary),
-                          ),
-                          _brandLogo(size: 24, radius: 8),
-                          const SizedBox(width: 8),
-                          Text('Notifications', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
-                          const Spacer(),
-                          if (_loading)
+                  child: SafeArea(
+                    bottom: false,
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.arrow_back, color: primary),
+                        ),
+                        _brandLogo(size: 24, radius: 8),
+                        const SizedBox(width: 8),
+                        Text('Notifications',
+                            style: GoogleFonts.manrope(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: primary)),
+                        const Spacer(),
+                        if (_loading)
                           SizedBox(
                             width: 18,
                             height: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2, color: primary.withOpacity(0.6)),
+                            child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: primary.withOpacity(0.6)),
                           ),
                       ],
                     ),
@@ -10322,9 +12310,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Your alerts', style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface)),
+                        Text('Your alerts',
+                            style: GoogleFonts.manrope(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w800,
+                                color: onSurface)),
                         const SizedBox(height: 6),
-                        Text('Trip updates, payment confirmations, and ticket alerts.', style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant)),
+                        Text(
+                            'Trip updates, payment confirmations, and ticket alerts.',
+                            style: GoogleFonts.inter(
+                                fontSize: 13, color: onSurfaceVariant)),
                         const SizedBox(height: 12),
                         OfflineBanner(onRetry: _loadNotifications),
                         const SizedBox(height: 16),
@@ -10332,9 +12327,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           _EmptyStateCard(
                             icon: Icons.lock_outline,
                             title: 'Sign in for alerts',
-                            body: 'See payment confirmations and ticket updates here.',
+                            body:
+                                'See payment confirmations and ticket updates here.',
                             actionLabel: 'Sign in',
-                            onAction: () => Navigator.pushNamed(context, AppRoutes.login),
+                            onAction: () =>
+                                Navigator.pushNamed(context, AppRoutes.login),
                           )
                         else if (_error != null)
                           Container(
@@ -10346,11 +12343,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(_error!, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: error)),
+                                Text(_error!,
+                                    style: GoogleFonts.inter(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: error)),
                                 const SizedBox(height: 8),
                                 GestureDetector(
                                   onTap: _loadNotifications,
-                                  child: Text('Retry', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: primary)),
+                                  child: Text('Retry',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w700,
+                                          color: primary)),
                                 ),
                               ],
                             ),
@@ -10359,9 +12364,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           _EmptyStateCard(
                             icon: Icons.notifications_none,
                             title: 'No alerts yet',
-                            body: 'We will let you know about payments, tickets, and rides here.',
+                            body:
+                                'We will let you know about payments, tickets, and rides here.',
                             actionLabel: 'View history',
-                            onAction: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                            onAction: () => Navigator.pushNamed(
+                                context, AppRoutes.completedRides),
                           )
                         else
                           ..._items.map(
@@ -10415,7 +12422,12 @@ class _NotificationCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: surfaceLowest,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 6))],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.03),
+                blurRadius: 12,
+                offset: const Offset(0, 6))
+          ],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -10441,11 +12453,16 @@ class _NotificationCard extends StatelessWidget {
                           title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface),
+                          style: GoogleFonts.manrope(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: onSurface),
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Text(timeLabel, style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant)),
+                      Text(timeLabel,
+                          style: GoogleFonts.inter(
+                              fontSize: 10, color: onSurfaceVariant)),
                     ],
                   ),
                   const SizedBox(height: 6),
@@ -10453,12 +12470,808 @@ class _NotificationCard extends StatelessWidget {
                     body,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.4),
+                    style: GoogleFonts.inter(
+                        fontSize: 12, color: onSurfaceVariant, height: 1.4),
                   ),
                 ],
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class TermsOfServiceScreen extends StatelessWidget {
+  const TermsOfServiceScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const _LegalDocumentScreen(
+      title: 'Terms of Service',
+      subtitle:
+          'Please read these terms carefully before booking rides or using I-Metro services.',
+      badge: 'Legal Agreement',
+      variant: _LegalDocumentVariant.terms,
+      sections: [
+        _LegalSectionData(
+          title: 'Acceptance of Terms',
+          body:
+              'By creating an account, booking a ticket, or using I-Metro, you agree to follow these terms and any service rules shown inside the app.',
+        ),
+        _LegalSectionData(
+          title: 'User Accounts',
+          body:
+              'You are responsible for keeping your login details accurate and secure. Account activity made through your credentials may be treated as your activity.',
+        ),
+        _LegalSectionData(
+          title: 'Ticket Booking & Payments',
+          body:
+              'Tickets are confirmed only after payment is successfully processed. Pending or failed payments do not guarantee a seat, fare, or completed booking.',
+        ),
+        _LegalSectionData(
+          title: 'Passenger Responsibilities',
+          body:
+              'Passengers must arrive on time, carry valid ticket details, follow driver and staff instructions, and avoid conduct that affects safety or comfort.',
+        ),
+        _LegalSectionData(
+          title: 'Route Availability',
+          body:
+              'Routes, schedules, buses, fares, and service availability may change because of traffic, safety, weather, operational needs, or regulatory direction.',
+        ),
+        _LegalSectionData(
+          title: 'Refund & Cancellation Policy',
+          body:
+              'Refunds and cancellations may depend on payment confirmation, trip status, route rules, and operational review. Approved refunds are returned through supported payment channels.',
+        ),
+        _LegalSectionData(
+          title: 'Prohibited Activities',
+          body:
+              'Do not misuse the app, submit false information, interfere with systems, harass staff or passengers, resell tickets, or use I-Metro for unlawful activity.',
+        ),
+        _LegalSectionData(
+          title: 'Limitation of Liability',
+          body:
+              'I-Metro works to provide reliable transport, but is not liable for indirect losses caused by delays, disruptions, third-party services, or events outside reasonable control.',
+        ),
+        _LegalSectionData(
+          title: 'Account Suspension',
+          body:
+              'We may suspend or restrict accounts that appear fraudulent, unsafe, abusive, unpaid, or in breach of these terms.',
+        ),
+        _LegalSectionData(
+          title: 'Intellectual Property',
+          body:
+              'The I-Metro name, brand assets, interface, content, and service design belong to I-Metro or its licensors and may not be copied without permission.',
+        ),
+        _LegalSectionData(
+          title: 'Changes to Terms',
+          body:
+              'We may update these terms as our services grow. Continued use of I-Metro after updates means you accept the revised terms.',
+        ),
+        _LegalSectionData(
+          title: 'Contact Information',
+          body:
+              'For questions about these terms, contact I-Metro support through the app or call +234 912 806 6666.',
+        ),
+      ],
+    );
+  }
+}
+
+class PrivacyPolicyScreen extends StatelessWidget {
+  const PrivacyPolicyScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const _LegalDocumentScreen(
+      title: 'Privacy Policy',
+      subtitle:
+          'Learn how I-Metro collects, protects, and uses data to deliver safer, smarter bus travel.',
+      badge: 'Data Protection',
+      variant: _LegalDocumentVariant.privacy,
+      sections: [
+        _LegalSectionData(
+          title: 'Information We Collect',
+          body:
+              'We may collect account details, contact information, booking history, support messages, and other information you provide while using I-Metro.',
+        ),
+        _LegalSectionData(
+          title: 'How We Use Data',
+          body:
+              'We use data to create accounts, process bookings, confirm payments, send service updates, improve routes, support passengers, and protect the platform.',
+        ),
+        _LegalSectionData(
+          title: 'GPS/Location Services',
+          body:
+              'Location data may be used to support pickup and destination features, route planning, real-time service information, safety, and operational monitoring.',
+        ),
+        _LegalSectionData(
+          title: 'Payment Information',
+          body:
+              'Payment processing is handled through approved payment partners. I-Metro may store payment references and status, but does not store full card details in the app.',
+        ),
+        _LegalSectionData(
+          title: 'Device Information',
+          body:
+              'We may collect device type, app version, network status, push notification identifiers, and diagnostic information to improve reliability and security.',
+        ),
+        _LegalSectionData(
+          title: 'Security & Data Protection',
+          body:
+              'We use reasonable safeguards to protect user data, limit access, and reduce unauthorized use, loss, or misuse of personal information.',
+        ),
+        _LegalSectionData(
+          title: 'Third-Party Services',
+          body:
+              'I-Metro may use trusted providers for authentication, payments, notifications, analytics, hosting, and customer support. These providers process data only as needed for service delivery.',
+        ),
+        _LegalSectionData(
+          title: 'Cookies & Analytics',
+          body:
+              'Web versions of I-Metro may use cookies, local storage, or analytics tools to keep sessions working, understand performance, and improve the product.',
+        ),
+        _LegalSectionData(
+          title: 'User Rights',
+          body:
+              'You may request access, correction, or deletion of your personal information, subject to legal, safety, payment, and operational record requirements.',
+        ),
+        _LegalSectionData(
+          title: 'Contact Information',
+          body:
+              'For privacy questions or data requests, contact I-Metro support through the app or call +234 912 806 6666.',
+        ),
+      ],
+    );
+  }
+}
+
+class _LegalSectionData {
+  const _LegalSectionData({
+    required this.title,
+    required this.body,
+  });
+
+  final String title;
+  final String body;
+}
+
+enum _LegalDocumentVariant {
+  terms,
+  privacy,
+}
+
+Future<void> _showLegalDocumentDialog({
+  required BuildContext context,
+  required String title,
+  required String subtitle,
+  required String badge,
+  required List<_LegalSectionData> sections,
+  _LegalDocumentVariant variant = _LegalDocumentVariant.privacy,
+}) {
+  final screen = MediaQuery.of(context).size;
+  final isPhoneWidth = screen.width < 600;
+
+  if (isPhoneWidth) {
+    return showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      useSafeArea: true,
+      backgroundColor: Colors.transparent,
+      barrierColor: Colors.black.withOpacity(0.32),
+      builder: (sheetContext) {
+        final maxHeight = MediaQuery.of(sheetContext).size.height * 0.9;
+        return Container(
+          constraints: BoxConstraints(maxHeight: maxHeight),
+          decoration: const BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+          ),
+          child: _LegalDocumentBody(
+            title: title,
+            subtitle: subtitle,
+            badge: badge,
+            sections: sections,
+            variant: variant,
+            modal: true,
+          ),
+        );
+      },
+    );
+  }
+
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: true,
+    builder: (dialogContext) {
+      final maxHeight = MediaQuery.of(dialogContext).size.height * 0.82;
+      return Dialog(
+        insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        backgroundColor: Colors.transparent,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            maxWidth: 430,
+          ),
+          child: SizedBox(
+            height: maxHeight,
+            child: _LegalDocumentBody(
+              title: title,
+              subtitle: subtitle,
+              badge: badge,
+              sections: sections,
+              variant: variant,
+              modal: true,
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+class _LegalDocumentScreen extends StatelessWidget {
+  const _LegalDocumentScreen({
+    required this.title,
+    required this.subtitle,
+    required this.badge,
+    required this.sections,
+    this.variant = _LegalDocumentVariant.privacy,
+  });
+
+  final String title;
+  final String subtitle;
+  final String badge;
+  final List<_LegalSectionData> sections;
+  final _LegalDocumentVariant variant;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF6FAFA),
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: _LegalDocumentBody(
+              title: title,
+              subtitle: subtitle,
+              badge: badge,
+              sections: sections,
+              variant: variant,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LegalDocumentBody extends StatelessWidget {
+  const _LegalDocumentBody({
+    required this.title,
+    required this.subtitle,
+    required this.badge,
+    required this.sections,
+    required this.variant,
+    this.modal = false,
+  });
+
+  final String title;
+  final String subtitle;
+  final String badge;
+  final List<_LegalSectionData> sections;
+  final _LegalDocumentVariant variant;
+  final bool modal;
+
+  Widget _buildFloatingHeader(
+    BuildContext context, {
+    required bool compact,
+    required bool isTerms,
+    required Color primary,
+    required Color primaryDeep,
+    required Color headerSurface,
+    required Color headerBorder,
+    required List<Color> badgeGradient,
+  }) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        compact ? 16 : 20,
+        compact ? 8 : 16,
+        compact ? 16 : 20,
+        0,
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(compact ? 20 : 24),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
+          child: Container(
+            padding: EdgeInsets.fromLTRB(
+              compact ? 10 : 14,
+              compact ? 8 : 12,
+              compact ? 10 : 14,
+              compact ? 8 : 12,
+            ),
+            decoration: BoxDecoration(
+              color: headerSurface,
+              borderRadius: BorderRadius.circular(compact ? 20 : 24),
+              border: Border.all(color: headerBorder),
+              gradient: isTerms
+                  ? LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Colors.white.withOpacity(0.82),
+                        const Color(0xFFFFFBF5).withOpacity(0.74),
+                      ],
+                    )
+                  : null,
+              boxShadow: [
+                BoxShadow(
+                  color: primary.withOpacity(isTerms ? 0.08 : 0.05),
+                  blurRadius: isTerms ? 28 : 24,
+                  offset: const Offset(0, 12),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(
+                    modal ? Icons.close_rounded : Icons.arrow_back,
+                    color: primaryDeep,
+                    size: compact ? 18 : 20,
+                  ),
+                  style: IconButton.styleFrom(
+                    minimumSize: Size(compact ? 34 : 42, compact ? 34 : 42),
+                    padding: EdgeInsets.zero,
+                    backgroundColor:
+                        Colors.white.withOpacity(isTerms ? 0.82 : 0.72),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                _brandLogo(size: compact ? 28 : 30, radius: 9),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    'I-Metro',
+                    style: GoogleFonts.manrope(
+                      fontSize: compact ? 15 : 18,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.2,
+                      color: primaryDeep,
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: compact ? 8 : 12,
+                    vertical: compact ? 4.5 : 7,
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: badgeGradient),
+                    borderRadius: BorderRadius.circular(999),
+                    boxShadow: [
+                      BoxShadow(
+                        color: primary.withOpacity(isTerms ? 0.1 : 0.08),
+                        blurRadius: isTerms ? 14 : 12,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    badge,
+                    style: GoogleFonts.inter(
+                      fontSize: compact ? 9 : 11,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.15,
+                      color: primaryDeep,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const primaryDeep = Color(0xFF0B7D58);
+    const mint = Color(0xFFE9F6F0);
+    const mist = Color(0xFFF7FBF9);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF4D5A54);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final compact = modal || screenWidth < 600;
+    final outerRadius = modal ? 30.0 : 34.0;
+    final isTerms = variant == _LegalDocumentVariant.terms;
+    final shellTop =
+        isTerms ? const Color(0xFFFFFCF8) : const Color(0xFFFCFEFD);
+    final shellBottom = isTerms ? const Color(0xFFF6F8F1) : mist;
+    final ambientGlow =
+        isTerms ? const Color(0xFFA9D7A5) : const Color(0xFF6DD5A6);
+    final headerSurface = isTerms
+        ? const Color(0xFFFFFCF8).withOpacity(0.72)
+        : Colors.white.withOpacity(0.72);
+    final headerBorder = isTerms
+        ? const Color(0xFFE9E6DB).withOpacity(0.68)
+        : Colors.white.withOpacity(0.55);
+    final mainSurfaceGradient = isTerms
+        ? [
+            const Color(0xFFFFFDF9).withOpacity(0.96),
+            const Color(0xFFF7FAF3).withOpacity(0.98),
+          ]
+        : [
+            Colors.white.withOpacity(0.88),
+            Colors.white.withOpacity(0.88),
+          ];
+    final badgeGradient = isTerms
+        ? [
+            const Color(0xFFFFF8EE).withOpacity(0.96),
+            const Color(0xFFE9F4E5).withOpacity(0.98),
+          ]
+        : [
+            Colors.white.withOpacity(0.92),
+            mint.withOpacity(0.86),
+          ];
+    final updatePillColor = isTerms ? const Color(0xFFF5F7EF) : mint;
+    final updatePillBorder =
+        isTerms ? const Color(0xFFE2E9DB) : Colors.transparent;
+    final mainSurfaceBorder =
+        isTerms ? const Color(0xFFE7ECE0).withOpacity(0.9) : Colors.transparent;
+
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            shellTop,
+            shellBottom,
+          ],
+        ),
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(modal ? outerRadius : 0),
+        ).resolve(TextDirection.ltr).copyWith(
+              bottomLeft:
+                  modal ? Radius.circular(outerRadius - 4) : Radius.zero,
+              bottomRight:
+                  modal ? Radius.circular(outerRadius - 4) : Radius.zero,
+            ),
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            top: compact ? -70 : -90,
+            right: compact ? -52 : -64,
+            child: IgnorePointer(
+              child: Container(
+                width: compact ? 170 : 220,
+                height: compact ? 170 : 220,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      primary.withOpacity(isTerms ? 0.22 : 0.18),
+                      primary.withOpacity(isTerms ? 0.07 : 0.03),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: compact ? -46 : -58,
+            top: compact ? 120 : 138,
+            child: IgnorePointer(
+              child: Container(
+                width: compact ? 120 : 150,
+                height: compact ? 120 : 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: RadialGradient(
+                    colors: [
+                      ambientGlow.withOpacity(isTerms ? 0.14 : 0.12),
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Column(
+            children: [
+              if (modal) ...[
+                const SizedBox(height: 8),
+                Center(
+                  child: Container(
+                    width: isTerms ? 38 : 34,
+                    height: 3,
+                    decoration: BoxDecoration(
+                      color: primary.withOpacity(isTerms ? 0.2 : 0.16),
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 4),
+              ],
+              _buildFloatingHeader(
+                context,
+                compact: compact,
+                isTerms: isTerms,
+                primary: primary,
+                primaryDeep: primaryDeep,
+                headerSurface: headerSurface,
+                headerBorder: headerBorder,
+                badgeGradient: badgeGradient,
+              ),
+              Expanded(
+                child: CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(
+                          compact ? 16 : 20,
+                          compact ? 10 : 20,
+                          compact ? 16 : 20,
+                          compact ? 18 : 22,
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(
+                            compact ? 18 : 24,
+                            compact ? 20 : 24,
+                            compact ? 18 : 24,
+                            compact ? 16 : 20,
+                          ),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: mainSurfaceGradient,
+                            ),
+                            borderRadius:
+                                BorderRadius.circular(compact ? 26 : 30),
+                            border: Border.all(color: mainSurfaceBorder),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    primary.withOpacity(isTerms ? 0.1 : 0.07),
+                                blurRadius: isTerms ? 42 : 38,
+                                offset: Offset(0, isTerms ? 24 : 20),
+                              ),
+                              BoxShadow(
+                                color: Colors.black
+                                    .withOpacity(isTerms ? 0.035 : 0.025),
+                                blurRadius: isTerms ? 18 : 14,
+                                offset: const Offset(0, 8),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                title,
+                                style: GoogleFonts.manrope(
+                                  fontSize: compact ? 24 : 31,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.06,
+                                  letterSpacing: isTerms ? -0.5 : -0.35,
+                                  color: onSurface,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                subtitle,
+                                style: GoogleFonts.inter(
+                                  fontSize: compact ? 14 : 15,
+                                  fontWeight: FontWeight.w400,
+                                  height: isTerms ? 1.6 : 1.68,
+                                  color: onSurfaceVariant.withOpacity(0.82),
+                                ),
+                              ),
+                              SizedBox(height: isTerms ? 14 : 16),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 7,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: updatePillColor,
+                                  borderRadius: BorderRadius.circular(999),
+                                  border: Border.all(color: updatePillBorder),
+                                ),
+                                child: Text(
+                                  'Last updated May 27, 2026',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 11.5,
+                                    fontWeight: FontWeight.w600,
+                                    color: primaryDeep,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: compact ? 18 : 22),
+                              ...List.generate(sections.length, (index) {
+                                final section = sections[index];
+                                final softTone = isTerms
+                                    ? (index.isEven
+                                        ? const Color(0xFFFFFCF8)
+                                        : const Color(0xFFF8FAF4))
+                                    : (index.isEven
+                                        ? Colors.white
+                                        : const Color(0xFFF8FCFA));
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: index == sections.length - 1
+                                        ? 0
+                                        : (compact ? 12 : 14),
+                                  ),
+                                  child: _LegalSectionCard(
+                                    index: index,
+                                    title: section.title,
+                                    body: section.body,
+                                    backgroundColor: softTone,
+                                    compact: compact,
+                                    variant: variant,
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _LegalSectionCard extends StatefulWidget {
+  const _LegalSectionCard({
+    required this.index,
+    required this.title,
+    required this.body,
+    required this.backgroundColor,
+    required this.compact,
+    required this.variant,
+  });
+
+  final int index;
+  final String title;
+  final String body;
+  final Color backgroundColor;
+  final bool compact;
+  final _LegalDocumentVariant variant;
+
+  @override
+  State<_LegalSectionCard> createState() => _LegalSectionCardState();
+}
+
+class _LegalSectionCardState extends State<_LegalSectionCard> {
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const primaryDeep = Color(0xFF0B7D58);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF4D5A54);
+    final isTerms = widget.variant == _LegalDocumentVariant.terms;
+    final cardBorder = isTerms
+        ? const Color(0xFFE9EDE3).withOpacity(0.95)
+        : Colors.transparent;
+
+    return GestureDetector(
+      onTapDown: (_) => setState(() => _pressed = true),
+      onTapCancel: () => setState(() => _pressed = false),
+      onTapUp: (_) => setState(() => _pressed = false),
+      child: AnimatedScale(
+        scale: _pressed ? 0.992 : 1,
+        duration: const Duration(milliseconds: 140),
+        curve: Curves.easeOutCubic,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          curve: Curves.easeOutCubic,
+          padding: EdgeInsets.all(widget.compact ? 16 : 18),
+          decoration: BoxDecoration(
+            color: widget.backgroundColor,
+            borderRadius: BorderRadius.circular(widget.compact ? 18 : 22),
+            border: Border.all(color: cardBorder),
+            boxShadow: [
+              BoxShadow(
+                color: primary.withOpacity(_pressed
+                    ? (isTerms ? 0.075 : 0.05)
+                    : (isTerms ? 0.05 : 0.035)),
+                blurRadius:
+                    _pressed ? (isTerms ? 20 : 18) : (isTerms ? 16 : 14),
+                offset: Offset(0, _pressed ? 8 : 6),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 36,
+                    height: 36,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          (isTerms
+                                  ? const Color(0xFFF2F5E8)
+                                  : const Color(0xFFE7F7F0))
+                              .withOpacity(0.98),
+                          (isTerms ? const Color(0xFFFFFBF4) : Colors.white)
+                              .withOpacity(isTerms ? 0.96 : 0.95),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(isTerms ? 16 : 14),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primary.withOpacity(isTerms ? 0.11 : 0.08),
+                          blurRadius: isTerms ? 14 : 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      '${widget.index + 1}'.padLeft(2, '0'),
+                      style: GoogleFonts.inter(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: primaryDeep,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      widget.title,
+                      style: GoogleFonts.manrope(
+                        fontSize: widget.compact ? 16.5 : 17.5,
+                        fontWeight: isTerms ? FontWeight.w700 : FontWeight.w600,
+                        height: 1.18,
+                        letterSpacing: isTerms ? -0.22 : -0.15,
+                        color: onSurface,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Text(
+                widget.body,
+                style: GoogleFonts.inter(
+                  fontSize: widget.compact ? 13.2 : 13.8,
+                  fontWeight: FontWeight.w400,
+                  height: isTerms ? 1.62 : 1.65,
+                  color: onSurfaceVariant.withOpacity(isTerms ? 0.84 : 0.9),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -10472,8 +13285,8 @@ class PolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const background = Color(0xFFF7F9FB);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF3F5F7);
-    const surfaceContainerHigh = Color(0xFFE8ECE9);
+    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerHigh = Color(0xFFE6E8EA);
     const outlineVariant = Color(0xFFBDCAC0);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
@@ -10484,30 +13297,23 @@ class PolicyScreen extends StatelessWidget {
       backgroundColor: background,
       body: Stack(
         children: [
-          Positioned(
-            right: -36,
-            top: 88,
-            child: Opacity(
-              opacity: 0.012,
-              child: Image.network(
-                'https://lh3.googleusercontent.com/aida-public/AB6AXuAtkF29Qu01aqkGm8daAClwzhQWIL2i6V5AdQLxPQghfhkiq6HgszNGYvA_-XFymnT8tvGE0xE75IWAYLLQQgteh-asmsUr38bI4AOAd9gWPBvsFsTJPwdorNHL13i6nOzRHpUrR0IzNFMTZLm5c5uu3C9meePwa4F4IpvPwTyjphVtDB9f--9esReqoPChvrJ3yMtGIY1vVPsECpTEu8uIixkVO2gQmglkFekjGMI1ltjVVCrit8StqmI4p0MF2r9CGyqkEBMRvA',
-                width: MediaQuery.of(context).size.width * 0.30,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
           Column(
             children: [
               SizedBox(
                 height: 64,
                 child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.84),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.035), blurRadius: 12, offset: const Offset(0, 4))],
+                        color: background.withOpacity(0.8),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4))
+                        ],
                       ),
                       child: SafeArea(
                         bottom: false,
@@ -10515,12 +13321,14 @@ class PolicyScreen extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () => Navigator.pop(context),
-                              icon: const Icon(Icons.arrow_back, color: primary),
+                              icon:
+                                  const Icon(Icons.arrow_back, color: primary),
                             ),
-                            Text(
-                              'Company Profile',
-                              style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: primary),
-                            ),
+                            Text('Company Profile',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: primary)),
                             const Spacer(),
                             _brandLogo(size: 28, radius: 8),
                           ],
@@ -10532,288 +13340,363 @@ class PolicyScreen extends StatelessWidget {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 188),
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 140),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _PolicyHeroCard(
-                        title: 'I-Metro Bus Profile',
-                        year: '2026',
-                        intro:
-                            'Inter-Metro Transport Solution Limited (I-Metro) is a privately owned, technology-driven urban mobility company headquartered in Abuja, Nigeria.',
-                        summary:
-                            'We deploy clean-energy fleets, intelligent transport systems, and professionally managed operations aligned with international standards.',
-                        chips: const [
-                          _PolicyPill(text: 'Clean-energy fleets'),
-                          _PolicyPill(text: 'Smart mobility systems'),
-                          _PolicyPill(text: 'Licensed operations'),
-                        ],
+                      Text(
+                        'I-Metro Bus Profile',
+                        style: GoogleFonts.manrope(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w800,
+                            color: onSurface),
                       ),
-                      const SizedBox(height: 22),
-                      _PolicyStorySection(
-                        title: 'About I-Metro',
-                        subtitle: 'A mobility company built for disciplined city movement and modern commuter comfort.',
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _PolicyBullet(text: 'Abuja-based, urban mobility focused, and technology-driven.'),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(text: 'Operates with clean-energy fleets and organized route systems.'),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(text: 'Built around dependable service, safer travel, and clear standards.'),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      _PolicySectionTitle(
-                        title: 'Vision & Mission',
-                        subtitle: 'The direction behind the brand and the promise we work from.',
-                      ),
+                      Text('2026',
+                          style: GoogleFonts.manrope(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w800,
+                              color: primary)),
                       const SizedBox(height: 12),
-                      LayoutBuilder(
-                        builder: (context, constraints) {
-                          final stacked = constraints.maxWidth < 720;
-                          final visionCard = _PolicyStatementCard(
-                            icon: Icons.visibility_rounded,
-                            title: 'Vision',
-                            body: 'To become Nigeria’s most trusted and innovative provider of sustainable, technology-enabled urban mobility solutions.',
-                            actionLabel: 'Read vision',
-                            onAction: () {},
-                            filled: false,
-                          );
-                          final missionCard = _PolicyStatementCard(
-                            icon: Icons.shield_rounded,
-                            title: 'Mission',
-                            body: 'To transform public transportation by deploying clean-energy fleets, smart technologies, and customer-centric services.',
-                            actionLabel: 'Read mission',
-                            onAction: () {},
-                            filled: true,
-                          );
-                          if (stacked) {
-                            return Column(
-                              children: [
-                                visionCard,
-                                const SizedBox(height: 12),
-                                missionCard,
-                              ],
-                            );
-                          }
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(child: visionCard),
-                              const SizedBox(width: 12),
-                              Expanded(child: missionCard),
-                            ],
-                          );
-                        },
+                      Text(
+                        'Inter-Metro Transport Solution Limited (I-Metro) is a privately owned, technology-driven urban mobility company headquartered in Abuja, Nigeria. We deploy clean-energy fleets, intelligent transport systems, and professionally managed operations aligned with international standards. I-Metro holds an active operational license issued by the FCTA Transport Secretariat with approval from the Office of the Honourable Minister of the FCT.',
+                        style: GoogleFonts.inter(
+                            fontSize: 16, color: onSurfaceVariant, height: 1.4),
                       ),
-                      const SizedBox(height: 20),
-                      _PolicySectionTitle(
-                        title: 'Core Values',
-                        subtitle: 'These values guide every decision and rider interaction.',
-                      ),
-                      const SizedBox(height: 12),
-                      _PolicyCard(
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            final narrow = constraints.maxWidth < 520;
-                            final tileWidth = narrow ? constraints.maxWidth : (constraints.maxWidth - 12) / 2;
-                            final values = const [
-                              _PolicyValueData(title: 'Safety', body: 'Passenger and operational safety above all else.'),
-                              _PolicyValueData(title: 'Integrity', body: 'Transparent, accountable, and ethical operations.'),
-                              _PolicyValueData(title: 'Innovation', body: 'Continuous adoption of smart mobility solutions.'),
-                              _PolicyValueData(title: 'Professionalism', body: 'Global service standards and discipline.'),
-                              _PolicyValueData(title: 'Sustainability', body: 'Environmental responsibility and long-term impact.'),
-                              _PolicyValueData(title: 'Customer Focus', body: 'Reliable, dignified, and comfortable mobility.'),
-                            ];
-                            return Wrap(
-                              spacing: 12,
-                              runSpacing: 12,
-                              children: values
-                                  .map(
-                                    (value) => SizedBox(
-                                      width: tileWidth,
-                                      child: _PolicyValueTile(data: value),
-                                    ),
-                                  )
-                                  .toList(),
-                            );
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      _PolicySectionTitle(
-                        title: 'Core Services',
-                        subtitle: 'A compact portfolio for urban, institutional, and managed mobility.',
-                      ),
-                      const SizedBox(height: 12),
-                      _PolicyStorySection(
-                        title: 'What we do',
-                        subtitle: 'Inter-Metro delivers an integrated portfolio of urban and institutional mobility solutions.',
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _PolicyBullet(text: 'High-capacity CNG bus operations.'),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(text: 'Metered taxi services (first of its kind in Abuja).'),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(text: 'Fleet management partnerships for third-party vehicles.'),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(text: 'Hire-purchase vehicle operations.'),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(text: 'Driver recruitment, training, and supervision.'),
-                            const SizedBox(height: 8),
-                            _PolicyBullet(text: 'Route planning, scheduling, and cashless fare collection.'),
-                            const SizedBox(height: 16),
-                            LayoutBuilder(
-                              builder: (context, constraints) {
-                                final stacked = constraints.maxWidth < 520;
-                                final cards = [
-                                  const _PolicyMiniCard(
-                                    title: 'Fleet Partnerships',
-                                    body: 'Daily operations, staffing, technology, monitoring, and reporting for partner-owned vehicles.',
-                                  ),
-                                  const _PolicyMiniCard(
-                                    title: 'Hire-Purchase',
-                                    body: 'Vehicles are taken into service and paid for over time from operational proceeds.',
-                                  ),
-                                ];
-                                if (stacked) {
-                                  return Column(
-                                    children: [
-                                      cards[0],
-                                      const SizedBox(height: 12),
-                                      cards[1],
-                                    ],
-                                  );
-                                }
-                                return Row(
-                                  children: [
-                                    Expanded(child: cards[0]),
-                                    const SizedBox(width: 12),
-                                    Expanded(child: cards[1]),
-                                  ],
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      _PolicySectionTitle(
-                        title: 'Technology & Safety',
-                        subtitle: 'Systems and safeguards that keep operations visible, efficient, and accountable.',
-                      ),
-                      const SizedBox(height: 12),
-                      _PolicyCard(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Operations are underpinned by a centralized, cloud-based mobility management system designed for transparency, efficiency, and safety.',
-                              style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.45),
-                            ),
-                            const SizedBox(height: 14),
-                            _PolicyHighlightPanel(
-                              title: 'Key infrastructure',
+                      const SizedBox(height: 24),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest,
+                                borderRadius: BorderRadius.circular(16),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 6))
+                                ],
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  _PolicyBullet(text: 'GPS-enabled real-time vehicle tracking.'),
-                                  SizedBox(height: 8),
-                                  _PolicyBullet(text: 'Onboard CCTV with two-way monitoring.'),
-                                  SizedBox(height: 8),
-                                  _PolicyBullet(text: 'Cashless fare collection (POS, smart cards, validators).'),
-                                  SizedBox(height: 8),
-                                  _PolicyBullet(text: 'Centralized cloud-based fleet management platform.'),
+                                children: [
+                                  Container(
+                                    width: 48,
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      color: primary.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child:
+                                        const Icon(Icons.gavel, color: primary),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text('Vision',
+                                      style: GoogleFonts.manrope(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                          color: onSurface)),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    "To become Nigeria's most trusted and innovative provider of sustainable, technology-enabled urban mobility solutions.",
+                                    style: GoogleFonts.inter(
+                                        fontSize: 12, color: onSurfaceVariant),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text('Read vision',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 12,
+                                              color: primary,
+                                              fontWeight: FontWeight.w600)),
+                                      const SizedBox(width: 4),
+                                      const Icon(Icons.arrow_forward,
+                                          size: 16, color: primary),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: primary,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 48,
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: const Icon(Icons.security,
+                                        color: Colors.white),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text('Mission',
+                                      style: GoogleFonts.manrope(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white)),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'To transform public transportation by deploying clean-energy fleets, smart technologies, and customer-centric services.',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 12,
+                                        color: Colors.white.withOpacity(0.85)),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text('Read mission',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 12,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w600)),
+                                      const SizedBox(width: 4),
+                                      const Icon(Icons.arrow_forward,
+                                          size: 16, color: Colors.white),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 20),
-                      _PolicySectionTitle(
-                        title: 'Partnerships',
-                        subtitle: 'Institutional relationships that support safe, scalable service delivery.',
+                      const SizedBox(height: 32),
+                      const _PolicySectionHeader(
+                        index: '01',
+                        title: 'Core Values',
                       ),
-                      const SizedBox(height: 12),
-                      _PolicyCard(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            _PolicyPartnerRow(text: 'Presidential Compressed Natural Gas Initiative (P-CNGi).'),
-                            SizedBox(height: 10),
-                            _PolicyPartnerRow(text: 'Office of the Honourable Minister of the FCT.'),
-                            SizedBox(height: 10),
-                            _PolicyPartnerRow(text: 'FCT Transport Secretariat and DRTS.'),
-                            SizedBox(height: 10),
-                            _PolicyPartnerRow(text: 'Federal Ministry of Transport and Environment.'),
-                            SizedBox(height: 10),
-                            _PolicyPartnerRow(text: 'AMAC, FRSC, and the Nigerian Police Force & NSCDC.'),
-                          ],
-                        ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Our operations are anchored on clear values that guide every decision and rider interaction:',
+                        style: GoogleFonts.inter(
+                            fontSize: 14, color: onSurfaceVariant, height: 1.6),
                       ),
-                      const SizedBox(height: 22),
+                      const SizedBox(height: 16),
                       Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(18),
+                        padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: primary.withOpacity(0.08),
-                          borderRadius: BorderRadius.circular(22),
-                          border: Border.all(color: primary.withOpacity(0.12)),
+                          color: surfaceContainerLow,
+                          borderRadius: BorderRadius.circular(16),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Want to partner or learn more?',
-                              style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: onSurface),
+                            Text('Values in Action',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w700,
+                                    color: onSurface)),
+                            const SizedBox(height: 12),
+                            const _PolicyBullet(
+                              text:
+                                  'Safety - passenger and operational safety above all else.',
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              'We welcome discussions about fleet partnerships, institutional mobility, and service collaboration.',
-                              style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.45),
+                            const _PolicyBullet(
+                              text:
+                                  'Integrity - transparent, accountable, and ethical operations.',
                             ),
-                            const SizedBox(height: 14),
-                            GestureDetector(
-                              onTap: () => Navigator.pushNamed(context, AppRoutes.contactUs),
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.symmetric(vertical: 14),
-                                decoration: BoxDecoration(
-                                  color: primary,
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: primary.withOpacity(0.18),
-                                      blurRadius: 14,
-                                      offset: const Offset(0, 8),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white, size: 18),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      'Contact I-Metro',
-                                      style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            const SizedBox(height: 8),
+                            const _PolicyBullet(
+                              text:
+                                  'Innovation - continuous adoption of smart mobility solutions.',
+                            ),
+                            const SizedBox(height: 8),
+                            const _PolicyBullet(
+                              text:
+                                  'Professionalism - global service standards and discipline.',
+                            ),
+                            const SizedBox(height: 8),
+                            const _PolicyBullet(
+                              text:
+                                  'Sustainability - environmental responsibility and long-term impact.',
+                            ),
+                            const SizedBox(height: 8),
+                            const _PolicyBullet(
+                              text:
+                                  'Customer Focus - reliable, dignified, and comfortable mobility.',
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 14),
-                      Center(
+                      const SizedBox(height: 32),
+                      const _PolicySectionHeader(
+                        index: '02',
+                        title: 'Core Services',
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Inter-Metro delivers an integrated portfolio of urban and institutional mobility solutions:',
+                        style: GoogleFonts.inter(
+                            fontSize: 14, color: onSurfaceVariant, height: 1.6),
+                      ),
+                      const SizedBox(height: 16),
+                      const Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _PolicyBullet(
+                              text: 'High-capacity CNG bus operations.'),
+                          SizedBox(height: 8),
+                          _PolicyBullet(
+                              text:
+                                  'Metered taxi services (first of its kind in Abuja).'),
+                          SizedBox(height: 8),
+                          _PolicyBullet(
+                              text:
+                                  'Fleet management partnerships for third-party vehicles.'),
+                          SizedBox(height: 8),
+                          _PolicyBullet(
+                              text: 'Hire-purchase vehicle operations.'),
+                          SizedBox(height: 8),
+                          _PolicyBullet(
+                              text:
+                                  'Driver recruitment, training, and supervision.'),
+                          SizedBox(height: 8),
+                          _PolicyBullet(
+                              text:
+                                  'Route planning, scheduling, and cashless fare collection.'),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      const Row(
+                        children: [
+                          Expanded(
+                            child: _PolicyMiniCard(
+                              title: 'Fleet Partnerships',
+                              body:
+                                  'I-Metro manages daily operations, staffing, technology, monitoring, and reporting for partner-owned vehicles.',
+                            ),
+                          ),
+                          SizedBox(width: 12),
+                          Expanded(
+                            child: _PolicyMiniCard(
+                              title: 'Hire-Purchase',
+                              body:
+                                  'Vehicles are taken into service and paid for over time from operational proceeds with transparent oversight.',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 32),
+                      const _PolicySectionHeader(
+                        index: '03',
+                        title: 'Technology & Safety Infrastructure',
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Operations are underpinned by a centralized, cloud-based mobility management system designed for transparency, efficiency, and safety.',
+                        style: GoogleFonts.inter(
+                            fontSize: 14, color: onSurfaceVariant, height: 1.6),
+                      ),
+                      const SizedBox(height: 16),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: surfaceContainerLow,
+                          borderRadius: BorderRadius.circular(16),
+                          border: const Border(
+                              left: BorderSide(color: primary, width: 4)),
+                        ),
                         child: Text(
-                          'I-Metro Bus Profile - 2026',
-                          style: GoogleFonts.inter(fontSize: 10, color: Colors.grey.shade500, letterSpacing: 2.0),
+                          'GPS-enabled real-time vehicle tracking\nOnboard CCTV with two-way monitoring\nCashless fare collection (POS, smart cards, validators)\nCentralized cloud-based fleet management platform',
+                          style: GoogleFonts.inter(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: onSurfaceVariant,
+                              height: 1.5),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Public sector & institutional partnerships include:',
+                            style: GoogleFonts.inter(
+                                fontSize: 14,
+                                height: 1.6,
+                                color: onSurfaceVariant),
+                          ),
+                          const SizedBox(height: 8),
+                          const _PolicyBullet(
+                              text:
+                                  'Presidential Compressed Natural Gas Initiative (P-CNGi).'),
+                          const SizedBox(height: 6),
+                          const _PolicyBullet(
+                              text:
+                                  'Office of the Honourable Minister of the FCT.'),
+                          const SizedBox(height: 6),
+                          const _PolicyBullet(
+                              text: 'FCT Transport Secretariat and DRTS.'),
+                          const SizedBox(height: 6),
+                          const _PolicyBullet(
+                              text:
+                                  'Federal Ministry of Transport and Environment.'),
+                          const SizedBox(height: 6),
+                          const _PolicyBullet(
+                              text:
+                                  'AMAC, FRSC, and the Nigerian Police Force & NSCDC.'),
+                        ],
+                      ),
+                      const SizedBox(height: 32),
+                      Container(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        decoration: BoxDecoration(
+                          border: Border(
+                              top: BorderSide(
+                                  color: outlineVariant.withOpacity(0.2))),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                                'Need more information? Call +234 912 806 6666.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 12, color: onSurfaceVariant)),
+                            const SizedBox(height: 16),
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                  context, AppRoutes.contactUs),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 12),
+                                decoration: BoxDecoration(
+                                  color: primary,
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: primary.withOpacity(0.2),
+                                        blurRadius: 12,
+                                        offset: const Offset(0, 6))
+                                  ],
+                                ),
+                                child: Text('Contact I-Metro',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white)),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text('I-Metro Bus Profile - 2026',
+                                style: GoogleFonts.inter(
+                                    fontSize: 10,
+                                    color: Colors.grey.shade500,
+                                    letterSpacing: 2.0)),
+                          ],
                         ),
                       ),
                     ],
@@ -10833,8 +13716,14 @@ class PolicyScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
                   decoration: BoxDecoration(
                     color: background.withOpacity(0.8),
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 30, offset: const Offset(0, -8))],
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(24)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.04),
+                          blurRadius: 30,
+                          offset: const Offset(0, -8))
+                    ],
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -10842,23 +13731,27 @@ class PolicyScreen extends StatelessWidget {
                       _BottomNavPill(
                         label: 'Home',
                         icon: Icons.home,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.home),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.home),
                       ),
                       _BottomNavPill(
                         label: 'History',
                         icon: Icons.history,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.completedRides),
+                        onTap: () => Navigator.pushNamed(
+                            context, AppRoutes.completedRides),
                       ),
                       _BottomNavPill(
                         label: 'Booking',
                         icon: Icons.confirmation_number,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.booking),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.booking),
                       ),
                       _BottomNavPill(
                         label: 'Profile',
                         icon: Icons.person,
                         active: true,
-                        onTap: () => Navigator.pushNamed(context, AppRoutes.profile),
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.profile),
                       ),
                     ],
                   ),
@@ -10868,379 +13761,6 @@ class PolicyScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _PolicyHeroCard extends StatelessWidget {
-  const _PolicyHeroCard({
-    required this.title,
-    required this.year,
-    required this.intro,
-    required this.summary,
-    required this.chips,
-  });
-
-  final String title;
-  final String year;
-  final String intro;
-  final String summary;
-  final List<Widget> chips;
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    const surfaceLowest = Color(0xFFFFFFFF);
-    const outlineVariant = Color(0xFFBDCAC0);
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: surfaceLowest,
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: outlineVariant.withOpacity(0.14)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 46,
-                height: 46,
-                decoration: BoxDecoration(
-                  color: primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Icon(Icons.directions_bus_filled_rounded, color: primary),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(title, style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: onSurface, height: 1.05)),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: primary.withOpacity(0.10),
-                            borderRadius: BorderRadius.circular(999),
-                          ),
-                          child: Text(year, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: primary)),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            intro,
-                            style: GoogleFonts.inter(fontSize: 12.5, color: onSurfaceVariant, height: 1.45),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(summary, style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.55)),
-          const SizedBox(height: 12),
-          Wrap(spacing: 8, runSpacing: 8, children: chips),
-        ],
-      ),
-    );
-  }
-}
-
-class _PolicyValueData {
-  const _PolicyValueData({required this.title, required this.body});
-
-  final String title;
-  final String body;
-}
-
-class _PolicyValueTile extends StatelessWidget {
-  const _PolicyValueTile({required this.data});
-
-  final _PolicyValueData data;
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7F9FB),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFD7E4DB)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 28,
-                height: 28,
-                decoration: BoxDecoration(
-                  color: primary.withOpacity(0.10),
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(Icons.check_rounded, size: 16, color: primary),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  data.title,
-                  style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: onSurface),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Text(
-            data.body,
-            style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.45),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PolicyHighlightPanel extends StatelessWidget {
-  const _PolicyHighlightPanel({
-    required this.title,
-    required this.child,
-  });
-
-  final String title;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    const surfaceContainerLow = Color(0xFFF3F5F7);
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: surfaceContainerLow,
-        borderRadius: BorderRadius.circular(18),
-        border: Border(left: BorderSide(color: primary, width: 4)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w800, color: const Color(0xFF191C1E)),
-          ),
-          const SizedBox(height: 12),
-          child,
-        ],
-      ),
-    );
-  }
-}
-
-class _PolicyStorySection extends StatelessWidget {
-  const _PolicyStorySection({
-    required this.title,
-    required this.subtitle,
-    required this.child,
-  });
-
-  final String title;
-  final String subtitle;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: onSurface)),
-        const SizedBox(height: 6),
-        Text(subtitle, style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.45)),
-        const SizedBox(height: 12),
-        _PolicyCard(child: child),
-      ],
-    );
-  }
-}
-
-class _PolicySectionTitle extends StatelessWidget {
-  const _PolicySectionTitle({
-    required this.title,
-    required this.subtitle,
-  });
-
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(title, style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: onSurface)),
-        const SizedBox(height: 4),
-        Text(subtitle, style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.45)),
-      ],
-    );
-  }
-}
-
-class _PolicyCard extends StatelessWidget {
-  const _PolicyCard({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xFFD7E4DB)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 6))],
-      ),
-      child: child,
-    );
-  }
-}
-
-class _PolicyStatementCard extends StatelessWidget {
-  const _PolicyStatementCard({
-    required this.icon,
-    required this.title,
-    required this.body,
-    required this.actionLabel,
-    required this.onAction,
-    required this.filled,
-  });
-
-  final IconData icon;
-  final String title;
-  final String body;
-  final String actionLabel;
-  final VoidCallback onAction;
-  final bool filled;
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    const onSurface = Color(0xFF191C1E);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    final background = filled ? primary : Colors.white;
-    final textColor = filled ? Colors.white : onSurface;
-    final mutedColor = filled ? Colors.white.withOpacity(0.82) : onSurfaceVariant;
-    final actionColor = filled ? Colors.white : primary;
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: filled ? primary.withOpacity(0.12) : const Color(0xFFD7E4DB)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 14, offset: const Offset(0, 8))],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 44,
-            height: 44,
-            decoration: BoxDecoration(
-              color: filled ? Colors.white.withOpacity(0.18) : primary.withOpacity(0.10),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: Icon(icon, color: filled ? Colors.white : primary),
-          ),
-          const SizedBox(height: 12),
-          Text(title, style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: textColor)),
-          const SizedBox(height: 8),
-          Text(body, style: GoogleFonts.inter(fontSize: 12, color: mutedColor, height: 1.5)),
-          const SizedBox(height: 14),
-          GestureDetector(
-            onTap: onAction,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(actionLabel, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: actionColor)),
-                const SizedBox(width: 4),
-                Icon(Icons.arrow_forward_rounded, size: 16, color: actionColor),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PolicyPill extends StatelessWidget {
-  const _PolicyPill({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: primary.withOpacity(0.08),
-        borderRadius: BorderRadius.circular(999),
-      ),
-      child: Text(
-        text,
-        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: primary),
-      ),
-    );
-  }
-}
-
-class _PolicyPartnerRow extends StatelessWidget {
-  const _PolicyPartnerRow({required this.text});
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    const onSurfaceVariant = Color(0xFF3E4942);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Icon(Icons.check_circle_rounded, color: primary, size: 18),
-        const SizedBox(width: 8),
-        Expanded(
-          child: Text(text, style: GoogleFonts.inter(fontSize: 12.5, color: onSurfaceVariant, height: 1.45)),
-        ),
-      ],
     );
   }
 }
@@ -11257,11 +13777,22 @@ class _PolicySectionHeader extends StatelessWidget {
     const outlineVariant = Color(0xFFBDCAC0);
     return Row(
       children: [
-        Text(index, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 2.0, color: primary)),
+        Text(index,
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 2.0,
+                color: primary)),
         const SizedBox(width: 12),
-        Expanded(child: Container(height: 1, color: outlineVariant.withOpacity(0.3))),
+        Expanded(
+            child:
+                Container(height: 1, color: outlineVariant.withOpacity(0.3))),
         const SizedBox(width: 12),
-        Text(title, style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: const Color(0xFF191C1E))),
+        Text(title,
+            style: GoogleFonts.manrope(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF191C1E))),
       ],
     );
   }
@@ -11282,7 +13813,9 @@ class _PolicyBullet extends StatelessWidget {
         const Icon(Icons.check_circle, color: primary, size: 18),
         const SizedBox(width: 8),
         Expanded(
-          child: Text(text, style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.4)),
+          child: Text(text,
+              style: GoogleFonts.inter(
+                  fontSize: 13, color: onSurfaceVariant, height: 1.4)),
         ),
       ],
     );
@@ -11309,95 +13842,19 @@ class _PolicyMiniCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
+          Text(title,
+              style: GoogleFonts.manrope(
+                  fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
           const SizedBox(height: 8),
-          Text(body, style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.4)),
+          Text(body,
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: onSurfaceVariant, height: 1.4)),
         ],
       ),
     );
   }
 }
 
-class _UserProfileThumb extends StatelessWidget {
-  const _UserProfileThumb({super.key, this.size = 40});
-
-  final double size;
-
-  String _initials() {
-    final first = AuthStore.firstName?.trim() ?? '';
-    final last = AuthStore.lastName?.trim() ?? '';
-    final email = AuthStore.email?.trim() ?? '';
-    final buffer = StringBuffer();
-
-    if (first.isNotEmpty) {
-      buffer.write(first[0]);
-    }
-    if (last.isNotEmpty) {
-      buffer.write(last[0]);
-    }
-    if (buffer.isEmpty && email.contains('@')) {
-      final local = email.split('@').first;
-      final parts = local.split(RegExp(r'[^A-Za-z0-9]+')).where((part) => part.isNotEmpty).toList();
-      for (final part in parts.take(2)) {
-        buffer.write(part[0]);
-      }
-    }
-
-    final text = buffer.toString().toUpperCase();
-    return text.isEmpty ? 'IM' : text;
-  }
-
-  ImageProvider? _avatarImageProvider() {
-    final data = AuthStore.avatarUrl?.trim();
-    if (data == null || data.isEmpty || AuthStore.isPlaceholderAvatar(data)) {
-      return null;
-    }
-    if (data.startsWith('data:image')) {
-      final comma = data.indexOf(',');
-      if (comma != -1) {
-        final base64Part = data.substring(comma + 1);
-        try {
-          return MemoryImage(base64Decode(base64Part));
-        } catch (_) {
-          return null;
-        }
-      }
-      return null;
-    }
-    if (data.startsWith('http')) {
-      return NetworkImage(data);
-    }
-    return null;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const primary = Color(0xFF006B47);
-    final avatarProvider = _avatarImageProvider();
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(size / 2),
-        border: Border.all(color: primary.withOpacity(0.18), width: 2),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(size / 2),
-        child: avatarProvider == null
-            ? Container(
-                color: primary.withOpacity(0.08),
-                alignment: Alignment.center,
-                child: Text(
-                  _initials(),
-                  style: GoogleFonts.manrope(fontSize: size * 0.32, fontWeight: FontWeight.w800, color: primary),
-                ),
-              )
-            : Image(image: avatarProvider, fit: BoxFit.cover),
-      ),
-    );
-  }
-}
 class LogoutScreen extends StatelessWidget {
   const LogoutScreen({super.key});
 
@@ -11450,19 +13907,24 @@ class LogoutScreen extends StatelessWidget {
                         color: tertiaryFixed,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.logout, color: tertiary, size: 28),
+                      child:
+                          const Icon(Icons.logout, color: tertiary, size: 28),
                     ),
                     const SizedBox(height: 18),
                     Text(
                       'Are you sure you want to log out?',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: onSurface),
+                      style: GoogleFonts.manrope(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                          color: onSurface),
                     ),
                     const SizedBox(height: 10),
                     Text(
                       'You will need to enter your credentials to access your traveler profile again.',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.4),
+                      style: GoogleFonts.inter(
+                          fontSize: 13, color: onSurfaceVariant, height: 1.4),
                     ),
                     const SizedBox(height: 24),
                     GestureDetector(
@@ -11497,7 +13959,10 @@ class LogoutScreen extends StatelessWidget {
                         child: Text(
                           'Log Out',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: GoogleFonts.inter(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white),
                         ),
                       ),
                     ),
@@ -11514,7 +13979,10 @@ class LogoutScreen extends StatelessWidget {
                         child: Text(
                           'Cancel',
                           textAlign: TextAlign.center,
-                          style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: onSurfaceVariant),
+                          style: GoogleFonts.inter(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: onSurfaceVariant),
                         ),
                       ),
                     ),
@@ -11529,8 +13997,510 @@ class LogoutScreen extends StatelessWidget {
   }
 }
 
+class AppModeSelectorScreen extends StatelessWidget {
+  const AppModeSelectorScreen({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    const background = Color(0xFFF7F9FB);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const primary = Color(0xFF006B47);
 
+    return Scaffold(
+      backgroundColor: background,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 16),
+              Text(
+                'Choose Mode',
+                style: GoogleFonts.manrope(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800,
+                  color: onSurface,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Select how you want to continue in I-Metro.',
+                style: GoogleFonts.inter(
+                  fontSize: 14,
+                  color: onSurfaceVariant,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 24),
+              _ModeTile(
+                title: 'Rider',
+                body: 'Book rides, manage tickets, and view travel history.',
+                icon: Icons.person,
+                onTap: () =>
+                    Navigator.pushReplacementNamed(context, AppRoutes.login),
+              ),
+              const SizedBox(height: 14),
+              _ModeTile(
+                title: 'Admin',
+                body: 'Manage routes, users, support tickets, and operations.',
+                icon: Icons.admin_panel_settings,
+                onTap: () => Navigator.pushReplacementNamed(
+                    context, AppRoutes.adminLogin),
+              ),
+              const SizedBox(height: 24),
+              Text(
+                'Powered by I-Metro',
+                style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: primary,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
+class _ModeTile extends StatelessWidget {
+  const _ModeTile({
+    required this.title,
+    required this.body,
+    required this.icon,
+    required this.onTap,
+  });
 
+  final String title;
+  final String body;
+  final IconData icon;
+  final VoidCallback onTap;
 
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 16,
+                offset: const Offset(0, 8))
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 54,
+              height: 54,
+              decoration: BoxDecoration(
+                color: const Color(0xFFE6F3ED),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Icon(icon, color: const Color(0xFF006B47)),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.manrope(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                      color: const Color(0xFF191C1E),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    body,
+                    style: GoogleFonts.inter(
+                      fontSize: 13,
+                      color: const Color(0xFF3E4942),
+                      height: 1.4,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
+
+  @override
+  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _codeController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  bool _sending = false;
+  bool _resetting = false;
+  String? _message;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _codeController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _sendCode() async {
+    if (_sending) return;
+    final email = _emailController.text.trim();
+    if (email.isEmpty) {
+      setState(() => _message = 'Please enter your email address.');
+      return;
+    }
+    setState(() {
+      _sending = true;
+      _message = null;
+    });
+    try {
+      final response = await AuthApi.requestPasswordReset(email: email);
+      setState(() {
+        _message = response['message']?.toString() ??
+            'If the email exists, a reset code has been sent. Please check your inbox, spam, and promotions folders.';
+      });
+    } catch (_) {
+      setState(() {
+        _message = 'Could not send reset code. Please try again.';
+      });
+    } finally {
+      if (mounted) setState(() => _sending = false);
+    }
+  }
+
+  Future<void> _resetPassword() async {
+    if (_resetting) return;
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+    final email = _emailController.text.trim();
+    final code = _codeController.text.trim();
+    final password = _passwordController.text;
+    setState(() {
+      _resetting = true;
+      _message = null;
+    });
+    try {
+      final response = await AuthApi.resetPassword(
+        email: email,
+        code: code,
+        newPassword: password,
+      );
+      final ok = response['ok'] == true;
+      setState(() {
+        _message = ok
+            ? 'Password updated successfully. Please sign in.'
+            : response['message']?.toString() ??
+                'Reset failed. Please check the code and try again.';
+      });
+      if (ok && mounted) {
+        await Future<void>.delayed(const Duration(milliseconds: 900));
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, AppRoutes.login);
+      }
+    } catch (_) {
+      setState(() {
+        _message = 'Password reset failed. Please try again.';
+      });
+    } finally {
+      if (mounted) setState(() => _resetting = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const background = Color(0xFFF6FAFA);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const outlineVariant = Color(0xFFBDCAC0);
+    const primary = Color(0xFF006B47);
+    const kineticEnd = Color(0xFF009B67);
+
+    return Scaffold(
+      backgroundColor: background,
+      body: Stack(
+        children: [
+          Positioned(
+            top: -82,
+            right: -70,
+            child: Container(
+              width: 190,
+              height: 190,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [kineticEnd.withOpacity(0.96), primary],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: primary.withOpacity(0.08),
+                    blurRadius: 86,
+                    spreadRadius: 22,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -88,
+            left: -72,
+            child: Container(
+              width: 172,
+              height: 172,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    primary.withOpacity(0.92),
+                    kineticEnd.withOpacity(0.82),
+                  ],
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: primary.withOpacity(0.07),
+                    blurRadius: 78,
+                    spreadRadius: 18,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(24, 28, 24, 32),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 500),
+                  child: Container(
+                    padding: const EdgeInsets.fromLTRB(26, 28, 26, 26),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(34),
+                      border: Border.all(color: Colors.white.withOpacity(0.86)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: primary.withOpacity(0.055),
+                          blurRadius: 44,
+                          offset: const Offset(0, 24),
+                        ),
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.035),
+                          blurRadius: 18,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
+                    ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              _brandLogo(size: 42, radius: 13),
+                              const SizedBox(width: 12),
+                              Text(
+                                'I-Metro',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w900,
+                                  height: 1,
+                                  color: primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 26),
+                          Text(
+                            'Reset Password',
+                            style: GoogleFonts.manrope(
+                              fontSize: 32,
+                              fontWeight: FontWeight.w900,
+                              height: 1.05,
+                              color: onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'We will send a reset code to your email. Enter it here with a new password to continue.',
+                            style: GoogleFonts.inter(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: onSurfaceVariant.withOpacity(0.82),
+                              height: 1.5,
+                            ),
+                          ),
+                          const SizedBox(height: 26),
+                          const _ForgotStepBadge(
+                            label: 'Step 1',
+                            title: 'Verify Email',
+                          ),
+                          const SizedBox(height: 16),
+                          _ForgotPasswordField(
+                            label: 'Email address',
+                            hint: 'you@example.com',
+                            icon: Icons.mail_outline,
+                            controller: _emailController,
+                            keyboardType: TextInputType.emailAddress,
+                            textInputAction: TextInputAction.next,
+                          ),
+                          const SizedBox(height: 16),
+                          _ForgotPasswordActionButton(
+                            label: 'Send Reset Code',
+                            loading: _sending,
+                            icon: Icons.arrow_forward,
+                            onPressed: _sending ? null : _sendCode,
+                          ),
+                          const SizedBox(height: 16),
+                          if (_message != null)
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF7FBF9),
+                                borderRadius: BorderRadius.circular(18),
+                                border: Border.all(
+                                    color: outlineVariant.withOpacity(0.4)),
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Icon(
+                                    Icons.info_outline,
+                                    color: primary,
+                                    size: 18,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Expanded(
+                                    child: Text(
+                                      _message!,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 12.5,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            onSurfaceVariant.withOpacity(0.88),
+                                        height: 1.45,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          const SizedBox(height: 28),
+                          Container(
+                            height: 1,
+                            width: double.infinity,
+                            color: outlineVariant.withOpacity(0.38),
+                          ),
+                          const SizedBox(height: 24),
+                          const _ForgotStepBadge(
+                            label: 'Step 2',
+                            title: 'Reset Password',
+                          ),
+                          const SizedBox(height: 16),
+                          _ForgotPasswordField(
+                            label: 'Reset code',
+                            hint: 'Enter reset code',
+                            icon: Icons.pin_outlined,
+                            controller: _codeController,
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                          ),
+                          const SizedBox(height: 14),
+                          _ForgotPasswordField(
+                            label: 'New password',
+                            hint: 'Enter new password',
+                            icon: Icons.lock_outline,
+                            controller: _passwordController,
+                            keyboardType: TextInputType.visiblePassword,
+                            textInputAction: TextInputAction.next,
+                            validator: (value) {
+                              final input = value ?? '';
+                              if (input.length < 6) {
+                                return 'Password must be at least 6 characters.';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 14),
+                          _ForgotPasswordField(
+                            label: 'Confirm password',
+                            hint: 'Confirm new password',
+                            icon: Icons.verified_user_outlined,
+                            controller: _confirmPasswordController,
+                            keyboardType: TextInputType.visiblePassword,
+                            textInputAction: TextInputAction.done,
+                            validator: (value) {
+                              final input = value ?? '';
+                              if (input != _passwordController.text) {
+                                return 'Passwords do not match.';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 18),
+                          _ForgotPasswordActionButton(
+                            label: 'Reset Password',
+                            loading: _resetting,
+                            icon: Icons.check_circle_outline,
+                            onPressed: _resetting ? null : _resetPassword,
+                          ),
+                          const SizedBox(height: 16),
+                          Center(
+                            child: TextButton.icon(
+                              onPressed: () => Navigator.pop(context),
+                              style: TextButton.styleFrom(
+                                foregroundColor: primary,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 12,
+                                ),
+                              ),
+                              icon: const Icon(Icons.arrow_back, size: 18),
+                              label: Text(
+                                'Back to login',
+                                style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w800,
+                                  color: primary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

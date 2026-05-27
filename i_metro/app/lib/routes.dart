@@ -1,15 +1,16 @@
-﻿import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 import 'screens/user_screens.dart';
 import 'screens/admin_screens.dart';
 
 class AppRoutes {
   static const splash = '/';
-  static const appModeSelect = '/app-mode-select';
   static const login = '/login';
   static const forgotPassword = '/forgot-password';
   static const createAccount = '/create-account';
+  static const onboarding = '/onboarding';
   static const home = '/home';
+  static const rideServices = '/ride-services';
   static const booking = '/booking';
   static const ticketDetails = '/ticket-details';
   static const afterBooking = '/after-booking';
@@ -20,6 +21,8 @@ class AppRoutes {
   static const changePassword = '/change-password';
   static const hamburgerMenu = '/hamburger-menu';
   static const contactUs = '/contact-us';
+  static const terms = '/terms-of-service';
+  static const privacy = '/privacy-policy';
   static const policy = '/policy';
   static const logout = '/logout';
 
@@ -40,17 +43,19 @@ class AppRoutes {
   static const adminUserDropdown = '/admin/user-dropdown';
   static const adminLogoutConfirmation = '/admin/logout-confirmation';
   static const adminAuditActivityLogs = '/admin/audit-activity-logs';
-  static const adminSupportTicketManagement = '/admin/support-ticket-management';
+  static const adminSupportTicketManagement =
+      '/admin/support-ticket-management';
   static const adminSystemSettings = '/admin/system-settings';
   static const adminRevenueDashboard = '/admin/revenue-dashboard';
 
   static final Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashOnboardingScreen(),
-    appModeSelect: (context) => const AppModeSelectorScreen(),
     login: (context) => const LoginScreen(),
     forgotPassword: (context) => const ForgotPasswordScreen(),
     createAccount: (context) => const CreateAccountScreen(),
+    onboarding: (context) => const UserOnboardingScreen(),
     home: (context) => const HomeScreen(),
+    rideServices: (context) => const RideServiceSelectorScreen(),
     booking: (context) {
       final args = ModalRoute.of(context)?.settings.arguments;
       String? initialRouteId;
@@ -86,6 +91,8 @@ class AppRoutes {
     changePassword: (context) => const ChangePasswordScreen(),
     hamburgerMenu: (context) => const HamburgerMenuScreen(),
     contactUs: (context) => const ContactUsScreen(),
+    terms: (context) => const TermsOfServiceScreen(),
+    privacy: (context) => const PrivacyPolicyScreen(),
     policy: (context) => const PolicyScreen(),
     logout: (context) => const LogoutScreen(),
     adminLogin: (context) => const AdminLoginScreen(),
@@ -105,7 +112,8 @@ class AppRoutes {
     adminUserDropdown: (context) => const AdminUserDropdownScreen(),
     adminLogoutConfirmation: (context) => const AdminLogoutConfirmationScreen(),
     adminAuditActivityLogs: (context) => const AdminAuditActivityLogsScreen(),
-    adminSupportTicketManagement: (context) => const AdminSupportTicketManagementScreen(),
+    adminSupportTicketManagement: (context) =>
+        const AdminSupportTicketManagementScreen(),
     adminSystemSettings: (context) => const AdminSystemSettingsScreen(),
     adminRevenueDashboard: (context) => const AdminRevenueDashboardScreen(),
   };

@@ -1,4 +1,4 @@
-package com.example.i_metro
+package com.imetro.bus
 
 import io.flutter.embedding.android.FlutterActivity
 
