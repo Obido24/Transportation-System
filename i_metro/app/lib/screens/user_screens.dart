@@ -11133,10 +11133,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAF8);
     const surfaceLowest = Color(0xFFFFFFFF);
+    const outlineVariant = Color(0xFFDBE7E0);
+    const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
+    const primaryContainer = Color(0xFF00875A);
     const error = Color(0xFFBA1A1A);
     final latestSupport = _supportItems.isNotEmpty ? _supportItems.first : null;
 
@@ -11145,54 +11148,105 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
       body: Stack(
         children: [
           Positioned(
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: Opacity(
-              opacity: 0.05,
-              child: Image.network(
-                'https://lh3.googleusercontent.com/aida-public/AB6AXuAtkF29Qu01aqkGm8daAClwzhQWIL2i6V5AdQLxPQghfhkiq6HgszNGYvA_-XFymnT8tvGE0xE75IWAYLLQQgteh-asmsUr38bI4AOAd9gWPBvsFsTJPwdorNHL13i6nOzRHpUrR0IzNFMTZLm5c5uu3C9meePwa4F4IpvPwTyjphVtDB9f--9esReqoPChvrJ3yMtGIY1vVPsECpTEu8uIixkVO2gQmglkFekjGMI1ltjVVCrit8StqmI4p0MF2r9CGyqkEBMRvA',
-                width: MediaQuery.of(context).size.width * 0.5,
-                fit: BoxFit.cover,
+            top: -120,
+            right: -76,
+            child: Container(
+              width: 240,
+              height: 240,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.16),
+                    primaryContainer.withOpacity(0.05),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: -44,
+            top: 260,
+            child: Container(
+              width: 132,
+              height: 132,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.06),
               ),
             ),
           ),
           Column(
             children: [
               SizedBox(
-                height: 64,
+                height: 72,
                 child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.8),
+                        color: background.withOpacity(0.82),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
-                              blurRadius: 12,
-                              offset: const Offset(0, 4))
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
+                          )
                         ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
-                            IconButton(
-                              onPressed: () => Navigator.pushNamed(
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
                                   context, AppRoutes.hamburgerMenu),
-                              icon: const Icon(Icons.menu, color: primary),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.menu, color: primary),
+                              ),
                             ),
-                            _brandLogo(size: 28, radius: 8),
+                            const SizedBox(width: 12),
+                            _brandLogo(size: 26, radius: 8),
                             const SizedBox(width: 8),
                             Text('I-Metro',
                                 style: GoogleFonts.manrope(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w800,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
                                     color: primary)),
                             const Spacer(),
-                            _brandLogo(size: 28, radius: 8),
+                            Container(
+                              width: 42,
+                              height: 42,
+                              decoration: BoxDecoration(
+                                color: surfaceLowest,
+                                borderRadius: BorderRadius.circular(16),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.035),
+                                    blurRadius: 12,
+                                    spreadRadius: -6,
+                                    offset: const Offset(0, 8),
+                                  ),
+                                ],
+                              ),
+                              child: _brandLogo(size: 20, radius: 6),
+                            ),
                           ],
                         ),
                       ),
@@ -11202,24 +11256,80 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 150),
+                  padding: const EdgeInsets.fromLTRB(24, 12, 24, 148),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 16),
-                      const _ContactLocationRow(),
-                      const SizedBox(height: 34),
                       Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.fromLTRB(26, 26, 26, 24),
+                        padding: const EdgeInsets.fromLTRB(4, 6, 4, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('How can we help?',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: -0.55,
+                                  color: onSurface,
+                                )),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Contact I-Metro for support, partnerships, or fleet management enquiries.',
+                              style: GoogleFonts.inter(
+                                fontSize: 14,
+                                height: 1.5,
+                                color: onSurfaceVariant.withOpacity(0.84),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 28),
+                      Text('Contact options',
+                          style: GoogleFonts.manrope(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: onSurface,
+                          )),
+                      const SizedBox(height: 14),
+                      const _ContactInfoCard(
+                        icon: Icons.call_rounded,
+                        title: 'Call Us',
+                        subtitle: 'Customer Support',
+                        value: '+234 912 806 6666',
+                        helper: 'Tap to call',
+                      ),
+                      const SizedBox(height: 14),
+                      const _ContactInfoCard(
+                        icon: Icons.apartment_rounded,
+                        title: 'Head Office',
+                        subtitle: 'Abuja, Nigeria',
+                        value: 'FCT Transport Secretariat',
+                        helper: 'Get directions',
+                      ),
+                      const SizedBox(height: 26),
+                      Text('Send a message',
+                          style: GoogleFonts.manrope(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: onSurface,
+                          )),
+                      const SizedBox(height: 14),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
                         decoration: BoxDecoration(
                           color: surfaceLowest,
                           borderRadius: BorderRadius.circular(28),
+                          border: Border.all(
+                              color: outlineVariant.withOpacity(0.2)),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.05),
-                              blurRadius: 26,
-                              offset: const Offset(0, 12),
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 22,
+                              spreadRadius: -12,
+                              offset: const Offset(0, 16),
                             ),
                           ],
                         ),
@@ -11231,23 +11341,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               placeholder: 'What can we help you with?',
                               controller: _subjectController,
                             ),
-                            const SizedBox(height: 22),
+                            const SizedBox(height: 18),
                             _ContactMessageField(
                               label: 'Message',
                               placeholder: 'Tell us more about your inquiry...',
                               controller: _messageController,
                             ),
-                            const SizedBox(height: 20),
+                            const SizedBox(height: 18),
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: _sending ? null : _sendMessage,
                                 style: ElevatedButton.styleFrom(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
+                                      const EdgeInsets.symmetric(vertical: 16),
                                   backgroundColor: primary,
                                   foregroundColor: Colors.white,
-                                  shape: const StadiumBorder(),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
                                   elevation: 0,
                                 ),
                                 child: Row(
@@ -11265,14 +11377,14 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                         ),
                                       )
                                     else
-                                      const Icon(Icons.send,
-                                          size: 20, color: Colors.white),
+                                      const Icon(Icons.send_rounded,
+                                          size: 18, color: Colors.white),
                                     const SizedBox(width: 8),
                                     Text(
                                       _sending ? 'Sending...' : 'Send Message',
                                       style: GoogleFonts.manrope(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w800,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
                                         color: Colors.white,
                                       ),
                                     ),
@@ -11291,32 +11403,48 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                 ),
                               ),
                             ],
-                            const SizedBox(height: 26),
-                            _SupportLiveUpdateBanner(
-                              notice: _supportNotice,
-                              latestItem: latestSupport,
-                              lastSyncedAt: _lastSupportSyncAt,
-                            ),
-                            const SizedBox(height: 20),
-                            _SupportStatusPanel(
-                              loading: _loadingSupport,
-                              errorText: _supportError,
-                              items: _supportItems,
-                              onRefresh: () => _loadSupportMessages(),
-                            ),
-                            const SizedBox(height: 18),
-                            Center(
-                              child: Text(
-                                'By sending this message, you agree to our privacy policy regarding data collection for support purposes.',
-                                style: GoogleFonts.inter(
-                                  fontSize: 13,
-                                  color: onSurfaceVariant,
-                                  height: 1.35,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
                           ],
+                        ),
+                      ),
+                      const SizedBox(height: 28),
+                      Text('My support requests',
+                          style: GoogleFonts.manrope(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: onSurface,
+                          )),
+                      const SizedBox(height: 6),
+                      Text(
+                        'Track whether your complaint is open, in progress, or resolved.',
+                        style: GoogleFonts.inter(
+                          fontSize: 13,
+                          height: 1.45,
+                          color: onSurfaceVariant.withOpacity(0.8),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      _SupportLiveUpdateBanner(
+                        notice: _supportNotice,
+                        latestItem: latestSupport,
+                        lastSyncedAt: _lastSupportSyncAt,
+                      ),
+                      const SizedBox(height: 14),
+                      _SupportStatusPanel(
+                        loading: _loadingSupport,
+                        errorText: _supportError,
+                        items: _supportItems,
+                        onRefresh: () => _loadSupportMessages(),
+                      ),
+                      const SizedBox(height: 18),
+                      Center(
+                        child: Text(
+                          'By sending this message, you agree to our privacy policy regarding data collection for support purposes.',
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: onSurfaceVariant.withOpacity(0.76),
+                            height: 1.4,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ],
@@ -11333,15 +11461,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                 child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                  padding: const EdgeInsets.fromLTRB(18, 10, 18, 18),
                   decoration: BoxDecoration(
-                    color: background.withOpacity(0.8),
+                    color: background.withOpacity(0.76),
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(24)),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
-                          blurRadius: 30,
+                          color: Colors.black.withOpacity(0.035),
+                          blurRadius: 24,
                           offset: const Offset(0, -8))
                     ],
                   ),
@@ -11400,8 +11528,7 @@ class _SupportStatusPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const panelBg = Color(0xFFF7FAF8);
-    const panelBorder = Color(0xFFD7E4DB);
+    const panelBg = Color(0xFFFFFFFF);
     const heading = Color(0xFF203229);
     const muted = Color(0xFF51615A);
     const primary = Color(0xFF006B47);
@@ -11413,8 +11540,15 @@ class _SupportStatusPanel extends StatelessWidget {
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: panelBg,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: panelBorder),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.035),
+            blurRadius: 18,
+            spreadRadius: -10,
+            offset: const Offset(0, 12),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -11424,7 +11558,7 @@ class _SupportStatusPanel extends StatelessWidget {
               Text('My support requests',
                   style: GoogleFonts.manrope(
                       fontSize: 16,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w700,
                       color: heading)),
               const Spacer(),
               TextButton(
@@ -11440,7 +11574,8 @@ class _SupportStatusPanel extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             'Track whether your complaint is open, in progress, or resolved.',
-            style: GoogleFonts.inter(fontSize: 12, color: muted, height: 1.4),
+            style: GoogleFonts.inter(
+                fontSize: 12.5, color: muted.withOpacity(0.86), height: 1.45),
           ),
           const SizedBox(height: 14),
           if (loading)
@@ -11486,8 +11621,8 @@ class _SupportLiveUpdateBanner extends StatelessWidget {
     const heading = Color(0xFF203229);
     const muted = Color(0xFF51615A);
     const success = Color(0xFF006B47);
-    const warning = Color(0xFFB26A00);
-    const danger = Color(0xFFB00020);
+    const warning = Color(0xFF9C6A08);
+    const danger = Color(0xFFB15A62);
 
     final normalized = latestItem == null
         ? 'OPEN'
@@ -11503,9 +11638,9 @@ class _SupportLiveUpdateBanner extends StatelessWidget {
       _ => danger,
     };
     final statusBg = switch (normalized) {
-      'IN_PROGRESS' => const Color(0xFFFFF2D8),
-      'RESOLVED' => const Color(0xFFE1F2EA),
-      _ => const Color(0xFFFFE2E2),
+      'IN_PROGRESS' => const Color(0xFFFFF5DE),
+      'RESOLVED' => const Color(0xFFE8F5EE),
+      _ => const Color(0xFFFBECEE),
     };
     final subject =
         latestItem?['subject']?.toString() ?? 'No support request yet';
@@ -11522,9 +11657,16 @@ class _SupportLiveUpdateBanner extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF7FAF8),
-        borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: const Color(0xFFD7E4DB)),
+        color: Colors.white.withOpacity(0.96),
+        borderRadius: BorderRadius.circular(22),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 16,
+            spreadRadius: -10,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -11641,14 +11783,14 @@ class _SupportTicketCard extends StatelessWidget {
       _ => 'Open',
     };
     final statusColor = switch (normalized) {
-      'IN_PROGRESS' => const Color(0xFFB26A00),
+      'IN_PROGRESS' => const Color(0xFF9C6A08),
       'RESOLVED' => const Color(0xFF006B47),
-      _ => const Color(0xFFB00020),
+      _ => const Color(0xFFB15A62),
     };
     final statusBg = switch (normalized) {
-      'IN_PROGRESS' => const Color(0xFFFFF2D8),
-      'RESOLVED' => const Color(0xFFE1F2EA),
-      _ => const Color(0xFFFFE2E2),
+      'IN_PROGRESS' => const Color(0xFFFFF5DE),
+      'RESOLVED' => const Color(0xFFE8F5EE),
+      _ => const Color(0xFFFBECEE),
     };
     final supportNote = switch (normalized) {
       'IN_PROGRESS' => 'Our team is working on this complaint.',
@@ -11661,8 +11803,15 @@ class _SupportTicketCard extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFD7E4DB)),
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 14,
+            spreadRadius: -10,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -11739,8 +11888,15 @@ class _SupportLoadingRow extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               color: const Color(0xFFFFFFFF),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFFD7E4DB)),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.025),
+                  blurRadius: 12,
+                  spreadRadius: -10,
+                  offset: const Offset(0, 8),
+                ),
+              ],
             ),
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -11768,8 +11924,15 @@ class _SupportEmptyState extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFD7E4DB)),
+        borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.025),
+            blurRadius: 12,
+            spreadRadius: -10,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
       child: Text(
         message,
@@ -11785,16 +11948,18 @@ class _ContactInfoCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.value,
+    this.helper,
   });
 
   final IconData icon;
   final String title;
   final String subtitle;
   final String value;
+  final String? helper;
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceLowest = Color(0xFFFFFFFF);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
@@ -11802,8 +11967,16 @@ class _ContactInfoCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: surfaceContainerLow,
+        color: surfaceLowest,
         borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.035),
+            blurRadius: 18,
+            spreadRadius: -10,
+            offset: const Offset(0, 12),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -11812,13 +11985,14 @@ class _ContactInfoCard extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
+              color: primary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(14),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4))
+                    color: primary.withOpacity(0.08),
+                    blurRadius: 12,
+                    spreadRadius: -8,
+                    offset: const Offset(0, 8))
               ],
             ),
             child: Icon(icon, color: primary),
@@ -11831,13 +12005,21 @@ class _ContactInfoCard extends StatelessWidget {
           Text(subtitle.toUpperCase(),
               style: GoogleFonts.inter(
                   fontSize: 10,
-                  letterSpacing: 2.2,
+                  letterSpacing: 1.8,
                   fontWeight: FontWeight.w600,
-                  color: onSurfaceVariant)),
+                  color: onSurfaceVariant.withOpacity(0.74))),
           const SizedBox(height: 12),
           Text(value,
               style: GoogleFonts.manrope(
                   fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+          if (helper != null) ...[
+            const SizedBox(height: 6),
+            Text(helper!,
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: onSurfaceVariant.withOpacity(0.78))),
+          ],
         ],
       ),
     );
@@ -11874,16 +12056,18 @@ class _ContactFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF5F8F6);
     const onSurfaceVariant = Color(0xFF3E4942);
+    const surfaceLowest = Color(0xFFFFFFFF);
+    const primary = Color(0xFF006B47);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label,
             style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: onSurfaceVariant)),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: onSurfaceVariant.withOpacity(0.86))),
         const SizedBox(height: 10),
         TextField(
           controller: controller,
@@ -11892,16 +12076,21 @@ class _ContactFormField extends StatelessWidget {
             fillColor: surfaceContainerLow,
             hintText: placeholder,
             hintStyle:
-                GoogleFonts.inter(fontSize: 18, color: Colors.grey.shade400),
+                GoogleFonts.inter(fontSize: 15, color: Colors.grey.shade400),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+                const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(
-                  color: const Color(0xFF006B47).withOpacity(0.4), width: 2),
+              borderSide:
+                  BorderSide(color: primary.withOpacity(0.28), width: 1.5),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(18),
+              borderSide:
+                  BorderSide(color: surfaceLowest.withOpacity(0.0), width: 0),
             ),
           ),
         ),
@@ -11923,16 +12112,17 @@ class _ContactMessageField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF5F8F6);
     const onSurfaceVariant = Color(0xFF3E4942);
+    const primary = Color(0xFF006B47);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label,
             style: GoogleFonts.inter(
-                fontSize: 15,
-                fontWeight: FontWeight.w700,
-                color: onSurfaceVariant)),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: onSurfaceVariant.withOpacity(0.86))),
         const SizedBox(height: 10),
         TextField(
           controller: controller,
@@ -11942,16 +12132,16 @@ class _ContactMessageField extends StatelessWidget {
             fillColor: surfaceContainerLow,
             hintText: placeholder,
             hintStyle:
-                GoogleFonts.inter(fontSize: 18, color: Colors.grey.shade400),
+                GoogleFonts.inter(fontSize: 15, color: Colors.grey.shade400),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+                const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(18),
-              borderSide: BorderSide(
-                  color: const Color(0xFF006B47).withOpacity(0.4), width: 2),
+              borderSide:
+                  BorderSide(color: primary.withOpacity(0.28), width: 1.5),
             ),
           ),
         ),
