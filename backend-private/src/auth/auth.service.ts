@@ -256,12 +256,22 @@ export class AuthService {
     if (!sent.ok) {
       if (process.env.NODE_ENV !== 'production') {
         return {
-          ok: true,
-          message: 'Development reset code generated.',
+          ok: false,
+          message:
+            sent.reason === 'email_not_configured'
+              ? 'Reset email is not configured on this server yet.'
+              : 'Unable to send the reset email right now.',
           debugCode: code,
         };
       }
-      return sent;
+      return {
+        ok: false,
+        reason: sent.reason ?? 'email_delivery_failed',
+        message:
+          sent.reason === 'email_not_configured'
+            ? 'Reset email is not configured on this server yet.'
+            : 'Unable to send the reset email right now. Please try again later.',
+      };
     }
 
     return {
@@ -357,21 +367,25 @@ export class AuthService {
       },
     });
 
-    await transport.sendMail({
-      from,
-      to: payload.to,
-      subject: 'I-Metro password reset code',
-      text: [
-        `Hello ${payload.name},`,
-        '',
-        `We received a request to reset your I-Metro password.`,
-        `Your reset code is: ${payload.code}`,
-        '',
-        `This code expires at ${payload.expiresAt.toLocaleString()}.`,
-        '',
-        'If you did not request this, you can safely ignore this email.',
-      ].join('\n'),
-    });
+    try {
+      await transport.sendMail({
+        from,
+        to: payload.to,
+        subject: 'I-Metro password reset code',
+        text: [
+          `Hello ${payload.name},`,
+          '',
+          `We received a request to reset your I-Metro password.`,
+          `Your reset code is: ${payload.code}`,
+          '',
+          `This code expires at ${payload.expiresAt.toLocaleString()}.`,
+          '',
+          'If you did not request this, you can safely ignore this email.',
+        ].join('\n'),
+      });
+    } catch {
+      return { ok: false, reason: 'email_delivery_failed' };
+    }
 
     return { ok: true };
   }

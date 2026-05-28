@@ -15679,6 +15679,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   bool _sending = false;
   bool _resetting = false;
   String? _message;
+  bool _messageIsError = false;
 
   @override
   void dispose() {
@@ -15693,22 +15694,31 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (_sending) return;
     final email = _emailController.text.trim();
     if (email.isEmpty) {
-      setState(() => _message = 'Please enter your email address.');
+      setState(() {
+        _message = 'Please enter your email address.';
+        _messageIsError = true;
+      });
       return;
     }
     setState(() {
       _sending = true;
       _message = null;
+      _messageIsError = false;
     });
     try {
       final response = await AuthApi.requestPasswordReset(email: email);
       setState(() {
+        final ok = response['ok'] == true;
+        _messageIsError = !ok;
         _message = response['message']?.toString() ??
-            'If the email exists, a reset code has been sent. Please check your inbox, spam, and promotions folders.';
+            (ok
+                ? 'If the email exists, a reset code has been sent. Please check your inbox, spam, and promotions folders.'
+                : 'We could not send a reset code right now. Please try again later.');
       });
     } catch (_) {
       setState(() {
         _message = 'Could not send reset code. Please try again.';
+        _messageIsError = true;
       });
     } finally {
       if (mounted) setState(() => _sending = false);
@@ -15724,6 +15734,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     setState(() {
       _resetting = true;
       _message = null;
+      _messageIsError = false;
     });
     try {
       final response = await AuthApi.resetPassword(
@@ -15733,6 +15744,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       );
       final ok = response['ok'] == true;
       setState(() {
+        final success = ok;
+        _messageIsError = !success;
         _message = ok
             ? 'Password updated successfully. Please sign in.'
             : response['message']?.toString() ??
@@ -15746,6 +15759,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     } catch (_) {
       setState(() {
         _message = 'Password reset failed. Please try again.';
+        _messageIsError = true;
       });
     } finally {
       if (mounted) setState(() => _resetting = false);
@@ -15904,17 +15918,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               width: double.infinity,
                               padding: const EdgeInsets.all(14),
                               decoration: BoxDecoration(
-                                color: const Color(0xFFF7FBF9),
+                                color: _messageIsError
+                                    ? const Color(0xFFFFF6F5)
+                                    : const Color(0xFFF7FBF9),
                                 borderRadius: BorderRadius.circular(18),
                                 border: Border.all(
-                                    color: outlineVariant.withOpacity(0.4)),
+                                  color: _messageIsError
+                                      ? const Color(0xFFE7C0BC)
+                                      : outlineVariant.withOpacity(0.4),
+                                ),
                               ),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Icon(
-                                    Icons.info_outline,
-                                    color: primary,
+                                  Icon(
+                                    _messageIsError
+                                        ? Icons.error_outline
+                                        : Icons.info_outline,
+                                    color: _messageIsError
+                                        ? const Color(0xFFB3261E)
+                                        : primary,
                                     size: 18,
                                   ),
                                   const SizedBox(width: 10),
@@ -15924,8 +15947,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                       style: GoogleFonts.inter(
                                         fontSize: 12.5,
                                         fontWeight: FontWeight.w500,
-                                        color:
-                                            onSurfaceVariant.withOpacity(0.88),
+                                        color: _messageIsError
+                                            ? const Color(0xFF8C1D18)
+                                            : onSurfaceVariant
+                                                .withOpacity(0.88),
                                         height: 1.45,
                                       ),
                                     ),
