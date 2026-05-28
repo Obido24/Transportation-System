@@ -6191,7 +6191,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                         ),
                       )
                     : Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 126),
+                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 108),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -6340,33 +6340,6 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                                         borderRadius: BorderRadius.circular(22),
                                         child: WebViewWidget(
                                             controller: _controller!),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 10),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: TextButton.icon(
-                                        onPressed: _openCheckout,
-                                        style: TextButton.styleFrom(
-                                          foregroundColor: primary,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12, vertical: 10),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(14),
-                                          ),
-                                        ),
-                                        icon: const Icon(
-                                          Icons.open_in_new_rounded,
-                                          size: 16,
-                                        ),
-                                        label: Text(
-                                          'Open full screen',
-                                          style: GoogleFonts.manrope(
-                                            fontSize: 12.5,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
                                       ),
                                     ),
                                   ],
@@ -12090,6 +12063,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
   final TextEditingController _messageController = TextEditingController();
   static final Uri _whatsAppUri = Uri.parse('https://wa.me/2347070050444');
   static final Uri _callUri = Uri.parse('tel:07070050444');
+  static final Uri _mapsUri =
+      Uri.parse('https://maps.app.goo.gl/TqPXFBomYCmrUk159');
   bool _sending = false;
   bool _loadingSupport = true;
   String? _error;
@@ -12221,6 +12196,19 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Unable to open the phone dialer right now.'),
+      ),
+    );
+  }
+
+  Future<void> _openOfficeMap() async {
+    final opened = await launchUrl(
+      _mapsUri,
+      mode: LaunchMode.externalApplication,
+    );
+    if (!mounted || opened) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Unable to open Google Maps right now.'),
       ),
     );
   }
@@ -12387,31 +12375,41 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             color: onSurface,
                           )),
                       const SizedBox(height: 14),
-                      _ContactInfoCard(
-                        icon: Icons.chat_bubble_outline_rounded,
-                        title: 'Chat With Us',
-                        subtitle: 'WhatsApp Business',
-                        value: '+234 707 005 0444',
-                        helper: 'Tap to chat on WhatsApp',
-                        onTap: _openWhatsAppSupport,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: _ContactInfoCard(
+                              icon: Icons.chat_bubble_outline_rounded,
+                              title: 'Chat With Us',
+                              subtitle: 'WhatsApp Business',
+                              value: '',
+                              helper: 'Tap to chat on WhatsApp',
+                              onTap: _openWhatsAppSupport,
+                            ),
+                          ),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: _ContactInfoCard(
+                              icon: Icons.call_rounded,
+                              title: 'Call Us',
+                              subtitle: 'Customer Support',
+                              value: '07070050444',
+                              helper: 'Tap to call',
+                              onTap: _openPhoneDialer,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 14),
                       _ContactInfoCard(
-                        icon: Icons.call_rounded,
-                        title: 'Call Us',
-                        subtitle: 'Customer Support',
-                        value: '07070050444',
-                        helper: 'Tap to call',
-                        onTap: _openPhoneDialer,
-                      ),
-                      const SizedBox(height: 14),
-                      const _ContactInfoCard(
                         icon: Icons.apartment_rounded,
                         title: 'Head Office',
                         subtitle: 'Abuja, Nigeria',
                         value:
                             'Suite 401, 4th Floor, Kano House, Ralph Shodeinde Street, Central Business District, Abuja.',
-                        helper: 'Corporate office',
+                        helper: 'Tap to open in Google Maps',
+                        onTap: _openOfficeMap,
                       ),
                       const SizedBox(height: 26),
                       _SupportFaqPreviewCard(
@@ -13120,10 +13118,12 @@ class _ContactInfoCard extends StatelessWidget {
                   letterSpacing: 1.8,
                   fontWeight: FontWeight.w600,
                   color: onSurfaceVariant.withOpacity(0.74))),
-          const SizedBox(height: 12),
-          Text(value,
-              style: GoogleFonts.manrope(
-                  fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+          if (value.trim().isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Text(value,
+                style: GoogleFonts.manrope(
+                    fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+          ],
           if (helper != null) ...[
             const SizedBox(height: 6),
             Text(helper!,
