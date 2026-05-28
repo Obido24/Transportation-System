@@ -9,6 +9,10 @@ class AuthStore {
   static const _emailKey = 'imt_email';
   static const _phoneKey = 'imt_phone';
   static const _avatarKey = 'imt_avatar';
+  static const _rememberMeKey = 'imt_remember_me';
+  static const _rememberedLoginKey = 'imt_remembered_login';
+  static const _rememberedPasswordKey = 'imt_remembered_password';
+  static const _hasSeenOnboardingKey = 'imt_seen_onboarding';
 
   static String? token;
   static String? userId;
@@ -18,6 +22,10 @@ class AuthStore {
   static String? email;
   static String? phone;
   static String? avatarUrl;
+  static bool rememberMe = false;
+  static String? rememberedLogin;
+  static String? rememberedPassword;
+  static bool hasSeenOnboarding = false;
   static SharedPreferences? _prefs;
 
   static bool get isLoggedIn => token != null && token!.isNotEmpty;
@@ -25,7 +33,8 @@ class AuthStore {
   static bool _isPlaceholderAvatar(String? value) {
     final avatar = value?.trim();
     if (avatar == null || avatar.isEmpty) return true;
-    return avatar.contains('lh3.googleusercontent.com/aida-public') || avatar.contains('aida-public');
+    return avatar.contains('lh3.googleusercontent.com/aida-public') ||
+        avatar.contains('aida-public');
   }
 
   static bool isPlaceholderAvatar(String? value) => _isPlaceholderAvatar(value);
@@ -46,8 +55,18 @@ class AuthStore {
     email = _prefs?.getString(_emailKey);
     phone = _prefs?.getString(_phoneKey);
     avatarUrl = _normalizeAvatar(_prefs?.getString(_avatarKey));
+    rememberMe = _prefs?.getBool(_rememberMeKey) ?? false;
+    rememberedLogin = _prefs?.getString(_rememberedLoginKey);
+    rememberedPassword = _prefs?.getString(_rememberedPasswordKey);
+    hasSeenOnboarding = _prefs?.getBool(_hasSeenOnboardingKey) ?? false;
     if (avatarUrl == null) {
       await _prefs!.remove(_avatarKey);
+    }
+    if (!rememberMe) {
+      rememberedLogin = null;
+      rememberedPassword = null;
+      await _prefs!.remove(_rememberedLoginKey);
+      await _prefs!.remove(_rememberedPasswordKey);
     }
   }
 
@@ -92,6 +111,22 @@ class AuthStore {
     await _persist();
   }
 
+  static Future<void> setRememberedCredentials({
+    required bool enabled,
+    String? loginValue,
+    String? passwordValue,
+  }) async {
+    rememberMe = enabled;
+    rememberedLogin = enabled ? loginValue : null;
+    rememberedPassword = enabled ? passwordValue : null;
+    await _persist();
+  }
+
+  static Future<void> markOnboardingSeen() async {
+    hasSeenOnboarding = true;
+    await _persist();
+  }
+
   static Future<void> _persist() async {
     _prefs ??= await SharedPreferences.getInstance();
     if (token != null) {
@@ -120,6 +155,20 @@ class AuthStore {
     } else {
       await _prefs!.remove(_avatarKey);
     }
+    await _prefs!.setBool(_rememberMeKey, rememberMe);
+    if (rememberMe && rememberedLogin != null && rememberedLogin!.isNotEmpty) {
+      await _prefs!.setString(_rememberedLoginKey, rememberedLogin!);
+    } else {
+      await _prefs!.remove(_rememberedLoginKey);
+    }
+    if (rememberMe &&
+        rememberedPassword != null &&
+        rememberedPassword!.isNotEmpty) {
+      await _prefs!.setString(_rememberedPasswordKey, rememberedPassword!);
+    } else {
+      await _prefs!.remove(_rememberedPasswordKey);
+    }
+    await _prefs!.setBool(_hasSeenOnboardingKey, hasSeenOnboarding);
   }
 
   static Future<void> clear() async {
@@ -140,5 +189,11 @@ class AuthStore {
     await _prefs!.remove(_emailKey);
     await _prefs!.remove(_phoneKey);
     await _prefs!.remove(_avatarKey);
+    if (!rememberMe) {
+      rememberedLogin = null;
+      rememberedPassword = null;
+      await _prefs!.remove(_rememberedLoginKey);
+      await _prefs!.remove(_rememberedPasswordKey);
+    }
   }
 }

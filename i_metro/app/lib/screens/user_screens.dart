@@ -11,6 +11,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../routes.dart';
@@ -60,7 +61,10 @@ class _SplashOnboardingScreenState extends State<SplashOnboardingScreen> {
     super.initState();
     _splashTimer = Timer(const Duration(seconds: 3), () {
       if (!mounted) return;
-      Navigator.pushReplacementNamed(context, AppRoutes.onboarding);
+      final nextRoute = !AuthStore.hasSeenOnboarding
+          ? AppRoutes.onboarding
+          : (AuthStore.isLoggedIn ? AppRoutes.rideServices : AppRoutes.login);
+      Navigator.pushReplacementNamed(context, nextRoute);
     });
   }
 
@@ -476,7 +480,10 @@ class _UserOnboardingScreenState extends State<UserOnboardingScreen> {
   }
 
   void _goToLogin() {
-    Navigator.pushReplacementNamed(context, AppRoutes.login);
+    AuthStore.markOnboardingSeen().then((_) {
+      if (!mounted) return;
+      Navigator.pushReplacementNamed(context, AppRoutes.login);
+    });
   }
 
   void _next() {
@@ -1276,6 +1283,16 @@ class _LoginScreenState extends State<LoginScreen> {
   String? _submitError;
 
   @override
+  void initState() {
+    super.initState();
+    _rememberMe = AuthStore.rememberMe;
+    if (_rememberMe) {
+      _loginController.text = AuthStore.rememberedLogin ?? '';
+      _passwordController.text = AuthStore.rememberedPassword ?? '';
+    }
+  }
+
+  @override
   void dispose() {
     _loginController.dispose();
     _passwordController.dispose();
@@ -1320,6 +1337,12 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() => _loading = false);
     if (!mounted) return;
     if (response['ok'] == true) {
+      await AuthStore.markOnboardingSeen();
+      await AuthStore.setRememberedCredentials(
+        enabled: _rememberMe,
+        loginValue: login,
+        passwordValue: password,
+      );
       await PushService.instance.initialize();
       Navigator.pushReplacementNamed(context, AppRoutes.rideServices);
     } else {
@@ -2039,6 +2062,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     setState(() => _loading = false);
     if (!mounted) return;
     if (response['ok'] == true) {
+      await AuthStore.markOnboardingSeen();
       await PushService.instance.initialize();
       Navigator.pushReplacementNamed(context, AppRoutes.rideServices);
     } else {
@@ -12064,6 +12088,8 @@ class ContactUsScreen extends StatefulWidget {
 class _ContactUsScreenState extends State<ContactUsScreen> {
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
+  static final Uri _whatsAppUri = Uri.parse('https://wa.me/2347070050444');
+  static final Uri _callUri = Uri.parse('tel:07070050444');
   bool _sending = false;
   bool _loadingSupport = true;
   String? _error;
@@ -12171,6 +12197,32 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
           'Unable to send message.';
       setState(() => _error = messageText);
     }
+  }
+
+  Future<void> _openWhatsAppSupport() async {
+    final opened = await launchUrl(
+      _whatsAppUri,
+      mode: LaunchMode.externalApplication,
+    );
+    if (!mounted || opened) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Unable to open WhatsApp on this device right now.'),
+      ),
+    );
+  }
+
+  Future<void> _openPhoneDialer() async {
+    final opened = await launchUrl(
+      _callUri,
+      mode: LaunchMode.externalApplication,
+    );
+    if (!mounted || opened) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Unable to open the phone dialer right now.'),
+      ),
+    );
   }
 
   @override
@@ -12335,20 +12387,31 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             color: onSurface,
                           )),
                       const SizedBox(height: 14),
-                      const _ContactInfoCard(
+                      _ContactInfoCard(
+                        icon: Icons.chat_bubble_outline_rounded,
+                        title: 'Chat With Us',
+                        subtitle: 'WhatsApp Business',
+                        value: '+234 707 005 0444',
+                        helper: 'Tap to chat on WhatsApp',
+                        onTap: _openWhatsAppSupport,
+                      ),
+                      const SizedBox(height: 14),
+                      _ContactInfoCard(
                         icon: Icons.call_rounded,
                         title: 'Call Us',
                         subtitle: 'Customer Support',
-                        value: '+234 912 806 6666',
+                        value: '07070050444',
                         helper: 'Tap to call',
+                        onTap: _openPhoneDialer,
                       ),
                       const SizedBox(height: 14),
                       const _ContactInfoCard(
                         icon: Icons.apartment_rounded,
                         title: 'Head Office',
                         subtitle: 'Abuja, Nigeria',
-                        value: 'FCT Transport Secretariat',
-                        helper: 'Get directions',
+                        value:
+                            'Suite 401, 4th Floor, Kano House, Ralph Shodeinde Street, Central Business District, Abuja.',
+                        helper: 'Corporate office',
                       ),
                       const SizedBox(height: 26),
                       _SupportFaqPreviewCard(
@@ -12996,6 +13059,7 @@ class _ContactInfoCard extends StatelessWidget {
     required this.subtitle,
     required this.value,
     this.helper,
+    this.onTap,
   });
 
   final IconData icon;
@@ -13003,6 +13067,7 @@ class _ContactInfoCard extends StatelessWidget {
   final String subtitle;
   final String value;
   final String? helper;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -13011,7 +13076,7 @@ class _ContactInfoCard extends StatelessWidget {
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
 
-    return Container(
+    final child = Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: surfaceLowest,
@@ -13068,6 +13133,17 @@ class _ContactInfoCard extends StatelessWidget {
                     color: onSurfaceVariant.withOpacity(0.78))),
           ],
         ],
+      ),
+    );
+
+    if (onTap == null) return child;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(24),
+        child: child,
       ),
     );
   }
