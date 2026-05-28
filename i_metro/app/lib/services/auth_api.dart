@@ -2,7 +2,8 @@ import 'api_client.dart';
 import 'auth_store.dart';
 
 class AuthApi {
-  static Future<Map<String, dynamic>> login(String emailOrPhone, String password) async {
+  static Future<Map<String, dynamic>> login(
+      String emailOrPhone, String password) async {
     final response = await ApiClient.post(
       '/auth/login',
       {
@@ -33,11 +34,23 @@ class AuthApi {
       {
         'firstName': firstName.trim().isEmpty ? null : firstName.trim(),
         'lastName': lastName.trim().isEmpty ? null : lastName.trim(),
-        'email': email.trim().isEmpty ? null : email.trim(),
+        'email': email.trim().isEmpty ? null : email.trim().toLowerCase(),
         'phone': phone.trim().isEmpty ? null : phone.trim(),
         'password': password,
       },
     );
+
+    if (response['ok'] == true && response['accessToken'] != null) {
+      await AuthStore.setSession(
+        tokenValue: response['accessToken'] as String,
+        userIdValue: response['userId'] as String?,
+        roleValue: response['role'] as String?,
+        firstNameValue: firstName.trim().isEmpty ? null : firstName.trim(),
+        lastNameValue: lastName.trim().isEmpty ? null : lastName.trim(),
+        emailValue: email.trim().isEmpty ? null : email.trim().toLowerCase(),
+        phoneValue: phone.trim().isEmpty ? null : phone.trim(),
+      );
+    }
 
     return response;
   }

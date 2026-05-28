@@ -2292,9 +2292,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                       if (input.isEmpty) {
                                         return null;
                                       }
-                                      final emailOk = RegExp(
-                                              r'^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
-                                          .hasMatch(input);
+                                      final emailOk =
+                                          RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+                                              .hasMatch(input);
                                       if (!emailOk) {
                                         return 'Enter a valid email address.';
                                       }
@@ -5889,27 +5889,40 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                               ),
                             ),
                             const SizedBox(width: 12),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Secure Checkout',
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Secure Checkout',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.manrope(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700,
-                                        color: primary)),
-                                Text(providerLabel,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: primary,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 1),
+                                  Text(
+                                    providerLabel,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.inter(
-                                        fontSize: 10.5,
-                                        fontWeight: FontWeight.w500,
-                                        color: onSurfaceVariant
-                                            .withOpacity(0.72))),
-                              ],
+                                      fontSize: 10.5,
+                                      fontWeight: FontWeight.w500,
+                                      color: onSurfaceVariant.withOpacity(0.72),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            const Spacer(),
+                            const SizedBox(width: 10),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
+                                  horizontal: 10, vertical: 7),
                               decoration: BoxDecoration(
                                 color: primary.withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(999),
@@ -5918,12 +5931,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   const Icon(Icons.lock_rounded,
-                                      size: 14, color: primary),
-                                  const SizedBox(width: 6),
+                                      size: 13, color: primary),
+                                  const SizedBox(width: 5),
                                   Text(
                                     'Protected',
                                     style: GoogleFonts.manrope(
-                                      fontSize: 11,
+                                      fontSize: 10.5,
                                       fontWeight: FontWeight.w700,
                                       color: primary,
                                     ),
