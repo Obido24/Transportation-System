@@ -12394,7 +12394,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               icon: Icons.call_rounded,
                               title: 'Call Us',
                               subtitle: 'Customer Support',
-                              value: '07070050444',
+                              value: '',
                               helper: 'Tap to call',
                               onTap: _openPhoneDialer,
                             ),
