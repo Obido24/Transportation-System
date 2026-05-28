@@ -14538,7 +14538,6 @@ class FaqScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const _UserBottomNavigation(currentIndex: 3),
     );
   }
 }
