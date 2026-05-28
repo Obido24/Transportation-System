@@ -15710,10 +15710,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       setState(() {
         final ok = response['ok'] == true;
         _messageIsError = !ok;
-        _message = response['message']?.toString() ??
-            (ok
-                ? 'If the email exists, a reset code has been sent. Please check your inbox, spam, and promotions folders.'
-                : 'We could not send a reset code right now. Please try again later.');
+        _message = ok
+            ? 'Reset code sent. Please check your inbox, spam, and promotions folders for the email before trying again.'
+            : response['message']?.toString() ??
+                'We could not send a reset code right now. Please try again later.';
       });
     } catch (_) {
       setState(() {
@@ -15904,6 +15904,32 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             controller: _emailController,
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
+                          ),
+                          const SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.mark_email_unread_outlined,
+                                  size: 15,
+                                  color: onSurfaceVariant.withOpacity(0.72),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    'We will send your reset code to this email. If you do not see it, check your spam or promotions folder.',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w500,
+                                      color: onSurfaceVariant.withOpacity(0.74),
+                                      height: 1.45,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(height: 16),
                           _ForgotPasswordActionButton(
