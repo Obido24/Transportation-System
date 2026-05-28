@@ -212,7 +212,7 @@ class _ForgotStepBadge extends StatelessWidget {
             label.toUpperCase(),
             style: GoogleFonts.inter(
               fontSize: 10,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w700,
               letterSpacing: 1.1,
               color: primary,
             ),
@@ -223,7 +223,7 @@ class _ForgotStepBadge extends StatelessWidget {
           title,
           style: GoogleFonts.manrope(
             fontSize: 18,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w700,
             color: onSurface,
           ),
         ),
@@ -265,7 +265,7 @@ class _ForgotPasswordField extends StatelessWidget {
           label.toUpperCase(),
           style: GoogleFonts.inter(
             fontSize: 11,
-            fontWeight: FontWeight.w900,
+            fontWeight: FontWeight.w700,
             letterSpacing: 1.35,
             color: onSurfaceVariant,
           ),
@@ -421,7 +421,7 @@ class _ForgotPasswordActionButtonState
                     widget.loading ? 'Please wait...' : widget.label,
                     style: GoogleFonts.inter(
                       fontSize: 15,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),
                   ),
@@ -545,7 +545,7 @@ class _UserOnboardingScreenState extends State<UserOnboardingScreen> {
                             _index == 0 ? 'Skip' : 'Back',
                             style: GoogleFonts.inter(
                               fontSize: 16,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                               color: muted,
                             ),
                           ),
@@ -571,7 +571,7 @@ class _UserOnboardingScreenState extends State<UserOnboardingScreen> {
                                 : 'Next',
                             style: GoogleFonts.inter(
                               fontSize: 16,
-                              fontWeight: FontWeight.w900,
+                              fontWeight: FontWeight.w700,
                               color: Colors.white,
                             ),
                           ),
@@ -917,7 +917,7 @@ class _TrackingOnboardingArt extends StatelessWidget {
                       style: GoogleFonts.inter(
                         color: primary,
                         fontSize: 12,
-                        fontWeight: FontWeight.w900,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
@@ -995,7 +995,7 @@ class _TrackingOnboardingArt extends StatelessWidget {
                   style: GoogleFonts.inter(
                     color: primary,
                     fontSize: 11,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -1006,7 +1006,7 @@ class _TrackingOnboardingArt extends StatelessWidget {
                   style: GoogleFonts.manrope(
                     color: const Color(0xFF191C1E),
                     fontSize: 18,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ],
@@ -1050,7 +1050,7 @@ class _RatingOnboardingArt extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.manrope(
                       fontSize: 21,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w700,
                       color: const Color(0xFF191C1E),
                     ),
                   ),
@@ -2116,7 +2116,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         'I-Metro',
                         style: GoogleFonts.manrope(
                             fontSize: 20,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             color: primary),
                       ),
                     ],
@@ -2139,7 +2139,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                   'Join the',
                                   style: GoogleFonts.manrope(
                                       fontSize: 34,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w700,
                                       color: onSurface),
                                 ),
                                 RichText(
@@ -2147,14 +2147,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                                     text: 'Journey',
                                     style: GoogleFonts.manrope(
                                         fontSize: 34,
-                                        fontWeight: FontWeight.w800,
+                                        fontWeight: FontWeight.w700,
                                         color: primary),
                                     children: [
                                       TextSpan(
                                         text: '.',
                                         style: GoogleFonts.manrope(
                                             fontSize: 34,
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w700,
                                             color: onSurface),
                                       ),
                                     ],
@@ -5800,224 +5800,508 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   @override
   Widget build(BuildContext context) {
     const primary = Color(0xFF006B47);
-    const background = Color(0xFFF7F9FB);
+    const primaryContainer = Color(0xFF00875A);
+    const background = Color(0xFFF6FAF8);
     const surfaceLowest = Colors.white;
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF1F5F3);
+    const surfaceSoft = Color(0xFFF8FBF9);
     const onSurfaceVariant = Color(0xFF3E4942);
     const onSurface = Color(0xFF191C1E);
+    final providerLabel =
+        widget.provider == 'PAYSTACK' ? 'Paystack' : 'Monnify';
+
     return Scaffold(
       backgroundColor: background,
-      appBar: AppBar(
-        title: const Text('Secure Checkout'),
-        backgroundColor: primary,
-        actions: [
-          TextButton(
-            onPressed: _verifying ? null : _verifyPayment,
-            child: Text(
-              _verifying ? 'Checking...' : 'Verify',
-              style: GoogleFonts.manrope(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
+      body: Stack(
+        children: [
+          Positioned(
+            top: -120,
+            right: -90,
+            child: Container(
+              width: 260,
+              height: 260,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.14),
+                    primaryContainer.withOpacity(0.04),
+                    Colors.transparent,
+                  ],
+                ),
               ),
             ),
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            margin: const EdgeInsets.fromLTRB(16, 16, 16, 12),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(18),
-              border: Border.all(color: primary.withOpacity(0.08)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
-                    blurRadius: 14,
-                    offset: const Offset(0, 8))
-              ],
+          Positioned(
+            left: -44,
+            top: 220,
+            child: Container(
+              width: 132,
+              height: 132,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.05),
+              ),
             ),
-            child: Row(
-              children: [
-                Container(
-                  width: 42,
-                  height: 42,
-                  decoration: BoxDecoration(
-                    color: primary.withOpacity(0.12),
-                    borderRadius: BorderRadius.circular(14),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                height: 72,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: background.withOpacity(0.84),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: SafeArea(
+                        bottom: false,
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.arrow_back,
+                                    color: primary, size: 20),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Secure Checkout',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary)),
+                                Text(providerLabel,
+                                    style: GoogleFonts.inter(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: onSurfaceVariant
+                                            .withOpacity(0.72))),
+                              ],
+                            ),
+                            const Spacer(),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.lock_rounded,
+                                      size: 14, color: primary),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    'Protected',
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
+                                      color: primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  child: const Icon(Icons.lock_clock_outlined, color: primary),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(20, 18, 20, 126),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Finish checkout, then verify',
-                          style: GoogleFonts.manrope(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w800,
-                              color: const Color(0xFF191C1E))),
-                      const SizedBox(height: 4),
                       Text(
-                        'Once payment succeeds, return here and tap Verify to load your ticket QR instantly.',
-                        style: GoogleFonts.inter(
-                            fontSize: 12, height: 1.4, color: onSurfaceVariant),
+                        'Complete your payment',
+                        style: GoogleFonts.manrope(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.45,
+                          color: onSurface,
+                        ),
                       ),
                       const SizedBox(height: 8),
-                      const Wrap(
-                        spacing: 8,
-                        runSpacing: 6,
-                        children: [
-                          _CheckoutStepBadge(
-                              label: '1. Open checkout', color: primary),
-                          _CheckoutStepBadge(label: '2. Pay', color: primary),
-                          _CheckoutStepBadge(
-                              label: '3. Verify', color: primary),
-                        ],
+                      Text(
+                        'Finish checkout securely, then verify to unlock your I-Metro ticket instantly.',
+                        style: GoogleFonts.inter(
+                          fontSize: 13.5,
+                          height: 1.5,
+                          color: onSurfaceVariant.withOpacity(0.84),
+                        ),
                       ),
+                      const SizedBox(height: 16),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(18),
+                        decoration: BoxDecoration(
+                          color: surfaceLowest,
+                          borderRadius: BorderRadius.circular(28),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.045),
+                              blurRadius: 18,
+                              spreadRadius: -8,
+                              offset: const Offset(0, 12),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 46,
+                              height: 46,
+                              decoration: BoxDecoration(
+                                color: primary.withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(Icons.verified_user_rounded,
+                                  color: primary),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Checkout flow',
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w800,
+                                      color: onSurface,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    'Open the secure payment page, complete checkout, then verify your payment here.',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12.5,
+                                      height: 1.45,
+                                      color: onSurfaceVariant.withOpacity(0.82),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  const Wrap(
+                                    spacing: 8,
+                                    runSpacing: 8,
+                                    children: [
+                                      _CheckoutStepBadge(
+                                          label: '1. Open checkout',
+                                          color: primary),
+                                      _CheckoutStepBadge(
+                                          label: '2. Pay securely',
+                                          color: primary),
+                                      _CheckoutStepBadge(
+                                          label: '3. Verify ticket',
+                                          color: primary),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      if (kIsWeb)
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(20),
+                          decoration: BoxDecoration(
+                            color: surfaceLowest,
+                            borderRadius: BorderRadius.circular(28),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.04),
+                                blurRadius: 18,
+                                spreadRadius: -8,
+                                offset: const Offset(0, 12),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 54,
+                                height: 54,
+                                decoration: BoxDecoration(
+                                  color: primary.withOpacity(0.08),
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                child: const Icon(
+                                  Icons.open_in_new_rounded,
+                                  color: primary,
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                'Open checkout in a new tab',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.w800,
+                                  color: onSurface,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'Chrome on web cannot display the in-app gateway window, so your secure checkout opens in a browser tab instead.',
+                                style: GoogleFonts.inter(
+                                  fontSize: 13,
+                                  height: 1.5,
+                                  color: onSurfaceVariant.withOpacity(0.84),
+                                ),
+                              ),
+                              const SizedBox(height: 18),
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: surfaceSoft,
+                                  borderRadius: BorderRadius.circular(18),
+                                  border: Border.all(
+                                    color: surfaceContainerLow,
+                                  ),
+                                ),
+                                child: SelectableText(
+                                  widget.checkoutUrl,
+                                  style: GoogleFonts.inter(
+                                    fontSize: 12,
+                                    color: onSurfaceVariant,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 18),
+                              SizedBox(
+                                width: double.infinity,
+                                height: 54,
+                                child: ElevatedButton.icon(
+                                  onPressed: _openCheckout,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: primary,
+                                    foregroundColor: Colors.white,
+                                    elevation: 0,
+                                    shadowColor: primary.withOpacity(0.28),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                  ),
+                                  icon: const Icon(Icons.launch_rounded),
+                                  label: Text(
+                                    _openedInBrowser
+                                        ? 'Open checkout again'
+                                        : 'Open secure checkout',
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                'When payment is complete, come back here and tap Verify payment below.',
+                                style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  color: onSurfaceVariant.withOpacity(0.8),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      else
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(14),
+                          decoration: BoxDecoration(
+                            color: surfaceLowest,
+                            borderRadius: BorderRadius.circular(28),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.04),
+                                blurRadius: 18,
+                                spreadRadius: -8,
+                                offset: const Offset(0, 12),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Secure gateway',
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w800,
+                                      color: onSurface,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 6),
+                                    decoration: BoxDecoration(
+                                      color: primary.withOpacity(0.08),
+                                      borderRadius: BorderRadius.circular(999),
+                                    ),
+                                    child: Text(
+                                      providerLabel,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                'Your payment page is embedded below. Complete the transaction, then verify when you return.',
+                                style: GoogleFonts.inter(
+                                  fontSize: 12.5,
+                                  height: 1.45,
+                                  color: onSurfaceVariant.withOpacity(0.82),
+                                ),
+                              ),
+                              const SizedBox(height: 14),
+                              SizedBox(
+                                height: 470,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(22),
+                                  child:
+                                      WebViewWidget(controller: _controller!),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: kIsWeb
-                ? Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: surfaceLowest,
-                        borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: surfaceContainerLow),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 56,
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: primary.withOpacity(0.08),
-                              borderRadius: BorderRadius.circular(18),
-                            ),
-                            child: const Icon(Icons.open_in_new_rounded,
-                                color: primary),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'Open checkout in a new tab',
-                            style: GoogleFonts.manrope(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w800,
-                                color: onSurface),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Chrome cannot show the in-app payment window, so we open your secure checkout page in a browser tab instead.',
-                            style: GoogleFonts.inter(
-                                fontSize: 13,
-                                height: 1.5,
-                                color: onSurfaceVariant),
-                          ),
-                          const SizedBox(height: 18),
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(14),
-                            decoration: BoxDecoration(
-                              color: surfaceContainerLow,
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: SelectableText(
-                              widget.checkoutUrl,
-                              style: GoogleFonts.inter(
-                                  fontSize: 12, color: onSurfaceVariant),
-                            ),
-                          ),
-                          const SizedBox(height: 18),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 52,
-                            child: ElevatedButton.icon(
-                              onPressed: _openCheckout,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: primary,
-                                foregroundColor: Colors.white,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18)),
-                              ),
-                              icon: const Icon(Icons.launch_rounded),
-                              label: Text(
-                                _openedInBrowser
-                                    ? 'Open checkout again'
-                                    : 'Open secure checkout',
-                                style: GoogleFonts.manrope(
-                                    fontSize: 15, fontWeight: FontWeight.w800),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Text(
-                            'When payment is complete, return here and tap Verify to unlock your ticket.',
-                            style: GoogleFonts.inter(
-                                fontSize: 12, color: onSurfaceVariant),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : WebViewWidget(controller: _controller!),
+              ),
+            ],
           ),
         ],
       ),
       bottomNavigationBar: SafeArea(
         top: false,
         child: Container(
-          padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+          padding: const EdgeInsets.fromLTRB(18, 10, 18, 16),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.98),
+            color: Colors.white.withOpacity(0.96),
             boxShadow: [
               BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 18,
-                  offset: const Offset(0, -6))
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 18,
+                spreadRadius: -8,
+                offset: const Offset(0, -6),
+              )
             ],
           ),
-          child: SizedBox(
-            height: 54,
-            child: ElevatedButton.icon(
-              onPressed: _verifying ? null : _verifyPayment,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primary,
-                foregroundColor: Colors.white,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18)),
+          child: Row(
+            children: [
+              if (kIsWeb) ...[
+                Expanded(
+                  flex: 4,
+                  child: SizedBox(
+                    height: 56,
+                    child: OutlinedButton.icon(
+                      onPressed: _openCheckout,
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: primary.withOpacity(0.26)),
+                        backgroundColor: primary.withOpacity(0.04),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      icon: const Icon(Icons.open_in_new_rounded,
+                          color: primary, size: 18),
+                      label: Text(
+                        'Checkout',
+                        style: GoogleFonts.manrope(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: primary,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+              ],
+              Expanded(
+                flex: 7,
+                child: SizedBox(
+                  height: 56,
+                  child: ElevatedButton.icon(
+                    onPressed: _verifying ? null : _verifyPayment,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primary,
+                      foregroundColor: Colors.white,
+                      elevation: 0,
+                      shadowColor: primary.withOpacity(0.28),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                    ),
+                    icon: _verifying
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          )
+                        : const Icon(Icons.verified_outlined),
+                    label: Text(
+                      _verifying ? 'Checking payment...' : 'Verify payment',
+                      style: GoogleFonts.manrope(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              icon: _verifying
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(Colors.white)),
-                    )
-                  : const Icon(Icons.verified_outlined),
-              label: Text(
-                _verifying ? 'Checking payment...' : 'Verify payment',
-                style: GoogleFonts.manrope(
-                    fontSize: 15, fontWeight: FontWeight.w800),
-              ),
-            ),
+            ],
           ),
         ),
       ),
@@ -6034,15 +6318,18 @@ class _CheckoutStepBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.12),
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(999),
       ),
       child: Text(
         label,
         style: GoogleFonts.inter(
-            fontSize: 10, fontWeight: FontWeight.w700, color: color),
+          fontSize: 10.5,
+          fontWeight: FontWeight.w700,
+          color: color,
+        ),
       ),
     );
   }
@@ -6355,317 +6642,522 @@ class TicketDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAF8);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
     const primaryContainer = Color(0xFF00875A);
-    const outlineVariant = Color(0xFFBDCAC0);
+    const outlineVariant = Color(0xFFD7E4DB);
 
     return Scaffold(
       backgroundColor: background,
-      appBar: AppBar(
-        backgroundColor: primary,
-        title: const Text('Ticket Details'),
-        actions: [
-          if (onRefresh != null)
-            IconButton(
-              icon: const Icon(Icons.refresh),
-              onPressed: () async {
-                await onRefresh?.call();
-              },
-            ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (showSuccess)
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: BoxDecoration(
-                  color: primary.withOpacity(0.08),
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: primary.withOpacity(0.2)),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: primary.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(Icons.check_circle_rounded,
-                          color: primary),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Payment confirmed',
-                              style: GoogleFonts.manrope(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w800,
-                                  color: onSurface)),
-                          const SizedBox(height: 4),
-                          Text(
-                            (qrPayload == null || qrPayload!.isEmpty)
-                                ? 'Your ticket is being issued. Pull to refresh if it does not appear.'
-                                : 'Your ticket is ready. Present this QR at the validator gate.',
-                            style: GoogleFonts.inter(
-                                fontSize: 12,
-                                height: 1.4,
-                                color: onSurfaceVariant),
-                          ),
-                        ],
-                      ),
-                    ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: -120,
+            right: -70,
+            child: Container(
+              width: 230,
+              height: 230,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.16),
+                    primaryContainer.withOpacity(0.04),
+                    Colors.transparent,
                   ],
                 ),
               ),
-            Container(
-              padding: const EdgeInsets.all(20),
+            ),
+          ),
+          Positioned(
+            left: -36,
+            top: 260,
+            child: Container(
+              width: 126,
+              height: 126,
               decoration: BoxDecoration(
-                gradient:
-                    const LinearGradient(colors: [primary, primaryContainer]),
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: Row(
-                children: [
-                  _TicketLocationBox(code: fromCode, label: fromLocation),
-                  const SizedBox(width: 16),
-                  const Icon(Icons.swap_horiz, color: Colors.white),
-                  const SizedBox(width: 16),
-                  _TicketLocationBox(code: toCode, label: toLocation),
-                ],
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.06),
               ),
             ),
-            const SizedBox(height: 16),
-            Row(
-              children: [
-                Expanded(
-                    child: _TicketInfoItem(label: 'Date', value: dateLabel)),
-                Expanded(
-                    child: _TicketInfoItem(
-                        label: 'Time', value: timeLabel, alignEnd: true)),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                    child: _TicketInfoItem(label: 'Fare', value: fareLabel)),
-                Expanded(
-                    child: _TicketInfoItem(
-                        label: 'Reference', value: reference, alignEnd: true)),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(color: outlineVariant.withOpacity(0.4)),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.04),
-                      blurRadius: 18,
-                      offset: const Offset(0, 8))
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: primary.withOpacity(0.12),
-                          borderRadius: BorderRadius.circular(999),
-                        ),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                height: 72,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: background.withOpacity(0.82),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: SafeArea(
+                        bottom: false,
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(Icons.qr_code_scanner_rounded,
-                                size: 18, color: primary),
-                            const SizedBox(width: 8),
-                            Text(
-                              qrPayload == null || qrPayload!.isEmpty
-                                  ? 'QR pending'
-                                  : 'Ready to scan',
-                              style: GoogleFonts.manrope(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w800,
-                                  color: primary),
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.arrow_back,
+                                    color: primary, size: 20),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Ticket Details',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary)),
+                                Text('Ride pass',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: onSurfaceVariant
+                                            .withOpacity(0.72))),
+                              ],
+                            ),
+                            const Spacer(),
+                            if (onRefresh != null)
+                              GestureDetector(
+                                onTap: () async {
+                                  await onRefresh?.call();
+                                },
+                                child: Container(
+                                  width: 42,
+                                  height: 42,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.035),
+                                        blurRadius: 12,
+                                        spreadRadius: -8,
+                                        offset: const Offset(0, 8),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Icon(Icons.refresh_rounded,
+                                      color: primary, size: 20),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(20, 18, 20, 28),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Your ticket',
+                          style: GoogleFonts.manrope(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w700,
+                              letterSpacing: -0.45,
+                              color: onSurface)),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Keep this pass ready for boarding and present the QR at the validator when prompted.',
+                        style: GoogleFonts.inter(
+                            fontSize: 13.5,
+                            height: 1.5,
+                            color: onSurfaceVariant.withOpacity(0.84)),
+                      ),
+                      const SizedBox(height: 16),
+                      if (showSuccess)
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          margin: const EdgeInsets.only(bottom: 16),
+                          decoration: BoxDecoration(
+                            color: primary.withOpacity(0.08),
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: primary.withOpacity(0.08),
+                                blurRadius: 14,
+                                spreadRadius: -10,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: primary.withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Icon(Icons.check_circle_rounded,
+                                    color: primary),
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Payment confirmed',
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w800,
+                                            color: onSurface)),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      (qrPayload == null || qrPayload!.isEmpty)
+                                          ? 'Your ticket is being issued. Pull to refresh if it does not appear.'
+                                          : 'Your ticket is ready. Present this QR at the validator gate.',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 12.5,
+                                          height: 1.45,
+                                          color: onSurfaceVariant
+                                              .withOpacity(0.82)),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          gradient: const LinearGradient(
+                            colors: [primary, primaryContainer],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(28),
+                          boxShadow: [
+                            BoxShadow(
+                                color: primary.withOpacity(0.18),
+                                blurRadius: 22,
+                                spreadRadius: -10,
+                                offset: const Offset(0, 14))
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                _TicketLocationBox(
+                                    code: fromCode, label: fromLocation),
+                                const SizedBox(width: 16),
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.16),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: const Icon(Icons.arrow_forward_rounded,
+                                      color: Colors.white, size: 20),
+                                ),
+                                const SizedBox(width: 16),
+                                _TicketLocationBox(
+                                    code: toCode, label: toLocation),
+                              ],
+                            ),
+                            const SizedBox(height: 18),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(22),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          child: _TicketInfoItem(
+                                              label: 'Date',
+                                              value: dateLabel,
+                                              light: true)),
+                                      Expanded(
+                                          child: _TicketInfoItem(
+                                              label: 'Time',
+                                              value: timeLabel,
+                                              alignEnd: true,
+                                              light: true)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          child: _TicketInfoItem(
+                                              label: 'Fare',
+                                              value: fareLabel,
+                                              light: true)),
+                                      Expanded(
+                                          child: _TicketInfoItem(
+                                              label: 'Reference',
+                                              value: reference,
+                                              alignEnd: true,
+                                              light: true)),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      const Spacer(),
-                      if (ticketId != null)
-                        Text(
-                          'ID ${ticketId!.substring(0, 8).toUpperCase()}',
-                          style: GoogleFonts.inter(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: 1.1,
-                              color: onSurfaceVariant),
+                      const SizedBox(height: 18),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(28),
+                          border: Border.all(
+                              color: outlineVariant.withOpacity(0.24)),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black.withOpacity(0.04),
+                                blurRadius: 18,
+                                spreadRadius: -10,
+                                offset: const Offset(0, 10))
+                          ],
                         ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 8),
+                                  decoration: BoxDecoration(
+                                    color: primary.withOpacity(0.12),
+                                    borderRadius: BorderRadius.circular(999),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.qr_code_scanner_rounded,
+                                          size: 18, color: primary),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        qrPayload == null || qrPayload!.isEmpty
+                                            ? 'QR pending'
+                                            : 'Ready to scan',
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w700,
+                                            color: primary),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const Spacer(),
+                                if (ticketId != null)
+                                  Text(
+                                    'ID ${ticketId!.substring(0, 8).toUpperCase()}',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700,
+                                        letterSpacing: 1.1,
+                                        color: onSurfaceVariant),
+                                  ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                                'Present this code at the validator gate for one-time entry.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 13,
+                                    height: 1.45,
+                                    color: onSurfaceVariant.withOpacity(0.84))),
+                            const SizedBox(height: 18),
+                            Center(child: _TicketQrBox(qrPayload: qrPayload)),
+                            if (qrPayload != null && qrPayload!.isNotEmpty) ...[
+                              const SizedBox(height: 12),
+                              SizedBox(
+                                width: double.infinity,
+                                child: OutlinedButton.icon(
+                                  onPressed: () async {
+                                    await Clipboard.setData(
+                                        ClipboardData(text: qrPayload!));
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                            content: Text('QR payload copied')),
+                                      );
+                                    }
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: BorderSide(
+                                        color: primary.withOpacity(0.34)),
+                                    backgroundColor: primary.withOpacity(0.04),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 14),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                  ),
+                                  icon: const Icon(Icons.copy_rounded,
+                                      color: primary),
+                                  label: Text(
+                                    'Copy QR text',
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: primary,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              SelectableText(
+                                qrPayload!,
+                                style: GoogleFonts.inter(
+                                  fontSize: 11,
+                                  height: 1.4,
+                                  color: onSurfaceVariant.withOpacity(0.85),
+                                ),
+                              ),
+                            ],
+                            if ((qrPayload == null || qrPayload!.isEmpty) &&
+                                paymentStatus != null)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  'Payment status: ${paymentStatus!.toLowerCase()}. Tap refresh after payment completes.',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 11,
+                                      color: onSurfaceVariant.withOpacity(0.8)),
+                                ),
+                              ),
+                            if ((qrPayload == null || qrPayload!.isEmpty) &&
+                                onRetryPayment != null)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 12),
+                                child: SizedBox(
+                                  width: double.infinity,
+                                  child: OutlinedButton.icon(
+                                    onPressed:
+                                        retryingPayment ? null : onRetryPayment,
+                                    style: OutlinedButton.styleFrom(
+                                      side: BorderSide(
+                                          color: primary.withOpacity(0.34)),
+                                      backgroundColor:
+                                          primary.withOpacity(0.04),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 14),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16)),
+                                    ),
+                                    icon: retryingPayment
+                                        ? const SizedBox(
+                                            width: 16,
+                                            height: 16,
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 2),
+                                          )
+                                        : const Icon(Icons.refresh_rounded,
+                                            color: primary),
+                                    label: Text(
+                                      retryingPayment
+                                          ? 'Restarting payment...'
+                                          : 'Retry payment',
+                                      style: GoogleFonts.manrope(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: primary),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            const SizedBox(height: 18),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFF8FCFA),
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Ticket reference',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 10,
+                                          letterSpacing: 1.4,
+                                          fontWeight: FontWeight.w700,
+                                          color: onSurfaceVariant)),
+                                  const SizedBox(height: 6),
+                                  SelectableText(reference,
+                                      style: GoogleFonts.manrope(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w800,
+                                          color: onSurface)),
+                                  if (ticketId != null) ...[
+                                    const SizedBox(height: 12),
+                                    Text('Ticket ID',
+                                        style: GoogleFonts.inter(
+                                            fontSize: 10,
+                                            letterSpacing: 1.4,
+                                            fontWeight: FontWeight.w700,
+                                            color: onSurfaceVariant)),
+                                    const SizedBox(height: 6),
+                                    SelectableText(ticketId!,
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w700,
+                                            color: onSurface)),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                      'Present this code at the validator gate for one-time entry.',
-                      style: GoogleFonts.inter(
-                          fontSize: 13, height: 1.45, color: onSurfaceVariant)),
-                  const SizedBox(height: 18),
-                  Center(child: _TicketQrBox(qrPayload: qrPayload)),
-                  if (qrPayload != null && qrPayload!.isNotEmpty) ...[
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () async {
-                          await Clipboard.setData(
-                              ClipboardData(text: qrPayload!));
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('QR payload copied')),
-                            );
-                          }
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: primary.withOpacity(0.5)),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                        ),
-                        icon: const Icon(Icons.copy_rounded, color: primary),
-                        label: Text(
-                          'Copy QR text',
-                          style: GoogleFonts.manrope(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w700,
-                            color: primary,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    SelectableText(
-                      qrPayload!,
-                      style: GoogleFonts.inter(
-                        fontSize: 11,
-                        height: 1.4,
-                        color: onSurfaceVariant.withOpacity(0.85),
-                      ),
-                    ),
-                  ],
-                  if ((qrPayload == null || qrPayload!.isEmpty) &&
-                      paymentStatus != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: Text(
-                        'Payment status: ${paymentStatus!.toLowerCase()}. Tap refresh after payment completes.',
-                        style: GoogleFonts.inter(
-                            fontSize: 11,
-                            color: onSurfaceVariant.withOpacity(0.8)),
-                      ),
-                    ),
-                  if ((qrPayload == null || qrPayload!.isEmpty) &&
-                      onRetryPayment != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 12),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: OutlinedButton.icon(
-                          onPressed: retryingPayment ? null : onRetryPayment,
-                          style: OutlinedButton.styleFrom(
-                            side: BorderSide(color: primary.withOpacity(0.6)),
-                            padding: const EdgeInsets.symmetric(vertical: 14),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                          ),
-                          icon: retryingPayment
-                              ? const SizedBox(
-                                  width: 16,
-                                  height: 16,
-                                  child:
-                                      CircularProgressIndicator(strokeWidth: 2),
-                                )
-                              : const Icon(Icons.refresh_rounded,
-                                  color: primary),
-                          label: Text(
-                            retryingPayment
-                                ? 'Restarting payment...'
-                                : 'Retry payment',
-                            style: GoogleFonts.manrope(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: primary),
-                          ),
-                        ),
-                      ),
-                    ),
-                  const SizedBox(height: 18),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: background,
-                      borderRadius: BorderRadius.circular(18),
-                      border:
-                          Border.all(color: outlineVariant.withOpacity(0.35)),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Ticket reference',
-                            style: GoogleFonts.inter(
-                                fontSize: 10,
-                                letterSpacing: 1.4,
-                                fontWeight: FontWeight.w700,
-                                color: onSurfaceVariant)),
-                        const SizedBox(height: 6),
-                        SelectableText(reference,
-                            style: GoogleFonts.manrope(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w800,
-                                color: onSurface)),
-                        if (ticketId != null) ...[
-                          const SizedBox(height: 12),
-                          Text('Ticket ID',
-                              style: GoogleFonts.inter(
-                                  fontSize: 10,
-                                  letterSpacing: 1.4,
-                                  fontWeight: FontWeight.w700,
-                                  color: onSurfaceVariant)),
-                          const SizedBox(height: 6),
-                          SelectableText(ticketId!,
-                              style: GoogleFonts.manrope(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w700,
-                                  color: onSurface)),
-                        ],
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -6705,11 +7197,13 @@ class _TicketInfoItem extends StatelessWidget {
     required this.label,
     required this.value,
     this.alignEnd = false,
+    this.light = false,
   });
 
   final String label;
   final String value;
   final bool alignEnd;
+  final bool light;
 
   @override
   Widget build(BuildContext context) {
@@ -6724,11 +7218,14 @@ class _TicketInfoItem extends StatelessWidget {
                 fontSize: 10,
                 letterSpacing: 1.6,
                 fontWeight: FontWeight.w700,
-                color: onSurfaceVariant)),
+                color:
+                    light ? Colors.white.withOpacity(0.72) : onSurfaceVariant)),
         const SizedBox(height: 4),
         Text(value,
             style: GoogleFonts.manrope(
-                fontSize: 14, fontWeight: FontWeight.w700, color: onSurface)),
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: light ? Colors.white : onSurface)),
       ],
     );
   }
@@ -7380,11 +7877,10 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAF8);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const surfaceContainerHigh = Color(0xFFE6E8EA);
-    const outlineVariant = Color(0xFFBDCAC0);
+    const surfaceContainerLow = Color(0xFFF2F6F4);
+    const outlineVariant = Color(0xFFD7E4DB);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
@@ -7395,46 +7891,122 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
       backgroundColor: background,
       body: Stack(
         children: [
+          Positioned(
+            top: -120,
+            right: -74,
+            child: Container(
+              width: 240,
+              height: 240,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.16),
+                    primaryContainer.withOpacity(0.04),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: -42,
+            top: 250,
+            child: Container(
+              width: 138,
+              height: 138,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.06),
+              ),
+            ),
+          ),
           Column(
             children: [
               SizedBox(
-                height: 64,
+                height: 72,
                 child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.8),
+                        color: background.withOpacity(0.82),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
-                              blurRadius: 12,
-                              offset: const Offset(0, 4))
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
+                          )
                         ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
-                            IconButton(
-                              onPressed: () => Navigator.pushNamed(
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
                                   context, AppRoutes.hamburgerMenu),
-                              icon: const Icon(Icons.menu, color: primary),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.menu, color: primary),
+                              ),
                             ),
+                            const SizedBox(width: 12),
                             _brandLogo(size: 26, radius: 8),
                             const SizedBox(width: 8),
-                            Text('I-Metro',
-                                style: GoogleFonts.manrope(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w800,
-                                    color: primary)),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('I-Metro',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary)),
+                                Text('Trip activity',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: onSurfaceVariant
+                                            .withOpacity(0.72))),
+                              ],
+                            ),
                             const Spacer(),
-                            Text('History',
-                                style: GoogleFonts.manrope(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: primary)),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest.withOpacity(0.94),
+                                borderRadius: BorderRadius.circular(18),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.03),
+                                    blurRadius: 12,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 8),
+                                  ),
+                                ],
+                              ),
+                              child: Text('History',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
+                                      color: primary)),
+                            ),
                           ],
                         ),
                       ),
@@ -7452,19 +8024,23 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                             'Reconnect to load your latest trips and tickets.',
                       )
                     : SingleChildScrollView(
-                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 150),
+                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 138),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Trip History',
                                 style: GoogleFonts.manrope(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.w800,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: -0.45,
                                     color: onSurface)),
-                            const SizedBox(height: 6),
-                            Text('Review your past travels and expenses.',
+                            const SizedBox(height: 8),
+                            Text(
+                                'Review your past travels, payment status, and ticket activity in one place.',
                                 style: GoogleFonts.inter(
-                                    fontSize: 13, color: onSurfaceVariant)),
+                                    fontSize: 13.5,
+                                    height: 1.5,
+                                    color: onSurfaceVariant.withOpacity(0.84))),
                             const SizedBox(height: 12),
                             OfflineBanner(onRetry: _refreshBookings),
                             const SizedBox(height: 16),
@@ -7631,7 +8207,106 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                                   }).toList();
 
                                   return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
+                                      Container(
+                                        width: double.infinity,
+                                        padding: const EdgeInsets.all(20),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFF006B47),
+                                              Color(0xFF00875A)
+                                            ],
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomRight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(28),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: primary.withOpacity(0.18),
+                                              blurRadius: 24,
+                                              spreadRadius: -12,
+                                              offset: const Offset(0, 16),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            Positioned(
+                                              right: -8,
+                                              top: -6,
+                                              child: Icon(
+                                                Icons.history_rounded,
+                                                size: 110,
+                                                color: Colors.white
+                                                    .withOpacity(0.08),
+                                              ),
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text('Travel snapshot',
+                                                    style: GoogleFonts.inter(
+                                                      fontSize: 10.5,
+                                                      letterSpacing: 1.8,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: Colors.white
+                                                          .withOpacity(0.78),
+                                                    )),
+                                                const SizedBox(height: 8),
+                                                Text(
+                                                  '${bookings.length} rides recorded',
+                                                  style: GoogleFonts.manrope(
+                                                    fontSize: 24,
+                                                    fontWeight: FontWeight.w700,
+                                                    letterSpacing: -0.35,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 6),
+                                                Text(
+                                                  'Your confirmed rides and monthly spend stay updated here as tickets and payments change.',
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 12.5,
+                                                    height: 1.45,
+                                                    color: Colors.white
+                                                        .withOpacity(0.82),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 16),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child:
+                                                          _HistorySummaryStat(
+                                                        label:
+                                                            'Confirmed trips',
+                                                        value: confirmedTrips
+                                                            .toString(),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 12),
+                                                    Expanded(
+                                                      child:
+                                                          _HistorySummaryStat(
+                                                        label: 'Spent',
+                                                        value:
+                                                            '$summaryCurrency $confirmedSpent',
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 18),
                                       SingleChildScrollView(
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
@@ -7679,22 +8354,33 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                                         ),
                                       ),
                                       const SizedBox(height: 16),
-                                      Align(
-                                        alignment: Alignment.centerRight,
-                                        child: TextButton.icon(
-                                          onPressed: () => setState(() =>
-                                              _bookingsFuture =
-                                                  _loadBookings()),
-                                          icon: const Icon(
-                                              Icons.refresh_rounded,
-                                              size: 18),
-                                          label: Text('Refresh',
-                                              style: GoogleFonts.inter(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w700)),
-                                          style: TextButton.styleFrom(
-                                              foregroundColor: primary),
-                                        ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Recent rides',
+                                            style: GoogleFonts.manrope(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w700,
+                                              color: onSurface,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          TextButton.icon(
+                                            onPressed: () => setState(() =>
+                                                _bookingsFuture =
+                                                    _loadBookings()),
+                                            icon: const Icon(
+                                                Icons.refresh_rounded,
+                                                size: 18),
+                                            label: Text('Refresh',
+                                                style: GoogleFonts.inter(
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w700)),
+                                            style: TextButton.styleFrom(
+                                                foregroundColor: primary),
+                                          ),
+                                        ],
                                       ),
                                       const SizedBox(height: 8),
                                       if (filteredBookings.isEmpty)
@@ -7711,70 +8397,6 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
                                       if (filteredBookings.isEmpty)
                                         const SizedBox(height: 12),
                                       ...cards,
-                                      const SizedBox(height: 12),
-                                      Container(
-                                        padding: const EdgeInsets.all(20),
-                                        decoration: BoxDecoration(
-                                          gradient: const LinearGradient(
-                                              colors: [
-                                                primary,
-                                                primaryContainer
-                                              ]),
-                                          borderRadius:
-                                              BorderRadius.circular(24),
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            Positioned(
-                                              right: -8,
-                                              bottom: -8,
-                                              child: Icon(Icons.analytics,
-                                                  size: 120,
-                                                  color: Colors.white
-                                                      .withOpacity(0.1)),
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text('Monthly Summary',
-                                                    style: GoogleFonts.manrope(
-                                                        fontSize: 22,
-                                                        fontWeight:
-                                                            FontWeight.w800,
-                                                        color: Colors.white)),
-                                                const SizedBox(height: 6),
-                                                Text(
-                                                    'CONFIRMED TRIPS THIS MONTH',
-                                                    style: GoogleFonts.inter(
-                                                        fontSize: 11,
-                                                        letterSpacing: 2.2,
-                                                        color: Colors.white
-                                                            .withOpacity(0.8),
-                                                        fontWeight:
-                                                            FontWeight.w600)),
-                                                const SizedBox(height: 16),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    _HistorySummaryStat(
-                                                        label:
-                                                            'Confirmed Trips',
-                                                        value: confirmedTrips
-                                                            .toString()),
-                                                    _HistorySummaryStat(
-                                                        label: 'Spent',
-                                                        value:
-                                                            '$summaryCurrency $confirmedSpent'),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
                                     ],
                                   );
                                 },
@@ -7793,15 +8415,15 @@ class _CompletedRidesScreenState extends State<CompletedRidesScreen> {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
                 child: Container(
-                  padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
+                  padding: const EdgeInsets.fromLTRB(18, 10, 18, 18),
                   decoration: BoxDecoration(
-                    color: background.withOpacity(0.8),
+                    color: background.withOpacity(0.76),
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(24)),
                     boxShadow: [
                       BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
-                          blurRadius: 30,
+                          color: Colors.black.withOpacity(0.035),
+                          blurRadius: 24,
                           offset: const Offset(0, -8))
                     ],
                   ),
@@ -7855,20 +8477,30 @@ class _HistoryChip extends StatelessWidget {
   Widget build(BuildContext context) {
     const primary = Color(0xFF006B47);
     const onSurfaceVariant = Color(0xFF3E4942);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF2F6F4);
     return GestureDetector(
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(right: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
         decoration: BoxDecoration(
           color: active ? primary : surfaceContainerLow,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(18),
+          boxShadow: active
+              ? [
+                  BoxShadow(
+                    color: primary.withOpacity(0.12),
+                    blurRadius: 12,
+                    spreadRadius: -8,
+                    offset: const Offset(0, 8),
+                  ),
+                ]
+              : null,
         ),
         child: Text(
           label,
           style: GoogleFonts.inter(
-            fontSize: 11,
+            fontSize: 11.5,
             fontWeight: FontWeight.w600,
             color: active ? Colors.white : onSurfaceVariant,
           ),
@@ -7962,7 +8594,7 @@ class _HistoryTripCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF2F6F4);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     return GestureDetector(
@@ -7971,12 +8603,14 @@ class _HistoryTripCard extends StatelessWidget {
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
           color: surfaceLowest,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(22),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.04),
-                blurRadius: 16,
-                offset: const Offset(0, 8))
+              color: Colors.black.withOpacity(0.035),
+              blurRadius: 16,
+              spreadRadius: -10,
+              offset: const Offset(0, 10),
+            )
           ],
         ),
         child: Column(
@@ -8006,10 +8640,10 @@ class _HistoryTripCard extends StatelessWidget {
                       Text(
                         date.toUpperCase(),
                         style: GoogleFonts.inter(
-                            fontSize: 10,
+                            fontSize: 10.5,
                             fontWeight: FontWeight.w700,
-                            letterSpacing: 1.4,
-                            color: onSurfaceVariant),
+                            letterSpacing: 1.2,
+                            color: onSurfaceVariant.withOpacity(0.78)),
                       ),
                       const SizedBox(height: 4),
                       Text(title,
@@ -8026,24 +8660,33 @@ class _HistoryTripCard extends StatelessWidget {
                     Text(price,
                         style: GoogleFonts.manrope(
                             fontSize: 16,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             color: statusColor)),
                     const SizedBox(height: 4),
-                    Row(
-                      children: [
-                        Icon(
-                            status == 'Canceled'
-                                ? Icons.cancel
-                                : Icons.check_circle,
-                            size: 14,
-                            color: statusColor),
-                        const SizedBox(width: 4),
-                        Text(status.toUpperCase(),
-                            style: GoogleFonts.inter(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w700,
-                                color: statusColor)),
-                      ],
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                        color: statusColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                              status == 'Canceled'
+                                  ? Icons.cancel_outlined
+                                  : Icons.check_circle_rounded,
+                              size: 14,
+                              color: statusColor),
+                          const SizedBox(width: 4),
+                          Text(status.toUpperCase(),
+                              style: GoogleFonts.inter(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w700,
+                                  color: statusColor)),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -8062,9 +8705,10 @@ class _HistoryTripCard extends StatelessWidget {
                     OutlinedButton.icon(
                       onPressed: retrying ? null : onRetry,
                       style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: lineColor.withOpacity(0.6)),
+                        side: BorderSide(color: lineColor.withOpacity(0.34)),
+                        backgroundColor: lineColor.withOpacity(0.04),
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 8),
+                            horizontal: 12, vertical: 9),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(14)),
                       ),
@@ -8091,7 +8735,7 @@ class _HistoryTripCard extends StatelessWidget {
                       children: [
                         Text('Open ticket',
                             style: GoogleFonts.inter(
-                                fontSize: 11,
+                                fontSize: 11.5,
                                 fontWeight: FontWeight.w700,
                                 color: lineColor)),
                         const SizedBox(width: 4),
@@ -8119,6 +8763,7 @@ class _HistoryTimeline extends StatelessWidget {
   Widget build(BuildContext context) {
     const surfaceLowest = Color(0xFFFFFFFF);
     const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
     return Row(
       children: [
         Column(
@@ -8149,12 +8794,25 @@ class _HistoryTimeline extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Expanded(
-          child: Text(
-            destination,
-            style: GoogleFonts.manrope(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: onSurface.withOpacity(0.6)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                destination,
+                style: GoogleFonts.manrope(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: onSurface.withOpacity(0.74)),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                'Destination stop',
+                style: GoogleFonts.inter(
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w500,
+                    color: onSurfaceVariant.withOpacity(0.68)),
+              ),
+            ],
           ),
         ),
       ],
@@ -8170,21 +8828,28 @@ class _HistorySummaryStat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label.toUpperCase(),
-            style: GoogleFonts.inter(
-                fontSize: 10,
-                letterSpacing: 1.4,
-                color: Colors.white.withOpacity(0.7))),
-        const SizedBox(height: 4),
-        Text(value,
-            style: GoogleFonts.manrope(
-                fontSize: 26,
-                fontWeight: FontWeight.w800,
-                color: Colors.white)),
-      ],
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.14),
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label.toUpperCase(),
+              style: GoogleFonts.inter(
+                  fontSize: 10,
+                  letterSpacing: 1.4,
+                  color: Colors.white.withOpacity(0.7))),
+          const SizedBox(height: 4),
+          Text(value,
+              style: GoogleFonts.manrope(
+                  fontSize: 23,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white)),
+        ],
+      ),
     );
   }
 }
@@ -9971,7 +10636,22 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   final TextEditingController _confirmController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _newController.addListener(_refreshStrength);
+    _confirmController.addListener(_refreshStrength);
+  }
+
+  void _refreshStrength() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  @override
   void dispose() {
+    _newController.removeListener(_refreshStrength);
+    _confirmController.removeListener(_refreshStrength);
     _currentController.dispose();
     _newController.dispose();
     _confirmController.dispose();
@@ -10039,11 +10719,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAF8);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const surfaceContainerHigh = Color(0xFFE6E8EA);
-    const outlineVariant = Color(0xFFBDCAC0);
+    const surfaceContainerLow = Color(0xFFF2F6F4);
+    const surfaceContainerHigh = Color(0xFFE7EEE9);
+    const outlineVariant = Color(0xFFD7E4DB);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
@@ -10053,39 +10733,130 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       backgroundColor: background,
       body: Stack(
         children: [
+          Positioned(
+            top: -110,
+            right: -74,
+            child: Container(
+              width: 230,
+              height: 230,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.16),
+                    primaryContainer.withOpacity(0.04),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: -38,
+            top: 250,
+            child: Container(
+              width: 128,
+              height: 128,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.06),
+              ),
+            ),
+          ),
           Column(
             children: [
               SizedBox(
-                height: 64,
+                height: 72,
                 child: ClipRect(
                   child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
                       decoration: BoxDecoration(
-                        color: background.withOpacity(0.8),
+                        color: background.withOpacity(0.82),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.black.withOpacity(0.04),
-                              blurRadius: 12,
-                              offset: const Offset(0, 4))
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
+                          )
                         ],
                       ),
                       child: SafeArea(
                         bottom: false,
                         child: Row(
                           children: [
-                            IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon:
-                                  const Icon(Icons.arrow_back, color: primary),
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.arrow_back,
+                                    color: primary, size: 20),
+                              ),
                             ),
-                            Text('Change Password',
-                                style: GoogleFonts.manrope(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: primary)),
+                            const SizedBox(width: 12),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Change Password',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary)),
+                                Text('Security settings',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: onSurfaceVariant
+                                            .withOpacity(0.72))),
+                              ],
+                            ),
                             const Spacer(),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest.withOpacity(0.94),
+                                borderRadius: BorderRadius.circular(18),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.03),
+                                    blurRadius: 12,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 8),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                children: [
+                                  const Icon(Icons.verified_user_rounded,
+                                      size: 15, color: primary),
+                                  const SizedBox(width: 6),
+                                  Text(
+                                    'Protected',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700,
+                                      color: primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -10095,210 +10866,311 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 130),
+                  padding: const EdgeInsets.fromLTRB(20, 18, 20, 36),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Update Security',
-                          style: GoogleFonts.manrope(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w800,
-                              color: onSurface)),
-                      const SizedBox(height: 6),
-                      Text(
-                        'Protect your I-Metro traveler account with a strong, unique password.',
-                        style: GoogleFonts.inter(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: onSurfaceVariant),
-                      ),
-                      const SizedBox(height: 20),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        width: double.infinity,
+                        padding: const EdgeInsets.fromLTRB(22, 24, 22, 22),
                         decoration: BoxDecoration(
-                          color: surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Column(
-                          children: [
-                            _PasswordField(
-                              label: 'Current Password',
-                              placeholder: 'Enter current password',
-                              obscure: !showCurrent,
-                              controller: _currentController,
-                              onToggle: () =>
-                                  setState(() => showCurrent = !showCurrent),
+                          gradient: LinearGradient(
+                            colors: [
+                              surfaceLowest,
+                              const Color(0xFFF8FCFA),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                              color: outlineVariant.withOpacity(0.18)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: primary.withOpacity(0.08),
+                              blurRadius: 24,
+                              spreadRadius: -14,
+                              offset: const Offset(0, 18),
                             ),
-                            Container(
-                                height: 1,
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 16),
-                                color: outlineVariant.withOpacity(0.1)),
-                            _PasswordField(
-                              label: 'New Password',
-                              placeholder: 'Create new password',
-                              obscure: !showNew,
-                              controller: _newController,
-                              onToggle: () =>
-                                  setState(() => showNew = !showNew),
-                            ),
-                            const SizedBox(height: 10),
-                            const _StrengthBars(activeCount: 1),
-                            const SizedBox(height: 6),
-                            Text('Password must be at least 8 characters',
-                                style: GoogleFonts.inter(
-                                    fontSize: 10, color: onSurfaceVariant)),
-                            const SizedBox(height: 16),
-                            _PasswordField(
-                              label: 'Confirm New Password',
-                              placeholder: 'Repeat new password',
-                              obscure: !showConfirm,
-                              controller: _confirmController,
-                              onToggle: () =>
-                                  setState(() => showConfirm = !showConfirm),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 20,
+                              spreadRadius: -14,
+                              offset: const Offset(0, 14),
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                          color: surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Row(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              width: 36,
-                              height: 36,
+                              width: 56,
+                              height: 56,
                               decoration: BoxDecoration(
                                 color: primary.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(18),
                               ),
-                              child: const Icon(Icons.info, color: primary),
+                              child: const Icon(Icons.lock_outline_rounded,
+                                  color: primary, size: 28),
                             ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Session Security',
-                                      style: GoogleFonts.manrope(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w700,
-                                          color: onSurface)),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'Updating your password will sign you out of all other active sessions on different devices for your safety.',
-                                    style: GoogleFonts.inter(
-                                        fontSize: 11,
-                                        color: onSurfaceVariant,
-                                        height: 1.4),
-                                  ),
-                                ],
+                            const SizedBox(height: 16),
+                            Text('Update Security',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: -0.45,
+                                  color: onSurface,
+                                )),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Protect your I-Metro traveler account with a strong, unique password.',
+                              style: GoogleFonts.inter(
+                                fontSize: 13,
+                                height: 1.5,
+                                fontWeight: FontWeight.w500,
+                                color: onSurfaceVariant.withOpacity(0.84),
                               ),
                             ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      IgnorePointer(
-                        ignoring: _saving,
-                        child: Opacity(
-                          opacity: _saving ? 0.7 : 1,
-                          child: GestureDetector(
-                            onTap: _submit,
-                            child: Container(
+                            const SizedBox(height: 18),
+                            Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.symmetric(vertical: 18),
+                              padding: const EdgeInsets.all(18),
                               decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                    colors: [primary, primaryContainer]),
+                                color: surfaceLowest.withOpacity(0.96),
                                 borderRadius: BorderRadius.circular(24),
                                 boxShadow: [
                                   BoxShadow(
-                                      color: primary.withOpacity(0.2),
-                                      blurRadius: 16,
-                                      offset: const Offset(0, 8))
+                                    color: Colors.black.withOpacity(0.03),
+                                    blurRadius: 16,
+                                    spreadRadius: -10,
+                                    offset: const Offset(0, 10),
+                                  ),
                                 ],
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                              child: Column(
                                 children: [
-                                  if (_saving)
-                                    const SizedBox(
-                                      width: 18,
-                                      height: 18,
-                                      child: CircularProgressIndicator(
-                                          strokeWidth: 2,
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                  Colors.white)),
-                                    )
-                                  else
-                                    const Icon(Icons.lock_reset,
-                                        color: Colors.white),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    _saving ? 'Saving...' : 'Save Changes',
-                                    style: GoogleFonts.manrope(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.white),
+                                  _PasswordField(
+                                    label: 'Current Password',
+                                    placeholder: 'Enter current password',
+                                    obscure: !showCurrent,
+                                    controller: _currentController,
+                                    onToggle: () => setState(
+                                        () => showCurrent = !showCurrent),
+                                  ),
+                                  Container(
+                                      height: 1,
+                                      margin: const EdgeInsets.symmetric(
+                                          vertical: 16),
+                                      color: outlineVariant.withOpacity(0.24)),
+                                  _PasswordField(
+                                    label: 'New Password',
+                                    placeholder: 'Create new password',
+                                    obscure: !showNew,
+                                    controller: _newController,
+                                    onToggle: () =>
+                                        setState(() => showNew = !showNew),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  _StrengthBars(
+                                      activeCount: _newController.text.isEmpty
+                                          ? 0
+                                          : (_newController.text.length >= 12
+                                              ? 4
+                                              : _newController.text.length >= 10
+                                                  ? 3
+                                                  : _newController
+                                                              .text.length >=
+                                                          8
+                                                      ? 2
+                                                      : 1)),
+                                  const SizedBox(height: 8),
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      'Password must be at least 8 characters',
+                                      style: GoogleFonts.inter(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            onSurfaceVariant.withOpacity(0.8),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  _PasswordField(
+                                    label: 'Confirm New Password',
+                                    placeholder: 'Repeat new password',
+                                    obscure: !showConfirm,
+                                    controller: _confirmController,
+                                    onToggle: () => setState(
+                                        () => showConfirm = !showConfirm),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Center(
-                        child: GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: Text(
-                            'Cancel and go back',
-                            style: GoogleFonts.inter(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: onSurfaceVariant),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          color: surfaceContainerHigh.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              right: -10,
-                              bottom: -10,
-                              child: Icon(Icons.security,
-                                  size: 100, color: primary.withOpacity(0.1)),
+                            const SizedBox(height: 18),
+                            Container(
+                              padding: const EdgeInsets.all(18),
+                              decoration: BoxDecoration(
+                                color: surfaceContainerLow,
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: primary.withOpacity(0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                        ),
+                                        child: const Icon(Icons.info_outline,
+                                            color: primary),
+                                      ),
+                                      const SizedBox(width: 12),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Session Security',
+                                                style: GoogleFonts.manrope(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: onSurface)),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              'Updating your password will sign you out of all other active sessions on different devices for your safety.',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 11.5,
+                                                  color: onSurfaceVariant
+                                                      .withOpacity(0.84),
+                                                  height: 1.45),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Icon(Icons.lock, color: primary),
-                                const SizedBox(height: 8),
-                                Text('Your data is encrypted',
-                                    style: GoogleFonts.inter(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: onSurfaceVariant)),
-                                const SizedBox(height: 6),
-                                Text(
-                                  'I-Metro uses bank-grade security to ensure your personal information remains private.',
-                                  style: GoogleFonts.inter(
-                                      fontSize: 10, color: onSurfaceVariant),
+                            const SizedBox(height: 22),
+                            IgnorePointer(
+                              ignoring: _saving,
+                              child: Opacity(
+                                opacity: _saving ? 0.7 : 1,
+                                child: GestureDetector(
+                                  onTap: _submit,
+                                  child: Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 17),
+                                    decoration: BoxDecoration(
+                                      gradient: const LinearGradient(
+                                          colors: [primary, primaryContainer]),
+                                      borderRadius: BorderRadius.circular(22),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: primary.withOpacity(0.18),
+                                            blurRadius: 18,
+                                            spreadRadius: -8,
+                                            offset: const Offset(0, 10))
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        if (_saving)
+                                          const SizedBox(
+                                            width: 18,
+                                            height: 18,
+                                            child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.white)),
+                                          )
+                                        else
+                                          const Icon(Icons.lock_reset_rounded,
+                                              color: Colors.white, size: 20),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          _saving
+                                              ? 'Saving...'
+                                              : 'Save Changes',
+                                          style: GoogleFonts.manrope(
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ],
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            Center(
+                              child: GestureDetector(
+                                onTap: () => Navigator.pop(context),
+                                child: Text(
+                                  'Cancel and go back',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: onSurfaceVariant),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: surfaceContainerHigh.withOpacity(0.65),
+                                borderRadius: BorderRadius.circular(24),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    right: -10,
+                                    bottom: -10,
+                                    child: Icon(Icons.security_rounded,
+                                        size: 100,
+                                        color: primary.withOpacity(0.08)),
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Icon(Icons.lock_outline_rounded,
+                                          color: primary),
+                                      const SizedBox(height: 8),
+                                      Text('Your data is encrypted',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 12.5,
+                                              fontWeight: FontWeight.w600,
+                                              color: onSurfaceVariant)),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        'I-Metro uses bank-grade security to ensure your personal information remains private.',
+                                        style: GoogleFonts.inter(
+                                            fontSize: 10.5,
+                                            height: 1.45,
+                                            color: onSurfaceVariant
+                                                .withOpacity(0.84)),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -10736,7 +11608,7 @@ class _PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const surfaceLowest = Color(0xFFFFFFFF);
+    const surfaceLowest = Color(0xFFF8FCFA);
     const primary = Color(0xFF006B47);
     const onSurfaceVariant = Color(0xFF3E4942);
 
@@ -10745,33 +11617,45 @@ class _PasswordField extends StatelessWidget {
       children: [
         Text(label.toUpperCase(),
             style: GoogleFonts.inter(
-                fontSize: 11,
-                letterSpacing: 1.4,
+                fontSize: 10.5,
+                letterSpacing: 1.2,
                 fontWeight: FontWeight.w600,
-                color: onSurfaceVariant)),
+                color: onSurfaceVariant.withOpacity(0.82))),
         const SizedBox(height: 6),
         TextField(
           controller: controller,
           obscureText: obscure,
+          style: GoogleFonts.manrope(
+            fontSize: 14.5,
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFF191C1E),
+          ),
           decoration: InputDecoration(
             filled: true,
             fillColor: surfaceLowest,
             hintText: placeholder,
             hintStyle: GoogleFonts.inter(
-                fontSize: 12, color: onSurfaceVariant.withOpacity(0.6)),
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: onSurfaceVariant.withOpacity(0.58)),
             contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                const EdgeInsets.symmetric(horizontal: 18, vertical: 17),
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(16),
-              borderSide: BorderSide(color: primary.withOpacity(0.4), width: 2),
+              borderRadius: BorderRadius.circular(18),
+              borderSide:
+                  BorderSide(color: primary.withOpacity(0.24), width: 1.6),
             ),
             suffixIcon: IconButton(
               onPressed: onToggle,
-              icon: Icon(obscure ? Icons.visibility : Icons.visibility_off,
-                  color: Colors.grey.shade400),
+              icon: Icon(
+                obscure
+                    ? Icons.visibility_outlined
+                    : Icons.visibility_off_outlined,
+                color: Colors.grey.shade500,
+              ),
             ),
           ),
         ),
@@ -10789,15 +11673,22 @@ class _StrengthBars extends StatelessWidget {
   Widget build(BuildContext context) {
     const primary = Color(0xFF006B47);
     const surfaceVariant = Color(0xFFE0E3E5);
+    final activeColor = switch (activeCount) {
+      0 => surfaceVariant,
+      1 => const Color(0xFFD98343),
+      2 => const Color(0xFFB88B12),
+      3 => const Color(0xFF2A8E68),
+      _ => primary,
+    };
     return Row(
       children: List.generate(4, (index) {
         final isActive = index < activeCount;
         return Expanded(
           child: Container(
             margin: EdgeInsets.only(right: index == 3 ? 0 : 6),
-            height: 4,
+            height: 5,
             decoration: BoxDecoration(
-              color: isActive ? primary.withOpacity(0.2) : surfaceVariant,
+              color: isActive ? activeColor.withOpacity(0.82) : surfaceVariant,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
@@ -12426,154 +13317,376 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const background = Color(0xFFF7F9FB);
+    const background = Color(0xFFF6FAF8);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
-    const outlineVariant = Color(0xFFBDCAC0);
+    const surfaceContainerLow = Color(0xFFF2F6F4);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
     const primary = Color(0xFF006B47);
+    const primaryContainer = Color(0xFF00875A);
     const error = Color(0xFFBA1A1A);
 
     final loggedIn = AuthStore.isLoggedIn;
+    final paymentCount = _items
+        .where((item) =>
+            (item['title']?.toString().toLowerCase() ?? '').contains('payment'))
+        .length;
+    final ticketCount = _items
+        .where((item) =>
+            (item['title']?.toString().toLowerCase() ?? '').contains('ticket'))
+        .length;
+    final updateCount = _items.length;
 
     return Scaffold(
       backgroundColor: background,
-      body: Column(
+      body: Stack(
         children: [
-          SizedBox(
-            height: 64,
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: background.withOpacity(0.8),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.04),
-                          blurRadius: 12,
-                          offset: const Offset(0, 4))
-                    ],
-                  ),
-                  child: SafeArea(
-                    bottom: false,
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => Navigator.pop(context),
-                          icon: const Icon(Icons.arrow_back, color: primary),
-                        ),
-                        _brandLogo(size: 24, radius: 8),
-                        const SizedBox(width: 8),
-                        Text('Notifications',
-                            style: GoogleFonts.manrope(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: primary)),
-                        const Spacer(),
-                        if (_loading)
-                          SizedBox(
-                            width: 18,
-                            height: 18,
-                            child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: primary.withOpacity(0.6)),
-                          ),
-                      ],
-                    ),
-                  ),
+          Positioned(
+            top: -120,
+            right: -74,
+            child: Container(
+              width: 240,
+              height: 240,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.15),
+                    primaryContainer.withOpacity(0.04),
+                    Colors.transparent,
+                  ],
                 ),
               ),
             ),
           ),
-          Expanded(
-            child: (!ConnectivityService.instance.isOnline && loggedIn)
-                ? OfflineFullScreen(
-                    onRetry: _loadNotifications,
-                    title: 'Offline alerts',
-                    body: 'Reconnect to load payment and ticket updates.',
-                  )
-                : SingleChildScrollView(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 120),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Your alerts',
-                            style: GoogleFonts.manrope(
-                                fontSize: 28,
-                                fontWeight: FontWeight.w800,
-                                color: onSurface)),
-                        const SizedBox(height: 6),
-                        Text(
-                            'Trip updates, payment confirmations, and ticket alerts.',
-                            style: GoogleFonts.inter(
-                                fontSize: 13, color: onSurfaceVariant)),
-                        const SizedBox(height: 12),
-                        OfflineBanner(onRetry: _loadNotifications),
-                        const SizedBox(height: 16),
-                        if (!loggedIn)
-                          _EmptyStateCard(
-                            icon: Icons.lock_outline,
-                            title: 'Sign in for alerts',
-                            body:
-                                'See payment confirmations and ticket updates here.',
-                            actionLabel: 'Sign in',
-                            onAction: () =>
-                                Navigator.pushNamed(context, AppRoutes.login),
+          Positioned(
+            left: -36,
+            top: 240,
+            child: Container(
+              width: 126,
+              height: 126,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.05),
+              ),
+            ),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                height: 72,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: background.withOpacity(0.82),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
                           )
-                        else if (_error != null)
-                          Container(
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: surfaceContainerLow,
-                              borderRadius: BorderRadius.circular(16),
+                        ],
+                      ),
+                      child: SafeArea(
+                        bottom: false,
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.arrow_back,
+                                    color: primary, size: 20),
+                              ),
                             ),
-                            child: Column(
+                            const SizedBox(width: 12),
+                            _brandLogo(size: 26, radius: 8),
+                            const SizedBox(width: 8),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(_error!,
+                                Text('I-Metro',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary)),
+                                Text('Notification center',
                                     style: GoogleFonts.inter(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                        color: error)),
-                                const SizedBox(height: 8),
-                                GestureDetector(
-                                  onTap: _loadNotifications,
-                                  child: Text('Retry',
-                                      style: GoogleFonts.inter(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w700,
-                                          color: primary)),
-                                ),
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w500,
+                                        color: onSurfaceVariant
+                                            .withOpacity(0.72))),
                               ],
                             ),
-                          )
-                        else if (!_loading && _items.isEmpty)
-                          _EmptyStateCard(
-                            icon: Icons.notifications_none,
-                            title: 'No alerts yet',
-                            body:
-                                'We will let you know about payments, tickets, and rides here.',
-                            actionLabel: 'View history',
-                            onAction: () => Navigator.pushNamed(
-                                context, AppRoutes.completedRides),
-                          )
-                        else
-                          ..._items.map(
-                            (item) => _NotificationCard(
-                              icon: item['icon'] as IconData,
-                              color: item['color'] as Color,
-                              title: item['title']?.toString() ?? 'Alert',
-                              body: item['body']?.toString() ?? '',
-                              timeLabel: _formatTime(item['time'] as DateTime?),
-                              onTap: () => _openNotification(item),
+                            const Spacer(),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest.withOpacity(0.95),
+                                borderRadius: BorderRadius.circular(18),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.03),
+                                    blurRadius: 12,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 8),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (_loading)
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: SizedBox(
+                                        width: 14,
+                                        height: 14,
+                                        child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            color: primary.withOpacity(0.7)),
+                                      ),
+                                    ),
+                                  Text('Alerts',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w700,
+                                          color: primary)),
+                                ],
+                              ),
                             ),
-                          ),
-                      ],
+                          ],
+                        ),
+                      ),
                     ),
                   ),
+                ),
+              ),
+              Expanded(
+                child: (!ConnectivityService.instance.isOnline && loggedIn)
+                    ? OfflineFullScreen(
+                        onRetry: _loadNotifications,
+                        title: 'Offline alerts',
+                        body: 'Reconnect to load payment and ticket updates.',
+                      )
+                    : SingleChildScrollView(
+                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 120),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Stay in the loop',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: -0.45,
+                                    color: onSurface)),
+                            const SizedBox(height: 8),
+                            Text(
+                                'Trip updates, payment confirmations, and ticket alerts in one premium rider feed.',
+                                style: GoogleFonts.inter(
+                                    fontSize: 13.5,
+                                    height: 1.5,
+                                    color: onSurfaceVariant.withOpacity(0.84))),
+                            const SizedBox(height: 12),
+                            OfflineBanner(onRetry: _loadNotifications),
+                            const SizedBox(height: 16),
+                            if (loggedIn && (_items.isNotEmpty || _loading))
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(18),
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(28),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.045),
+                                      blurRadius: 18,
+                                      spreadRadius: -8,
+                                      offset: const Offset(0, 12),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 46,
+                                          height: 46,
+                                          decoration: BoxDecoration(
+                                            color: primary.withOpacity(0.12),
+                                            borderRadius:
+                                                BorderRadius.circular(16),
+                                          ),
+                                          child: const Icon(
+                                            Icons.notifications_active_rounded,
+                                            color: primary,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 14),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Recent activity',
+                                                  style: GoogleFonts.manrope(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      color: onSurface)),
+                                              const SizedBox(height: 4),
+                                              Text(
+                                                  'Your ticket, ride, and payment events appear here as they happen.',
+                                                  style: GoogleFonts.inter(
+                                                      fontSize: 12.5,
+                                                      height: 1.45,
+                                                      color: onSurfaceVariant
+                                                          .withOpacity(0.82))),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: _NotificationSummaryChip(
+                                            label: 'Updates',
+                                            value: updateCount.toString(),
+                                            tint: primary,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: _NotificationSummaryChip(
+                                            label: 'Payments',
+                                            value: paymentCount.toString(),
+                                            tint: const Color(0xFF355AA2),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Expanded(
+                                          child: _NotificationSummaryChip(
+                                            label: 'Tickets',
+                                            value: ticketCount.toString(),
+                                            tint: const Color(0xFFB54708),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if (loggedIn && (_items.isNotEmpty || _loading))
+                              const SizedBox(height: 16),
+                            if (!loggedIn)
+                              _EmptyStateCard(
+                                icon: Icons.lock_outline,
+                                title: 'Sign in for alerts',
+                                body:
+                                    'See payment confirmations and ticket updates here.',
+                                actionLabel: 'Sign in',
+                                onAction: () => Navigator.pushNamed(
+                                    context, AppRoutes.login),
+                              )
+                            else if (_error != null)
+                              Container(
+                                padding: const EdgeInsets.all(18),
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(22),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 16,
+                                      spreadRadius: -8,
+                                      offset: const Offset(0, 10),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Unable to refresh alerts',
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                            color: error)),
+                                    const SizedBox(height: 6),
+                                    Text(_error!,
+                                        style: GoogleFonts.inter(
+                                            fontSize: 12.5,
+                                            height: 1.45,
+                                            color: onSurfaceVariant)),
+                                    const SizedBox(height: 12),
+                                    GestureDetector(
+                                      onTap: _loadNotifications,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 14, vertical: 10),
+                                        decoration: BoxDecoration(
+                                          color: primary.withOpacity(0.08),
+                                          borderRadius:
+                                              BorderRadius.circular(14),
+                                        ),
+                                        child: Text('Retry',
+                                            style: GoogleFonts.inter(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w700,
+                                                color: primary)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            else if (!_loading && _items.isEmpty)
+                              _EmptyStateCard(
+                                icon: Icons.notifications_none,
+                                title: 'No alerts yet',
+                                body:
+                                    'We will let you know about payments, tickets, and rides here.',
+                                actionLabel: 'View history',
+                                onAction: () => Navigator.pushNamed(
+                                    context, AppRoutes.completedRides),
+                              )
+                            else
+                              ..._items.map(
+                                (item) => _NotificationCard(
+                                  icon: item['icon'] as IconData,
+                                  color: item['color'] as Color,
+                                  title: item['title']?.toString() ?? 'Alert',
+                                  body: item['body']?.toString() ?? '',
+                                  timeLabel:
+                                      _formatTime(item['time'] as DateTime?),
+                                  onTap: () => _openNotification(item),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+              ),
+            ],
           ),
         ],
       ),
@@ -12604,70 +13717,134 @@ class _NotificationCard extends StatelessWidget {
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: surfaceLowest,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.03),
-                blurRadius: 12,
-                offset: const Offset(0, 6))
-          ],
-        ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.12),
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Icon(icon, color: color),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(24),
+          child: Ink(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: surfaceLowest,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.035),
+                  blurRadius: 16,
+                  spreadRadius: -8,
+                  offset: const Offset(0, 10),
+                ),
+              ],
             ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.12),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Icon(icon, color: color, size: 22),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: Text(
-                          title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.manrope(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: onSurface),
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.manrope(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: onSurface),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 6),
+                            decoration: BoxDecoration(
+                              color: color.withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                            child: Text(
+                              timeLabel,
+                              style: GoogleFonts.inter(
+                                  fontSize: 10.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: color.withOpacity(0.88)),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Text(timeLabel,
-                          style: GoogleFonts.inter(
-                              fontSize: 10, color: onSurfaceVariant)),
+                      const SizedBox(height: 8),
+                      Text(
+                        body,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                            fontSize: 12.5,
+                            color: onSurfaceVariant.withOpacity(0.88),
+                            height: 1.45),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 6),
-                  Text(
-                    body,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: GoogleFonts.inter(
-                        fontSize: 12, color: onSurfaceVariant, height: 1.4),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 10),
+                Icon(Icons.chevron_right_rounded,
+                    color: onSurfaceVariant.withOpacity(0.5)),
+              ],
             ),
-          ],
+          ),
         ),
+      ),
+    );
+  }
+}
+
+class _NotificationSummaryChip extends StatelessWidget {
+  const _NotificationSummaryChip({
+    required this.label,
+    required this.value,
+    required this.tint,
+  });
+
+  final String label;
+  final String value;
+  final Color tint;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+      decoration: BoxDecoration(
+        color: tint.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(18),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label.toUpperCase(),
+              style: GoogleFonts.inter(
+                  fontSize: 10,
+                  letterSpacing: 1.3,
+                  fontWeight: FontWeight.w700,
+                  color: tint.withOpacity(0.88))),
+          const SizedBox(height: 6),
+          Text(value,
+              style: GoogleFonts.manrope(
+                  fontSize: 18, fontWeight: FontWeight.w800, color: tint)),
+        ],
       ),
     );
   }
@@ -14052,22 +15229,43 @@ class LogoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const inverseSurface = Color(0xFF2D3133);
     const surfaceLowest = Color(0xFFFFFFFF);
-    const surfaceContainerLow = Color(0xFFF2F4F6);
+    const surfaceContainerLow = Color(0xFFF2F6F4);
+    const surfaceSoft = Color(0xFFF8FBF9);
     const onSurface = Color(0xFF191C1E);
     const onSurfaceVariant = Color(0xFF3E4942);
+    const primary = Color(0xFF006B47);
+    const primaryContainer = Color(0xFF00875A);
     const tertiary = Color(0xFF9B403E);
     const tertiaryContainer = Color(0xFFBA5855);
     const tertiaryFixed = Color(0xFFFFDAD7);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F9FB),
+      backgroundColor: const Color(0xFFF6FAF8),
       body: Stack(
         children: [
           const ProfileScreen(),
+          Positioned(
+            top: 90,
+            right: -36,
+            child: Container(
+              width: 180,
+              height: 180,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.12),
+                    primaryContainer.withOpacity(0.04),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
           Positioned.fill(
             child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-              child: Container(color: inverseSurface.withOpacity(0.4)),
+              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+              child: Container(color: inverseSurface.withOpacity(0.34)),
             ),
           ),
           Center(
@@ -14075,104 +15273,239 @@ class LogoutScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Container(
                 constraints: const BoxConstraints(maxWidth: 380),
-                padding: const EdgeInsets.all(28),
+                padding: const EdgeInsets.fromLTRB(24, 22, 24, 24),
                 decoration: BoxDecoration(
                   color: surfaceLowest,
-                  borderRadius: BorderRadius.circular(32),
+                  borderRadius: BorderRadius.circular(34),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.12),
-                      blurRadius: 40,
-                      offset: const Offset(0, 20),
+                      blurRadius: 42,
+                      spreadRadius: -10,
+                      offset: const Offset(0, 24),
                     ),
                   ],
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 64,
-                      height: 64,
-                      decoration: const BoxDecoration(
-                        color: tertiaryFixed,
-                        shape: BoxShape.circle,
+                    Center(
+                      child: Container(
+                        width: 52,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFD7E4DB),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
                       ),
-                      child:
-                          const Icon(Icons.logout, color: tertiary, size: 28),
                     ),
                     const SizedBox(height: 18),
-                    Text(
-                      'Are you sure you want to log out?',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.manrope(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w800,
-                          color: onSurface),
+                    Row(
+                      children: [
+                        Container(
+                          width: 62,
+                          height: 62,
+                          decoration: BoxDecoration(
+                            color: tertiaryFixed,
+                            borderRadius: BorderRadius.circular(22),
+                            boxShadow: [
+                              BoxShadow(
+                                color: tertiary.withOpacity(0.16),
+                                blurRadius: 18,
+                                spreadRadius: -10,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.logout_rounded,
+                            color: tertiary,
+                            size: 28,
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 7),
+                                decoration: BoxDecoration(
+                                  color: primary.withOpacity(0.08),
+                                  borderRadius: BorderRadius.circular(999),
+                                ),
+                                child: Text(
+                                  'Session Security',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 10.5,
+                                    fontWeight: FontWeight.w700,
+                                    color: primary,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                'Sign out safely',
+                                style: GoogleFonts.manrope(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: -0.35,
+                                  color: onSurface,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 14),
                     Text(
-                      'You will need to enter your credentials to access your traveler profile again.',
-                      textAlign: TextAlign.center,
+                      'You are about to log out of your I-Metro account on this device. You will need to sign in again to access your bookings, tickets, and traveler profile.',
                       style: GoogleFonts.inter(
-                          fontSize: 13, color: onSurfaceVariant, height: 1.4),
+                        fontSize: 13.5,
+                        height: 1.5,
+                        color: onSurfaceVariant.withOpacity(0.86),
+                      ),
                     ),
                     const SizedBox(height: 24),
-                    GestureDetector(
-                      onTap: () async {
-                        await PushService.instance.unregister();
-                        await AuthStore.clear();
-                        if (!context.mounted) return;
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          AppRoutes.splash,
-                          (route) => false,
-                        );
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [tertiary, tertiaryContainer],
-                          ),
-                          borderRadius: BorderRadius.circular(24),
-                          boxShadow: [
-                            BoxShadow(
-                              color: tertiary.withOpacity(0.2),
-                              blurRadius: 18,
-                              offset: const Offset(0, 10),
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: surfaceSoft,
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: primary.withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(14),
                             ),
-                          ],
-                        ),
-                        child: Text(
-                          'Log Out',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.inter(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white),
+                            child: const Icon(Icons.shield_outlined,
+                                color: primary, size: 20),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Session note',
+                                  style: GoogleFonts.manrope(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w700,
+                                    color: onSurface,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  'Logging out removes your active rider session from this device and protects your account if you are on a shared phone.',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 12.5,
+                                    height: 1.45,
+                                    color: onSurfaceVariant.withOpacity(0.84),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 22),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () async {
+                          await PushService.instance.unregister();
+                          await AuthStore.clear();
+                          if (!context.mounted) return;
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            AppRoutes.splash,
+                            (route) => false,
+                          );
+                        },
+                        borderRadius: BorderRadius.circular(24),
+                        child: Ink(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(vertical: 17),
+                          decoration: BoxDecoration(
+                            gradient: const LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [tertiary, tertiaryContainer],
+                            ),
+                            borderRadius: BorderRadius.circular(24),
+                            boxShadow: [
+                              BoxShadow(
+                                color: tertiary.withOpacity(0.2),
+                                blurRadius: 18,
+                                spreadRadius: -8,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.logout_rounded,
+                                  color: Colors.white, size: 18),
+                              const SizedBox(width: 10),
+                              Text(
+                                'Log out',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.manrope(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 12),
-                    GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        decoration: BoxDecoration(
-                          color: surfaceContainerLow,
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: Text(
-                          'Cancel',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.inter(
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () => Navigator.pop(context),
+                        borderRadius: BorderRadius.circular(24),
+                        child: Ink(
+                          width: double.infinity,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          decoration: BoxDecoration(
+                            color: surfaceContainerLow,
+                            borderRadius: BorderRadius.circular(24),
+                          ),
+                          child: Text(
+                            'Stay signed in',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.inter(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: onSurfaceVariant),
+                              color: onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Center(
+                      child: Text(
+                        'You can change your password anytime from Profile Settings.',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.inter(
+                          fontSize: 11.5,
+                          height: 1.45,
+                          color: onSurfaceVariant.withOpacity(0.72),
                         ),
                       ),
                     ),
@@ -14517,7 +15850,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 'I-Metro',
                                 style: GoogleFonts.manrope(
                                   fontSize: 24,
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w800,
                                   height: 1,
                                   color: primary,
                                 ),
@@ -14529,7 +15862,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             'Reset Password',
                             style: GoogleFonts.manrope(
                               fontSize: 32,
-                              fontWeight: FontWeight.w900,
+                              fontWeight: FontWeight.w700,
                               height: 1.05,
                               color: onSurface,
                             ),
@@ -14675,7 +16008,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 'Back to login',
                                 style: GoogleFonts.inter(
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                   color: primary,
                                 ),
                               ),
