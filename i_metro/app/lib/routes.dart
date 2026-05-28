@@ -21,6 +21,7 @@ class AppRoutes {
   static const changePassword = '/change-password';
   static const hamburgerMenu = '/hamburger-menu';
   static const contactUs = '/contact-us';
+  static const faq = '/faq';
   static const terms = '/terms-of-service';
   static const privacy = '/privacy-policy';
   static const policy = '/policy';
@@ -91,6 +92,7 @@ class AppRoutes {
     changePassword: (context) => const ChangePasswordScreen(),
     hamburgerMenu: (context) => const HamburgerMenuScreen(),
     contactUs: (context) => const ContactUsScreen(),
+    faq: (context) => const FaqScreen(),
     terms: (context) => const TermsOfServiceScreen(),
     privacy: (context) => const PrivacyPolicyScreen(),
     policy: (context) => const PolicyScreen(),

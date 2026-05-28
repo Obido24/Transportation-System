@@ -5952,281 +5952,406 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                 ),
               ),
               Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.fromLTRB(20, 18, 20, 126),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Complete your payment',
-                        style: GoogleFonts.manrope(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.45,
-                          color: onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'Finish checkout securely, then verify to unlock your I-Metro ticket instantly.',
-                        style: GoogleFonts.inter(
-                          fontSize: 13.5,
-                          height: 1.5,
-                          color: onSurfaceVariant.withOpacity(0.84),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(18),
-                        decoration: BoxDecoration(
-                          color: surfaceLowest,
-                          borderRadius: BorderRadius.circular(28),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.045),
-                              blurRadius: 18,
-                              spreadRadius: -8,
-                              offset: const Offset(0, 12),
-                            ),
-                          ],
-                        ),
-                        child: Row(
+                child: kIsWeb
+                    ? SingleChildScrollView(
+                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 126),
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 46,
-                              height: 46,
-                              decoration: BoxDecoration(
-                                color: primary.withOpacity(0.12),
-                                borderRadius: BorderRadius.circular(16),
+                            Text(
+                              'Complete your payment',
+                              style: GoogleFonts.manrope(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.45,
+                                color: onSurface,
                               ),
-                              child: const Icon(Icons.verified_user_rounded,
-                                  color: primary),
                             ),
-                            const SizedBox(width: 14),
-                            Expanded(
+                            const SizedBox(height: 8),
+                            Text(
+                              'Finish checkout securely, then verify to unlock your I-Metro ticket instantly.',
+                              style: GoogleFonts.inter(
+                                fontSize: 13.5,
+                                height: 1.5,
+                                color: onSurfaceVariant.withOpacity(0.84),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(18),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest,
+                                borderRadius: BorderRadius.circular(28),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.045),
+                                    blurRadius: 18,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 12),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 46,
+                                    height: 46,
+                                    decoration: BoxDecoration(
+                                      color: primary.withOpacity(0.12),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: const Icon(
+                                      Icons.verified_user_rounded,
+                                      color: primary,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 14),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Checkout flow',
+                                          style: GoogleFonts.manrope(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w800,
+                                            color: onSurface,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          'Open the secure payment page, complete checkout, then verify your payment here.',
+                                          style: GoogleFonts.inter(
+                                            fontSize: 12.5,
+                                            height: 1.45,
+                                            color: onSurfaceVariant
+                                                .withOpacity(0.82),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        const Wrap(
+                                          spacing: 8,
+                                          runSpacing: 8,
+                                          children: [
+                                            _CheckoutStepBadge(
+                                              label: '1. Open checkout',
+                                              color: primary,
+                                            ),
+                                            _CheckoutStepBadge(
+                                              label: '2. Pay securely',
+                                              color: primary,
+                                            ),
+                                            _CheckoutStepBadge(
+                                              label: '3. Verify ticket',
+                                              color: primary,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest,
+                                borderRadius: BorderRadius.circular(28),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.04),
+                                    blurRadius: 18,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 12),
+                                  ),
+                                ],
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Container(
+                                    width: 54,
+                                    height: 54,
+                                    decoration: BoxDecoration(
+                                      color: primary.withOpacity(0.08),
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                    child: const Icon(
+                                      Icons.open_in_new_rounded,
+                                      color: primary,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
                                   Text(
-                                    'Checkout flow',
+                                    'Open checkout in a new tab',
                                     style: GoogleFonts.manrope(
-                                      fontSize: 16,
+                                      fontSize: 22,
                                       fontWeight: FontWeight.w800,
                                       color: onSurface,
                                     ),
                                   ),
-                                  const SizedBox(height: 5),
+                                  const SizedBox(height: 8),
                                   Text(
-                                    'Open the secure payment page, complete checkout, then verify your payment here.',
+                                    'Chrome on web cannot display the in-app gateway window, so your secure checkout opens in a browser tab instead.',
                                     style: GoogleFonts.inter(
-                                      fontSize: 12.5,
-                                      height: 1.45,
-                                      color: onSurfaceVariant.withOpacity(0.82),
+                                      fontSize: 13,
+                                      height: 1.5,
+                                      color: onSurfaceVariant.withOpacity(0.84),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 18),
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.all(14),
+                                    decoration: BoxDecoration(
+                                      color: surfaceSoft,
+                                      borderRadius: BorderRadius.circular(18),
+                                      border: Border.all(
+                                        color: surfaceContainerLow,
+                                      ),
+                                    ),
+                                    child: SelectableText(
+                                      widget.checkoutUrl,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 12,
+                                        color: onSurfaceVariant,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 18),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 54,
+                                    child: ElevatedButton.icon(
+                                      onPressed: _openCheckout,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: primary,
+                                        foregroundColor: Colors.white,
+                                        elevation: 0,
+                                        shadowColor: primary.withOpacity(0.28),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(18),
+                                        ),
+                                      ),
+                                      icon: const Icon(Icons.launch_rounded),
+                                      label: Text(
+                                        _openedInBrowser
+                                            ? 'Open checkout again'
+                                            : 'Open secure checkout',
+                                        style: GoogleFonts.manrope(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(height: 12),
-                                  const Wrap(
-                                    spacing: 8,
-                                    runSpacing: 8,
-                                    children: [
-                                      _CheckoutStepBadge(
-                                          label: '1. Open checkout',
-                                          color: primary),
-                                      _CheckoutStepBadge(
-                                          label: '2. Pay securely',
-                                          color: primary),
-                                      _CheckoutStepBadge(
-                                          label: '3. Verify ticket',
-                                          color: primary),
-                                    ],
+                                  Text(
+                                    'When payment is complete, come back here and tap Verify payment below.',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12,
+                                      color: onSurfaceVariant.withOpacity(0.8),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      if (kIsWeb)
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: surfaceLowest,
-                            borderRadius: BorderRadius.circular(28),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.04),
-                                blurRadius: 18,
-                                spreadRadius: -8,
-                                offset: const Offset(0, 12),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 126),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Complete your payment',
+                              style: GoogleFonts.manrope(
+                                fontSize: 30,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.45,
+                                color: onSurface,
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 54,
-                                height: 54,
-                                decoration: BoxDecoration(
-                                  color: primary.withOpacity(0.08),
-                                  borderRadius: BorderRadius.circular(18),
-                                ),
-                                child: const Icon(
-                                  Icons.open_in_new_rounded,
-                                  color: primary,
-                                ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Finish checkout securely, then verify to unlock your I-Metro ticket instantly.',
+                              style: GoogleFonts.inter(
+                                fontSize: 13.5,
+                                height: 1.5,
+                                color: onSurfaceVariant.withOpacity(0.84),
                               ),
-                              const SizedBox(height: 16),
-                              Text(
-                                'Open checkout in a new tab',
-                                style: GoogleFonts.manrope(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w800,
-                                  color: onSurface,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                'Chrome on web cannot display the in-app gateway window, so your secure checkout opens in a browser tab instead.',
-                                style: GoogleFonts.inter(
-                                  fontSize: 13,
-                                  height: 1.5,
-                                  color: onSurfaceVariant.withOpacity(0.84),
-                                ),
-                              ),
-                              const SizedBox(height: 18),
-                              Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.all(14),
-                                decoration: BoxDecoration(
-                                  color: surfaceSoft,
-                                  borderRadius: BorderRadius.circular(18),
-                                  border: Border.all(
-                                    color: surfaceContainerLow,
+                            ),
+                            const SizedBox(height: 16),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(18),
+                              decoration: BoxDecoration(
+                                color: surfaceLowest,
+                                borderRadius: BorderRadius.circular(28),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.045),
+                                    blurRadius: 18,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 12),
                                   ),
-                                ),
-                                child: SelectableText(
-                                  widget.checkoutUrl,
-                                  style: GoogleFonts.inter(
-                                    fontSize: 12,
-                                    color: onSurfaceVariant,
-                                  ),
-                                ),
+                                ],
                               ),
-                              const SizedBox(height: 18),
-                              SizedBox(
-                                width: double.infinity,
-                                height: 54,
-                                child: ElevatedButton.icon(
-                                  onPressed: _openCheckout,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: primary,
-                                    foregroundColor: Colors.white,
-                                    elevation: 0,
-                                    shadowColor: primary.withOpacity(0.28),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18),
-                                    ),
-                                  ),
-                                  icon: const Icon(Icons.launch_rounded),
-                                  label: Text(
-                                    _openedInBrowser
-                                        ? 'Open checkout again'
-                                        : 'Open secure checkout',
-                                    style: GoogleFonts.manrope(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              Text(
-                                'When payment is complete, come back here and tap Verify payment below.',
-                                style: GoogleFonts.inter(
-                                  fontSize: 12,
-                                  color: onSurfaceVariant.withOpacity(0.8),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      else
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: surfaceLowest,
-                            borderRadius: BorderRadius.circular(28),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.04),
-                                blurRadius: 18,
-                                spreadRadius: -8,
-                                offset: const Offset(0, 12),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'Secure gateway',
-                                    style: GoogleFonts.manrope(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w800,
-                                      color: onSurface,
+                                  Container(
+                                    width: 46,
+                                    height: 46,
+                                    decoration: BoxDecoration(
+                                      color: primary.withOpacity(0.12),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: const Icon(
+                                      Icons.verified_user_rounded,
+                                      color: primary,
                                     ),
                                   ),
-                                  const Spacer(),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: primary.withOpacity(0.08),
-                                      borderRadius: BorderRadius.circular(999),
-                                    ),
-                                    child: Text(
-                                      providerLabel,
-                                      style: GoogleFonts.inter(
-                                        fontSize: 10.5,
-                                        fontWeight: FontWeight.w700,
-                                        color: primary,
-                                      ),
+                                  const SizedBox(width: 14),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Checkout flow',
+                                          style: GoogleFonts.manrope(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w800,
+                                            color: onSurface,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          'Open the secure payment page, complete checkout, then verify your payment here.',
+                                          style: GoogleFonts.inter(
+                                            fontSize: 12.5,
+                                            height: 1.45,
+                                            color: onSurfaceVariant
+                                                .withOpacity(0.82),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 6),
-                              Text(
-                                'Your payment page is embedded below. Complete the transaction, then verify when you return.',
-                                style: GoogleFonts.inter(
-                                  fontSize: 12.5,
-                                  height: 1.45,
-                                  color: onSurfaceVariant.withOpacity(0.82),
+                            ),
+                            const SizedBox(height: 16),
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(28),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 18,
+                                      spreadRadius: -8,
+                                      offset: const Offset(0, 12),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Secure gateway',
+                                          style: GoogleFonts.manrope(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w800,
+                                            color: onSurface,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 6),
+                                          decoration: BoxDecoration(
+                                            color: primary.withOpacity(0.08),
+                                            borderRadius:
+                                                BorderRadius.circular(999),
+                                          ),
+                                          child: Text(
+                                            providerLabel,
+                                            style: GoogleFonts.inter(
+                                              fontSize: 10.5,
+                                              fontWeight: FontWeight.w700,
+                                              color: primary,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      'Your payment page is embedded below. Complete the transaction, then verify when you return.',
+                                      style: GoogleFonts.inter(
+                                        fontSize: 12.5,
+                                        height: 1.45,
+                                        color:
+                                            onSurfaceVariant.withOpacity(0.82),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 14),
+                                    Expanded(
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(22),
+                                        child: WebViewWidget(
+                                            controller: _controller!),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: TextButton.icon(
+                                        onPressed: _openCheckout,
+                                        style: TextButton.styleFrom(
+                                          foregroundColor: primary,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12, vertical: 10),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(14),
+                                          ),
+                                        ),
+                                        icon: const Icon(
+                                          Icons.open_in_new_rounded,
+                                          size: 16,
+                                        ),
+                                        label: Text(
+                                          'Open full screen',
+                                          style: GoogleFonts.manrope(
+                                            fontSize: 12.5,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              const SizedBox(height: 14),
-                              SizedBox(
-                                height: 470,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(22),
-                                  child:
-                                      WebViewWidget(controller: _controller!),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                    ],
-                  ),
-                ),
+                      ),
               ),
             ],
           ),
@@ -9619,6 +9744,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTap: () =>
                             Navigator.pushNamed(context, AppRoutes.contactUs),
                       ),
+                      _ProfileSettingItem(
+                        icon: Icons.quiz_outlined,
+                        label: 'Help & FAQ',
+                        subtitle: 'Answers to common rider questions',
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.faq),
+                      ),
                       const SizedBox(height: 20),
                       Container(
                         padding: const EdgeInsets.all(16),
@@ -11835,6 +11967,12 @@ class HamburgerMenuScreen extends StatelessWidget {
                             Navigator.pushNamed(context, AppRoutes.contactUs),
                       ),
                       _MenuItem(
+                        icon: Icons.quiz_outlined,
+                        label: 'Help & FAQ',
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.faq),
+                      ),
+                      _MenuItem(
                         icon: Icons.policy,
                         label: 'Policies',
                         onTap: () =>
@@ -12211,6 +12349,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         subtitle: 'Abuja, Nigeria',
                         value: 'FCT Transport Secretariat',
                         helper: 'Get directions',
+                      ),
+                      const SizedBox(height: 26),
+                      _SupportFaqPreviewCard(
+                        onTap: () =>
+                            Navigator.pushNamed(context, AppRoutes.faq),
                       ),
                       const SizedBox(height: 26),
                       Text('Send a message',
@@ -12924,6 +13067,138 @@ class _ContactInfoCard extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     color: onSurfaceVariant.withOpacity(0.78))),
           ],
+        ],
+      ),
+    );
+  }
+}
+
+class _SupportFaqPreviewCard extends StatelessWidget {
+  const _SupportFaqPreviewCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    const surfaceLowest = Color(0xFFFFFFFF);
+    const outlineVariant = Color(0xFFDBE7E0);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const primary = Color(0xFF006B47);
+    const previewItems = [
+      'How do I book a ride?',
+      'Why is my payment still pending?',
+      'Where can I find my ticket?',
+    ];
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 18),
+      decoration: BoxDecoration(
+        color: surfaceLowest,
+        borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: outlineVariant.withOpacity(0.2)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 22,
+            spreadRadius: -12,
+            offset: const Offset(0, 16),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 46,
+                height: 46,
+                decoration: BoxDecoration(
+                  color: primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const Icon(Icons.quiz_outlined, color: primary),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Frequently asked questions',
+                      style: GoogleFonts.manrope(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Quick answers before you contact support.',
+                      style: GoogleFonts.inter(
+                        fontSize: 12.5,
+                        height: 1.45,
+                        color: onSurfaceVariant.withOpacity(0.82),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ...previewItems.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 7,
+                    height: 7,
+                    margin: const EdgeInsets.only(top: 6),
+                    decoration: const BoxDecoration(
+                      color: primary,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      item,
+                      style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        color: onSurface,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 4),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton.icon(
+              onPressed: onTap,
+              style: TextButton.styleFrom(
+                foregroundColor: primary,
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 8),
+              ),
+              icon: const Icon(Icons.open_in_new_rounded, size: 18),
+              label: Text(
+                'View all FAQs',
+                style: GoogleFonts.manrope(
+                  fontSize: 13.5,
+                  fontWeight: FontWeight.w700,
+                  color: primary,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -13857,6 +14132,451 @@ class _NotificationSummaryChip extends StatelessWidget {
           Text(value,
               style: GoogleFonts.manrope(
                   fontSize: 18, fontWeight: FontWeight.w800, color: tint)),
+        ],
+      ),
+    );
+  }
+}
+
+class FaqScreen extends StatelessWidget {
+  const FaqScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const background = Color(0xFFF6FAF8);
+    const surfaceLowest = Color(0xFFFFFFFF);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const outlineVariant = Color(0xFFDBE7E0);
+    const primary = Color(0xFF006B47);
+    const primaryContainer = Color(0xFF00875A);
+
+    final sections = <_FaqSectionData>[
+      _FaqSectionData(
+        title: 'Account & Access',
+        icon: Icons.person_outline_rounded,
+        items: const [
+          _FaqItemData(
+            question: 'How do I create an I-Metro account?',
+            answer:
+                'Tap Create Account on the sign-in screen, enter your details, accept the terms, and submit. Once successful, you can continue directly into the rider app.',
+          ),
+          _FaqItemData(
+            question: 'What if I forget my password?',
+            answer:
+                'Use Forgot Password on the login screen. We will send a reset code to your registered email address. If you do not see it, check your spam or promotions folder.',
+          ),
+          _FaqItemData(
+            question: 'Can I use phone number instead of email?',
+            answer:
+                'Yes. The app supports either an email address or phone number for account creation, as long as at least one contact method is provided.',
+          ),
+        ],
+      ),
+      _FaqSectionData(
+        title: 'Booking & Tickets',
+        icon: Icons.confirmation_number_outlined,
+        items: const [
+          _FaqItemData(
+            question: 'How do I book a ride?',
+            answer:
+                'Open Book Ride, choose your preferred route, select a payment gateway, complete checkout, and verify payment. Your ticket will appear inside the app once payment is confirmed.',
+          ),
+          _FaqItemData(
+            question: 'Where can I find my ticket after payment?',
+            answer:
+                'After a successful payment, your digital ticket is available in the ticket details screen and can also be revisited from your trip history.',
+          ),
+          _FaqItemData(
+            question: 'Why is my ticket not showing yet?',
+            answer:
+                'Sometimes payment confirmation takes a little time. Wait a few seconds, tap Verify payment again, and make sure your internet connection is stable.',
+          ),
+        ],
+      ),
+      _FaqSectionData(
+        title: 'Payments & Refunds',
+        icon: Icons.account_balance_wallet_outlined,
+        items: const [
+          _FaqItemData(
+            question: 'Which payment gateways are supported?',
+            answer:
+                'I-Metro currently supports Monnify and Paystack, depending on the route checkout flow available in the app.',
+          ),
+          _FaqItemData(
+            question: 'What should I do if payment is pending?',
+            answer:
+                'Do not make multiple payments immediately. Wait briefly, return to the checkout screen, and tap Verify payment. If it remains pending, contact support with your payment reference.',
+          ),
+          _FaqItemData(
+            question: 'How do refunds work?',
+            answer:
+                'Refund requests depend on route rules, payment confirmation, operational review, and cancellation status. Contact support from the app if you need help with a failed or disputed transaction.',
+          ),
+        ],
+      ),
+      _FaqSectionData(
+        title: 'Support & Safety',
+        icon: Icons.support_agent_outlined,
+        items: const [
+          _FaqItemData(
+            question: 'How do I contact I-Metro support?',
+            answer:
+                'Open the Support screen from your profile or menu, use the contact options provided, or send a message directly through the in-app support form.',
+          ),
+          _FaqItemData(
+            question: 'Can I track my support request?',
+            answer:
+                'Yes. Your submitted support requests appear in the support screen, where you can check whether a message is open, in progress, or resolved.',
+          ),
+          _FaqItemData(
+            question: 'Where can I read your policies?',
+            answer:
+                'You can review the Privacy Policy and Terms of Service inside the app from the policy and legal sections linked through profile and onboarding flows.',
+          ),
+        ],
+      ),
+    ];
+
+    return Scaffold(
+      backgroundColor: background,
+      body: Stack(
+        children: [
+          Positioned(
+            top: -120,
+            right: -78,
+            child: Container(
+              width: 240,
+              height: 240,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    primary.withOpacity(0.16),
+                    primaryContainer.withOpacity(0.05),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: -44,
+            top: 260,
+            child: Container(
+              width: 132,
+              height: 132,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: primary.withOpacity(0.06),
+              ),
+            ),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                height: 72,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 18),
+                      decoration: BoxDecoration(
+                        color: background.withOpacity(0.82),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.03),
+                            blurRadius: 14,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: SafeArea(
+                        bottom: false,
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                width: 42,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: surfaceLowest,
+                                  borderRadius: BorderRadius.circular(16),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.04),
+                                      blurRadius: 12,
+                                      spreadRadius: -6,
+                                      offset: const Offset(0, 8),
+                                    ),
+                                  ],
+                                ),
+                                child: const Icon(Icons.arrow_back,
+                                    color: primary, size: 20),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            _brandLogo(size: 26, radius: 8),
+                            const SizedBox(width: 8),
+                            Text(
+                              'I-Metro',
+                              style: GoogleFonts.manrope(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: primary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(24, 12, 24, 140),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(4, 6, 4, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Help & FAQ',
+                              style: GoogleFonts.manrope(
+                                fontSize: 32,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -0.55,
+                                color: onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Find quick answers about your account, bookings, payments, tickets, and support.',
+                              style: GoogleFonts.inter(
+                                fontSize: 14,
+                                height: 1.5,
+                                color: onSurfaceVariant.withOpacity(0.84),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 22),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: surfaceLowest,
+                          borderRadius: BorderRadius.circular(28),
+                          border: Border.all(
+                              color: outlineVariant.withOpacity(0.22)),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.04),
+                              blurRadius: 22,
+                              spreadRadius: -12,
+                              offset: const Offset(0, 16),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: primary.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Icon(Icons.auto_awesome_rounded,
+                                  color: primary),
+                            ),
+                            const SizedBox(width: 14),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Self-service help',
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700,
+                                      color: onSurface,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    'Start here before contacting support. If you still need help, our support screen is only one tap away.',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12.5,
+                                      height: 1.45,
+                                      color: onSurfaceVariant.withOpacity(0.82),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      ...sections.map(
+                        (section) => _FaqSectionCard(section: section),
+                      ),
+                      const SizedBox(height: 8),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, AppRoutes.contactUs),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: primary,
+                            side: BorderSide(color: primary.withOpacity(0.18)),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            backgroundColor: surfaceLowest,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                          icon: const Icon(Icons.support_agent_outlined),
+                          label: Text(
+                            'Still need help? Contact support',
+                            style: GoogleFonts.manrope(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: const _UserBottomNavigation(currentIndex: 3),
+    );
+  }
+}
+
+class _FaqSectionData {
+  const _FaqSectionData({
+    required this.title,
+    required this.icon,
+    required this.items,
+  });
+
+  final String title;
+  final IconData icon;
+  final List<_FaqItemData> items;
+}
+
+class _FaqItemData {
+  const _FaqItemData({
+    required this.question,
+    required this.answer,
+  });
+
+  final String question;
+  final String answer;
+}
+
+class _FaqSectionCard extends StatelessWidget {
+  const _FaqSectionCard({required this.section});
+
+  final _FaqSectionData section;
+
+  @override
+  Widget build(BuildContext context) {
+    const surfaceLowest = Color(0xFFFFFFFF);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    const primary = Color(0xFF006B47);
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.fromLTRB(18, 18, 18, 8),
+      decoration: BoxDecoration(
+        color: surfaceLowest,
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.035),
+            blurRadius: 18,
+            spreadRadius: -10,
+            offset: const Offset(0, 12),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(section.icon, color: primary, size: 22),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  section.title,
+                  style: GoogleFonts.manrope(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w700,
+                    color: onSurface,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          ...section.items.map(
+            (item) => Theme(
+              data:
+                  Theme.of(context).copyWith(dividerColor: Colors.transparent),
+              child: ExpansionTile(
+                tilePadding:
+                    const EdgeInsets.symmetric(horizontal: 0, vertical: 2),
+                childrenPadding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                iconColor: primary,
+                collapsedIconColor: onSurfaceVariant.withOpacity(0.6),
+                shape: const Border(),
+                collapsedShape: const Border(),
+                title: Text(
+                  item.question,
+                  style: GoogleFonts.manrope(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: onSurface,
+                  ),
+                ),
+                children: [
+                  Text(
+                    item.answer,
+                    style: GoogleFonts.inter(
+                      fontSize: 12.8,
+                      height: 1.55,
+                      color: onSurfaceVariant.withOpacity(0.88),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
