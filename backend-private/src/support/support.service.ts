@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 import { PrismaService } from '../prisma/prisma.service';
+import { CreatePublicSupportMessageDto } from './dto/create-public-support-message.dto';
 import { CreateSupportMessageDto } from './dto/create-support-message.dto';
 
 @Injectable()
@@ -42,6 +43,37 @@ export class SupportService {
       id: record.id,
       status: record.status,
       notice: 'Complaint delivered to customer service.',
+      emailSent: emailResult.ok,
+      emailReason: emailResult.ok ? null : emailResult.reason,
+    };
+  }
+
+  async createPublicMessage(payload: CreatePublicSupportMessageDto) {
+    const record = await this.prisma.supportMessage.create({
+      data: {
+        userId: null,
+        name: payload.name?.trim() || null,
+        email: payload.email?.trim() || null,
+        phone: payload.phone?.trim() || null,
+        subject: payload.subject,
+        message: payload.message,
+      },
+    });
+
+    const emailResult = await this.sendSupportEmail({
+      id: record.id,
+      subject: record.subject,
+      message: record.message,
+      name: record.name,
+      email: record.email,
+      phone: record.phone,
+    });
+
+    return {
+      ok: true,
+      id: record.id,
+      status: record.status,
+      notice: 'Your support ticket has been received.',
       emailSent: emailResult.ok,
       emailReason: emailResult.ok ? null : emailResult.reason,
     };
