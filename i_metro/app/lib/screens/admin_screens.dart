@@ -106,7 +106,8 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
               return Align(
                 alignment: Alignment.center,
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: maxWidth),
                     child: Column(
@@ -119,13 +120,15 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                             borderRadius: BorderRadius.circular(24),
                           ),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 36),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 32, vertical: 36),
                             decoration: BoxDecoration(
                               color: surfaceLowest,
                               borderRadius: BorderRadius.circular(16),
                               boxShadow: [
                                 BoxShadow(
-                                  color: const Color(0xFF191C1D).withOpacity(0.05),
+                                  color:
+                                      const Color(0xFF191C1D).withOpacity(0.05),
                                   blurRadius: 30,
                                   offset: const Offset(0, 10),
                                 ),
@@ -147,7 +150,10 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                         ),
                                         borderRadius: BorderRadius.circular(16),
                                       ),
-                                      child: const Icon(Icons.directions_railway, color: Colors.white, size: 30),
+                                      child: const Icon(
+                                          Icons.directions_railway,
+                                          color: Colors.white,
+                                          size: 30),
                                     ),
                                     const SizedBox(height: 12),
                                     Text(
@@ -204,9 +210,11 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                   icon: Icons.lock_outline,
                                   controller: _passwordController,
                                   obscureText: true,
-                                  trailing: Icon(Icons.visibility, color: onSurfaceVariant),
+                                  trailing: Icon(Icons.visibility,
+                                      color: onSurfaceVariant),
                                   labelAction: GestureDetector(
-                                    onTap: () => Navigator.pushNamed(context, AppRoutes.adminForgotPassword),
+                                    onTap: () => Navigator.pushNamed(
+                                        context, AppRoutes.adminForgotPassword),
                                     child: Text(
                                       'Forgot password?',
                                       style: GoogleFonts.inter(
@@ -223,15 +231,22 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                     Checkbox(
                                       value: _remember,
                                       activeColor: primary,
-                                      onChanged: (value) => setState(() => _remember = value ?? false),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                                      side: BorderSide(color: outlineVariant.withOpacity(0.6)),
+                                      onChanged: (value) => setState(
+                                          () => _remember = value ?? false),
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      side: BorderSide(
+                                          color:
+                                              outlineVariant.withOpacity(0.6)),
                                     ),
                                     const SizedBox(width: 6),
                                     Expanded(
                                       child: Text(
                                         'Keep me logged in for 30 days',
-                                        style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant),
+                                        style: GoogleFonts.inter(
+                                            fontSize: 13,
+                                            color: onSurfaceVariant),
                                       ),
                                     ),
                                   ],
@@ -258,10 +273,13 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                     ),
                                     alignment: Alignment.center,
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          _loading ? 'Signing in...' : 'Sign in',
+                                          _loading
+                                              ? 'Signing in...'
+                                              : 'Sign in',
                                           style: GoogleFonts.inter(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600,
@@ -269,18 +287,24 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                           ),
                                         ),
                                         const SizedBox(width: 8),
-                                        const Icon(Icons.arrow_forward, color: Colors.white, size: 18),
+                                        const Icon(Icons.arrow_forward,
+                                            color: Colors.white, size: 18),
                                       ],
                                     ),
                                   ),
                                 ),
                                 const SizedBox(height: 28),
-                                Container(height: 1, color: outlineVariant.withOpacity(0.1)),
+                                Container(
+                                    height: 1,
+                                    color: outlineVariant.withOpacity(0.1)),
                                 const SizedBox(height: 18),
                                 Text(
                                   'Authorized personnel only. Access is monitored and logged. By signing in, you agree to the Operational Guidelines.',
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.4),
+                                  style: GoogleFonts.inter(
+                                      fontSize: 11,
+                                      color: onSurfaceVariant,
+                                      height: 1.4),
                                 ),
                               ],
                             ),
@@ -292,9 +316,13 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                           children: [
                             Row(
                               children: [
-                                Text('SYSTEM v4.2.1', style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant)),
+                                Text('SYSTEM v4.2.1',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 11, color: onSurfaceVariant)),
                                 const SizedBox(width: 12),
-                                Text('SECURE NODE 09', style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant)),
+                                Text('SECURE NODE 09',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 11, color: onSurfaceVariant)),
                               ],
                             ),
                             Row(
@@ -308,7 +336,9 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                                   ),
                                 ),
                                 const SizedBox(width: 6),
-                                Text('ALL SYSTEMS NOMINAL', style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant)),
+                                Text('ALL SYSTEMS NOMINAL',
+                                    style: GoogleFonts.inter(
+                                        fontSize: 11, color: onSurfaceVariant)),
                               ],
                             ),
                           ],
@@ -328,7 +358,8 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                 width: 200,
                 height: 200,
                 decoration: BoxDecoration(
-                  border: Border.all(color: surfaceHighest.withOpacity(0.5), width: 40),
+                  border: Border.all(
+                      color: surfaceHighest.withOpacity(0.5), width: 40),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -350,17 +381,28 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(width: 24, height: 24, decoration: BoxDecoration(color: surfaceHighest, borderRadius: BorderRadius.circular(6))),
+                      Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                              color: surfaceHighest,
+                              borderRadius: BorderRadius.circular(6))),
                       Column(
                         children: [
-                          Container(height: 6, decoration: BoxDecoration(color: surfaceHighest, borderRadius: BorderRadius.circular(6))),
+                          Container(
+                              height: 6,
+                              decoration: BoxDecoration(
+                                  color: surfaceHighest,
+                                  borderRadius: BorderRadius.circular(6))),
                           const SizedBox(height: 6),
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Container(
                               width: 60,
                               height: 6,
-                              decoration: BoxDecoration(color: surfaceHighest, borderRadius: BorderRadius.circular(6)),
+                              decoration: BoxDecoration(
+                                  color: surfaceHighest,
+                                  borderRadius: BorderRadius.circular(6)),
                             ),
                           ),
                         ],
@@ -443,12 +485,14 @@ class _StitchInputState extends State<_StitchInput> {
           decoration: BoxDecoration(
             color: focused ? surfaceLowest : surfaceHighest,
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: focused ? primary : Colors.transparent, width: 1),
+            border: Border.all(
+                color: focused ? primary : Colors.transparent, width: 1),
           ),
           child: Row(
             children: [
               const SizedBox(width: 16),
-              Icon(widget.icon, size: 20, color: focused ? primary : onSurfaceVariant),
+              Icon(widget.icon,
+                  size: 20, color: focused ? primary : onSurfaceVariant),
               const SizedBox(width: 12),
               Expanded(
                 child: TextField(
@@ -456,10 +500,12 @@ class _StitchInputState extends State<_StitchInput> {
                   focusNode: _focusNode,
                   keyboardType: widget.keyboardType,
                   obscureText: widget.obscureText,
-                  style: GoogleFonts.inter(fontSize: 14, color: const Color(0xFF191C1D)),
+                  style: GoogleFonts.inter(
+                      fontSize: 14, color: const Color(0xFF191C1D)),
                   decoration: InputDecoration(
                     hintText: widget.placeholder,
-                    hintStyle: GoogleFonts.inter(fontSize: 13, color: outlineVariant),
+                    hintStyle:
+                        GoogleFonts.inter(fontSize: 13, color: outlineVariant),
                     border: InputBorder.none,
                   ),
                 ),
@@ -477,6 +523,7 @@ class _StitchInputState extends State<_StitchInput> {
     );
   }
 }
+
 class _AdminInput extends StatelessWidget {
   const _AdminInput({
     required this.hint,
@@ -515,7 +562,8 @@ class _AdminInput extends StatelessWidget {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: hint,
-                hintStyle: const TextStyle(color: Color(0xFFB0B0B0), fontSize: 12),
+                hintStyle:
+                    const TextStyle(color: Color(0xFFB0B0B0), fontSize: 12),
               ),
             ),
           ),
@@ -633,7 +681,10 @@ class _AdminSignupScreenState extends State<AdminSignupScreen> {
                         child: isWide
                             ? Row(
                                 children: [
-                                  Expanded(child: _SignupLeftPanel(primaryFixedDim: primaryFixedDim, primaryFixed: primaryFixed)),
+                                  Expanded(
+                                      child: _SignupLeftPanel(
+                                          primaryFixedDim: primaryFixedDim,
+                                          primaryFixed: primaryFixed)),
                                   Expanded(
                                     child: _SignupRightPanel(
                                       nameController: _nameController,
@@ -642,7 +693,8 @@ class _AdminSignupScreenState extends State<AdminSignupScreen> {
                                       passwordController: _passwordController,
                                       confirmController: _confirmController,
                                       terms: _terms,
-                                      onTermsChanged: (value) => setState(() => _terms = value),
+                                      onTermsChanged: (value) =>
+                                          setState(() => _terms = value),
                                     ),
                                   ),
                                 ],
@@ -654,7 +706,8 @@ class _AdminSignupScreenState extends State<AdminSignupScreen> {
                                 passwordController: _passwordController,
                                 confirmController: _confirmController,
                                 terms: _terms,
-                                onTermsChanged: (value) => setState(() => _terms = value),
+                                onTermsChanged: (value) =>
+                                    setState(() => _terms = value),
                                 showCompactHeader: true,
                               ),
                       ),
@@ -704,7 +757,8 @@ class _SignupLeftPanel extends StatelessWidget {
                   color: Colors.white.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.directions_transit, color: Colors.white, size: 28),
+                child: const Icon(Icons.directions_transit,
+                    color: Colors.white, size: 28),
               ),
               const SizedBox(width: 12),
               Text(
@@ -749,9 +803,16 @@ class _SignupLeftPanel extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('2.4M', style: GoogleFonts.manrope(fontSize: 24, fontWeight: FontWeight.w700, color: primaryFixedDim)),
+                      Text('2.4M',
+                          style: GoogleFonts.manrope(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: primaryFixedDim)),
                       const SizedBox(height: 4),
-                      Text('Daily Commutes', style: GoogleFonts.inter(fontSize: 12, color: Colors.white.withOpacity(0.8))),
+                      Text('Daily Commutes',
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              color: Colors.white.withOpacity(0.8))),
                     ],
                   ),
                 ),
@@ -767,9 +828,16 @@ class _SignupLeftPanel extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('99.9%', style: GoogleFonts.manrope(fontSize: 24, fontWeight: FontWeight.w700, color: primaryFixedDim)),
+                      Text('99.9%',
+                          style: GoogleFonts.manrope(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: primaryFixedDim)),
                       const SizedBox(height: 4),
-                      Text('System Uptime', style: GoogleFonts.inter(fontSize: 12, color: Colors.white.withOpacity(0.8))),
+                      Text('System Uptime',
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              color: Colors.white.withOpacity(0.8))),
                     ],
                   ),
                 ),
@@ -821,13 +889,20 @@ class _SignupRightPanel extends StatelessWidget {
               children: [
                 const Icon(Icons.directions_transit, color: primary, size: 28),
                 const SizedBox(width: 8),
-                Text('I-Metro', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: primary)),
+                Text('I-Metro',
+                    style: GoogleFonts.manrope(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: primary)),
               ],
             ),
           if (showCompactHeader) const SizedBox(height: 24),
           Text(
             'Create Admin Account',
-            style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w700, color: const Color(0xFF191C1D)),
+            style: GoogleFonts.manrope(
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF191C1D)),
           ),
           const SizedBox(height: 6),
           Text(
@@ -919,24 +994,32 @@ class _SignupRightPanel extends StatelessWidget {
                 value: terms,
                 onChanged: (value) => onTermsChanged(value ?? false),
                 activeColor: primary,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4)),
                 side: BorderSide(color: outlineVariant),
               ),
               const SizedBox(width: 6),
               Expanded(
                 child: RichText(
                   text: TextSpan(
-                    style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.4),
+                    style: GoogleFonts.inter(
+                        fontSize: 12, color: onSurfaceVariant, height: 1.4),
                     children: [
                       const TextSpan(text: 'I agree to the '),
                       TextSpan(
                         text: 'Terms of Authority',
-                        style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w600),
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: primary,
+                            fontWeight: FontWeight.w600),
                       ),
                       const TextSpan(text: ' and acknowledge the '),
                       TextSpan(
                         text: 'Security Protocols',
-                        style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w600),
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: primary,
+                            fontWeight: FontWeight.w600),
                       ),
                       const TextSpan(text: '.'),
                     ],
@@ -967,7 +1050,11 @@ class _SignupRightPanel extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Request Admin Access', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
+                Text('Request Admin Access',
+                    style: GoogleFonts.manrope(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white)),
                 const SizedBox(width: 8),
                 const Icon(Icons.arrow_forward, size: 18, color: Colors.white),
               ],
@@ -978,10 +1065,17 @@ class _SignupRightPanel extends StatelessWidget {
             child: Wrap(
               alignment: WrapAlignment.center,
               children: [
-                Text('Already have an authorized account? ', style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
+                Text('Already have an authorized account? ',
+                    style: GoogleFonts.inter(
+                        fontSize: 12, color: onSurfaceVariant)),
                 GestureDetector(
-                  onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogin),
-                  child: Text('Sign In Here', style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w700)),
+                  onTap: () =>
+                      Navigator.pushNamed(context, AppRoutes.adminLogin),
+                  child: Text('Sign In Here',
+                      style: GoogleFonts.inter(
+                          fontSize: 12,
+                          color: primary,
+                          fontWeight: FontWeight.w700)),
                 ),
               ],
             ),
@@ -1019,6 +1113,7 @@ class _MiniBadge extends StatelessWidget {
     );
   }
 }
+
 class AdminForgotPasswordScreen extends StatelessWidget {
   const AdminForgotPasswordScreen({super.key});
 
@@ -1074,7 +1169,10 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                     color: surfaceContainer,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
-                      BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 20, offset: const Offset(0, 8)),
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.08),
+                          blurRadius: 20,
+                          offset: const Offset(0, 8)),
                     ],
                   ),
                   child: ClipRRect(
@@ -1096,18 +1194,24 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
                                           Container(
-              width: 44,
-              height: 44,
+                                            width: 44,
+                                            height: 44,
                                             decoration: BoxDecoration(
-                                              color: Colors.white.withOpacity(0.1),
-                                              borderRadius: BorderRadius.circular(12),
+                                              color:
+                                                  Colors.white.withOpacity(0.1),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                             ),
-                                            child: Icon(Icons.directions_railway, color: primaryFixedDim, size: 22),
+                                            child: Icon(
+                                                Icons.directions_railway,
+                                                color: primaryFixedDim,
+                                                size: 22),
                                           ),
                                           const SizedBox(width: 10),
                                           Text(
@@ -1144,17 +1248,22 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(16),
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.08),
-                                          borderRadius: BorderRadius.circular(12),
-                                          border: Border.all(color: Colors.white.withOpacity(0.1)),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          border: Border.all(
+                                              color: Colors.white
+                                                  .withOpacity(0.1)),
                                         ),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               'STATUS CHECK',
                                               style: GoogleFonts.inter(
                                                 fontSize: 11,
-                                                color: Colors.white.withOpacity(0.6),
+                                                color: Colors.white
+                                                    .withOpacity(0.6),
                                                 letterSpacing: 1.4,
                                               ),
                                             ),
@@ -1164,12 +1273,16 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                                 Container(
                                                   width: 8,
                                                   height: 8,
-                                                  decoration: BoxDecoration(color: primaryFixedDim, shape: BoxShape.circle),
+                                                  decoration: BoxDecoration(
+                                                      color: primaryFixedDim,
+                                                      shape: BoxShape.circle),
                                                 ),
                                                 const SizedBox(width: 8),
                                                 Text(
                                                   'All transit systems operational',
-                                                  style: GoogleFonts.inter(fontSize: 12, color: Colors.white),
+                                                  style: GoogleFonts.inter(
+                                                      fontSize: 12,
+                                                      color: Colors.white),
                                                 ),
                                               ],
                                             ),
@@ -1183,20 +1296,26 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                             Expanded(
                               child: Container(
                                 color: surfaceLowest,
-                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 32, vertical: 40),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     GestureDetector(
-                                      onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogin),
+                                      onTap: () => Navigator.pushNamed(
+                                          context, AppRoutes.adminLogin),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          const Icon(Icons.arrow_back, size: 16, color: primary),
+                                          const Icon(Icons.arrow_back,
+                                              size: 16, color: primary),
                                           const SizedBox(width: 6),
                                           Text(
                                             'Back to Login',
-                                            style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: primary),
+                                            style: GoogleFonts.inter(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                                color: primary),
                                           ),
                                         ],
                                       ),
@@ -1213,7 +1332,10 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                     const SizedBox(height: 8),
                                     Text(
                                       'Enter the email address associated with your I-Metro admin account and we\'ll send you a verification code to reset your password.',
-                                      style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant, height: 1.5),
+                                      style: GoogleFonts.inter(
+                                          fontSize: 13,
+                                          color: onSurfaceVariant,
+                                          height: 1.5),
                                     ),
                                     const SizedBox(height: 24),
                                     _StitchInput(
@@ -1225,7 +1347,8 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 18),
                                     GestureDetector(
-                                      onTap: () => Navigator.pushNamed(context, AppRoutes.adminEmailVerification),
+                                      onTap: () => Navigator.pushNamed(context,
+                                          AppRoutes.adminEmailVerification),
                                       child: Container(
                                         height: 52,
                                         decoration: BoxDecoration(
@@ -1234,14 +1357,20 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                             begin: Alignment.topLeft,
                                             end: Alignment.bottomRight,
                                           ),
-                                          borderRadius: BorderRadius.circular(16),
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                           boxShadow: [
-                                            BoxShadow(color: primary.withOpacity(0.12), blurRadius: 16, offset: const Offset(0, 8)),
+                                            BoxShadow(
+                                                color:
+                                                    primary.withOpacity(0.12),
+                                                blurRadius: 16,
+                                                offset: const Offset(0, 8)),
                                           ],
                                         ),
                                         alignment: Alignment.center,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Text(
                                               'Send verification code',
@@ -1252,7 +1381,8 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                               ),
                                             ),
                                             const SizedBox(width: 8),
-                                            const Icon(Icons.send, size: 18, color: Colors.white),
+                                            const Icon(Icons.send,
+                                                size: 18, color: Colors.white),
                                           ],
                                         ),
                                       ),
@@ -1265,7 +1395,8 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Container(
                                             width: 40,
@@ -1274,18 +1405,29 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                               color: surfaceHighest,
                                               shape: BoxShape.circle,
                                             ),
-                                            child: const Icon(Icons.mark_email_unread, color: primary),
+                                            child: const Icon(
+                                                Icons.mark_email_unread,
+                                                color: primary),
                                           ),
                                           const SizedBox(width: 12),
                                           Expanded(
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                Text('1. Check your inbox', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w700, color: onSurface)),
+                                                Text('1. Check your inbox',
+                                                    style: GoogleFonts.inter(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: onSurface)),
                                                 const SizedBox(height: 4),
                                                 Text(
                                                   'A 6-digit verification code will be sent to your registered email address within a few minutes.',
-                                                  style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.4),
+                                                  style: GoogleFonts.inter(
+                                                      fontSize: 11,
+                                                      color: onSurfaceVariant,
+                                                      height: 1.4),
                                                 ),
                                               ],
                                             ),
@@ -1303,7 +1445,8 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                       child: Opacity(
                                         opacity: 0.6,
                                         child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Container(
                                               width: 40,
@@ -1312,18 +1455,29 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                                 color: surfaceHighest,
                                                 shape: BoxShape.circle,
                                               ),
-                                              child: const Icon(Icons.lock_reset, color: onSurfaceVariant),
+                                              child: const Icon(
+                                                  Icons.lock_reset,
+                                                  color: onSurfaceVariant),
                                             ),
                                             const SizedBox(width: 12),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  Text('2. Reset your password', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w700, color: onSurface)),
+                                                  Text('2. Reset your password',
+                                                      style: GoogleFonts.inter(
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: onSurface)),
                                                   const SizedBox(height: 4),
                                                   Text(
                                                     'Enter the code and choose a new, strong password to regain access to the I-Metro dashboard.',
-                                                    style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.4),
+                                                    style: GoogleFonts.inter(
+                                                        fontSize: 11,
+                                                        color: onSurfaceVariant,
+                                                        height: 1.4),
                                                   ),
                                                 ],
                                               ),
@@ -1337,8 +1491,15 @@ class AdminForgotPasswordScreen extends StatelessWidget {
                                       child: Wrap(
                                         alignment: WrapAlignment.center,
                                         children: [
-                                          Text('Having trouble? ', style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
-                                          Text('Contact Support', style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w600)),
+                                          Text('Having trouble? ',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 12,
+                                                  color: onSurfaceVariant)),
+                                          Text('Contact Support',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 12,
+                                                  color: primary,
+                                                  fontWeight: FontWeight.w600)),
                                         ],
                                       ),
                                     ),
@@ -1360,21 +1521,30 @@ class AdminForgotPasswordScreen extends StatelessWidget {
               bottom: 24,
               right: 24,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
                 decoration: BoxDecoration(
                   color: surfaceLowest,
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
-                    BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 20, offset: const Offset(0, 10)),
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 20,
+                        offset: const Offset(0, 10)),
                   ],
                 ),
                 child: Row(
                   children: [
-                    Container(width: 8, height: 8, decoration: const BoxDecoration(color: Color(0xFFBA1A1A), shape: BoxShape.circle)),
+                    Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                            color: Color(0xFFBA1A1A), shape: BoxShape.circle)),
                     const SizedBox(width: 8),
                     Text(
                       'Security Protocol: 2FA Active',
-                      style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11, color: onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -1385,6 +1555,7 @@ class AdminForgotPasswordScreen extends StatelessWidget {
     );
   }
 }
+
 class AdminEmailVerificationScreen extends StatelessWidget {
   const AdminEmailVerificationScreen({super.key});
 
@@ -1445,9 +1616,14 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const Icon(Icons.directions_railway, color: primary, size: 32),
+                                const Icon(Icons.directions_railway,
+                                    color: primary, size: 32),
                                 const SizedBox(width: 8),
-                                Text('I-Metro', style: GoogleFonts.manrope(fontSize: 24, fontWeight: FontWeight.w800, color: primary)),
+                                Text('I-Metro',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w800,
+                                        color: primary)),
                               ],
                             ),
                             const SizedBox(height: 36),
@@ -1463,7 +1639,10 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                             const SizedBox(height: 12),
                             Text(
                               'Secure access to the I-Metro Admin Portal. Oversee clean-energy fleet operations, safety, and compliance.',
-                              style: GoogleFonts.inter(fontSize: 14, color: onSurfaceVariant, height: 1.6),
+                              style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  color: onSurfaceVariant,
+                                  height: 1.6),
                             ),
                             const SizedBox(height: 24),
                             Container(
@@ -1471,7 +1650,9 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: surfaceLowest,
                                 borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: const Color(0xFFBEC9C3).withOpacity(0.1)),
+                                border: Border.all(
+                                    color: const Color(0xFFBEC9C3)
+                                        .withOpacity(0.1)),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1485,14 +1666,23 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                                           color: primaryFixed,
                                           shape: BoxShape.circle,
                                         ),
-                                        child: const Icon(Icons.security, color: Color(0xFF002118)),
+                                        child: const Icon(Icons.security,
+                                            color: Color(0xFF002118)),
                                       ),
                                       const SizedBox(width: 12),
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Text('Verification Secure', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600)),
-                                          Text('Authentication Protocol active', style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant, letterSpacing: 0.8)),
+                                          Text('Verification Secure',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w600)),
+                                          Text('Authentication Protocol active',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 10,
+                                                  color: onSurfaceVariant,
+                                                  letterSpacing: 0.8)),
                                         ],
                                       ),
                                     ],
@@ -1510,7 +1700,8 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: primary,
-                                          borderRadius: BorderRadius.circular(999),
+                                          borderRadius:
+                                              BorderRadius.circular(999),
                                         ),
                                       ),
                                     ),
@@ -1525,7 +1716,8 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                   Expanded(
                     child: Container(
                       color: showLeft ? surface : surfaceContainer,
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 40),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -1533,31 +1725,44 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Icon(Icons.directions_railway, color: primary, size: 28),
+                                const Icon(Icons.directions_railway,
+                                    color: primary, size: 28),
                                 const SizedBox(width: 6),
-                                Text('I-Metro', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: primary)),
+                                Text('I-Metro',
+                                    style: GoogleFonts.manrope(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary)),
                               ],
                             ),
                           if (!showLeft) const SizedBox(height: 20),
                           Text(
                             'Verify your email',
-                            textAlign: showLeft ? TextAlign.left : TextAlign.center,
-                            style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: onSurface),
+                            textAlign:
+                                showLeft ? TextAlign.left : TextAlign.center,
+                            style: GoogleFonts.manrope(
+                                fontSize: 26,
+                                fontWeight: FontWeight.w700,
+                                color: onSurface),
                           ),
                           const SizedBox(height: 6),
                           Text(
                             "We've sent a 6-digit verification code to admin@i-metro.gov",
-                            textAlign: showLeft ? TextAlign.left : TextAlign.center,
-                            style: GoogleFonts.inter(fontSize: 13, color: onSurfaceVariant),
+                            textAlign:
+                                showLeft ? TextAlign.left : TextAlign.center,
+                            style: GoogleFonts.inter(
+                                fontSize: 13, color: onSurfaceVariant),
                           ),
                           const SizedBox(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: List.generate(6, (index) => _OtpInputBox()),
+                            children:
+                                List.generate(6, (index) => _OtpInputBox()),
                           ),
                           const SizedBox(height: 24),
                           GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.adminResetPassword),
+                            onTap: () => Navigator.pushNamed(
+                                context, AppRoutes.adminResetPassword),
                             child: Container(
                               height: 52,
                               decoration: BoxDecoration(
@@ -1572,9 +1777,14 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Verify', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white)),
+                                  Text('Verify',
+                                      style: GoogleFonts.manrope(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white)),
                                   const SizedBox(width: 8),
-                                  const Icon(Icons.arrow_forward, color: Colors.white, size: 18),
+                                  const Icon(Icons.arrow_forward,
+                                      color: Colors.white, size: 18),
                                 ],
                               ),
                             ),
@@ -1582,14 +1792,21 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                           const SizedBox(height: 16),
                           Column(
                             children: [
-                              Text("Didn't receive the code?", style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
+                              Text("Didn't receive the code?",
+                                  style: GoogleFonts.inter(
+                                      fontSize: 12, color: onSurfaceVariant)),
                               const SizedBox(height: 6),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Resend Code', style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w600)),
+                                  Text('Resend Code',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 12,
+                                          color: primary,
+                                          fontWeight: FontWeight.w600)),
                                   const SizedBox(width: 6),
-                                  const Icon(Icons.refresh, size: 14, color: primary),
+                                  const Icon(Icons.refresh,
+                                      size: 14, color: primary),
                                 ],
                               ),
                             ],
@@ -1611,18 +1828,27 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                                     color: surfaceLowest,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: const Icon(Icons.help_outline, color: primary),
+                                  child: const Icon(Icons.help_outline,
+                                      color: primary),
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text('Need assistance?', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: onSurface)),
+                                      Text('Need assistance?',
+                                          style: GoogleFonts.inter(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                              color: onSurface)),
                                       const SizedBox(height: 4),
                                       Text(
                                         "Contact your local station administrator if you're having trouble logging in.",
-                                        style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant, height: 1.4),
+                                        style: GoogleFonts.inter(
+                                            fontSize: 11,
+                                            color: onSurfaceVariant,
+                                            height: 1.4),
                                       ),
                                     ],
                                   ),
@@ -1634,7 +1860,10 @@ class AdminEmailVerificationScreen extends StatelessWidget {
                           Text(
                             '(c) 2024 Inter-Metro Transport Solution Limited - Secure Access',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant, letterSpacing: 1.2),
+                            style: GoogleFonts.inter(
+                                fontSize: 10,
+                                color: onSurfaceVariant,
+                                letterSpacing: 1.2),
                           ),
                         ],
                       ),
@@ -1674,6 +1903,7 @@ class _OtpInputBox extends StatelessWidget {
     );
   }
 }
+
 class _OtpBox extends StatelessWidget {
   const _OtpBox({required this.text, required this.highlighted});
 
@@ -1689,7 +1919,10 @@ class _OtpBox extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: highlighted ? const Color(0xFF6AB04A) : const Color(0xFFDADADA)),
+        border: Border.all(
+            color: highlighted
+                ? const Color(0xFF6AB04A)
+                : const Color(0xFFDADADA)),
       ),
       child: Text(
         text,
@@ -1724,7 +1957,8 @@ class AdminTwoFactorScreen extends StatelessWidget {
             child: Container(
               width: 320,
               height: 320,
-              decoration: BoxDecoration(color: primary.withOpacity(0.05), shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: primary.withOpacity(0.05), shape: BoxShape.circle),
             ),
           ),
           Positioned(
@@ -1733,7 +1967,9 @@ class AdminTwoFactorScreen extends StatelessWidget {
             child: Container(
               width: 420,
               height: 420,
-              decoration: BoxDecoration(color: secondaryContainer.withOpacity(0.1), shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: secondaryContainer.withOpacity(0.1),
+                  shape: BoxShape.circle),
             ),
           ),
           Align(
@@ -1745,14 +1981,19 @@ class AdminTwoFactorScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 34),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 28, vertical: 34),
                       decoration: BoxDecoration(
                         color: surfaceLowest.withOpacity(0.7),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 30, offset: const Offset(0, 14)),
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.12),
+                              blurRadius: 30,
+                              offset: const Offset(0, 14)),
                         ],
-                        border: Border.all(color: Colors.white.withOpacity(0.4)),
+                        border:
+                            Border.all(color: Colors.white.withOpacity(0.4)),
                       ),
                       child: Column(
                         children: [
@@ -1767,28 +2008,45 @@ class AdminTwoFactorScreen extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(16),
                               boxShadow: [
-                                BoxShadow(color: primary.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 6)),
+                                BoxShadow(
+                                    color: primary.withOpacity(0.2),
+                                    blurRadius: 12,
+                                    offset: const Offset(0, 6)),
                               ],
                             ),
-                            child: const Icon(Icons.shield, color: Colors.white, size: 32),
+                            child: const Icon(Icons.shield,
+                                color: Colors.white, size: 32),
                           ),
                           const SizedBox(height: 12),
-                          Text('I-Metro', style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w800, color: primary)),
+                          Text('I-Metro',
+                              style: GoogleFonts.manrope(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w800,
+                                  color: primary)),
                           const SizedBox(height: 4),
                           Text(
                             'I-Metro Security',
-                            style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1.6, color: onSurfaceVariant),
+                            style: GoogleFonts.inter(
+                                fontSize: 10,
+                                letterSpacing: 1.6,
+                                color: onSurfaceVariant),
                           ),
                           const SizedBox(height: 24),
                           Text(
                             'Two-Factor Authentication',
-                            style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w600, color: onSurface),
+                            style: GoogleFonts.manrope(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: onSurface),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             "We've sent a 6-digit verification code to ad***@i-metro.gov. Enter the code below to secure your session.",
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.5),
+                            style: GoogleFonts.inter(
+                                fontSize: 12,
+                                color: onSurfaceVariant,
+                                height: 1.5),
                           ),
                           const SizedBox(height: 24),
                           Row(
@@ -1799,18 +2057,25 @@ class AdminTwoFactorScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.schedule, size: 14, color: onSurfaceVariant),
+                              const Icon(Icons.schedule,
+                                  size: 14, color: onSurfaceVariant),
                               const SizedBox(width: 6),
                               Text(
                                 'Code expires in ',
-                                style: GoogleFonts.inter(fontSize: 11, color: onSurfaceVariant),
+                                style: GoogleFonts.inter(
+                                    fontSize: 11, color: onSurfaceVariant),
                               ),
-                              Text('04:59', style: GoogleFonts.inter(fontSize: 11, color: primary, fontWeight: FontWeight.w600)),
+                              Text('04:59',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 11,
+                                      color: primary,
+                                      fontWeight: FontWeight.w600)),
                             ],
                           ),
                           const SizedBox(height: 22),
                           GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, AppRoutes.adminDashboard),
+                            onTap: () => Navigator.pushNamed(
+                                context, AppRoutes.adminDashboard),
                             child: Container(
                               width: double.infinity,
                               height: 52,
@@ -1823,15 +2088,25 @@ class AdminTwoFactorScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               alignment: Alignment.center,
-                              child: Text('Verify Account', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white)),
+                              child: Text('Verify Account',
+                                  style: GoogleFonts.manrope(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white)),
                             ),
                           ),
                           const SizedBox(height: 16),
                           Column(
                             children: [
-                              Text("Didn't receive the code?", style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
+                              Text("Didn't receive the code?",
+                                  style: GoogleFonts.inter(
+                                      fontSize: 12, color: onSurfaceVariant)),
                               const SizedBox(height: 6),
-                              Text('Resend Code', style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w600)),
+                              Text('Resend Code',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 12,
+                                      color: primary,
+                                      fontWeight: FontWeight.w600)),
                             ],
                           ),
                           const SizedBox(height: 22),
@@ -1843,9 +2118,12 @@ class AdminTwoFactorScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              _SecurityChip(icon: Icons.verified_user, label: 'Secure TLS 1.3'),
+                              _SecurityChip(
+                                  icon: Icons.verified_user,
+                                  label: 'Secure TLS 1.3'),
                               const SizedBox(width: 12),
-                              _SecurityChip(icon: Icons.lock, label: 'AES-256 Encrypted'),
+                              _SecurityChip(
+                                  icon: Icons.lock, label: 'AES-256 Encrypted'),
                             ],
                           ),
                         ],
@@ -1853,13 +2131,17 @@ class AdminTwoFactorScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 18),
                     GestureDetector(
-                      onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogin),
+                      onTap: () =>
+                          Navigator.pushNamed(context, AppRoutes.adminLogin),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.arrow_back, size: 18, color: onSurfaceVariant),
+                          const Icon(Icons.arrow_back,
+                              size: 18, color: onSurfaceVariant),
                           const SizedBox(width: 6),
-                          Text('Return to Login', style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
+                          Text('Return to Login',
+                              style: GoogleFonts.inter(
+                                  fontSize: 12, color: onSurfaceVariant)),
                         ],
                       ),
                     ),
@@ -1878,7 +2160,10 @@ class AdminTwoFactorScreen extends StatelessWidget {
                 color: Colors.white,
                 shape: BoxShape.circle,
                 boxShadow: [
-                  BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 16, offset: const Offset(0, 8)),
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.12),
+                      blurRadius: 16,
+                      offset: const Offset(0, 8)),
                 ],
               ),
               child: const Icon(Icons.help_outline, color: primary),
@@ -1904,8 +2189,12 @@ class _OtpCell extends StatelessWidget {
       alignment: Alignment.center,
       child: TextField(
         textAlign: TextAlign.center,
-        style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: const Color(0xFF00513F)),
-        decoration: const InputDecoration(border: InputBorder.none, hintText: '·'),
+        style: GoogleFonts.manrope(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFF00513F)),
+        decoration:
+            const InputDecoration(border: InputBorder.none, hintText: '·'),
         onTapOutside: (_) => FocusScope.of(context).unfocus(),
       ),
     );
@@ -1924,11 +2213,16 @@ class _SecurityChip extends StatelessWidget {
       children: [
         Icon(icon, size: 14, color: const Color(0xFF3E4944)),
         const SizedBox(width: 4),
-        Text(label, style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1.2, color: const Color(0xFF3E4944))),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 10,
+                letterSpacing: 1.2,
+                color: const Color(0xFF3E4944))),
       ],
     );
   }
 }
+
 class AdminResetPasswordScreen extends StatelessWidget {
   const AdminResetPasswordScreen({super.key});
 
@@ -1955,7 +2249,8 @@ class AdminResetPasswordScreen extends StatelessWidget {
             child: Container(
               width: 480,
               height: 480,
-              decoration: BoxDecoration(color: primaryFixed.withOpacity(0.2), shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: primaryFixed.withOpacity(0.2), shape: BoxShape.circle),
             ),
           ),
           Positioned(
@@ -1964,7 +2259,9 @@ class AdminResetPasswordScreen extends StatelessWidget {
             child: Container(
               width: 420,
               height: 420,
-              decoration: BoxDecoration(color: secondaryFixed.withOpacity(0.3), shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: secondaryFixed.withOpacity(0.3),
+                  shape: BoxShape.circle),
             ),
           ),
           Center(
@@ -1977,7 +2274,10 @@ class AdminResetPasswordScreen extends StatelessWidget {
                     color: surfaceLowest,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
-                      BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 30, offset: const Offset(0, 10)),
+                      BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 30,
+                          offset: const Offset(0, 10)),
                     ],
                   ),
                   child: ClipRRect(
@@ -1999,13 +2299,19 @@ class AdminResetPasswordScreen extends StatelessWidget {
                                     ),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Row(
                                         children: [
-                                          const Icon(Icons.directions_railway, color: Colors.white, size: 28),
+                                          const Icon(Icons.directions_railway,
+                                              color: Colors.white, size: 28),
                                           const SizedBox(width: 8),
-                                          Text('I-Metro', style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: Colors.white)),
+                                          Text('I-Metro',
+                                              style: GoogleFonts.manrope(
+                                                  fontSize: 22,
+                                                  fontWeight: FontWeight.w800,
+                                                  color: Colors.white)),
                                         ],
                                       ),
                                       const SizedBox(height: 36),
@@ -2032,25 +2338,36 @@ class AdminResetPasswordScreen extends StatelessWidget {
                                         padding: const EdgeInsets.all(16),
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.1),
-                                          borderRadius: BorderRadius.circular(12),
-                                          border: Border.all(color: Colors.white.withOpacity(0.1)),
+                                          borderRadius:
+                                              BorderRadius.circular(12),
+                                          border: Border.all(
+                                              color: Colors.white
+                                                  .withOpacity(0.1)),
                                         ),
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Row(
                                               children: [
-                                                const Icon(Icons.verified_user, size: 16, color: Colors.white),
+                                                const Icon(Icons.verified_user,
+                                                    size: 16,
+                                                    color: Colors.white),
                                                 const SizedBox(width: 8),
-                                                Text('Security Protocol 8.24', style: GoogleFonts.inter(fontSize: 12, color: Colors.white)),
+                                                Text('Security Protocol 8.24',
+                                                    style: GoogleFonts.inter(
+                                                        fontSize: 12,
+                                                        color: Colors.white)),
                                               ],
                                             ),
                                             const SizedBox(height: 12),
                                             Container(
                                               height: 8,
                                               decoration: BoxDecoration(
-                                                color: Colors.white.withOpacity(0.2),
-                                                borderRadius: BorderRadius.circular(999),
+                                                color: Colors.white
+                                                    .withOpacity(0.2),
+                                                borderRadius:
+                                                    BorderRadius.circular(999),
                                               ),
                                               child: FractionallySizedBox(
                                                 widthFactor: 0.33,
@@ -2058,7 +2375,9 @@ class AdminResetPasswordScreen extends StatelessWidget {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     color: Colors.white,
-                                                    borderRadius: BorderRadius.circular(999),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            999),
                                                   ),
                                                 ),
                                               ),
@@ -2073,27 +2392,40 @@ class AdminResetPasswordScreen extends StatelessWidget {
                             Expanded(
                               child: Container(
                                 color: surfaceLowest,
-                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 32, vertical: 40),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     GestureDetector(
-                                      onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogin),
+                                      onTap: () => Navigator.pushNamed(
+                                          context, AppRoutes.adminLogin),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          const Icon(Icons.arrow_back, size: 16, color: onSurfaceVariant),
+                                          const Icon(Icons.arrow_back,
+                                              size: 16,
+                                              color: onSurfaceVariant),
                                           const SizedBox(width: 6),
-                                          Text('Return to Login', style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant)),
+                                          Text('Return to Login',
+                                              style: GoogleFonts.inter(
+                                                  fontSize: 12,
+                                                  color: onSurfaceVariant)),
                                         ],
                                       ),
                                     ),
                                     const SizedBox(height: 24),
-                                    Text('Reset Password', style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w700, color: onSurface)),
+                                    Text('Reset Password',
+                                        style: GoogleFonts.manrope(
+                                            fontSize: 28,
+                                            fontWeight: FontWeight.w700,
+                                            color: onSurface)),
                                     const SizedBox(height: 6),
                                     Text(
                                       'Ensure your new password is at least 12 characters long with a mix of symbols.',
-                                      style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant),
+                                      style: GoogleFonts.inter(
+                                          fontSize: 12,
+                                          color: onSurfaceVariant),
                                     ),
                                     const SizedBox(height: 24),
                                     _StitchInput(
@@ -2117,10 +2449,13 @@ class AdminResetPasswordScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         color: surfaceLow,
                                         borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(color: const Color(0xFFBEC9C3).withOpacity(0.1)),
+                                        border: Border.all(
+                                            color: const Color(0xFFBEC9C3)
+                                                .withOpacity(0.1)),
                                       ),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             'SECURITY REQUIREMENTS',
@@ -2132,9 +2467,16 @@ class AdminResetPasswordScreen extends StatelessWidget {
                                             ),
                                           ),
                                           const SizedBox(height: 10),
-                                          _RequirementItem(text: '12+ characters', met: true),
-                                          _RequirementItem(text: 'One special symbol (!@#\$%)', met: false),
-                                          _RequirementItem(text: 'Numerical digits', met: false),
+                                          _RequirementItem(
+                                              text: '12+ characters',
+                                              met: true),
+                                          _RequirementItem(
+                                              text:
+                                                  'One special symbol (!@#\$%)',
+                                              met: false),
+                                          _RequirementItem(
+                                              text: 'Numerical digits',
+                                              met: false),
                                         ],
                                       ),
                                     ),
@@ -2149,28 +2491,46 @@ class AdminResetPasswordScreen extends StatelessWidget {
                                         ),
                                         borderRadius: BorderRadius.circular(16),
                                         boxShadow: [
-                                          BoxShadow(color: primary.withOpacity(0.2), blurRadius: 16, offset: const Offset(0, 8)),
+                                          BoxShadow(
+                                              color: primary.withOpacity(0.2),
+                                              blurRadius: 16,
+                                              offset: const Offset(0, 8)),
                                         ],
                                       ),
                                       alignment: Alignment.center,
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Text('Reset', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white)),
+                                          Text('Reset',
+                                              style: GoogleFonts.manrope(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white)),
                                           const SizedBox(width: 8),
-                                          const Icon(Icons.published_with_changes, size: 18, color: Colors.white),
+                                          const Icon(
+                                              Icons.published_with_changes,
+                                              size: 18,
+                                              color: Colors.white),
                                         ],
                                       ),
                                     ),
                                     const SizedBox(height: 24),
-                                    Container(height: 1, color: surfaceHighest.withOpacity(0.6)),
+                                    Container(
+                                        height: 1,
+                                        color: surfaceHighest.withOpacity(0.6)),
                                     const SizedBox(height: 12),
                                     Text(
                                       '© 2024 Inter-Metro Transport Solution Limited. Admin Panel. Authorized Personnel Only.',
-                                      style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant, height: 1.4),
+                                      style: GoogleFonts.inter(
+                                          fontSize: 10,
+                                          color: onSurfaceVariant,
+                                          height: 1.4),
                                     ),
                                     const SizedBox(height: 6),
-                                    Text('Legal Policy', style: GoogleFonts.inter(fontSize: 10, color: primary)),
+                                    Text('Legal Policy',
+                                        style: GoogleFonts.inter(
+                                            fontSize: 10, color: primary)),
                                   ],
                                 ),
                               ),
@@ -2221,7 +2581,9 @@ class _RequirementItem extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: color),
           const SizedBox(width: 8),
-          Text(text, style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF3E4944))),
+          Text(text,
+              style: GoogleFonts.inter(
+                  fontSize: 11, color: const Color(0xFF3E4944))),
         ],
       ),
     );
@@ -2235,9 +2597,11 @@ class _FooterLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF3E4944)));
+    return Text(text,
+        style: GoogleFonts.inter(fontSize: 11, color: const Color(0xFF3E4944)));
   }
 }
+
 class AdminResetSuccessScreen extends StatelessWidget {
   const AdminResetSuccessScreen({super.key});
 
@@ -2262,7 +2626,8 @@ class AdminResetSuccessScreen extends StatelessWidget {
             child: Container(
               width: 320,
               height: 320,
-              decoration: BoxDecoration(color: primary.withOpacity(0.05), shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: primary.withOpacity(0.05), shape: BoxShape.circle),
             ),
           ),
           Positioned(
@@ -2271,7 +2636,8 @@ class AdminResetSuccessScreen extends StatelessWidget {
             child: Container(
               width: 320,
               height: 320,
-              decoration: BoxDecoration(color: secondary.withOpacity(0.1), shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                  color: secondary.withOpacity(0.1), shape: BoxShape.circle),
             ),
           ),
           Center(
@@ -2290,30 +2656,46 @@ class AdminResetSuccessScreen extends StatelessWidget {
                             color: primary,
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
-                              BoxShadow(color: primary.withOpacity(0.2), blurRadius: 16, offset: const Offset(0, 8)),
+                              BoxShadow(
+                                  color: primary.withOpacity(0.2),
+                                  blurRadius: 16,
+                                  offset: const Offset(0, 8)),
                             ],
                           ),
-                          child: const Icon(Icons.directions_railway, color: Colors.white, size: 28),
+                          child: const Icon(Icons.directions_railway,
+                              color: Colors.white, size: 28),
                         ),
                         const SizedBox(height: 10),
-                        Text('I-Metro', style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w800, color: primary)),
+                        Text('I-Metro',
+                            style: GoogleFonts.manrope(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w800,
+                                color: primary)),
                         const SizedBox(height: 4),
                         Text(
                           'Luxury in Motion',
-                          style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant, letterSpacing: 2),
+                          style: GoogleFonts.inter(
+                              fontSize: 10,
+                              color: onSurfaceVariant,
+                              letterSpacing: 2),
                         ),
                       ],
                     ),
                     const SizedBox(height: 28),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 28),
                       decoration: BoxDecoration(
                         color: surfaceLowest,
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
-                          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 30, offset: const Offset(0, 10)),
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 30,
+                              offset: const Offset(0, 10)),
                         ],
-                        border: Border.all(color: Colors.white.withOpacity(0.2)),
+                        border:
+                            Border.all(color: Colors.white.withOpacity(0.2)),
                       ),
                       child: Column(
                         children: [
@@ -2339,10 +2721,14 @@ class AdminResetSuccessScreen extends StatelessWidget {
                                   ),
                                   shape: BoxShape.circle,
                                   boxShadow: [
-                                    BoxShadow(color: primary.withOpacity(0.2), blurRadius: 20, offset: const Offset(0, 10)),
+                                    BoxShadow(
+                                        color: primary.withOpacity(0.2),
+                                        blurRadius: 20,
+                                        offset: const Offset(0, 10)),
                                   ],
                                 ),
-                                child: const Icon(Icons.check_circle, color: Colors.white, size: 44),
+                                child: const Icon(Icons.check_circle,
+                                    color: Colors.white, size: 44),
                               ),
                             ],
                           ),
@@ -2350,13 +2736,19 @@ class AdminResetSuccessScreen extends StatelessWidget {
                           Text(
                             'Password reset successful',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.manrope(fontSize: 24, fontWeight: FontWeight.w700, color: onSurface),
+                            style: GoogleFonts.manrope(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                color: onSurface),
                           ),
                           const SizedBox(height: 10),
                           Text(
                             'Your account security has been updated. You can now use your new password to access the I-Metro transit dashboard.',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant, height: 1.5),
+                            style: GoogleFonts.inter(
+                                fontSize: 12,
+                                color: onSurfaceVariant,
+                                height: 1.5),
                           ),
                           const SizedBox(height: 22),
                           GestureDetector(
@@ -2375,16 +2767,24 @@ class AdminResetSuccessScreen extends StatelessWidget {
                                 ),
                                 borderRadius: BorderRadius.circular(16),
                                 boxShadow: [
-                                  BoxShadow(color: primary.withOpacity(0.2), blurRadius: 16, offset: const Offset(0, 8)),
+                                  BoxShadow(
+                                      color: primary.withOpacity(0.2),
+                                      blurRadius: 16,
+                                      offset: const Offset(0, 8)),
                                 ],
                               ),
                               alignment: Alignment.center,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Back to login', style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white)),
+                                  Text('Back to login',
+                                      style: GoogleFonts.inter(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
                                   const SizedBox(width: 8),
-                                  const Icon(Icons.arrow_forward, color: Colors.white, size: 18),
+                                  const Icon(Icons.arrow_forward,
+                                      color: Colors.white, size: 18),
                                 ],
                               ),
                             ),
@@ -2393,11 +2793,15 @@ class AdminResetSuccessScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.shield, size: 16, color: onSurfaceVariant),
+                              const Icon(Icons.shield,
+                                  size: 16, color: onSurfaceVariant),
                               const SizedBox(width: 6),
                               Text(
                                 'Secure Infrastructure',
-                                style: GoogleFonts.inter(fontSize: 10, color: onSurfaceVariant, letterSpacing: 1.4),
+                                style: GoogleFonts.inter(
+                                    fontSize: 10,
+                                    color: onSurfaceVariant,
+                                    letterSpacing: 1.4),
                               ),
                             ],
                           ),
@@ -2408,11 +2812,15 @@ class AdminResetSuccessScreen extends StatelessWidget {
                     Text.rich(
                       TextSpan(
                         text: 'Having trouble? ',
-                        style: GoogleFonts.inter(fontSize: 12, color: onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 12, color: onSurfaceVariant),
                         children: [
                           TextSpan(
                             text: 'Contact IT Support',
-                            style: GoogleFonts.inter(fontSize: 12, color: primary, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.inter(
+                                fontSize: 12,
+                                color: primary,
+                                fontWeight: FontWeight.w600),
                           ),
                         ],
                       ),
@@ -2428,6 +2836,7 @@ class AdminResetSuccessScreen extends StatelessWidget {
     );
   }
 }
+
 class _AdminDashboardData {
   const _AdminDashboardData({
     required this.totalUsers,
@@ -2530,7 +2939,8 @@ String _bookingUserName(Map<String, dynamic> booking) {
 String _bookingRoute(Map<String, dynamic> booking) {
   final route = booking['route'];
   if (route is Map<String, dynamic>) {
-    return '${route['fromLocation'] ?? ''}-${route['toLocation'] ?? ''}'.replaceAll(' ', '');
+    return '${route['fromLocation'] ?? ''}-${route['toLocation'] ?? ''}'
+        .replaceAll(' ', '');
   }
   return 'Route';
 }
@@ -2551,6 +2961,7 @@ String _bookingStatus(Map<String, dynamic> booking) {
   }
   return 'PENDING';
 }
+
 // Dashboard UI components
 class _DashboardColors {
   static const primary = Color(0xFF00513F);
@@ -2667,7 +3078,9 @@ class AdminDashboardMain extends StatelessWidget {
                                   deltaLabel: '+12.5%',
                                   icon: Icons.group,
                                   accent: _DashboardColors.primary,
-                                  accentBackground: _DashboardColors.primaryFixedDim.withOpacity(0.3),
+                                  accentBackground: _DashboardColors
+                                      .primaryFixedDim
+                                      .withOpacity(0.3),
                                 ),
                                 _DashboardSummaryCard(
                                   title: 'Total Bookings',
@@ -2675,7 +3088,8 @@ class AdminDashboardMain extends StatelessWidget {
                                   deltaLabel: '+3.2%',
                                   icon: Icons.confirmation_number,
                                   accent: _DashboardColors.secondary,
-                                  accentBackground: _DashboardColors.secondaryContainer,
+                                  accentBackground:
+                                      _DashboardColors.secondaryContainer,
                                 ),
                                 _DashboardSummaryCard(
                                   title: 'Ticket Sales (NGN)',
@@ -2683,7 +3097,9 @@ class AdminDashboardMain extends StatelessWidget {
                                   deltaLabel: '+8.1%',
                                   icon: Icons.payments,
                                   accent: _DashboardColors.tertiary,
-                                  accentBackground: _DashboardColors.tertiaryFixed.withOpacity(0.35),
+                                  accentBackground: _DashboardColors
+                                      .tertiaryFixed
+                                      .withOpacity(0.35),
                                 ),
                                 _DashboardSummaryCard(
                                   title: 'Available Routes',
@@ -2691,7 +3107,8 @@ class AdminDashboardMain extends StatelessWidget {
                                   deltaLabel: 'Stable',
                                   icon: Icons.alt_route,
                                   accent: _DashboardColors.onSurface,
-                                  accentBackground: _DashboardColors.surfaceHighest,
+                                  accentBackground:
+                                      _DashboardColors.surfaceHighest,
                                   deltaMuted: true,
                                 ),
                               ],
@@ -2706,7 +3123,8 @@ class AdminDashboardMain extends StatelessWidget {
                               return Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: const [
-                                  Expanded(flex: 2, child: _DashboardTrendCard()),
+                                  Expanded(
+                                      flex: 2, child: _DashboardTrendCard()),
                                   SizedBox(width: 18),
                                   Expanded(child: _DashboardMapCard()),
                                 ],
@@ -2761,7 +3179,10 @@ class _DashboardSidebar extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+                    colors: [
+                      _DashboardColors.primary,
+                      _DashboardColors.primaryContainer
+                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -2790,11 +3211,17 @@ class _DashboardSidebar extends StatelessWidget {
                 children: [
                   Text(
                     'I-Metro',
-                    style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: const Color(0xFF0C3B2E)),
+                    style: GoogleFonts.manrope(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: const Color(0xFF0C3B2E)),
                   ),
                   Text(
                     'Luxury in Motion',
-                    style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w500, color: _DashboardColors.onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w500,
+                        color: _DashboardColors.onSurfaceVariant),
                   ),
                 ],
               ),
@@ -2825,6 +3252,12 @@ class _DashboardSidebar extends StatelessWidget {
             selected: selectedRoute == AppRoutes.adminAvailableRoutes,
             onTap: () => onNavigate(AppRoutes.adminAvailableRoutes),
           ),
+          _DashboardNavItem(
+            icon: Icons.campaign,
+            label: 'Announcements',
+            selected: selectedRoute == AppRoutes.adminAnnouncements,
+            onTap: () => onNavigate(AppRoutes.adminAnnouncements),
+          ),
           const SizedBox(height: 24),
           GestureDetector(
             onTap: () => onNavigate(AppRoutes.adminAddRoute),
@@ -2833,7 +3266,10 @@ class _DashboardSidebar extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+                  colors: [
+                    _DashboardColors.primary,
+                    _DashboardColors.primaryContainer
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -2853,7 +3289,10 @@ class _DashboardSidebar extends StatelessWidget {
                   const SizedBox(width: 8),
                   Text(
                     'New Route',
-                    style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white),
+                    style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -2905,7 +3344,8 @@ class _DashboardNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = selected ? Colors.white.withOpacity(0.6) : Colors.transparent;
+    final background =
+        selected ? Colors.white.withOpacity(0.6) : Colors.transparent;
     final textColor = danger
         ? _DashboardColors.error
         : selected
@@ -2917,7 +3357,8 @@ class _DashboardNavItem extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: dense ? 10 : 12),
+          padding:
+              EdgeInsets.symmetric(horizontal: 12, vertical: dense ? 10 : 12),
           decoration: BoxDecoration(
             color: background,
             borderRadius: BorderRadius.circular(12),
@@ -2928,7 +3369,10 @@ class _DashboardNavItem extends StatelessWidget {
               const SizedBox(width: 10),
               Text(
                 label,
-                style: GoogleFonts.inter(fontSize: dense ? 12 : 13, fontWeight: FontWeight.w600, color: textColor),
+                style: GoogleFonts.inter(
+                    fontSize: dense ? 12 : 13,
+                    fontWeight: FontWeight.w600,
+                    color: textColor),
               ),
             ],
           ),
@@ -2971,8 +3415,10 @@ class _DashboardTopBar extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search operations, routes, or tickets...',
-                  hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
-                  prefixIcon: const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                  hintStyle: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  prefixIcon: const Icon(Icons.search,
+                      size: 18, color: _DashboardColors.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
@@ -2994,7 +3440,8 @@ class _DashboardTopBar extends StatelessWidget {
                   child: Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(color: _DashboardColors.error, shape: BoxShape.circle),
+                    decoration: const BoxDecoration(
+                        color: _DashboardColors.error, shape: BoxShape.circle),
                   ),
                 ),
               ],
@@ -3005,10 +3452,14 @@ class _DashboardTopBar extends StatelessWidget {
             icon: const Icon(Icons.help_outline, color: Color(0xFF6B7771)),
           ),
           const SizedBox(width: 16),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 16),
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
             child: Row(
               children: [
                 Column(
@@ -3026,7 +3477,10 @@ class _DashboardTopBar extends StatelessWidget {
                     ),
                     Text(
                       'Alex Rivera',
-                      style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: _DashboardColors.onSurface),
                     ),
                   ],
                 ),
@@ -3048,7 +3502,8 @@ class _DashboardTopBar extends StatelessWidget {
 }
 
 class _DashboardFilterButton extends StatelessWidget {
-  const _DashboardFilterButton({required this.label, required this.icon, this.onTap});
+  const _DashboardFilterButton(
+      {required this.label, required this.icon, this.onTap});
 
   final String label;
   final IconData icon;
@@ -3064,7 +3519,8 @@ class _DashboardFilterButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: _DashboardColors.surfaceLowest,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.25)),
+          border: Border.all(
+              color: _DashboardColors.outlineVariant.withOpacity(0.25)),
         ),
         child: Row(
           children: [
@@ -3072,7 +3528,10 @@ class _DashboardFilterButton extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               label,
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _DashboardColors.onSurface),
             ),
           ],
         ),
@@ -3102,14 +3561,19 @@ class _DashboardSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final deltaColor = deltaMuted ? _DashboardColors.onSurfaceVariant : const Color(0xFF1F9D5B);
+    final deltaColor = deltaMuted
+        ? _DashboardColors.onSurfaceVariant
+        : const Color(0xFF1F9D5B);
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6)),
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6)),
         ],
         border: Border(
           bottom: BorderSide(color: accent.withOpacity(0.25), width: 4),
@@ -3131,19 +3595,28 @@ class _DashboardSummaryCard extends StatelessWidget {
               ),
               Text(
                 deltaLabel,
-                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: deltaColor),
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: deltaColor),
               ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
             title,
-            style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 22, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 22,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
         ],
       ),
@@ -3162,7 +3635,12 @@ class _DashboardTrendCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -3172,13 +3650,17 @@ class _DashboardTrendCard extends StatelessWidget {
             children: [
               Text(
                 'Network Usage Trends',
-                style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
               Row(
                 children: [
                   _LegendDot(color: _DashboardColors.primary, label: 'Subway'),
                   const SizedBox(width: 12),
-                  _LegendDot(color: _DashboardColors.secondary, label: 'Light Rail'),
+                  _LegendDot(
+                      color: _DashboardColors.secondary, label: 'Light Rail'),
                 ],
               ),
             ],
@@ -3195,8 +3677,11 @@ class _DashboardTrendCard extends StatelessWidget {
                       margin: const EdgeInsets.symmetric(horizontal: 4),
                       height: 200 * heights[i],
                       decoration: BoxDecoration(
-                        color: i == 4 ? _DashboardColors.primary : _DashboardColors.surfaceLow,
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+                        color: i == 4
+                            ? _DashboardColors.primary
+                            : _DashboardColors.surfaceLow,
+                        borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(10)),
                       ),
                     ),
                   ),
@@ -3236,11 +3721,17 @@ class _LegendDot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 6),
         Text(
           label,
-          style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: _DashboardColors.onSurfaceVariant),
         ),
       ],
     );
@@ -3256,7 +3747,12 @@ class _DashboardMapCard extends StatelessWidget {
       height: 320,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
@@ -3272,7 +3768,10 @@ class _DashboardMapCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [_DashboardColors.primary.withOpacity(0.85), Colors.transparent],
+                    colors: [
+                      _DashboardColors.primary.withOpacity(0.85),
+                      Colors.transparent
+                    ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ),
@@ -3293,17 +3792,22 @@ class _DashboardMapCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: Colors.white.withOpacity(0.3)),
                     ),
-                    child: const Icon(Icons.my_location, color: Colors.white, size: 18),
+                    child: const Icon(Icons.my_location,
+                        color: Colors.white, size: 18),
                   ),
                   const SizedBox(height: 12),
                   Text(
                     'Network Map',
-                    style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
+                    style: GoogleFonts.manrope(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'View real-time vehicle positioning and line health status.',
-                    style: GoogleFonts.inter(fontSize: 12, color: Colors.white.withOpacity(0.8)),
+                    style: GoogleFonts.inter(
+                        fontSize: 12, color: Colors.white.withOpacity(0.8)),
                   ),
                   const SizedBox(height: 12),
                   Container(
@@ -3349,7 +3853,12 @@ class _DashboardTransactionsTable extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -3357,7 +3866,8 @@ class _DashboardTransactionsTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -3373,7 +3883,10 @@ class _DashboardTransactionsTable extends StatelessWidget {
                 ),
                 Text(
                   'View All',
-                  style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                  style: GoogleFonts.inter(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      color: _DashboardColors.primary),
                 ),
               ],
             ),
@@ -3389,11 +3902,14 @@ class _DashboardTransactionsTable extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       'No transactions yet.',
-                      style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 12,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   )
                 else
-                  for (final booking in bookings) _DashboardTransactionRow(booking: booking),
+                  for (final booking in bookings)
+                    _DashboardTransactionRow(booking: booking),
               ],
             ),
           ),
@@ -3420,7 +3936,11 @@ class _DashboardTableHeader extends StatelessWidget {
         Expanded(flex: 3, child: Text('Passenger', style: style)),
         Expanded(flex: 3, child: Text('Route', style: style)),
         Expanded(flex: 2, child: Text('Time', style: style)),
-        Expanded(flex: 2, child: Align(alignment: Alignment.centerRight, child: Text('Status', style: style))),
+        Expanded(
+            flex: 2,
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Text('Status', style: style))),
       ],
     );
   }
@@ -3444,7 +3964,10 @@ class _DashboardTransactionRow extends StatelessWidget {
             flex: 2,
             child: Text(
               _bookingId(booking),
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _DashboardColors.onSurfaceVariant),
             ),
           ),
           Expanded(
@@ -3461,7 +3984,10 @@ class _DashboardTransactionRow extends StatelessWidget {
                   child: Center(
                     child: Text(
                       initials,
-                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.onSurface),
                     ),
                   ),
                 ),
@@ -3469,7 +3995,10 @@ class _DashboardTransactionRow extends StatelessWidget {
                 Expanded(
                   child: Text(
                     name,
-                    style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.onSurface),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -3480,14 +4009,18 @@ class _DashboardTransactionRow extends StatelessWidget {
             flex: 3,
             child: Text(
               _bookingRouteLabel(booking),
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+              style: GoogleFonts.inter(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: _DashboardColors.primary),
             ),
           ),
           Expanded(
             flex: 2,
             child: Text(
               _bookingTimeAgo(booking),
-              style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.inter(
+                  fontSize: 11, color: _DashboardColors.onSurfaceVariant),
             ),
           ),
           Expanded(
@@ -3525,10 +4058,12 @@ class _StatusChip extends StatelessWidget {
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(16)),
+      decoration: BoxDecoration(
+          color: background, borderRadius: BorderRadius.circular(16)),
       child: Text(
         normalized,
-        style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, color: textColor),
+        style: GoogleFonts.inter(
+            fontSize: 9, fontWeight: FontWeight.w700, color: textColor),
       ),
     );
   }
@@ -3682,8 +4217,12 @@ class _AdminTotalUsersScreenState extends State<AdminTotalUsersScreen> {
                       builder: (context, snapshot) {
                         final users = snapshot.data ?? [];
                         final totalUsers = users.length;
-                        final activeUsers = users.where((user) => user['isActive'] == true).length;
-                        final newToday = users.where((user) => _isCreatedToday(user['createdAt'])).length;
+                        final activeUsers = users
+                            .where((user) => user['isActive'] == true)
+                            .length;
+                        final newToday = users
+                            .where((user) => _isCreatedToday(user['createdAt']))
+                            .length;
 
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -3693,7 +4232,8 @@ class _AdminTotalUsersScreenState extends State<AdminTotalUsersScreen> {
                               children: [
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Total Users',
@@ -3708,7 +4248,8 @@ class _AdminTotalUsersScreenState extends State<AdminTotalUsersScreen> {
                                         "Manage and monitor the transit system's active passenger base and authentication statuses.",
                                         style: GoogleFonts.inter(
                                           fontSize: 13,
-                                          color: _DashboardColors.onSurfaceVariant,
+                                          color:
+                                              _DashboardColors.onSurfaceVariant,
                                         ),
                                       ),
                                     ],
@@ -3757,7 +4298,8 @@ class _AdminTotalUsersScreenState extends State<AdminTotalUsersScreen> {
                                       const SizedBox(width: 16),
                                       Expanded(
                                         flex: 2,
-                                        child: _UserHealthCard(totalUsers: totalUsers),
+                                        child: _UserHealthCard(
+                                            totalUsers: totalUsers),
                                       ),
                                     ],
                                   );
@@ -3793,7 +4335,8 @@ class _AdminTotalUsersScreenState extends State<AdminTotalUsersScreen> {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            _UserPaginationFooter(totalUsers: totalUsers, shown: users.length),
+                            _UserPaginationFooter(
+                                totalUsers: totalUsers, shown: users.length),
                             const SizedBox(height: 24),
                             LayoutBuilder(
                               builder: (context, constraints) {
@@ -3838,7 +4381,9 @@ String _userDisplayName(Map<String, dynamic> user) {
 }
 
 String _userEmail(Map<String, dynamic> user) {
-  return user['email']?.toString() ?? user['phone']?.toString() ?? 'unknown@i-metro.app';
+  return user['email']?.toString() ??
+      user['phone']?.toString() ??
+      'unknown@i-metro.app';
 }
 
 String _userInitials(Map<String, dynamic> user) {
@@ -3866,7 +4411,9 @@ bool _isCreatedToday(dynamic createdAt) {
   }
   if (parsed == null) return false;
   final now = DateTime.now();
-  return parsed.year == now.year && parsed.month == now.month && parsed.day == now.day;
+  return parsed.year == now.year &&
+      parsed.month == now.month &&
+      parsed.day == now.day;
 }
 
 class _UserManagementTopBar extends StatelessWidget {
@@ -3902,8 +4449,10 @@ class _UserManagementTopBar extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search users, IDs, or locations...',
-                  hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
-                  prefixIcon: const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                  hintStyle: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  prefixIcon: const Icon(Icons.search,
+                      size: 18, color: _DashboardColors.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
@@ -3912,39 +4461,45 @@ class _UserManagementTopBar extends StatelessWidget {
           const SizedBox(width: 24),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.notifications,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(width: 16),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 16),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
-              child: Row(
-                children: [
-                  Text(
-                    'Admin Profile',
-                    style: GoogleFonts.inter(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1,
-                      color: _DashboardColors.onSurfaceVariant,
-                    ),
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            child: Row(
+              children: [
+                Text(
+                  'Admin Profile',
+                  style: GoogleFonts.inter(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1,
+                    color: _DashboardColors.onSurfaceVariant,
                   ),
-                  const SizedBox(width: 12),
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: _DashboardColors.surfaceHighest,
-                    backgroundImage: const NetworkImage(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuAX8VHnHrZTHZpcw8q_ZtfOZwtcU3YtUXgzssQTVDPzG_DpvLgxPc9skygNx5olqV6fwbF_p6QjHvGmeeEXgBrFl1wmEdxTsVCBRTBNFZ9A9L4zTnY08nfM0Bybcve3P3HQwYGMsOtzkPEl-2E4w-YkDXMDRToz9Bat3zBqCX1zcFomHfx7kdKBP4Gdt1n30aq8iNZayozDen18TRCJBUdrI7o9Rq5F6uVynhHtZ4tCJh4vVECL22OxuwJ4xOIskUf4RkWEVEun2wQ',
-                    ),
+                ),
+                const SizedBox(width: 12),
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: _DashboardColors.surfaceHighest,
+                  backgroundImage: const NetworkImage(
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAX8VHnHrZTHZpcw8q_ZtfOZwtcU3YtUXgzssQTVDPzG_DpvLgxPc9skygNx5olqV6fwbF_p6QjHvGmeeEXgBrFl1wmEdxTsVCBRTBNFZ9A9L4zTnY08nfM0Bybcve3P3HQwYGMsOtzkPEl-2E4w-YkDXMDRToz9Bat3zBqCX1zcFomHfx7kdKBP4Gdt1n30aq8iNZayozDen18TRCJBUdrI7o9Rq5F6uVynhHtZ4tCJh4vVECL22OxuwJ4xOIskUf4RkWEVEun2wQ',
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+          ),
         ],
       ),
     );
@@ -3966,7 +4521,8 @@ class _UserActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = filled ? _DashboardColors.primary : _DashboardColors.surfaceLow;
+    final background =
+        filled ? _DashboardColors.primary : _DashboardColors.surfaceLow;
     final foreground = filled ? Colors.white : _DashboardColors.primary;
     return InkWell(
       onTap: onTap,
@@ -3977,7 +4533,12 @@ class _UserActionButton extends StatelessWidget {
           color: background,
           borderRadius: BorderRadius.circular(12),
           boxShadow: filled
-              ? [BoxShadow(color: _DashboardColors.primary.withOpacity(0.15), blurRadius: 12, offset: const Offset(0, 6))]
+              ? [
+                  BoxShadow(
+                      color: _DashboardColors.primary.withOpacity(0.15),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6))
+                ]
               : null,
         ),
         child: Row(
@@ -3986,7 +4547,8 @@ class _UserActionButton extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               label,
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: foreground),
+              style: GoogleFonts.inter(
+                  fontSize: 12, fontWeight: FontWeight.w600, color: foreground),
             ),
           ],
         ),
@@ -4016,7 +4578,12 @@ class _UserStatCard extends StatelessWidget {
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.transparent),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10, offset: const Offset(0, 4))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 4))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -4037,12 +4604,18 @@ class _UserStatCard extends StatelessWidget {
             children: [
               Text(
                 value,
-                style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color: badgeFilled ? _DashboardColors.primaryFixedDim.withOpacity(0.25) : Colors.transparent,
+                  color: badgeFilled
+                      ? _DashboardColors.primaryFixedDim.withOpacity(0.25)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -4050,7 +4623,9 @@ class _UserStatCard extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
-                    color: badgeFilled ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant,
+                    color: badgeFilled
+                        ? _DashboardColors.primary
+                        : _DashboardColors.onSurfaceVariant,
                   ),
                 ),
               ),
@@ -4084,7 +4659,8 @@ class _UserHealthCard extends StatelessWidget {
           Positioned(
             right: -12,
             bottom: -24,
-            child: Icon(Icons.cloud_done, size: 120, color: Colors.white.withOpacity(0.12)),
+            child: Icon(Icons.cloud_done,
+                size: 120, color: Colors.white.withOpacity(0.12)),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -4101,12 +4677,16 @@ class _UserHealthCard extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 '99.8% Reliability',
-                style: GoogleFonts.manrope(fontSize: 24, fontWeight: FontWeight.w700, color: Colors.white),
+                style: GoogleFonts.manrope(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
               ),
               const SizedBox(height: 6),
               Text(
                 'User authentication servers are performing within optimal latency thresholds. Total users: ${_formatCount(totalUsers)}.',
-                style: GoogleFonts.inter(fontSize: 12, color: Colors.white.withOpacity(0.85)),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: Colors.white.withOpacity(0.85)),
               ),
             ],
           ),
@@ -4128,7 +4708,12 @@ class _UserDirectoryTable extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -4136,7 +4721,8 @@ class _UserDirectoryTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(18)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -4154,11 +4740,13 @@ class _UserDirectoryTable extends StatelessWidget {
                   children: [
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.download, color: _DashboardColors.onSurfaceVariant),
+                      icon: const Icon(Icons.download,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: const Icon(Icons.more_vert, color: _DashboardColors.onSurfaceVariant),
+                      icon: const Icon(Icons.more_vert,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -4176,7 +4764,9 @@ class _UserDirectoryTable extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 24),
                     child: Text(
                       'No users yet.',
-                      style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   )
                 else
@@ -4214,7 +4804,11 @@ class _UserTableHeader extends StatelessWidget {
         Expanded(flex: 2, child: Text('Gender', style: style)),
         Expanded(flex: 3, child: Text('Location', style: style)),
         Expanded(flex: 2, child: Text('Status', style: style)),
-        Expanded(flex: 1, child: Align(alignment: Alignment.centerRight, child: Text('Actions', style: style))),
+        Expanded(
+            flex: 1,
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Text('Actions', style: style))),
       ],
     );
   }
@@ -4252,7 +4846,10 @@ class _UserTableRow extends StatelessWidget {
                     child: Center(
                       child: Text(
                         initials,
-                        style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                            color: _DashboardColors.onSurface),
                       ),
                     ),
                   ),
@@ -4263,11 +4860,16 @@ class _UserTableRow extends StatelessWidget {
                       children: [
                         Text(
                           name,
-                          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: _DashboardColors.onSurface),
                         ),
                         Text(
                           email,
-                          style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                          style: GoogleFonts.inter(
+                              fontSize: 11,
+                              color: _DashboardColors.onSurfaceVariant),
                         ),
                       ],
                     ),
@@ -4279,19 +4881,22 @@ class _UserTableRow extends StatelessWidget {
               flex: 2,
               child: Text(
                 _userGender(user),
-                style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: _DashboardColors.onSurface),
               ),
             ),
             Expanded(
               flex: 3,
               child: Row(
                 children: [
-                  const Icon(Icons.location_on, size: 14, color: _DashboardColors.primary),
+                  const Icon(Icons.location_on,
+                      size: 14, color: _DashboardColors.primary),
                   const SizedBox(width: 4),
                   Expanded(
                     child: Text(
                       _userLocation(user),
-                      style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.inter(
+                          fontSize: 12, color: _DashboardColors.onSurface),
                     ),
                   ),
                 ],
@@ -4307,7 +4912,8 @@ class _UserTableRow extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: IconButton(
                   onPressed: () {},
-                  icon: const Icon(Icons.more_horiz, color: _DashboardColors.onSurfaceVariant),
+                  icon: const Icon(Icons.more_horiz,
+                      color: _DashboardColors.onSurfaceVariant),
                 ),
               ),
             ),
@@ -4325,21 +4931,31 @@ class _UserStatusPill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = active ? _DashboardColors.primaryFixedDim.withOpacity(0.3) : _DashboardColors.surfaceHighest;
+    final background = active
+        ? _DashboardColors.primaryFixedDim.withOpacity(0.3)
+        : _DashboardColors.surfaceHighest;
     final text = active ? 'Active' : 'Inactive';
-    final dotColor = active ? _DashboardColors.primary : _DashboardColors.outlineVariant;
-    final textColor = active ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
+    final dotColor =
+        active ? _DashboardColors.primary : _DashboardColors.outlineVariant;
+    final textColor =
+        active ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(18)),
+      decoration: BoxDecoration(
+          color: background, borderRadius: BorderRadius.circular(18)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(width: 6, height: 6, decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle)),
+          Container(
+              width: 6,
+              height: 6,
+              decoration:
+                  BoxDecoration(color: dotColor, shape: BoxShape.circle)),
           const SizedBox(width: 6),
           Text(
             text,
-            style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: textColor),
+            style: GoogleFonts.inter(
+                fontSize: 11, fontWeight: FontWeight.w700, color: textColor),
           ),
         ],
       ),
@@ -4367,22 +4983,27 @@ class _UserPaginationFooter extends StatelessWidget {
         children: [
           Text(
             'Showing 1 to $shown of $totalLabel users',
-            style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 12, color: _DashboardColors.onSurfaceVariant),
           ),
           Row(
             children: [
               IconButton(
                 onPressed: null,
-                icon: const Icon(Icons.chevron_left, color: _DashboardColors.onSurfaceVariant),
+                icon: const Icon(Icons.chevron_left,
+                    color: _DashboardColors.onSurfaceVariant),
               ),
               _PageChip(label: '1', active: true),
               _PageChip(label: '2'),
               _PageChip(label: '3'),
-              Text('...', style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
+              Text('...',
+                  style: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
               _PageChip(label: '120'),
               IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.chevron_right, color: _DashboardColors.onSurfaceVariant),
+                icon: const Icon(Icons.chevron_right,
+                    color: _DashboardColors.onSurfaceVariant),
               ),
             ],
           ),
@@ -4444,19 +5065,26 @@ class _UserSecurityCard extends StatelessWidget {
                   color: _DashboardColors.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.security, size: 18, color: _DashboardColors.primary),
+                child: const Icon(Icons.security,
+                    size: 18, color: _DashboardColors.primary),
               ),
               const SizedBox(width: 10),
               Text(
                 'Security Overview',
-                style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
             ],
           ),
           const SizedBox(height: 12),
           Text(
             '24 users requested password resets in the last hour. All requests were verified through multi-factor authentication systems without incident.',
-            style: GoogleFonts.inter(fontSize: 12, height: 1.4, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                height: 1.4,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 12),
           Text(
@@ -4496,12 +5124,16 @@ class _UserRegionCard extends StatelessWidget {
                   color: _DashboardColors.primary.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Icon(Icons.map, size: 18, color: _DashboardColors.primary),
+                child: const Icon(Icons.map,
+                    size: 18, color: _DashboardColors.primary),
               ),
               const SizedBox(width: 10),
               Text(
                 'Regional Density',
-                style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
             ],
           ),
@@ -4529,11 +5161,15 @@ class _UserRegionCard extends StatelessWidget {
             children: [
               Text(
                 'Europe (Central)',
-                style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: _DashboardColors.onSurfaceVariant),
               ),
               Text(
                 '6,120 users',
-                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurfaceVariant),
               ),
             ],
           ),
@@ -4620,14 +5256,17 @@ class _UserDetailsTopBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.search,
+                    size: 18, color: _DashboardColors.onSurfaceVariant),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Search transit data...',
-                      hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                      hintStyle: GoogleFonts.inter(
+                          fontSize: 12,
+                          color: _DashboardColors.onSurfaceVariant),
                       isCollapsed: true,
                     ),
                   ),
@@ -4642,18 +5281,22 @@ class _UserDetailsTopBar extends StatelessWidget {
           const SizedBox(width: 8),
           _CircleIconButton(icon: Icons.help_outline, onTap: () {}),
           const SizedBox(width: 12),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 12),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor: _DashboardColors.surfaceHighest,
-                backgroundImage: const NetworkImage(
-                  'https://lh3.googleusercontent.com/aida-public/AB6AXuDSVpJ1TwlmhLzH6F3_O9QbK8x4zdKo6uFShEMCikyOtlV__nw2EvaZL5MFXX3A4RpoTlE2q1xNJEccSHDb_Dj3kygZ61qb7zQB1YXpSjpIqr0EYCsJltTBVDeP5PYpPYPZuh8euLsh63XW_OIQHXLgV23hTD8MYY-5NA2iYu48FhPWHGjoytbfA_ryaxR1AtOOhiPIOVnWCh1EmR0QnA26bSHDmbYnWaxTrah7kyEh-hGnFs-qF4lgen8sCvlPppdlCQEzRioXtv0',
-                ),
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            child: CircleAvatar(
+              radius: 16,
+              backgroundColor: _DashboardColors.surfaceHighest,
+              backgroundImage: const NetworkImage(
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuDSVpJ1TwlmhLzH6F3_O9QbK8x4zdKo6uFShEMCikyOtlV__nw2EvaZL5MFXX3A4RpoTlE2q1xNJEccSHDb_Dj3kygZ61qb7zQB1YXpSjpIqr0EYCsJltTBVDeP5PYpPYPZuh8euLsh63XW_OIQHXLgV23hTD8MYY-5NA2iYu48FhPWHGjoytbfA_ryaxR1AtOOhiPIOVnWCh1EmR0QnA26bSHDmbYnWaxTrah7kyEh-hGnFs-qF4lgen8sCvlPppdlCQEzRioXtv0',
               ),
             ),
+          ),
         ],
       ),
     );
@@ -4697,15 +5340,20 @@ class _UserBreadcrumbs extends StatelessWidget {
           onTap: onBack,
           child: Text(
             'User Management',
-            style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 12, color: _DashboardColors.onSurfaceVariant),
           ),
         ),
         const SizedBox(width: 6),
-        const Icon(Icons.chevron_right, size: 14, color: _DashboardColors.onSurfaceVariant),
+        const Icon(Icons.chevron_right,
+            size: 14, color: _DashboardColors.onSurfaceVariant),
         const SizedBox(width: 6),
         Text(
           'User Details',
-          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+          style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: _DashboardColors.onSurface),
         ),
       ],
     );
@@ -4744,10 +5392,17 @@ class _UserDetailsActionButton extends StatelessWidget {
           color: background,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: filled ? Colors.transparent : _DashboardColors.outlineVariant.withOpacity(0.3),
+            color: filled
+                ? Colors.transparent
+                : _DashboardColors.outlineVariant.withOpacity(0.3),
           ),
           boxShadow: filled
-              ? [BoxShadow(color: background.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 6))]
+              ? [
+                  BoxShadow(
+                      color: background.withOpacity(0.2),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6))
+                ]
               : null,
         ),
         child: Row(
@@ -4756,7 +5411,8 @@ class _UserDetailsActionButton extends StatelessWidget {
             const SizedBox(width: 8),
             Text(
               loading ? 'Working...' : label,
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: textColor),
+              style: GoogleFonts.inter(
+                  fontSize: 12, fontWeight: FontWeight.w600, color: textColor),
             ),
           ],
         ),
@@ -4795,7 +5451,10 @@ class _UserIdentityCard extends StatelessWidget {
             height: 120,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+                colors: [
+                  _DashboardColors.primary,
+                  _DashboardColors.primaryContainer
+                ],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
               ),
@@ -4816,7 +5475,11 @@ class _UserIdentityCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(18),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 12)],
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black.withOpacity(0.08),
+                                blurRadius: 12)
+                          ],
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(14),
@@ -4848,14 +5511,20 @@ class _UserIdentityCard extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 4),
                                     decoration: BoxDecoration(
-                                      color: _DashboardColors.primary.withOpacity(0.1),
+                                      color: _DashboardColors.primary
+                                          .withOpacity(0.1),
                                       borderRadius: BorderRadius.circular(16),
-                                      border: Border.all(color: _DashboardColors.primary.withOpacity(0.1)),
+                                      border: Border.all(
+                                          color: _DashboardColors.primary
+                                              .withOpacity(0.1)),
                                     ),
                                     child: Text(
-                                      isActive ? 'Active Member' : 'Inactive Member',
+                                      isActive
+                                          ? 'Active Member'
+                                          : 'Inactive Member',
                                       style: GoogleFonts.inter(
                                         fontSize: 10,
                                         fontWeight: FontWeight.w700,
@@ -4869,12 +5538,17 @@ class _UserIdentityCard extends StatelessWidget {
                               const SizedBox(height: 4),
                               Row(
                                 children: [
-                                  const Icon(Icons.alternate_email, size: 14, color: _DashboardColors.onSurfaceVariant),
+                                  const Icon(Icons.alternate_email,
+                                      size: 14,
+                                      color: _DashboardColors.onSurfaceVariant),
                                   const SizedBox(width: 6),
                                   Expanded(
                                     child: Text(
                                       email,
-                                      style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                                      style: GoogleFonts.inter(
+                                          fontSize: 12,
+                                          color: _DashboardColors
+                                              .onSurfaceVariant),
                                     ),
                                   ),
                                 ],
@@ -4924,7 +5598,8 @@ class _UserIdentityCard extends StatelessWidget {
 }
 
 class _UserMetricTile extends StatelessWidget {
-  const _UserMetricTile({required this.label, required this.value, required this.icon});
+  const _UserMetricTile(
+      {required this.label, required this.value, required this.icon});
 
   final String label;
   final String value;
@@ -4955,7 +5630,10 @@ class _UserMetricTile extends StatelessWidget {
             children: [
               Text(
                 value,
-                style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.manrope(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
               const SizedBox(width: 6),
               Icon(icon, size: 14, color: _DashboardColors.primaryContainer),
@@ -5024,11 +5702,15 @@ class _UserContactCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.chat, size: 18, color: _DashboardColors.primary),
+                  const Icon(Icons.chat,
+                      size: 18, color: _DashboardColors.primary),
                   const SizedBox(width: 8),
                   Text(
                     'Send Notification',
-                    style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: _DashboardColors.primary),
                   ),
                 ],
               ),
@@ -5041,7 +5723,8 @@ class _UserContactCard extends StatelessWidget {
 }
 
 class _ContactRow extends StatelessWidget {
-  const _ContactRow({required this.icon, required this.title, required this.value});
+  const _ContactRow(
+      {required this.icon, required this.title, required this.value});
 
   final IconData icon;
   final String title;
@@ -5068,12 +5751,16 @@ class _ContactRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 10, color: _DashboardColors.onSurfaceVariant),
               ),
               const SizedBox(height: 2),
               Text(
                 value,
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: _DashboardColors.onSurface),
               ),
             ],
           ),
@@ -5102,7 +5789,8 @@ class _UserBookingHistoryTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -5112,12 +5800,17 @@ class _UserBookingHistoryTable extends StatelessWidget {
                   children: [
                     Text(
                       'Booking History',
-                      style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.manrope(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.onSurface),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Last 10 transactions and journey logs',
-                      style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -5142,7 +5835,9 @@ class _UserBookingHistoryTable extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: Text(
                       'No bookings yet.',
-                      style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 12,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   )
                 else
@@ -5154,15 +5849,18 @@ class _UserBookingHistoryTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLowest,
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
-              border: Border(top: BorderSide(color: _DashboardColors.surfaceLow)),
+              borderRadius:
+                  const BorderRadius.vertical(bottom: Radius.circular(16)),
+              border:
+                  Border(top: BorderSide(color: _DashboardColors.surfaceLow)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Showing 1-${rows.length} of ${_formatCount(bookings.length)} trips',
-                  style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 11, color: _DashboardColors.onSurfaceVariant),
                 ),
                 Row(
                   children: [
@@ -5203,7 +5901,10 @@ class _MiniAction extends StatelessWidget {
           const SizedBox(width: 4),
           Text(
             label,
-            style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.inter(
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
         ],
       ),
@@ -5230,7 +5931,11 @@ class _UserBookingHeader extends StatelessWidget {
         Expanded(flex: 2, child: Text('Duration', style: style)),
         Expanded(flex: 2, child: Text('Fare', style: style)),
         Expanded(flex: 2, child: Text('Status', style: style)),
-        Expanded(flex: 1, child: Align(alignment: Alignment.centerRight, child: Text('Actions', style: style))),
+        Expanded(
+            flex: 1,
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Text('Actions', style: style))),
       ],
     );
   }
@@ -5256,7 +5961,10 @@ class _UserBookingRow extends StatelessWidget {
             flex: 2,
             child: Text(
               _bookingId(booking),
-              style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+              style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  color: _DashboardColors.primary),
             ),
           ),
           Expanded(
@@ -5266,11 +5974,15 @@ class _UserBookingRow extends StatelessWidget {
               children: [
                 Text(
                   date,
-                  style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                  style: GoogleFonts.inter(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: _DashboardColors.onSurface),
                 ),
                 Text(
                   time,
-                  style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 10, color: _DashboardColors.onSurfaceVariant),
                 ),
               ],
             ),
@@ -5286,7 +5998,8 @@ class _UserBookingRow extends StatelessWidget {
                     color: _DashboardColors.primaryContainer.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Icon(Icons.directions_subway, size: 16, color: _DashboardColors.primary),
+                  child: const Icon(Icons.directions_subway,
+                      size: 16, color: _DashboardColors.primary),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
@@ -5295,11 +6008,16 @@ class _UserBookingRow extends StatelessWidget {
                     children: [
                       Text(
                         routeInfo,
-                        style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: _DashboardColors.onSurface),
                       ),
                       Text(
                         'Zone 1 -> Zone 4',
-                        style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 10,
+                            color: _DashboardColors.onSurfaceVariant),
                       ),
                     ],
                   ),
@@ -5311,14 +6029,18 @@ class _UserBookingRow extends StatelessWidget {
             flex: 2,
             child: Text(
               '--',
-              style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.inter(
+                  fontSize: 11, color: _DashboardColors.onSurfaceVariant),
             ),
           ),
           Expanded(
             flex: 2,
             child: Text(
               fare,
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+              style: GoogleFonts.inter(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: _DashboardColors.onSurface),
             ),
           ),
           Expanded(
@@ -5331,7 +6053,8 @@ class _UserBookingRow extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.more_vert, size: 18, color: _DashboardColors.onSurfaceVariant),
+                icon: const Icon(Icons.more_vert,
+                    size: 18, color: _DashboardColors.onSurfaceVariant),
               ),
             ),
           ),
@@ -5362,15 +6085,21 @@ class _UserStatusChip extends StatelessWidget {
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(14)),
+      decoration: BoxDecoration(
+          color: background, borderRadius: BorderRadius.circular(14)),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(width: 6, height: 6, decoration: BoxDecoration(color: textColor, shape: BoxShape.circle)),
+          Container(
+              width: 6,
+              height: 6,
+              decoration:
+                  BoxDecoration(color: textColor, shape: BoxShape.circle)),
           const SizedBox(width: 4),
           Text(
             status.toUpperCase(),
-            style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, color: textColor),
+            style: GoogleFonts.inter(
+                fontSize: 9, fontWeight: FontWeight.w700, color: textColor),
           ),
         ],
       ),
@@ -5393,7 +6122,11 @@ class _PageMiniButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: _DashboardColors.outlineVariant),
       ),
-      child: Icon(icon, size: 14, color: enabled ? _DashboardColors.onSurfaceVariant : _DashboardColors.outlineVariant),
+      child: Icon(icon,
+          size: 14,
+          color: enabled
+              ? _DashboardColors.onSurfaceVariant
+              : _DashboardColors.outlineVariant),
     );
   }
 }
@@ -5413,7 +6146,10 @@ class _MiniPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: active ? _DashboardColors.primary : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: active ? _DashboardColors.primary : _DashboardColors.outlineVariant),
+        border: Border.all(
+            color: active
+                ? _DashboardColors.primary
+                : _DashboardColors.outlineVariant),
       ),
       child: Center(
         child: Text(
@@ -5457,7 +6193,10 @@ class _UserAdminNotesCard extends StatelessWidget {
               ),
               Text(
                 'Add Note',
-                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
             ],
           ),
@@ -5473,7 +6212,10 @@ class _UserAdminNotesCard extends StatelessWidget {
               children: [
                 Text(
                   'User requested fare refund for trip #IM-28114 due to station delay. Refund processed via dashboard.',
-                  style: GoogleFonts.inter(fontSize: 12, fontStyle: FontStyle.italic, color: _DashboardColors.onSurface),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontStyle: FontStyle.italic,
+                      color: _DashboardColors.onSurface),
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -5481,11 +6223,15 @@ class _UserAdminNotesCard extends StatelessWidget {
                   children: [
                     Text(
                       'Added by: Admin Sarah W.',
-                      style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                     Text(
                       'Oct 22, 2023',
-                      style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -5522,7 +6268,8 @@ class _UserSecuritySummaryCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          _SecurityRow(label: 'Last Login', value: '2 hours ago (203.0.113.42)'),
+          _SecurityRow(
+              label: 'Last Login', value: '2 hours ago (203.0.113.42)'),
           _SecurityRow(
             label: 'Two-Factor Auth',
             value: 'Enabled',
@@ -5536,7 +6283,8 @@ class _UserSecuritySummaryCard extends StatelessWidget {
 }
 
 class _SecurityRow extends StatelessWidget {
-  const _SecurityRow({required this.label, required this.value, this.highlight = false});
+  const _SecurityRow(
+      {required this.label, required this.value, this.highlight = false});
 
   final String label;
   final String value;
@@ -5551,23 +6299,31 @@ class _SecurityRow extends StatelessWidget {
         children: [
           Text(
             label,
-            style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 12, color: _DashboardColors.onSurfaceVariant),
           ),
           if (highlight)
             Row(
               children: [
-                const Icon(Icons.check_circle, size: 14, color: Color(0xFF16A34A)),
+                const Icon(Icons.check_circle,
+                    size: 14, color: Color(0xFF16A34A)),
                 const SizedBox(width: 4),
                 Text(
                   value,
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: const Color(0xFF16A34A)),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: const Color(0xFF16A34A)),
                 ),
               ],
             )
           else
             Text(
               value,
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _DashboardColors.onSurface),
             ),
         ],
       ),
@@ -5634,8 +6390,10 @@ class _MerchantTopBar extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search transactions, routes or IDs...',
-                  hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
-                  prefixIcon: const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                  hintStyle: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  prefixIcon: const Icon(Icons.search,
+                      size: 18, color: _DashboardColors.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
@@ -5644,20 +6402,23 @@ class _MerchantTopBar extends StatelessWidget {
           const SizedBox(width: 24),
           IconButton(
             onPressed: onRefresh,
-            icon: const Icon(Icons.refresh, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.refresh,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
             icon: Stack(
               children: [
-                const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.notifications,
+                    color: _DashboardColors.onSurfaceVariant),
                 Positioned(
                   right: 2,
                   top: 2,
                   child: Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(color: _DashboardColors.error, shape: BoxShape.circle),
+                    decoration: const BoxDecoration(
+                        color: _DashboardColors.error, shape: BoxShape.circle),
                   ),
                 ),
               ],
@@ -5665,44 +6426,52 @@ class _MerchantTopBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(width: 12),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 12),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Admin Profile',
-                        style: GoogleFonts.manrope(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: _DashboardColors.onSurface,
-                        ),
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Admin Profile',
+                      style: GoogleFonts.manrope(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: _DashboardColors.onSurface,
                       ),
-                      Text(
-                        'Lead Operator',
-                        style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1, color: _DashboardColors.onSurfaceVariant),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 10),
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: _DashboardColors.surfaceHighest,
-                    backgroundImage: const NetworkImage(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuAN36OWD_m3A-5h65_Bk9J8wbmwt7I7wa9Ocu_ro_0_ZJfJzEuWbWCeVbnpf-uiYrckXcyRxFFe3CYEoSUKhF7PQGFyGfaFJMsQCPVSsAEeC7x4ly9-FcO7Lf-CtpKu8YPMYmyv31aBe10aDVDReVtT37igSDeksdMlDJxgqSfqP751dMjlJxDa9roRS46zOtVpoR2BnH-YdX7G1D9UwebJAbkKn2h9r6u1bvwkeEz9xmszJBluF-vyiDN7KY4AlIfaJ-ZapFWq5B4',
                     ),
+                    Text(
+                      'Lead Operator',
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          letterSpacing: 1,
+                          color: _DashboardColors.onSurfaceVariant),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 10),
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: _DashboardColors.surfaceHighest,
+                  backgroundImage: const NetworkImage(
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuAN36OWD_m3A-5h65_Bk9J8wbmwt7I7wa9Ocu_ro_0_ZJfJzEuWbWCeVbnpf-uiYrckXcyRxFFe3CYEoSUKhF7PQGFyGfaFJMsQCPVSsAEeC7x4ly9-FcO7Lf-CtpKu8YPMYmyv31aBe10aDVDReVtT37igSDeksdMlDJxgqSfqP751dMjlJxDa9roRS46zOtVpoR2BnH-YdX7G1D9UwebJAbkKn2h9r6u1bvwkeEz9xmszJBluF-vyiDN7KY4AlIfaJ-ZapFWq5B4',
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+          ),
         ],
       ),
     );
@@ -5738,7 +6507,8 @@ class _MerchantHeader extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 6),
-                const Icon(Icons.chevron_right, size: 14, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.chevron_right,
+                    size: 14, color: _DashboardColors.onSurfaceVariant),
                 const SizedBox(width: 6),
                 Text(
                   'Details',
@@ -5754,7 +6524,10 @@ class _MerchantHeader extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               name,
-              style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: _DashboardColors.onSurface),
+              style: GoogleFonts.manrope(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: _DashboardColors.onSurface),
             ),
           ],
         ),
@@ -5793,7 +6566,10 @@ class _MerchantActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final background = filled
         ? const LinearGradient(
-            colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+            colors: [
+              _DashboardColors.primary,
+              _DashboardColors.primaryContainer
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           )
@@ -5808,10 +6584,17 @@ class _MerchantActionButton extends StatelessWidget {
           gradient: background,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: filled ? Colors.transparent : _DashboardColors.outlineVariant.withOpacity(0.3),
+            color: filled
+                ? Colors.transparent
+                : _DashboardColors.outlineVariant.withOpacity(0.3),
           ),
           boxShadow: filled
-              ? [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 6))]
+              ? [
+                  BoxShadow(
+                      color: _DashboardColors.primary.withOpacity(0.2),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6))
+                ]
               : null,
         ),
         child: Text(
@@ -5881,7 +6664,12 @@ class _MerchantInfoCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -5891,7 +6679,8 @@ class _MerchantInfoCard extends StatelessWidget {
               children: [
                 Positioned.fill(
                   child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+                    borderRadius:
+                        const BorderRadius.vertical(top: Radius.circular(18)),
                     child: Image.network(
                       'https://lh3.googleusercontent.com/aida-public/AB6AXuDjC00RzTISaQfjzJN202Z0QKRcfaT4HQYj4E4lboL3I-dce7GosxO0_qpLn-MNofyLi3QGW-HRMWqGm0vAX4Ux83Ievj0W_YDF-cGqHxSd6oQcnsd1T2KsuYJlEkkySftcclolXUk68JO0iAFaSo5HRndmImcAII7gdQ2GyaZobGzKdxPtS7ssHAwJt4OyuY5WBpXJ9rU_RYNO1E5r9R2EhQPAbymYT3gQZmf3KgZhLon7h_TsNa_CJMMqiQRb6wgtIfdRRzwY0G8',
                       fit: BoxFit.cover,
@@ -5901,9 +6690,13 @@ class _MerchantInfoCard extends StatelessWidget {
                 Positioned.fill(
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+                      borderRadius:
+                          const BorderRadius.vertical(top: Radius.circular(18)),
                       gradient: LinearGradient(
-                        colors: [Colors.black.withOpacity(0.55), Colors.transparent],
+                        colors: [
+                          Colors.black.withOpacity(0.55),
+                          Colors.transparent
+                        ],
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                       ),
@@ -5922,7 +6715,11 @@ class _MerchantInfoCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 8)],
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black.withOpacity(0.12),
+                                blurRadius: 8)
+                          ],
                         ),
                         child: Image.network(
                           'https://lh3.googleusercontent.com/aida-public/AB6AXuC9lQ1-MnEdBvvf5iziRAJ_-6AXO0djEaRi06kMBN4Q_Fnf93GNcEWzXvAkmlMmwOXSBkl3SbDH7WDP7Vvjn1TFusO_P1zhMmHcFdbga5Z-UlcwwVgY7_4THHeBSdNwcF8-hkAraZTclx7mwnSTZ1QNf0GMcmaSLDzyfY-OMIHGVwBHfju8GpXhsTuCt8aNGzXGB-D0rl2aq2pWCDWn8JPcQosZghwJd07DtHdZ0GfQyv_g5QCDH2diiDJQmNYvymQI2iWcGdIe2EQ',
@@ -5931,14 +6728,18 @@ class _MerchantInfoCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: _DashboardColors.primary.withOpacity(0.9),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Text(
                           'Verified Merchant',
-                          style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
+                          style: GoogleFonts.inter(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white),
                         ),
                       ),
                     ],
@@ -5980,7 +6781,8 @@ class _MerchantInfoCard extends StatelessWidget {
                   value: 'Suite 400, Level 2, Terminal A',
                 ),
                 const SizedBox(height: 20),
-                Divider(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+                Divider(
+                    color: _DashboardColors.outlineVariant.withOpacity(0.2)),
                 const SizedBox(height: 16),
                 Text(
                   'Business Details',
@@ -6064,11 +6866,15 @@ class _MerchantContactRow extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 10, color: _DashboardColors.onSurfaceVariant),
               ),
               Text(
                 value,
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: _DashboardColors.onSurface),
               ),
             ],
           ),
@@ -6097,12 +6903,16 @@ class _MerchantBusinessTile extends StatelessWidget {
         children: [
           Text(
             label.toUpperCase(),
-            style: GoogleFonts.inter(fontSize: 9, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 9, color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 6),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 13, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
         ],
       ),
@@ -6126,16 +6936,25 @@ class _MerchantRiskTile extends StatelessWidget {
         children: [
           Text(
             'RISK TIER',
-            style: GoogleFonts.inter(fontSize: 9, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 9, color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 6),
           Row(
             children: [
-              Container(width: 6, height: 6, decoration: BoxDecoration(color: _DashboardColors.primaryFixedDim, shape: BoxShape.circle)),
+              Container(
+                  width: 6,
+                  height: 6,
+                  decoration: BoxDecoration(
+                      color: _DashboardColors.primaryFixedDim,
+                      shape: BoxShape.circle)),
               const SizedBox(width: 6),
               Text(
                 'Low',
-                style: GoogleFonts.manrope(fontSize: 13, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
             ],
           ),
@@ -6155,7 +6974,12 @@ class _MerchantRoutesCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -6174,7 +6998,10 @@ class _MerchantRoutesCard extends StatelessWidget {
               ),
               Text(
                 'View Map',
-                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
             ],
           ),
@@ -6239,7 +7066,10 @@ class _MerchantRouteRow extends StatelessWidget {
             child: Center(
               child: Text(
                 initials,
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: textColor),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: textColor),
               ),
             ),
           ),
@@ -6248,12 +7078,20 @@ class _MerchantRouteRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
-                Text(subtitle, style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                Text(title,
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.onSurface)),
+                Text(subtitle,
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: _DashboardColors.onSurfaceVariant)),
               ],
             ),
           ),
-          const Icon(Icons.arrow_forward_ios, size: 14, color: _DashboardColors.onSurfaceVariant),
+          const Icon(Icons.arrow_forward_ios,
+              size: 14, color: _DashboardColors.onSurfaceVariant),
         ],
       ),
     );
@@ -6383,8 +7221,16 @@ class _MerchantStatCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
-        border: highlight ? Border(left: BorderSide(color: _DashboardColors.primary, width: 4)) : null,
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
+        border: highlight
+            ? Border(
+                left: BorderSide(color: _DashboardColors.primary, width: 4))
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -6403,19 +7249,26 @@ class _MerchantStatCard extends StatelessWidget {
             children: [
               Text(
                 value,
-                style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w800, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w800,
+                    color: _DashboardColors.onSurface),
               ),
               const SizedBox(width: 6),
               if (chip)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: _DashboardColors.primaryFixedDim,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
                     change,
-                    style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                    style: GoogleFonts.inter(
+                        fontSize: 9,
+                        fontWeight: FontWeight.w700,
+                        color: _DashboardColors.primary),
                   ),
                 )
               else
@@ -6424,7 +7277,9 @@ class _MerchantStatCard extends StatelessWidget {
                   style: GoogleFonts.inter(
                     fontSize: 10,
                     fontWeight: FontWeight.w700,
-                    color: highlight ? _DashboardColors.primaryContainer : _DashboardColors.onSurfaceVariant,
+                    color: highlight
+                        ? _DashboardColors.primaryContainer
+                        : _DashboardColors.onSurfaceVariant,
                   ),
                 ),
             ],
@@ -6446,7 +7301,12 @@ class _MerchantTransactionHistory extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -6454,14 +7314,18 @@ class _MerchantTransactionHistory extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(18)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Transaction History',
-                  style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w800, color: _DashboardColors.onSurface),
+                  style: GoogleFonts.manrope(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: _DashboardColors.onSurface),
                 ),
                 Row(
                   children: const [
@@ -6519,14 +7383,17 @@ class _MerchantTransactionHistory extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: _DashboardColors.outlineVariant.withOpacity(0.2))),
+              border: Border(
+                  top: BorderSide(
+                      color: _DashboardColors.outlineVariant.withOpacity(0.2))),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Showing 5 of 1,280 transactions',
-                  style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 11, color: _DashboardColors.onSurfaceVariant),
                 ),
                 Row(
                   children: [
@@ -6552,13 +7419,21 @@ class _MerchantTransactionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.2, color: _DashboardColors.onSurfaceVariant);
+    final style = GoogleFonts.inter(
+        fontSize: 9,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 1.2,
+        color: _DashboardColors.onSurfaceVariant);
     return Row(
       children: [
         Expanded(flex: 2, child: Text('Transaction ID', style: style)),
         Expanded(flex: 3, child: Text('Date & Time', style: style)),
         Expanded(flex: 2, child: Text('Customer ID', style: style)),
-        Expanded(flex: 2, child: Align(alignment: Alignment.centerRight, child: Text('Amount', style: style))),
+        Expanded(
+            flex: 2,
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Text('Amount', style: style))),
         Expanded(flex: 2, child: Text('Status', style: style)),
         const SizedBox(width: 20),
       ],
@@ -6589,21 +7464,33 @@ class _MerchantTransactionRow extends StatelessWidget {
         children: [
           Expanded(
             flex: 2,
-            child: Text(id, style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface)),
+            child: Text(id,
+                style: GoogleFonts.manrope(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface)),
           ),
           Expanded(
             flex: 3,
-            child: Text(date, style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
+            child: Text(date,
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
           ),
           Expanded(
             flex: 2,
-            child: Text(customer, style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
+            child: Text(customer,
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
           ),
           Expanded(
             flex: 2,
             child: Align(
               alignment: Alignment.centerRight,
-              child: Text(amount, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface)),
+              child: Text(amount,
+                  style: GoogleFonts.inter(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      color: _DashboardColors.onSurface)),
             ),
           ),
           Expanded(
@@ -6612,7 +7499,8 @@ class _MerchantTransactionRow extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.more_horiz, size: 18, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.more_horiz,
+                size: 18, color: _DashboardColors.onSurfaceVariant),
           ),
         ],
       ),
@@ -6641,10 +7529,12 @@ class _MerchantStatusChip extends StatelessWidget {
     }
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(color: background, borderRadius: BorderRadius.circular(14)),
+      decoration: BoxDecoration(
+          color: background, borderRadius: BorderRadius.circular(14)),
       child: Text(
         status.toUpperCase(),
-        style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, color: textColor),
+        style: GoogleFonts.inter(
+            fontSize: 9, fontWeight: FontWeight.w700, color: textColor),
       ),
     );
   }
@@ -6662,7 +7552,8 @@ class _MerchantIconButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
       ),
       child: Icon(icon, size: 18, color: _DashboardColors.onSurfaceVariant),
     );
@@ -6679,7 +7570,12 @@ class _MerchantDeviceDistributionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -6701,14 +7597,20 @@ class _MerchantDeviceDistributionCard extends StatelessWidget {
                 height: 110,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: _DashboardColors.surfaceLow, width: 12),
+                  border:
+                      Border.all(color: _DashboardColors.surfaceLow, width: 12),
                 ),
                 child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('72%', style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800)),
-                      Text('Mobile', style: GoogleFonts.inter(fontSize: 9, color: _DashboardColors.onSurfaceVariant)),
+                      Text('72%',
+                          style: GoogleFonts.manrope(
+                              fontSize: 18, fontWeight: FontWeight.w800)),
+                      Text('Mobile',
+                          style: GoogleFonts.inter(
+                              fontSize: 9,
+                              color: _DashboardColors.onSurfaceVariant)),
                     ],
                   ),
                 ),
@@ -6717,11 +7619,20 @@ class _MerchantDeviceDistributionCard extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: const [
-                    _DeviceLegendItem(label: 'I-Metro Pass', value: '72%', color: _DashboardColors.primary),
+                    _DeviceLegendItem(
+                        label: 'I-Metro Pass',
+                        value: '72%',
+                        color: _DashboardColors.primary),
                     SizedBox(height: 8),
-                    _DeviceLegendItem(label: 'Direct NFC', value: '18%', color: _DashboardColors.primaryContainer),
+                    _DeviceLegendItem(
+                        label: 'Direct NFC',
+                        value: '18%',
+                        color: _DashboardColors.primaryContainer),
                     SizedBox(height: 8),
-                    _DeviceLegendItem(label: 'QR Code', value: '10%', color: _DashboardColors.primaryFixedDim),
+                    _DeviceLegendItem(
+                        label: 'QR Code',
+                        value: '10%',
+                        color: _DashboardColors.primaryFixedDim),
                   ],
                 ),
               ),
@@ -6734,7 +7645,8 @@ class _MerchantDeviceDistributionCard extends StatelessWidget {
 }
 
 class _DeviceLegendItem extends StatelessWidget {
-  const _DeviceLegendItem({required this.label, required this.value, required this.color});
+  const _DeviceLegendItem(
+      {required this.label, required this.value, required this.color});
 
   final String label;
   final String value;
@@ -6747,12 +7659,20 @@ class _DeviceLegendItem extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+            Container(
+                width: 8,
+                height: 8,
+                decoration:
+                    BoxDecoration(color: color, shape: BoxShape.circle)),
             const SizedBox(width: 6),
-            Text(label, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 11, fontWeight: FontWeight.w600)),
           ],
         ),
-        Text(value, style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
+        Text(value,
+            style: GoogleFonts.inter(
+                fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
       ],
     );
   }
@@ -6768,7 +7688,12 @@ class _MerchantLocationAnalyticsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -6802,14 +7727,16 @@ class _MerchantLocationAnalyticsCard extends StatelessWidget {
                 ),
                 Center(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Text(
                       'Zone 1 Hub',
-                      style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700),
+                      style: GoogleFonts.inter(
+                          fontSize: 10, fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),
@@ -6822,17 +7749,22 @@ class _MerchantLocationAnalyticsCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.speed, size: 16, color: _DashboardColors.primary),
+                  const Icon(Icons.speed,
+                      size: 16, color: _DashboardColors.primary),
                   const SizedBox(width: 6),
                   Text(
                     'Peak: 12:00 - 14:00',
-                    style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.inter(
+                        fontSize: 11, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
               Text(
                 'Heatmap',
-                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
             ],
           ),
@@ -6875,8 +7807,10 @@ class _RoutesTopBar extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search routes, stations, or IDs...',
-                  hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
-                  prefixIcon: const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                  hintStyle: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  prefixIcon: const Icon(Icons.search,
+                      size: 18, color: _DashboardColors.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
@@ -6885,20 +7819,23 @@ class _RoutesTopBar extends StatelessWidget {
           const SizedBox(width: 24),
           IconButton(
             onPressed: onRefresh,
-            icon: const Icon(Icons.refresh, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.refresh,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
             icon: Stack(
               children: [
-                const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.notifications,
+                    color: _DashboardColors.onSurfaceVariant),
                 Positioned(
                   right: 2,
                   top: 2,
                   child: Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(color: _DashboardColors.error, shape: BoxShape.circle),
+                    decoration: const BoxDecoration(
+                        color: _DashboardColors.error, shape: BoxShape.circle),
                   ),
                 ),
               ],
@@ -6906,13 +7843,18 @@ class _RoutesTopBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(width: 12),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 12),
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
             child: Row(
               children: [
                 Column(
@@ -6930,7 +7872,9 @@ class _RoutesTopBar extends StatelessWidget {
                     ),
                     Text(
                       'Sarah Jenkins',
-                      style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -6969,26 +7913,39 @@ class _RoutesHeader extends StatelessWidget {
                 children: [
                   Text(
                     'Admin',
-                    style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.onSurfaceVariant),
                   ),
                   const SizedBox(width: 6),
-                  Text('/', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                  Text('/',
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          color: _DashboardColors.onSurfaceVariant)),
                   const SizedBox(width: 6),
                   Text(
                     'Routes',
-                    style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: _DashboardColors.primary),
                   ),
                 ],
               ),
               const SizedBox(height: 6),
               Text(
                 'Route Management',
-                style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
               const SizedBox(height: 6),
               Text(
                 'Manage and monitor active transit arteries across the metropolitan area.',
-                style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: _DashboardColors.onSurfaceVariant),
               ),
             ],
           ),
@@ -7001,12 +7958,20 @@ class _RoutesHeader extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+                colors: [
+                  _DashboardColors.primary,
+                  _DashboardColors.primaryContainer
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(16),
-              boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 16, offset: const Offset(0, 8))],
+              boxShadow: [
+                BoxShadow(
+                    color: _DashboardColors.primary.withOpacity(0.2),
+                    blurRadius: 16,
+                    offset: const Offset(0, 8))
+              ],
             ),
             child: Row(
               children: [
@@ -7014,7 +7979,10 @@ class _RoutesHeader extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   'Add New Transit Route',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
                 ),
               ],
             ),
@@ -7035,7 +8003,12 @@ class _RoutesCoverageCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Stack(
         children: [
@@ -7056,17 +8029,24 @@ class _RoutesCoverageCard extends StatelessWidget {
             children: [
               Text(
                 'Total Network Coverage',
-                style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: _DashboardColors.onSurfaceVariant),
               ),
               const SizedBox(height: 8),
               RichText(
                 text: TextSpan(
                   text: '1,240',
-                  style: GoogleFonts.manrope(fontSize: 36, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                  style: GoogleFonts.manrope(
+                      fontSize: 36,
+                      fontWeight: FontWeight.w700,
+                      color: _DashboardColors.onSurface),
                   children: [
                     TextSpan(
                       text: ' km',
-                      style: GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -7074,11 +8054,15 @@ class _RoutesCoverageCard extends StatelessWidget {
               const SizedBox(height: 12),
               Row(
                 children: [
-                  const Icon(Icons.trending_up, size: 14, color: _DashboardColors.primary),
+                  const Icon(Icons.trending_up,
+                      size: 14, color: _DashboardColors.primary),
                   const SizedBox(width: 6),
                   Text(
                     '+4.2% from last month',
-                    style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.primary),
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.primary),
                   ),
                 ],
               ),
@@ -7110,19 +8094,28 @@ class _RoutesStatCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 12, color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 8),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 28,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
           const SizedBox(height: 12),
           if (progress != null)
@@ -7161,7 +8154,9 @@ class _DotIndicator extends StatelessWidget {
       height: 8,
       margin: const EdgeInsets.only(right: 6),
       decoration: BoxDecoration(
-        color: active ? _DashboardColors.primary : _DashboardColors.primary.withOpacity(0.4),
+        color: active
+            ? _DashboardColors.primary
+            : _DashboardColors.primary.withOpacity(0.4),
         shape: BoxShape.circle,
       ),
     );
@@ -7185,7 +8180,12 @@ class _RoutesTable extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -7193,24 +8193,30 @@ class _RoutesTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(18)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.alt_route, color: _DashboardColors.primary),
+                    const Icon(Icons.alt_route,
+                        color: _DashboardColors.primary),
                     const SizedBox(width: 8),
                     Text(
                       'Available Routes',
-                      style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.manrope(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.onSurface),
                     ),
                   ],
                 ),
                 Row(
                   children: const [
-                    _RoutesTableAction(label: 'Filter', icon: Icons.filter_list),
+                    _RoutesTableAction(
+                        label: 'Filter', icon: Icons.filter_list),
                     SizedBox(width: 8),
                     _RoutesTableAction(label: 'Export', icon: Icons.download),
                   ],
@@ -7229,7 +8235,9 @@ class _RoutesTable extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 24),
                     child: Text(
                       'No routes yet.',
-                      style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   )
                 else
@@ -7245,14 +8253,16 @@ class _RoutesTable extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: _DashboardColors.surfaceLow)),
+              border:
+                  Border(top: BorderSide(color: _DashboardColors.surfaceLow)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   'Showing 1-${routes.length} of ${routes.length} routes',
-                  style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
                 ),
                 Row(
                   children: [
@@ -7290,7 +8300,11 @@ class _RoutesTableHeader extends StatelessWidget {
         Expanded(flex: 3, child: Text('Pickup Point', style: style)),
         Expanded(flex: 3, child: Text('Destination', style: style)),
         Expanded(flex: 2, child: Text('Status', style: style)),
-        Expanded(flex: 2, child: Align(alignment: Alignment.centerRight, child: Text('Price', style: style))),
+        Expanded(
+            flex: 2,
+            child: Align(
+                alignment: Alignment.centerRight,
+                child: Text('Price', style: style))),
         const SizedBox(width: 24),
       ],
     );
@@ -7325,7 +8339,10 @@ class _RoutesTableRow extends StatelessWidget {
               ),
               child: Text(
                 _routeId(route),
-                style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.inter(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
             ),
           ),
@@ -7353,13 +8370,17 @@ class _RoutesTableRow extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text(
                 _routePrice(route),
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
             ),
           ),
           IconButton(
             onPressed: onEdit ?? onDelete,
-            icon: const Icon(Icons.more_vert, size: 18, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.more_vert,
+                size: 18, color: _DashboardColors.onSurfaceVariant),
           ),
         ],
       ),
@@ -7380,11 +8401,15 @@ class _RouteLocationBlock extends StatelessWidget {
       children: [
         Text(
           title,
-          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+          style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: _DashboardColors.onSurface),
         ),
         Text(
           subtitle,
-          style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 10, color: _DashboardColors.onSurfaceVariant),
         ),
       ],
     );
@@ -7423,11 +8448,16 @@ class _RouteStatusChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(width: 6, height: 6, decoration: BoxDecoration(color: dotColor, shape: BoxShape.circle)),
+          Container(
+              width: 6,
+              height: 6,
+              decoration:
+                  BoxDecoration(color: dotColor, shape: BoxShape.circle)),
           const SizedBox(width: 6),
           Text(
             status,
-            style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: textColor),
+            style: GoogleFonts.inter(
+                fontSize: 10, fontWeight: FontWeight.w700, color: textColor),
           ),
         ],
       ),
@@ -7448,7 +8478,8 @@ class _RoutesTableAction extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
       ),
       child: Row(
         children: [
@@ -7473,7 +8504,12 @@ class _RoutesMapPanel extends StatelessWidget {
       height: 320,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.12),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
@@ -7511,14 +8547,19 @@ class _RoutesMapPanel extends StatelessWidget {
                   children: [
                     Text(
                       'Network Map Live',
-                      style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.manrope(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.onSurface),
                     ),
                     const SizedBox(height: 6),
                     SizedBox(
                       width: 220,
                       child: Text(
                         'Visualizing high-traffic congestion points in real-time. RT-5022 maintenance is affecting 14% of North traffic.',
-                        style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 10,
+                            color: _DashboardColors.onSurfaceVariant),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -7526,10 +8567,14 @@ class _RoutesMapPanel extends StatelessWidget {
                       children: [
                         Text(
                           'Full Network Insights',
-                          style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                          style: GoogleFonts.inter(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                              color: _DashboardColors.primary),
                         ),
                         const SizedBox(width: 4),
-                        const Icon(Icons.arrow_forward, size: 14, color: _DashboardColors.primary),
+                        const Icon(Icons.arrow_forward,
+                            size: 14, color: _DashboardColors.primary),
                       ],
                     ),
                   ],
@@ -7589,8 +8634,10 @@ class _AddRouteTopBar extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search routes, schedules, or transit IDs...',
-                  hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
-                  prefixIcon: const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                  hintStyle: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  prefixIcon: const Icon(Icons.search,
+                      size: 18, color: _DashboardColors.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
@@ -7599,49 +8646,57 @@ class _AddRouteTopBar extends StatelessWidget {
           const SizedBox(width: 24),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.notifications,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(width: 12),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 12),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'I-Metro Admin',
-                        style: GoogleFonts.inter(
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.2,
-                          color: _DashboardColors.onSurface,
-                        ),
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'I-Metro Admin',
+                      style: GoogleFonts.inter(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.2,
+                        color: _DashboardColors.onSurface,
                       ),
-                      Text(
-                        'Fleet Manager',
-                        style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 10),
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: _DashboardColors.surfaceHighest,
-                    backgroundImage: const NetworkImage(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuA9F-W19-WhUzKzYJng_gANBfAU3ms_19CbA96r9AwR2RH69zlR8wR3kOUQwiRyb5QJc6aMyzwBrCtDwGDwohbFCJ1KnBEWrFhogbc48mYUZlAIC1V_yUlIrJ9cNHHCq36BuCmXhpKrx2Nqwgr24Qq1EUfY_v91D7yPRW_QMVBu4MSPuvdEVvkYM1JEgIfMiY80fXx0uGxxckfI18hpVojQjvfh0JZ7ZKpVHVY6HUko99fl1sCqSeTuHEH_ZlbXlQpXDv9Psy4EpXw',
                     ),
+                    Text(
+                      'Fleet Manager',
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          color: _DashboardColors.onSurfaceVariant),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 10),
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: _DashboardColors.surfaceHighest,
+                  backgroundImage: const NetworkImage(
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuA9F-W19-WhUzKzYJng_gANBfAU3ms_19CbA96r9AwR2RH69zlR8wR3kOUQwiRyb5QJc6aMyzwBrCtDwGDwohbFCJ1KnBEWrFhogbc48mYUZlAIC1V_yUlIrJ9cNHHCq36BuCmXhpKrx2Nqwgr24Qq1EUfY_v91D7yPRW_QMVBu4MSPuvdEVvkYM1JEgIfMiY80fXx0uGxxckfI18hpVojQjvfh0JZ7ZKpVHVY6HUko99fl1sCqSeTuHEH_ZlbXlQpXDv9Psy4EpXw',
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+          ),
         ],
       ),
     );
@@ -7681,7 +8736,12 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(24),
@@ -7744,7 +8804,10 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
                     children: [
                       Text(
                         'Route Frequency',
-                        style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: _DashboardColors.onSurfaceVariant),
                       ),
                       const SizedBox(height: 8),
                       Container(
@@ -7759,10 +8822,17 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
                             isExpanded: true,
                             icon: const Icon(Icons.keyboard_arrow_down),
                             items: const [
-                              DropdownMenuItem(value: 'Every 15 minutes', child: Text('Every 15 minutes')),
-                              DropdownMenuItem(value: 'Every 30 minutes', child: Text('Every 30 minutes')),
-                              DropdownMenuItem(value: 'Hourly', child: Text('Hourly')),
-                              DropdownMenuItem(value: 'Peak hours only', child: Text('Peak hours only')),
+                              DropdownMenuItem(
+                                  value: 'Every 15 minutes',
+                                  child: Text('Every 15 minutes')),
+                              DropdownMenuItem(
+                                  value: 'Every 30 minutes',
+                                  child: Text('Every 30 minutes')),
+                              DropdownMenuItem(
+                                  value: 'Hourly', child: Text('Hourly')),
+                              DropdownMenuItem(
+                                  value: 'Peak hours only',
+                                  child: Text('Peak hours only')),
                             ],
                             onChanged: (value) {
                               if (value == null) return;
@@ -7779,7 +8849,10 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
             const SizedBox(height: 16),
             Text(
               'Operational Days',
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _DashboardColors.onSurfaceVariant),
             ),
             const SizedBox(height: 8),
             Wrap(
@@ -7790,9 +8863,12 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
                 return GestureDetector(
                   onTap: () => setState(() => _days[day] = !selected),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
                     decoration: BoxDecoration(
-                      color: selected ? _DashboardColors.primaryContainer : _DashboardColors.surfaceHighest,
+                      color: selected
+                          ? _DashboardColors.primaryContainer
+                          : _DashboardColors.surfaceHighest,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -7800,7 +8876,9 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
                       style: GoogleFonts.inter(
                         fontSize: 12,
                         fontWeight: FontWeight.w600,
-                        color: selected ? Colors.white : _DashboardColors.onSurfaceVariant,
+                        color: selected
+                            ? Colors.white
+                            : _DashboardColors.onSurfaceVariant,
                       ),
                     ),
                   ),
@@ -7819,7 +8897,9 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
                   },
                   child: Text(
                     'Discard',
-                    style: GoogleFonts.inter(fontWeight: FontWeight.w600, color: _DashboardColors.primary),
+                    style: GoogleFonts.inter(
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.primary),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -7828,8 +8908,10 @@ class _AddRouteFormPanelState extends State<_AddRouteFormPanel> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _DashboardColors.primary,
                     foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
                   ),
                   child: Text(widget.loading ? 'Saving...' : 'Save Route'),
                 ),
@@ -7868,7 +8950,10 @@ class _AddRouteField extends StatelessWidget {
       children: [
         Text(
           label,
-          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: _DashboardColors.onSurfaceVariant),
         ),
         const SizedBox(height: 8),
         Container(
@@ -7879,7 +8964,9 @@ class _AddRouteField extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(icon, size: 18, color: iconColor ?? _DashboardColors.onSurfaceVariant),
+              Icon(icon,
+                  size: 18,
+                  color: iconColor ?? _DashboardColors.onSurfaceVariant),
               const SizedBox(width: 8),
               Expanded(
                 child: TextField(
@@ -7888,14 +8975,18 @@ class _AddRouteField extends StatelessWidget {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: hint,
-                    hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                    hintStyle: GoogleFonts.inter(
+                        fontSize: 12, color: _DashboardColors.onSurfaceVariant),
                   ),
                 ),
               ),
               if (suffix != null)
                 Text(
                   suffix!,
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: _DashboardColors.onSurfaceVariant),
                 ),
             ],
           ),
@@ -7931,7 +9022,12 @@ class _AddRouteMapPreview extends StatelessWidget {
       height: 260,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 16, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 16,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
@@ -7958,14 +9054,18 @@ class _AddRouteMapPreview extends StatelessWidget {
               top: 16,
               right: 16,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
                   color: _DashboardColors.primary,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
                   'Live Preview',
-                  style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white),
+                  style: GoogleFonts.inter(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -7985,12 +9085,17 @@ class _AddRouteMapPreview extends StatelessWidget {
                   children: [
                     Text(
                       'Visualizer',
-                      style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.2, color: Colors.white),
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1.2,
+                          color: Colors.white),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'The route map will automatically update based on your pickup and destination coordinates.',
-                      style: GoogleFonts.inter(fontSize: 11, color: Colors.white.withOpacity(0.9)),
+                      style: GoogleFonts.inter(
+                          fontSize: 11, color: Colors.white.withOpacity(0.9)),
                     ),
                   ],
                 ),
@@ -8023,7 +9128,10 @@ class _AddRouteAnalyticsCard extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 'Route Analytics',
-                style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
             ],
           ),
@@ -8040,7 +9148,10 @@ class _AddRouteAnalyticsCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          _AnalyticsRow(label: 'Carbon Offset', value: 'High Impact', valueColor: const Color(0xFF10B981)),
+          _AnalyticsRow(
+              label: 'Carbon Offset',
+              value: 'High Impact',
+              valueColor: const Color(0xFF10B981)),
         ],
       ),
     );
@@ -8063,10 +9174,15 @@ class _AnalyticsRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
         Text(
           value,
-          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: valueColor ?? _DashboardColors.onSurface),
+          style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              color: valueColor ?? _DashboardColors.onSurface),
         ),
       ],
     );
@@ -8089,19 +9205,24 @@ class _AddRouteDidYouKnowCard extends StatelessWidget {
           Positioned(
             right: -20,
             bottom: -20,
-            child: Icon(Icons.eco, size: 120, color: Colors.white.withOpacity(0.08)),
+            child: Icon(Icons.eco,
+                size: 120, color: Colors.white.withOpacity(0.08)),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Did you know?',
-                style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white),
+                style: GoogleFonts.manrope(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
               ),
               const SizedBox(height: 8),
               Text(
                 'Each new metro route added to the I-Metro network reduces city traffic congestion by an average of 4.2% within the first six months.',
-                style: GoogleFonts.inter(fontSize: 12, color: Colors.white.withOpacity(0.8)),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: Colors.white.withOpacity(0.8)),
               ),
             ],
           ),
@@ -8149,8 +9270,10 @@ class _EditRouteTopBar extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search routes, terminals, or IDs...',
-                  hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
-                  prefixIcon: const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                  hintStyle: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  prefixIcon: const Icon(Icons.search,
+                      size: 18, color: _DashboardColors.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
@@ -8161,14 +9284,16 @@ class _EditRouteTopBar extends StatelessWidget {
             onPressed: () {},
             icon: Stack(
               children: [
-                const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.notifications,
+                    color: _DashboardColors.onSurfaceVariant),
                 Positioned(
                   right: 2,
                   top: 2,
                   child: Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(color: _DashboardColors.error, shape: BoxShape.circle),
+                    decoration: const BoxDecoration(
+                        color: _DashboardColors.error, shape: BoxShape.circle),
                   ),
                 ),
               ],
@@ -8176,40 +9301,51 @@ class _EditRouteTopBar extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(width: 12),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 12),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Admin Profile',
-                        style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
-                      ),
-                      Text(
-                        'Senior Dispatcher',
-                        style: GoogleFonts.inter(fontSize: 10, letterSpacing: 1, color: _DashboardColors.onSurfaceVariant),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 10),
-                  CircleAvatar(
-                    radius: 18,
-                    backgroundColor: _DashboardColors.surfaceHighest,
-                    backgroundImage: const NetworkImage(
-                      'https://lh3.googleusercontent.com/aida-public/AB6AXuC19hLfSfphrGFS9nLUbLAA_ORwXJ_f38F4RZULBTzoDqTQ6P8rJ5V7w5vCZ2K-gMdzjWjVwRbuPOkMM2lacQ8RoxSEZ0eZsZSW7jtDnubxA35_n6CH1ox9rzjnfN-gx7q1pTWFU5kVH1mUydNtsVpKQ_cMFDElWuIOAMyMPrOhmxph7TeyMmfYlAoQwwS-NXEcnNeeXWq-ek6pbxeXkDkksL7SDJMQiylEkJb-ku4ZlJqJYG4cnPKNCwskwOVdm8YvRu4H7BJMIek',
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Admin Profile',
+                      style: GoogleFonts.manrope(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.onSurface),
                     ),
+                    Text(
+                      'Senior Dispatcher',
+                      style: GoogleFonts.inter(
+                          fontSize: 10,
+                          letterSpacing: 1,
+                          color: _DashboardColors.onSurfaceVariant),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 10),
+                CircleAvatar(
+                  radius: 18,
+                  backgroundColor: _DashboardColors.surfaceHighest,
+                  backgroundImage: const NetworkImage(
+                    'https://lh3.googleusercontent.com/aida-public/AB6AXuC19hLfSfphrGFS9nLUbLAA_ORwXJ_f38F4RZULBTzoDqTQ6P8rJ5V7w5vCZ2K-gMdzjWjVwRbuPOkMM2lacQ8RoxSEZ0eZsZSW7jtDnubxA35_n6CH1ox9rzjnfN-gx7q1pTWFU5kVH1mUydNtsVpKQ_cMFDElWuIOAMyMPrOhmxph7TeyMmfYlAoQwwS-NXEcnNeeXWq-ek6pbxeXkDkksL7SDJMQiylEkJb-ku4ZlJqJYG4cnPKNCwskwOVdm8YvRu4H7BJMIek',
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+          ),
         ],
       ),
     );
@@ -8239,26 +9375,35 @@ class _EditRouteHeader extends StatelessWidget {
               children: [
                 Text(
                   'Route Management',
-                  style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
                 ),
                 const SizedBox(width: 6),
-                const Icon(Icons.chevron_right, size: 14, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.chevron_right,
+                    size: 14, color: _DashboardColors.onSurfaceVariant),
                 const SizedBox(width: 6),
                 Text(
                   'Edit Route $routeId',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: _DashboardColors.onSurface),
                 ),
               ],
             ),
             const SizedBox(height: 8),
             Text(
               'Edit Route Details',
-              style: GoogleFonts.manrope(fontSize: 28, fontWeight: FontWeight.w800, color: _DashboardColors.onSurface),
+              style: GoogleFonts.manrope(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w800,
+                  color: _DashboardColors.onSurface),
             ),
             const SizedBox(height: 4),
             Text(
               'Update schedule, pricing, and availability for the Urban Express line.',
-              style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: _DashboardColors.onSurfaceVariant),
             ),
           ],
         ),
@@ -8268,9 +9413,12 @@ class _EditRouteHeader extends StatelessWidget {
               onPressed: onDiscard,
               style: OutlinedButton.styleFrom(
                 foregroundColor: _DashboardColors.primary,
-                side: BorderSide(color: _DashboardColors.outlineVariant.withOpacity(0.3)),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                side: BorderSide(
+                    color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
               ),
               child: const Text('Discard Changes'),
             ),
@@ -8280,8 +9428,10 @@ class _EditRouteHeader extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: _DashboardColors.primary,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
               ),
               child: const Text('Save Changes'),
             ),
@@ -8312,7 +9462,12 @@ class _EditRouteFormCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -8321,7 +9476,10 @@ class _EditRouteFormCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Text(
               'Route Logistics',
-              style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+              style: GoogleFonts.manrope(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: _DashboardColors.onSurface),
             ),
           ),
           const SizedBox(height: 12),
@@ -8402,18 +9560,26 @@ class _EditRouteField extends StatelessWidget {
       children: [
         Text(
           label.toUpperCase(),
-          style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.2, color: _DashboardColors.onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.2,
+              color: _DashboardColors.onSurfaceVariant),
         ),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
-            color: readOnly ? _DashboardColors.surfaceLow : _DashboardColors.surfaceHighest,
+            color: readOnly
+                ? _DashboardColors.surfaceLow
+                : _DashboardColors.surfaceHighest,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
             children: [
-              Icon(icon, size: 18, color: iconColor ?? _DashboardColors.onSurfaceVariant),
+              Icon(icon,
+                  size: 18,
+                  color: iconColor ?? _DashboardColors.onSurfaceVariant),
               const SizedBox(width: 8),
               Expanded(
                 child: TextField(
@@ -8440,7 +9606,12 @@ class _EditRouteMapCard extends StatelessWidget {
       height: 240,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 16, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 16,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18),
@@ -8456,7 +9627,10 @@ class _EditRouteMapCard extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [const Color(0xFF0F3B2E).withOpacity(0.6), Colors.transparent],
+                    colors: [
+                      const Color(0xFF0F3B2E).withOpacity(0.6),
+                      Colors.transparent
+                    ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ),
@@ -8485,14 +9659,20 @@ class _EditRouteMapCard extends StatelessWidget {
                             color: _DashboardColors.primary,
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.map, size: 18, color: Colors.white),
+                          child: const Icon(Icons.map,
+                              size: 18, color: Colors.white),
                         ),
                         const SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Distance Preview', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
-                            Text('14.2 km', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700)),
+                            Text('Distance Preview',
+                                style: GoogleFonts.inter(
+                                    fontSize: 10,
+                                    color: _DashboardColors.onSurfaceVariant)),
+                            Text('14.2 km',
+                                style: GoogleFonts.manrope(
+                                    fontSize: 16, fontWeight: FontWeight.w700)),
                           ],
                         ),
                       ],
@@ -8500,8 +9680,15 @@ class _EditRouteMapCard extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('Est. Time', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
-                        Text('22 mins', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                        Text('Est. Time',
+                            style: GoogleFonts.inter(
+                                fontSize: 10,
+                                color: _DashboardColors.onSurfaceVariant)),
+                        Text('22 mins',
+                            style: GoogleFonts.manrope(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: _DashboardColors.primary)),
                       ],
                     ),
                   ],
@@ -8531,7 +9718,12 @@ class _EditRouteStatusCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -8541,17 +9733,24 @@ class _EditRouteStatusCard extends StatelessWidget {
             children: [
               Text(
                 'Route Status',
-                style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
                   color: _DashboardColors.primaryFixedDim,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   isActive ? 'Active' : 'Inactive',
-                  style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                  style: GoogleFonts.inter(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: _DashboardColors.primary),
                 ),
               ),
             ],
@@ -8562,11 +9761,13 @@ class _EditRouteStatusCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.power_settings_new, color: _DashboardColors.primary),
+                  const Icon(Icons.power_settings_new,
+                      color: _DashboardColors.primary),
                   const SizedBox(width: 8),
                   Text(
                     'Enable Route',
-                    style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.inter(
+                        fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -8579,16 +9780,19 @@ class _EditRouteStatusCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             'Disabling this route will immediately remove it from the public passenger app and notify all scheduled drivers.',
-            style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 11, color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 12),
           Row(
             children: [
-              const Icon(Icons.history, size: 16, color: _DashboardColors.onSurfaceVariant),
+              const Icon(Icons.history,
+                  size: 16, color: _DashboardColors.onSurfaceVariant),
               const SizedBox(width: 6),
               Text(
                 'Last updated: 12 Oct, 14:30 by Admin',
-                style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 10, color: _DashboardColors.onSurfaceVariant),
               ),
             ],
           ),
@@ -8611,7 +9815,9 @@ class _RouteToggleSwitch extends StatelessWidget {
       height: 24,
       padding: const EdgeInsets.symmetric(horizontal: 4),
       decoration: BoxDecoration(
-        color: enabled ? _DashboardColors.primary : _DashboardColors.surfaceHighest,
+        color: enabled
+            ? _DashboardColors.primary
+            : _DashboardColors.surfaceHighest,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Align(
@@ -8619,7 +9825,8 @@ class _RouteToggleSwitch extends StatelessWidget {
         child: Container(
           width: 16,
           height: 16,
-          decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+          decoration:
+              const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
         ),
       ),
     );
@@ -8642,7 +9849,8 @@ class _EditRouteMarketCard extends StatelessWidget {
         children: [
           Text(
             'Market Intelligence',
-            style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
+            style: GoogleFonts.manrope(
+                fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
           ),
           const SizedBox(height: 16),
           Text(
@@ -8650,7 +9858,11 @@ class _EditRouteMarketCard extends StatelessWidget {
             style: GoogleFonts.inter(fontSize: 11, color: Colors.white70),
           ),
           const SizedBox(height: 6),
-          Text('NGN 26.00', style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white)),
+          Text('NGN 26.00',
+              style: GoogleFonts.manrope(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white)),
           const SizedBox(height: 12),
           Container(
             height: 6,
@@ -8698,7 +9910,10 @@ class _EditRouteMarketCard extends StatelessWidget {
             child: Center(
               child: Text(
                 'Apply Auto-Pricing',
-                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
             ),
           ),
@@ -8725,9 +9940,15 @@ class _MarketStatCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 9, color: _DashboardColors.primaryFixedDim)),
+          Text(label.toUpperCase(),
+              style: GoogleFonts.inter(
+                  fontSize: 9, color: _DashboardColors.primaryFixedDim)),
           const SizedBox(height: 4),
-          Text(value, style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white)),
+          Text(value,
+              style: GoogleFonts.manrope(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white)),
         ],
       ),
     );
@@ -8744,19 +9965,37 @@ class _EditRouteCapacityCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Capacity Rules',
-            style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.4,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 12),
-          _CapacityRow(label: 'Max Seats', value: '42', valueColor: _DashboardColors.onSurface),
-          _CapacityRow(label: 'Overbooking Allow.', value: 'Disabled', valueColor: _DashboardColors.error),
-          _CapacityRow(label: 'Vehicle Class', value: 'Luxury Coach', valueColor: _DashboardColors.onSurface),
+          _CapacityRow(
+              label: 'Max Seats',
+              value: '42',
+              valueColor: _DashboardColors.onSurface),
+          _CapacityRow(
+              label: 'Overbooking Allow.',
+              value: 'Disabled',
+              valueColor: _DashboardColors.error),
+          _CapacityRow(
+              label: 'Vehicle Class',
+              value: 'Luxury Coach',
+              valueColor: _DashboardColors.onSurface),
         ],
       ),
     );
@@ -8781,8 +10020,14 @@ class _CapacityRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface)),
-          Text(value, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: valueColor)),
+          Text(label,
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: _DashboardColors.onSurface)),
+          Text(value,
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: valueColor)),
         ],
       ),
     );
@@ -8799,21 +10044,27 @@ class _RoutesAiCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.primaryContainer.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: _DashboardColors.primaryContainer.withOpacity(0.1)),
+        border: Border.all(
+            color: _DashboardColors.primaryContainer.withOpacity(0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.auto_awesome, color: _DashboardColors.primary, size: 28),
+          const Icon(Icons.auto_awesome,
+              color: _DashboardColors.primary, size: 28),
           const SizedBox(height: 10),
           Text(
             'AI Route Optimization',
-            style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
           const SizedBox(height: 6),
           Text(
             'Our kinetic engine suggests adding 2 new stops to North Highlands route to increase efficiency by 22%.',
-            style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 12, color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 12),
           Container(
@@ -8822,12 +10073,16 @@ class _RoutesAiCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: _DashboardColors.primary.withOpacity(0.2)),
+              border:
+                  Border.all(color: _DashboardColors.primary.withOpacity(0.2)),
             ),
             child: Center(
               child: Text(
                 'Review Suggestions',
-                style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
             ),
           ),
@@ -8847,19 +10102,35 @@ class _RoutesHealthCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Route Health',
-            style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
           const SizedBox(height: 12),
-          _HealthMetric(label: 'Punctuality', value: '98%', color: const Color(0xFF10B981), progress: 0.98),
+          _HealthMetric(
+              label: 'Punctuality',
+              value: '98%',
+              color: const Color(0xFF10B981),
+              progress: 0.98),
           const SizedBox(height: 12),
-          _HealthMetric(label: 'Passenger Load', value: '62%', color: const Color(0xFFF59E0B), progress: 0.62),
+          _HealthMetric(
+              label: 'Passenger Load',
+              value: '62%',
+              color: const Color(0xFFF59E0B),
+              progress: 0.62),
         ],
       ),
     );
@@ -8887,8 +10158,12 @@ class _HealthMetric extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(label, style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
-            Text(value, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: color)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
+            Text(value,
+                style: GoogleFonts.inter(
+                    fontSize: 11, fontWeight: FontWeight.w700, color: color)),
           ],
         ),
         const SizedBox(height: 6),
@@ -8910,7 +10185,8 @@ String _routeId(Map<String, dynamic> route) {
   final raw = route['id']?.toString() ?? '';
   if (raw.isEmpty) return 'RT-0000';
   final cleaned = raw.replaceAll('-', '').toUpperCase();
-  final short = cleaned.length >= 4 ? cleaned.substring(0, 4) : cleaned.padRight(4, '0');
+  final short =
+      cleaned.length >= 4 ? cleaned.substring(0, 4) : cleaned.padRight(4, '0');
   return 'RT-$short';
 }
 
@@ -8932,10 +10208,12 @@ class AdminAvailableRoutesScreen extends StatefulWidget {
   const AdminAvailableRoutesScreen({super.key});
 
   @override
-  State<AdminAvailableRoutesScreen> createState() => _AdminAvailableRoutesScreenState();
+  State<AdminAvailableRoutesScreen> createState() =>
+      _AdminAvailableRoutesScreenState();
 }
 
-class _AdminAvailableRoutesScreenState extends State<AdminAvailableRoutesScreen> {
+class _AdminAvailableRoutesScreenState
+    extends State<AdminAvailableRoutesScreen> {
   late Future<List<Map<String, dynamic>>> _routesFuture;
 
   @override
@@ -9015,7 +10293,9 @@ class _AdminAvailableRoutesScreenState extends State<AdminAvailableRoutesScreen>
                     future: _routesFuture,
                     builder: (context, snapshot) {
                       final routes = snapshot.data ?? [];
-                      final activeCount = routes.where((route) => route['isActive'] == true).length;
+                      final activeCount = routes
+                          .where((route) => route['isActive'] == true)
+                          .length;
                       final pendingCount = routes.length - activeCount;
 
                       return SingleChildScrollView(
@@ -9024,7 +10304,9 @@ class _AdminAvailableRoutesScreenState extends State<AdminAvailableRoutesScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             _RoutesHeader(
-                              onAdd: () => Navigator.pushNamed(context, AppRoutes.adminAddRoute).then((_) => _refreshRoutes()),
+                              onAdd: () => Navigator.pushNamed(
+                                      context, AppRoutes.adminAddRoute)
+                                  .then((_) => _refreshRoutes()),
                             ),
                             const SizedBox(height: 24),
                             LayoutBuilder(
@@ -9033,20 +10315,29 @@ class _AdminAvailableRoutesScreenState extends State<AdminAvailableRoutesScreen>
                                 if (wide) {
                                   return Row(
                                     children: [
-                                      const Expanded(flex: 2, child: _RoutesCoverageCard()),
+                                      const Expanded(
+                                          flex: 2,
+                                          child: _RoutesCoverageCard()),
                                       const SizedBox(width: 16),
                                       Expanded(
                                         child: _RoutesStatCard(
                                           title: 'Active Routes',
                                           value: activeCount.toString(),
-                                          progress: activeCount == 0 ? 0 : activeCount / (routes.isEmpty ? 1 : routes.length),
+                                          progress: activeCount == 0
+                                              ? 0
+                                              : activeCount /
+                                                  (routes.isEmpty
+                                                      ? 1
+                                                      : routes.length),
                                         ),
                                       ),
                                       const SizedBox(width: 16),
                                       Expanded(
                                         child: _RoutesStatCard(
                                           title: 'Pending Review',
-                                          value: pendingCount.toString().padLeft(2, '0'),
+                                          value: pendingCount
+                                              .toString()
+                                              .padLeft(2, '0'),
                                           showDots: true,
                                         ),
                                       ),
@@ -9060,12 +10351,19 @@ class _AdminAvailableRoutesScreenState extends State<AdminAvailableRoutesScreen>
                                     _RoutesStatCard(
                                       title: 'Active Routes',
                                       value: activeCount.toString(),
-                                      progress: activeCount == 0 ? 0 : activeCount / (routes.isEmpty ? 1 : routes.length),
+                                      progress: activeCount == 0
+                                          ? 0
+                                          : activeCount /
+                                              (routes.isEmpty
+                                                  ? 1
+                                                  : routes.length),
                                     ),
                                     const SizedBox(height: 16),
                                     _RoutesStatCard(
                                       title: 'Pending Review',
-                                      value: pendingCount.toString().padLeft(2, '0'),
+                                      value: pendingCount
+                                          .toString()
+                                          .padLeft(2, '0'),
                                       showDots: true,
                                     ),
                                   ],
@@ -9088,9 +10386,11 @@ class _AdminAvailableRoutesScreenState extends State<AdminAvailableRoutesScreen>
                                 final wide = constraints.maxWidth >= 1100;
                                 if (wide) {
                                   return Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: const [
-                                      Expanded(flex: 2, child: _RoutesMapPanel()),
+                                      Expanded(
+                                          flex: 2, child: _RoutesMapPanel()),
                                       SizedBox(width: 16),
                                       Expanded(child: _RoutesInsightPanel()),
                                     ],
@@ -9119,6 +10419,7 @@ class _AdminAvailableRoutesScreenState extends State<AdminAvailableRoutesScreen>
     );
   }
 }
+
 class _RouteCard extends StatelessWidget {
   const _RouteCard({
     required this.letter,
@@ -9142,7 +10443,10 @@ class _RouteCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 8, offset: const Offset(0, 4)),
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 4)),
         ],
       ),
       child: Column(
@@ -9158,16 +10462,20 @@ class _RouteCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
                 alignment: Alignment.center,
-                child: Text(letter, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
+                child: Text(letter,
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w700)),
               ),
               const Spacer(),
               if (onDelete != null)
                 GestureDetector(
                   onTap: onDelete,
-                  child: const Icon(Icons.delete_outline, size: 16, color: Color(0xFF7C7C7C)),
+                  child: const Icon(Icons.delete_outline,
+                      size: 16, color: Color(0xFF7C7C7C)),
                 )
               else
-                const Icon(Icons.delete_outline, size: 16, color: Color(0xFF7C7C7C)),
+                const Icon(Icons.delete_outline,
+                    size: 16, color: Color(0xFF7C7C7C)),
             ],
           ),
           const SizedBox(height: 10),
@@ -9179,10 +10487,13 @@ class _RouteCard extends StatelessWidget {
                   Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(color: Color(0xFF2C7A2C), shape: BoxShape.circle),
+                    decoration: const BoxDecoration(
+                        color: Color(0xFF2C7A2C), shape: BoxShape.circle),
                   ),
-                  Container(width: 2, height: 18, color: const Color(0xFFE0E0E0)),
-                  const Icon(Icons.location_on, size: 14, color: Color(0xFF3E7BD9)),
+                  Container(
+                      width: 2, height: 18, color: const Color(0xFFE0E0E0)),
+                  const Icon(Icons.location_on,
+                      size: 14, color: Color(0xFF3E7BD9)),
                 ],
               ),
               const SizedBox(width: 8),
@@ -9190,9 +10501,13 @@ class _RouteCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(from, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                    Text(from,
+                        style: const TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w600)),
                     const SizedBox(height: 10),
-                    Text(to, style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                    Text(to,
+                        style: const TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w600)),
                   ],
                 ),
               ),
@@ -9209,7 +10524,9 @@ class _RouteCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 alignment: Alignment.center,
-                child: const Text('N2000', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                child: const Text('N2000',
+                    style:
+                        TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
               ),
               const SizedBox(width: 10),
               Expanded(
@@ -9222,7 +10539,9 @@ class _RouteCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     alignment: Alignment.center,
-                    child: const Text('Edit', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)),
+                    child: const Text('Edit',
+                        style: TextStyle(
+                            fontSize: 10, fontWeight: FontWeight.w600)),
                   ),
                 ),
               ),
@@ -9233,6 +10552,7 @@ class _RouteCard extends StatelessWidget {
     );
   }
 }
+
 class AdminAddRouteScreen extends StatefulWidget {
   const AdminAddRouteScreen({super.key});
 
@@ -9327,7 +10647,9 @@ class _AdminAddRouteScreenState extends State<AdminAddRouteScreen> {
                                 const SizedBox(height: 6),
                                 Text(
                                   'Configure a new metropolitan transit line for the I-Metro network.',
-                                  style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                                  style: GoogleFonts.inter(
+                                      fontSize: 12,
+                                      color: _DashboardColors.onSurfaceVariant),
                                 ),
                               ],
                             ),
@@ -9336,7 +10658,8 @@ class _AdminAddRouteScreenState extends State<AdminAddRouteScreen> {
                               icon: const Icon(Icons.arrow_back, size: 18),
                               label: Text(
                                 'Back to Routes',
-                                style: GoogleFonts.inter(fontWeight: FontWeight.w600),
+                                style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           ],
@@ -9360,7 +10683,8 @@ class _AdminAddRouteScreenState extends State<AdminAddRouteScreen> {
                                     ),
                                   ),
                                   const SizedBox(width: 20),
-                                  const Expanded(child: _AddRoutePreviewPanel()),
+                                  const Expanded(
+                                      child: _AddRoutePreviewPanel()),
                                 ],
                               );
                             }
@@ -9540,7 +10864,8 @@ class _AdminEditRouteScreenState extends State<AdminEditRouteScreen> {
                                       children: [
                                         _EditRouteStatusCard(
                                           isActive: !_inactive,
-                                          onToggle: () => setState(() => _inactive = !_inactive),
+                                          onToggle: () => setState(
+                                              () => _inactive = !_inactive),
                                         ),
                                         const SizedBox(height: 16),
                                         const _EditRouteMarketCard(),
@@ -9565,7 +10890,8 @@ class _AdminEditRouteScreenState extends State<AdminEditRouteScreen> {
                                 const SizedBox(height: 16),
                                 _EditRouteStatusCard(
                                   isActive: !_inactive,
-                                  onToggle: () => setState(() => _inactive = !_inactive),
+                                  onToggle: () =>
+                                      setState(() => _inactive = !_inactive),
                                 ),
                                 const SizedBox(height: 16),
                                 const _EditRouteMarketCard(),
@@ -9645,8 +10971,9 @@ class _AdminUserDetailsScreenState extends State<AdminUserDetailsScreen> {
         final email = user['email']?.toString() ?? 'unknown@i-metro.app';
         final phone = user['phone']?.toString() ?? '+234 000 000 0000';
         final isActive = user['isActive'] == true;
-        final bookings =
-            (user['bookings'] is List) ? List<Map<String, dynamic>>.from(user['bookings']) : <Map<String, dynamic>>[];
+        final bookings = (user['bookings'] is List)
+            ? List<Map<String, dynamic>>.from(user['bookings'])
+            : <Map<String, dynamic>>[];
         final totalTrips = bookings.length;
         final loyaltyPoints = totalTrips * 4;
         final accountAge = _formatAccountAge(user['createdAt']);
@@ -9680,7 +11007,8 @@ class _AdminUserDetailsScreenState extends State<AdminUserDetailsScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                _UserBreadcrumbs(onBack: () => Navigator.pop(context)),
+                                _UserBreadcrumbs(
+                                    onBack: () => Navigator.pop(context)),
                                 Row(
                                   children: [
                                     _UserDetailsActionButton(
@@ -9691,8 +11019,12 @@ class _AdminUserDetailsScreenState extends State<AdminUserDetailsScreen> {
                                     ),
                                     const SizedBox(width: 12),
                                     _UserDetailsActionButton(
-                                      label: isActive ? 'Block User' : 'Unblock User',
-                                      icon: isActive ? Icons.block : Icons.check_circle,
+                                      label: isActive
+                                          ? 'Block User'
+                                          : 'Unblock User',
+                                      icon: isActive
+                                          ? Icons.block
+                                          : Icons.check_circle,
                                       filled: true,
                                       destructive: isActive,
                                       loading: _updatingStatus,
@@ -9708,7 +11040,8 @@ class _AdminUserDetailsScreenState extends State<AdminUserDetailsScreen> {
                                 final wide = constraints.maxWidth >= 1100;
                                 if (wide) {
                                   return Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         flex: 8,
@@ -9756,7 +11089,8 @@ class _AdminUserDetailsScreenState extends State<AdminUserDetailsScreen> {
                                     children: const [
                                       Expanded(child: _UserAdminNotesCard()),
                                       SizedBox(width: 16),
-                                      Expanded(child: _UserSecuritySummaryCard()),
+                                      Expanded(
+                                          child: _UserSecuritySummaryCard()),
                                     ],
                                   );
                                 }
@@ -9907,10 +11241,12 @@ class AdminMerchantDetailsScreen extends StatefulWidget {
   const AdminMerchantDetailsScreen({super.key});
 
   @override
-  State<AdminMerchantDetailsScreen> createState() => _AdminMerchantDetailsScreenState();
+  State<AdminMerchantDetailsScreen> createState() =>
+      _AdminMerchantDetailsScreenState();
 }
 
-class _AdminMerchantDetailsScreenState extends State<AdminMerchantDetailsScreen> {
+class _AdminMerchantDetailsScreenState
+    extends State<AdminMerchantDetailsScreen> {
   String? _merchantId;
   Future<Map<String, dynamic>>? _future;
 
@@ -9945,7 +11281,8 @@ class _AdminMerchantDetailsScreenState extends State<AdminMerchantDetailsScreen>
       builder: (context, snapshot) {
         final merchant = snapshot.data ?? {};
         final name = merchant['name']?.toString() ?? 'Metropolis Central Mall';
-        final email = merchant['email']?.toString() ?? 'billing@metropolis-mall.com';
+        final email =
+            merchant['email']?.toString() ?? 'billing@metropolis-mall.com';
         final phone = merchant['phone']?.toString() ?? '+1 (555) 982-1200';
         final merchantId = merchant['id']?.toString() ?? 'M-98210-XC';
         final onboarding = _formatMerchantOnboarding(merchant['createdAt']);
@@ -9985,7 +11322,8 @@ class _AdminMerchantDetailsScreenState extends State<AdminMerchantDetailsScreen>
                                 final wide = constraints.maxWidth >= 1100;
                                 if (wide) {
                                   return Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
                                         child: _MerchantInfoColumn(
@@ -9999,7 +11337,8 @@ class _AdminMerchantDetailsScreenState extends State<AdminMerchantDetailsScreen>
                                       const SizedBox(width: 24),
                                       Expanded(
                                         flex: 2,
-                                        child: _MerchantStatsAndHistory(name: name),
+                                        child: _MerchantStatsAndHistory(
+                                            name: name),
                                       ),
                                     ],
                                   );
@@ -10049,13 +11388,18 @@ class _MetricCard extends StatelessWidget {
           color: const Color(0xFFB8F68C),
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.06), blurRadius: 6, offset: const Offset(0, 3)),
+            BoxShadow(
+                color: Colors.black.withOpacity(0.06),
+                blurRadius: 6,
+                offset: const Offset(0, 3)),
           ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(value, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+            Text(value,
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
             const SizedBox(height: 4),
             Text(label, style: const TextStyle(fontSize: 10)),
           ],
@@ -10069,7 +11413,8 @@ class AdminUserDropdownScreen extends StatefulWidget {
   const AdminUserDropdownScreen({super.key});
 
   @override
-  State<AdminUserDropdownScreen> createState() => _AdminUserDropdownScreenState();
+  State<AdminUserDropdownScreen> createState() =>
+      _AdminUserDropdownScreenState();
 }
 
 class _AdminUserDropdownScreenState extends State<AdminUserDropdownScreen> {
@@ -10124,11 +11469,15 @@ class _AdminUserDropdownScreenState extends State<AdminUserDropdownScreen> {
                                   final wide = constraints.maxWidth >= 1100;
                                   if (wide) {
                                     return Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: const [
-                                        Expanded(flex: 2, child: _ProfileMenuMapCard()),
+                                        Expanded(
+                                            flex: 2,
+                                            child: _ProfileMenuMapCard()),
                                         SizedBox(width: 18),
-                                        Expanded(child: _ProfileMenuStatStack()),
+                                        Expanded(
+                                            child: _ProfileMenuStatStack()),
                                       ],
                                     );
                                   }
@@ -10160,7 +11509,8 @@ class _AdminUserDropdownScreenState extends State<AdminUserDropdownScreen> {
                   bottom: 26,
                   right: 30,
                   child: _ProfileMenuFab(
-                    onPressed: () => Navigator.pushNamed(context, AppRoutes.adminAddRoute),
+                    onPressed: () =>
+                        Navigator.pushNamed(context, AppRoutes.adminAddRoute),
                   ),
                 ),
               ],
@@ -10205,8 +11555,12 @@ class _ProfileMenuTopBar extends StatelessWidget {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: 'Search transit data...',
-                  hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant.withOpacity(0.8)),
-                  prefixIcon: const Icon(Icons.search, size: 18, color: _DashboardColors.onSurfaceVariant),
+                  hintStyle: GoogleFonts.inter(
+                      fontSize: 12,
+                      color:
+                          _DashboardColors.onSurfaceVariant.withOpacity(0.8)),
+                  prefixIcon: const Icon(Icons.search,
+                      size: 18, color: _DashboardColors.onSurfaceVariant),
                   contentPadding: const EdgeInsets.symmetric(vertical: 14),
                 ),
               ),
@@ -10224,7 +11578,8 @@ class _ProfileMenuTopBar extends StatelessWidget {
                   child: Container(
                     width: 8,
                     height: 8,
-                    decoration: const BoxDecoration(color: _DashboardColors.error, shape: BoxShape.circle),
+                    decoration: const BoxDecoration(
+                        color: _DashboardColors.error, shape: BoxShape.circle),
                   ),
                 ),
               ],
@@ -10235,7 +11590,10 @@ class _ProfileMenuTopBar extends StatelessWidget {
             icon: const Icon(Icons.help_outline, color: Color(0xFF6B7771)),
           ),
           const SizedBox(width: 16),
-          Container(width: 1, height: 28, color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+          Container(
+              width: 1,
+              height: 28,
+              color: _DashboardColors.outlineVariant.withOpacity(0.3)),
           const SizedBox(width: 16),
           GestureDetector(
             onTap: onProfileTap,
@@ -10249,7 +11607,10 @@ class _ProfileMenuTopBar extends StatelessWidget {
                 children: [
                   Text(
                     'Admin Metro',
-                    style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: const Color(0xFF0C3B2E)),
+                    style: GoogleFonts.inter(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFF0C3B2E)),
                   ),
                   const SizedBox(width: 8),
                   CircleAvatar(
@@ -10310,8 +11671,14 @@ class _ProfileMenuMapCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Stack(
         children: [
@@ -10353,7 +11720,10 @@ class _ProfileMenuMapCard extends StatelessWidget {
                 children: [
                   Text(
                     'Network Status',
-                    style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                    style: GoogleFonts.manrope(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: _DashboardColors.onSurface),
                   ),
                   const SizedBox(height: 4),
                   Row(
@@ -10361,12 +11731,16 @@ class _ProfileMenuMapCard extends StatelessWidget {
                       Container(
                         width: 8,
                         height: 8,
-                        decoration: const BoxDecoration(color: Color(0xFF31B47B), shape: BoxShape.circle),
+                        decoration: const BoxDecoration(
+                            color: Color(0xFF31B47B), shape: BoxShape.circle),
                       ),
                       const SizedBox(width: 6),
                       Text(
                         '98.2% OPERATIONAL',
-                        style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: const Color(0xFF1F9D5B)),
+                        style: GoogleFonts.inter(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                            color: const Color(0xFF1F9D5B)),
                       ),
                     ],
                   ),
@@ -10392,7 +11766,10 @@ class _ProfileMenuStatStack extends StatelessWidget {
           value: '14,204',
           subtitle: '+12% vs yesterday',
           icon: Icons.confirmation_number,
-          gradient: const LinearGradient(colors: [_DashboardColors.primary, _DashboardColors.primaryContainer]),
+          gradient: const LinearGradient(colors: [
+            _DashboardColors.primary,
+            _DashboardColors.primaryContainer
+          ]),
           textColor: Colors.white,
           subtitleFilled: true,
         ),
@@ -10443,7 +11820,12 @@ class _ProfileMenuStatCard extends StatelessWidget {
         gradient: gradient,
         color: background ?? _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -10452,24 +11834,32 @@ class _ProfileMenuStatCard extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             title,
-            style: GoogleFonts.manrope(fontSize: 12, fontWeight: FontWeight.w600, color: textColor.withOpacity(0.8)),
+            style: GoogleFonts.manrope(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: textColor.withOpacity(0.8)),
           ),
           const SizedBox(height: 8),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 32, fontWeight: FontWeight.w700, color: textColor),
+            style: GoogleFonts.manrope(
+                fontSize: 32, fontWeight: FontWeight.w700, color: textColor),
           ),
           const SizedBox(height: 12),
           subtitleFilled
               ? Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
                     subtitle,
-                    style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, color: textColor),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        color: textColor),
                   ),
                 )
               : Text(
@@ -10497,7 +11887,12 @@ class _ProfileMenuLogsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -10510,18 +11905,27 @@ class _ProfileMenuLogsCard extends StatelessWidget {
                 children: [
                   Text(
                     'System Logs',
-                    style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                    style: GoogleFonts.manrope(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: _DashboardColors.onSurface),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     'Most recent infrastructure events',
-                    style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500, color: _DashboardColors.onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: _DashboardColors.onSurfaceVariant),
                   ),
                 ],
               ),
               Text(
                 'Download Report',
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
             ],
           ),
@@ -10582,8 +11986,10 @@ class _ProfileMenuLogItem extends StatelessWidget {
               Container(
                 width: 36,
                 height: 36,
-                decoration: BoxDecoration(color: iconBackground, shape: BoxShape.circle),
-                child: Icon(icon, size: 18, color: _DashboardColors.onSurfaceVariant),
+                decoration: BoxDecoration(
+                    color: iconBackground, shape: BoxShape.circle),
+                child: Icon(icon,
+                    size: 18, color: _DashboardColors.onSurfaceVariant),
               ),
               const SizedBox(width: 12),
               Column(
@@ -10591,12 +11997,16 @@ class _ProfileMenuLogItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                    style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.onSurface),
                   ),
                   const SizedBox(height: 3),
                   Text(
                     meta,
-                    style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                    style: GoogleFonts.inter(
+                        fontSize: 10, color: _DashboardColors.onSurfaceVariant),
                   ),
                 ],
               ),
@@ -10610,7 +12020,10 @@ class _ProfileMenuLogItem extends StatelessWidget {
             ),
             child: Text(
               status.toUpperCase(),
-              style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: statusColor),
+              style: GoogleFonts.inter(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                  color: statusColor),
             ),
           ),
         ],
@@ -10630,8 +12043,14 @@ class _ProfileMenuDropdown extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 20, offset: const Offset(0, 12))],
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 20,
+              offset: const Offset(0, 12))
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -10660,12 +12079,17 @@ class _ProfileMenuDropdown extends StatelessWidget {
                     children: [
                       Text(
                         'Admin Metro',
-                        style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                        style: GoogleFonts.manrope(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: _DashboardColors.onSurface),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'System Administrator',
-                        style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 10,
+                            color: _DashboardColors.onSurfaceVariant),
                       ),
                       const SizedBox(height: 6),
                       Row(
@@ -10673,12 +12097,17 @@ class _ProfileMenuDropdown extends StatelessWidget {
                           Container(
                             width: 6,
                             height: 6,
-                            decoration: const BoxDecoration(color: _DashboardColors.primaryFixedDim, shape: BoxShape.circle),
+                            decoration: const BoxDecoration(
+                                color: _DashboardColors.primaryFixedDim,
+                                shape: BoxShape.circle),
                           ),
                           const SizedBox(width: 6),
                           Text(
                             'LEVEL 4 ACCESS',
-                            style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, color: const Color(0xFF1F9D5B)),
+                            style: GoogleFonts.inter(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w700,
+                                color: const Color(0xFF1F9D5B)),
                           ),
                         ],
                       ),
@@ -10692,17 +12121,20 @@ class _ProfileMenuDropdown extends StatelessWidget {
           _ProfileMenuActionRow(
             icon: Icons.account_circle,
             label: 'Profile Settings',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDetails),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDetails),
           ),
           _ProfileMenuActionRow(
             icon: Icons.security,
             label: 'Security & Privacy',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _ProfileMenuActionRow(
             icon: Icons.history,
             label: 'Recent Activity',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 8),
@@ -10721,7 +12153,8 @@ class _ProfileMenuDropdown extends StatelessWidget {
 }
 
 class _ProfileMenuActionRow extends StatelessWidget {
-  const _ProfileMenuActionRow({required this.icon, required this.label, this.onTap});
+  const _ProfileMenuActionRow(
+      {required this.icon, required this.label, this.onTap});
 
   final IconData icon;
   final String label;
@@ -10743,11 +12176,15 @@ class _ProfileMenuActionRow extends StatelessWidget {
                 const SizedBox(width: 10),
                 Text(
                   label,
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: _DashboardColors.onSurface),
                 ),
               ],
             ),
-            const Icon(Icons.chevron_right, size: 18, color: _DashboardColors.onSurfaceVariant),
+            const Icon(Icons.chevron_right,
+                size: 18, color: _DashboardColors.onSurfaceVariant),
           ],
         ),
       ),
@@ -10773,7 +12210,10 @@ class _ProfileMenuLogoutRow extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               'Logout',
-              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.error),
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  color: _DashboardColors.error),
             ),
           ],
         ),
@@ -10796,7 +12236,12 @@ class _ProfileMenuFab extends StatelessWidget {
         decoration: BoxDecoration(
           color: _DashboardColors.primary,
           borderRadius: BorderRadius.circular(28),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.18), blurRadius: 16, offset: const Offset(0, 8))],
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.18),
+                blurRadius: 16,
+                offset: const Offset(0, 8))
+          ],
         ),
         child: Row(
           children: [
@@ -10804,7 +12249,10 @@ class _ProfileMenuFab extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               'New Route',
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+              style: GoogleFonts.inter(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white),
             ),
           ],
         ),
@@ -10826,7 +12274,8 @@ class AdminLogoutConfirmationScreen extends StatelessWidget {
 
   void _handleConfirm(BuildContext context) {
     AuthStore.clear();
-    Navigator.pushNamedAndRemoveUntil(context, AppRoutes.adminLogin, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppRoutes.adminLogin, (route) => false);
   }
 
   @override
@@ -10848,7 +12297,8 @@ class AdminLogoutConfirmationScreen extends StatelessWidget {
             ),
           ),
           Positioned.fill(
-            child: Container(color: _DashboardColors.onSurface.withOpacity(0.08)),
+            child:
+                Container(color: _DashboardColors.onSurface.withOpacity(0.08)),
           ),
           Center(
             child: _LogoutModalCard(
@@ -10885,7 +12335,8 @@ class _LogoutBackgroundMock extends StatelessWidget {
                       color: _DashboardColors.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: const Icon(Icons.directions_subway, color: Colors.white),
+                    child: const Icon(Icons.directions_subway,
+                        color: Colors.white),
                   ),
                   const SizedBox(width: 10),
                   Column(
@@ -10893,11 +12344,16 @@ class _LogoutBackgroundMock extends StatelessWidget {
                     children: [
                       Text(
                         'I-Metro',
-                        style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w700, color: const Color(0xFF0C3B2E)),
+                        style: GoogleFonts.manrope(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: const Color(0xFF0C3B2E)),
                       ),
                       Text(
                         'Luxury in Motion',
-                        style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            color: _DashboardColors.onSurfaceVariant),
                       ),
                     ],
                   ),
@@ -10906,22 +12362,28 @@ class _LogoutBackgroundMock extends StatelessWidget {
               const SizedBox(height: 24),
               _LogoutSidebarItem(icon: Icons.dashboard, label: 'Dashboard'),
               _LogoutSidebarItem(icon: Icons.group, label: 'User Management'),
-              _LogoutSidebarItem(icon: Icons.storefront, label: 'Merchant Management'),
+              _LogoutSidebarItem(
+                  icon: Icons.storefront, label: 'Merchant Management'),
               _LogoutSidebarItem(icon: Icons.map, label: 'Route Management'),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 decoration: BoxDecoration(
                   color: _DashboardColors.surfaceLowest.withOpacity(0.6),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
                   children: [
-                    const Icon(Icons.logout, color: _DashboardColors.onSurfaceVariant),
+                    const Icon(Icons.logout,
+                        color: _DashboardColors.onSurfaceVariant),
                     const SizedBox(width: 10),
                     Text(
                       'Logout',
-                      style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ],
                 ),
@@ -10938,12 +12400,16 @@ class _LogoutBackgroundMock extends StatelessWidget {
               children: [
                 Text(
                   'Transit Dashboard',
-                  style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                  style: GoogleFonts.manrope(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w700,
+                      color: _DashboardColors.onSurface),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   'System status: Operative',
-                  style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 12, color: _DashboardColors.onSurfaceVariant),
                 ),
                 const SizedBox(height: 24),
                 Row(
@@ -10994,7 +12460,9 @@ class _LogoutSidebarItem extends StatelessWidget {
         children: [
           Icon(icon, size: 18, color: _DashboardColors.onSurfaceVariant),
           const SizedBox(width: 10),
-          Text(label, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
+          Text(label,
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
         ],
       ),
     );
@@ -11032,16 +12500,23 @@ class _LogoutModalCard extends StatelessWidget {
             color: _DashboardColors.surfaceLowest.withOpacity(0.82),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(color: Colors.white.withOpacity(0.6)),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.08), blurRadius: 24, offset: const Offset(0, 12))],
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.08),
+                  blurRadius: 24,
+                  offset: const Offset(0, 12))
+            ],
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
                 decoration: BoxDecoration(
                   color: _DashboardColors.surfaceLow.withOpacity(0.8),
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(18)),
+                  borderRadius:
+                      const BorderRadius.vertical(top: Radius.circular(18)),
                 ),
                 child: Row(
                   children: [
@@ -11052,12 +12527,16 @@ class _LogoutModalCard extends StatelessWidget {
                         color: const Color(0xFFFFDAD6),
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: const Icon(Icons.logout, size: 18, color: _DashboardColors.error),
+                      child: const Icon(Icons.logout,
+                          size: 18, color: _DashboardColors.error),
                     ),
                     const SizedBox(width: 12),
                     Text(
                       'System Session',
-                      style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.manrope(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.onSurface),
                     ),
                   ],
                 ),
@@ -11082,9 +12561,12 @@ class _LogoutModalCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: _DashboardColors.primaryFixedDim,
                             shape: BoxShape.circle,
-                            border: Border.all(color: _DashboardColors.surfaceLowest, width: 3),
+                            border: Border.all(
+                                color: _DashboardColors.surfaceLowest,
+                                width: 3),
                           ),
-                          child: const Icon(Icons.verified, size: 12, color: Colors.white),
+                          child: const Icon(Icons.verified,
+                              size: 12, color: Colors.white),
                         ),
                       ],
                     ),
@@ -11092,13 +12574,19 @@ class _LogoutModalCard extends StatelessWidget {
                     Text(
                       'Are you sure you want to log out?',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                      style: GoogleFonts.manrope(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.onSurface),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       'You are currently managing active transit routes. Logging out will end your current administrative session.',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant, height: 1.5),
+                      style: GoogleFonts.inter(
+                          fontSize: 12,
+                          color: _DashboardColors.onSurfaceVariant,
+                          height: 1.5),
                     ),
                   ],
                 ),
@@ -11112,12 +12600,18 @@ class _LogoutModalCard extends StatelessWidget {
                         onPressed: onCancel,
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
-                          side: BorderSide(color: _DashboardColors.outlineVariant.withOpacity(0.6)),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          side: BorderSide(
+                              color: _DashboardColors.outlineVariant
+                                  .withOpacity(0.6)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12)),
                         ),
                         child: Text(
                           'Cancel',
-                          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.primary),
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color: _DashboardColors.primary),
                         ),
                       ),
                     ),
@@ -11129,17 +12623,29 @@ class _LogoutModalCard extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           decoration: BoxDecoration(
                             gradient: const LinearGradient(
-                              colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+                              colors: [
+                                _DashboardColors.primary,
+                                _DashboardColors.primaryContainer
+                              ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
                             borderRadius: BorderRadius.circular(12),
-                            boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 6))],
+                            boxShadow: [
+                              BoxShadow(
+                                  color:
+                                      _DashboardColors.primary.withOpacity(0.2),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 6))
+                            ],
                           ),
                           child: Center(
                             child: Text(
                               'Confirm',
-                              style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                              style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white),
                             ),
                           ),
                         ),
@@ -11148,7 +12654,10 @@ class _LogoutModalCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(height: 4, decoration: BoxDecoration(color: _DashboardColors.surfaceHighest.withOpacity(0.6))),
+              Container(
+                  height: 4,
+                  decoration: BoxDecoration(
+                      color: _DashboardColors.surfaceHighest.withOpacity(0.6))),
             ],
           ),
         ),
@@ -11161,10 +12670,12 @@ class AdminAuditActivityLogsScreen extends StatefulWidget {
   const AdminAuditActivityLogsScreen({super.key});
 
   @override
-  State<AdminAuditActivityLogsScreen> createState() => _AdminAuditActivityLogsScreenState();
+  State<AdminAuditActivityLogsScreen> createState() =>
+      _AdminAuditActivityLogsScreenState();
 }
 
-class _AdminAuditActivityLogsScreenState extends State<AdminAuditActivityLogsScreen> {
+class _AdminAuditActivityLogsScreenState
+    extends State<AdminAuditActivityLogsScreen> {
   late Future<List<_AuditLogEntry>> _future;
 
   @override
@@ -11191,48 +12702,48 @@ class _AdminAuditActivityLogsScreenState extends State<AdminAuditActivityLogsScr
       builder: (context, snapshot) {
         final logs = snapshot.data ?? const <_AuditLogEntry>[];
         return Scaffold(
-      backgroundColor: _DashboardColors.surface,
-      body: Stack(
-        children: [
-          Row(
+          backgroundColor: _DashboardColors.surface,
+          body: Stack(
             children: [
-              const _AuditSidebar(),
-              Expanded(
-                child: Column(
-                  children: [
-                    _AuditTopBar(
-                      onRefresh: () => setState(() {
-                        _future = _load();
-                      }),
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        padding: const EdgeInsets.fromLTRB(28, 24, 28, 96),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const _AuditHeaderSection(),
-                            const SizedBox(height: 20),
-                            _AuditFiltersSection(),
-                            const SizedBox(height: 20),
-                            _AuditTable(logs: logs),
-                          ],
+              Row(
+                children: [
+                  const _AuditSidebar(),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        _AuditTopBar(
+                          onRefresh: () => setState(() {
+                            _future = _load();
+                          }),
                         ),
-                      ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.fromLTRB(28, 24, 28, 96),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const _AuditHeaderSection(),
+                                const SizedBox(height: 20),
+                                _AuditFiltersSection(),
+                                const SizedBox(height: 20),
+                                _AuditTable(logs: logs),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
+              const Positioned(
+                right: 28,
+                bottom: 24,
+                child: _AuditFab(),
               ),
             ],
           ),
-          const Positioned(
-            right: 28,
-            bottom: 24,
-            child: _AuditFab(),
-          ),
-        ],
-      ),
-    );
+        );
       },
     );
   }
@@ -11252,34 +12763,45 @@ class _AuditSidebar extends StatelessWidget {
         children: [
           Text(
             'I-Metro Admin',
-            style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.manrope(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
           const SizedBox(height: 4),
           Text(
             'Luxury in Motion',
-            style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 1.6, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.6,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 24),
           _AuditSidebarItem(
             icon: Icons.dashboard,
             label: 'Revenue',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
           ),
           _AuditSidebarItem(
             icon: Icons.settings,
             label: 'Settings',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _AuditSidebarItem(
             icon: Icons.history,
             label: 'Activity',
             selected: true,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           _AuditSidebarItem(
             icon: Icons.support_agent,
             label: 'Support',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSupportTicketManagement),
+            onTap: () => Navigator.pushNamed(
+                context, AppRoutes.adminSupportTicketManagement),
           ),
           const Spacer(),
           Container(
@@ -11287,17 +12809,28 @@ class _AuditSidebar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+                colors: [
+                  _DashboardColors.primary,
+                  _DashboardColors.primaryContainer
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 12, offset: const Offset(0, 6))],
+              boxShadow: [
+                BoxShadow(
+                    color: _DashboardColors.primary.withOpacity(0.2),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6))
+              ],
             ),
             child: Center(
               child: Text(
                 'Create Report',
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white),
               ),
             ),
           ),
@@ -11305,12 +12838,14 @@ class _AuditSidebar extends StatelessWidget {
           _AuditFooterLink(
             icon: Icons.verified_user,
             label: 'Security',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _AuditFooterLink(
             icon: Icons.logout,
             label: 'Log Out',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
           ),
         ],
       ),
@@ -11319,7 +12854,11 @@ class _AuditSidebar extends StatelessWidget {
 }
 
 class _AuditSidebarItem extends StatelessWidget {
-  const _AuditSidebarItem({required this.icon, required this.label, this.selected = false, this.onTap});
+  const _AuditSidebarItem(
+      {required this.icon,
+      required this.label,
+      this.selected = false,
+      this.onTap});
 
   final IconData icon;
   final String label;
@@ -11328,7 +12867,8 @@ class _AuditSidebarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
+    final textColor =
+        selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -11336,15 +12876,24 @@ class _AuditSidebarItem extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          color: selected ? _DashboardColors.surfaceLowest.withOpacity(0.6) : Colors.transparent,
+          color: selected
+              ? _DashboardColors.surfaceLowest.withOpacity(0.6)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
-          border: selected ? const Border(right: BorderSide(color: _DashboardColors.primary, width: 3)) : null,
+          border: selected
+              ? const Border(
+                  right: BorderSide(color: _DashboardColors.primary, width: 3))
+              : null,
         ),
         child: Row(
           children: [
             Icon(icon, size: 18, color: textColor),
             const SizedBox(width: 10),
-            Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: textColor)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: textColor)),
           ],
         ),
       ),
@@ -11372,7 +12921,11 @@ class _AuditFooterLink extends StatelessWidget {
           children: [
             Icon(icon, size: 16, color: _DashboardColors.onSurfaceVariant),
             const SizedBox(width: 10),
-            Text(label, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: _DashboardColors.onSurfaceVariant)),
           ],
         ),
       ),
@@ -11392,7 +12945,12 @@ class _AuditTopBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 28),
       decoration: BoxDecoration(
         color: _DashboardColors.surface.withOpacity(0.9),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Row(
         children: [
@@ -11400,23 +12958,29 @@ class _AuditTopBar extends StatelessWidget {
             children: [
               Text(
                 'Inter-Metro Transport Solution Limited',
-                style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+                style: GoogleFonts.manrope(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.primary),
               ),
               const SizedBox(width: 22),
               _AuditTopLink(
                 label: 'Analytics',
-                onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+                onTap: () => Navigator.pushNamed(
+                    context, AppRoutes.adminRevenueDashboard),
               ),
               const SizedBox(width: 16),
               _AuditTopLink(
                 label: 'Configuration',
-                onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+                onTap: () =>
+                    Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
               ),
               const SizedBox(width: 16),
               _AuditTopLink(
                 label: 'Logs',
                 selected: true,
-                onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+                onTap: () => Navigator.pushNamed(
+                    context, AppRoutes.adminAuditActivityLogs),
               ),
             ],
           ),
@@ -11430,14 +12994,18 @@ class _AuditTopBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.search, size: 16, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.search,
+                    size: 16, color: _DashboardColors.onSurfaceVariant),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Global search...',
-                      hintStyle: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
+                      hintStyle: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant
+                              .withOpacity(0.7)),
                       isCollapsed: true,
                     ),
                   ),
@@ -11448,26 +13016,30 @@ class _AuditTopBar extends StatelessWidget {
           const SizedBox(width: 16),
           IconButton(
             onPressed: onRefresh,
-            icon: const Icon(Icons.refresh, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.refresh,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.notifications,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
-            GestureDetector(
-              onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor: _DashboardColors.surfaceHighest,
-                backgroundImage: const NetworkImage(
-                  'https://lh3.googleusercontent.com/aida-public/AB6AXuC9l91YUWJ3Brj02TQsqqHtHG1E61eA05Stezv_5vjQsYOS99UUytIC-194PN-lV_cAFVOCETd4UGcNCrp58uVRDUZjs2NeF-0QNH2L8SNtPdixePl-Dc7YEXpo_QBtDiHMtSSfJ1XE41DyhG3npn5Ljt-j4DyEZNJ1lzG4UsAIeyp16DorvlT1s9oZov9LjiLPjifuM-o6iNOWxy-KCvng-OyJBkmqzOe7M5saaonjyf11r2Qwqn7XTJtY_x433fbRaz6B4K5gt3Q',
-                ),
+          GestureDetector(
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            child: CircleAvatar(
+              radius: 16,
+              backgroundColor: _DashboardColors.surfaceHighest,
+              backgroundImage: const NetworkImage(
+                'https://lh3.googleusercontent.com/aida-public/AB6AXuC9l91YUWJ3Brj02TQsqqHtHG1E61eA05Stezv_5vjQsYOS99UUytIC-194PN-lV_cAFVOCETd4UGcNCrp58uVRDUZjs2NeF-0QNH2L8SNtPdixePl-Dc7YEXpo_QBtDiHMtSSfJ1XE41DyhG3npn5Ljt-j4DyEZNJ1lzG4UsAIeyp16DorvlT1s9oZov9LjiLPjifuM-o6iNOWxy-KCvng-OyJBkmqzOe7M5saaonjyf11r2Qwqn7XTJtY_x433fbRaz6B4K5gt3Q',
               ),
             ),
+          ),
         ],
       ),
     );
@@ -11488,14 +13060,19 @@ class _AuditTopLink extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(bottom: 4),
         decoration: BoxDecoration(
-          border: selected ? const Border(bottom: BorderSide(color: _DashboardColors.primary, width: 2)) : null,
+          border: selected
+              ? const Border(
+                  bottom: BorderSide(color: _DashboardColors.primary, width: 2))
+              : null,
         ),
         child: Text(
           label,
           style: GoogleFonts.inter(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant,
+            color: selected
+                ? _DashboardColors.primary
+                : _DashboardColors.onSurfaceVariant,
           ),
         ),
       ),
@@ -11517,18 +13094,23 @@ class _AuditHeaderSection extends StatelessWidget {
             children: [
               Text(
                 'Audit & Activity Logs',
-                style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
               const SizedBox(height: 6),
               Text(
                 'Monitor administrative actions and security events across the Luxury in Motion infrastructure.',
-                style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: _DashboardColors.onSurfaceVariant),
               ),
             ],
           ),
         ),
         const SizedBox(width: 16),
-        const _AuditExportButton(label: 'Export PDF', icon: Icons.file_download),
+        const _AuditExportButton(
+            label: 'Export PDF', icon: Icons.file_download),
         const SizedBox(width: 10),
         const _AuditExportButton(label: 'Export CSV', icon: Icons.table_chart),
       ],
@@ -11548,13 +13130,18 @@ class _AuditExportButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.3)),
       ),
       child: Row(
         children: [
           Icon(icon, size: 16, color: _DashboardColors.onSurfaceVariant),
           const SizedBox(width: 8),
-          Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+          Text(label,
+              style: GoogleFonts.inter(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: _DashboardColors.onSurface)),
         ],
       ),
     );
@@ -11567,7 +13154,11 @@ class _AuditFiltersSection extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final crossAxisCount = width >= 1100 ? 4 : width >= 760 ? 2 : 1;
+        final crossAxisCount = width >= 1100
+            ? 4
+            : width >= 760
+                ? 2
+                : 1;
         return GridView.count(
           crossAxisCount: crossAxisCount,
           shrinkWrap: true,
@@ -11601,7 +13192,8 @@ class _AuditFiltersSection extends StatelessWidget {
 }
 
 class _AuditFilterCard extends StatelessWidget {
-  const _AuditFilterCard({required this.label, required this.child, this.highlighted = false});
+  const _AuditFilterCard(
+      {required this.label, required this.child, this.highlighted = false});
 
   final String label;
   final Widget child;
@@ -11614,14 +13206,21 @@ class _AuditFilterCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(12),
-        border: highlighted ? Border.all(color: _DashboardColors.primary.withOpacity(0.1), width: 2) : null,
+        border: highlighted
+            ? Border.all(
+                color: _DashboardColors.primary.withOpacity(0.1), width: 2)
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label,
-            style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.6, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 9,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.6,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 8),
           Expanded(child: child),
@@ -11642,10 +13241,14 @@ class _AuditFilterDropdown extends StatelessWidget {
       children: [
         Text(
           value,
-          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+          style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: _DashboardColors.onSurface),
         ),
         const Spacer(),
-        const Icon(Icons.expand_more, size: 18, color: _DashboardColors.onSurfaceVariant),
+        const Icon(Icons.expand_more,
+            size: 18, color: _DashboardColors.onSurfaceVariant),
       ],
     );
   }
@@ -11662,10 +13265,14 @@ class _AuditFilterDate extends StatelessWidget {
       children: [
         Text(
           value,
-          style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+          style: GoogleFonts.inter(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: _DashboardColors.onSurface),
         ),
         const Spacer(),
-        const Icon(Icons.calendar_today, size: 16, color: _DashboardColors.onSurfaceVariant),
+        const Icon(Icons.calendar_today,
+            size: 16, color: _DashboardColors.onSurfaceVariant),
       ],
     );
   }
@@ -11683,7 +13290,9 @@ class _AuditFilterSearch extends StatelessWidget {
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: 'Entry keywords...',
-              hintStyle: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
+              hintStyle: GoogleFonts.inter(
+                  fontSize: 12,
+                  color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
               isCollapsed: true,
             ),
           ),
@@ -11709,7 +13318,12 @@ class _AuditTable extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -11717,7 +13331,8 @@ class _AuditTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               children: [
@@ -11734,7 +13349,8 @@ class _AuditTable extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
                 'No audit activity yet.',
-                style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: _DashboardColors.onSurfaceVariant),
               ),
             )
           else
@@ -11747,13 +13363,17 @@ class _AuditTable extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: _DashboardColors.outlineVariant.withOpacity(0.15))),
+              border: Border(
+                  top: BorderSide(
+                      color:
+                          _DashboardColors.outlineVariant.withOpacity(0.15))),
             ),
             child: Row(
               children: [
                 Text(
                   footerLabel,
-                  style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 11, color: _DashboardColors.onSurfaceVariant),
                 ),
                 if (total > 0) ...[
                   const Spacer(),
@@ -11809,7 +13429,9 @@ class _AuditLogRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-      color: shaded ? _DashboardColors.surfaceLow.withOpacity(0.3) : Colors.transparent,
+      color: shaded
+          ? _DashboardColors.surfaceLow.withOpacity(0.3)
+          : Colors.transparent,
       child: Row(
         children: [
           Expanded(
@@ -11817,9 +13439,16 @@ class _AuditLogRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(entry.date, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+                Text(entry.date,
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.onSurface)),
                 const SizedBox(height: 4),
-                Text(entry.time, style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                Text(entry.time,
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: _DashboardColors.onSurfaceVariant)),
               ],
             ),
           ),
@@ -11835,16 +13464,26 @@ class _AuditLogRow extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: entry.avatarUrl.isEmpty
-                      ? const Icon(Icons.shield, size: 18, color: _DashboardColors.primary)
-                      : ClipOval(child: Image.network(entry.avatarUrl, fit: BoxFit.cover)),
+                      ? const Icon(Icons.shield,
+                          size: 18, color: _DashboardColors.primary)
+                      : ClipOval(
+                          child: Image.network(entry.avatarUrl,
+                              fit: BoxFit.cover)),
                 ),
                 const SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(entry.name, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+                    Text(entry.name,
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: _DashboardColors.onSurface)),
                     const SizedBox(height: 4),
-                    Text(entry.role, style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                    Text(entry.role,
+                        style: GoogleFonts.inter(
+                            fontSize: 10,
+                            color: _DashboardColors.onSurfaceVariant)),
                   ],
                 ),
               ],
@@ -11858,14 +13497,18 @@ class _AuditLogRow extends StatelessWidget {
             flex: 3,
             child: Text(
               entry.details,
-              style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant, height: 1.4),
+              style: GoogleFonts.inter(
+                  fontSize: 11,
+                  color: _DashboardColors.onSurfaceVariant,
+                  height: 1.4),
             ),
           ),
           Expanded(
             flex: 2,
             child: Text(
               entry.ipAddress,
-              style: GoogleFonts.robotoMono(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.robotoMono(
+                  fontSize: 10, color: _DashboardColors.onSurfaceVariant),
             ),
           ),
         ],
@@ -11901,7 +13544,11 @@ class _AuditCategoryChip extends StatelessWidget {
       ),
       child: Text(
         category.toUpperCase(),
-        style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.2, color: textColor),
+        style: GoogleFonts.inter(
+            fontSize: 9,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.2,
+            color: textColor),
       ),
     );
   }
@@ -11951,7 +13598,11 @@ class _AuditPageIcon extends StatelessWidget {
         color: _DashboardColors.surfaceLow,
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Icon(icon, size: 18, color: disabled ? _DashboardColors.onSurfaceVariant.withOpacity(0.3) : _DashboardColors.onSurfaceVariant),
+      child: Icon(icon,
+          size: 18,
+          color: disabled
+              ? _DashboardColors.onSurfaceVariant.withOpacity(0.3)
+              : _DashboardColors.onSurfaceVariant),
     );
   }
 }
@@ -11966,7 +13617,12 @@ class _AuditFab extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.primary,
         borderRadius: BorderRadius.circular(30),
-        boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.3), blurRadius: 16, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: _DashboardColors.primary.withOpacity(0.3),
+              blurRadius: 16,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Row(
         children: [
@@ -11974,7 +13630,8 @@ class _AuditFab extends StatelessWidget {
           const SizedBox(width: 10),
           Text(
             'Create Audit Alert',
-            style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+            style: GoogleFonts.inter(
+                fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
           ),
         ],
       ),
@@ -12078,10 +13735,12 @@ class AdminSupportTicketManagementScreen extends StatefulWidget {
   const AdminSupportTicketManagementScreen({super.key});
 
   @override
-  State<AdminSupportTicketManagementScreen> createState() => _AdminSupportTicketManagementScreenState();
+  State<AdminSupportTicketManagementScreen> createState() =>
+      _AdminSupportTicketManagementScreenState();
 }
 
-class _AdminSupportTicketManagementScreenState extends State<AdminSupportTicketManagementScreen> {
+class _AdminSupportTicketManagementScreenState
+    extends State<AdminSupportTicketManagementScreen> {
   late Future<_SupportData> _future;
 
   @override
@@ -12112,11 +13771,15 @@ class _AdminSupportTicketManagementScreenState extends State<AdminSupportTicketM
     return FutureBuilder<_SupportData>(
       future: _future,
       builder: (context, snapshot) {
-        final data = snapshot.data ?? const _SupportData(tickets: [], activity: []);
+        final data =
+            snapshot.data ?? const _SupportData(tickets: [], activity: []);
         final now = DateTime.now();
-        final openCount = data.tickets.where((t) => t.supportStatus == 'OPEN').length;
-        final inProgressCount = data.tickets.where((t) => t.supportStatus == 'IN_PROGRESS').length;
-        final resolvedCount = data.tickets.where((t) => t.supportStatus == 'RESOLVED').length;
+        final openCount =
+            data.tickets.where((t) => t.supportStatus == 'OPEN').length;
+        final inProgressCount =
+            data.tickets.where((t) => t.supportStatus == 'IN_PROGRESS').length;
+        final resolvedCount =
+            data.tickets.where((t) => t.supportStatus == 'RESOLVED').length;
         final overdueCount = data.tickets.where((t) {
           if (t.createdAt == null) return false;
           if (t.supportStatus == 'RESOLVED') return false;
@@ -12132,7 +13795,7 @@ class _AdminSupportTicketManagementScreenState extends State<AdminSupportTicketM
                   Expanded(
                     child: Column(
                       children: [
-                    _SupportTopBar(onRefresh: _refresh),
+                        _SupportTopBar(onRefresh: _refresh),
                         Expanded(
                           child: SingleChildScrollView(
                             padding: const EdgeInsets.fromLTRB(28, 24, 28, 96),
@@ -12197,34 +13860,44 @@ class _SupportSidebar extends StatelessWidget {
         children: [
           Text(
             'I-Metro Admin',
-            style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.manrope(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
           const SizedBox(height: 4),
           Text(
             'Luxury in Motion',
-            style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 22),
           _SupportSidebarItem(
             icon: Icons.dashboard,
             label: 'Revenue',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
           ),
           _SupportSidebarItem(
             icon: Icons.settings,
             label: 'Settings',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _SupportSidebarItem(
             icon: Icons.history,
             label: 'Activity',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           _SupportSidebarItem(
             icon: Icons.support_agent,
             label: 'Support',
             selected: true,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSupportTicketManagement),
+            onTap: () => Navigator.pushNamed(
+                context, AppRoutes.adminSupportTicketManagement),
           ),
           const Spacer(),
           Container(
@@ -12232,7 +13905,10 @@ class _SupportSidebar extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 12),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [_DashboardColors.primary, _DashboardColors.primaryContainer],
+                colors: [
+                  _DashboardColors.primary,
+                  _DashboardColors.primaryContainer
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -12245,7 +13921,10 @@ class _SupportSidebar extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   'Create Report',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
                 ),
               ],
             ),
@@ -12254,12 +13933,14 @@ class _SupportSidebar extends StatelessWidget {
           _SupportFooterLink(
             icon: Icons.verified_user,
             label: 'Security',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _SupportFooterLink(
             icon: Icons.logout,
             label: 'Log Out',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
           ),
         ],
       ),
@@ -12268,7 +13949,11 @@ class _SupportSidebar extends StatelessWidget {
 }
 
 class _SupportSidebarItem extends StatelessWidget {
-  const _SupportSidebarItem({required this.icon, required this.label, this.selected = false, this.onTap});
+  const _SupportSidebarItem(
+      {required this.icon,
+      required this.label,
+      this.selected = false,
+      this.onTap});
 
   final IconData icon;
   final String label;
@@ -12277,7 +13962,8 @@ class _SupportSidebarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
+    final textColor =
+        selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -12285,15 +13971,24 @@ class _SupportSidebarItem extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
         decoration: BoxDecoration(
-          color: selected ? _DashboardColors.surfaceLowest.withOpacity(0.6) : Colors.transparent,
+          color: selected
+              ? _DashboardColors.surfaceLowest.withOpacity(0.6)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
-          border: selected ? const Border(right: BorderSide(color: _DashboardColors.primary, width: 3)) : null,
+          border: selected
+              ? const Border(
+                  right: BorderSide(color: _DashboardColors.primary, width: 3))
+              : null,
         ),
         child: Row(
           children: [
             Icon(icon, size: 18, color: textColor),
             const SizedBox(width: 10),
-            Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: textColor)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: textColor)),
           ],
         ),
       ),
@@ -12302,7 +13997,8 @@ class _SupportSidebarItem extends StatelessWidget {
 }
 
 class _SupportFooterLink extends StatelessWidget {
-  const _SupportFooterLink({required this.icon, required this.label, this.onTap});
+  const _SupportFooterLink(
+      {required this.icon, required this.label, this.onTap});
 
   final IconData icon;
   final String label;
@@ -12320,7 +14016,11 @@ class _SupportFooterLink extends StatelessWidget {
           children: [
             Icon(icon, size: 16, color: _DashboardColors.onSurfaceVariant),
             const SizedBox(width: 10),
-            Text(label, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: _DashboardColors.onSurfaceVariant)),
           ],
         ),
       ),
@@ -12340,28 +14040,39 @@ class _SupportTopBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 28),
       decoration: BoxDecoration(
         color: _DashboardColors.surface.withOpacity(0.9),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Row(
         children: [
           Text(
             'Inter-Metro Transport Solution Limited',
-            style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.manrope(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
           const SizedBox(width: 22),
           _SupportTopLink(
             label: 'Analytics',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
           ),
           const SizedBox(width: 16),
           _SupportTopLink(
             label: 'Configuration',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           const SizedBox(width: 16),
           _SupportTopLink(
             label: 'Logs',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           const Spacer(),
           Container(
@@ -12373,14 +14084,18 @@ class _SupportTopBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.search, size: 16, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.search,
+                    size: 16, color: _DashboardColors.onSurfaceVariant),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Search tickets...',
-                      hintStyle: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
+                      hintStyle: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant
+                              .withOpacity(0.7)),
                       isCollapsed: true,
                     ),
                   ),
@@ -12391,24 +14106,29 @@ class _SupportTopBar extends StatelessWidget {
           const SizedBox(width: 12),
           IconButton(
             onPressed: onRefresh,
-            icon: const Icon(Icons.refresh, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.refresh,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.notifications,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
             child: Container(
               width: 32,
               height: 32,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.3)),
+                border: Border.all(
+                    color: _DashboardColors.outlineVariant.withOpacity(0.3)),
                 image: const DecorationImage(
                   image: NetworkImage(
                     'https://lh3.googleusercontent.com/aida-public/AB6AXuBUK8fI7t_HwW2tQYPOCUPMAechmK8GkwqUOT80mLcpeG-bCgIF8Xezi5kDm6vqszSDCGMAjFPP0KbgDf524qjD-9FvYAstcHtHhJioPFNCGUnPbUMxhSTJ8gb2xA-8hQxtVm-34eLXJIaY2WWfI2VDjwh6kKY8nkFYo5K2C9sNx8-sUYAAfgddVfz7pFUlicg8m149l2Aj5BPtznF4atmtZsG3mIaq268yhL_Oy2e0Z4O-tfX-i-YIBD9ZnQilynNztm1pB4w7NiM',
@@ -12436,7 +14156,10 @@ class _SupportTopLink extends StatelessWidget {
       onTap: onTap,
       child: Text(
         label,
-        style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+        style: GoogleFonts.inter(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: _DashboardColors.onSurfaceVariant),
       ),
     );
   }
@@ -12452,12 +14175,16 @@ class _SupportHeader extends StatelessWidget {
       children: [
         Text(
           'Support Ticket Management',
-          style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+          style: GoogleFonts.manrope(
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+              color: _DashboardColors.onSurface),
         ),
         const SizedBox(height: 6),
         Text(
           'Oversee transit concerns and maintain commuter satisfaction.',
-          style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 12, color: _DashboardColors.onSurfaceVariant),
         ),
       ],
     );
@@ -12482,7 +14209,11 @@ class _SupportSummaryGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final crossAxisCount = width >= 1100 ? 4 : width >= 760 ? 2 : 1;
+        final crossAxisCount = width >= 1100
+            ? 4
+            : width >= 760
+                ? 2
+                : 1;
         return GridView.count(
           crossAxisCount: crossAxisCount,
           shrinkWrap: true,
@@ -12494,7 +14225,8 @@ class _SupportSummaryGrid extends StatelessWidget {
             _SupportSummaryCard(
               title: 'Open',
               value: _formatCount(openCount),
-              subtitle: openCount == 0 ? 'No open tickets' : 'Awaiting response',
+              subtitle:
+                  openCount == 0 ? 'No open tickets' : 'Awaiting response',
               icon: Icons.drafts,
               iconColor: _DashboardColors.primary,
               iconBackground: const Color(0xFFE4F2EC),
@@ -12503,7 +14235,9 @@ class _SupportSummaryGrid extends StatelessWidget {
             _SupportSummaryCard(
               title: 'In Progress',
               value: _formatCount(inProgressCount),
-              subtitle: inProgressCount == 0 ? 'No active escalations' : 'Being handled',
+              subtitle: inProgressCount == 0
+                  ? 'No active escalations'
+                  : 'Being handled',
               icon: Icons.pending_actions,
               iconColor: _DashboardColors.tertiaryContainer,
               iconBackground: const Color(0x1F92493E),
@@ -12512,7 +14246,9 @@ class _SupportSummaryGrid extends StatelessWidget {
             _SupportSummaryCard(
               title: 'Resolved',
               value: _formatCount(resolvedCount),
-              subtitle: resolvedCount == 0 ? 'No resolved tickets yet' : 'Closed successfully',
+              subtitle: resolvedCount == 0
+                  ? 'No resolved tickets yet'
+                  : 'Closed successfully',
               icon: Icons.task_alt,
               iconColor: _DashboardColors.secondary,
               iconBackground: const Color(0x33C8EADC),
@@ -12521,7 +14257,8 @@ class _SupportSummaryGrid extends StatelessWidget {
             _SupportSummaryCard(
               title: 'Overdue',
               value: _formatCount(overdueCount),
-              subtitle: overdueCount == 0 ? 'No SLA breaches' : 'Requires attention',
+              subtitle:
+                  overdueCount == 0 ? 'No SLA breaches' : 'Requires attention',
               icon: Icons.warning,
               iconColor: _DashboardColors.error,
               iconBackground: const Color(0x33FFDAD6),
@@ -12560,8 +14297,14 @@ class _SupportSummaryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.1)),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.1)),
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -12579,19 +14322,29 @@ class _SupportSummaryCard extends StatelessWidget {
               ),
               Text(
                 title.toUpperCase(),
-                style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.6, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 9,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.6,
+                    color: _DashboardColors.onSurfaceVariant),
               ),
             ],
           ),
           const SizedBox(height: 10),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 26,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
           const SizedBox(height: 6),
           Text(
             subtitle,
-            style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: subtitleColor),
+            style: GoogleFonts.inter(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: subtitleColor),
           ),
         ],
       ),
@@ -12615,7 +14368,12 @@ class _SupportTicketSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -12623,7 +14381,8 @@ class _SupportTicketSection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               children: [
@@ -12633,13 +14392,16 @@ class _SupportTicketSection extends StatelessWidget {
                 const Spacer(),
                 Text(
                   countLabel,
-                  style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 11, color: _DashboardColors.onSurfaceVariant),
                 ),
                 const SizedBox(width: 12),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+                    border: Border.all(
+                        color:
+                            _DashboardColors.outlineVariant.withOpacity(0.2)),
                   ),
                   child: Row(
                     children: const [
@@ -12671,21 +14433,24 @@ class _SupportTicketSection extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
                 'No support tickets yet.',
-                style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: _DashboardColors.onSurfaceVariant),
               ),
             )
           else
             Column(
               children: List.generate(tickets.length, (index) {
                 final ticket = tickets[index];
-                return _SupportTicketRow(ticket: ticket, onStatusChanged: onStatusChanged);
+                return _SupportTicketRow(
+                    ticket: ticket, onStatusChanged: onStatusChanged);
               }),
             ),
           Container(
             padding: const EdgeInsets.symmetric(vertical: 14),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow.withOpacity(0.5),
-              borderRadius: const BorderRadius.vertical(bottom: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(bottom: Radius.circular(16)),
             ),
             child: Center(
               child: Row(
@@ -12693,10 +14458,14 @@ class _SupportTicketSection extends StatelessWidget {
                 children: [
                   Text(
                     'View All Active Tickets',
-                    style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.primary),
+                    style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.primary),
                   ),
                   const SizedBox(width: 6),
-                  const Icon(Icons.arrow_forward, size: 16, color: _DashboardColors.primary),
+                  const Icon(Icons.arrow_forward,
+                      size: 16, color: _DashboardColors.primary),
                 ],
               ),
             ),
@@ -12720,13 +14489,16 @@ class _SupportControlButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
       ),
       child: Row(
         children: [
           Icon(icon, size: 16, color: _DashboardColors.onSurfaceVariant),
           const SizedBox(width: 6),
-          Text(label, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600)),
+          Text(label,
+              style:
+                  GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600)),
         ],
       ),
     );
@@ -12744,7 +14516,9 @@ class _SupportPageButton extends StatelessWidget {
       padding: const EdgeInsets.all(6),
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
-        border: Border(right: BorderSide(color: _DashboardColors.outlineVariant.withOpacity(0.2))),
+        border: Border(
+            right: BorderSide(
+                color: _DashboardColors.outlineVariant.withOpacity(0.2))),
       ),
       child: Icon(icon, size: 16, color: _DashboardColors.onSurfaceVariant),
     );
@@ -12752,7 +14526,11 @@ class _SupportPageButton extends StatelessWidget {
 }
 
 class _SupportHeaderCell extends StatelessWidget {
-  const _SupportHeaderCell({required this.label, required this.flex, this.center = false, this.alignRight = false});
+  const _SupportHeaderCell(
+      {required this.label,
+      required this.flex,
+      this.center = false,
+      this.alignRight = false});
 
   final String label;
   final int flex;
@@ -12794,7 +14572,9 @@ class _SupportTicketRow extends StatelessWidget {
       context: context,
       builder: (context) {
         String currentStatus = _normalizeSupportStatus(
-          ticket.supportStatus.isNotEmpty ? ticket.supportStatus : ticket.status,
+          ticket.supportStatus.isNotEmpty
+              ? ticket.supportStatus
+              : ticket.status,
         );
         bool isUpdating = false;
 
@@ -12804,21 +14584,28 @@ class _SupportTicketRow extends StatelessWidget {
               if (isUpdating) return;
               if (ticket.supportId.isEmpty) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Support ID missing. Unable to update status.')),
+                  const SnackBar(
+                      content:
+                          Text('Support ID missing. Unable to update status.')),
                 );
                 return;
               }
               setState(() => isUpdating = true);
               try {
-                await AdminApi.updateSupportStatus(ticket.supportId, nextStatus);
+                await AdminApi.updateSupportStatus(
+                    ticket.supportId, nextStatus);
                 setState(() => currentStatus = nextStatus);
                 onStatusChanged?.call();
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Status updated to ${_supportStatusLabel(nextStatus)}.')),
+                  SnackBar(
+                      content: Text(
+                          'Status updated to ${_supportStatusLabel(nextStatus)}.')),
                 );
               } catch (_) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Failed to update status. Please try again.')),
+                  const SnackBar(
+                      content:
+                          Text('Failed to update status. Please try again.')),
                 );
               } finally {
                 setState(() => isUpdating = false);
@@ -12826,7 +14613,8 @@ class _SupportTicketRow extends StatelessWidget {
             }
 
             return Dialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
@@ -12842,16 +14630,24 @@ class _SupportTicketRow extends StatelessWidget {
                             color: _DashboardColors.primary.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          child: const Icon(Icons.mail_outline, color: _DashboardColors.primary),
+                          child: const Icon(Icons.mail_outline,
+                              color: _DashboardColors.primary),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Support Message', style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700)),
+                              Text('Support Message',
+                                  style: GoogleFonts.manrope(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700)),
                               const SizedBox(height: 2),
-                              Text(ticket.id, style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
+                              Text(ticket.id,
+                                  style: GoogleFonts.inter(
+                                      fontSize: 11,
+                                      color:
+                                          _DashboardColors.onSurfaceVariant)),
                             ],
                           ),
                         ),
@@ -12862,17 +14658,34 @@ class _SupportTicketRow extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Text('Subject', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurfaceVariant)),
+                    Text('Subject',
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: _DashboardColors.onSurfaceVariant)),
                     const SizedBox(height: 6),
-                    Text(ticket.subject, style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700)),
+                    Text(ticket.subject,
+                        style: GoogleFonts.manrope(
+                            fontSize: 16, fontWeight: FontWeight.w700)),
                     const SizedBox(height: 12),
                     if (ticket.contactLabel.isNotEmpty) ...[
-                      Text('From', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurfaceVariant)),
+                      Text('From',
+                          style: GoogleFonts.inter(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: _DashboardColors.onSurfaceVariant)),
                       const SizedBox(height: 6),
-                      Text(ticket.contactLabel, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
+                      Text(ticket.contactLabel,
+                          style: GoogleFonts.inter(
+                              fontSize: 12,
+                              color: _DashboardColors.onSurfaceVariant)),
                       const SizedBox(height: 12),
                     ],
-                    Text('Message', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurfaceVariant)),
+                    Text('Message',
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: _DashboardColors.onSurfaceVariant)),
                     const SizedBox(height: 6),
                     Container(
                       width: double.infinity,
@@ -12882,12 +14695,21 @@ class _SupportTicketRow extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        ticket.fullMessage.isNotEmpty ? ticket.fullMessage : 'No message provided.',
-                        style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant, height: 1.5),
+                        ticket.fullMessage.isNotEmpty
+                            ? ticket.fullMessage
+                            : 'No message provided.',
+                        style: GoogleFonts.inter(
+                            fontSize: 12,
+                            color: _DashboardColors.onSurfaceVariant,
+                            height: 1.5),
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Text('Update Status', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.onSurfaceVariant)),
+                    Text('Update Status',
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: _DashboardColors.onSurfaceVariant)),
                     const SizedBox(height: 8),
                     Wrap(
                       spacing: 10,
@@ -12931,7 +14753,9 @@ class _SupportTicketRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: _DashboardColors.outlineVariant.withOpacity(0.12))),
+        border: Border(
+            top: BorderSide(
+                color: _DashboardColors.outlineVariant.withOpacity(0.12))),
       ),
       child: Row(
         children: [
@@ -12939,7 +14763,10 @@ class _SupportTicketRow extends StatelessWidget {
             flex: 2,
             child: Text(
               ticket.id,
-              style: GoogleFonts.robotoMono(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+              style: GoogleFonts.robotoMono(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  color: _DashboardColors.primary),
             ),
           ),
           Expanded(
@@ -12947,9 +14774,14 @@ class _SupportTicketRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(ticket.subject, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700)),
+                Text(ticket.subject,
+                    style: GoogleFonts.inter(
+                        fontSize: 12, fontWeight: FontWeight.w700)),
                 const SizedBox(height: 4),
-                Text(ticket.subtitle, style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                Text(ticket.subtitle,
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: _DashboardColors.onSurfaceVariant)),
               ],
             ),
           ),
@@ -12968,18 +14800,26 @@ class _SupportTicketRow extends StatelessWidget {
             flex: 3,
             child: Row(
               children: [
-                _SupportAvatar(initials: ticket.assigneeInitials, filled: ticket.assigneeInitials.isNotEmpty),
+                _SupportAvatar(
+                    initials: ticket.assigneeInitials,
+                    filled: ticket.assigneeInitials.isNotEmpty),
                 const SizedBox(width: 8),
                 Text(
                   ticket.assigneeName,
-                  style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: ticket.assigneeInitials.isEmpty ? _DashboardColors.onSurfaceVariant : _DashboardColors.onSurface),
+                  style: GoogleFonts.inter(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: ticket.assigneeInitials.isEmpty
+                          ? _DashboardColors.onSurfaceVariant
+                          : _DashboardColors.onSurface),
                 ),
               ],
             ),
           ),
           Expanded(
             flex: 2,
-            child: _SupportStatusChip(status: ticket.status, statusKey: ticket.supportStatus),
+            child: _SupportStatusChip(
+                status: ticket.status, statusKey: ticket.supportStatus),
           ),
           Expanded(
             flex: 2,
@@ -12988,7 +14828,9 @@ class _SupportTicketRow extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _SupportActionIcon(icon: Icons.visibility, onTap: () => _openDetails(context)),
+                  _SupportActionIcon(
+                      icon: Icons.visibility,
+                      onTap: () => _openDetails(context)),
                   const SizedBox(width: 6),
                   const _SupportActionIcon(icon: Icons.person_add),
                 ],
@@ -13009,8 +14851,12 @@ class _SupportTypeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isPassenger = label == 'Passenger';
-    final background = isPassenger ? _DashboardColors.secondaryContainer.withOpacity(0.3) : _DashboardColors.surfaceHighest;
-    final textColor = isPassenger ? _DashboardColors.onSecondaryContainer : _DashboardColors.onSurfaceVariant;
+    final background = isPassenger
+        ? _DashboardColors.secondaryContainer.withOpacity(0.3)
+        : _DashboardColors.surfaceHighest;
+    final textColor = isPassenger
+        ? _DashboardColors.onSecondaryContainer
+        : _DashboardColors.onSurfaceVariant;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
@@ -13019,7 +14865,11 @@ class _SupportTypeChip extends StatelessWidget {
       ),
       child: Text(
         label.toUpperCase(),
-        style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.2, color: textColor),
+        style: GoogleFonts.inter(
+            fontSize: 9,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.2,
+            color: textColor),
       ),
     );
   }
@@ -13048,7 +14898,9 @@ class _SupportPriorityLabel extends StatelessWidget {
       children: [
         Icon(icon, size: 16, color: color),
         const SizedBox(width: 6),
-        Text(priority, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: color)),
+        Text(priority,
+            style: GoogleFonts.inter(
+                fontSize: 11, fontWeight: FontWeight.w600, color: color)),
       ],
     );
   }
@@ -13062,14 +14914,20 @@ class _SupportAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = filled ? _DashboardColors.primaryContainer : _DashboardColors.outlineVariant;
+    final background = filled
+        ? _DashboardColors.primaryContainer
+        : _DashboardColors.outlineVariant;
     return Container(
       width: 26,
       height: 26,
       decoration: BoxDecoration(color: background, shape: BoxShape.circle),
       child: Center(
         child: filled
-            ? Text(initials, style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white))
+            ? Text(initials,
+                style: GoogleFonts.inter(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white))
             : const Icon(Icons.person, size: 14, color: Colors.white),
       ),
     );
@@ -13084,7 +14942,8 @@ class _SupportStatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final key = _normalizeSupportStatus(statusKey != null && statusKey!.isNotEmpty ? statusKey! : status);
+    final key = _normalizeSupportStatus(
+        statusKey != null && statusKey!.isNotEmpty ? statusKey! : status);
     final label = status.isNotEmpty ? status : _supportStatusLabel(key);
     final color = _supportStatusColor(key);
     return Container(
@@ -13096,7 +14955,11 @@ class _SupportStatusChip extends StatelessWidget {
       ),
       child: Text(
         label.toUpperCase(),
-        style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.1, color: color),
+        style: GoogleFonts.inter(
+            fontSize: 9,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 1.1,
+            color: color),
       ),
     );
   }
@@ -13141,8 +15004,10 @@ class _SupportStatusButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = selected ? color.withOpacity(0.16) : _DashboardColors.surfaceLowest;
-    final border = selected ? color : _DashboardColors.outlineVariant.withOpacity(0.3);
+    final background =
+        selected ? color.withOpacity(0.16) : _DashboardColors.surfaceLowest;
+    final border =
+        selected ? color : _DashboardColors.outlineVariant.withOpacity(0.3);
     final textColor = selected ? color : _DashboardColors.onSurfaceVariant;
     return InkWell(
       onTap: disabled ? null : onTap,
@@ -13156,7 +15021,8 @@ class _SupportStatusButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: textColor),
+          style: GoogleFonts.inter(
+              fontSize: 11, fontWeight: FontWeight.w700, color: textColor),
         ),
       ),
     );
@@ -13234,24 +15100,31 @@ class _SupportActivityFeed extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLow,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.08)),
+        border: Border.all(
+            color: _DashboardColors.outlineVariant.withOpacity(0.08)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Team Activity',
-            style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
           const SizedBox(height: 16),
           if (activity.isEmpty)
             Text(
               'No recent support activity.',
-              style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: _DashboardColors.onSurfaceVariant),
             )
           else
             Column(
-              children: activity.map((entry) => _SupportActivityRow(activity: entry)).toList(),
+              children: activity
+                  .map((entry) => _SupportActivityRow(activity: entry))
+                  .toList(),
             ),
         ],
       ),
@@ -13274,9 +15147,14 @@ class _SupportActivityRow extends StatelessWidget {
           Container(
             width: 28,
             height: 28,
-            decoration: BoxDecoration(color: activity.color, shape: BoxShape.circle),
+            decoration:
+                BoxDecoration(color: activity.color, shape: BoxShape.circle),
             child: Center(
-              child: Text(activity.initials, style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: Colors.white)),
+              child: Text(activity.initials,
+                  style: GoogleFonts.inter(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white)),
             ),
           ),
           const SizedBox(width: 10),
@@ -13284,9 +15162,14 @@ class _SupportActivityRow extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(activity.message, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface)),
+                Text(activity.message,
+                    style: GoogleFonts.inter(
+                        fontSize: 12, color: _DashboardColors.onSurface)),
                 const SizedBox(height: 4),
-                Text(activity.timeAgo, style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                Text(activity.timeAgo,
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: _DashboardColors.onSurfaceVariant)),
               ],
             ),
           ),
@@ -13324,19 +15207,24 @@ class _SupportInsightCard extends StatelessWidget {
           Positioned(
             right: -10,
             top: -20,
-            child: Icon(Icons.support_agent, size: 120, color: Colors.white.withOpacity(0.08)),
+            child: Icon(Icons.support_agent,
+                size: 120, color: Colors.white.withOpacity(0.08)),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Live support snapshot',
-                style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: Colors.white),
+                style: GoogleFonts.manrope(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
               ),
               const SizedBox(height: 10),
               Text(
                 'These counts come from the live support queue, so the team can see what needs attention right now.',
-                style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onPrimaryContainer),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: _DashboardColors.onPrimaryContainer),
               ),
               const SizedBox(height: 16),
               Wrap(
@@ -13344,15 +15232,21 @@ class _SupportInsightCard extends StatelessWidget {
                 runSpacing: 10,
                 children: [
                   _SupportMiniStat(label: 'Open', value: openCount.toString()),
-                  _SupportMiniStat(label: 'In progress', value: inProgressCount.toString()),
-                  _SupportMiniStat(label: 'Resolved', value: resolvedCount.toString()),
-                  _SupportMiniStat(label: 'Overdue', value: overdueCount.toString()),
+                  _SupportMiniStat(
+                      label: 'In progress', value: inProgressCount.toString()),
+                  _SupportMiniStat(
+                      label: 'Resolved', value: resolvedCount.toString()),
+                  _SupportMiniStat(
+                      label: 'Overdue', value: overdueCount.toString()),
                 ],
               ),
               const SizedBox(height: 16),
               Text(
                 'Total tickets: $totalCount',
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.white.withOpacity(0.9)),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white.withOpacity(0.9)),
               ),
             ],
           ),
@@ -13383,12 +15277,16 @@ class _SupportMiniStat extends StatelessWidget {
         children: [
           Text(
             label.toUpperCase(),
-            style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, color: Colors.white.withOpacity(0.72)),
+            style: GoogleFonts.inter(
+                fontSize: 9,
+                fontWeight: FontWeight.w700,
+                color: Colors.white.withOpacity(0.72)),
           ),
           const SizedBox(height: 4),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white),
+            style: GoogleFonts.manrope(
+                fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white),
           ),
         ],
       ),
@@ -13411,7 +15309,12 @@ class _SupportFab extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(28),
-        boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.3), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: _DashboardColors.primary.withOpacity(0.3),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: const Icon(Icons.add_comment, size: 24, color: Colors.white),
     );
@@ -13493,15 +15396,14 @@ class _SupportTicketEntry {
     final email = map['email']?.toString() ?? '';
     final phone = map['phone']?.toString() ?? '';
     final name = map['name']?.toString() ?? '';
-    final contact = name.isNotEmpty
-        ? name
-        : (email.isNotEmpty ? email : phone);
+    final contact = name.isNotEmpty ? name : (email.isNotEmpty ? email : phone);
     final contactLabel = [
       if (contact.isNotEmpty) contact,
       if (email.isNotEmpty && contact != email) email,
       if (phone.isNotEmpty && contact != phone) phone,
     ].join(' - ');
-    final rawStatus = map['supportStatus']?.toString() ?? map['status']?.toString() ?? '';
+    final rawStatus =
+        map['supportStatus']?.toString() ?? map['status']?.toString() ?? '';
     final statusKey = _normalizeSupportStatus(rawStatus);
     final createdRaw = map['createdAt'];
     DateTime? createdAt;
@@ -13530,7 +15432,11 @@ class _SupportTicketEntry {
 }
 
 class _SupportActivityEntry {
-  const _SupportActivityEntry({required this.initials, required this.message, required this.timeAgo, required this.color});
+  const _SupportActivityEntry(
+      {required this.initials,
+      required this.message,
+      required this.timeAgo,
+      required this.color});
 
   final String initials;
   final String message;
@@ -13564,6 +15470,714 @@ Color _colorFromHex(String hex, {required Color fallback}) {
     }
   }
   return fallback;
+}
+
+class AdminAnnouncementsScreen extends StatefulWidget {
+  const AdminAnnouncementsScreen({super.key});
+
+  @override
+  State<AdminAnnouncementsScreen> createState() =>
+      _AdminAnnouncementsScreenState();
+}
+
+class _AdminAnnouncementsScreenState extends State<AdminAnnouncementsScreen> {
+  late Future<List<Map<String, dynamic>>> _announcementsFuture;
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _bodyController = TextEditingController();
+  bool _isActive = true;
+  bool _isPinned = false;
+  bool _saving = false;
+  String? _message;
+  bool _messageIsError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _announcementsFuture = _loadAnnouncements();
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _bodyController.dispose();
+    super.dispose();
+  }
+
+  Future<List<Map<String, dynamic>>> _loadAnnouncements() async {
+    if (!AuthStore.isLoggedIn || AuthStore.token == null) {
+      return [];
+    }
+    return AdminApi.listAnnouncements();
+  }
+
+  void _refreshAnnouncements() {
+    setState(() {
+      _announcementsFuture = _loadAnnouncements();
+    });
+  }
+
+  Future<void> _publishAnnouncement() async {
+    final title = _titleController.text.trim();
+    final body = _bodyController.text.trim();
+    if (title.isEmpty || body.isEmpty) {
+      setState(() {
+        _message = 'Please enter both a title and announcement message.';
+        _messageIsError = true;
+      });
+      return;
+    }
+
+    setState(() {
+      _saving = true;
+      _message = null;
+      _messageIsError = false;
+    });
+
+    final response = await AdminApi.createAnnouncement(
+      title: title,
+      body: body,
+      isActive: _isActive,
+      isPinned: _isPinned,
+    );
+
+    if (!mounted) return;
+
+    setState(() {
+      _saving = false;
+    });
+
+    if (response['id'] != null) {
+      _titleController.clear();
+      _bodyController.clear();
+      setState(() {
+        _isActive = true;
+        _isPinned = false;
+        _message = 'Announcement published successfully.';
+        _messageIsError = false;
+      });
+      _refreshAnnouncements();
+      return;
+    }
+
+    setState(() {
+      _message = response['message']?.toString() ??
+          response['reason']?.toString() ??
+          'Unable to publish announcement.';
+      _messageIsError = true;
+    });
+  }
+
+  Future<void> _toggleAnnouncement(
+    Map<String, dynamic> item, {
+    bool? isActive,
+    bool? isPinned,
+  }) async {
+    final id = item['id']?.toString();
+    if (id == null || id.isEmpty) return;
+    final response = await AdminApi.updateAnnouncement(
+      id,
+      isActive: isActive,
+      isPinned: isPinned,
+    );
+    if (!mounted) return;
+    final ok = response['id'] != null;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          ok
+              ? 'Announcement updated.'
+              : response['message']?.toString() ??
+                  response['reason']?.toString() ??
+                  'Unable to update announcement.',
+        ),
+      ),
+    );
+    if (ok) {
+      _refreshAnnouncements();
+    }
+  }
+
+  Future<void> _deleteAnnouncement(Map<String, dynamic> item) async {
+    final id = item['id']?.toString();
+    final title = item['title']?.toString() ?? 'this announcement';
+    if (id == null || id.isEmpty) return;
+
+    final confirmed = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Delete announcement?'),
+            content: Text('This will permanently remove "$title".'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context, false),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context, true),
+                child: const Text('Delete'),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+
+    if (!confirmed) return;
+
+    final response = await AdminApi.deleteAnnouncement(id);
+    if (!mounted) return;
+    final ok = response['ok'] == true;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          ok
+              ? 'Announcement deleted.'
+              : response['message']?.toString() ??
+                  response['reason']?.toString() ??
+                  'Unable to delete announcement.',
+        ),
+      ),
+    );
+    if (ok) {
+      _refreshAnnouncements();
+    }
+  }
+
+  String _formatAnnouncementTime(dynamic value) {
+    if (value is! String) return 'Just now';
+    final parsed = DateTime.tryParse(value);
+    if (parsed == null) return 'Just now';
+    final date = parsed.toIso8601String().split('T').first;
+    final time = parsed.toIso8601String().split('T').last.split('.').first;
+    final shortTime = time.length >= 5 ? time.substring(0, 5) : time;
+    return '$date - $shortTime';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!AuthStore.isLoggedIn) {
+      return const AdminLoginScreen();
+    }
+
+    return Scaffold(
+      backgroundColor: _DashboardColors.surface,
+      body: Row(
+        children: [
+          _DashboardSidebar(
+            onNavigate: (route) => Navigator.pushNamed(context, route),
+            selectedRoute: AppRoutes.adminAnnouncements,
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                _DashboardTopBar(onRefresh: _refreshAnnouncements),
+                Expanded(
+                  child: FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _announcementsFuture,
+                    builder: (context, snapshot) {
+                      final announcements =
+                          snapshot.data ?? const <Map<String, dynamic>>[];
+                      final activeCount = announcements
+                          .where((item) => item['isActive'] == true)
+                          .length;
+                      final pinnedCount = announcements
+                          .where((item) => item['isPinned'] == true)
+                          .length;
+
+                      return SingleChildScrollView(
+                        padding: const EdgeInsets.fromLTRB(28, 24, 28, 32),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'General Announcements',
+                                        style: GoogleFonts.manrope(
+                                          fontSize: 28,
+                                          fontWeight: FontWeight.w700,
+                                          color: _DashboardColors.onSurface,
+                                          letterSpacing: -0.5,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      Text(
+                                        'Publish service updates to every rider using the I-Metro app.',
+                                        style: GoogleFonts.inter(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w500,
+                                          color:
+                                              _DashboardColors.onSurfaceVariant,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                _DashboardFilterButton(
+                                  label: 'Refresh',
+                                  icon: Icons.refresh,
+                                  onTap: _refreshAnnouncements,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: _AnnouncementStatCard(
+                                    label: 'Total',
+                                    value: announcements.length.toString(),
+                                    color: _DashboardColors.primary,
+                                  ),
+                                ),
+                                const SizedBox(width: 14),
+                                Expanded(
+                                  child: _AnnouncementStatCard(
+                                    label: 'Live',
+                                    value: activeCount.toString(),
+                                    color: const Color(0xFF355AA2),
+                                  ),
+                                ),
+                                const SizedBox(width: 14),
+                                Expanded(
+                                  child: _AnnouncementStatCard(
+                                    label: 'Pinned',
+                                    value: pinnedCount.toString(),
+                                    color: const Color(0xFFB42318),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(22),
+                              decoration: BoxDecoration(
+                                color: _DashboardColors.surfaceLowest,
+                                borderRadius: BorderRadius.circular(28),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.045),
+                                    blurRadius: 18,
+                                    spreadRadius: -8,
+                                    offset: const Offset(0, 12),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Publish a new announcement',
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w800,
+                                      color: _DashboardColors.onSurface,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'Use this for route notices, fare updates, service advisories, or office-wide rider communication.',
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12.5,
+                                      height: 1.45,
+                                      color: _DashboardColors.onSurfaceVariant,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 18),
+                                  TextField(
+                                    controller: _titleController,
+                                    decoration: InputDecoration(
+                                      labelText: 'Announcement title',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(18),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 14),
+                                  TextField(
+                                    controller: _bodyController,
+                                    maxLines: 5,
+                                    decoration: InputDecoration(
+                                      labelText: 'Announcement message',
+                                      alignLabelWithHint: true,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(18),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 14),
+                                  Wrap(
+                                    spacing: 16,
+                                    runSpacing: 8,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Switch(
+                                            value: _isActive,
+                                            onChanged: (value) => setState(
+                                                () => _isActive = value),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            'Publish immediately',
+                                            style: GoogleFonts.inter(
+                                              fontSize: 12.5,
+                                              fontWeight: FontWeight.w600,
+                                              color: _DashboardColors.onSurface,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Switch(
+                                            value: _isPinned,
+                                            onChanged: (value) => setState(
+                                                () => _isPinned = value),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            'Pin on rider home',
+                                            style: GoogleFonts.inter(
+                                              fontSize: 12.5,
+                                              fontWeight: FontWeight.w600,
+                                              color: _DashboardColors.onSurface,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  if (_message != null) ...[
+                                    const SizedBox(height: 12),
+                                    Container(
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 14, vertical: 12),
+                                      decoration: BoxDecoration(
+                                        color: _messageIsError
+                                            ? _DashboardColors.error
+                                                .withOpacity(0.08)
+                                            : _DashboardColors.primary
+                                                .withOpacity(0.08),
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      child: Text(
+                                        _message!,
+                                        style: GoogleFonts.inter(
+                                          fontSize: 12.5,
+                                          fontWeight: FontWeight.w600,
+                                          color: _messageIsError
+                                              ? _DashboardColors.error
+                                              : _DashboardColors.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                  const SizedBox(height: 16),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: ElevatedButton.icon(
+                                      onPressed:
+                                          _saving ? null : _publishAnnouncement,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor:
+                                            _DashboardColors.primary,
+                                        foregroundColor: Colors.white,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 18, vertical: 14),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                        ),
+                                      ),
+                                      icon: _saving
+                                          ? const SizedBox(
+                                              width: 18,
+                                              height: 18,
+                                              child: CircularProgressIndicator(
+                                                strokeWidth: 2,
+                                                valueColor:
+                                                    AlwaysStoppedAnimation<
+                                                        Color>(Colors.white),
+                                              ),
+                                            )
+                                          : const Icon(Icons.campaign_outlined),
+                                      label: Text(
+                                        _saving
+                                            ? 'Publishing...'
+                                            : 'Publish announcement',
+                                        style: GoogleFonts.manrope(
+                                          fontSize: 13.5,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting)
+                              const Center(child: CircularProgressIndicator())
+                            else if (announcements.isEmpty)
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(24),
+                                decoration: BoxDecoration(
+                                  color: _DashboardColors.surfaceLowest,
+                                  borderRadius: BorderRadius.circular(24),
+                                ),
+                                child: Text(
+                                  'No announcements yet. Publish your first update above.',
+                                  style: GoogleFonts.inter(
+                                    fontSize: 13,
+                                    color: _DashboardColors.onSurfaceVariant,
+                                  ),
+                                ),
+                              )
+                            else
+                              ...announcements.map(
+                                (item) => _AdminAnnouncementCard(
+                                  title: item['title']?.toString() ??
+                                      'Announcement',
+                                  body: item['body']?.toString() ?? '',
+                                  isActive: item['isActive'] == true,
+                                  isPinned: item['isPinned'] == true,
+                                  createdAtLabel: _formatAnnouncementTime(
+                                      item['createdAt']),
+                                  onToggleActive: () => _toggleAnnouncement(
+                                    item,
+                                    isActive: !(item['isActive'] == true),
+                                  ),
+                                  onTogglePinned: () => _toggleAnnouncement(
+                                    item,
+                                    isPinned: !(item['isPinned'] == true),
+                                  ),
+                                  onDelete: () => _deleteAnnouncement(item),
+                                ),
+                              ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AnnouncementStatCard extends StatelessWidget {
+  const _AnnouncementStatCard({
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  final String label;
+  final String value;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label.toUpperCase(),
+            style: GoogleFonts.inter(
+              fontSize: 10.5,
+              letterSpacing: 1.2,
+              fontWeight: FontWeight.w700,
+              color: color,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: GoogleFonts.manrope(
+              fontSize: 24,
+              fontWeight: FontWeight.w800,
+              color: _DashboardColors.onSurface,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AdminAnnouncementCard extends StatelessWidget {
+  const _AdminAnnouncementCard({
+    required this.title,
+    required this.body,
+    required this.isActive,
+    required this.isPinned,
+    required this.createdAtLabel,
+    required this.onToggleActive,
+    required this.onTogglePinned,
+    required this.onDelete,
+  });
+
+  final String title;
+  final String body;
+  final bool isActive;
+  final bool isPinned;
+  final String createdAtLabel;
+  final VoidCallback onToggleActive;
+  final VoidCallback onTogglePinned;
+  final VoidCallback onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            blurRadius: 14,
+            spreadRadius: -8,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: GoogleFonts.manrope(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                        color: _DashboardColors.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      createdAtLabel,
+                      style: GoogleFonts.inter(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w600,
+                        color: _DashboardColors.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 10),
+              if (isPinned)
+                _AdminAnnouncementBadge(
+                  label: 'Pinned',
+                  color: const Color(0xFFB42318),
+                ),
+              const SizedBox(width: 8),
+              _AdminAnnouncementBadge(
+                label: isActive ? 'Live' : 'Draft',
+                color: isActive
+                    ? _DashboardColors.primary
+                    : _DashboardColors.onSurfaceVariant,
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            body,
+            style: GoogleFonts.inter(
+              fontSize: 13,
+              height: 1.55,
+              color: _DashboardColors.onSurfaceVariant,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              OutlinedButton.icon(
+                onPressed: onToggleActive,
+                icon: Icon(isActive ? Icons.visibility_off : Icons.publish),
+                label: Text(isActive ? 'Deactivate' : 'Activate'),
+              ),
+              OutlinedButton.icon(
+                onPressed: onTogglePinned,
+                icon: Icon(isPinned ? Icons.push_pin_outlined : Icons.push_pin),
+                label: Text(isPinned ? 'Unpin' : 'Pin'),
+              ),
+              OutlinedButton.icon(
+                onPressed: onDelete,
+                icon: const Icon(Icons.delete_outline),
+                label: const Text('Delete'),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: _DashboardColors.error,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AdminAnnouncementBadge extends StatelessWidget {
+  const _AdminAnnouncementBadge({
+    required this.label,
+    required this.color,
+  });
+
+  final String label;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Text(
+        label,
+        style: GoogleFonts.inter(
+          fontSize: 10.5,
+          fontWeight: FontWeight.w700,
+          color: color,
+        ),
+      ),
+    );
+  }
 }
 
 class _SystemSettingsData {
@@ -13619,8 +16233,11 @@ class _SystemSettingsData {
   factory _SystemSettingsData.fromMap(Map<String, dynamic> data) {
     final notifications = data['notifications'];
     final branding = data['branding'];
-    final notificationsMap = notifications is Map<String, dynamic> ? notifications : const <String, dynamic>{};
-    final brandingMap = branding is Map<String, dynamic> ? branding : const <String, dynamic>{};
+    final notificationsMap = notifications is Map<String, dynamic>
+        ? notifications
+        : const <String, dynamic>{};
+    final brandingMap =
+        branding is Map<String, dynamic> ? branding : const <String, dynamic>{};
 
     bool _boolValue(String key, bool fallbackValue) {
       if (notificationsMap.containsKey(key)) {
@@ -13632,18 +16249,24 @@ class _SystemSettingsData {
     return _SystemSettingsData(
       platformName: data['platformName']?.toString() ?? fallback.platformName,
       timezone: data['timezone']?.toString() ?? fallback.timezone,
-      maintenanceMode: data['maintenanceMode'] == true ? true : fallback.maintenanceMode,
+      maintenanceMode:
+          data['maintenanceMode'] == true ? true : fallback.maintenanceMode,
       baseFareMultiplier: (data['baseFareMultiplier'] is num)
           ? (data['baseFareMultiplier'] as num).toDouble()
           : fallback.baseFareMultiplier,
       peakStrategy: data['peakStrategy']?.toString() ?? fallback.peakStrategy,
       apiKeyMasked: data['apiKeyMasked']?.toString() ?? fallback.apiKeyMasked,
       webhookUrl: data['webhookUrl']?.toString() ?? fallback.webhookUrl,
-      emailAdminAlerts: _boolValue('emailAdminAlerts', fallback.emailAdminAlerts),
-      slackIntegration: _boolValue('slackIntegration', fallback.slackIntegration),
-      smsCriticalDelays: _boolValue('smsCriticalDelays', fallback.smsCriticalDelays),
-      pushNotifications: _boolValue('pushNotifications', fallback.pushNotifications),
-      primaryColor: brandingMap['primaryColor']?.toString() ?? fallback.primaryColor,
+      emailAdminAlerts:
+          _boolValue('emailAdminAlerts', fallback.emailAdminAlerts),
+      slackIntegration:
+          _boolValue('slackIntegration', fallback.slackIntegration),
+      smsCriticalDelays:
+          _boolValue('smsCriticalDelays', fallback.smsCriticalDelays),
+      pushNotifications:
+          _boolValue('pushNotifications', fallback.pushNotifications),
+      primaryColor:
+          brandingMap['primaryColor']?.toString() ?? fallback.primaryColor,
       logoHint: brandingMap['logoHint']?.toString() ?? fallback.logoHint,
       lastModified: data['lastModified']?.toString() ?? fallback.lastModified,
     );
@@ -13654,7 +16277,8 @@ class AdminSystemSettingsScreen extends StatefulWidget {
   const AdminSystemSettingsScreen({super.key});
 
   @override
-  State<AdminSystemSettingsScreen> createState() => _AdminSystemSettingsScreenState();
+  State<AdminSystemSettingsScreen> createState() =>
+      _AdminSystemSettingsScreenState();
 }
 
 class _AdminSystemSettingsScreenState extends State<AdminSystemSettingsScreen> {
@@ -13711,17 +16335,21 @@ class _AdminSystemSettingsScreenState extends State<AdminSystemSettingsScreen> {
                                     final wide = constraints.maxWidth >= 1100;
                                     if (wide) {
                                       return Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
                                             flex: 2,
                                             child: Column(
                                               children: [
-                                                _SettingsGeneralSection(settings: settings),
+                                                _SettingsGeneralSection(
+                                                    settings: settings),
                                                 const SizedBox(height: 18),
-                                                _SettingsFareSection(settings: settings),
+                                                _SettingsFareSection(
+                                                    settings: settings),
                                                 const SizedBox(height: 18),
-                                                _SettingsApiSection(settings: settings),
+                                                _SettingsApiSection(
+                                                    settings: settings),
                                               ],
                                             ),
                                           ),
@@ -13729,9 +16357,11 @@ class _AdminSystemSettingsScreenState extends State<AdminSystemSettingsScreen> {
                                           Expanded(
                                             child: Column(
                                               children: [
-                                                _SettingsNotificationSection(settings: settings),
+                                                _SettingsNotificationSection(
+                                                    settings: settings),
                                                 const SizedBox(height: 18),
-                                                _SettingsBrandingSection(settings: settings),
+                                                _SettingsBrandingSection(
+                                                    settings: settings),
                                               ],
                                             ),
                                           ),
@@ -13740,21 +16370,26 @@ class _AdminSystemSettingsScreenState extends State<AdminSystemSettingsScreen> {
                                     }
                                     return Column(
                                       children: [
-                                        _SettingsGeneralSection(settings: settings),
+                                        _SettingsGeneralSection(
+                                            settings: settings),
                                         const SizedBox(height: 18),
-                                        _SettingsFareSection(settings: settings),
+                                        _SettingsFareSection(
+                                            settings: settings),
                                         const SizedBox(height: 18),
                                         _SettingsApiSection(settings: settings),
                                         const SizedBox(height: 18),
-                                        _SettingsNotificationSection(settings: settings),
+                                        _SettingsNotificationSection(
+                                            settings: settings),
                                         const SizedBox(height: 18),
-                                        _SettingsBrandingSection(settings: settings),
+                                        _SettingsBrandingSection(
+                                            settings: settings),
                                       ],
                                     );
                                   },
                                 ),
                                 const SizedBox(height: 24),
-                                _SettingsFooterBar(lastModified: settings.lastModified),
+                                _SettingsFooterBar(
+                                    lastModified: settings.lastModified),
                               ],
                             ),
                           ),
@@ -13791,34 +16426,43 @@ class _SettingsSidebar extends StatelessWidget {
         children: [
           Text(
             'I-Metro Admin',
-            style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.manrope(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
           const SizedBox(height: 4),
           Text(
             'Luxury in Motion',
-            style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
+            style: GoogleFonts.inter(
+                fontSize: 11,
+                color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
           ),
           const SizedBox(height: 24),
           _SettingsSidebarItem(
             icon: Icons.dashboard,
             label: 'Revenue',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
           ),
           _SettingsSidebarItem(
             icon: Icons.settings,
             label: 'Settings',
             selected: true,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _SettingsSidebarItem(
             icon: Icons.history,
             label: 'Activity',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           _SettingsSidebarItem(
             icon: Icons.support_agent,
             label: 'Support',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSupportTicketManagement),
+            onTap: () => Navigator.pushNamed(
+                context, AppRoutes.adminSupportTicketManagement),
           ),
           const Spacer(),
           Container(
@@ -13827,16 +16471,25 @@ class _SettingsSidebar extends StatelessWidget {
             decoration: BoxDecoration(
               color: _DashboardColors.primaryContainer,
               borderRadius: BorderRadius.circular(12),
-              boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.15), blurRadius: 10, offset: const Offset(0, 4))],
+              boxShadow: [
+                BoxShadow(
+                    color: _DashboardColors.primary.withOpacity(0.15),
+                    blurRadius: 10,
+                    offset: const Offset(0, 4))
+              ],
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.add, size: 16, color: _DashboardColors.onPrimaryContainer),
+                const Icon(Icons.add,
+                    size: 16, color: _DashboardColors.onPrimaryContainer),
                 const SizedBox(width: 8),
                 Text(
                   'Create Report',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onPrimaryContainer),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: _DashboardColors.onPrimaryContainer),
                 ),
               ],
             ),
@@ -13845,12 +16498,14 @@ class _SettingsSidebar extends StatelessWidget {
           _SettingsFooterLink(
             icon: Icons.verified_user,
             label: 'Security',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _SettingsFooterLink(
             icon: Icons.logout,
             label: 'Log Out',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
           ),
         ],
       ),
@@ -13859,7 +16514,11 @@ class _SettingsSidebar extends StatelessWidget {
 }
 
 class _SettingsSidebarItem extends StatelessWidget {
-  const _SettingsSidebarItem({required this.icon, required this.label, this.selected = false, this.onTap});
+  const _SettingsSidebarItem(
+      {required this.icon,
+      required this.label,
+      this.selected = false,
+      this.onTap});
 
   final IconData icon;
   final String label;
@@ -13868,7 +16527,8 @@ class _SettingsSidebarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
+    final textColor =
+        selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -13878,13 +16538,20 @@ class _SettingsSidebarItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected ? _DashboardColors.surfaceLow : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
-          border: selected ? const Border(right: BorderSide(color: _DashboardColors.primary, width: 3)) : null,
+          border: selected
+              ? const Border(
+                  right: BorderSide(color: _DashboardColors.primary, width: 3))
+              : null,
         ),
         child: Row(
           children: [
             Icon(icon, size: 18, color: textColor),
             const SizedBox(width: 10),
-            Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: textColor)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: textColor)),
           ],
         ),
       ),
@@ -13893,7 +16560,8 @@ class _SettingsSidebarItem extends StatelessWidget {
 }
 
 class _SettingsFooterLink extends StatelessWidget {
-  const _SettingsFooterLink({required this.icon, required this.label, this.onTap});
+  const _SettingsFooterLink(
+      {required this.icon, required this.label, this.onTap});
 
   final IconData icon;
   final String label;
@@ -13910,7 +16578,11 @@ class _SettingsFooterLink extends StatelessWidget {
           children: [
             Icon(icon, size: 16, color: _DashboardColors.onSurfaceVariant),
             const SizedBox(width: 10),
-            Text(label, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant)),
+            Text(label,
+                style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: _DashboardColors.onSurfaceVariant)),
           ],
         ),
       ),
@@ -13930,29 +16602,40 @@ class _SettingsTopBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 28),
       decoration: BoxDecoration(
         color: _DashboardColors.surface.withOpacity(0.9),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Row(
         children: [
           Text(
             'Inter-Metro Transport Solution Limited',
-            style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.manrope(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
           const SizedBox(width: 22),
           _SettingsTopNavLink(
             label: 'Analytics',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
           ),
           const SizedBox(width: 16),
           _SettingsTopNavLink(
             label: 'Configuration',
             selected: true,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           const SizedBox(width: 16),
           _SettingsTopNavLink(
             label: 'Logs',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           const Spacer(),
           Container(
@@ -13964,14 +16647,18 @@ class _SettingsTopBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(Icons.search, size: 16, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.search,
+                    size: 16, color: _DashboardColors.onSurfaceVariant),
                 const SizedBox(width: 8),
                 Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Search parameters...',
-                      hintStyle: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
+                      hintStyle: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant
+                              .withOpacity(0.7)),
                       isCollapsed: true,
                     ),
                   ),
@@ -13982,18 +16669,22 @@ class _SettingsTopBar extends StatelessWidget {
           const SizedBox(width: 12),
           IconButton(
             onPressed: onRefresh,
-            icon: const Icon(Icons.refresh, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.refresh,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.notifications,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
             child: CircleAvatar(
               radius: 16,
               backgroundColor: _DashboardColors.surfaceLowest,
@@ -14009,7 +16700,8 @@ class _SettingsTopBar extends StatelessWidget {
 }
 
 class _SettingsTopNavLink extends StatelessWidget {
-  const _SettingsTopNavLink({required this.label, this.selected = false, this.onTap});
+  const _SettingsTopNavLink(
+      {required this.label, this.selected = false, this.onTap});
 
   final String label;
   final bool selected;
@@ -14022,14 +16714,19 @@ class _SettingsTopNavLink extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(bottom: 4),
         decoration: BoxDecoration(
-          border: selected ? const Border(bottom: BorderSide(color: _DashboardColors.primary, width: 2)) : null,
+          border: selected
+              ? const Border(
+                  bottom: BorderSide(color: _DashboardColors.primary, width: 2))
+              : null,
         ),
         child: Text(
           label,
           style: GoogleFonts.inter(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant,
+            color: selected
+                ? _DashboardColors.primary
+                : _DashboardColors.onSurfaceVariant,
           ),
         ),
       ),
@@ -14047,12 +16744,16 @@ class _SettingsHeader extends StatelessWidget {
       children: [
         Text(
           'System Configuration',
-          style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+          style: GoogleFonts.manrope(
+              fontSize: 26,
+              fontWeight: FontWeight.w700,
+              color: _DashboardColors.onSurface),
         ),
         const SizedBox(height: 8),
         Text(
           'Manage the core parameters of the I-Metro transit network. Changes made here affect real-time operations, fare calculations, and system-wide visibility.',
-          style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 12, color: _DashboardColors.onSurfaceVariant),
         ),
       ],
     );
@@ -14068,7 +16769,8 @@ class _SettingsGeneralSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return _SettingsSectionShell(
       title: 'General Platform Settings',
-      trailing: const Icon(Icons.info, size: 18, color: _DashboardColors.onSurfaceVariant),
+      trailing: const Icon(Icons.info,
+          size: 18, color: _DashboardColors.onSurfaceVariant),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final stacked = constraints.maxWidth < 720;
@@ -14109,17 +16811,24 @@ class _SettingsGeneralSection extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.construction, size: 28, color: _DashboardColors.primary),
+                        const Icon(Icons.construction,
+                            size: 28, color: _DashboardColors.primary),
                         const SizedBox(width: 14),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Maintenance Mode', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                              Text('Maintenance Mode',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: _DashboardColors.primary)),
                               const SizedBox(height: 4),
                               Text(
                                 'Temporarily redirect users to an Under Maintenance page.',
-                                style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                                style: GoogleFonts.inter(
+                                    fontSize: 10,
+                                    color: _DashboardColors.onSurfaceVariant),
                               ),
                             ],
                           ),
@@ -14142,17 +16851,24 @@ class _SettingsGeneralSection extends StatelessWidget {
                 )
               : Row(
                   children: [
-                    const Icon(Icons.construction, size: 28, color: _DashboardColors.primary),
+                    const Icon(Icons.construction,
+                        size: 28, color: _DashboardColors.primary),
                     const SizedBox(width: 14),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Maintenance Mode', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                          Text('Maintenance Mode',
+                              style: GoogleFonts.inter(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  color: _DashboardColors.primary)),
                           const SizedBox(height: 4),
                           Text(
                             'Temporarily redirect users to an Under Maintenance page.',
-                            style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                            style: GoogleFonts.inter(
+                                fontSize: 10,
+                                color: _DashboardColors.onSurfaceVariant),
                           ),
                         ],
                       ),
@@ -14177,7 +16893,8 @@ class _SettingsGeneralSection extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: _DashboardColors.primary.withOpacity(0.05),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: _DashboardColors.primary.withOpacity(0.1)),
+                  border: Border.all(
+                      color: _DashboardColors.primary.withOpacity(0.1)),
                 ),
                 child: maintenanceRow,
               ),
@@ -14196,7 +16913,8 @@ class _SettingsFareSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final multiplierLabel = '${settings.baseFareMultiplier.toStringAsFixed(1)}x';
+    final multiplierLabel =
+        '${settings.baseFareMultiplier.toStringAsFixed(1)}x';
     final sliderValue = settings.baseFareMultiplier.clamp(0.5, 2.0).toDouble();
     final peakStrategy = settings.peakStrategy.toLowerCase();
     return _SettingsSectionShell(
@@ -14209,13 +16927,20 @@ class _SettingsFareSection extends StatelessWidget {
             children: [
               Text(
                 'Base Fare Multiplier',
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: _DashboardColors.onSurface),
               ),
               const SizedBox(height: 6),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(multiplierLabel, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                  Text(multiplierLabel,
+                      style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: _DashboardColors.primary)),
                 ],
               ),
               Slider(
@@ -14228,21 +16953,28 @@ class _SettingsFareSection extends StatelessWidget {
               ),
               Text(
                 'Applied to all standard ticket types across the network.',
-                style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 10, color: _DashboardColors.onSurfaceVariant),
               ),
               const SizedBox(height: 16),
               Text(
                 'Peak Hour Strategy',
-                style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface),
+                style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: _DashboardColors.onSurface),
               ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  _SettingsChipButton(label: 'Dynamic', selected: peakStrategy == 'dynamic'),
-                  _SettingsChipButton(label: 'Fixed', selected: peakStrategy == 'fixed'),
-                  _SettingsChipButton(label: 'Disabled', selected: peakStrategy == 'disabled'),
+                  _SettingsChipButton(
+                      label: 'Dynamic', selected: peakStrategy == 'dynamic'),
+                  _SettingsChipButton(
+                      label: 'Fixed', selected: peakStrategy == 'fixed'),
+                  _SettingsChipButton(
+                      label: 'Disabled', selected: peakStrategy == 'disabled'),
                 ],
               ),
             ],
@@ -14253,14 +16985,19 @@ class _SettingsFareSection extends StatelessWidget {
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.1)),
+              border: Border.all(
+                  color: _DashboardColors.outlineVariant.withOpacity(0.1)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Live Preview',
-                  style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 9,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.4,
+                      color: _DashboardColors.onSurfaceVariant),
                 ),
                 const SizedBox(height: 12),
                 _SettingsPreviewRow(label: 'Standard Ticket', value: '\$4.50'),
@@ -14303,20 +17040,27 @@ class _SettingsApiSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return _SettingsSectionShell(
       title: 'API & Integrations',
-      trailing: Text('Revoke All Keys', style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+      trailing: Text('Revoke All Keys',
+          style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: _DashboardColors.primary)),
       child: LayoutBuilder(
         builder: (context, constraints) {
           final stacked = constraints.maxWidth < 780;
           final webhookField = _SettingsInlineField(
             label: 'Webhook Endpoint URL',
-            hint: settings.webhookUrl.isNotEmpty ? settings.webhookUrl : 'https://your-domain.com/webhooks/i-metro',
+            hint: settings.webhookUrl.isNotEmpty
+                ? settings.webhookUrl
+                : 'https://your-domain.com/webhooks/i-metro',
           );
           final actionButton = const _SettingsActionButton(label: 'Test');
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _SettingsSecureField(label: 'Production API Key', value: settings.apiKeyMasked),
+              _SettingsSecureField(
+                  label: 'Production API Key', value: settings.apiKeyMasked),
               const SizedBox(height: 16),
               if (stacked)
                 Column(
@@ -14357,15 +17101,21 @@ class _SettingsNotificationSection extends StatelessWidget {
         children: [
           const _SettingsSectionSubtitle(label: 'Platform Errors'),
           const SizedBox(height: 10),
-          _SettingsCheckboxRow(label: 'Email Admin Alerts', checked: settings.emailAdminAlerts),
-          _SettingsCheckboxRow(label: 'Slack Integration', checked: settings.slackIntegration),
+          _SettingsCheckboxRow(
+              label: 'Email Admin Alerts', checked: settings.emailAdminAlerts),
+          _SettingsCheckboxRow(
+              label: 'Slack Integration', checked: settings.slackIntegration),
           const SizedBox(height: 16),
           const Divider(height: 1),
           const SizedBox(height: 16),
           const _SettingsSectionSubtitle(label: 'Transit Alerts'),
           const SizedBox(height: 10),
-          _SettingsCheckboxRow(label: 'SMS for Critical Delays', checked: settings.smsCriticalDelays),
-          _SettingsCheckboxRow(label: 'Mobile Push Notifications', checked: settings.pushNotifications),
+          _SettingsCheckboxRow(
+              label: 'SMS for Critical Delays',
+              checked: settings.smsCriticalDelays),
+          _SettingsCheckboxRow(
+              label: 'Mobile Push Notifications',
+              checked: settings.pushNotifications),
         ],
       ),
     );
@@ -14379,7 +17129,8 @@ class _SettingsBrandingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = _colorFromHex(settings.primaryColor, fallback: _DashboardColors.primary);
+    final primaryColor = _colorFromHex(settings.primaryColor,
+        fallback: _DashboardColors.primary);
     return _SettingsSectionShell(
       title: 'Custom Branding',
       child: LayoutBuilder(
@@ -14397,7 +17148,8 @@ class _SettingsBrandingSection extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: primaryColor,
                             shape: BoxShape.circle,
-                            border: Border.all(color: _DashboardColors.surfaceLow, width: 3),
+                            border: Border.all(
+                                color: _DashboardColors.surfaceLow, width: 3),
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -14405,9 +17157,16 @@ class _SettingsBrandingSection extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(settings.primaryColor, style: GoogleFonts.robotoMono(fontSize: 11, fontWeight: FontWeight.w700)),
+                              Text(settings.primaryColor,
+                                  style: GoogleFonts.robotoMono(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w700)),
                               const SizedBox(height: 4),
-                              Text('Transit Emerald (Global Default)', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                              Text('Transit Emerald (Global Default)',
+                                  style: GoogleFonts.inter(
+                                      fontSize: 10,
+                                      color:
+                                          _DashboardColors.onSurfaceVariant)),
                             ],
                           ),
                         ),
@@ -14416,7 +17175,11 @@ class _SettingsBrandingSection extends StatelessWidget {
                     const SizedBox(height: 10),
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Text('Change', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                      child: Text('Change',
+                          style: GoogleFonts.inter(
+                              fontSize: 11,
+                              fontWeight: FontWeight.w700,
+                              color: _DashboardColors.primary)),
                     ),
                   ],
                 )
@@ -14428,7 +17191,8 @@ class _SettingsBrandingSection extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: primaryColor,
                         shape: BoxShape.circle,
-                        border: Border.all(color: _DashboardColors.surfaceLow, width: 3),
+                        border: Border.all(
+                            color: _DashboardColors.surfaceLow, width: 3),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -14436,43 +17200,72 @@ class _SettingsBrandingSection extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(settings.primaryColor, style: GoogleFonts.robotoMono(fontSize: 11, fontWeight: FontWeight.w700)),
+                          Text(settings.primaryColor,
+                              style: GoogleFonts.robotoMono(
+                                  fontSize: 11, fontWeight: FontWeight.w700)),
                           const SizedBox(height: 4),
-                          Text('Transit Emerald (Global Default)', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant)),
+                          Text('Transit Emerald (Global Default)',
+                              style: GoogleFonts.inter(
+                                  fontSize: 10,
+                                  color: _DashboardColors.onSurfaceVariant)),
                         ],
                       ),
                     ),
-                    Text('Change', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                    Text('Change',
+                        style: GoogleFonts.inter(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: _DashboardColors.primary)),
                   ],
                 );
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Primary Brand Color', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+              Text('Primary Brand Color',
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: _DashboardColors.onSurface)),
               const SizedBox(height: 10),
               colorRow,
               const SizedBox(height: 18),
-              Text('Logo Assets', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+              Text('Logo Assets',
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: _DashboardColors.onSurface)),
               const SizedBox(height: 10),
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 30, horizontal: 16),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.5), width: 2, style: BorderStyle.solid),
+                  border: Border.all(
+                      color: _DashboardColors.outlineVariant.withOpacity(0.5),
+                      width: 2,
+                      style: BorderStyle.solid),
                   color: _DashboardColors.surfaceLow,
                 ),
                 child: Column(
                   children: [
-                    const Icon(Icons.cloud_upload, size: 32, color: _DashboardColors.outlineVariant),
+                    const Icon(Icons.cloud_upload,
+                        size: 32, color: _DashboardColors.outlineVariant),
                     const SizedBox(height: 8),
                     Text(
                       settings.logoHint,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                     const SizedBox(height: 4),
-                    Text('Max size 2MB', style: GoogleFonts.inter(fontSize: 10, color: _DashboardColors.onSurfaceVariant.withOpacity(0.6))),
+                    Text('Max size 2MB',
+                        style: GoogleFonts.inter(
+                            fontSize: 10,
+                            color: _DashboardColors.onSurfaceVariant
+                                .withOpacity(0.6))),
                   ],
                 ),
               ),
@@ -14502,21 +17295,33 @@ class _SettingsFooterBar extends StatelessWidget {
                     onPressed: () {},
                     child: Text(
                       'Discard Changes',
-                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22, vertical: 12),
                     decoration: BoxDecoration(
                       color: _DashboardColors.primary,
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 6))],
+                      boxShadow: [
+                        BoxShadow(
+                            color: _DashboardColors.primary.withOpacity(0.2),
+                            blurRadius: 10,
+                            offset: const Offset(0, 6))
+                      ],
                     ),
                     child: Text(
                       'Save Configuration',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
                     ),
                   ),
                 ],
@@ -14527,20 +17332,32 @@ class _SettingsFooterBar extends StatelessWidget {
                     onPressed: () {},
                     child: Text(
                       'Discard Changes',
-                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   ),
                   const SizedBox(width: 12),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22, vertical: 12),
                     decoration: BoxDecoration(
                       color: _DashboardColors.primary,
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.2), blurRadius: 10, offset: const Offset(0, 6))],
+                      boxShadow: [
+                        BoxShadow(
+                            color: _DashboardColors.primary.withOpacity(0.2),
+                            blurRadius: 10,
+                            offset: const Offset(0, 6))
+                      ],
                     ),
                     child: Text(
                       'Save Configuration',
-                      style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white),
                     ),
                   ),
                 ],
@@ -14558,12 +17375,16 @@ class _SettingsFooterBar extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.history, size: 16, color: _DashboardColors.onSurfaceVariant),
+                        const Icon(Icons.history,
+                            size: 16, color: _DashboardColors.onSurfaceVariant),
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             lastModified,
-                            style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant, fontStyle: FontStyle.italic),
+                            style: GoogleFonts.inter(
+                                fontSize: 11,
+                                color: _DashboardColors.onSurfaceVariant,
+                                fontStyle: FontStyle.italic),
                           ),
                         ),
                       ],
@@ -14576,11 +17397,15 @@ class _SettingsFooterBar extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.history, size: 16, color: _DashboardColors.onSurfaceVariant),
+                        const Icon(Icons.history,
+                            size: 16, color: _DashboardColors.onSurfaceVariant),
                         const SizedBox(width: 8),
                         Text(
                           lastModified,
-                          style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant, fontStyle: FontStyle.italic),
+                          style: GoogleFonts.inter(
+                              fontSize: 11,
+                              color: _DashboardColors.onSurfaceVariant,
+                              fontStyle: FontStyle.italic),
                         ),
                       ],
                     ),
@@ -14605,15 +17430,22 @@ class _SettingsFab extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.primaryContainer,
         borderRadius: BorderRadius.circular(28),
-        boxShadow: [BoxShadow(color: _DashboardColors.primary.withOpacity(0.25), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: _DashboardColors.primary.withOpacity(0.25),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
-      child: const Icon(Icons.save, size: 26, color: _DashboardColors.onPrimaryContainer),
+      child: const Icon(Icons.save,
+          size: 26, color: _DashboardColors.onPrimaryContainer),
     );
   }
 }
 
 class _SettingsSectionShell extends StatelessWidget {
-  const _SettingsSectionShell({required this.title, required this.child, this.trailing});
+  const _SettingsSectionShell(
+      {required this.title, required this.child, this.trailing});
 
   final String title;
   final Widget child;
@@ -14633,13 +17465,18 @@ class _SettingsSectionShell extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               children: [
                 Text(
                   title.toUpperCase(),
-                  style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.inter(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.4,
+                      color: _DashboardColors.onSurfaceVariant),
                 ),
                 const Spacer(),
                 if (trailing != null) trailing!,
@@ -14667,7 +17504,11 @@ class _SettingsTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _DashboardColors.onSurface)),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -14675,7 +17516,9 @@ class _SettingsTextField extends StatelessWidget {
             color: _DashboardColors.surfaceHighest,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Text(value, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface)),
+          child: Text(value,
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: _DashboardColors.onSurface)),
         ),
       ],
     );
@@ -14693,7 +17536,11 @@ class _SettingsSelectField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _DashboardColors.onSurface)),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -14703,8 +17550,12 @@ class _SettingsSelectField extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Expanded(child: Text(value, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface))),
-              const Icon(Icons.expand_more, size: 18, color: _DashboardColors.onSurfaceVariant),
+              Expanded(
+                  child: Text(value,
+                      style: GoogleFonts.inter(
+                          fontSize: 12, color: _DashboardColors.onSurface))),
+              const Icon(Icons.expand_more,
+                  size: 18, color: _DashboardColors.onSurfaceVariant),
             ],
           ),
         ),
@@ -14724,7 +17575,11 @@ class _SettingsInlineField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _DashboardColors.onSurface)),
         const SizedBox(height: 8),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -14732,7 +17587,9 @@ class _SettingsInlineField extends StatelessWidget {
             color: _DashboardColors.surfaceHighest,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Text(hint, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
+          child: Text(hint,
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: _DashboardColors.onSurfaceVariant)),
         ),
       ],
     );
@@ -14750,20 +17607,26 @@ class _SettingsSecureField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: _DashboardColors.onSurface)),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+                color: _DashboardColors.onSurface)),
         const SizedBox(height: 8),
         Row(
           children: [
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
                 decoration: BoxDecoration(
                   color: _DashboardColors.surfaceHighest,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   value,
-                  style: GoogleFonts.robotoMono(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                  style: GoogleFonts.robotoMono(
+                      fontSize: 11, color: _DashboardColors.onSurfaceVariant),
                 ),
               ),
             ),
@@ -14774,7 +17637,8 @@ class _SettingsSecureField extends StatelessWidget {
                 color: _DashboardColors.surfaceHighest,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(Icons.copy, size: 18, color: _DashboardColors.onSurfaceVariant),
+              child: const Icon(Icons.copy,
+                  size: 18, color: _DashboardColors.onSurfaceVariant),
             ),
           ],
         ),
@@ -14796,7 +17660,9 @@ class _SettingsActionButton extends StatelessWidget {
         color: _DashboardColors.primary,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(label, style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
+      child: Text(label,
+          style: GoogleFonts.inter(
+              fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white)),
     );
   }
 }
@@ -14812,13 +17678,22 @@ class _SettingsChipButton extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: selected ? _DashboardColors.primary.withOpacity(0.05) : _DashboardColors.surfaceHighest,
+        color: selected
+            ? _DashboardColors.primary.withOpacity(0.05)
+            : _DashboardColors.surfaceHighest,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: selected ? _DashboardColors.primary : Colors.transparent, width: 2),
+        border: Border.all(
+            color: selected ? _DashboardColors.primary : Colors.transparent,
+            width: 2),
       ),
       child: Text(
         label,
-        style: GoogleFonts.inter(fontSize: 11, fontWeight: selected ? FontWeight.w700 : FontWeight.w600, color: selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant),
+        style: GoogleFonts.inter(
+            fontSize: 11,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+            color: selected
+                ? _DashboardColors.primary
+                : _DashboardColors.onSurfaceVariant),
       ),
     );
   }
@@ -14835,8 +17710,14 @@ class _SettingsPreviewRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface)),
-        Text(value, style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+        Text(label,
+            style: GoogleFonts.inter(
+                fontSize: 12, color: _DashboardColors.onSurface)),
+        Text(value,
+            style: GoogleFonts.manrope(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary)),
       ],
     );
   }
@@ -14851,7 +17732,11 @@ class _SettingsSectionSubtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label.toUpperCase(),
-      style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.2, color: _DashboardColors.onSurfaceVariant),
+      style: GoogleFonts.inter(
+          fontSize: 10,
+          fontWeight: FontWeight.w700,
+          letterSpacing: 1.2,
+          color: _DashboardColors.onSurfaceVariant),
     );
   }
 }
@@ -14872,7 +17757,9 @@ class _SettingsCheckboxRow extends StatelessWidget {
           activeColor: _DashboardColors.primary,
         ),
         Expanded(
-          child: Text(label, style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurface)),
+          child: Text(label,
+              style: GoogleFonts.inter(
+                  fontSize: 12, color: _DashboardColors.onSurface)),
         ),
       ],
     );
@@ -14937,10 +17824,12 @@ class AdminRevenueDashboardScreen extends StatefulWidget {
   const AdminRevenueDashboardScreen({super.key});
 
   @override
-  State<AdminRevenueDashboardScreen> createState() => _AdminRevenueDashboardScreenState();
+  State<AdminRevenueDashboardScreen> createState() =>
+      _AdminRevenueDashboardScreenState();
 }
 
-class _AdminRevenueDashboardScreenState extends State<AdminRevenueDashboardScreen> {
+class _AdminRevenueDashboardScreenState
+    extends State<AdminRevenueDashboardScreen> {
   late Future<_RevenueDashboardData> _dashboardFuture;
 
   @override
@@ -14953,12 +17842,19 @@ class _AdminRevenueDashboardScreenState extends State<AdminRevenueDashboardScree
     final payments = await AdminApi.listPayments();
     final routes = await AdminApi.listRoutes();
     final totalCount = payments.length;
-    final refundedCount = payments.where((payment) => payment['status']?.toString() == 'REFUNDED').length;
-    final successfulPayments = payments.where((payment) => payment['status']?.toString() == 'SUCCESS').toList();
+    final refundedCount = payments
+        .where((payment) => payment['status']?.toString() == 'REFUNDED')
+        .length;
+    final successfulPayments = payments
+        .where((payment) => payment['status']?.toString() == 'SUCCESS')
+        .toList();
     final successCount = successfulPayments.length;
-    final totalRevenue = successfulPayments.fold<int>(0, (sum, payment) => sum + _paymentAmount(payment));
-    final averageFare = successCount == 0 ? 0 : (totalRevenue / successCount).round();
-    final refundRate = totalCount == 0 ? 0.0 : (refundedCount / totalCount) * 100;
+    final totalRevenue = successfulPayments.fold<int>(
+        0, (sum, payment) => sum + _paymentAmount(payment));
+    final averageFare =
+        successCount == 0 ? 0 : (totalRevenue / successCount).round();
+    final refundRate =
+        totalCount == 0 ? 0.0 : (refundedCount / totalCount) * 100;
 
     final currencyLabel = payments
         .map((payment) => payment['currency'])
@@ -14966,20 +17862,23 @@ class _AdminRevenueDashboardScreenState extends State<AdminRevenueDashboardScree
         .firstWhere((value) => value.isNotEmpty, orElse: () => 'NGN')
         .toUpperCase();
 
-    final activeRoutes = routes.where((route) => route['isActive'] == true).length;
+    final activeRoutes =
+        routes.where((route) => route['isActive'] == true).length;
     final summary = _RevenueSummaryData(
       totalRevenue: _formatCurrency(totalRevenue.toDouble()),
       totalRevenueTag: 'Live',
       averageFare: _formatCurrency(averageFare.toDouble()),
       averageFareTag: successCount == 0 ? 'No sales' : 'Avg',
       refundRate: '${refundRate.toStringAsFixed(2)}%',
-      refundRateTag: refundedCount == 0 ? 'No refunds' : '$refundedCount refunds',
+      refundRateTag:
+          refundedCount == 0 ? 'No refunds' : '$refundedCount refunds',
       activePromos: _formatCount(activeRoutes),
       activePromosTag: '${_formatCount(activeRoutes)} active',
     );
 
     final distribution = _buildRevenueDistribution(successfulPayments);
-    final transactions = payments.take(6).map(_mapPaymentToTransaction).toList();
+    final transactions =
+        payments.take(6).map(_mapPaymentToTransaction).toList();
 
     return _RevenueDashboardData(
       summary: summary,
@@ -15003,7 +17902,8 @@ class _AdminRevenueDashboardScreenState extends State<AdminRevenueDashboardScree
     return 0;
   }
 
-  List<_RevenueDistributionItem> _buildRevenueDistribution(List<Map<String, dynamic>> payments) {
+  List<_RevenueDistributionItem> _buildRevenueDistribution(
+      List<Map<String, dynamic>> payments) {
     if (payments.isEmpty) {
       return const <_RevenueDistributionItem>[];
     }
@@ -15011,13 +17911,17 @@ class _AdminRevenueDashboardScreenState extends State<AdminRevenueDashboardScree
     for (final payment in payments) {
       final booking = payment['booking'];
       final route = booking is Map<String, dynamic> ? booking['route'] : null;
-      final routeMap = route is Map<String, dynamic> ? route : const <String, dynamic>{};
+      final routeMap =
+          route is Map<String, dynamic> ? route : const <String, dynamic>{};
       final from = routeMap['fromLocation']?.toString();
       final to = routeMap['toLocation']?.toString();
-      final label = (from != null && to != null) ? '$from → $to' : 'Unknown Route';
-      revenueByRoute[label] = (revenueByRoute[label] ?? 0) + _paymentAmount(payment);
+      final label =
+          (from != null && to != null) ? '$from → $to' : 'Unknown Route';
+      revenueByRoute[label] =
+          (revenueByRoute[label] ?? 0) + _paymentAmount(payment);
     }
-    final totalRevenue = revenueByRoute.values.fold<int>(0, (sum, value) => sum + value);
+    final totalRevenue =
+        revenueByRoute.values.fold<int>(0, (sum, value) => sum + value);
     if (totalRevenue == 0) {
       return const <_RevenueDistributionItem>[];
     }
@@ -15043,15 +17947,19 @@ class _AdminRevenueDashboardScreenState extends State<AdminRevenueDashboardScree
 
   _RevenueTransaction _mapPaymentToTransaction(Map<String, dynamic> payment) {
     final booking = payment['booking'];
-    final bookingMap = booking is Map<String, dynamic> ? booking : const <String, dynamic>{};
+    final bookingMap =
+        booking is Map<String, dynamic> ? booking : const <String, dynamic>{};
     final route = bookingMap['route'];
-    final routeMap = route is Map<String, dynamic> ? route : const <String, dynamic>{};
+    final routeMap =
+        route is Map<String, dynamic> ? route : const <String, dynamic>{};
     final from = routeMap['fromLocation']?.toString() ?? '-';
     final to = routeMap['toLocation']?.toString() ?? '-';
     final provider = payment['provider']?.toString() ?? 'MONNIFY';
     final status = payment['status']?.toString() ?? 'PENDING';
-    final timestamp = payment['paidAt']?.toString() ?? payment['createdAt']?.toString();
-    final dateTimeLabel = '${_formatDate(timestamp)} - ${_formatTime(timestamp)}';
+    final timestamp =
+        payment['paidAt']?.toString() ?? payment['createdAt']?.toString();
+    final dateTimeLabel =
+        '${_formatDate(timestamp)} - ${_formatTime(timestamp)}';
 
     return _RevenueTransaction(
       id: payment['id']?.toString().toUpperCase() ?? '#IM-000000',
@@ -15135,11 +18043,15 @@ class _AdminRevenueDashboardScreenState extends State<AdminRevenueDashboardScree
                           children: [
                             const _RevenueHeaderSection(),
                             const SizedBox(height: 18),
-                            _RevenueSummaryGrid(summary: data.summary, currencyLabel: data.currencyLabel),
+                            _RevenueSummaryGrid(
+                                summary: data.summary,
+                                currencyLabel: data.currencyLabel),
                             const SizedBox(height: 20),
-                            _RevenueAnalyticsSection(distribution: data.distribution),
+                            _RevenueAnalyticsSection(
+                                distribution: data.distribution),
                             const SizedBox(height: 20),
-                            _RevenueTransactionsTable(transactions: data.transactions),
+                            _RevenueTransactionsTable(
+                                transactions: data.transactions),
                           ],
                         ),
                       ),
@@ -15169,34 +18081,45 @@ class _RevenueSidebar extends StatelessWidget {
         children: [
           Text(
             'I-Metro Admin',
-            style: GoogleFonts.manrope(fontSize: 20, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.manrope(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
           const SizedBox(height: 4),
           Text(
             'Luxury in Motion',
-            style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 1.6, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 10,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 1.6,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 24),
           _RevenueSidebarItem(
             icon: Icons.dashboard,
             label: 'Revenue',
             selected: true,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
           ),
           _RevenueSidebarItem(
             icon: Icons.settings,
             label: 'Settings',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _RevenueSidebarItem(
             icon: Icons.history,
             label: 'Activity',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           _RevenueSidebarItem(
             icon: Icons.support_agent,
             label: 'Support',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSupportTicketManagement),
+            onTap: () => Navigator.pushNamed(
+                context, AppRoutes.adminSupportTicketManagement),
           ),
           const Spacer(),
           Container(
@@ -15213,7 +18136,10 @@ class _RevenueSidebar extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   'Create Report',
-                  style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white),
+                  style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white),
                 ),
               ],
             ),
@@ -15222,12 +18148,14 @@ class _RevenueSidebar extends StatelessWidget {
           _RevenueSidebarLink(
             icon: Icons.verified_user,
             label: 'Security',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           _RevenueSidebarLink(
             icon: Icons.logout,
             label: 'Log Out',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminLogoutConfirmation),
           ),
         ],
       ),
@@ -15236,7 +18164,11 @@ class _RevenueSidebar extends StatelessWidget {
 }
 
 class _RevenueSidebarItem extends StatelessWidget {
-  const _RevenueSidebarItem({required this.icon, required this.label, this.selected = false, this.onTap});
+  const _RevenueSidebarItem(
+      {required this.icon,
+      required this.label,
+      this.selected = false,
+      this.onTap});
 
   final IconData icon;
   final String label;
@@ -15245,7 +18177,8 @@ class _RevenueSidebarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
+    final textColor =
+        selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant;
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
@@ -15255,7 +18188,10 @@ class _RevenueSidebarItem extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected ? _DashboardColors.surfaceLow : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
-          border: selected ? const Border(right: BorderSide(color: _DashboardColors.primary, width: 3)) : null,
+          border: selected
+              ? const Border(
+                  right: BorderSide(color: _DashboardColors.primary, width: 3))
+              : null,
         ),
         child: Row(
           children: [
@@ -15263,7 +18199,11 @@ class _RevenueSidebarItem extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               label.toUpperCase(),
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, letterSpacing: 1.2, color: textColor),
+              style: GoogleFonts.inter(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.2,
+                  color: textColor),
             ),
           ],
         ),
@@ -15273,7 +18213,8 @@ class _RevenueSidebarItem extends StatelessWidget {
 }
 
 class _RevenueSidebarLink extends StatelessWidget {
-  const _RevenueSidebarLink({required this.icon, required this.label, this.onTap});
+  const _RevenueSidebarLink(
+      {required this.icon, required this.label, this.onTap});
 
   final IconData icon;
   final String label;
@@ -15290,7 +18231,12 @@ class _RevenueSidebarLink extends StatelessWidget {
           children: [
             Icon(icon, size: 16, color: _DashboardColors.onSurfaceVariant),
             const SizedBox(width: 10),
-            Text(label.toUpperCase(), style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600, letterSpacing: 1.2, color: _DashboardColors.onSurfaceVariant)),
+            Text(label.toUpperCase(),
+                style: GoogleFonts.inter(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.2,
+                    color: _DashboardColors.onSurfaceVariant)),
           ],
         ),
       ),
@@ -15310,29 +18256,40 @@ class _RevenueTopBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 28),
       decoration: BoxDecoration(
         color: _DashboardColors.surface.withOpacity(0.9),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 18, offset: const Offset(0, 8))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 18,
+              offset: const Offset(0, 8))
+        ],
       ),
       child: Row(
         children: [
           Text(
             'Inter-Metro Transport Solution Limited',
-            style: GoogleFonts.manrope(fontSize: 16, fontWeight: FontWeight.w700, color: _DashboardColors.primary),
+            style: GoogleFonts.manrope(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.primary),
           ),
           const SizedBox(width: 22),
           _RevenueTopLink(
             label: 'Analytics',
             selected: true,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminRevenueDashboard),
           ),
           const SizedBox(width: 16),
           _RevenueTopLink(
             label: 'Configuration',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminSystemSettings),
           ),
           const SizedBox(width: 16),
           _RevenueTopLink(
             label: 'Logs',
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminAuditActivityLogs),
           ),
           const Spacer(),
           Container(
@@ -15349,30 +18306,38 @@ class _RevenueTopBar extends StatelessWidget {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Search transactions...',
-                      hintStyle: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant.withOpacity(0.7)),
+                      hintStyle: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant
+                              .withOpacity(0.7)),
                       isCollapsed: true,
                     ),
                   ),
                 ),
-                const Icon(Icons.search, size: 16, color: _DashboardColors.onSurfaceVariant),
+                const Icon(Icons.search,
+                    size: 16, color: _DashboardColors.onSurfaceVariant),
               ],
             ),
           ),
           const SizedBox(width: 14),
           IconButton(
             onPressed: onRefresh,
-            icon: const Icon(Icons.refresh, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.refresh,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.notifications,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.help_outline, color: _DashboardColors.onSurfaceVariant),
+            icon: const Icon(Icons.help_outline,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           GestureDetector(
-            onTap: () => Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
+            onTap: () =>
+                Navigator.pushNamed(context, AppRoutes.adminUserDropdown),
             child: CircleAvatar(
               radius: 16,
               backgroundColor: _DashboardColors.surfaceHighest,
@@ -15388,7 +18353,8 @@ class _RevenueTopBar extends StatelessWidget {
 }
 
 class _RevenueTopLink extends StatelessWidget {
-  const _RevenueTopLink({required this.label, this.selected = false, this.onTap});
+  const _RevenueTopLink(
+      {required this.label, this.selected = false, this.onTap});
 
   final String label;
   final bool selected;
@@ -15401,14 +18367,19 @@ class _RevenueTopLink extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.only(bottom: 4),
         decoration: BoxDecoration(
-          border: selected ? const Border(bottom: BorderSide(color: _DashboardColors.primary, width: 2)) : null,
+          border: selected
+              ? const Border(
+                  bottom: BorderSide(color: _DashboardColors.primary, width: 2))
+              : null,
         ),
         child: Text(
           label,
           style: GoogleFonts.inter(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: selected ? _DashboardColors.primary : _DashboardColors.onSurfaceVariant,
+            color: selected
+                ? _DashboardColors.primary
+                : _DashboardColors.onSurfaceVariant,
           ),
         ),
       ),
@@ -15430,12 +18401,16 @@ class _RevenueHeaderSection extends StatelessWidget {
             children: [
               Text(
                 'Revenue Dashboard',
-                style: GoogleFonts.manrope(fontSize: 26, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+                style: GoogleFonts.manrope(
+                    fontSize: 26,
+                    fontWeight: FontWeight.w700,
+                    color: _DashboardColors.onSurface),
               ),
               const SizedBox(height: 6),
               Text(
                 'Financial health and transit movement overview',
-                style: GoogleFonts.inter(fontSize: 12, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 12, color: _DashboardColors.onSurfaceVariant),
               ),
             ],
           ),
@@ -15468,15 +18443,19 @@ class _RevenueFilterChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+        border:
+            Border.all(color: _DashboardColors.outlineVariant.withOpacity(0.2)),
       ),
       child: Row(
         children: [
           Icon(icon, size: 16, color: _DashboardColors.primary),
           const SizedBox(width: 8),
-          Text(label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600)),
+          Text(label,
+              style:
+                  GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600)),
           const SizedBox(width: 6),
-          const Icon(Icons.expand_more, size: 16, color: _DashboardColors.onSurfaceVariant),
+          const Icon(Icons.expand_more,
+              size: 16, color: _DashboardColors.onSurfaceVariant),
         ],
       ),
     );
@@ -15484,7 +18463,8 @@ class _RevenueFilterChip extends StatelessWidget {
 }
 
 class _RevenueSummaryGrid extends StatelessWidget {
-  const _RevenueSummaryGrid({required this.summary, required this.currencyLabel});
+  const _RevenueSummaryGrid(
+      {required this.summary, required this.currencyLabel});
 
   final _RevenueSummaryData summary;
   final String currencyLabel;
@@ -15494,7 +18474,11 @@ class _RevenueSummaryGrid extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final crossAxisCount = width >= 1100 ? 4 : width >= 760 ? 2 : 1;
+        final crossAxisCount = width >= 1100
+            ? 4
+            : width >= 760
+                ? 2
+                : 1;
         return GridView.count(
           crossAxisCount: crossAxisCount,
           shrinkWrap: true,
@@ -15578,7 +18562,12 @@ class _RevenueSummaryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -15600,19 +18589,30 @@ class _RevenueSummaryCard extends StatelessWidget {
                   color: tagBackground,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Text(tag, style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: tagColor)),
+                child: Text(tag,
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: tagColor)),
               ),
             ],
           ),
           const SizedBox(height: 10),
           Text(
             title.toUpperCase(),
-            style: GoogleFonts.inter(fontSize: 9, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: _DashboardColors.onSurfaceVariant),
+            style: GoogleFonts.inter(
+                fontSize: 9,
+                fontWeight: FontWeight.w700,
+                letterSpacing: 1.4,
+                color: _DashboardColors.onSurfaceVariant),
           ),
           const SizedBox(height: 8),
           Text(
             value,
-            style: GoogleFonts.manrope(fontSize: 24, fontWeight: FontWeight.w700, color: _DashboardColors.onSurface),
+            style: GoogleFonts.manrope(
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
+                color: _DashboardColors.onSurface),
           ),
         ],
       ),
@@ -15663,7 +18663,12 @@ class _RevenueTrendCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -15671,12 +18676,15 @@ class _RevenueTrendCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Revenue Trends', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700)),
+                Text('Revenue Trends',
+                    style: GoogleFonts.manrope(
+                        fontSize: 14, fontWeight: FontWeight.w700)),
                 Row(
                   children: [
                     _RevenuePill(label: 'DAILY', selected: true),
@@ -15696,7 +18704,10 @@ class _RevenueTrendCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: List.generate(
                       4,
-                      (index) => Divider(color: _DashboardColors.onSurfaceVariant.withOpacity(0.12), height: 1),
+                      (index) => Divider(
+                          color: _DashboardColors.onSurfaceVariant
+                              .withOpacity(0.12),
+                          height: 1),
                     ),
                   ),
                   Row(
@@ -15705,7 +18716,8 @@ class _RevenueTrendCard extends StatelessWidget {
                         .map(
                           (height) => Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6),
                               child: _RevenueBar(heightFactor: height),
                             ),
                           ),
@@ -15793,7 +18805,12 @@ class _RevenueDistributionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -15801,11 +18818,14 @@ class _RevenueDistributionCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               children: [
-                Text('Route Distribution', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700)),
+                Text('Route Distribution',
+                    style: GoogleFonts.manrope(
+                        fontSize: 14, fontWeight: FontWeight.w700)),
               ],
             ),
           ),
@@ -15818,7 +18838,9 @@ class _RevenueDistributionCard extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 18),
                     child: Text(
                       'No revenue data yet.',
-                      style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                      style: GoogleFonts.inter(
+                          fontSize: 11,
+                          color: _DashboardColors.onSurfaceVariant),
                     ),
                   )
                 else
@@ -15827,7 +18849,9 @@ class _RevenueDistributionCard extends StatelessWidget {
                     if (index != items.length - 1) const SizedBox(height: 12),
                   ],
                 const SizedBox(height: 18),
-                Container(height: 1, color: _DashboardColors.outlineVariant.withOpacity(0.2)),
+                Container(
+                    height: 1,
+                    color: _DashboardColors.outlineVariant.withOpacity(0.2)),
                 const SizedBox(height: 16),
                 const _RevenuePaymentLegend(),
               ],
@@ -15852,8 +18876,12 @@ class _RevenueDistributionRow extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(item.label, style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600)),
-            Text('${item.percent}%', style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w700)),
+            Text(item.label,
+                style: GoogleFonts.inter(
+                    fontSize: 12, fontWeight: FontWeight.w600)),
+            Text('${item.percent}%',
+                style: GoogleFonts.inter(
+                    fontSize: 12, fontWeight: FontWeight.w700)),
           ],
         ),
         const SizedBox(height: 6),
@@ -15881,16 +18909,23 @@ class _RevenuePaymentLegend extends StatelessWidget {
       children: [
         Text(
           'Payment Breakdown',
-          style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, letterSpacing: 1.4, color: _DashboardColors.onSurfaceVariant),
+          style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.4,
+              color: _DashboardColors.onSurfaceVariant),
         ),
         const SizedBox(height: 10),
         Row(
           children: const [
-            _RevenueLegendItem(color: _DashboardColors.primary, label: 'Metro Pass'),
+            _RevenueLegendItem(
+                color: _DashboardColors.primary, label: 'Metro Pass'),
             SizedBox(width: 12),
-            _RevenueLegendItem(color: _DashboardColors.primaryContainer, label: 'NFC'),
+            _RevenueLegendItem(
+                color: _DashboardColors.primaryContainer, label: 'NFC'),
             SizedBox(width: 12),
-            _RevenueLegendItem(color: _DashboardColors.secondary, label: 'QR Code'),
+            _RevenueLegendItem(
+                color: _DashboardColors.secondary, label: 'QR Code'),
           ],
         ),
       ],
@@ -15908,9 +18943,14 @@ class _RevenueLegendItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 6),
-        Text(label, style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600)),
+        Text(label,
+            style:
+                GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w600)),
       ],
     );
   }
@@ -15927,7 +18967,12 @@ class _RevenueTransactionsTable extends StatelessWidget {
       decoration: BoxDecoration(
         color: _DashboardColors.surfaceLowest,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 6))
+        ],
       ),
       child: Column(
         children: [
@@ -15935,13 +18980,20 @@ class _RevenueTransactionsTable extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
             decoration: BoxDecoration(
               color: _DashboardColors.surfaceLow,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Recent Transactions', style: GoogleFonts.manrope(fontSize: 14, fontWeight: FontWeight.w700)),
-                Text('View All', style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700, color: _DashboardColors.primary)),
+                Text('Recent Transactions',
+                    style: GoogleFonts.manrope(
+                        fontSize: 14, fontWeight: FontWeight.w700)),
+                Text('View All',
+                    style: GoogleFonts.inter(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                        color: _DashboardColors.primary)),
               ],
             ),
           ),
@@ -15965,12 +19017,15 @@ class _RevenueTransactionsTable extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Text(
                 'No transactions yet.',
-                style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+                style: GoogleFonts.inter(
+                    fontSize: 11, color: _DashboardColors.onSurfaceVariant),
               ),
             )
           else
             Column(
-              children: transactions.map((tx) => _RevenueTransactionRow(transaction: tx)).toList(),
+              children: transactions
+                  .map((tx) => _RevenueTransactionRow(transaction: tx))
+                  .toList(),
             ),
         ],
       ),
@@ -15979,7 +19034,8 @@ class _RevenueTransactionsTable extends StatelessWidget {
 }
 
 class _RevenueTableHeader extends StatelessWidget {
-  const _RevenueTableHeader({required this.label, required this.flex, this.alignRight = false});
+  const _RevenueTableHeader(
+      {required this.label, required this.flex, this.alignRight = false});
 
   final String label;
   final int flex;
@@ -16015,7 +19071,9 @@ class _RevenueTransactionRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: _DashboardColors.surfaceHighest.withOpacity(0.5))),
+        border: Border(
+            top: BorderSide(
+                color: _DashboardColors.surfaceHighest.withOpacity(0.5))),
       ),
       child: Row(
         children: [
@@ -16023,30 +19081,37 @@ class _RevenueTransactionRow extends StatelessWidget {
             flex: 2,
             child: Text(
               transaction.id,
-              style: GoogleFonts.robotoMono(fontSize: 11, color: _DashboardColors.onSurface),
+              style: GoogleFonts.robotoMono(
+                  fontSize: 11, color: _DashboardColors.onSurface),
             ),
           ),
           Expanded(
             flex: 2,
             child: Text(
               transaction.dateTime,
-              style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant),
+              style: GoogleFonts.inter(
+                  fontSize: 11, color: _DashboardColors.onSurfaceVariant),
             ),
           ),
           Expanded(
             flex: 2,
             child: Text(
               transaction.route,
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600),
+              style:
+                  GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w600),
             ),
           ),
           Expanded(
             flex: 2,
             child: Row(
               children: [
-                Icon(transaction.methodIcon, size: 16, color: _DashboardColors.onSurfaceVariant),
+                Icon(transaction.methodIcon,
+                    size: 16, color: _DashboardColors.onSurfaceVariant),
                 const SizedBox(width: 6),
-                Text(transaction.methodLabel, style: GoogleFonts.inter(fontSize: 11, color: _DashboardColors.onSurfaceVariant)),
+                Text(transaction.methodLabel,
+                    style: GoogleFonts.inter(
+                        fontSize: 11,
+                        color: _DashboardColors.onSurfaceVariant)),
               ],
             ),
           ),
@@ -16054,7 +19119,8 @@ class _RevenueTransactionRow extends StatelessWidget {
             flex: 1,
             child: Text(
               transaction.amount,
-              style: GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700),
+              style:
+                  GoogleFonts.inter(fontSize: 11, fontWeight: FontWeight.w700),
             ),
           ),
           Expanded(
@@ -16065,7 +19131,8 @@ class _RevenueTransactionRow extends StatelessWidget {
             flex: 1,
             child: Align(
               alignment: Alignment.centerRight,
-              child: Icon(Icons.more_vert, size: 18, color: _DashboardColors.onSurfaceVariant),
+              child: Icon(Icons.more_vert,
+                  size: 18, color: _DashboardColors.onSurfaceVariant),
             ),
           ),
         ],
@@ -16101,14 +19168,16 @@ class _RevenueStatusChip extends StatelessWidget {
       ),
       child: Text(
         status,
-        style: GoogleFonts.inter(fontSize: 10, fontWeight: FontWeight.w700, color: textColor),
+        style: GoogleFonts.inter(
+            fontSize: 10, fontWeight: FontWeight.w700, color: textColor),
       ),
     );
   }
 }
 
 class _RevenueDistributionItem {
-  const _RevenueDistributionItem({required this.label, required this.percent, required this.color});
+  const _RevenueDistributionItem(
+      {required this.label, required this.percent, required this.color});
 
   final String label;
   final int percent;
@@ -16136,10 +19205,18 @@ class _RevenueTransaction {
 }
 
 const List<_RevenueDistributionItem> _routeDistribution = [
-  _RevenueDistributionItem(label: 'Green Line (Main)', percent: 42, color: _DashboardColors.primary),
-  _RevenueDistributionItem(label: 'Express 88', percent: 28, color: _DashboardColors.primaryContainer),
-  _RevenueDistributionItem(label: 'River Shuttle', percent: 18, color: _DashboardColors.secondary),
-  _RevenueDistributionItem(label: 'Airport Connector', percent: 12, color: _DashboardColors.outlineVariant),
+  _RevenueDistributionItem(
+      label: 'Green Line (Main)', percent: 42, color: _DashboardColors.primary),
+  _RevenueDistributionItem(
+      label: 'Express 88',
+      percent: 28,
+      color: _DashboardColors.primaryContainer),
+  _RevenueDistributionItem(
+      label: 'River Shuttle', percent: 18, color: _DashboardColors.secondary),
+  _RevenueDistributionItem(
+      label: 'Airport Connector',
+      percent: 12,
+      color: _DashboardColors.outlineVariant),
 ];
 
 const List<_RevenueTransaction> _revenueTransactions = [
@@ -16180,8 +19257,3 @@ const List<_RevenueTransaction> _revenueTransactions = [
     status: 'Flagged',
   ),
 ];
-
-
-
-
-

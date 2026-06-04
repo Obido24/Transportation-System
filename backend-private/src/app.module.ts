@@ -12,6 +12,7 @@ import { BookingsModule } from './bookings/bookings.module';
 import { AdminModule } from './admin/admin.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { SupportModule } from './support/support.module';
+import { AnnouncementsModule } from './announcements/announcements.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { SupportModule } from './support/support.module';
     AuthModule,
     BookingsModule,
     NotificationsModule,
+    AnnouncementsModule,
     AdminModule,
     SupportModule,
   ],

@@ -1,12 +1,18 @@
 import 'api_client.dart';
 
 class UserApi {
+  static Future<List<Map<String, dynamic>>> listAnnouncements() async {
+    final data = await ApiClient.getList('/announcements');
+    return data.whereType<Map<String, dynamic>>().toList();
+  }
+
   static Future<List<Map<String, dynamic>>> listRoutes() async {
     final data = await ApiClient.getList('/routes');
     return data.whereType<Map<String, dynamic>>().toList();
   }
 
-  static Future<List<Map<String, dynamic>>> listBookingsForUser(String userId) async {
+  static Future<List<Map<String, dynamic>>> listBookingsForUser(
+      String userId) async {
     final data = await ApiClient.getList('/bookings/user/$userId', auth: true);
     return data.whereType<Map<String, dynamic>>().toList();
   }

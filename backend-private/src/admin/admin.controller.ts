@@ -7,12 +7,18 @@ import { UpdateUserStatusDto } from './dto/update-user-status.dto';
 import { UpdateSupportStatusDto } from './dto/update-support-status.dto';
 import { CreateRouteDto } from '../routes/dto/create-route.dto';
 import { UpdateRouteDto } from '../routes/dto/update-route.dto';
+import { AnnouncementsService } from '../announcements/announcements.service';
+import { CreateAnnouncementDto } from '../announcements/dto/create-announcement.dto';
+import { UpdateAnnouncementDto } from '../announcements/dto/update-announcement.dto';
 
 @Controller('admin')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('ADMIN')
 export class AdminController {
-  constructor(private readonly adminService: AdminService) {}
+  constructor(
+    private readonly adminService: AdminService,
+    private readonly announcementsService: AnnouncementsService,
+  ) {}
 
   @Get('users')
   listUsers() {
@@ -117,5 +123,25 @@ export class AdminController {
   @Patch('system-settings')
   updateSystemSettings(@Body() body: Record<string, any>, @Req() req: any) {
     return this.adminService.updateSystemSettings(body, req.user?.userId, req.ip);
+  }
+
+  @Get('announcements')
+  listAnnouncements() {
+    return this.announcementsService.listAdminAnnouncements();
+  }
+
+  @Post('announcements')
+  createAnnouncement(@Body() body: CreateAnnouncementDto, @Req() req: any) {
+    return this.announcementsService.createAnnouncement(body, req.user?.userId, req.ip);
+  }
+
+  @Patch('announcements/:id')
+  updateAnnouncement(@Param('id') id: string, @Body() body: UpdateAnnouncementDto, @Req() req: any) {
+    return this.announcementsService.updateAnnouncement(id, body, req.user?.userId, req.ip);
+  }
+
+  @Delete('announcements/:id')
+  deleteAnnouncement(@Param('id') id: string, @Req() req: any) {
+    return this.announcementsService.deleteAnnouncement(id, req.user?.userId, req.ip);
   }
 }

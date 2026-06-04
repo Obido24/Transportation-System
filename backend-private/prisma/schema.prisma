@@ -63,6 +63,23 @@ model User {
   passwordReset  PasswordReset?
 }
 
+model Announcement {
+  id              String   @id @default(uuid())
+  title           String
+  body            String
+  isActive        Boolean  @default(true)
+  isPinned        Boolean  @default(false)
+  startsAt        DateTime?
+  expiresAt       DateTime?
+  createdByUserId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([isActive, isPinned, createdAt])
+  @@index([startsAt])
+  @@index([expiresAt])
+}
+
 model Merchant {
   id         String   @id @default(uuid())
   userId     String?  @unique

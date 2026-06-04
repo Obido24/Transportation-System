@@ -13,6 +13,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 import '../routes.dart';
 import '../services/auth_api.dart';
@@ -2872,8 +2873,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _loadingRecent = false;
   bool _loadingRoutes = false;
   bool _loadingProfile = false;
+  bool _loadingAnnouncements = false;
   List<Map<String, dynamic>> _recentBookings = [];
   List<Map<String, dynamic>> _availableRoutes = [];
+  List<Map<String, dynamic>> _announcements = [];
   StreamSubscription<bool>? _onlineSub;
   StreamSubscription<TicketRefreshEvent>? _ticketRefreshSub;
 
@@ -2883,6 +2886,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadHomeProfile();
     _loadRecentBookings();
     _loadHomeRoutes();
+    _loadAnnouncements();
     _onlineSub = ConnectivityService.instance.onlineStream.listen((online) {
       if (online) {
         _retryHomeData();
@@ -2959,6 +2963,21 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<void> _loadAnnouncements() async {
+    setState(() => _loadingAnnouncements = true);
+    try {
+      final announcements = await UserApi.listAnnouncements();
+      if (!mounted) return;
+      setState(() {
+        _announcements = announcements;
+        _loadingAnnouncements = false;
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() => _loadingAnnouncements = false);
+    }
+  }
+
   void _retryHomeData() {
     if (!ConnectivityService.instance.isOnline) {
       return;
@@ -2966,6 +2985,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadHomeProfile();
     _loadRecentBookings();
     _loadHomeRoutes();
+    _loadAnnouncements();
   }
 
   Future<void> _openLatestTicket() async {
@@ -3101,6 +3121,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return null;
   }
 
+  Map<String, dynamic>? _latestAnnouncement() {
+    if (_announcements.isEmpty) {
+      return null;
+    }
+    return _announcements.first;
+  }
+
   String _latestDestination() {
     if (_recentBookings.isEmpty) {
       return 'No completed rides yet';
@@ -3146,7 +3173,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final profileDescriptor = _profileDescriptor();
     final avatarInitials = _avatarInitials();
     final avatarProvider = _avatarImageProvider();
-    final hasAlerts = _recentBookings.isNotEmpty;
+    final hasAlerts = _recentBookings.isNotEmpty || _announcements.isNotEmpty;
+    final latestAnnouncement = _latestAnnouncement();
 
     return Scaffold(
       backgroundColor: background,
@@ -3411,6 +3439,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             const SizedBox(height: 14),
                             OfflineBanner(onRetry: _retryHomeData),
+                            if (_loadingAnnouncements ||
+                                latestAnnouncement != null) ...[
+                              const SizedBox(height: 14),
+                              _HomeAnnouncementBanner(
+                                announcement: latestAnnouncement,
+                                loading: _loadingAnnouncements,
+                                onTap: () => Navigator.pushNamed(
+                                    context, AppRoutes.notifications),
+                              ),
+                            ],
                             const SizedBox(height: 22),
                             LayoutBuilder(
                               builder: (context, constraints) {
@@ -3954,6 +3992,172 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _HomeAnnouncementBanner extends StatelessWidget {
+  const _HomeAnnouncementBanner({
+    required this.loading,
+    required this.onTap,
+    this.announcement,
+  });
+
+  final bool loading;
+  final Map<String, dynamic>? announcement;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+    final title =
+        announcement?['title']?.toString() ?? 'Checking announcements';
+    final body = announcement?['body']?.toString() ??
+        'We are syncing the latest service updates for riders.';
+    final isPinned = announcement?['isPinned'] == true;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: loading ? null : onTap,
+        borderRadius: BorderRadius.circular(24),
+        child: Ink(
+          padding: const EdgeInsets.all(18),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 16,
+                spreadRadius: -8,
+                offset: const Offset(0, 10),
+              ),
+            ],
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 46,
+                height: 46,
+                decoration: BoxDecoration(
+                  color: primary.withOpacity(0.11),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Icon(
+                  isPinned
+                      ? Icons.campaign_rounded
+                      : Icons.notifications_active_rounded,
+                  color: primary,
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          'General announcement',
+                          style: GoogleFonts.inter(
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1.1,
+                            color: primary,
+                          ),
+                        ),
+                        if (isPinned) ...[
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: primary.withOpacity(0.08),
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                            child: Text(
+                              'Pinned',
+                              style: GoogleFonts.inter(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
+                                color: primary,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    if (loading)
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: primary.withOpacity(0.7),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Loading latest announcement...',
+                            style: GoogleFonts.inter(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.w600,
+                              color: onSurfaceVariant,
+                            ),
+                          ),
+                        ],
+                      )
+                    else ...[
+                      Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.manrope(
+                          fontSize: 15.5,
+                          fontWeight: FontWeight.w800,
+                          color: onSurface,
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Text(
+                        body,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 12.5,
+                          height: 1.45,
+                          color: onSurfaceVariant.withOpacity(0.84),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'View all announcements',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: primary,
+                        ),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              const SizedBox(width: 10),
+              Icon(
+                Icons.chevron_right_rounded,
+                color: onSurfaceVariant.withOpacity(0.5),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -5753,10 +5957,15 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   WebViewController? _controller;
   bool _verifying = false;
   bool _openedInBrowser = false;
+  bool _gatewayLoading = true;
+  String? _gatewayError;
+  int _gatewayProgress = 0;
+  String? _gatewayUrl;
 
   @override
   void initState() {
     super.initState();
+    _gatewayUrl = widget.checkoutUrl;
     if (kIsWeb) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
@@ -5766,10 +5975,113 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
         }
       });
     } else {
-      _controller = WebViewController()
+      PlatformWebViewControllerCreationParams params =
+          const PlatformWebViewControllerCreationParams();
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        params = AndroidWebViewControllerCreationParams
+            .fromPlatformWebViewControllerCreationParams(params);
+      }
+
+      final controller = WebViewController.fromPlatformCreationParams(params)
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..setBackgroundColor(Colors.white)
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onPageStarted: (_) {
+              if (!mounted) return;
+              setState(() {
+                _gatewayLoading = true;
+                _gatewayError = null;
+                _gatewayProgress = 0;
+              });
+            },
+            onPageFinished: (_) {
+              if (!mounted) return;
+              setState(() {
+                _gatewayLoading = false;
+                _gatewayError = null;
+                _gatewayProgress = 100;
+              });
+            },
+            onProgress: (progress) {
+              if (!mounted) return;
+              setState(() {
+                _gatewayProgress = progress;
+              });
+            },
+            onUrlChange: (change) {
+              if (!mounted) return;
+              setState(() {
+                _gatewayUrl = change.url;
+              });
+            },
+            onHttpError: (error) {
+              final requestUrl = error.request?.uri.toString();
+              final statusCode = error.response?.statusCode;
+              final isCurrentMainRequest = requestUrl != null &&
+                  (requestUrl == widget.checkoutUrl ||
+                      requestUrl == _gatewayUrl);
+              debugPrint(
+                'Monnify HTTP error: '
+                'status=$statusCode request=$requestUrl current=$_gatewayUrl',
+              );
+              if (!isCurrentMainRequest) {
+                return;
+              }
+              if (!mounted) return;
+              setState(() {
+                _gatewayLoading = false;
+                _gatewayError =
+                    'HTTP ${statusCode ?? ''} while loading checkout.'.trim();
+              });
+            },
+            onWebResourceError: (error) {
+              debugPrint(
+                'Monnify web resource error: '
+                'code=${error.errorCode} '
+                'type=${error.errorType} '
+                'mainFrame=${error.isForMainFrame} '
+                'url=${error.url} '
+                'description=${error.description}',
+              );
+              if (error.isForMainFrame == false) {
+                return;
+              }
+              if (!mounted) return;
+              setState(() {
+                _gatewayLoading = false;
+                _gatewayError = error.description.isNotEmpty
+                    ? error.description
+                    : 'Unable to load the payment page right now.';
+              });
+            },
+          ),
+        )
         ..loadRequest(Uri.parse(widget.checkoutUrl));
+
+      if (controller.platform is AndroidWebViewController) {
+        final androidController =
+            controller.platform as AndroidWebViewController;
+        androidController.setMediaPlaybackRequiresUserGesture(false);
+        androidController.setMixedContentMode(MixedContentMode.alwaysAllow);
+      }
+
+      _controller = controller;
     }
+  }
+
+  void _reloadGateway() {
+    final controller = _controller;
+    if (controller == null) return;
+    setState(() {
+      _gatewayLoading = true;
+      _gatewayError = null;
+    });
+    controller.loadRequest(Uri.parse(widget.checkoutUrl));
+  }
+
+  Widget _buildGatewayWebView() {
+    return WebViewWidget(controller: _controller!);
   }
 
   void _openCheckout() {
@@ -5833,6 +6145,325 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
     const onSurface = Color(0xFF191C1E);
     final providerLabel =
         widget.provider == 'PAYSTACK' ? 'Paystack' : 'Monnify';
+
+    if (!kIsWeb) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back, color: primary),
+          ),
+          titleSpacing: 0,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Secure Checkout',
+                style: GoogleFonts.manrope(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                  color: primary,
+                ),
+              ),
+              Text(
+                providerLabel,
+                style: GoogleFonts.inter(
+                  fontSize: 10.5,
+                  fontWeight: FontWeight.w500,
+                  color: onSurfaceVariant.withOpacity(0.72),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                decoration: BoxDecoration(
+                  color: primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.lock_rounded, size: 13, color: primary),
+                    const SizedBox(width: 5),
+                    Text(
+                      'Protected',
+                      style: GoogleFonts.manrope(
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.w700,
+                        color: primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+        body: SafeArea(
+          top: false,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                child: Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  decoration: BoxDecoration(
+                    color: surfaceLowest,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: const Color(0xFFE4ECE7),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Secure gateway',
+                              style: GoogleFonts.manrope(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w800,
+                                color: onSurface,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Complete payment below, then tap Verify payment.',
+                              style: GoogleFonts.inter(
+                                fontSize: 12.5,
+                                height: 1.4,
+                                color: onSurfaceVariant.withOpacity(0.82),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: primary.withOpacity(0.08),
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                        child: Text(
+                          providerLabel,
+                          style: GoogleFonts.inter(
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w700,
+                            color: primary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              if (_gatewayLoading || _gatewayError != null)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      _gatewayLoading
+                          ? 'Connecting to Monnify... ${_gatewayProgress.clamp(0, 100)}%'
+                          : _gatewayError!,
+                      style: GoogleFonts.inter(
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w600,
+                        color: _gatewayLoading
+                            ? onSurfaceVariant
+                            : Colors.red.shade700,
+                      ),
+                    ),
+                  ),
+                ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: const Color(0xFFE4ECE7),
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: _buildGatewayWebView(),
+                        ),
+                        if (_gatewayLoading)
+                          Positioned.fill(
+                            child: Container(
+                              color: Colors.white,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(24),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const SizedBox(
+                                    width: 28,
+                                    height: 28,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.8,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        primary,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 14),
+                                  Text(
+                                    'Loading secure payment page...',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        if (_gatewayError != null && !_gatewayLoading)
+                          Positioned.fill(
+                            child: Container(
+                              color: Colors.white,
+                              padding: const EdgeInsets.all(24),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 52,
+                                    height: 52,
+                                    decoration: BoxDecoration(
+                                      color: primary.withOpacity(0.08),
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                    child: const Icon(
+                                      Icons.wifi_off_rounded,
+                                      color: primary,
+                                      size: 26,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 14),
+                                  Text(
+                                    'We could not load the payment page.',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.manrope(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      color: onSurface,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'Check your internet connection and try again. If it still stays blank, the embedded session is not being painted correctly on this device.',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                      fontSize: 12.5,
+                                      height: 1.45,
+                                      color: onSurfaceVariant.withOpacity(0.82),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 14),
+                                  SizedBox(
+                                    height: 44,
+                                    child: OutlinedButton.icon(
+                                      onPressed: _reloadGateway,
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                          color: primary.withOpacity(0.22),
+                                        ),
+                                        foregroundColor: primary,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                        ),
+                                      ),
+                                      icon: const Icon(
+                                        Icons.refresh,
+                                        size: 18,
+                                      ),
+                                      label: Text(
+                                        'Reload payment page',
+                                        style: GoogleFonts.manrope(
+                                          fontSize: 13.5,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: SafeArea(
+          top: false,
+          child: Container(
+            color: Colors.white,
+            padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
+            child: SizedBox(
+              height: 56,
+              child: ElevatedButton.icon(
+                onPressed: _verifying ? null : _verifyPayment,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: primary,
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                icon: _verifying
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor:
+                              AlwaysStoppedAnimation<Color>(Colors.white),
+                        ),
+                      )
+                    : const Icon(Icons.verified_outlined),
+                label: Text(
+                  _verifying ? 'Checking payment...' : 'Verify payment',
+                  style: GoogleFonts.manrope(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       backgroundColor: background,
@@ -6191,38 +6822,20 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                         ),
                       )
                     : Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 18, 20, 108),
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 92),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Complete your payment',
-                              style: GoogleFonts.manrope(
-                                fontSize: 30,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: -0.45,
-                                color: onSurface,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              'Finish checkout securely, then verify to unlock your I-Metro ticket instantly.',
-                              style: GoogleFonts.inter(
-                                fontSize: 13.5,
-                                height: 1.5,
-                                color: onSurfaceVariant.withOpacity(0.84),
-                              ),
-                            ),
-                            const SizedBox(height: 16),
                             Container(
                               width: double.infinity,
-                              padding: const EdgeInsets.all(18),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 14),
                               decoration: BoxDecoration(
                                 color: surfaceLowest,
-                                borderRadius: BorderRadius.circular(28),
+                                borderRadius: BorderRadius.circular(22),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withOpacity(0.045),
+                                    color: Colors.black.withOpacity(0.04),
                                     blurRadius: 18,
                                     spreadRadius: -8,
                                     offset: const Offset(0, 12),
@@ -6230,40 +6843,26 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                                 ],
                               ),
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    width: 46,
-                                    height: 46,
-                                    decoration: BoxDecoration(
-                                      color: primary.withOpacity(0.12),
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: const Icon(
-                                      Icons.verified_user_rounded,
-                                      color: primary,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 14),
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Checkout flow',
+                                          'Secure gateway',
                                           style: GoogleFonts.manrope(
-                                            fontSize: 16,
+                                            fontSize: 17,
                                             fontWeight: FontWeight.w800,
                                             color: onSurface,
                                           ),
                                         ),
-                                        const SizedBox(height: 5),
+                                        const SizedBox(height: 4),
                                         Text(
-                                          'Open the secure payment page, complete checkout, then verify your payment here.',
+                                          'Complete payment below, then tap Verify payment.',
                                           style: GoogleFonts.inter(
                                             fontSize: 12.5,
-                                            height: 1.45,
+                                            height: 1.4,
                                             color: onSurfaceVariant
                                                 .withOpacity(0.82),
                                           ),
@@ -6271,78 +6870,174 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                                       ],
                                     ),
                                   ),
+                                  const SizedBox(width: 12),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 6),
+                                    decoration: BoxDecoration(
+                                      color: primary.withOpacity(0.08),
+                                      borderRadius: BorderRadius.circular(999),
+                                    ),
+                                    child: Text(
+                                      providerLabel,
+                                      style: GoogleFonts.inter(
+                                        fontSize: 10.5,
+                                        fontWeight: FontWeight.w700,
+                                        color: primary,
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 12),
                             Expanded(
                               child: Container(
                                 width: double.infinity,
-                                padding: const EdgeInsets.all(14),
+                                padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: surfaceLowest,
                                   borderRadius: BorderRadius.circular(28),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.04),
-                                      blurRadius: 18,
+                                      color: Colors.black.withOpacity(0.045),
+                                      blurRadius: 20,
                                       spreadRadius: -8,
                                       offset: const Offset(0, 12),
                                     ),
                                   ],
                                 ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Secure gateway',
-                                          style: GoogleFonts.manrope(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w800,
-                                            color: onSurface,
-                                          ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(22),
+                                  child: Stack(
+                                    children: [
+                                      Positioned.fill(
+                                        child: ColoredBox(
+                                          color: surfaceSoft,
+                                          child: _buildGatewayWebView(),
                                         ),
-                                        const Spacer(),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 6),
-                                          decoration: BoxDecoration(
-                                            color: primary.withOpacity(0.08),
-                                            borderRadius:
-                                                BorderRadius.circular(999),
-                                          ),
-                                          child: Text(
-                                            providerLabel,
-                                            style: GoogleFonts.inter(
-                                              fontSize: 10.5,
-                                              fontWeight: FontWeight.w700,
-                                              color: primary,
+                                      ),
+                                      if (_gatewayLoading)
+                                        Positioned.fill(
+                                          child: Container(
+                                            color: Colors.white,
+                                            alignment: Alignment.center,
+                                            padding: const EdgeInsets.all(24),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                const SizedBox(
+                                                  width: 28,
+                                                  height: 28,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    strokeWidth: 2.8,
+                                                    valueColor:
+                                                        AlwaysStoppedAnimation<
+                                                            Color>(primary),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 14),
+                                                Text(
+                                                  'Loading secure payment page...',
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 12.5,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: onSurfaceVariant,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 6),
-                                    Text(
-                                      'Your payment page is embedded below. Complete the transaction, then verify when you return.',
-                                      style: GoogleFonts.inter(
-                                        fontSize: 12.5,
-                                        height: 1.45,
-                                        color:
-                                            onSurfaceVariant.withOpacity(0.82),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 14),
-                                    Expanded(
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(22),
-                                        child: WebViewWidget(
-                                            controller: _controller!),
-                                      ),
-                                    ),
-                                  ],
+                                      if (_gatewayError != null &&
+                                          !_gatewayLoading)
+                                        Positioned.fill(
+                                          child: Container(
+                                            color: Colors.white,
+                                            padding: const EdgeInsets.all(24),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  width: 52,
+                                                  height: 52,
+                                                  decoration: BoxDecoration(
+                                                    color: primary
+                                                        .withOpacity(0.08),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            18),
+                                                  ),
+                                                  child: const Icon(
+                                                    Icons.wifi_off_rounded,
+                                                    color: primary,
+                                                    size: 26,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 14),
+                                                Text(
+                                                  'We could not load the payment page.',
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.manrope(
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: onSurface,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 8),
+                                                Text(
+                                                  'Check your internet connection and try again. If the page still stays blank, the embedded Monnify view may be refusing this device session.',
+                                                  textAlign: TextAlign.center,
+                                                  style: GoogleFonts.inter(
+                                                    fontSize: 12.5,
+                                                    height: 1.45,
+                                                    color: onSurfaceVariant
+                                                        .withOpacity(0.82),
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 14),
+                                                SizedBox(
+                                                  height: 44,
+                                                  child: OutlinedButton.icon(
+                                                    onPressed: _reloadGateway,
+                                                    style: OutlinedButton
+                                                        .styleFrom(
+                                                      side: BorderSide(
+                                                        color: primary
+                                                            .withOpacity(0.22),
+                                                      ),
+                                                      foregroundColor: primary,
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16),
+                                                      ),
+                                                    ),
+                                                    icon: const Icon(
+                                                      Icons.refresh,
+                                                      size: 18,
+                                                    ),
+                                                    label: Text(
+                                                      'Reload payment page',
+                                                      style:
+                                                          GoogleFonts.manrope(
+                                                        fontSize: 13.5,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -13642,6 +14337,34 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return items;
   }
 
+  List<Map<String, dynamic>> _buildFromAnnouncements(
+      List<Map<String, dynamic>> announcements) {
+    const primary = Color(0xFF006B47);
+    const urgent = Color(0xFFB42318);
+    final items = <Map<String, dynamic>>[];
+
+    for (final announcement in announcements) {
+      final createdAt = _parseDate(announcement['createdAt']);
+      final isPinned = announcement['isPinned'] == true;
+      items.add({
+        'kind': 'announcement',
+        'title': announcement['title']?.toString() ?? 'Service update',
+        'body': announcement['body']?.toString() ?? '',
+        'fullBody': announcement['body']?.toString() ?? '',
+        'time': createdAt,
+        'icon': isPinned
+            ? Icons.campaign_rounded
+            : Icons.notifications_active_rounded,
+        'color': isPinned ? urgent : primary,
+        'announcementId': announcement['id']?.toString(),
+        'isPinned': isPinned,
+      });
+    }
+
+    items.sort((a, b) => _timeScore(b).compareTo(_timeScore(a)));
+    return items;
+  }
+
   Future<void> _loadNotifications() async {
     if (!AuthStore.isLoggedIn || AuthStore.userId == null) {
       setState(() {
@@ -13655,9 +14378,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       _error = null;
     });
     try {
+      final announcements = await UserApi.listAnnouncements();
       final bookings = await UserApi.listBookingsForUser(AuthStore.userId!);
+      final items = [
+        ..._buildFromAnnouncements(announcements),
+        ..._buildFromBookings(bookings),
+      ];
+      items.sort((a, b) => _timeScore(b).compareTo(_timeScore(a)));
       setState(() {
-        _items = _buildFromBookings(bookings);
+        _items = items;
         _loading = false;
       });
     } catch (_) {
@@ -13669,6 +14398,24 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   }
 
   void _openNotification(Map<String, dynamic> item) {
+    if (item['kind'] == 'announcement') {
+      final title = item['title']?.toString() ?? 'Announcement';
+      final body =
+          item['fullBody']?.toString() ?? item['body']?.toString() ?? '';
+      final timeLabel = _formatTime(item['time'] as DateTime?);
+      showModalBottomSheet<void>(
+        context: context,
+        backgroundColor: Colors.transparent,
+        isScrollControlled: true,
+        builder: (context) => _AnnouncementDetailsSheet(
+          title: title,
+          body: body,
+          timeLabel: timeLabel,
+          pinned: item['isPinned'] == true,
+        ),
+      );
+      return;
+    }
     final bookingId = item['bookingId']?.toString();
     if (bookingId != null && bookingId.isNotEmpty) {
       Navigator.pushNamed(
@@ -13691,10 +14438,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     const error = Color(0xFFBA1A1A);
 
     final loggedIn = AuthStore.isLoggedIn;
-    final paymentCount = _items
-        .where((item) =>
-            (item['title']?.toString().toLowerCase() ?? '').contains('payment'))
-        .length;
+    final announcementCount =
+        _items.where((item) => item['kind'] == 'announcement').length;
     final ticketCount = _items
         .where((item) =>
             (item['title']?.toString().toLowerCase() ?? '').contains('ticket'))
@@ -13944,9 +14689,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                                         const SizedBox(width: 10),
                                         Expanded(
                                           child: _NotificationSummaryChip(
-                                            label: 'Payments',
-                                            value: paymentCount.toString(),
-                                            tint: const Color(0xFF355AA2),
+                                            label: 'Announcements',
+                                            value: announcementCount.toString(),
+                                            tint: const Color(0xFFB42318),
                                           ),
                                         ),
                                         const SizedBox(width: 10),
@@ -14169,6 +14914,124 @@ class _NotificationCard extends StatelessWidget {
                     color: onSurfaceVariant.withOpacity(0.5)),
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AnnouncementDetailsSheet extends StatelessWidget {
+  const _AnnouncementDetailsSheet({
+    required this.title,
+    required this.body,
+    required this.timeLabel,
+    this.pinned = false,
+  });
+
+  final String title;
+  final String body;
+  final String timeLabel;
+  final bool pinned;
+
+  @override
+  Widget build(BuildContext context) {
+    const primary = Color(0xFF006B47);
+    const onSurface = Color(0xFF191C1E);
+    const onSurfaceVariant = Color(0xFF3E4942);
+
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+        child: Container(
+          padding: const EdgeInsets.all(22),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(28),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 42,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFD8E1DC),
+                    borderRadius: BorderRadius.circular(999),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 18),
+              Row(
+                children: [
+                  Container(
+                    width: 46,
+                    height: 46,
+                    decoration: BoxDecoration(
+                      color: primary.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Icon(
+                      pinned
+                          ? Icons.campaign_rounded
+                          : Icons.notifications_active_rounded,
+                      color: primary,
+                    ),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: GoogleFonts.manrope(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w800,
+                            color: onSurface,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          timeLabel,
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: onSurfaceVariant.withOpacity(0.78),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 18),
+              Text(
+                body,
+                style: GoogleFonts.inter(
+                  fontSize: 13.5,
+                  height: 1.6,
+                  color: onSurfaceVariant,
+                ),
+              ),
+              const SizedBox(height: 18),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'Close',
+                    style: GoogleFonts.manrope(
+                      fontSize: 13.5,
+                      fontWeight: FontWeight.w800,
+                      color: primary,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

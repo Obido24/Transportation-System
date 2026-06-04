@@ -1,6 +1,48 @@
 import 'api_client.dart';
 
 class AdminApi {
+  static Future<List<Map<String, dynamic>>> listAnnouncements() async {
+    final data = await ApiClient.getList('/admin/announcements', auth: true);
+    return data.whereType<Map<String, dynamic>>().toList();
+  }
+
+  static Future<Map<String, dynamic>> createAnnouncement({
+    required String title,
+    required String body,
+    bool isActive = true,
+    bool isPinned = false,
+  }) {
+    return ApiClient.post(
+      '/admin/announcements',
+      {
+        'title': title,
+        'body': body,
+        'isActive': isActive,
+        'isPinned': isPinned,
+      },
+      auth: true,
+    );
+  }
+
+  static Future<Map<String, dynamic>> updateAnnouncement(
+    String id, {
+    String? title,
+    String? body,
+    bool? isActive,
+    bool? isPinned,
+  }) {
+    final payload = <String, dynamic>{};
+    if (title != null) payload['title'] = title;
+    if (body != null) payload['body'] = body;
+    if (isActive != null) payload['isActive'] = isActive;
+    if (isPinned != null) payload['isPinned'] = isPinned;
+    return ApiClient.patch('/admin/announcements/$id', payload, auth: true);
+  }
+
+  static Future<Map<String, dynamic>> deleteAnnouncement(String id) {
+    return ApiClient.delete('/admin/announcements/$id', auth: true);
+  }
+
   static Future<List<Map<String, dynamic>>> listUsers() async {
     final data = await ApiClient.getList('/admin/users', auth: true);
     return data.whereType<Map<String, dynamic>>().toList();
@@ -10,7 +52,8 @@ class AdminApi {
     return ApiClient.getMap('/admin/users/$id', auth: true);
   }
 
-  static Future<Map<String, dynamic>> updateUserStatus(String id, bool isActive) async {
+  static Future<Map<String, dynamic>> updateUserStatus(
+      String id, bool isActive) async {
     return ApiClient.patch(
       '/admin/users/$id/status',
       {'isActive': isActive},
@@ -57,7 +100,8 @@ class AdminApi {
     return data.whereType<Map<String, dynamic>>().toList();
   }
 
-  static Future<Map<String, dynamic>> updateSupportStatus(String id, String status) async {
+  static Future<Map<String, dynamic>> updateSupportStatus(
+      String id, String status) async {
     return ApiClient.patch(
       '/admin/support/messages/$id/status',
       {'status': status},

@@ -46,6 +46,7 @@ class AppRoutes {
   static const adminAuditActivityLogs = '/admin/audit-activity-logs';
   static const adminSupportTicketManagement =
       '/admin/support-ticket-management';
+  static const adminAnnouncements = '/admin/announcements';
   static const adminSystemSettings = '/admin/system-settings';
   static const adminRevenueDashboard = '/admin/revenue-dashboard';
 
@@ -116,6 +117,7 @@ class AppRoutes {
     adminAuditActivityLogs: (context) => const AdminAuditActivityLogsScreen(),
     adminSupportTicketManagement: (context) =>
         const AdminSupportTicketManagementScreen(),
+    adminAnnouncements: (context) => const AdminAnnouncementsScreen(),
     adminSystemSettings: (context) => const AdminSystemSettingsScreen(),
     adminRevenueDashboard: (context) => const AdminRevenueDashboardScreen(),
   };
