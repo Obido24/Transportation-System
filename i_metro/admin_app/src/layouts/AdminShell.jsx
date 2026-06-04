@@ -9,6 +9,7 @@ const navItems = [
   { label: "User Management", icon: "group", path: "/admin/users" },
   { label: "Merchant Management", icon: "storefront", path: "/admin/merchants" },
   { label: "Route Management", icon: "map", path: "/admin/routes" },
+  { label: "Announcements", icon: "campaign", path: "/admin/announcements" },
   { label: "Revenue", icon: "monitoring", path: "/admin/revenue" },
   { label: "Settings", icon: "settings", path: "/admin/settings" },
   { label: "Activity", icon: "history", path: "/admin/activity" },

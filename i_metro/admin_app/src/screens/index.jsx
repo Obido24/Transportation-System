@@ -12,6 +12,7 @@ import twoFactorHtml from "./html/two_factor_authentication.html?raw";
 import resetPasswordHtml from "./html/reset_password.html?raw";
 import resetSuccessHtml from "./html/reset_success.html?raw";
 import DashboardMain from "./DashboardMain";
+import AdminAnnouncements from "./AdminAnnouncements";
 import TotalUsers from "./TotalUsers";
 import UserDetails from "./UserDetails";
 import MerchantList from "./MerchantList";
@@ -95,6 +96,7 @@ export const ResetSuccess = () => (
   />
 );
 export { DashboardMain };
+export { AdminAnnouncements };
 export { TotalUsers };
 export { UserDetails };
 export { MerchantList, MerchantDetails };

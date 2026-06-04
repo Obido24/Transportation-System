@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import {
   AddRoute,
+  AdminAnnouncements,
   AdminLogin,
   AdminSignUp,
   AuditActivityLogs,
@@ -51,6 +52,7 @@ function App() {
           <Route path="/admin/routes" element={<AvailableRoutes />} />
           <Route path="/admin/routes/add" element={<AddRoute />} />
           <Route path="/admin/routes/edit" element={<EditRoute />} />
+          <Route path="/admin/announcements" element={<AdminAnnouncements />} />
           <Route path="/admin/profile-menu" element={<ProfileMenu />} />
           <Route path="/admin/profile-settings" element={<ProfileSettings />} />
           <Route path="/admin/logout" element={<LogOutConfirmation />} />
