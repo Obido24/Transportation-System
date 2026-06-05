@@ -3092,24 +3092,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _recentSubtitle(Map<String, dynamic> booking) {
     final status = booking['status']?.toString() ?? 'Pending';
-    final createdAt = booking['createdAt']?.toString();
-    if (createdAt != null && createdAt.contains('T')) {
-      final parts = createdAt.split('T');
-      final time = parts[1].split('.').first;
-      final shortTime = time.length >= 5 ? time.substring(0, 5) : time;
-      return '${parts[0]} - $shortTime - $status';
+    final createdAt = _formatDateTimeLabel(booking['createdAt']);
+    if (createdAt != null) {
+      return '$createdAt - $status';
     }
     return status;
   }
 
   String _recentSubtitleDisplay(Map<String, dynamic> booking) {
     final status = booking['status']?.toString() ?? 'Pending';
-    final createdAt = booking['createdAt']?.toString();
-    if (createdAt != null && createdAt.contains('T')) {
-      final parts = createdAt.split('T');
-      final time = parts[1].split('.').first;
-      final shortTime = time.length >= 5 ? time.substring(0, 5) : time;
-      return '${parts[0]} - $shortTime - $status';
+    final createdAt = _formatDateTimeLabel(booking['createdAt']);
+    if (createdAt != null) {
+      return '$createdAt - $status';
     }
     return status;
   }
@@ -7366,7 +7360,9 @@ class _TicketDetailsLoaderScreenState extends State<TicketDetailsLoaderScreen> {
               widget.paymentReference ??
               '-';
           final createdAt = booking['createdAt']?.toString();
-          final date = createdAt != null ? DateTime.tryParse(createdAt) : null;
+          final date = createdAt != null
+              ? DateTime.tryParse(createdAt)?.toLocal()
+              : null;
           final dateLabel =
               date != null ? '${date.day}-${date.month}-${date.year}' : '-';
           final timeLabel = date != null
@@ -14242,24 +14238,41 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   DateTime? _parseDate(dynamic value) {
     if (value is DateTime) {
-      return value;
+      return value.isUtc ? value.toLocal() : value;
     }
     if (value is String) {
-      return DateTime.tryParse(value);
+      final parsed = DateTime.tryParse(value);
+      if (parsed == null) return null;
+      return parsed.isUtc ? parsed.toLocal() : parsed;
     }
     return null;
+  }
+
+  String? _formatDateTimeLabel(dynamic value) {
+    final parsed = _parseDate(value);
+    if (parsed == null) {
+      return null;
+    }
+    final dateLabel =
+        '${parsed.year.toString().padLeft(4, '0')}-${parsed.month.toString().padLeft(2, '0')}-${parsed.day.toString().padLeft(2, '0')}';
+    final timeLabel =
+        '${parsed.hour.toString().padLeft(2, '0')}:${parsed.minute.toString().padLeft(2, '0')}';
+    return '$dateLabel - $timeLabel';
   }
 
   String _formatTime(DateTime? date) {
     if (date == null) {
       return 'Just now';
     }
+    final local = date.isUtc ? date.toLocal() : date;
     final now = DateTime.now();
-    final sameDay =
-        now.year == date.year && now.month == date.month && now.day == date.day;
-    final dateLabel = date.toIso8601String().split('T').first;
-    final time = date.toIso8601String().split('T').last.split('.').first;
-    final shortTime = time.length >= 5 ? time.substring(0, 5) : time;
+    final sameDay = now.year == local.year &&
+        now.month == local.month &&
+        now.day == local.day;
+    final dateLabel =
+        '${local.year.toString().padLeft(4, '0')}-${local.month.toString().padLeft(2, '0')}-${local.day.toString().padLeft(2, '0')}';
+    final shortTime =
+        '${local.hour.toString().padLeft(2, '0')}:${local.minute.toString().padLeft(2, '0')}';
     return sameDay ? 'Today - $shortTime' : '$dateLabel - $shortTime';
   }
 
