@@ -10,6 +10,8 @@ import { UpdateRouteDto } from '../routes/dto/update-route.dto';
 import { AnnouncementsService } from '../announcements/announcements.service';
 import { CreateAnnouncementDto } from '../announcements/dto/create-announcement.dto';
 import { UpdateAnnouncementDto } from '../announcements/dto/update-announcement.dto';
+import { BusHireService } from '../bus-hire/bus-hire.service';
+import { UpdateBusHireRequestDto } from '../bus-hire/dto/update-bus-hire-request.dto';
 
 @Controller('admin')
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -18,6 +20,7 @@ export class AdminController {
   constructor(
     private readonly adminService: AdminService,
     private readonly announcementsService: AnnouncementsService,
+    private readonly busHireService: BusHireService,
   ) {}
 
   @Get('users')
@@ -113,6 +116,16 @@ export class AdminController {
   @Patch('support/messages/:id/status')
   updateSupportStatus(@Param('id') id: string, @Body() body: UpdateSupportStatusDto, @Req() req: any) {
     return this.adminService.updateSupportStatus(id, body.status, req.user?.userId, req.ip);
+  }
+
+  @Get('bus-hire/requests')
+  listBusHireRequests() {
+    return this.busHireService.listAdminRequests();
+  }
+
+  @Patch('bus-hire/requests/:id')
+  updateBusHireRequest(@Param('id') id: string, @Body() body: UpdateBusHireRequestDto, @Req() req: any) {
+    return this.busHireService.updateAdminRequest(id, body, req.user?.userId, req.ip);
   }
 
   @Get('system-settings')

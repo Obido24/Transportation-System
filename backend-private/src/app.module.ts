@@ -13,6 +13,7 @@ import { AdminModule } from './admin/admin.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { SupportModule } from './support/support.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
+import { BusHireModule } from './bus-hire/bus-hire.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AnnouncementsModule } from './announcements/announcements.module';
     AnnouncementsModule,
     AdminModule,
     SupportModule,
+    BusHireModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -305,7 +305,7 @@ export class AdminService {
       return [];
     }
 
-    const [users, merchants, routes, payments, tickets, bookings, auditLogs, settings] = await Promise.all([
+    const [users, merchants, routes, payments, tickets, bookings, auditLogs, settings, busHireRequests] = await Promise.all([
       this.listUsers(),
       this.listMerchants(),
       this.listRoutes(),
@@ -314,6 +314,10 @@ export class AdminService {
       this.listBookings(),
       this.listAuditLogs(),
       this.getSystemSettings(),
+      this.prisma.busHireRequest.findMany({
+        orderBy: { createdAt: 'desc' },
+        take: 25,
+      }),
     ]);
 
     const results = [
@@ -370,8 +374,8 @@ export class AdminService {
         {
           key: 'page-support',
           category: 'Page',
-          label: 'Support',
-          subtitle: 'Handle support tickets',
+          label: 'Support & Hire',
+          subtitle: 'Handle support tickets and bus hire requests',
           path: '/admin/support',
         },
         {
@@ -464,12 +468,30 @@ export class AdminService {
             category: 'Support',
             label: ticket.subject ?? 'Support ticket',
             subtitle: `${ticket.supportStatus ?? 'Open'} ? ${ticket.supportId ?? ticket.id}`,
-            path: '/admin/support',
+            path: `/admin/support?tab=support&supportId=${ticket.supportId ?? ticket.id}`,
             score:
               this.scoreSearch(ticket.subject, q) +
               this.scoreSearch(ticket.supportStatus, q) +
               this.scoreSearch(ticket.supportId, q) +
               this.scoreSearch(ticket.id, q),
+          }),
+        )
+        .filter((item) => item.score > 0),
+      ...busHireRequests
+        .map((request) =>
+          this.buildSearchResult({
+            key: `bus-hire-${request.id}`,
+            category: 'Bus Hire',
+            label: request.fullNameOrOrg,
+            subtitle: `${request.destination} - ${request.serviceDate.toISOString().slice(0, 10)} - ${request.status}`,
+            path: `/admin/support?tab=busHire&requestId=${request.id}`,
+            score:
+              this.scoreSearch(request.fullNameOrOrg, q) +
+              this.scoreSearch(request.phoneNumber, q) +
+              this.scoreSearch(request.whatsappNumber, q) +
+              this.scoreSearch(request.destination, q) +
+              this.scoreSearch(request.eventType, q) +
+              this.scoreSearch(request.status, q),
           }),
         )
         .filter((item) => item.score > 0),

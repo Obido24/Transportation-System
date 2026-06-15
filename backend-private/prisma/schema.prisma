@@ -43,6 +43,14 @@ enum SupportStatus {
   RESOLVED
 }
 
+enum BusHireRequestStatus {
+  PENDING
+  CONTACTED
+  APPROVED
+  DECLINED
+  COMPLETED
+}
+
 model User {
   id           String   @id @default(uuid())
   email        String?  @unique
@@ -230,6 +238,32 @@ model SupportMessage {
 
   @@index([userId])
   @@index([status])
+}
+
+model BusHireRequest {
+  id               String               @id @default(uuid())
+  fullNameOrOrg    String
+  phoneNumber      String
+  whatsappNumber   String
+  email            String?
+  pickupPoint      String
+  dropoffPoint     String
+  destination      String
+  serviceDate      DateTime
+  serviceTime      String
+  numberOfTrips    Int
+  numberOfBuses    Int
+  eventType        String
+  additionalNotes  String?
+  status           BusHireRequestStatus @default(PENDING)
+  adminComments    String?
+  assignedBuses    String[]             @default([])
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  @@index([status])
+  @@index([serviceDate])
+  @@index([createdAt])
 }
 
 model PasswordReset {
